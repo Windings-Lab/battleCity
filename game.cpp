@@ -11,8 +11,8 @@ class MyFramework : public Framework {
 private:
 	shared_ptr<ObjectList> objLi = make_shared<ObjectList>();
 	//ObjectListIterator* objLiIt = new ObjectListIterator(objLi);
-	shared_ptr<TankPlayer> player = make_shared < TankPlayer>();
-	shared_ptr < Tank> tank = make_shared < Tank>();
+	shared_ptr<TankPlayer> player = make_shared<TankPlayer>();
+	shared_ptr<Tank> tank = make_shared<Tank>();
 	Clock clock;
 	bool stateGame = false;
 	unsigned int loopTime = 0;
