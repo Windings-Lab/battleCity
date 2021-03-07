@@ -45,7 +45,6 @@ void battleCity::ObjectList::clear()
 	objectPtrList.shrink_to_fit();
 }
 
-
 battleCity::ObjectList::~ObjectList()
 {
 #if DEBUG == 2
