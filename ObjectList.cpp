@@ -9,7 +9,7 @@ int battleCity::ObjectList::insert(shared_ptr<Object> objectPtr)
 {
 	try
 	{
-		objectPtrList.push_back(objectPtr);
+		objectPtrList.push_back(move(objectPtr));
 		count++;
 	}
 	catch (...)
@@ -22,7 +22,7 @@ int battleCity::ObjectList::insert(shared_ptr<Object> objectPtr)
 
 int battleCity::ObjectList::remove(shared_ptr<Object> objectPtr)
 {
-	auto it = std::find(objectPtrList.begin(), objectPtrList.end(), objectPtr);
+	auto it = std::find(objectPtrList.begin(), objectPtrList.end(), move(objectPtr));
 	if (it != objectPtrList.end())
 	{
 		objectPtrList.erase(it);
@@ -54,7 +54,6 @@ battleCity::ObjectList::~ObjectList()
 	for (unsigned int i = 0; i < objectPtrList.size(); i++)
 	{
 		objectPtrList[i].reset();
-		objectPtrList[i] = NULL;
 	}
 	objectPtrList.clear();
 	objectPtrList.shrink_to_fit();

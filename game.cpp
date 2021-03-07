@@ -10,7 +10,7 @@ class MyFramework : public Framework {
 
 private:
 	shared_ptr<ObjectList> objLi = make_shared<ObjectList>();
-	//ObjectListIterator* objLiIt = new ObjectListIterator(objLi);
+	ObjectListIterator objLiIt = ObjectListIterator(objLi);
 	shared_ptr<TankPlayer> player = make_shared<TankPlayer>();
 	shared_ptr<Tank> tank = make_shared<Tank>();
 	Clock clock;
@@ -30,30 +30,23 @@ public:
 		player->spriteInit();
 		tank->spriteInit();
 		objLi->insert(player);
-		objLi->insert(tank);
+		objLi->insert(move(tank));
 		return true;
 	}
 
 	virtual void Close() {
 		objLi.reset();
-
-		player = NULL;
-		tank = NULL;
-		objLi = NULL;
+		player.reset();
 		std::cout << "Close" << std::endl;
 	}
 
 	virtual bool Tick() {
 		clock.delta();
-		player->update();
-		player->draw();
-		tank->update();
-		tank->draw();
-		//for (objLiIt->first(); !objLiIt->isDone(); objLiIt->next())
-		//{
-		//	(*(objLiIt->currentObject()))->update();
-		//	(*(objLiIt->currentObject()))->draw();
-		//}
+		for (objLiIt.first(); !objLiIt.isDone(); objLiIt.next())
+		{
+			(*objLiIt.currentObject())->update();
+			(*objLiIt.currentObject())->draw();
+		}
 		loopTime = clock.split();
 
 		clock.sleep(loopTime);
