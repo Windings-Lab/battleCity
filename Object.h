@@ -11,8 +11,8 @@ namespace battleCity
 		int id;
 		string type;
 		Vector position;
-		int spriteX = 0, spriteY = 0;
-		float speed = 1;
+		int spriteX, spriteY;
+		float speed;
 		/// <summary>
 		/// Vector of direction sprites
 		/// </summary>
@@ -22,15 +22,20 @@ namespace battleCity
 		/// <param name="3">DOWN</param>
 		/// <param name="4">UP</param>
 		std::vector<Sprite*> sprite{ NULL, NULL, NULL, NULL, NULL };
+		bool isDeleted;
 	public:
-		//Object();
+		Object();
 		virtual ~Object();
 
 		void spriteInit(string path = ".\\data\\Player\\TankPlayer*.png");
-		void spriteSet(Sprite& newSprite);
+		void spriteSet(int index);
 
 		virtual void update() = 0;
 		virtual void draw() = 0;
+
+		string getType();
+		bool objectIsDeleted() const;
+		vector<Sprite*>& getSprite();
 
 		virtual int eventHandler(const Event* ptrEvent) = 0;
 

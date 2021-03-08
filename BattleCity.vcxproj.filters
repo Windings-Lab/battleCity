@@ -126,7 +126,7 @@
       <Filter>Header Files\Event</Filter>
     </ClInclude>
     <ClInclude Include="WorldManager.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

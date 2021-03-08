@@ -3,19 +3,19 @@
 #include "ObjectList.h"
 #include "Tank.h"
 #include "TankPlayer.h"
+#include "WorldManager.h"
 
 using namespace battleCity;
 
 class MyFramework : public Framework {
 
 private:
-	shared_ptr<ObjectList> objLi = make_shared<ObjectList>();
-	//ObjectListIterator* objLiIt = new ObjectListIterator(objLi);
-	shared_ptr<TankPlayer> player = make_shared < TankPlayer>();
-	shared_ptr < Tank> tank = make_shared < Tank>();
+	TankPlayer *player = new TankPlayer();
+	Tank *tank = new Tank();
 	Clock clock;
 	bool stateGame = false;
 	unsigned int loopTime = 0;
+	unsigned int tickCount;
 
 public:
 
@@ -27,37 +27,26 @@ public:
 	}
 
 	virtual bool Init() {
-		player->spriteInit();
-		tank->spriteInit();
-		objLi->insert(player);
-		objLi->insert(tank);
+		WM.spriteInit();
+		
 		return true;
 	}
 
 	virtual void Close() {
-		objLi.reset();
-
-		player = NULL;
-		tank = NULL;
-		objLi = NULL;
 		std::cout << "Close" << std::endl;
+		WM.shutDown();
 	}
 
 	virtual bool Tick() {
 		clock.delta();
-		player->update();
-		player->draw();
-		tank->update();
-		tank->draw();
-		//for (objLiIt->first(); !objLiIt->isDone(); objLiIt->next())
-		//{
-		//	(*(objLiIt->currentObject()))->update();
-		//	(*(objLiIt->currentObject()))->draw();
-		//}
+		WM.update();
+		WM.draw();
 		loopTime = clock.split();
 
 		clock.sleep(loopTime);
 
+		tickCount = getTickCount();
+				
 		return stateGame;
 	}
 

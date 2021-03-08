@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Framework.h"
+#include "Object.h"
+#include "ObjectList.h"
 #include "Event.h"
 
 namespace battleCity

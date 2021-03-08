@@ -8,37 +8,36 @@ namespace battleCity
 
 	class ObjectListIterator
 	{
-	//private:
-	//	/// Iterator must be given list when created
-	//	ObjectListIterator();
-	//	/// List iterating over
-	//	const ObjectList* managerPtrlist;	
-	//	vector<Object*>::const_iterator itList;
-	//public:
-	//	~ObjectListIterator();
+	private:
+		/// Iterator must be given list when created
+		ObjectListIterator();
+		/// List iterating over
+		const ObjectList* managerPtrlist;	
+		vector<Object*>::const_iterator itList;
+	public:
 
-	//	/// Create iterator, over indicated list
-	//	ObjectListIterator(const ObjectList* ptrList);
+		/// Create iterator, over indicated list
+		ObjectListIterator(const ObjectList* ptrList);
 
-	//	/// Set iterator to first item in list
-	//	void first();
+		/// Set iterator to first item in list
+		void first();
 
-	//	/// Reset to last object in list
-	//	void last();
+		/// Reset to last object in list
+		void last();
 
-	//	/// Set iterator to next item in list
-	//	void next();
+		/// Set iterator to next item in list
+		void next();
 
-	//	/// Return true if at end of list
-	//	bool isDone() const;
+		/// Return true if at end of list
+		bool isDone() const;
 
-	//	/// Return pointer to current item in list, NULL if done/empty
-	//	vector<Object*>::const_iterator currentObject() const;
+		/// Return pointer to current item in list, NULL if done/empty
+		vector<Object*>::const_iterator currentObject() const;
 
-	//	ObjectListIterator& operator=(const ObjectListIterator& rhs);
+		ObjectListIterator& operator=(const ObjectListIterator& rhs);
 
-	//	/// Set to new List
-	//	void setList(const ObjectList* p_list);
+		/// Set to new List
+		void setList(const ObjectList* p_list);
 	};
 }
 

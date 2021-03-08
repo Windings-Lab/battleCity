@@ -1,11 +1,9 @@
 #pragma once
 
 #include "Manager.h"
-#include "ObjectList.h"
 #include "Vector.h"
 
-// Two-letter acronym for easier access to manager.
-#define WM df::WorldManager::getInstance()
+#define WM battleCity::WorldManager::getInstance()
 
 namespace battleCity
 {
@@ -20,12 +18,14 @@ namespace battleCity
 		void operator=(WorldManager const&);
 
 		// All Objects in game world
-		ObjectList* worldList;
+		ObjectList worldList;
 		// List of all Objects to delete.
-		ObjectList* deletionList;
+		ObjectList deletionList;
 
 	public:
 		~WorldManager();
+
+		void spriteInit(string path = ".\\data\\Player\\TankPlayer*.png");
 
 		// Get the one and only instance of the WorldManager
 		static WorldManager& getInstance();
@@ -46,11 +46,11 @@ namespace battleCity
 		int removeObject(Object* objectPtr);
 
 		// Return list of all Objects in world
-		ObjectList* getAllObjects() const;
+		ObjectList getAllObjects() const;
 
 		// Return list of Objects matching type
 		// List is empty if none found
-		ObjectList* objectsOfType(string type);
+		ObjectList objectsOfType(string type);
 
 		// Update world.
 		// Update positions of Objects based on their velocities.

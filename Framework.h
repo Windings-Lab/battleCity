@@ -6,6 +6,7 @@
 #define ENUM_TO_STR(ENUM) # ENUM
 #define DEBUG 2
 #define FPS 16
+#define WM battleCity::WorldManager::getInstance()
 
 // Bonus for any found bugs in the framework!
 

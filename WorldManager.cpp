@@ -2,21 +2,29 @@
 
 battleCity::WorldManager::WorldManager()
 {
-	worldList = new ObjectList();
-	setType("GameManager");
+	setType("WorldManager");
 }
 
 battleCity::WorldManager::~WorldManager()
 {
-	delete worldList;
-	worldList = NULL;
+#if DEBUG == 2
+	std::cout << "WorldManager Destructor" << std::endl;
+	cout << endl;
+#endif
 }
 
 battleCity::WorldManager& battleCity::WorldManager::getInstance()
 {
 	static WorldManager single;
-	single.startUp();
 	return single;
+}
+
+void battleCity::WorldManager::spriteInit(string path)
+{
+	for (auto& it : worldList.getList())
+	{
+		it->spriteInit();
+	}
 }
 
 int battleCity::WorldManager::startUp()
@@ -26,29 +34,86 @@ int battleCity::WorldManager::startUp()
 
 void battleCity::WorldManager::shutDown()
 {
-	//ObjectList* all = worldList;
-	//all->clear(all);
-
+	ObjectList all = worldList;
+	ObjectListIterator it = ObjectListIterator(&all);
+	for (it.first(); !it.isDone(); it.next())
+	{
+		delete *it.currentObject();
+	}
 	Manager::shutDown();
 }
 
-//int battleCity::WorldManager::insertObject(Object* objectPtr)
-//{
-//	return worldList->insert(objectPtr);
-//}
-//
-//int battleCity::WorldManager::removeObject(Object* objectPtr)
-//{
-//	return worldList->remove(objectPtr);
-//}
+int battleCity::WorldManager::insertObject(Object* objectPtr)
+{
+	int i = worldList.insert(objectPtr);
+	objectPtr = NULL;
+	return i;
+}
 
-battleCity::ObjectList* battleCity::WorldManager::getAllObjects() const
+int battleCity::WorldManager::removeObject(Object* objectPtr)
+{
+	int i = worldList.remove(objectPtr);
+	objectPtr = NULL;
+	return i;
+}
+
+battleCity::ObjectList battleCity::WorldManager::getAllObjects() const
 {
 	return worldList;
 }
 
-battleCity::ObjectList* battleCity::WorldManager::objectsOfType(string type)
+battleCity::ObjectList battleCity::WorldManager::objectsOfType(string type)
 {
-	ObjectList* newList = worldList;
-	return new ObjectList();
+	ObjectList newList = worldList;
+	ObjectListIterator it = ObjectListIterator(&worldList);
+
+	for (it.first(); !it.isDone(); it.next())
+	{
+		if ((*it.currentObject())->getType() == type)
+			newList.insert(*it.currentObject());
+	}
+
+	return newList;
+}
+
+void battleCity::WorldManager::update()
+{
+	ObjectListIterator it = ObjectListIterator(&worldList);
+	ObjectListIterator itDeletetion = ObjectListIterator(&deletionList);
+
+	for (it.first(); !it.isDone(); it.next())
+	{
+		(*it.currentObject())->update();
+	}
+
+	for (itDeletetion.first(); !itDeletetion.isDone(); itDeletetion.next())
+	{
+		delete *itDeletetion.currentObject();
+	}
+	deletionList.clear();
+}
+
+void battleCity::WorldManager::draw()
+{
+	ObjectListIterator it = ObjectListIterator(&worldList);
+
+	for (it.first(); !it.isDone(); it.next())
+	{
+		(*it.currentObject())->draw();
+	}
+}
+
+int battleCity::WorldManager::markForDelete(Object* objectPtr)
+{
+	ObjectListIterator it = ObjectListIterator(&deletionList);
+
+	for (it.first(); !it.isDone(); it.next())
+	{
+		if (*it.currentObject() == objectPtr)
+			return 0;
+	}
+
+	deletionList.insert(objectPtr);
+	objectPtr = NULL;
+	return 0;
 }

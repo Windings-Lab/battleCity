@@ -11,18 +11,20 @@ namespace battleCity
 	class ObjectList
 	{
 	private:
-		/// Count of objects in list
-		int count;
 		/// Vector of pointers to objects
-		vector<shared_ptr<Object>> objectPtrList;
+		vector<Object*> objectPtrList;
+		int i;
 	public:
 
 		friend class ObjectListIterator;
 		ObjectList();
+		ObjectList(int i);
 		~ObjectList();
 
-		int insert(shared_ptr<Object> objectPtr);
-		int remove(shared_ptr<Object> objectPtr);
+		int insert(Object* objectPtr);
+		int remove(Object* objectPtr);
+		vector<Object*>& getList();
+		int getSize();
 		void clear();
 	};
 }

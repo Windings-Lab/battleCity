@@ -13,22 +13,22 @@ inline void TankPlayer::update()
 	if (movement.back() == "RIGHT")
 	{
 		position.x += speed;
-		spriteSet(*sprite[1]);
+		spriteSet(1);
 	}
 	if (movement.back() == "LEFT")
 	{
 		position.x -= speed;
-		spriteSet(*sprite[2]);
+		spriteSet(2);
 	}
 	if (movement.back() == "DOWN")
 	{
 		position.y += speed;
-		spriteSet(*sprite[3]);
+		spriteSet(3);
 	}
 	if (movement.back() == "UP")
 	{
 		position.y -= speed;
-		spriteSet(*sprite[4]);
+		spriteSet(4);
 	}
 }
 

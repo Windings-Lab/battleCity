@@ -1,4 +1,26 @@
 #include "Object.h"
+#include "WorldManager.h"
+
+battleCity::Object::Object() : spriteX(0), spriteY(0), speed(1), id(0) 
+{
+    isDeleted = false;
+    WM.insertObject(this);
+}
+
+string battleCity::Object::getType()
+{
+    return type;
+}
+
+bool battleCity::Object::objectIsDeleted() const
+{
+    return isDeleted;
+}
+
+vector<Sprite*>& battleCity::Object::getSprite()
+{
+    return sprite;
+}
 
 bool battleCity::Object::operator==(const Object& other) noexcept
 {
@@ -54,18 +76,18 @@ void battleCity::Object::spriteInit(string path)
 
     std::regex vowel_re(R"(\*)");
 
-    sprite[1] = std::move(createSprite(std::regex_replace(path, vowel_re, "R").c_str()));
-    sprite[2] = std::move(createSprite(std::regex_replace(path, vowel_re, "L").c_str()));
-    sprite[3] = std::move(createSprite(std::regex_replace(path, vowel_re, "D").c_str()));
-    sprite[4] = std::move(createSprite(std::regex_replace(path, vowel_re, "U").c_str()));
+    sprite[1] = createSprite(std::regex_replace(path, vowel_re, "R").c_str());
+    sprite[2] = createSprite(std::regex_replace(path, vowel_re, "L").c_str());
+    sprite[3] = createSprite(std::regex_replace(path, vowel_re, "D").c_str());
+    sprite[4] = createSprite(std::regex_replace(path, vowel_re, "U").c_str());
     sprite[0] = sprite[4];
 
     getSpriteSize(sprite[0], spriteX, spriteY);
 }
 
-void battleCity::Object::spriteSet(Sprite& newSprite)
+void battleCity::Object::spriteSet(int index)
 {
-    sprite[0] = &newSprite;
+    sprite[0] = sprite[index];
 }
 
 battleCity::Object::~Object()
@@ -73,10 +95,7 @@ battleCity::Object::~Object()
 #if DEBUG == 2
     std::cout << "Object Destructor" << std::endl;
 #endif
-    for (unsigned long long i = 1; i < sprite.size(); i++)
-    {
-        destroySprite(sprite[i]);
-        sprite[i] = NULL;
-    }
-    sprite[0] = NULL;
+
+    isDeleted = true;
+    WM.removeObject(this);
 }
