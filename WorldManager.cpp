@@ -1,4 +1,6 @@
 #include "WorldManager.h"
+#include "Tank.h"
+#include "TankPlayer.h"
 
 battleCity::WorldManager::WorldManager()
 {
@@ -17,14 +19,6 @@ battleCity::WorldManager& battleCity::WorldManager::getInstance()
 {
 	static WorldManager single;
 	return single;
-}
-
-void battleCity::WorldManager::spriteInit(string path)
-{
-	for (auto& it : worldList.getList())
-	{
-		it->spriteInit();
-	}
 }
 
 int battleCity::WorldManager::startUp()

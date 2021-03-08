@@ -3,6 +3,8 @@
 TankPlayer::TankPlayer()
 {
 	id = 1;
+	type = "Player";
+	speed = 1;
 #if DEBUG == 1
 	std::cout << "x: " << position.x << " y: " << position.y << std::endl;
 #endif

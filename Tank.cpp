@@ -2,9 +2,18 @@
 
 Tank::Tank()
 {
-	position.x = 400;
-	position.y = 300;
 	id = 2;
+	type = "Tank";
+	speed = 1;
+}
+
+Tank::Tank(int x, int y)
+{
+	position.x = x;
+	position.y = y;
+	id = 2;
+	type = "Tank";
+	speed = 1;
 }
 
 inline void Tank::update()

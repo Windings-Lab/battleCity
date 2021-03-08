@@ -1,7 +1,7 @@
 #include "Object.h"
 #include "WorldManager.h"
 
-battleCity::Object::Object() : spriteX(0), spriteY(0), speed(1), id(0) 
+battleCity::Object::Object() : spriteX(0), spriteY(0), id(0) 
 {
     isDeleted = false;
     WM.insertObject(this);
@@ -67,11 +67,11 @@ bool battleCity::Object::operator==(const Object& other) noexcept
 	return false;
 }
 
-void battleCity::Object::spriteInit(string path)
+int battleCity::Object::spriteInit(string path)
 {
     if (sprite[0] != NULL)
     {
-        return;
+        return 1;
     }
 
     std::regex vowel_re(R"(\*)");
@@ -82,6 +82,8 @@ void battleCity::Object::spriteInit(string path)
     sprite[4] = createSprite(std::regex_replace(path, vowel_re, "U").c_str());
     sprite[0] = sprite[4];
 
+    if (sprite[0] == NULL)
+        return 0;
     getSpriteSize(sprite[0], spriteX, spriteY);
 }
 

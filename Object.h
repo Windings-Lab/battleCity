@@ -12,7 +12,6 @@ namespace battleCity
 		string type;
 		Vector position;
 		int spriteX, spriteY;
-		float speed;
 		/// <summary>
 		/// Vector of direction sprites
 		/// </summary>
@@ -27,7 +26,7 @@ namespace battleCity
 		Object();
 		virtual ~Object();
 
-		void spriteInit(string path = ".\\data\\Player\\TankPlayer*.png");
+		int spriteInit(string path = ".\\data\\Player\\TankPlayer*.png");
 		void spriteSet(int index);
 
 		virtual void update() = 0;

@@ -1,12 +1,15 @@
 #include "GameManager.h"
+#include "WorldManager.h"
 
 bool battleCity::GameManager::_gameOver = NULL;
-int battleCity::GameManager::_frameTime = NULL;
-int battleCity::GameManager::_stepCount = NULL;
+unsigned int battleCity::GameManager::_frameTime = NULL;
+unsigned int battleCity::GameManager::_stepCount = NULL;
+Clock battleCity::GameManager::_clock;
 
 const bool& battleCity::GameManager::gameOver = _gameOver;
-const int& battleCity::GameManager::frameTime = _frameTime;
-const int& battleCity::GameManager::stepCount = _stepCount;
+const unsigned int& battleCity::GameManager::frameTime = _frameTime;
+const unsigned int& battleCity::GameManager::stepCount = _stepCount;
+const Clock& battleCity::GameManager::clock = _clock;
 
 static std::unique_ptr<battleCity::GameManager> gameManager;
 
@@ -25,19 +28,42 @@ battleCity::GameManager::~GameManager()
 battleCity::GameManager& battleCity::GameManager::getInstance()
 {
 	static GameManager single;
-	single.startUp();
 	return single;
+}
+
+int battleCity::GameManager::spriteInit(string path)
+{
+	int check = true;
+	for (auto& it : WM.worldList.getList())
+	{
+		check = it->spriteInit();
+		if (check == 0)
+			return check;
+	}
+	return 1;
 }
 
 int battleCity::GameManager::startUp()
 {
 	_gameOver = false;
+	WM.startUp();
 	return Manager::startUp();
 }
 
 void battleCity::GameManager::shutDown()
 {
+	WM.shutDown();
 	_gameOver = true;
+}
+
+void battleCity::GameManager::run()
+{
+	_clock.delta();
+	WM.update();
+	WM.draw();
+	_frameTime = clock.split();
+
+	_clock.sleep(_frameTime);
 }
 
 void battleCity::GameManager::setGameOver(bool gameState)

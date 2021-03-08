@@ -3,7 +3,7 @@
 #include "Manager.h"
 
 // Two-letter acronym for easier access to manager.
-#define GM df::GameManager::getInstance()
+#define GM battleCity::GameManager::getInstance()
 
 const int FRAME_TIME_DEFAULT = 16;
 
@@ -19,15 +19,19 @@ namespace battleCity {
 		/// True->game loop should stop
 		static bool _gameOver;  
 		// Target time per game loop, in millisec
-		static int _frameTime; 
+		static unsigned int _frameTime;
+		// Clock managment
+		static Clock _clock;
 		/// Count of game loop iterations
-		static int _stepCount; 
+		static unsigned int _stepCount; 
 
 	public:
 		~GameManager();
 
 		/// Get the singleton instance of the GameManager.
 		static GameManager& getInstance();
+
+		int spriteInit(string path = ".\\data\\Player\\TankPlayer*.png");
 
 		/// Startup all GameManager services.
 		int startUp() override;
@@ -39,18 +43,16 @@ namespace battleCity {
 		/// Shut down GameManager services.
 		void shutDown() override;
 
+		/// Run game loop.
+		void run();
+
 		/// Set game over status to indicated value.
 		/// If true (default), will stop game loop.
 		void static setGameOver(bool gameState = true);
 
-		/// Get game over status.
 		static const bool& gameOver;
-
-		/// Return frame time.  
-		/// Frame time is target time for each game loop, in milliseconds.
-		static const int& frameTime;
-
-		/// Return game loop step count.
-		static const int& stepCount;
+		static const unsigned int& frameTime;
+		static const unsigned int& stepCount;
+		static const Clock& clock;
 	};
 }

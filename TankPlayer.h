@@ -5,7 +5,7 @@ class TankPlayer : public battleCity::Object
 {
 private:
 	vector<string> movement = { "IDLE" };
-
+	float speed;
 public:
 	TankPlayer();
 	~TankPlayer();

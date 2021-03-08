@@ -23,9 +23,9 @@ namespace battleCity
 		ObjectList deletionList;
 
 	public:
-		~WorldManager();
+		friend class GameManager;
 
-		void spriteInit(string path = ".\\data\\Player\\TankPlayer*.png");
+		~WorldManager();
 
 		// Get the one and only instance of the WorldManager
 		static WorldManager& getInstance();

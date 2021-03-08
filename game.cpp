@@ -4,6 +4,7 @@
 #include "Tank.h"
 #include "TankPlayer.h"
 #include "WorldManager.h"
+#include "GameManager.h"
 
 using namespace battleCity;
 
@@ -11,11 +12,10 @@ class MyFramework : public Framework {
 
 private:
 	TankPlayer *player = new TankPlayer();
-	Tank *tank = new Tank();
+	Tank* tank = new Tank(300, 400);
 	Clock clock;
 	bool stateGame = false;
 	unsigned int loopTime = 0;
-	unsigned int tickCount;
 
 public:
 
@@ -27,26 +27,17 @@ public:
 	}
 
 	virtual bool Init() {
-		WM.spriteInit();
-		
-		return true;
+		GM.startUp();
+		return GM.spriteInit();
 	}
 
 	virtual void Close() {
 		std::cout << "Close" << std::endl;
-		WM.shutDown();
+		GM.shutDown();
 	}
 
 	virtual bool Tick() {
-		clock.delta();
-		WM.update();
-		WM.draw();
-		loopTime = clock.split();
-
-		clock.sleep(loopTime);
-
-		tickCount = getTickCount();
-				
+		GM.run();
 		return stateGame;
 	}
 

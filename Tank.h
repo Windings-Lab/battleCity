@@ -4,8 +4,11 @@
 
 class Tank : public battleCity::Object
 {
+private:
+	float speed;
 public:
 	Tank();
+	Tank(int x, int y);
 	~Tank();
 
 	virtual inline void update() override;
