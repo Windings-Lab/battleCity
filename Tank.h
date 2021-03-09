@@ -5,7 +5,7 @@
 class Tank : public battleCity::Object
 {
 private:
-	float speed;
+	int change;
 public:
 	Tank();
 	Tank(int x, int y);
@@ -14,5 +14,5 @@ public:
 	virtual inline void update() override;
 	virtual inline void draw() override;
 
-	virtual int eventHandler(const battleCity::Event* ptrEvent) override;
+	virtual int eventHandler(const battleCity::Event* eventPtr) override;
 };

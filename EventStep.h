@@ -3,11 +3,13 @@
 
 namespace battleCity
 {
+	const string STEP_EVENT = "Step";
+
 	class EventStep : public Event
 	{
 	private:
 		/// Iteration number of game loop
-		int stepCount;  
+		unsigned int stepCount;  
 
 	public:
 		/// Default constructor.
@@ -15,10 +17,10 @@ namespace battleCity
 		~EventStep();
 
 		/// Constructor with initial step count.
-		EventStep(int init);
+		EventStep(unsigned int init);
 
 		/// Set step count.
-		void setStepCount(int newStep);
+		void setStepCount(unsigned int newStep);
 
 		/// Get step count.
 		int getStepCount() const;

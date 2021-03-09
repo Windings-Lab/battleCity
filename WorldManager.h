@@ -24,6 +24,7 @@ namespace battleCity
 
 	public:
 		friend class GameManager;
+		friend class Manager;
 
 		~WorldManager();
 
@@ -60,6 +61,17 @@ namespace battleCity
 		// Draw all Objects in view
 		// Draw bottom up, from 0 to MAX_ALTITUDE
 		void draw();
+
+		/// Move Object. 
+		/// If collision with solid, send collision events.
+		/// If no collision with solid, move ok.
+		/// If all collided objects soft, move ok.
+		/// If Object is spectral, move ok.
+		/// If move ok, move.
+		/// If moved, adjust view if following this Object.
+		/// If moved from inside world boundary to outside, generate EventOut.
+		/// Return 0 if moved, else -1 if collision with solid.
+		int moveObject(Object* ptrObject, Vector where);
 
 		// Indicate Object is to be deleted at end of current game loop.
 		// Return 0 if ok, else -1.

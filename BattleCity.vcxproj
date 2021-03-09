@@ -21,9 +21,11 @@
   <ItemGroup>
     <ClCompile Include="Clock.cpp" />
     <ClCompile Include="Event.cpp" />
+    <ClCompile Include="EventKeyboard.cpp" />
     <ClCompile Include="EventStep.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Manager.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="ObjectList.cpp" />
@@ -37,10 +39,12 @@
   <ItemGroup>
     <ClInclude Include="Clock.h" />
     <ClInclude Include="Event.h" />
+    <ClInclude Include="EventKeyboard.h" />
     <ClInclude Include="EventStep.h" />
     <ClInclude Include="Framework.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="headers.h" />
+    <ClInclude Include="InputManager.h" />
     <ClInclude Include="Manager.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="ObjectList.h" />

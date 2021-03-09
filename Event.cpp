@@ -14,7 +14,7 @@ string battleCity::Event::getType() const
 
 battleCity::Event::~Event()
 {
-#if DEBUG == 2
-	std::cout << "Event Destructor" << std::endl;
-#endif
+//#if DEBUG == 2
+//	std::cout << "Event Destructor" << std::endl;
+//#endif
 }

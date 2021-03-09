@@ -5,6 +5,7 @@
 #include "TankPlayer.h"
 #include "WorldManager.h"
 #include "GameManager.h"
+#include "EventKeyboard.h"
 
 using namespace battleCity;
 
@@ -16,6 +17,7 @@ private:
 	Clock clock;
 	bool stateGame = false;
 	unsigned int loopTime = 0;
+	EventKeyboard eventKeyboard;
 
 public:
 
@@ -51,12 +53,19 @@ public:
 
 	virtual void onKeyPressed(FRKey k) 
 	{
-		player->directionSet(FRKeyStr[(int)k]);
+		eventKeyboard.setKey(k);
+		eventKeyboard.setKeyboardAction(EventKeyboardAction::KEY_PRESSED);
+		player->movementSet(FRKeyStr[(int)k]);
+		player->eventHandler(&eventKeyboard);
+
 	}
 
 	virtual void onKeyReleased(FRKey k) 
 	{
-		player->directionErase(FRKeyStr[(int)k]);
+		eventKeyboard.setKey(k);
+		eventKeyboard.setKeyboardAction(EventKeyboardAction::KEY_RELEASED);
+		player->movementErase(FRKeyStr[(int)k]);
+		player->eventHandler(&eventKeyboard);
 	}
 
 	virtual const char* GetTitle() override

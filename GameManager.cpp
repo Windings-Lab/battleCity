@@ -1,5 +1,6 @@
 #include "GameManager.h"
 #include "WorldManager.h"
+#include "EventStep.h"
 
 bool battleCity::GameManager::_gameOver = NULL;
 unsigned int battleCity::GameManager::_frameTime = NULL;
@@ -15,6 +16,7 @@ static std::unique_ptr<battleCity::GameManager> gameManager;
 
 battleCity::GameManager::GameManager()
 {
+	_stepCount = 0;
 	setType("GameManager");
 }
 
@@ -59,11 +61,18 @@ void battleCity::GameManager::shutDown()
 void battleCity::GameManager::run()
 {
 	_clock.delta();
+	onEvent(&EventStep());
 	WM.update();
 	WM.draw();
-	_frameTime = clock.split();
+	_frameTime = getTickCount() / 1000;
+	_stepCount++;
+	//if (_stepCount % 250 == 0)
+	//{
+	//	cout << _frameTime << " seconds" << endl;
+	//	cout << _stepCount << " steps" << endl << endl;
+	//}
 
-	_clock.sleep(_frameTime);
+	_clock.sleep(clock.split());
 }
 
 void battleCity::GameManager::setGameOver(bool gameState)

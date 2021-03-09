@@ -1,17 +1,14 @@
 #include "EventStep.h"
+#include "GameManager.h"
 
-battleCity::EventStep::EventStep() : stepCount(0) {}
-
-battleCity::EventStep::~EventStep()
+battleCity::EventStep::EventStep() : stepCount(GM.stepCount) 
 {
-#if DEBUG == 2
-	std::cout << "EventStep Destructor" << std::endl;
-#endif
+	setType(STEP_EVENT);
 }
 
-battleCity::EventStep::EventStep(int init) : stepCount(init) {}
+battleCity::EventStep::EventStep(unsigned int init) : stepCount(init) {}
 
-void battleCity::EventStep::setStepCount(int newStep) 
+void battleCity::EventStep::setStepCount(unsigned int newStep)
 {
 	stepCount = newStep;
 }
@@ -19,4 +16,11 @@ void battleCity::EventStep::setStepCount(int newStep)
 int battleCity::EventStep::getStepCount() const
 {
 	return stepCount;
+}
+
+battleCity::EventStep::~EventStep()
+{
+//#if DEBUG == 2
+//	std::cout << "EventStep Destructor" << std::endl;
+//#endif
 }

@@ -1,18 +1,11 @@
 #include "WorldManager.h"
 #include "Tank.h"
 #include "TankPlayer.h"
+#include "EventStep.h"
 
 battleCity::WorldManager::WorldManager()
 {
 	setType("WorldManager");
-}
-
-battleCity::WorldManager::~WorldManager()
-{
-#if DEBUG == 2
-	std::cout << "WorldManager Destructor" << std::endl;
-	cout << endl;
-#endif
 }
 
 battleCity::WorldManager& battleCity::WorldManager::getInstance()
@@ -74,10 +67,19 @@ void battleCity::WorldManager::update()
 {
 	ObjectListIterator it = ObjectListIterator(&worldList);
 	ObjectListIterator itDeletetion = ObjectListIterator(&deletionList);
+	ObjectListIterator itPlayer = ObjectListIterator(&worldList);
+	itPlayer.first();
+	Vector newPos = (*itPlayer.currentObject())->predictPosition();
 
 	for (it.first(); !it.isDone(); it.next())
 	{
 		(*it.currentObject())->update();
+	}
+
+	if ((newPos.x >= 0 && newPos.x + 32 <= Screen::width) &&
+		(newPos.y >= 0 && newPos.y + 32 <= Screen::height))
+	{
+		moveObject(*itPlayer.currentObject(), newPos);
 	}
 
 	for (itDeletetion.first(); !itDeletetion.isDone(); itDeletetion.next())
@@ -97,6 +99,13 @@ void battleCity::WorldManager::draw()
 	}
 }
 
+int battleCity::WorldManager::moveObject(Object* ptrObject, Vector where)
+{
+	int i = ptrObject->setPosition(where);
+	ptrObject = NULL;
+	return i;
+}
+
 int battleCity::WorldManager::markForDelete(Object* objectPtr)
 {
 	ObjectListIterator it = ObjectListIterator(&deletionList);
@@ -110,4 +119,12 @@ int battleCity::WorldManager::markForDelete(Object* objectPtr)
 	deletionList.insert(objectPtr);
 	objectPtr = NULL;
 	return 0;
+}
+
+battleCity::WorldManager::~WorldManager()
+{
+#if DEBUG == 2
+	std::cout << "WorldManager Destructor" << std::endl;
+	cout << endl;
+#endif
 }

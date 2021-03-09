@@ -2,15 +2,19 @@
 
 battleCity::Vector::Vector() : x(0), y(0) {}
 
-battleCity::Vector::~Vector()
+battleCity::Vector::Vector(float xValue, float yValue) : x(xValue), y(yValue) {}
+
+void battleCity::Vector::setXY(float newX, float newY)
 {
-#if DEBUG == 2
-    std::cout << "Vector Destructor" << std::endl;
-    cout << endl;
-#endif
+    x = newX;
+    y = newY;
 }
 
-battleCity::Vector::Vector(float xValue, float yValue) : x(xValue), y(yValue){}
+void battleCity::Vector::addToXY(float newX, float newY)
+{
+    x += newX;
+    y += newY;
+}
 
 float battleCity::Vector::magnitude() const
 {
@@ -27,11 +31,19 @@ void battleCity::Vector::normalize()
     }
 }
 
-battleCity::Vector& battleCity::Vector::operator+(const Vector& other) noexcept
+battleCity::Vector& battleCity::Vector::operator+=(const Vector& other) noexcept
 {
     this->x += other.x;
     this->y += other.y;
     return *this;
+}
+
+battleCity::Vector& battleCity::Vector::operator+(const Vector& other) noexcept
+{
+    Vector vec = *this;
+    vec.x += other.x;
+    vec.y += other.y;
+    return vec;
 }
 
 battleCity::Vector& battleCity::Vector::operator*(const float& value) noexcept
@@ -39,4 +51,12 @@ battleCity::Vector& battleCity::Vector::operator*(const float& value) noexcept
     this->x = this->x * value;
     this->y = this->y * value;
     return *this;
+}
+
+battleCity::Vector::~Vector()
+{
+#if DEBUG == 2
+    std::cout << "Vector Destructor" << std::endl;
+    cout << endl;
+#endif
 }

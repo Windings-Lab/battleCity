@@ -18,7 +18,7 @@ namespace battleCity {
 
 		/// True->game loop should stop
 		static bool _gameOver;  
-		// Target time per game loop, in millisec
+		// Target time per game loop, in seconds
 		static unsigned int _frameTime;
 		// Clock managment
 		static Clock _clock;

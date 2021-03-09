@@ -1,4 +1,5 @@
 #include "Manager.h"
+#include "WorldManager.h"
 
 battleCity::Manager::Manager() : type(""), started(false) {}
 
@@ -33,4 +34,20 @@ void battleCity::Manager::shutDown()
 bool battleCity::Manager::isStarted() const
 {
 	return started;
+}
+
+int battleCity::Manager::onEvent(const Event* ptrEvent) const
+{
+	int count = 0;
+
+	ObjectListIterator itEvent = ObjectListIterator(&WM.worldList);
+
+	for (itEvent.first(); !itEvent.isDone(); itEvent.next())
+	{
+		(*itEvent.currentObject())->eventHandler(ptrEvent);
+		count++;
+	}
+
+	ptrEvent = NULL;
+	return count;
 }

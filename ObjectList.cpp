@@ -31,8 +31,6 @@ int battleCity::ObjectList::remove(Object* objectPtr)
 			objectPtr->getSprite()[i] = NULL;
 		}
 		objectPtr->getSprite()[0] = NULL;
-		if(!objectPtr->objectIsDeleted())
-			delete objectPtr;
 		*it = NULL;
 		objectPtrList.erase(it);
 	}
