@@ -1,52 +1,67 @@
 #pragma once
 
-#include "headers.h"
+#include <string>
+#include <vector>
+
+#include "Framework.h"
 #include "Event.h"
+#include "Box.h"
+#include "Vector.h"
+#include "Sprites.h"
 
 namespace battleCity
 {
+	/// Types of solidness of Object.
+	enum class Solidness {
+		HARD,       /// Object causes collisions and impedes.
+		SOFT,       /// Object causes collision, but doesn't impede.
+		SPECTRAL,   /// Object doesn't cause collisions.
+	};
+
 	class Object
 	{
 	protected:
 		int id;
-		string type;
+		std::string type;
 		Vector position;
 		Vector direction;
+		Solidness solidness;
+		Box box;
 		int spriteX, spriteY;
 		float speed;
 		/// <summary>
 		/// Vector of direction sprites
 		/// </summary>
-		/// <param name="0">Sprite to draw</param>
-		/// <param name="1">RIGHT</param>
-		/// <param name="2">LEFT</param>
-		/// <param name="3">DOWN</param>
-		/// <param name="4">UP</param>
-		std::vector<Sprite*> sprite{ NULL, NULL, NULL, NULL, NULL };
+		/// <param name="0">RIGHT</param>
+		/// <param name="1">LEFT</param>
+		/// <param name="2">DOWN</param>
+		/// <param name="3">UP</param>
+		std::vector<Sprite*> sprite;
+		Sprite* spriteDirection;
 		bool isDeleted;
 	public:
 		Object();
 		virtual ~Object();
-
-		int spriteInit(string path = ".\\data\\Player\\TankPlayer*.png");
 		/// <summary>
 		/// Change sprite direction
 		/// </summary>
-		/// <param name="0">Do not change</param>
-		/// <param name="1">RIGHT</param>
-		/// <param name="2">LEFT</param>
-		/// <param name="3">DOWN</param>
-		/// <param name="4">UP</param>
+		/// <param name="0">RIGHT</param>
+		/// <param name="1">LEFT</param>
+		/// <param name="2">DOWN</param>
+		/// <param name="3">UP</param>
 		void spriteSet(int index);
 
 		virtual void update() = 0;
 		virtual void draw() = 0;
 
-		string getType();
+		std::string getType();
 		bool objectIsDeleted() const;
-		vector<Sprite*>& getSprite();
+		std::vector<Sprite*>& getSpriteList();
 
 		virtual int eventHandler(const Event* ptrEvent) = 0;
+
+		int getSpriteX() const;
+		int getSpriteY() const;
 
 		void setSpeed(float newSpeed);
 
@@ -64,12 +79,22 @@ namespace battleCity
 
 		/// Set position of Object.
 		/// Return 0 if ok, else -1.
-		virtual int setPosition(Vector new_position);
+		virtual int setPosition(Vector newPosition);
 
 		/// Get position of Object.
 		Vector getPosition() const;
 
-		bool operator==(const Object& other) noexcept;
+		bool isSolid() const;
+
+		/// Set solidness of Object
+		/// Return 0 if ok, else -1.
+		int setSolidness(Solidness newSolid);
+
+		/// Return solidness of Object.
+		Solidness getSolidness() const;
+
+		/// Get/Set Object's bounding box
+		void setBox(Box newBox);
+		Box getBox() const;
 	};
 }
-

@@ -1,13 +1,28 @@
 #include "Object.h"
 #include "WorldManager.h"
+#include "Vector.h"
+#include "Box.h"
+#include "Framework.h"
+#include "Screen.h"
+#include "Sprites.h"
 
-battleCity::Object::Object() : spriteX(0), spriteY(0), id(0), speed(0)
+#include <regex>
+#include <string>
+#include <iostream>
+
+battleCity::Object::Object() : id(0), speed(0), sprite(SPR.getTankSprites())
 {
+    spriteSet(3);
+    getSpriteSize(spriteDirection, spriteX, spriteY);
+    box = Box(Vector(), spriteX, spriteY);
+    position.x = SCR.getBoundaryL();
+    position.y = SCR.getBoundaryU();
     isDeleted = false;
+    solidness = Solidness::HARD;
     WM.insertObject(this);
 }
 
-string battleCity::Object::getType()
+std::string battleCity::Object::getType()
 {
     return type;
 }
@@ -17,9 +32,19 @@ bool battleCity::Object::objectIsDeleted() const
     return isDeleted;
 }
 
-vector<Sprite*>& battleCity::Object::getSprite()
+std::vector<Sprite*>& battleCity::Object::getSpriteList()
 {
     return sprite;
+}
+
+int battleCity::Object::getSpriteX() const
+{
+    return spriteX;
+}
+
+int battleCity::Object::getSpriteY() const
+{
+    return spriteY;
 }
 
 void battleCity::Object::setSpeed(float newSpeed)
@@ -72,74 +97,39 @@ battleCity::Vector battleCity::Object::getPosition() const
     return position;
 }
 
-bool battleCity::Object::operator==(const Object& other) noexcept
+bool battleCity::Object::isSolid() const
 {
-    //The sides of the rectangles
-    float leftA, leftB;
-    float rightA, rightB;
-    float topA, topB;
-    float bottomA, bottomB;
-
-    //Calculate the sides of this object
-    leftA = this->position.x;
-    rightA = this->position.x + this->spriteX;
-    topA = this->position.y;
-    bottomA = this->position.y + this->spriteY;
-
-    //Calculate the sides of other object
-    leftB = other.position.x;
-    rightB = other.position.x + other.spriteX;
-    topB = other.position.y;
-    bottomB = other.position.y + other.spriteY;
-
-    //If any of the sides from this object are outside of other
-    if (bottomA <= topB)
+    if (solidness == Solidness::SPECTRAL)
     {
-        return false;
+        return 0;
     }
-
-    if (topA >= bottomB)
-    {
-        return false;
-    }
-
-    if (rightA <= leftB)
-    {
-        return false;
-    }
-
-    if (leftA >= rightB)
-    {
-        return false;
-    }
-
-    //If none of the sides from this object are outside other
-	return false;
+    return solidness == Solidness::HARD ? 1 : 0;
 }
 
-int battleCity::Object::spriteInit(string path)
+int battleCity::Object::setSolidness(Solidness newSolid)
 {
-    if (sprite[0] != NULL)
-    {
-        return 1;
-    }
+    solidness = newSolid;
+    return 0;
+}
 
-    std::regex vowel_re(R"(\*)");
+battleCity::Solidness battleCity::Object::getSolidness() const
+{
+    return solidness;
+}
 
-    sprite[1] = createSprite(std::regex_replace(path, vowel_re, "R").c_str());
-    sprite[2] = createSprite(std::regex_replace(path, vowel_re, "L").c_str());
-    sprite[3] = createSprite(std::regex_replace(path, vowel_re, "D").c_str());
-    sprite[4] = createSprite(std::regex_replace(path, vowel_re, "U").c_str());
-    sprite[0] = sprite[4];
+void battleCity::Object::setBox(Box newBox)
+{
+    box = newBox;
+}
 
-    if (sprite[0] == NULL)
-        return 0;
-    getSpriteSize(sprite[0], spriteX, spriteY);
+battleCity::Box battleCity::Object::getBox() const
+{
+    return box;
 }
 
 void battleCity::Object::spriteSet(int index)
 {
-    sprite[0] = sprite[index];
+    spriteDirection = sprite[index];
 }
 
 battleCity::Object::~Object()
@@ -150,4 +140,5 @@ battleCity::Object::~Object()
 
     isDeleted = true;
     WM.removeObject(this);
+    spriteDirection = NULL;
 }

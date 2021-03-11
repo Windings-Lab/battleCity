@@ -1,30 +1,34 @@
 #pragma once
 
-#include "headers.h"
+#include <vector>
+
 #include "Object.h"
-#include "ObjectListIterator.h"
 
 namespace battleCity
 {
 	class ObjectListIterator;
+	class Object;
 
 	class ObjectList
 	{
 	private:
 		/// Vector of pointers to objects
-		vector<Object*> objectPtrList;
+		std::vector<Object*> objectPtrList;
 		int i;
 	public:
 
 		friend class ObjectListIterator;
 		ObjectList();
-		ObjectList(int i);
+		ObjectList(int index);
 		~ObjectList();
 
 		int insert(Object* objectPtr);
 		int remove(Object* objectPtr);
-		vector<Object*>& getList();
+		std::vector<Object*>& getList();
 		int getSize();
+
+		bool isEmpty();
+
 		void clear();
 	};
 }

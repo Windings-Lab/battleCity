@@ -1,9 +1,20 @@
 #include "TankPlayer.h"
+#include "WorldManager.h"
+#include "GameManager.h"
+#include "EventOut.h"
+#include "EventMouse.h"
+#include "EventKeyboard.h"
+#include "Framework.h"
+#include "Vector.h"
+#include "Event.h"
+#include "Screen.h"
+#include "Bullet.h"
 
+#include <vector>
+#include <iostream>
 
 TankPlayer::TankPlayer()
 {
-	speed = 0;
 	id = 1;
 	type = "Player";
 #if DEBUG == 1
@@ -11,19 +22,36 @@ TankPlayer::TankPlayer()
 #endif
 }
 
+TankPlayer::TankPlayer(float x, float y)
+{
+	position.x = x;
+	position.y = y;
+	if (x < SCR.getBoundaryL() || x > SCR.getBoundaryR())
+	{
+		position.x = SCR.getBoundaryL();
+	}
+	if (y < SCR.getBoundaryU() || y > SCR.getBoundaryD())
+	{
+		position.y = SCR.getBoundaryU();
+	}
+	type = "Player";
+	id = 1;
+}
+
 void TankPlayer::update()
 {
-	if (GM.stepCount % 250 == 0)
-	{
-		cout << "speed: " << speed << endl;
-		cout << "x: " << position.x << " y: " << position.y << endl;
-		cout << "x: " << direction.x << " y: " << direction.y << endl << endl;
-	}
+	//if (GM.stepCount % 1000 == 0)
+	//{
+	//	std::cout << "------------------------------------" << std::endl;
+	//	cout << "speed: " << speed << endl;
+	//	std::cout << "Player x: " << position.x << " y: " << position.y << std::endl;
+	//	cout << "x: " << direction.x << " y: " << direction.y << endl << endl;
+	//}
 }
 
 inline void TankPlayer::draw()
 {
-	drawSprite(sprite[0], (int)position.x, (int)position.y);
+	drawSprite(spriteDirection, (int)position.x, (int)position.y);
 }
 
 void TankPlayer::keyboardInput()
@@ -31,22 +59,22 @@ void TankPlayer::keyboardInput()
 	if (movement.back() == "RIGHT")
 	{
 		move(1, 0);
-		spriteSet(1);
+		spriteSet(0);
 	}
 	if (movement.back() == "LEFT")
 	{
 		move(-1, 0);
-		spriteSet(2);
+		spriteSet(1);
 	}
 	if (movement.back() == "DOWN")
 	{
 		move(0, 1);
-		spriteSet(3);
+		spriteSet(2);
 	}
 	if (movement.back() == "UP")
 	{
 		move(0, -1);
-		spriteSet(4);
+		spriteSet(3);
 	}
 	if (movement.back() == "IDLE")
 	{
@@ -54,22 +82,35 @@ void TankPlayer::keyboardInput()
 	}
 }
 
+void TankPlayer::mouseInput(const battleCity::EventMouse* mouseEvent)
+{
+	// Pressed button?
+	if ((mouseEvent->getMouseAction() == battleCity::EventMouseAction::PRESSED) &&
+		(mouseEvent->getMouseButton() == FRMouseButton::LEFT))
+		fire();
+}
+
 void TankPlayer::move(int x, int y)
 {
 	setVelocity(battleCity::Vector(x, y));
-	battleCity::Vector newPos = battleCity::Vector(position.x + x, position.y + y);
-	if ((newPos.x >= 0 && newPos.x + 32 <= Screen::width) &&
-		(newPos.y >= 0 && newPos.y + 32 <= Screen::height))
-	{
-		WM.moveObject(this, newPos);
-	}
+}
+
+void TankPlayer::fire()
+{
+	battleCity::Bullet* newBullet = new battleCity::Bullet(this);
 }
 
 int TankPlayer::eventHandler(const battleCity::Event* eventPtr)
 {
 	if (eventPtr->getType() == battleCity::KEYBOARD_EVENT) {
-		const battleCity::EventKeyboard& keyboardEvent = dynamic_cast <const battleCity::EventKeyboard&> (*eventPtr);
 		keyboardInput();
+		eventPtr = NULL;
+		return 1;
+	}
+
+	if (eventPtr->getType() == battleCity::MSE_EVENT) {
+		const battleCity::EventMouse& mouseEvent = dynamic_cast <const battleCity::EventMouse&> (*eventPtr);
+		mouseInput(&mouseEvent);
 		eventPtr = NULL;
 		return 1;
 	}
@@ -83,16 +124,16 @@ void TankPlayer::movementSet(std::string direction)
 	{
 		movement.push_back("IDLE");
 	}
-		
+
 #if DEBUG == 1
 	//std::cout << "x: " << position.x << " y: " << position.y << endl;
 	//std::cout << "movement capacity: " << movement.capacity() << std::endl;
-	std::cout << "PRESSED" << endl;
-	for (const auto& i : movement)
-	{
-		cout << i << " ";
-	}
-	cout << endl << endl;
+	std::cout << "PRESSED" << std::endl;
+	//for (const auto& i : movement)
+	//{
+	//	std::cout << i << " ";
+	//}
+	std::cout << std::endl << std::endl;
 #endif
 }
 
@@ -107,12 +148,12 @@ void TankPlayer::movementErase(std::string direction)
 #if DEBUG == 1
 	//std::cout << "x: " << position.x << " y: " << position.y << endl;
 	//std::cout << "movement capacity: " << movement.capacity() << std::endl;
-	std::cout << "RELEASED" << endl;
-	for (const auto& i : movement)
-	{
-		cout << i << " ";
-	}
-	cout << endl << endl;
+	std::cout << "RELEASED" << std::endl;
+	//for (const auto& i : movement)
+	//{
+	//	std::cout << i << " ";
+	//}
+	std::cout << std::endl << std::endl;
 #endif
 }
 

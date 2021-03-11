@@ -1,6 +1,6 @@
 #pragma once
 
-#include "headers.h"
+#include <string>
 
 namespace battleCity
 {
@@ -8,7 +8,7 @@ namespace battleCity
 	{
 	private:
 		/// Holds event type
-		string eventType;    
+		std::string eventType;
 	public:
 		/// Create base event.
 		Event();
@@ -20,6 +20,6 @@ namespace battleCity
 		void setType(std::string new_type);
 
 		/// Get event type.
-		string getType() const;
+		std::string getType() const;
 	};
 }

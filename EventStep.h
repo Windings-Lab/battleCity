@@ -1,15 +1,18 @@
 #pragma once
+
+#include <string>
+
 #include "Event.h"
 
 namespace battleCity
 {
-	const string STEP_EVENT = "Step";
+	const std::string STEP_EVENT = "Step";
 
 	class EventStep : public Event
 	{
 	private:
 		/// Iteration number of game loop
-		unsigned int stepCount;  
+		unsigned int stepCount;
 
 	public:
 		/// Default constructor.

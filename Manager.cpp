@@ -1,5 +1,11 @@
 #include "Manager.h"
 #include "WorldManager.h"
+#include "Object.h"
+#include "ObjectList.h"
+#include "ObjectListIterator.h"
+
+#include <iostream>
+#include <vector>
 
 battleCity::Manager::Manager() : type(""), started(false) {}
 
@@ -10,7 +16,7 @@ battleCity::Manager::~Manager()
 #endif
 }
 
-void battleCity::Manager::setType(string newType)
+void battleCity::Manager::setType(std::string newType)
 {
 	type = newType;
 }
@@ -39,7 +45,6 @@ bool battleCity::Manager::isStarted() const
 int battleCity::Manager::onEvent(const Event* ptrEvent) const
 {
 	int count = 0;
-
 	ObjectListIterator itEvent = ObjectListIterator(&WM.worldList);
 
 	for (itEvent.first(); !itEvent.isDone(); itEvent.next())

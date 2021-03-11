@@ -1,6 +1,5 @@
 #pragma once
 
-#include "headers.h"
 namespace battleCity {
 	class Vector
 	{
@@ -19,12 +18,9 @@ namespace battleCity {
 		float magnitude() const;
 		void normalize();
 
-		/// Scale Vector
-		Vector& operator*(const float& value) noexcept;
 		/// Add Vector
-		Vector& operator+=(const Vector& other) noexcept;
 		Vector& operator+(const Vector& other) noexcept;
-
+		Vector operator-();
 	};
 }
 

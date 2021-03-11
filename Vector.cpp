@@ -1,5 +1,7 @@
 #include "Vector.h"
 
+#include <cmath>
+
 battleCity::Vector::Vector() : x(0), y(0) {}
 
 battleCity::Vector::Vector(float xValue, float yValue) : x(xValue), y(yValue) {}
@@ -31,13 +33,6 @@ void battleCity::Vector::normalize()
     }
 }
 
-battleCity::Vector& battleCity::Vector::operator+=(const Vector& other) noexcept
-{
-    this->x += other.x;
-    this->y += other.y;
-    return *this;
-}
-
 battleCity::Vector& battleCity::Vector::operator+(const Vector& other) noexcept
 {
     Vector vec = *this;
@@ -46,17 +41,13 @@ battleCity::Vector& battleCity::Vector::operator+(const Vector& other) noexcept
     return vec;
 }
 
-battleCity::Vector& battleCity::Vector::operator*(const float& value) noexcept
+battleCity::Vector battleCity::Vector::operator-()
 {
-    this->x = this->x * value;
-    this->y = this->y * value;
-    return *this;
+    float newX = -x;
+    float newY = -y;
+    return Vector(newX, newY);
 }
 
 battleCity::Vector::~Vector()
 {
-#if DEBUG == 2
-    std::cout << "Vector Destructor" << std::endl;
-    cout << endl;
-#endif
 }

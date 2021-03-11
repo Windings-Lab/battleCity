@@ -1,7 +1,11 @@
 #pragma once
 
+#include <string>
+
 #include "Manager.h"
 #include "Vector.h"
+#include "Object.h"
+#include "ObjectList.h"
 
 #define WM battleCity::WorldManager::getInstance()
 
@@ -23,8 +27,8 @@ namespace battleCity
 		ObjectList deletionList;
 
 	public:
-		friend class GameManager;
 		friend class Manager;
+		friend class GameManager;
 
 		~WorldManager();
 
@@ -51,7 +55,7 @@ namespace battleCity
 
 		// Return list of Objects matching type
 		// List is empty if none found
-		ObjectList objectsOfType(string type);
+		ObjectList objectsOfType(std::string type);
 
 		// Update world.
 		// Update positions of Objects based on their velocities.
@@ -62,7 +66,7 @@ namespace battleCity
 		// Draw bottom up, from 0 to MAX_ALTITUDE
 		void draw();
 
-		/// Move Object. 
+		/// Move Object.
 		/// If collision with solid, send collision events.
 		/// If no collision with solid, move ok.
 		/// If all collided objects soft, move ok.
@@ -76,6 +80,11 @@ namespace battleCity
 		// Indicate Object is to be deleted at end of current game loop.
 		// Return 0 if ok, else -1.
 		int markForDelete(Object* objectPtr);
+
+		// Return list of Objects collided with at position 'where'.
+		// Collisions only with solid Objects.
+		// Does not consider if p_o is solid or not.
+		ObjectList getCollisions(const Object* ptrObject, Vector where) const;
 	};
 }
 

@@ -1,8 +1,7 @@
 #pragma once
 
-#include "Framework.h"
-#include "Object.h"
-#include "ObjectList.h"
+#include <string>
+
 #include "Event.h"
 
 namespace battleCity
@@ -11,13 +10,13 @@ namespace battleCity
 
 	private:
 		/// Manager type identifier
-		string type;	
+		std::string type;
 		/// True if startUp() succeeded.
-		bool started;	
+		bool started;
 
 	protected:
 		/// Set type identifier of Manager.
-		void setType(string newType);
+		void setType(std::string newType);
 
 	public:
 		Manager();
@@ -25,11 +24,11 @@ namespace battleCity
 
 		std::string getType() const;
 
-		/// Startup Manager. 
+		/// Startup Manager.
 		/// Return 0 if ok, else negative number.
 		virtual int startUp();
 
-		/// Shutdown Manager.  
+		/// Shutdown Manager.
 		virtual void shutDown();
 
 		/// Return status of is_started (true when startUp() was successful).

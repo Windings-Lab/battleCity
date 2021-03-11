@@ -1,7 +1,13 @@
 #include "ObjectListIterator.h"
 
+#include <iostream>
+
 //Constructor
-battleCity::ObjectListIterator::ObjectListIterator(const ObjectList* list) : managerPtrlist(list) {}
+battleCity::ObjectListIterator::ObjectListIterator(const ObjectList* list) : managerPtrlist(list)
+{
+	list = NULL;
+	this->first();
+}
 
 
 void battleCity::ObjectListIterator::first()
@@ -25,8 +31,12 @@ bool battleCity::ObjectListIterator::isDone() const
 	return this->itList == managerPtrlist->objectPtrList.end();
 }
 
-vector<battleCity::Object*>::const_iterator battleCity::ObjectListIterator::currentObject() const
+std::vector<battleCity::Object*>::const_iterator battleCity::ObjectListIterator::currentObject() const
 {
+	if (managerPtrlist->objectPtrList.size() == 0)
+	{
+		std::cout << std::endl;
+	}
 	return this->itList;
 }
 

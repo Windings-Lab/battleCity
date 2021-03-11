@@ -1,19 +1,25 @@
 #include "ObjectList.h"
+#include "Object.h"
+#include "ObjectListIterator.h"
 
-battleCity::ObjectList::ObjectList() {}
+#include <iostream>
+#include <algorithm>
+#include <vector>
 
-battleCity::ObjectList::ObjectList(int i) : i(i) {}
+battleCity::ObjectList::ObjectList() : i(0)
+{}
+
+battleCity::ObjectList::ObjectList(int index) : i(index) {}
 
 int battleCity::ObjectList::insert(Object* objectPtr)
 {
 	try
 	{
 		objectPtrList.push_back(objectPtr);
-		
 	}
 	catch (...)
 	{
-		cout << "Object insert error" << endl;
+		std::cout << "Object insert error" << std::endl;
 		return -1;
 	}
 	objectPtr = NULL;
@@ -25,12 +31,6 @@ int battleCity::ObjectList::remove(Object* objectPtr)
 	auto it = std::find(objectPtrList.begin(), objectPtrList.end(), objectPtr);
 	if (it != objectPtrList.end())
 	{
-		for (unsigned long long i = 1; i < objectPtr->getSprite().size(); i++)
-		{
-			destroySprite(objectPtr->getSprite()[i]);
-			objectPtr->getSprite()[i] = NULL;
-		}
-		objectPtr->getSprite()[0] = NULL;
 		*it = NULL;
 		objectPtrList.erase(it);
 	}
@@ -42,7 +42,7 @@ int battleCity::ObjectList::remove(Object* objectPtr)
 	return 0;
 }
 
-vector<battleCity::Object*>& battleCity::ObjectList::getList()
+std::vector<battleCity::Object*>& battleCity::ObjectList::getList()
 {
 	return objectPtrList;
 }
@@ -50,6 +50,11 @@ vector<battleCity::Object*>& battleCity::ObjectList::getList()
 int battleCity::ObjectList::getSize()
 {
 	return objectPtrList.size();
+}
+
+bool battleCity::ObjectList::isEmpty()
+{
+	return getSize() == 0;
 }
 
 void battleCity::ObjectList::clear()
@@ -65,10 +70,6 @@ void battleCity::ObjectList::clear()
 
 battleCity::ObjectList::~ObjectList()
 {
-#if DEBUG == 2
-	std::cout << "ObjectList Destructor" << std::endl;
-	cout << endl;
-#endif
 	objectPtrList.clear();
 	objectPtrList.shrink_to_fit();
 }

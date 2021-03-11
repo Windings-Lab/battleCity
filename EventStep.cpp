@@ -1,7 +1,7 @@
 #include "EventStep.h"
 #include "GameManager.h"
 
-battleCity::EventStep::EventStep() : stepCount(GM.stepCount) 
+battleCity::EventStep::EventStep() : stepCount(GM.stepCount)
 {
 	setType(STEP_EVENT);
 }

@@ -1,9 +1,13 @@
 #pragma once
+
+#include <vector>
+
 #include "Object.h"
 #include "ObjectList.h"
 
 namespace battleCity
 {
+	class Object;
 	class ObjectList;
 
 	class ObjectListIterator
@@ -12,8 +16,8 @@ namespace battleCity
 		/// Iterator must be given list when created
 		ObjectListIterator();
 		/// List iterating over
-		const ObjectList* managerPtrlist;	
-		vector<Object*>::const_iterator itList;
+		const ObjectList* managerPtrlist;
+		std::vector<Object*>::const_iterator itList;
 	public:
 
 		/// Create iterator, over indicated list
@@ -32,7 +36,7 @@ namespace battleCity
 		bool isDone() const;
 
 		/// Return pointer to current item in list, NULL if done/empty
-		vector<Object*>::const_iterator currentObject() const;
+		std::vector<Object*>::const_iterator currentObject() const;
 
 		ObjectListIterator& operator=(const ObjectListIterator& rhs);
 

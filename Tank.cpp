@@ -1,34 +1,49 @@
 #include "Tank.h"
-#include "EventStep.h"
+#include "Utility.h"
+#include "GameManager.h"
 #include "WorldManager.h"
+#include "Event.h"
+#include "EventCollision.h"
+#include "EventStep.h"
+#include "Vector.h"
+#include "Screen.h"
+
+#include <iostream>
+#include <vector>
 
 Tank::Tank()
 {
 	speed = 1;
-	change = 3;
+	change = battleCity::randomNumber(0, 3);
 	id = 2;
 	type = "Tank";
 }
 
-Tank::Tank(int x, int y)
+Tank::Tank(float x, float y)
 {
 	speed = 1;
-	change = 3;
+	change = battleCity::randomNumber(0, 3);
 	position.x = x;
 	position.y = y;
+	if (x < SCR.getBoundaryL() || x > SCR.getBoundaryR())
+	{
+		position.x = SCR.getBoundaryL();
+	}
+	if (y < SCR.getBoundaryU() || y > SCR.getBoundaryD())
+	{
+		position.y = SCR.getBoundaryU();
+	}
 	id = 2;
 	type = "Tank";
 }
 
 inline void Tank::update()
 {
-	direction.x = 0;
-	direction.y = 0;
 }
 
 inline void Tank::draw()
 {
-	drawSprite(sprite[0], (int)position.x, (int)position.y);
+	drawSprite(spriteDirection, (int)position.x, (int)position.y);
 }
 
 int Tank::eventHandler(const battleCity::Event* eventPtr)
@@ -39,29 +54,30 @@ int Tank::eventHandler(const battleCity::Event* eventPtr)
 		if (stepEvent->getStepCount() % 250 == 0)
 		{
 			change++;
-			if (change > 4)
-				change = 1;
+			if (change > 3)
+				change = 0;
+		}
+		if (change == 0)
+		{
+			setVelocity(battleCity::Vector(1, 0));
 		}
 		if (change == 1)
 		{
-			WM.moveObject(this, battleCity::Vector(position.x + 1, position.y));
+			setVelocity(battleCity::Vector(-1, 0));
 		}
 		if (change == 2)
 		{
-			WM.moveObject(this, battleCity::Vector(position.x + -1, position.y));
+			setVelocity(battleCity::Vector(0, 1));
 		}
 		if (change == 3)
 		{
-			WM.moveObject(this, battleCity::Vector(position.x, position.y + 1));
-		}
-		if (change == 4)
-		{
-			WM.moveObject(this, battleCity::Vector(position.x, position.y - 1));
+			setVelocity(battleCity::Vector(0, -1));
 		}
 
 		spriteSet(change);
 		return 1;
 	}
+
 	eventPtr = NULL;
 	return 0;
 }

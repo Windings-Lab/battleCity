@@ -7,7 +7,7 @@ void battleCity::Event::setType(std::string newType)
 	eventType = newType;
 }
 
-string battleCity::Event::getType() const
+std::string battleCity::Event::getType() const
 {
 	return eventType;
 }

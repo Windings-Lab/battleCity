@@ -1,18 +1,25 @@
+#include "Manager.h"
 #include "GameManager.h"
 #include "WorldManager.h"
 #include "EventStep.h"
+#include "Object.h"
+#include "ObjectList.h"
+#include "Clock.h"
+#include "Sprites.h"
 
-bool battleCity::GameManager::_gameOver = NULL;
-unsigned int battleCity::GameManager::_frameTime = NULL;
-unsigned int battleCity::GameManager::_stepCount = NULL;
+#include "Framework.h"
+#include <iostream>
+#include <vector>
+
+bool battleCity::GameManager::_gameOver = 0;
+unsigned int battleCity::GameManager::_frameTime = 0;
+unsigned int battleCity::GameManager::_stepCount = 0;
 Clock battleCity::GameManager::_clock;
 
 const bool& battleCity::GameManager::gameOver = _gameOver;
 const unsigned int& battleCity::GameManager::frameTime = _frameTime;
 const unsigned int& battleCity::GameManager::stepCount = _stepCount;
 const Clock& battleCity::GameManager::clock = _clock;
-
-static std::unique_ptr<battleCity::GameManager> gameManager;
 
 battleCity::GameManager::GameManager()
 {
@@ -33,16 +40,9 @@ battleCity::GameManager& battleCity::GameManager::getInstance()
 	return single;
 }
 
-int battleCity::GameManager::spriteInit(string path)
+int battleCity::GameManager::spriteInit()
 {
-	int check = true;
-	for (auto& it : WM.worldList.getList())
-	{
-		check = it->spriteInit();
-		if (check == 0)
-			return check;
-	}
-	return 1;
+	return SPR.initAll();
 }
 
 int battleCity::GameManager::startUp()
@@ -55,6 +55,7 @@ int battleCity::GameManager::startUp()
 void battleCity::GameManager::shutDown()
 {
 	WM.shutDown();
+	SPR.deleteAll();
 	_gameOver = true;
 }
 

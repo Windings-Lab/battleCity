@@ -1,14 +1,13 @@
 #pragma once
 
-#include "headers.h"
+// Bonus for any found bugs in the framework!
 
 #define FRAMEWORK_API extern "C" __declspec(dllimport)
 #define ENUM_TO_STR(ENUM) # ENUM
-#define DEBUG 0
+#define DEBUG 2
 #define FPS 16
-#define WM battleCity::WorldManager::getInstance()
 
-// Bonus for any found bugs in the framework!
+#include <string>
 
 class Sprite;
 
@@ -19,7 +18,7 @@ FRAMEWORK_API void destroySprite(Sprite* s);
 
 
 FRAMEWORK_API void drawTestBackground();
-FRAMEWORK_API void getScreenSize(int& w, int &h);
+FRAMEWORK_API void getScreenSize(int& w, int& h);
 
 // Get the number of milliseconds since library initialization.
 FRAMEWORK_API unsigned int getTickCount();
@@ -62,7 +61,7 @@ public:
 	// return value: if true will exit the application
 	virtual bool Tick() = 0;
 
-	// param: xrel, yrel: The relative motion in the X/Y direction 
+	// param: xrel, yrel: The relative motion in the X/Y direction
 	// param: x, y : coordinate, relative to window
 	virtual void onMouseMove(int x, int y, int xrelative, int yrelative) = 0;
 
@@ -76,6 +75,5 @@ public:
 
 	virtual ~Framework() {};
 };
-
 
 FRAMEWORK_API int run(Framework*);

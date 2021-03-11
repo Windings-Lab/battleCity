@@ -1,4 +1,9 @@
 #include "Clock.h"
+#include "Framework.h"
+
+#include <thread>
+#include <chrono>
+#include <iostream>
 
 Clock::Clock() : previousTime(getTickCount())
 {

@@ -1,6 +1,9 @@
 #pragma once
 
+#include <string>
+
 #include "Manager.h"
+#include "Clock.h"
 
 // Two-letter acronym for easier access to manager.
 #define GM battleCity::GameManager::getInstance()
@@ -12,18 +15,18 @@ namespace battleCity {
 
 	private:
 		// Private since a singleton.
-		GameManager();               
-		GameManager(GameManager const&);    
-		void operator=(GameManager const&); 
+		GameManager();
+		GameManager(GameManager const&);
+		void operator=(GameManager const&);
 
 		/// True->game loop should stop
-		static bool _gameOver;  
+		static bool _gameOver;
 		// Target time per game loop, in seconds
 		static unsigned int _frameTime;
 		// Clock managment
 		static Clock _clock;
 		/// Count of game loop iterations
-		static unsigned int _stepCount; 
+		static unsigned int _stepCount;
 
 	public:
 		~GameManager();
@@ -31,14 +34,14 @@ namespace battleCity {
 		/// Get the singleton instance of the GameManager.
 		static GameManager& getInstance();
 
-		int spriteInit(string path = ".\\data\\Player\\TankPlayer*.png");
+		int spriteInit();
 
 		/// Startup all GameManager services.
 		int startUp() override;
 
 		/// Game manager only accepts step events.
 		/// Return false if other event.
-		bool isValid(string eventName) const;
+		bool isValid(std::string eventName) const;
 
 		/// Shut down GameManager services.
 		void shutDown() override;

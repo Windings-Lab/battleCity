@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Object.h"
+#include "Event.h"
 
 class Tank : public battleCity::Object
 {
@@ -8,7 +9,7 @@ private:
 	int change;
 public:
 	Tank();
-	Tank(int x, int y);
+	Tank(float x, float y);
 	~Tank();
 
 	virtual inline void update() override;
