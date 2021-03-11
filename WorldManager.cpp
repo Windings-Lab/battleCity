@@ -9,6 +9,8 @@
 #include "Screen.h"
 #include "Box.h"
 #include "Utility.h"
+#include "Framework.h"
+#include "Sprites.h"
 
 #include <vector>
 #include <iostream>
@@ -76,18 +78,20 @@ battleCity::ObjectList battleCity::WorldManager::objectsOfType(std::string type)
 
 void battleCity::WorldManager::update()
 {
-	ObjectListIterator it = ObjectListIterator(&worldList);
+	ObjectList listToIt = worldList;
+	ObjectListIterator it = ObjectListIterator(&listToIt);
 	ObjectListIterator itDeletetion = ObjectListIterator(&deletionList);
 
-	for (it.first(); !it.isDone(); it.next())
-	{
-		(*it.currentObject())->update();
-	}
 
 	for (it.first(); !it.isDone(); it.next())
 	{
 		Vector newPos = (*it.currentObject())->predictPosition();
 		moveObject(*it.currentObject(), newPos);
+	}
+
+	for (it.first(); !it.isDone(); it.next())
+	{
+		(*it.currentObject())->update();
 	}
 
 	for (itDeletetion.first(); !itDeletetion.isDone(); itDeletetion.next())
@@ -103,15 +107,22 @@ void battleCity::WorldManager::draw()
 {
 	ObjectListIterator it = ObjectListIterator(&worldList);
 
+	drawBackground();
+
 	for (it.first(); !it.isDone(); it.next())
 	{
 		(*it.currentObject())->draw();
 	}
 }
 
+void battleCity::WorldManager::drawBackground()
+{
+	drawSprite(&SPR.getBackgroundSprite(), SCR.getBoundaryL(), SCR.getBoundaryU());
+}
+
 int battleCity::WorldManager::moveObject(Object* ptrObject, Vector where)
 {
-	if (ptrObject->isSolid())
+	if (ptrObject->isSolid() || ptrObject->isSoft())
 	{
 		ObjectList newList = getCollisions(ptrObject, where);
 
@@ -124,7 +135,7 @@ int battleCity::WorldManager::moveObject(Object* ptrObject, Vector where)
 			for (it.first(); !it.isDone(); it.next())
 			{
 				tempObject = *it.currentObject();
-				EventCollision collision = EventCollision(ptrObject, tempObject, where);
+				EventCollision collision(ptrObject, tempObject, where);
 
 				ptrObject->eventHandler(&collision);
 				tempObject->eventHandler(&collision);
@@ -166,7 +177,13 @@ int battleCity::WorldManager::markForDelete(Object* objectPtr)
 			return 0;
 	}
 
-	deletionList.insert(objectPtr);
+	objectPtr->setHealth(-1);
+	int id1 = objectPtr->getID();
+
+	if (objectPtr->getHealth() == 0)
+	{
+		deletionList.insert(objectPtr);
+	}
 	objectPtr = NULL;
 	return 0;
 }
@@ -180,12 +197,13 @@ battleCity::ObjectList battleCity::WorldManager::getCollisions(const Object* ptr
 	for (it.first(); !it.isDone(); it.next())
 	{
 		Object* tempObject = *it.currentObject();
+
 		Box b = getWorldBox(ptrObject, where);
 		Box bTemp = getWorldBox(tempObject);
 		if (tempObject != ptrObject)
 		{
 			if (boxesIntersect(b, bTemp) &&
-				tempObject->isSolid())
+				(tempObject->isSolid() || tempObject->isSoft()))
 			{
 				collisionList.insert(tempObject);
 			}

@@ -13,8 +13,10 @@
 #include <vector>
 #include <iostream>
 
-TankPlayer::TankPlayer()
+battleCity::TankPlayer::TankPlayer()
 {
+	sprite = SPR.getTankPlayerSprites();
+	spriteSet(3);
 	id = 1;
 	type = "Player";
 #if DEBUG == 1
@@ -22,8 +24,10 @@ TankPlayer::TankPlayer()
 #endif
 }
 
-TankPlayer::TankPlayer(float x, float y)
+battleCity::TankPlayer::TankPlayer(float x, float y)
 {
+	sprite = SPR.getTankPlayerSprites();
+	spriteSet(3);
 	position.x = x;
 	position.y = y;
 	if (x < SCR.getBoundaryL() || x > SCR.getBoundaryR())
@@ -38,24 +42,27 @@ TankPlayer::TankPlayer(float x, float y)
 	id = 1;
 }
 
-void TankPlayer::update()
+void battleCity::TankPlayer::update()
 {
-	if (GM.stepCount % 250 == 0)
+	if (health == 0)
 	{
-		std::cout << "speed: " << speed << std::endl;
-		std::cout << "Player x: " << position.x << " y: " << position.y << std::endl;
-		std::cout << "x: " << direction.x << " y: " << direction.y << std::endl;
-		std::cout << "sight.x: " << sight.x << " sight.y: " << sight.y << std::endl << std::endl;
-
+		GM.setGameOver();
 	}
+	//if (GM.stepCount % 250 == 0)
+	//{
+	//	std::cout << "speed: " << speed << std::endl;
+	//	std::cout << "Player x: " << position.x << " y: " << position.y << std::endl;
+	//	std::cout << "x: " << direction.x << " y: " << direction.y << std::endl;
+	//	std::cout << "sight.x: " << sight.x << " sight.y: " << sight.y << std::endl << std::endl;
+	//}
 }
 
-inline void TankPlayer::draw()
+inline void battleCity::TankPlayer::draw()
 {
 	drawSprite(spriteDirection, (int)position.x, (int)position.y);
 }
 
-void TankPlayer::keyboardInput()
+void battleCity::TankPlayer::keyboardInput()
 {
 	if (movement.back() == "RIGHT")
 	{
@@ -91,7 +98,7 @@ void TankPlayer::keyboardInput()
 	}
 }
 
-void TankPlayer::mouseInput(const battleCity::EventMouse* mouseEvent)
+void battleCity::TankPlayer::mouseInput(const battleCity::EventMouse* mouseEvent)
 {
 	// Pressed button?
 	if ((mouseEvent->getMouseAction() == battleCity::EventMouseAction::PRESSED) &&
@@ -99,17 +106,21 @@ void TankPlayer::mouseInput(const battleCity::EventMouse* mouseEvent)
 		fire();
 }
 
-void TankPlayer::move(int x, int y)
+void battleCity::TankPlayer::move(int x, int y)
 {
 	setVelocity(battleCity::Vector(x, y));
 }
 
-void TankPlayer::fire()
+void battleCity::TankPlayer::fire()
 {
-	battleCity::Bullet* newBullet = new battleCity::Bullet(this);
+	if (bulletCount != 0)
+	{
+		Bullet* newBullet = new Bullet(this);
+		bulletCount--;
+	}
 }
 
-int TankPlayer::eventHandler(const battleCity::Event* eventPtr)
+int battleCity::TankPlayer::eventHandler(const battleCity::Event* eventPtr)
 {
 	if (eventPtr->getType() == battleCity::KEYBOARD_EVENT) {
 		keyboardInput();
@@ -126,7 +137,7 @@ int TankPlayer::eventHandler(const battleCity::Event* eventPtr)
 	return 0;
 }
 
-void TankPlayer::movementSet(std::string direction)
+void battleCity::TankPlayer::movementSet(std::string direction)
 {
 	movement.push_back(direction);
 	if (movement.size() > 2)
@@ -146,7 +157,7 @@ void TankPlayer::movementSet(std::string direction)
 #endif
 }
 
-void TankPlayer::movementErase(std::string direction)
+void battleCity::TankPlayer::movementErase(std::string direction)
 {
 	movement.erase(std::find(movement.begin() + 1, movement.end(), direction));
 	auto it = std::find(movement.begin() + 1, movement.end(), "IDLE");
@@ -166,7 +177,7 @@ void TankPlayer::movementErase(std::string direction)
 #endif
 }
 
-TankPlayer::~TankPlayer()
+battleCity::TankPlayer::~TankPlayer()
 {
 #if DEBUG == 2
 	std::cout << "TankPlayer Destructor" << std::endl;

@@ -10,7 +10,11 @@ namespace battleCity
     private:
         void out();
         void hit(const battleCity::EventCollision* CollisionEvent);
+
+        Object& object;
     public:
+        ~Bullet();
+
         void update() override;
         void draw() override;
 

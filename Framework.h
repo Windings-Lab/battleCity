@@ -4,7 +4,7 @@
 
 #define FRAMEWORK_API extern "C" __declspec(dllimport)
 #define ENUM_TO_STR(ENUM) # ENUM
-#define DEBUG 2
+#define DEBUG 0
 #define FPS 16
 
 #include <string>

@@ -23,6 +23,7 @@ const Clock& battleCity::GameManager::clock = _clock;
 
 battleCity::GameManager::GameManager()
 {
+
 	_stepCount = 0;
 	setType("GameManager");
 }
@@ -54,9 +55,9 @@ int battleCity::GameManager::startUp()
 
 void battleCity::GameManager::shutDown()
 {
+	_gameOver = true;
 	WM.shutDown();
 	SPR.deleteAll();
-	_gameOver = true;
 }
 
 void battleCity::GameManager::run()

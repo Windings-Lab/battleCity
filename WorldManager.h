@@ -62,9 +62,10 @@ namespace battleCity
 		// Lastly, delete Objects marked for deletion.
 		void update();
 
-		// Draw all Objects in view
-		// Draw bottom up, from 0 to MAX_ALTITUDE
+		// Draw all Objects
 		void draw();
+
+		void drawBackground();
 
 		/// Move Object.
 		/// If collision with solid, send collision events.

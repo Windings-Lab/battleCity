@@ -30,6 +30,8 @@ namespace battleCity
 		Box box;
 		int spriteX, spriteY;
 		float speed;
+		int bulletCount;
+		int health;
 		/// <summary>
 		/// Vector of direction sprites
 		/// </summary>
@@ -64,20 +66,25 @@ namespace battleCity
 		int getSpriteX() const;
 		int getSpriteY() const;
 
-		void setSpeed(float newSpeed);
+		int getID() const;
 
+		void setSpeed(float newSpeed);
 		float getSpeed() const;
+
+		void setHealth(int newHealth);
+		int getHealth() const;
+
+		void setBulletCount(int newBulletCount);
+		int getBulletCount();
 
 		void setDirection(Vector newDirection);
 
 		Vector getDirection() const;
-
 		Vector getSight() const;
+		void setSight(Vector newSight);
 
 		void setVelocity(Vector newVelocity);
-
 		Vector getVelocity() const;
-
 		Vector predictPosition();
 
 		/// Set position of Object.
@@ -88,6 +95,7 @@ namespace battleCity
 		Vector getPosition() const;
 
 		bool isSolid() const;
+		bool isSoft() const;
 
 		/// Set solidness of Object
 		/// Return 0 if ok, else -1.

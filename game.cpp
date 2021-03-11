@@ -32,7 +32,11 @@ public:
 		GM.startUp();
 		int i = GM.spriteInit();
 		player = new TankPlayer(0, 0);
-		Object* list[5] { new Tank(300, 400), new Tank(200, 400) };
+		Object* list[5] { new Tank(300, 400), new Tank(500, 400) };
+		list[0]->setSight(Vector(1, 0));
+		list[1]->setSight(Vector(-1, 0));
+		list[0]->spriteSet(0);
+		list[1]->spriteSet(1);
 		return i;
 	}
 
@@ -46,7 +50,7 @@ public:
 
 	virtual bool Tick() {
 		GM.run();
-		return false;
+		return GM.gameOver;
 	}
 
 	virtual void onMouseMove(int x, int y, int xrelative, int yrelative)

@@ -37,15 +37,15 @@
     <Filter Include="Source Files\Event">
       <UniqueIdentifier>{8578686e-55f6-4f03-ab9e-fdaeb99cda45}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\BattleCity Objects">
+      <UniqueIdentifier>{30df22b6-d6fe-41a8-86d3-c3d2625a34ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BattleCity Objects">
+      <UniqueIdentifier>{add61852-e9fd-4215-b961-49865336e084}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="game.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="TankPlayer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Tank.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Clock.cpp">
@@ -81,9 +81,6 @@
     <ClCompile Include="EventKeyboard.cpp">
       <Filter>Source Files\Event</Filter>
     </ClCompile>
-    <ClCompile Include="Bullet.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="EventCollision.cpp">
       <Filter>Source Files\Event</Filter>
     </ClCompile>
@@ -99,17 +96,26 @@
     <ClCompile Include="EventOut.cpp">
       <Filter>Source Files\Event</Filter>
     </ClCompile>
-    <ClCompile Include="EventMouse.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Sprites.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="EventMouse.cpp">
+      <Filter>Source Files\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Source Files\BattleCity Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Tank.cpp">
+      <Filter>Source Files\BattleCity Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="TankPlayer.cpp">
+      <Filter>Source Files\BattleCity Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Wall.cpp">
+      <Filter>Source Files\BattleCity Objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="TankPlayer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Vector.h">
       <Filter>Header Files\Utility</Filter>
     </ClInclude>
@@ -121,9 +127,6 @@
     </ClInclude>
     <ClInclude Include="ObjectList.h">
       <Filter>Header Files\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Tank.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Framework.h">
       <Filter>Header Files</Filter>
@@ -149,9 +152,6 @@
     <ClInclude Include="EventKeyboard.h">
       <Filter>Header Files\Event</Filter>
     </ClInclude>
-    <ClInclude Include="Bullet.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Utility.h">
       <Filter>Header Files\Utility</Filter>
     </ClInclude>
@@ -167,14 +167,23 @@
     <ClInclude Include="Box.h">
       <Filter>Header Files\Utility</Filter>
     </ClInclude>
-    <ClInclude Include="Header.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="TankPlayer.h">
+      <Filter>Header Files\BattleCity Objects</Filter>
     </ClInclude>
-    <ClInclude Include="EventMouse.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Tank.h">
+      <Filter>Header Files\BattleCity Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>Header Files\BattleCity Objects</Filter>
     </ClInclude>
     <ClInclude Include="Sprites.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="EventMouse.h">
+      <Filter>Header Files\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Wall.h">
+      <Filter>Header Files\BattleCity Objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

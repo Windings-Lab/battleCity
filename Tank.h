@@ -3,17 +3,21 @@
 #include "Object.h"
 #include "Event.h"
 
-class Tank : public battleCity::Object
+namespace battleCity
 {
-private:
-	int change;
-public:
-	Tank();
-	Tank(float x, float y);
-	~Tank();
+	class Tank : public Object
+	{
+	private:
+		int change;
+	public:
+		Tank();
+		Tank(float x, float y);
+		~Tank();
 
-	virtual inline void update() override;
-	virtual inline void draw() override;
+		virtual inline void update() override;
+		virtual inline void draw() override;
+		void fire();
 
-	virtual int eventHandler(const battleCity::Event* eventPtr) override;
-};
+		virtual int eventHandler(const Event* eventPtr) override;
+	};
+}

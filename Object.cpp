@@ -13,6 +13,8 @@
 battleCity::Object::Object() : id(0), speed(0), sprite(SPR.getTankSprites())
 {
     spriteSet(3);
+    health = 1;
+    bulletCount = 1;
     sight.y = -1;
     getSpriteSize(spriteDirection, spriteX, spriteY);
     box = Box(Vector(), spriteX, spriteY);
@@ -48,6 +50,11 @@ int battleCity::Object::getSpriteY() const
     return spriteY;
 }
 
+int battleCity::Object::getID() const
+{
+    return id;
+}
+
 void battleCity::Object::setSpeed(float newSpeed)
 {
     speed = newSpeed;
@@ -56,6 +63,26 @@ void battleCity::Object::setSpeed(float newSpeed)
 float battleCity::Object::getSpeed() const
 {
     return speed;
+}
+
+void battleCity::Object::setHealth(int newHealth)
+{
+    health += newHealth;
+}
+
+int battleCity::Object::getHealth() const
+{
+    return health;
+}
+
+void battleCity::Object::setBulletCount(int newBulletCount)
+{
+    bulletCount += newBulletCount;
+}
+
+int battleCity::Object::getBulletCount()
+{
+    return bulletCount;
 }
 
 void battleCity::Object::setDirection(Vector newDirection)
@@ -73,6 +100,11 @@ battleCity::Vector battleCity::Object::getDirection() const
 battleCity::Vector battleCity::Object::getSight() const
 {
     return sight;
+}
+
+void battleCity::Object::setSight(Vector newSight)
+{
+    sight = newSight;
 }
 
 void battleCity::Object::setVelocity(Vector newVelocity)
@@ -105,11 +137,12 @@ battleCity::Vector battleCity::Object::getPosition() const
 
 bool battleCity::Object::isSolid() const
 {
-    if (solidness == Solidness::SPECTRAL)
-    {
-        return 0;
-    }
     return solidness == Solidness::HARD ? 1 : 0;
+}
+
+bool battleCity::Object::isSoft() const
+{
+    return solidness == Solidness::SOFT ? 1 : 0;
 }
 
 int battleCity::Object::setSolidness(Solidness newSolid)

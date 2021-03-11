@@ -8,6 +8,7 @@ bool battleCity::Sprites::isCreated = false;
 std::string battleCity::Sprites::tankPath = "";
 std::string battleCity::Sprites::tankPlayerPath = "";
 std::string battleCity::Sprites::bulletPath = "";
+std::string battleCity::Sprites::backgroundPath = "";
 
 battleCity::Sprites::Sprites()
 {
@@ -19,15 +20,16 @@ battleCity::Sprites& battleCity::Sprites::getInstance()
     static Sprites single;
     if (!isCreated)
     {
-        single.tankPath =       ".\\data\\Player\\TankPlayer*.png";
+        single.tankPath =       ".\\data\\Tank\\Tank*.png";
         single.tankPlayerPath = ".\\data\\Player\\TankPlayer*.png";
         single.bulletPath =     ".\\data\\Bullet\\bullet*.png";
+        single.backgroundPath = ".\\data\\Background.png";
         single.isCreated = true;
     }
     return single;
 }
 
-std::vector<Sprite*>& battleCity::Sprites::spriteInit(std::string spritePath)
+std::vector<Sprite*>& battleCity::Sprites::spriteInitDirections(std::string spritePath)
 {
     std::vector<Sprite*>* spriteVec = new std::vector<Sprite*>();
     std::regex vowel_re(R"(\*)");
@@ -45,6 +47,18 @@ std::vector<Sprite*>& battleCity::Sprites::spriteInit(std::string spritePath)
     return *spriteVec;
 }
 
+Sprite& battleCity::Sprites::spriteInit(std::string spritePath)
+{
+    Sprite* newSprite = createSprite(spritePath.c_str());
+
+    if (newSprite == NULL)
+    {
+        exit(0);
+    }
+
+    return *newSprite;
+}
+
 std::vector<Sprite*>& battleCity::Sprites::getTankSprites()
 {
     return *tank;
@@ -60,11 +74,18 @@ std::vector<Sprite*>& battleCity::Sprites::getBulletSprites()
     return *bullet;
 }
 
+Sprite& battleCity::Sprites::getBackgroundSprite()
+{
+    return *background;
+}
+
 int battleCity::Sprites::initAll()
 {
-    tank = &spriteInit(tankPath);
-    tankPlayer = &spriteInit(tankPlayerPath);
-    bullet = &spriteInit(bulletPath);
+    tank = &spriteInitDirections(tankPath);
+    tankPlayer = &spriteInitDirections(tankPlayerPath);
+    bullet = &spriteInitDirections(bulletPath);
+
+    background = &spriteInit(backgroundPath);
 
     return 1;
 }
@@ -91,6 +112,9 @@ void battleCity::Sprites::deleteAll()
         bullet->at(i) = NULL;
     }
     delete bullet;
+
+    destroySprite(background);
+    background = NULL;
 }
 
 battleCity::Sprites::~Sprites()

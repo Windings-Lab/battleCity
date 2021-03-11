@@ -23,21 +23,26 @@ namespace battleCity
 		static std::string tankPath;
 		static std::string tankPlayerPath;
 		static std::string bulletPath;
+		static std::string backgroundPath;
 
 		std::vector<Sprite*>* tank;
 		std::vector<Sprite*>* tankPlayer;
 		std::vector<Sprite*>* bullet;
 
+		Sprite* background;
 	public:
 		~Sprites();
 
 		static Sprites& getInstance();
 
-		std::vector<Sprite*>& spriteInit(std::string spritePath);
+		std::vector<Sprite*>& spriteInitDirections(std::string spritePath);
+
+		Sprite& spriteInit(std::string spritePath);
 
 		std::vector<Sprite*>& getTankSprites();
 		std::vector<Sprite*>& getTankPlayerSprites();
 		std::vector<Sprite*>& getBulletSprites();
+		Sprite& getBackgroundSprite();
 
 		int initAll();
 		void deleteAll();
