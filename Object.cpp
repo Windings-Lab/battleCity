@@ -13,6 +13,7 @@
 battleCity::Object::Object() : id(0), speed(0), sprite(SPR.getTankSprites())
 {
     spriteSet(3);
+    sight.y = -1;
     getSpriteSize(spriteDirection, spriteX, spriteY);
     box = Box(Vector(), spriteX, spriteY);
     position.x = SCR.getBoundaryL();
@@ -67,6 +68,11 @@ void battleCity::Object::setDirection(Vector newDirection)
 battleCity::Vector battleCity::Object::getDirection() const
 {
     return direction;
+}
+
+battleCity::Vector battleCity::Object::getSight() const
+{
+    return sight;
 }
 
 void battleCity::Object::setVelocity(Vector newVelocity)

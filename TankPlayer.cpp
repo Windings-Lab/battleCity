@@ -40,13 +40,14 @@ TankPlayer::TankPlayer(float x, float y)
 
 void TankPlayer::update()
 {
-	//if (GM.stepCount % 1000 == 0)
-	//{
-	//	std::cout << "------------------------------------" << std::endl;
-	//	cout << "speed: " << speed << endl;
-	//	std::cout << "Player x: " << position.x << " y: " << position.y << std::endl;
-	//	cout << "x: " << direction.x << " y: " << direction.y << endl << endl;
-	//}
+	if (GM.stepCount % 250 == 0)
+	{
+		std::cout << "speed: " << speed << std::endl;
+		std::cout << "Player x: " << position.x << " y: " << position.y << std::endl;
+		std::cout << "x: " << direction.x << " y: " << direction.y << std::endl;
+		std::cout << "sight.x: " << sight.x << " sight.y: " << sight.y << std::endl << std::endl;
+
+	}
 }
 
 inline void TankPlayer::draw()
@@ -59,21 +60,29 @@ void TankPlayer::keyboardInput()
 	if (movement.back() == "RIGHT")
 	{
 		move(1, 0);
+		sight.x = 1;
+		sight.y = 0;
 		spriteSet(0);
 	}
 	if (movement.back() == "LEFT")
 	{
 		move(-1, 0);
+		sight.x = -1;
+		sight.y = 0;
 		spriteSet(1);
 	}
 	if (movement.back() == "DOWN")
 	{
 		move(0, 1);
+		sight.x = 0;
+		sight.y = 1;
 		spriteSet(2);
 	}
 	if (movement.back() == "UP")
 	{
 		move(0, -1);
+		sight.x = 0;
+		sight.y = -1;
 		spriteSet(3);
 	}
 	if (movement.back() == "IDLE")

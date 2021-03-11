@@ -25,6 +25,7 @@ namespace battleCity
 		std::string type;
 		Vector position;
 		Vector direction;
+		Vector sight;
 		Solidness solidness;
 		Box box;
 		int spriteX, spriteY;
@@ -70,6 +71,8 @@ namespace battleCity
 		void setDirection(Vector newDirection);
 
 		Vector getDirection() const;
+
+		Vector getSight() const;
 
 		void setVelocity(Vector newVelocity);
 

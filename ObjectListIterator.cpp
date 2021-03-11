@@ -33,10 +33,6 @@ bool battleCity::ObjectListIterator::isDone() const
 
 std::vector<battleCity::Object*>::const_iterator battleCity::ObjectListIterator::currentObject() const
 {
-	if (managerPtrlist->objectPtrList.size() == 0)
-	{
-		std::cout << std::endl;
-	}
 	return this->itList;
 }
 

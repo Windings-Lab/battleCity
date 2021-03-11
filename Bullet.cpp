@@ -12,10 +12,9 @@ battleCity::Bullet::Bullet(Object* ptrObj)
 	sprite = SPR.getBulletSprites();
 	type = "Bullet";
 	id = 3;
-	solidness = Solidness::SOFT;
 
 	Vector pos = ptrObj->getPosition();
-	Vector directionObj = ptrObj->getDirection();
+	Vector directionObj = ptrObj->getSight();
 	float spriteObjX = ptrObj->getBox().getHorizontal();
 	float spriteObjY = ptrObj->getBox().getVertical();
 
