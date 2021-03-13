@@ -20,55 +20,86 @@ namespace battleCity
 
 	class Object
 	{
+	private:
+		float speed;
+		Vector direction;
+		// setSight() in derived objects
+		Vector sight;
+
+		Vector worldIndexRelative;
+
+		// Relative to the next spriteIndexSize 16px blocks
+		void setWorldIndex(Vector where);
+		void setSpeed(float newSpeed);
+		void setDirection(Vector newDirection);
 	protected:
 		int id;
 		std::string type;
+
+		// Boundary of windows default
 		Vector position;
-		Vector direction;
-		Vector sight;
-		Solidness solidness;
-		Box box;
-		int spriteX, spriteY;
-		float speed;
-		int bulletCount;
+
 		int health;
+		float constSpeed;
+		int bulletCount;
+		Solidness solidness;
+
 		/// <summary>
-		/// Vector of direction sprites
+		/// Database vector of direction sprites
 		/// </summary>
+		/// <param name="">Initialize it in derived objects</param>
+		/// <param name="spriteSet(0, index)">to change direction</param>
+		/// <param name=""></param>
 		/// <param name="0">RIGHT</param>
 		/// <param name="1">LEFT</param>
 		/// <param name="2">DOWN</param>
 		/// <param name="3">UP</param>
-		std::vector<Sprite*> sprite;
-		Sprite* spriteDirection;
-		bool isDeleted;
+		std::vector<Sprite*> spriteDB;
+		int spriteX, spriteY;
+		int spriteIndexSize;
+		Box box;
+		// spriteSet(Sprite*) initialize if no spriteDB
+		Sprite* sprite;
+
+		// Make it only once in Constructor of derived object
+		void initPosition(Vector initPosition);
+		void setSight(Vector newSight);
+		void setVelocity(Vector newVelocity);
 	public:
+		const int worldID;
+		const int moveID;
+
 		Object();
+		Object(int newWorldMoveID);
 		virtual ~Object();
 		/// <summary>
 		/// Change sprite direction
 		/// </summary>
-		/// <param name="0">RIGHT</param>
-		/// <param name="1">LEFT</param>
-		/// <param name="2">DOWN</param>
-		/// <param name="3">UP</param>
-		void spriteSet(int index);
+		/// <param name="0, 0">RIGHT</param>
+		/// <param name="0, 1">LEFT</param>
+		/// <param name="0, 2">DOWN</param>
+		/// <param name="0, 3">UP</param>
+		void spriteSet(Sprite* = NULL, int index = 3);
 
-		virtual void update() = 0;
-		virtual void draw() = 0;
+		virtual void update();
+		virtual void draw();
 
-		std::string getType();
-		bool objectIsDeleted() const;
+		std::string getType() const;
 		std::vector<Sprite*>& getSpriteList();
 
-		virtual int eventHandler(const Event* ptrEvent) = 0;
+		virtual int eventHandler(const Event* ptrEvent);
 
 		int getSpriteX() const;
 		int getSpriteY() const;
+		int getSpriteIndexSize() const;
 
 		int getID() const;
+		int getWorldID() const;
+		int getWorldMoveID() const;
 
-		void setSpeed(float newSpeed);
+		// Relative to the next spriteIndexSize 16px blocks
+		Vector getWorldIndex() const;
+
 		float getSpeed() const;
 
 		void setHealth(int newHealth);
@@ -77,32 +108,22 @@ namespace battleCity
 		void setBulletCount(int newBulletCount);
 		int getBulletCount();
 
-		void setDirection(Vector newDirection);
-
 		Vector getDirection() const;
 		Vector getSight() const;
-		void setSight(Vector newSight);
 
-		void setVelocity(Vector newVelocity);
 		Vector getVelocity() const;
 		Vector predictPosition();
 
 		/// Set position of Object.
-		/// Return 0 if ok, else -1.
-		virtual int setPosition(Vector newPosition);
-
-		/// Get position of Object.
+		int setPosition(Vector newPosition);
 		Vector getPosition() const;
+
+		/// Get/Set solidness of Object
+		int setSolidness(Solidness newSolid);
+		Solidness getSolidness() const;
 
 		bool isSolid() const;
 		bool isSoft() const;
-
-		/// Set solidness of Object
-		/// Return 0 if ok, else -1.
-		int setSolidness(Solidness newSolid);
-
-		/// Return solidness of Object.
-		Solidness getSolidness() const;
 
 		/// Get/Set Object's bounding box
 		void setBox(Box newBox);

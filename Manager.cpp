@@ -45,7 +45,7 @@ bool battleCity::Manager::isStarted() const
 int battleCity::Manager::onEvent(const Event* ptrEvent) const
 {
 	int count = 0;
-	ObjectList listToIt = WM.worldList;
+	ObjectList listToIt = WM.objectsToMove;
 	ObjectListIterator itEvent = ObjectListIterator(&listToIt);
 
 	for (itEvent.first(); !itEvent.isDone(); itEvent.next())

@@ -8,7 +8,9 @@ bool battleCity::Sprites::isCreated = false;
 std::string battleCity::Sprites::tankPath = "";
 std::string battleCity::Sprites::tankPlayerPath = "";
 std::string battleCity::Sprites::bulletPath = "";
+
 std::string battleCity::Sprites::backgroundPath = "";
+std::string battleCity::Sprites::wallPath = "";
 
 battleCity::Sprites::Sprites()
 {
@@ -24,6 +26,7 @@ battleCity::Sprites& battleCity::Sprites::getInstance()
         single.tankPlayerPath = ".\\data\\Player\\TankPlayer*.png";
         single.bulletPath =     ".\\data\\Bullet\\bullet*.png";
         single.backgroundPath = ".\\data\\Background.png";
+        single.wallPath =       ".\\data\\Wall.png";
         single.isCreated = true;
     }
     return single;
@@ -79,6 +82,11 @@ Sprite& battleCity::Sprites::getBackgroundSprite()
     return *background;
 }
 
+Sprite& battleCity::Sprites::getWallSprite()
+{
+    return *wall;
+}
+
 int battleCity::Sprites::initAll()
 {
     tank = &spriteInitDirections(tankPath);
@@ -86,6 +94,7 @@ int battleCity::Sprites::initAll()
     bullet = &spriteInitDirections(bulletPath);
 
     background = &spriteInit(backgroundPath);
+    wall = &spriteInit(wallPath);
 
     return 1;
 }
@@ -98,6 +107,7 @@ void battleCity::Sprites::deleteAll()
         tank->at(i) = NULL;
     }
     delete tank;
+    tank = NULL;
 
     for (size_t i = 0; i < tankPlayer->size(); i++)
     {
@@ -105,6 +115,7 @@ void battleCity::Sprites::deleteAll()
         tankPlayer->at(i) = NULL;
     }
     delete tankPlayer;
+    tankPlayer = NULL;
 
     for (size_t i = 0; i < bullet->size(); i++)
     {
@@ -112,9 +123,13 @@ void battleCity::Sprites::deleteAll()
         bullet->at(i) = NULL;
     }
     delete bullet;
+    bullet = NULL;
 
     destroySprite(background);
     background = NULL;
+
+    destroySprite(wall);
+    wall = NULL;
 }
 
 battleCity::Sprites::~Sprites()

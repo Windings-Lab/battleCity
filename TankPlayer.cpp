@@ -13,12 +13,30 @@
 #include <vector>
 #include <iostream>
 
+/// <summary>
+/// Object default values
+/// </summary>
+/// <param name="id">0</param>
+/// <param name="type">""</param>
+/// <param name="position.x">SCR.getBoundaryL()</param>
+/// <param name="position.y">SCR.getBoundaryU()</param>
+/// <param name="health">1</param>
+/// <param name="constSpeed">0</param>
+/// <param name="bulletCount">1</param>
+/// <param name="solidness">Solidness::HARD</param>
 battleCity::TankPlayer::TankPlayer()
 {
-	sprite = SPR.getTankPlayerSprites();
-	spriteSet(3);
 	id = 1;
 	type = "Player";
+
+	health = 100;
+	constSpeed = 1;
+	bulletCount = 1;
+	solidness = Solidness::HARD;
+
+	spriteDB = SPR.getTankPlayerSprites();
+	spriteSet();
+	setSight(Vector(0, -1));
 #if DEBUG == 1
 	std::cout << "x: " << position.x << " y: " << position.y << std::endl;
 #endif
@@ -26,20 +44,19 @@ battleCity::TankPlayer::TankPlayer()
 
 battleCity::TankPlayer::TankPlayer(float x, float y)
 {
-	sprite = SPR.getTankPlayerSprites();
-	spriteSet(3);
-	position.x = x;
-	position.y = y;
-	if (x < SCR.getBoundaryL() || x > SCR.getBoundaryR())
-	{
-		position.x = SCR.getBoundaryL();
-	}
-	if (y < SCR.getBoundaryU() || y > SCR.getBoundaryD())
-	{
-		position.y = SCR.getBoundaryU();
-	}
-	type = "Player";
 	id = 1;
+	type = "Player";
+
+	initPosition(Vector(x, y));
+
+	health = 100;
+	constSpeed = 1;
+	bulletCount = 1;
+	solidness = Solidness::HARD;
+
+	spriteDB = SPR.getTankPlayerSprites();
+	spriteSet();
+	setSight(Vector(0, -1));
 }
 
 void battleCity::TankPlayer::update()
@@ -48,49 +65,41 @@ void battleCity::TankPlayer::update()
 	{
 		GM.setGameOver();
 	}
-	//if (GM.stepCount % 250 == 0)
+	//if (GM.stepCount % 5000 == 0)
 	//{
-	//	std::cout << "speed: " << speed << std::endl;
+	//	//std::cout << "speed: " << getSpeed() << std::endl;
 	//	std::cout << "Player x: " << position.x << " y: " << position.y << std::endl;
-	//	std::cout << "x: " << direction.x << " y: " << direction.y << std::endl;
-	//	std::cout << "sight.x: " << sight.x << " sight.y: " << sight.y << std::endl << std::endl;
+	//	std::cout << "x: " << getDirection().x << " y: " << getDirection().y << std::endl;
+	//	std::cout << "sight.x: " << getSight().x << " sight.y: " << getSight().y << std::endl << std::endl;
 	//}
 }
 
 inline void battleCity::TankPlayer::draw()
 {
-	drawSprite(spriteDirection, (int)position.x, (int)position.y);
+	drawSprite(sprite, (int)position.x, (int)position.y);
 }
 
 void battleCity::TankPlayer::keyboardInput()
 {
 	if (movement.back() == "RIGHT")
 	{
-		move(1, 0);
-		sight.x = 1;
-		sight.y = 0;
-		spriteSet(0);
+		move(constSpeed, 0);
+		spriteSet(0, 0);
 	}
 	if (movement.back() == "LEFT")
 	{
-		move(-1, 0);
-		sight.x = -1;
-		sight.y = 0;
-		spriteSet(1);
+		move(-constSpeed, 0);
+		spriteSet(0, 1);
 	}
 	if (movement.back() == "DOWN")
 	{
-		move(0, 1);
-		sight.x = 0;
-		sight.y = 1;
-		spriteSet(2);
+		move(0, constSpeed);
+		spriteSet(0, 2);
 	}
 	if (movement.back() == "UP")
 	{
-		move(0, -1);
-		sight.x = 0;
-		sight.y = -1;
-		spriteSet(3);
+		move(0, -constSpeed);
+		spriteSet(0, 3);
 	}
 	if (movement.back() == "IDLE")
 	{
@@ -106,8 +115,9 @@ void battleCity::TankPlayer::mouseInput(const battleCity::EventMouse* mouseEvent
 		fire();
 }
 
-void battleCity::TankPlayer::move(int x, int y)
+void battleCity::TankPlayer::move(float x, float y)
 {
+	setSight(Vector(x, y));
 	setVelocity(battleCity::Vector(x, y));
 }
 
@@ -115,7 +125,7 @@ void battleCity::TankPlayer::fire()
 {
 	if (bulletCount != 0)
 	{
-		Bullet* newBullet = new Bullet(this);
+		Bullet* newBullet = new Bullet(*this);
 		bulletCount--;
 	}
 }

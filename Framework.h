@@ -5,7 +5,13 @@
 #define FRAMEWORK_API extern "C" __declspec(dllimport)
 #define ENUM_TO_STR(ENUM) # ENUM
 #define DEBUG 0
-#define FPS 16
+
+// NewValue > FPS - game is slower
+// NewValue < FPS - game is faster
+#define FPS 13
+
+#define HEIGHT 32
+#define WIDTH 45
 
 #include <string>
 

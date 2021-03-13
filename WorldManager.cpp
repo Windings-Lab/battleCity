@@ -8,17 +8,23 @@
 #include "EventOut.h"
 #include "Screen.h"
 #include "Box.h"
+#include "GameManager.h"
 #include "Utility.h"
 #include "Framework.h"
 #include "Sprites.h"
+#include "Wall.h"
 
 #include <vector>
 #include <iostream>
+#include <fstream>
 
+int battleCity::WorldManager::worldID = 1;
+int battleCity::WorldManager::moveID = 1;
 
 battleCity::WorldManager::WorldManager()
 {
 	setType("WorldManager");
+	map = std::vector<std::vector<Object*>>(HEIGHT, std::vector<Object*>(WIDTH));
 }
 
 battleCity::WorldManager& battleCity::WorldManager::getInstance()
@@ -29,13 +35,17 @@ battleCity::WorldManager& battleCity::WorldManager::getInstance()
 
 int battleCity::WorldManager::startUp()
 {
+	//std::cout << "WorldManager - startUp" << std::endl;
+	if(initMap() == 0);
+	    return 0;
 	return Manager::startUp();
 }
 
 void battleCity::WorldManager::shutDown()
 {
-	ObjectList all = worldList;
-	ObjectListIterator it = ObjectListIterator(&all);
+	//std::cout << "WorldManager - shutDown" << std::endl;
+	ObjectList listToDelete = worldList;
+	ObjectListIterator it = ObjectListIterator(&listToDelete);
 	for (it.first(); !it.isDone(); it.next())
 	{
 		delete *it.currentObject();
@@ -45,21 +55,86 @@ void battleCity::WorldManager::shutDown()
 
 int battleCity::WorldManager::insertObject(Object* objectPtr)
 {
-	int i = worldList.insert(objectPtr);
+	//std::cout << "WorldManager - insertObject" << std::endl;
+	int check;
+	if (objectPtr->getWorldMoveID() != 0)
+	{
+		moveID++;
+		check = objectsToMove.insert(objectPtr);
+		if (check == -1)
+			return check;
+	}
+	worldID++;
+	check = worldList.insert(objectPtr);
 	objectPtr = NULL;
-	return i;
+	return check;
 }
 
 int battleCity::WorldManager::removeObject(Object* objectPtr)
 {
-	int i = worldList.remove(objectPtr);
+	//std::cout << "WorldManager - removeObject" << std::endl;
+	int check;
+	if (objectPtr->getWorldMoveID() != 0)
+	{
+		check = objectsToMove.removeByMoveID(objectPtr->getWorldMoveID());
+		if (check == -1)
+			return check;
+	}
+	check = worldList.removeByWorldID(objectPtr->getWorldID());
 	objectPtr = NULL;
-	return i;
+	return check;
 }
 
 battleCity::ObjectList battleCity::WorldManager::getAllObjects() const
 {
 	return worldList;
+}
+
+int battleCity::WorldManager::getSizeOfWorldList()
+{
+	return worldList.getSize();
+}
+
+int battleCity::WorldManager::getSizeOfMoveList()
+{
+	return objectsToMove.getSize();
+}
+
+int battleCity::WorldManager::getWorldID() const
+{
+	return worldID;
+}
+
+int battleCity::WorldManager::getMoveID() const
+{
+	return moveID;
+}
+
+std::vector<std::vector<battleCity::Object*>>& battleCity::WorldManager::getWorldMap()
+{
+	return map;
+}
+
+int battleCity::WorldManager::initMap()
+{
+	//std::cout << "WorldManager - initMap" << std::endl;
+	char charToStore;
+	std::ifstream mapFile(".\\data\\Maps\\level1.txt");
+	if (!mapFile)
+	{
+		return 0;
+	}
+
+	for (int i = 0; i < HEIGHT; i++) {  // stop loops if nothing to read
+		for (int j = 0; j < WIDTH; j++) {
+			mapFile >> charToStore;
+			if(charToStore - '0' == 1)
+				map[i][j] = new Wall(SCR.getBoundaryL() + (16 * j), SCR.getBoundaryU() + (16 * i));
+		}
+	}
+	mapFile.close();
+
+	return 1;
 }
 
 battleCity::ObjectList battleCity::WorldManager::objectsOfType(std::string type)
@@ -78,28 +153,40 @@ battleCity::ObjectList battleCity::WorldManager::objectsOfType(std::string type)
 
 void battleCity::WorldManager::update()
 {
-	ObjectList listToIt = worldList;
-	ObjectListIterator it = ObjectListIterator(&listToIt);
+	//std::cout << "WorldManager - update" << std::endl;
+	ObjectList listToIt = objectsToMove;
+	ObjectListIterator it = ObjectListIterator(&objectsToMove);
+
+	ObjectListIterator itUpdate = ObjectListIterator(&worldList);
 	ObjectListIterator itDeletetion = ObjectListIterator(&deletionList);
 
-
+	int i = getTickCount();
 	for (it.first(); !it.isDone(); it.next())
 	{
 		Vector newPos = (*it.currentObject())->predictPosition();
 		moveObject(*it.currentObject(), newPos);
 	}
+	i = getTickCount() - i;
 
-	for (it.first(); !it.isDone(); it.next())
+	for (itUpdate.first(); !itUpdate.isDone(); itUpdate.next())
 	{
-		(*it.currentObject())->update();
+		(*itUpdate.currentObject())->update();
 	}
 
 	for (itDeletetion.first(); !itDeletetion.isDone(); itDeletetion.next())
 	{
 		Object* objToDelete = *itDeletetion.currentObject();
+		if (objToDelete->getType() == "Wall")
+		{
+			Vector pos = objToDelete->getPosition();
+			int x = (pos.x - SCR.getBoundaryL()) / 16;
+			int y = (pos.y - SCR.getBoundaryU()) / 16;
+			map[y][x] = NULL;
+		}
 		delete objToDelete;
 		objToDelete = NULL;
 	}
+
 	deletionList.clear();
 }
 
@@ -117,11 +204,13 @@ void battleCity::WorldManager::draw()
 
 void battleCity::WorldManager::drawBackground()
 {
+
 	drawSprite(&SPR.getBackgroundSprite(), SCR.getBoundaryL(), SCR.getBoundaryU());
 }
 
 int battleCity::WorldManager::moveObject(Object* ptrObject, Vector where)
 {
+	//std::cout << "moveObject" << std::endl;
 	if (ptrObject->isSolid() || ptrObject->isSoft())
 	{
 		ObjectList newList = getCollisions(ptrObject, where);
@@ -178,7 +267,6 @@ int battleCity::WorldManager::markForDelete(Object* objectPtr)
 	}
 
 	objectPtr->setHealth(-1);
-	int id1 = objectPtr->getID();
 
 	if (objectPtr->getHealth() == 0)
 	{
@@ -190,28 +278,159 @@ int battleCity::WorldManager::markForDelete(Object* objectPtr)
 
 battleCity::ObjectList battleCity::WorldManager::getCollisions(const Object* ptrObject, Vector where) const
 {
+	//std::cout << "WorldManager - getCollisions - 276: " << ptrObject->getType() << std::endl;
 	ObjectList collisionList;
-	ObjectListIterator it = ObjectListIterator(&worldList);
-	Object* tempObject = NULL;
-
-	for (it.first(); !it.isDone(); it.next())
+	if (ptrObject->getSpeed() == 0)
 	{
-		Object* tempObject = *it.currentObject();
+		/*std::cout << "WorldManager - getCollisions - 280" << std::endl;*/
+		ptrObject = NULL;
+		return collisionList;
+	}
+	ObjectListIterator it = ObjectListIterator(&objectsToMove);
+	Object* tempObject = NULL;
+	Vector sight = ptrObject->getSight();
+	Vector pos = ptrObject->getPosition();
+	int indexX = 0, indexY = 0;
+	int spriteIndexSize = ptrObject->getSpriteIndexSize();
+	/*std::cout << "WorldManager - getCollisions - 290" << std::endl;*/
 
-		Box b = getWorldBox(ptrObject, where);
-		Box bTemp = getWorldBox(tempObject);
-		if (tempObject != ptrObject)
+	if (sight.x == 1)
+	{
+		//std::cout << "WorldManager - getCollisions - 294" << std::endl;
+		indexX = ((pos.x - SCR.getBoundaryL()) / 16) + spriteIndexSize;
+		if (indexX >= WIDTH)
+			indexX = WIDTH - 1;
+		indexY = ((pos.y - SCR.getBoundaryU()) / 16);
+		for (int i = 0; i < 2; i++)
 		{
+			if (map[indexY][indexX] == NULL)
+			{
+				indexY++;
+				if (indexY >= HEIGHT)
+					indexY = HEIGHT - 1;
+			}
+			else
+			{
+				break;
+			}
+		}
+	}
+	else if (sight.x == -1)
+	{
+		//std::cout << "WorldManager - getCollisions - 313" << std::endl;
+		indexX = ((pos.x - SCR.getBoundaryL()) / 16) - 1;
+		if (indexX < 0)
+			indexX = 0;
+		indexY = ((pos.y - SCR.getBoundaryU()) / 16);
+		for (int i = 0; i < 2; i++)
+		{
+			if (map[indexY][indexX] == NULL)
+			{
+				indexY++;
+				if (indexY >= HEIGHT)
+					indexY = HEIGHT - 1;
+			}
+			else
+			{
+				break;
+			}
+		}
+	}
+	else if (sight.y == 1)
+	{
+		/*std::cout << "WorldManager - getCollisions - 332" << std::endl;*/
+		indexX = ((pos.x - SCR.getBoundaryL()) / 16);
+		indexY = ((pos.y - SCR.getBoundaryU()) / 16) + spriteIndexSize;
+		if (indexY >= HEIGHT)
+			indexY = HEIGHT - 1;
+		for (int i = 0; i < 2; i++)
+		{
+			if (map[indexY][indexX] == NULL)
+			{
+				indexX++;
+				if (indexX >= WIDTH)
+					indexX = WIDTH - 1;
+			}
+			else
+			{
+				break;
+			}
+		}
+	}
+	else if (sight.y == -1)
+	{
+		//std::cout << "WorldManager - getCollisions - 351" << std::endl;
+		indexX = ((pos.x - SCR.getBoundaryL()) / 16);
+		indexY = ((pos.y - SCR.getBoundaryU()) / 16) - 1;
+		if (indexY < 0)
+			indexY = 0;
+		for (int i = 0; i < 2; i++)
+		{
+			if (map[indexY][indexX] == NULL)
+			{
+				indexX++;
+				if (indexX >= WIDTH)
+					indexX = WIDTH - 1;
+			}
+			else
+			{
+				break;
+			}
+		}
+	}
+	tempObject = map[indexY][indexX];
+	/*std::cout << "WorldManager - getCollisions - 371" << std::endl;*/
+	auto iterateFullListFunc =
+	[&it, &ptrObject, &collisionList, &where]()
+	{
+		for (it.first(); !it.isDone(); it.next())
+		{
+			Object* tempObject = *it.currentObject();
+			if (tempObject == ptrObject)
+			{
+				continue;
+			}
+			Box b = getWorldBox(ptrObject, where);
+			Box bTemp = getWorldBox(tempObject);
 			if (boxesIntersect(b, bTemp) &&
-				(tempObject->isSolid() || tempObject->isSoft()))
+			   (tempObject->isSolid() || tempObject->isSoft()))
 			{
 				collisionList.insert(tempObject);
 			}
 		}
+	};
+	// IF NULL then check for other movable objects
+	if (tempObject == NULL)
+	{
+		//std::cout << "WorldManager - getCollisions - 393" << std::endl;
+		iterateFullListFunc();
+		/*std::cout << "WorldManager - getCollisions - 395" << std::endl;*/
+	}
+	// Else we are checking this wall for collision
+	else
+	{
+		/*std::cout << "WorldManager - getCollisions - 397" << std::endl;*/
+		Box b = getWorldBox(ptrObject, where);
+		Box bTemp = getWorldBox(tempObject);
+		// If false, then check other objects for collision
+		// for example Player(14, 0), Wall(15, 0) no collision
+		if (boxesIntersect(b, bTemp) &&
+			(tempObject->isSolid() || tempObject->isSoft()))
+		{
+			collisionList.insert(tempObject);
+		}
+		// Check other movable objects
+		else
+		{
+			iterateFullListFunc();
+		}
+		/*std::cout << "WorldManager - getCollisions - 415" << std::endl;*/
 	}
 
+	/*std::cout << "WorldManager - getCollisions - 418" << std::endl;*/
 	tempObject = NULL;
 	ptrObject = NULL;
+	/*std::cout << "WorldManager - getCollisions - 421" << std::endl;*/
 	return collisionList;
 }
 

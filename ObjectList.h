@@ -24,9 +24,12 @@ namespace battleCity
 
 		int insert(Object* objectPtr);
 		int remove(Object* objectPtr);
+
+		int removeByWorldID(int objID);
+		int removeByMoveID(int objID);
+
 		std::vector<Object*>& getList();
 		int getSize();
-
 		bool isEmpty();
 
 		void clear();

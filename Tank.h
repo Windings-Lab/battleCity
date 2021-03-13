@@ -14,9 +14,10 @@ namespace battleCity
 		Tank(float x, float y);
 		~Tank();
 
-		virtual inline void update() override;
-		virtual inline void draw() override;
+		virtual void update() override;
+		virtual void draw() override;
 		void fire();
+		void move(float x, float y);
 
 		virtual int eventHandler(const Event* eventPtr) override;
 	};

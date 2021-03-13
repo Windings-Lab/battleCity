@@ -11,10 +11,27 @@ public:
 	unsigned int getHeight();
 	bool getFullscreen();
 
+
+	/// <summary>
+	/// boundaryR = 760
+	/// </summary>
+	/// <param name="744">last coordinate for creating wall</param>
 	float getBoundaryR();
+	/// <summary>
+	/// boundaryD = 556
+	/// </summary>
+	/// <param name="540">last coordinate for creating wall</param>
 	float getBoundaryD();
 
+	/// <summary>
+	/// boundaryL = 40
+	/// </summary>
+	/// <param name="40">First coordinate for creating wall</param>
 	float getBoundaryL();
+	/// <summary>
+	/// boundaryU = 44
+	/// </summary>
+	/// <param name="44">First coordinate for creating wall</param>
 	float getBoundaryU();
 
 	/// <summary>

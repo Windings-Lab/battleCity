@@ -7,10 +7,16 @@ unsigned int Screen::_width = 0;
 unsigned int Screen::_height = 0;
 bool Screen::_fullscreen = 0;
 
+// boundaryL = 40
 float Screen::_boundaryL = 0;
+// boundaryL = 44
 float Screen::_boundaryU = 0;
 
+// boundaryR = 760
+// 720 - last coordinate for creating wall
 float Screen::_boundaryR = 0;
+// boundaryD = 556
+// 512 - last coordinate for creating wall
 float Screen::_boundaryD = 0;
 
 Screen& Screen::set(unsigned int wValue, unsigned int hValue, bool fValue) noexcept
@@ -22,7 +28,7 @@ Screen& Screen::set(unsigned int wValue, unsigned int hValue, bool fValue) noexc
 		single._height = hValue;
 		single._fullscreen = fValue;
 		single._boundaryL = 40;
-		single._boundaryU = 40;
+		single._boundaryU = 44;
 		single._boundaryR = (float)single._width - single._boundaryL;
 		single._boundaryD = (float)single._height - single._boundaryU;
 	}
@@ -76,6 +82,7 @@ bool Screen::getFullscreen()
 {
 	return _fullscreen;
 }
+
 
 float Screen::getBoundaryR()
 {

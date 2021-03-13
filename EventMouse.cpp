@@ -43,6 +43,5 @@ battleCity::Vector& battleCity::EventMouse::getMousePosition() const
 
 battleCity::EventMouse::~EventMouse()
 {
-	delete mouseXY;
 	mouseXY = NULL;
 }

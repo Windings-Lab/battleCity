@@ -26,7 +26,7 @@ namespace battleCity
 		void keyboardInput();
 		void mouseInput(const EventMouse* mouseEvent);
 
-		void move(int x, int y);
+		void move(float x, float y);
 		void fire();
 
 		virtual int eventHandler(const Event* ptrEvent) override;

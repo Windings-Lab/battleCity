@@ -21,10 +21,18 @@ namespace battleCity
 		// Don't allow assignment
 		void operator=(WorldManager const&);
 
+		std::vector<std::vector<Object*>> map;
+		// Objects, that need to update
+		// every loop step
+		ObjectList objectsToMove;
 		// All Objects in game world
+		// to check collision with
 		ObjectList worldList;
 		// List of all Objects to delete.
 		ObjectList deletionList;
+
+		static int worldID;
+		static int moveID;
 
 	public:
 		friend class Manager;
@@ -52,6 +60,15 @@ namespace battleCity
 
 		// Return list of all Objects in world
 		ObjectList getAllObjects() const;
+
+		int getSizeOfWorldList();
+		int getSizeOfMoveList();
+
+		int getWorldID() const;
+		int getMoveID() const;
+		std::vector<std::vector<Object*>>& getWorldMap();
+
+		int initMap();
 
 		// Return list of Objects matching type
 		// List is empty if none found

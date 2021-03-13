@@ -10,56 +10,65 @@
 
 #include <iostream>
 
-battleCity::Bullet::Bullet(Object* ptrObj) : object(*ptrObj)
+battleCity::Bullet::Bullet(Object& ptrObj) : object(ptrObj)
 {
-	sprite = SPR.getBulletSprites();
-	type = "Bullet";
 	id = 3;
-	setSolidness(Solidness::SOFT);
+	type = "Bullet";
 
-	Vector pos = ptrObj->getPosition();
-	Vector directionObj = ptrObj->getSight();
-	float spriteObjX = ptrObj->getBox().getHorizontal();
-	float spriteObjY = ptrObj->getBox().getVertical();
+	health = 1;
+	constSpeed = 2;
+	bulletCount = 0;
+	solidness = Solidness::SOFT;
+
+	spriteDB = SPR.getBulletSprites();
+
+	initBullet(object);
+	//std::cout << "bulletX: " << position.x << " bulletY: " << position.y << std::endl;
+}
+
+void battleCity::Bullet::initBullet(const Object& ptrObj)
+{
+	Vector pos = ptrObj.getPosition();
+	Vector directionObj = ptrObj.getSight();
+	float spriteObjX = ptrObj.getBox().getHorizontal();
+	float spriteObjY = ptrObj.getBox().getVertical();
 
 	// RIGHT LEFT
 	if (directionObj.x == 1)
 	{
 		pos.y = pos.y + (spriteObjY / 2) - 2; // -2 is Centerize
-		pos.x = pos.x + spriteObjX + 1;
-		directionObj.x = 2;
-		spriteSet(0);
+		pos.x = pos.x + spriteObjX;
+		directionObj.x = constSpeed;
+		spriteSet(0, 0);
+		setSight(Vector(1, 0));
 	}
 	else if (directionObj.x == -1)
 	{
 		pos.y = pos.y + (spriteObjY / 2) - 2; // -2 is Centerize
-		pos.x -= 1;
-		directionObj.x = -2;
-		spriteSet(1);
+		directionObj.x = -constSpeed;
+		spriteSet(0, 1);
+		setSight(Vector(-1, 0));
 	}
 	// DOWN UP
 	else if (directionObj.y == 1)
 	{
 		pos.x = pos.x + (spriteObjX / 2) - 2; // -2 is Centerize
-		pos.y = pos.y + spriteObjY + 1;
-		directionObj.y = 2;
-		spriteSet(2);
+		pos.y = pos.y + spriteObjY;
+		directionObj.y = constSpeed;
+		spriteSet(0, 2);
+		setSight(Vector(0, 1));
 	}
 	else if (directionObj.y == -1)
 	{
 		pos.x = pos.x + (spriteObjX / 2) - 2; // -2 is Centerize
-		pos.y -= 1;
-		directionObj.y = -2;
-		spriteSet(3);
+		directionObj.y = -constSpeed;
+		spriteSet(0, 3);
+		setSight(Vector(0, -1));
 	}
 
-	getSpriteSize(spriteDirection, spriteX, spriteY);
-	box = Box(Vector(), spriteX, spriteY);
 	position = pos;
 	setVelocity(directionObj);
-	ptrObj = NULL;
-
-	//std::cout << "bulletX: " << position.x << " bulletY: " << position.y << std::endl;
+	objectType = object.getType();
 }
 
 void battleCity::Bullet::out()
@@ -69,24 +78,33 @@ void battleCity::Bullet::out()
 
 void battleCity::Bullet::hit(const battleCity::EventCollision* CollisionEvent)
 {
-	if (((CollisionEvent->getObject1()->getType() == "Tank") ||
-		(CollisionEvent->getObject2()->getType() == "Tank")) && object.getType() != "Tank") {
-		WM.markForDelete(CollisionEvent->getObject1());
-		WM.markForDelete(CollisionEvent->getObject2());
-		return;
-	}
-	if (CollisionEvent->getObject1()->getType() == "Bullet" &&
-		CollisionEvent->getObject2()->getType() == "Bullet")
+	if (health != 0)
 	{
-		WM.markForDelete(CollisionEvent->getObject1());
-		WM.markForDelete(CollisionEvent->getObject2());
-		return;
-	}
-	if (((CollisionEvent->getObject1()->getType() == "Player") ||
-		(CollisionEvent->getObject2()->getType() == "Player")) && object.getType() != "Player") {
-		WM.markForDelete(CollisionEvent->getObject1());
-		WM.markForDelete(CollisionEvent->getObject2());
-		return;
+		if (((CollisionEvent->getObject1()->getType() == "Tank") ||
+			(CollisionEvent->getObject2()->getType() == "Tank")) && objectType != "Tank") {
+			WM.markForDelete(CollisionEvent->getObject1());
+			WM.markForDelete(CollisionEvent->getObject2());
+			return;
+		}
+		if (CollisionEvent->getObject1()->getType() == "Bullet" &&
+			CollisionEvent->getObject2()->getType() == "Bullet")
+		{
+			WM.markForDelete(CollisionEvent->getObject1());
+			WM.markForDelete(CollisionEvent->getObject2());
+			return;
+		}
+		if (((CollisionEvent->getObject1()->getType() == "Player") ||
+			(CollisionEvent->getObject2()->getType() == "Player")) && objectType != "Player") {
+			WM.markForDelete(CollisionEvent->getObject1());
+			WM.markForDelete(CollisionEvent->getObject2());
+			return;
+		}
+		if (((CollisionEvent->getObject1()->getType() == "Wall") ||
+			(CollisionEvent->getObject2()->getType() == "Wall"))) {
+			WM.markForDelete(CollisionEvent->getObject1());
+			WM.markForDelete(CollisionEvent->getObject2());
+			return;
+		}
 	}
 }
 
@@ -97,7 +115,7 @@ void battleCity::Bullet::update()
 
 void battleCity::Bullet::draw()
 {
-	drawSprite(spriteDirection, (int)position.x, (int)position.y);
+	drawSprite(sprite, (int)position.x, (int)position.y);
 }
 
 int battleCity::Bullet::eventHandler(const Event* ptrEvent) {

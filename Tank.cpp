@@ -13,31 +13,51 @@
 #include <iostream>
 #include <vector>
 
+/// <summary>
+/// Object default values
+/// </summary>
+/// <param name="id">0</param>
+/// <param name="type">""</param>
+/// <param name="position.x">SCR.getBoundaryL()</param>
+/// <param name="position.y">SCR.getBoundaryU()</param>
+/// <param name="health">1</param>
+/// <param name="constSpeed">0</param>
+/// <param name="bulletCount">1</param>
+/// <param name="solidness">Solidness::HARD</param>
 battleCity::Tank::Tank()
 {
-	speed = 1;
-	change = battleCity::randomNumber(0, 3);
 	id = 2;
 	type = "Tank";
+
+	health = 2;
+	constSpeed = 1;
+	bulletCount = 1;
+	solidness = Solidness::HARD;
+
+	spriteDB = SPR.getTankSprites();
+	spriteSet(0, 3);
+	setSight(Vector(0, -1));
+
+	change = battleCity::randomNumber(0, 3);
 }
 
 battleCity::Tank::Tank(float x, float y)
 {
-	health = 2;
-	speed = 1;
-	change = battleCity::randomNumber(0, 3);
-	position.x = x;
-	position.y = y;
-	if (x < SCR.getBoundaryL() || x > SCR.getBoundaryR())
-	{
-		position.x = SCR.getBoundaryL();
-	}
-	if (y < SCR.getBoundaryU() || y > SCR.getBoundaryD())
-	{
-		position.y = SCR.getBoundaryU();
-	}
 	id = 2;
 	type = "Tank";
+
+	initPosition(Vector(x, y));
+
+	health = 2;
+	constSpeed = 1;
+	bulletCount = 1;
+	solidness = Solidness::HARD;
+
+	spriteDB = SPR.getTankSprites();
+	spriteSet(0, 3);
+	setSight(Vector(0, -1));
+
+	change = battleCity::randomNumber(0, 3);
 }
 
 inline void battleCity::Tank::update()
@@ -46,16 +66,22 @@ inline void battleCity::Tank::update()
 
 inline void battleCity::Tank::draw()
 {
-	drawSprite(spriteDirection, (int)position.x, (int)position.y);
+	drawSprite(sprite, (int)position.x, (int)position.y);
 }
 
 void battleCity::Tank::fire()
 {
 	if (bulletCount != 0)
 	{
-		Bullet* newBullet = new Bullet(this);
+		Bullet* newBullet = new Bullet(*this);
 		bulletCount--;
 	}
+}
+
+void battleCity::Tank::move(float x, float y)
+{
+	setSight(Vector(x, y));
+	setVelocity(Vector(x, y));
 }
 
 int battleCity::Tank::eventHandler(const battleCity::Event* eventPtr)
@@ -66,37 +92,30 @@ int battleCity::Tank::eventHandler(const battleCity::Event* eventPtr)
 		unsigned int loopStep = stepEvent->getStepCount();
 		if (loopStep % 250 == 0)
 		{
-			//change++;
-			//if (change > 3)
-			//	change = 0;
-			//if (change == 0)
-			//{
-			//	setVelocity(battleCity::Vector(1, 0));
-			//	sight.x = 1;
-			//	sight.y = 0;
-			//}
-			//if (change == 1)
-			//{
-			//	setVelocity(battleCity::Vector(-1, 0));
-			//	sight.x = -1;
-			//	sight.y = 0;
-			//}
-			//if (change == 2)
-			//{
-			//	setVelocity(battleCity::Vector(0, 1));
-			//	sight.x = 0;
-			//	sight.y = 1;
-			//}
-			//if (change == 3)
-			//{
-			//	setVelocity(battleCity::Vector(0, -1));
-			//	sight.x = 0;
-			//	sight.y = -1;
-			//}
+			change++;
+			if (change > 3)
+				change = 0;
+			change = 1;
+			if (change == 0)
+			{
+				move(1, 0);
+			}
+			if (change == 1)
+			{
+				move(-1, 0);
+			}
+			if (change == 2)
+			{
+				move(0, 1);
+			}
+			if (change == 3)
+			{
+				move(0, -1);
+			}
 			fire();
 		}
 
-		//spriteSet(change);
+		spriteSet(0, change);
 		return 1;
 	}
 

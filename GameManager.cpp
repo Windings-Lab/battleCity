@@ -74,7 +74,7 @@ void battleCity::GameManager::run()
 	//	cout << _stepCount << " steps" << endl << endl;
 	//}
 
-	_clock.sleep(clock.split());
+	//_clock.sleep(clock.split());
 }
 
 void battleCity::GameManager::setGameOver(bool gameState)

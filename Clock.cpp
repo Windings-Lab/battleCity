@@ -35,7 +35,10 @@ void Clock::sleep(unsigned int loopTime)
 	std::this_thread::sleep_for(std::chrono::milliseconds(intendedSleepTime));
 	actualSleepTime = split();
 
+
+
 	adjustTime = actualSleepTime - intendedSleepTime;
+	std::cout << actualSleepTime << std::endl;
 	if (adjustTime < 0)
 		adjustTime = 0;
 }

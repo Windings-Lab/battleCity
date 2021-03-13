@@ -5,6 +5,7 @@
 #include <iostream>
 #include <algorithm>
 #include <vector>
+#include <string>
 
 battleCity::ObjectList::ObjectList() : i(0)
 {}
@@ -42,6 +43,42 @@ int battleCity::ObjectList::remove(Object* objectPtr)
 	return 0;
 }
 
+int battleCity::ObjectList::removeByWorldID(int objID)
+{
+	auto it = std::lower_bound(objectPtrList.begin(), objectPtrList.end(), objID, [](const Object* obj, int id)
+		{
+			return obj->worldID < id;
+		});
+
+	if (it != objectPtrList.end())
+	{
+		*it = NULL;
+		objectPtrList.erase(it);
+	}
+	else
+	{
+		return -1;
+	}
+}
+
+int battleCity::ObjectList::removeByMoveID(int objID)
+{
+	auto it = std::lower_bound(objectPtrList.begin(), objectPtrList.end(), objID, [](const Object* obj, int id)
+		{
+			return obj->moveID < id;
+		});
+
+	if (it != objectPtrList.end())
+	{
+		*it = NULL;
+		objectPtrList.erase(it);
+	}
+	else
+	{
+		return -1;
+	}
+}
+
 std::vector<battleCity::Object*>& battleCity::ObjectList::getList()
 {
 	return objectPtrList;
@@ -70,6 +107,10 @@ void battleCity::ObjectList::clear()
 
 battleCity::ObjectList::~ObjectList()
 {
+	for (unsigned int i = 0; i < objectPtrList.size(); i++)
+	{
+		objectPtrList[i] = NULL;
+	}
 	objectPtrList.clear();
 	objectPtrList.shrink_to_fit();
 }
