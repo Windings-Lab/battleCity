@@ -160,17 +160,15 @@ void battleCity::WorldManager::update()
 	ObjectListIterator itUpdate = ObjectListIterator(&worldList);
 	ObjectListIterator itDeletetion = ObjectListIterator(&deletionList);
 
-	int i = getTickCount();
+	for (itUpdate.first(); !itUpdate.isDone(); itUpdate.next())
+	{
+		(*itUpdate.currentObject())->update();
+	}
+
 	for (it.first(); !it.isDone(); it.next())
 	{
 		Vector newPos = (*it.currentObject())->predictPosition();
 		moveObject(*it.currentObject(), newPos);
-	}
-	i = getTickCount() - i;
-
-	for (itUpdate.first(); !itUpdate.isDone(); itUpdate.next())
-	{
-		(*itUpdate.currentObject())->update();
 	}
 
 	for (itDeletetion.first(); !itDeletetion.isDone(); itDeletetion.next())
@@ -278,108 +276,17 @@ int battleCity::WorldManager::markForDelete(Object* objectPtr)
 
 battleCity::ObjectList battleCity::WorldManager::getCollisions(const Object* ptrObject, Vector where) const
 {
-	//std::cout << "WorldManager - getCollisions - 276: " << ptrObject->getType() << std::endl;
 	ObjectList collisionList;
 	if (ptrObject->getSpeed() == 0)
 	{
-		/*std::cout << "WorldManager - getCollisions - 280" << std::endl;*/
 		ptrObject = NULL;
 		return collisionList;
 	}
 	ObjectListIterator it = ObjectListIterator(&objectsToMove);
 	Object* tempObject = NULL;
-	Vector sight = ptrObject->getSight();
-	Vector pos = ptrObject->getPosition();
-	int indexX = 0, indexY = 0;
-	int spriteIndexSize = ptrObject->getSpriteIndexSize();
-	/*std::cout << "WorldManager - getCollisions - 290" << std::endl;*/
+	Vector objWorldIndex = ptrObject->getWorldIndex();
 
-	if (sight.x == 1)
-	{
-		//std::cout << "WorldManager - getCollisions - 294" << std::endl;
-		indexX = ((pos.x - SCR.getBoundaryL()) / 16) + spriteIndexSize;
-		if (indexX >= WIDTH)
-			indexX = WIDTH - 1;
-		indexY = ((pos.y - SCR.getBoundaryU()) / 16);
-		for (int i = 0; i < 2; i++)
-		{
-			if (map[indexY][indexX] == NULL)
-			{
-				indexY++;
-				if (indexY >= HEIGHT)
-					indexY = HEIGHT - 1;
-			}
-			else
-			{
-				break;
-			}
-		}
-	}
-	else if (sight.x == -1)
-	{
-		//std::cout << "WorldManager - getCollisions - 313" << std::endl;
-		indexX = ((pos.x - SCR.getBoundaryL()) / 16) - 1;
-		if (indexX < 0)
-			indexX = 0;
-		indexY = ((pos.y - SCR.getBoundaryU()) / 16);
-		for (int i = 0; i < 2; i++)
-		{
-			if (map[indexY][indexX] == NULL)
-			{
-				indexY++;
-				if (indexY >= HEIGHT)
-					indexY = HEIGHT - 1;
-			}
-			else
-			{
-				break;
-			}
-		}
-	}
-	else if (sight.y == 1)
-	{
-		/*std::cout << "WorldManager - getCollisions - 332" << std::endl;*/
-		indexX = ((pos.x - SCR.getBoundaryL()) / 16);
-		indexY = ((pos.y - SCR.getBoundaryU()) / 16) + spriteIndexSize;
-		if (indexY >= HEIGHT)
-			indexY = HEIGHT - 1;
-		for (int i = 0; i < 2; i++)
-		{
-			if (map[indexY][indexX] == NULL)
-			{
-				indexX++;
-				if (indexX >= WIDTH)
-					indexX = WIDTH - 1;
-			}
-			else
-			{
-				break;
-			}
-		}
-	}
-	else if (sight.y == -1)
-	{
-		//std::cout << "WorldManager - getCollisions - 351" << std::endl;
-		indexX = ((pos.x - SCR.getBoundaryL()) / 16);
-		indexY = ((pos.y - SCR.getBoundaryU()) / 16) - 1;
-		if (indexY < 0)
-			indexY = 0;
-		for (int i = 0; i < 2; i++)
-		{
-			if (map[indexY][indexX] == NULL)
-			{
-				indexX++;
-				if (indexX >= WIDTH)
-					indexX = WIDTH - 1;
-			}
-			else
-			{
-				break;
-			}
-		}
-	}
-	tempObject = map[indexY][indexX];
-	/*std::cout << "WorldManager - getCollisions - 371" << std::endl;*/
+	tempObject = map[(int)objWorldIndex.y][(int)objWorldIndex.x];
 	auto iterateFullListFunc =
 	[&it, &ptrObject, &collisionList, &where]()
 	{
@@ -409,7 +316,6 @@ battleCity::ObjectList battleCity::WorldManager::getCollisions(const Object* ptr
 	// Else we are checking this wall for collision
 	else
 	{
-		/*std::cout << "WorldManager - getCollisions - 397" << std::endl;*/
 		Box b = getWorldBox(ptrObject, where);
 		Box bTemp = getWorldBox(tempObject);
 		// If false, then check other objects for collision
@@ -424,13 +330,10 @@ battleCity::ObjectList battleCity::WorldManager::getCollisions(const Object* ptr
 		{
 			iterateFullListFunc();
 		}
-		/*std::cout << "WorldManager - getCollisions - 415" << std::endl;*/
 	}
 
-	/*std::cout << "WorldManager - getCollisions - 418" << std::endl;*/
 	tempObject = NULL;
 	ptrObject = NULL;
-	/*std::cout << "WorldManager - getCollisions - 421" << std::endl;*/
 	return collisionList;
 }
 
