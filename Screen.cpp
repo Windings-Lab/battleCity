@@ -29,8 +29,8 @@ Screen& Screen::set(unsigned int wValue, unsigned int hValue, bool fValue) noexc
 		single._fullscreen = fValue;
 		single._boundaryL = 40;
 		single._boundaryU = 44;
-		single._boundaryR = (float)single._width - single._boundaryL;
-		single._boundaryD = (float)single._height - single._boundaryU;
+		single._boundaryR = 800 - single._boundaryL;
+		single._boundaryD = 600 - single._boundaryU;
 	}
 	return single;
 }

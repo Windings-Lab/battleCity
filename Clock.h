@@ -3,10 +3,10 @@
 class Clock
 {
 private:
-	unsigned int previousTime;
-	unsigned int adjustTime = 0;
-	unsigned int actualSleepTime = 0;
-	unsigned int intendedSleepTime = 0;
+	int previousTime;
+	int adjustTime = 0;
+	int actualSleepTime = 0;
+	int intendedSleepTime = 0;
 
 public:
 	// Sets previous_time to current time
@@ -21,7 +21,7 @@ public:
 	// Return time elapsed since delta() was called
 	// Does not reset clock time
 	// Units are milliseconds
-	unsigned int split() const;
+	int split() const;
 
-	void sleep(unsigned int loopTime);
+	void sleep(int loopTime);
 };

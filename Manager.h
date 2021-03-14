@@ -25,7 +25,7 @@ namespace battleCity
 		std::string getType() const;
 
 		/// Startup Manager.
-		/// Return 0 if ok, else negative number.
+		/// Return 0 if ok
 		virtual int startUp();
 
 		/// Shutdown Manager.
@@ -34,7 +34,7 @@ namespace battleCity
 		/// Return status of is_started (true when startUp() was successful).
 		bool isStarted() const;
 
-		/// Send event to all interested Objects.
+		/// Send eventStep to all Objects.
 		/// Return count of number of events sent.
 		int onEvent(const Event *ptrEvent) const;
 	};

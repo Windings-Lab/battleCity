@@ -30,6 +30,8 @@ namespace battleCity
 
 		std::vector<Object*>& getList();
 		int getSize();
+
+		// List is Empty?
 		bool isEmpty();
 
 		void clear();

@@ -7,6 +7,8 @@ battleCity::EventCollision::EventCollision()
 	setType(COLLISION_EVENT);
 }
 
+// newPtrObj1 = who moved
+// newPtrObj2 = collided with
 battleCity::EventCollision::EventCollision(Object* newPtrObj1, Object* newPtrObj2, Vector newPosition)
 {
 	ptrObj1 = newPtrObj1;

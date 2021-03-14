@@ -6,11 +6,14 @@
 #include "Vector.h"
 #include "Object.h"
 #include "ObjectList.h"
+#include "TankPlayer.h"
+#include "PowerUp.h"
 
 #define WM battleCity::WorldManager::getInstance()
 
 namespace battleCity
 {
+	class PowerUp;
 	class WorldManager : public Manager
 	{
 	private:
@@ -22,6 +25,7 @@ namespace battleCity
 		void operator=(WorldManager const&);
 
 		std::vector<std::vector<Object*>> map;
+		std::vector<std::vector<int>> powerUpPositions;
 		// Objects, that need to update
 		// every loop step
 		ObjectList objectsToMove;
@@ -34,6 +38,16 @@ namespace battleCity
 		static int worldID;
 		static int moveID;
 
+		Vector gameOverPos;
+		Sprite* gameOverSpr;
+		bool gameOver;
+
+		int tankCount;
+		int killCount;
+
+		PowerUp* powerUp;
+		bool isPowerUp;
+		bool powerUpisTaked;
 	public:
 		friend class Manager;
 		friend class GameManager;
@@ -45,10 +59,18 @@ namespace battleCity
 
 		// Startup game world (initialize everything to empty)
         // Return 0
-		int startUp() override;
+		int startUp(TankPlayer& newPlayer);
 
 		// Shutdown game world (delete all game world Objects)
 		void shutDown() override;
+
+		void setGameOverState();
+		void setTankCount(int newTankCount);
+		int getTankCount();
+
+		// killCount += newKillCount;
+		void setKillCount(int newKillCount);
+		int getKillCount();
 
 		// Insert Object into world
 		// Return 0 if ok, else -1
@@ -67,8 +89,11 @@ namespace battleCity
 		int getWorldID() const;
 		int getMoveID() const;
 		std::vector<std::vector<Object*>>& getWorldMap();
+		std::vector<std::vector<int>>& getPowerUpPositions();
 
-		int initMap();
+		void createSomeTanks();
+
+		int initMap(TankPlayer& newPlayer);
 
 		// Return list of Objects matching type
 		// List is empty if none found
@@ -76,12 +101,10 @@ namespace battleCity
 
 		// Update world.
 		// Update positions of Objects based on their velocities.
-		// Lastly, delete Objects marked for deletion.
 		void update();
 
 		// Draw all Objects
 		void draw();
-
 		void drawBackground();
 
 		/// Move Object.
@@ -90,18 +113,19 @@ namespace battleCity
 		/// If all collided objects soft, move ok.
 		/// If Object is spectral, move ok.
 		/// If move ok, move.
-		/// If moved, adjust view if following this Object.
-		/// If moved from inside world boundary to outside, generate EventOut.
 		/// Return 0 if moved, else -1 if collision with solid.
 		int moveObject(Object* ptrObject, Vector where);
 
 		// Indicate Object is to be deleted at end of current game loop.
-		// Return 0 if ok, else -1.
+		// Return 0 if ok
 		int markForDelete(Object* objectPtr);
 
+		void createPowerUp();
+		void setPowerUpToFalse();
+		void setPowerUpisTakedToTrue();
+
 		// Return list of Objects collided with at position 'where'.
-		// Collisions only with solid Objects.
-		// Does not consider if p_o is solid or not.
+		// Collisions only with solid and soft Objects.
 		ObjectList getCollisions(const Object* ptrObject, Vector where) const;
 	};
 }

@@ -1,6 +1,7 @@
 #include "Manager.h"
 #include "GameManager.h"
 #include "WorldManager.h"
+#include "TankPlayer.h"
 #include "EventStep.h"
 #include "Object.h"
 #include "ObjectList.h"
@@ -12,19 +13,19 @@
 #include <vector>
 
 bool battleCity::GameManager::_gameOver = 0;
-unsigned int battleCity::GameManager::_frameTime = 0;
-unsigned int battleCity::GameManager::_stepCount = 0;
+int battleCity::GameManager::_frameTime = 0;
+int battleCity::GameManager::_stepCount = 0;
 Clock battleCity::GameManager::_clock;
 
 const bool& battleCity::GameManager::gameOver = _gameOver;
-const unsigned int& battleCity::GameManager::frameTime = _frameTime;
-const unsigned int& battleCity::GameManager::stepCount = _stepCount;
+const int& battleCity::GameManager::frameTime = _frameTime;
+const int& battleCity::GameManager::stepCount = _stepCount;
 const Clock& battleCity::GameManager::clock = _clock;
 
 battleCity::GameManager::GameManager()
 {
-
 	_stepCount = 0;
+	player = NULL;
 	setType("GameManager");
 }
 
@@ -46,18 +47,29 @@ int battleCity::GameManager::spriteInit()
 	return SPR.initAll();
 }
 
-int battleCity::GameManager::startUp()
+int battleCity::GameManager::startUp(TankPlayer& newPlayer)
 {
 	_gameOver = false;
-	WM.startUp();
+	player = &newPlayer;
+	WM.startUp(newPlayer);
 	return Manager::startUp();
 }
+
 
 void battleCity::GameManager::shutDown()
 {
 	_gameOver = true;
 	WM.shutDown();
+	player = NULL;
 	SPR.deleteAll();
+}
+
+void battleCity::GameManager::gameOverState()
+{
+	if (stepCount >= 500)
+	{
+		setGameOver(true);
+	}
 }
 
 void battleCity::GameManager::run()
@@ -68,16 +80,23 @@ void battleCity::GameManager::run()
 	WM.draw();
 	_frameTime = getTickCount() / 1000;
 	_stepCount++;
-	//if (_stepCount % 250 == 0)
-	//{
-	//	cout << _frameTime << " seconds" << endl;
-	//	cout << _stepCount << " steps" << endl << endl;
-	//}
 
-	//_clock.sleep(clock.split());
+	//std::cout << "frameTime: " << frameTime << " stepCount: " << stepCount << std::endl;
+
+	_clock.sleep(clock.split());
 }
 
 void battleCity::GameManager::setGameOver(bool gameState)
 {
 	_gameOver = gameState;
+}
+
+void battleCity::GameManager::setPlayerHealthToZero()
+{
+	player->setHealth(-player->getHealth());
+}
+
+void battleCity::GameManager::setStepCount(int newStepCount)
+{
+	_stepCount = newStepCount;
 }

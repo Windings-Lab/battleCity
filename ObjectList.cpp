@@ -8,7 +8,9 @@
 #include <string>
 
 battleCity::ObjectList::ObjectList() : i(0)
-{}
+{
+	objectPtrList.reserve(100);
+}
 
 battleCity::ObjectList::ObjectList(int index) : i(index) {}
 
@@ -59,6 +61,7 @@ int battleCity::ObjectList::removeByWorldID(int objID)
 	{
 		return -1;
 	}
+	return 0;
 }
 
 int battleCity::ObjectList::removeByMoveID(int objID)
@@ -77,6 +80,7 @@ int battleCity::ObjectList::removeByMoveID(int objID)
 	{
 		return -1;
 	}
+	return 0;
 }
 
 std::vector<battleCity::Object*>& battleCity::ObjectList::getList()

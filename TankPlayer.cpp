@@ -4,6 +4,7 @@
 #include "EventOut.h"
 #include "EventMouse.h"
 #include "EventKeyboard.h"
+#include "Explosion.h"
 #include "Framework.h"
 #include "Vector.h"
 #include "Event.h"
@@ -29,12 +30,16 @@ battleCity::TankPlayer::TankPlayer()
 	id = 1;
 	type = "Player";
 
-	health = 100;
+#if DEBUG == 0
+	health = 1;
+#else
+	health = 10;
+#endif
 	constSpeed = 1;
 	bulletCount = 1;
 	solidness = Solidness::HARD;
 
-	spriteDB = SPR.getTankPlayerSprites();
+	spriteDB = &SPR.getTankPlayerSprites();
 	spriteSet();
 	setSight(Vector(0, -1));
 #if DEBUG == 1
@@ -49,22 +54,22 @@ battleCity::TankPlayer::TankPlayer(float x, float y)
 
 	initPosition(Vector(x, y));
 
-	health = 100;
+#if DEBUG == 0
+	health = 1;
+#else
+	health = 10;
+#endif
 	constSpeed = 1;
 	bulletCount = 1;
 	solidness = Solidness::HARD;
 
-	spriteDB = SPR.getTankPlayerSprites();
+	spriteDB = &SPR.getTankPlayerSprites();
 	spriteSet();
 	setSight(Vector(0, -1));
 }
 
 void battleCity::TankPlayer::update()
 {
-	if (health == 0)
-	{
-		GM.setGameOver();
-	}
 	//if (GM.stepCount % 5000 == 0)
 	//{
 	//	//std::cout << "speed: " << getSpeed() << std::endl;
@@ -189,6 +194,10 @@ void battleCity::TankPlayer::movementErase(std::string direction)
 
 battleCity::TankPlayer::~TankPlayer()
 {
+	WM.setGameOverState();
+	Explosion* newExp = new Explosion(true);
+	newExp->setPosition(this->position);
+	newExp = NULL;
 #if DEBUG == 2
 	std::cout << "TankPlayer Destructor" << std::endl;
 #endif

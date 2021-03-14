@@ -2,6 +2,7 @@
 #include "WorldManager.h"
 #include "Object.h"
 #include "ObjectList.h"
+#include "Explosion.h"
 #include "ObjectListIterator.h"
 
 #include <iostream>
@@ -46,11 +47,19 @@ int battleCity::Manager::onEvent(const Event* ptrEvent) const
 {
 	int count = 0;
 	ObjectList listToIt = WM.objectsToMove;
+	ObjectList explosion = WM.objectsOfType("Explosion");
 	ObjectListIterator itEvent = ObjectListIterator(&listToIt);
+	ObjectListIterator itEventExplosion = ObjectListIterator(&explosion);
 
 	for (itEvent.first(); !itEvent.isDone(); itEvent.next())
 	{
 		(*itEvent.currentObject())->eventHandler(ptrEvent);
+		count++;
+	}
+
+	for (itEventExplosion.first(); !itEventExplosion.isDone(); itEventExplosion.next())
+	{
+		(*itEventExplosion.currentObject())->eventHandler(ptrEvent);
 		count++;
 	}
 

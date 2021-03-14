@@ -8,6 +8,8 @@ namespace battleCity
 {
     const std::string COLLISION_EVENT = "Collision";
 
+    // newPtrObj1 = who moved
+    // newPtrObj2 = collided with
     class EventCollision : public Event
     {
         Vector position;      // Where collision occurred.
@@ -15,11 +17,11 @@ namespace battleCity
         Object* ptrObj2;      // Object being collided with.
 
     public:
-        // Create collision event at (0,0) with o1 and o2 NULL.
+        // Create collision event at (0,0) with newPtrObj1 and newPtrObj2 NULL.
         EventCollision();
 
-        // Create collision event between o1 and o2 at position p.
-        // Object o1 "caused" collision by moving into object o2.
+        // Create collision event between newPtrObj1 and newPtrObj2 at position p.
+        // Object newPtrObj1 "caused" collision by moving into object newPtrObj2.
         EventCollision(Object* newPtrObj1, Object* newPtrObj2, Vector newPosition);
 
         // Set object that caused collision.

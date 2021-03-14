@@ -7,6 +7,7 @@ namespace battleCity
     {
     public:
         Wall();
+        ~Wall();
         Wall(float x, float y);
 
         void update() override;

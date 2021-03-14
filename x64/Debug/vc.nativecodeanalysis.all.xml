@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?><DEFECTS><DEFECT>
+    <SFA>
+      <FILEPATH>D:\Desktop\Battle City\Game\BattleCity\</FILEPATH>
+      <FILENAME>GameManager.cpp</FILENAME>
+      <LINE>25</LINE>
+      <COLUMN>25</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'battleCity::GameManager::player' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>battleCity::GameManager::{ctor}</FUNCTION>
+    <DECORATED>??0GameManager@battleCity@@AEAA@XZ</DECORATED>
+    <FUNCLINE>25</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>battleCity::GameManager::player</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT><DEFECT>
+    <SFA>
+      <FILEPATH>D:\Desktop\Battle City\Game\BattleCity\</FILEPATH>
+      <FILENAME>Sprites.cpp</FILENAME>
+      <LINE>20</LINE>
+      <COLUMN>21</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'battleCity::Sprites::wall' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>battleCity::Sprites::{ctor}</FUNCTION>
+    <DECORATED>??0Sprites@battleCity@@AEAA@XZ</DECORATED>
+    <FUNCLINE>20</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>battleCity::Sprites::wall</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT></DEFECTS>

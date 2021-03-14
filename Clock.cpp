@@ -22,12 +22,12 @@ void Clock::delta()
 	previousTime = getTickCount();
 }
 
-unsigned int Clock::split() const
+int Clock::split() const
 {
 	return getTickCount() - previousTime;
 }
 
-void Clock::sleep(unsigned int loopTime)
+void Clock::sleep(int loopTime)
 {
 	intendedSleepTime = FPS - loopTime - adjustTime;
 
@@ -38,7 +38,6 @@ void Clock::sleep(unsigned int loopTime)
 
 
 	adjustTime = actualSleepTime - intendedSleepTime;
-	std::cout << actualSleepTime << std::endl;
 	if (adjustTime < 0)
 		adjustTime = 0;
 }

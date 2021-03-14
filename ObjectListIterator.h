@@ -35,7 +35,7 @@ namespace battleCity
 		/// Return true if at end of list
 		bool isDone() const;
 
-		/// Return pointer to current item in list, NULL if done/empty
+		/// Return iterator pointer to current item in list
 		std::vector<Object*>::const_iterator currentObject() const;
 
 		ObjectListIterator& operator=(const ObjectListIterator& rhs);

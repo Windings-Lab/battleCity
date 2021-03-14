@@ -4,6 +4,11 @@
 
 #define FRAMEWORK_API extern "C" __declspec(dllimport)
 #define ENUM_TO_STR(ENUM) # ENUM
+
+// DEBUG 0		- Standart game
+// DEBUG 1		- Some position informations
+// DEBUG 2		- Destructor informations
+// DEBUG >= 1	- Creative game
 #define DEBUG 0
 
 // NewValue > FPS - game is slower

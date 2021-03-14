@@ -4,6 +4,7 @@
 #include "EventOut.h"
 #include "EventCollision.h"
 #include "WorldManager.h"
+#include "Explosion.h"
 #include "GameManager.h"
 #include "Event.h"
 #include "Sprites.h"
@@ -20,7 +21,7 @@ battleCity::Bullet::Bullet(Object& ptrObj) : object(ptrObj)
 	bulletCount = 0;
 	solidness = Solidness::SOFT;
 
-	spriteDB = SPR.getBulletSprites();
+	spriteDB = &SPR.getBulletSprites();
 
 	initBullet(object);
 	//std::cout << "bulletX: " << position.x << " bulletY: " << position.y << std::endl;
@@ -68,6 +69,7 @@ void battleCity::Bullet::initBullet(const Object& ptrObj)
 
 	position = pos;
 	setVelocity(directionObj);
+	objectID = object.getWorldID();
 	objectType = object.getType();
 }
 
@@ -80,37 +82,26 @@ void battleCity::Bullet::hit(const battleCity::EventCollision* CollisionEvent)
 {
 	if (health != 0)
 	{
-		if (((CollisionEvent->getObject1()->getType() == "Tank") ||
-			(CollisionEvent->getObject2()->getType() == "Tank")) && objectType != "Tank") {
-			WM.markForDelete(CollisionEvent->getObject1());
-			WM.markForDelete(CollisionEvent->getObject2());
-			return;
-		}
-		if (CollisionEvent->getObject1()->getType() == "Bullet" &&
-			CollisionEvent->getObject2()->getType() == "Bullet")
+		if (objectID != CollisionEvent->getObject1()->getWorldID()
+			&&
+			objectID != CollisionEvent->getObject2()->getWorldID())
 		{
-			WM.markForDelete(CollisionEvent->getObject1());
-			WM.markForDelete(CollisionEvent->getObject2());
-			return;
-		}
-		if (((CollisionEvent->getObject1()->getType() == "Player") ||
-			(CollisionEvent->getObject2()->getType() == "Player")) && objectType != "Player") {
-			WM.markForDelete(CollisionEvent->getObject1());
-			WM.markForDelete(CollisionEvent->getObject2());
-			return;
-		}
-		if (((CollisionEvent->getObject1()->getType() == "Wall") ||
-			(CollisionEvent->getObject2()->getType() == "Wall"))) {
+			if ((CollisionEvent->getObject2()->getType() == "Tank" ||
+				CollisionEvent->getObject1()->getType() == "Tank") && objectType == "Tank")
+			{
+				WM.markForDelete(this);
+				return;
+			}
+			if ((CollisionEvent->getObject2()->getType() == "PowerUp" ||
+				CollisionEvent->getObject1()->getType() == "PowerUp"))
+			{
+				return;
+			}
 			WM.markForDelete(CollisionEvent->getObject1());
 			WM.markForDelete(CollisionEvent->getObject2());
 			return;
 		}
 	}
-}
-
-void battleCity::Bullet::update()
-{
-
 }
 
 void battleCity::Bullet::draw()
@@ -128,6 +119,7 @@ int battleCity::Bullet::eventHandler(const Event* ptrEvent) {
 	if (ptrEvent->getType() == COLLISION_EVENT) {
 		const EventCollision* collisionEvent = dynamic_cast <const EventCollision*> (ptrEvent);
 		hit(collisionEvent);
+		collisionEvent = NULL;
 		return 1;
 	}
 
@@ -139,4 +131,8 @@ int battleCity::Bullet::eventHandler(const Event* ptrEvent) {
 battleCity::Bullet::~Bullet()
 {
 	object.setBulletCount(1);
+	position.x -= 5;
+	Explosion* newExp = new Explosion(false);
+	newExp->setPosition(this->position);
+	newExp = NULL;
 }

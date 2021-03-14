@@ -11,7 +11,6 @@ namespace battleCity
 	bool boxesIntersect(Box A, Box B);
 
 	Box getWorldBox(const Object* ptrObject);
-
 	Box getWorldBox(const Object* ptrObject, Vector where);
 
 	int randomNumber(int start, int end);

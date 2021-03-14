@@ -2,6 +2,7 @@
 
 #include "Object.h"
 #include "Event.h"
+#include "EventCollision.h"
 
 namespace battleCity
 {
@@ -18,6 +19,9 @@ namespace battleCity
 		virtual void draw() override;
 		void fire();
 		void move(float x, float y);
+
+		void pathFind(const battleCity::EventCollision* CollisionEvent = NULL);
+		void randomMove();
 
 		virtual int eventHandler(const Event* eventPtr) override;
 	};

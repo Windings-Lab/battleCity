@@ -3,7 +3,9 @@
 #include <string>
 
 #include "Manager.h"
+#include "TankPlayer.h"
 #include "Clock.h"
+#include "EventStep.h"
 
 // Two-letter acronym for easier access to manager.
 #define GM battleCity::GameManager::getInstance()
@@ -22,11 +24,12 @@ namespace battleCity {
 		/// True->game loop should stop
 		static bool _gameOver;
 		// Target time per game loop, in seconds
-		static unsigned int _frameTime;
+		static int _frameTime;
 		// Clock managment
 		static Clock _clock;
 		/// Count of game loop iterations
-		static unsigned int _stepCount;
+		static int _stepCount;
+		TankPlayer* player;
 
 	public:
 		~GameManager();
@@ -37,14 +40,12 @@ namespace battleCity {
 		int spriteInit();
 
 		/// Startup all GameManager services.
-		int startUp() override;
-
-		/// Game manager only accepts step events.
-		/// Return false if other event.
-		bool isValid(std::string eventName) const;
+		int startUp(TankPlayer& newPlayer);
 
 		/// Shut down GameManager services.
 		void shutDown() override;
+
+		void gameOverState();
 
 		/// Run game loop.
 		void run();
@@ -52,10 +53,14 @@ namespace battleCity {
 		/// Set game over status to indicated value.
 		/// If true (default), will stop game loop.
 		void static setGameOver(bool gameState = true);
+		void setPlayerHealthToZero();
+
+		//Use this function carefull
+		static void setStepCount(int newStepCount);
 
 		static const bool& gameOver;
-		static const unsigned int& frameTime;
-		static const unsigned int& stepCount;
+		static const int& frameTime;
+		static const int& stepCount;
 		static const Clock& clock;
 	};
 }

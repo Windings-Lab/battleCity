@@ -19,8 +19,9 @@ battleCity::Object::Object() : worldID(WM.getWorldID()), moveID(WM.getMoveID())
     constSpeed = 0;
     bulletCount = 1;
     solidness = Solidness::HARD;
+    isSpawnIntersects = true;
 
-    initPosition(Vector());
+    initPosition(Vector(40, 44));
 
     WM.insertObject(this);
 }
@@ -45,8 +46,9 @@ battleCity::Object::Object(int newMoveID) : worldID(WM.getWorldID()), moveID(new
     constSpeed = 0;
     bulletCount = 1;
     solidness = Solidness::HARD;
+    isSpawnIntersects = true;
 
-    initPosition(Vector());
+    initPosition(Vector(40, 44));
 
     WM.insertObject(this);
 }
@@ -58,7 +60,7 @@ std::string battleCity::Object::getType() const
 
 std::vector<Sprite*>& battleCity::Object::getSpriteList()
 {
-    return spriteDB;
+    return *spriteDB;
 }
 
 int battleCity::Object::eventHandler(const Event* ptrEvent)
@@ -96,15 +98,15 @@ int battleCity::Object::getWorldMoveID() const
     return moveID;
 }
 
-void battleCity::Object::setWorldIndex(Vector where)
+void battleCity::Object::setWorldIndexRelative()
 {
     if (sight.x == 1)
     {
         //std::cout << "WorldManager - getCollisions - 294" << std::endl;
-        worldIndexRelative.x = (int)(((where.x - SCR.getBoundaryL()) / 16) + spriteIndexSize);
+        worldIndexRelative.x = (int)(((position.x - SCR.getBoundaryL()) / 16) + spriteIndexSize);
         if (worldIndexRelative.x >= WIDTH)
             worldIndexRelative.x = WIDTH - 1;
-        worldIndexRelative.y = (int)(((where.y - SCR.getBoundaryU()) / 16));
+        worldIndexRelative.y = (int)(((position.y - SCR.getBoundaryU()) / 16));
         for (int i = 0; i < spriteIndexSize; i++)
         {
             if (WM.getWorldMap()[(int)worldIndexRelative.y][(int)worldIndexRelative.x] == NULL)
@@ -122,10 +124,10 @@ void battleCity::Object::setWorldIndex(Vector where)
     else if (sight.x == -1)
     {
         //std::cout << "WorldManager - getCollisions - 313" << std::endl;
-        worldIndexRelative.x = (int)(((where.x - SCR.getBoundaryL()) / 16) - 1);
+        worldIndexRelative.x = (int)(((position.x - SCR.getBoundaryL()) / 16) - 1);
         if (worldIndexRelative.x < 0)
             worldIndexRelative.x = 0;
-        worldIndexRelative.y = (int)((where.y - SCR.getBoundaryU()) / 16);
+        worldIndexRelative.y = (int)((position.y - SCR.getBoundaryU()) / 16);
         for (int i = 0; i < spriteIndexSize; i++)
         {
             if (WM.getWorldMap()[(int)worldIndexRelative.y][(int)worldIndexRelative.x] == NULL)
@@ -143,8 +145,8 @@ void battleCity::Object::setWorldIndex(Vector where)
     else if (sight.y == 1)
     {
         /*std::cout << "WorldManager - getCollisions - 332" << std::endl;*/
-        worldIndexRelative.x = (int)((where.x - SCR.getBoundaryL()) / 16);
-        worldIndexRelative.y = (int)(((where.y - SCR.getBoundaryU()) / 16) + spriteIndexSize);
+        worldIndexRelative.x = (int)((position.x - SCR.getBoundaryL()) / 16);
+        worldIndexRelative.y = (int)(((position.y - SCR.getBoundaryU()) / 16) + spriteIndexSize);
         if (worldIndexRelative.y >= HEIGHT)
             worldIndexRelative.y = HEIGHT - 1;
         for (int i = 0; i < spriteIndexSize; i++)
@@ -164,8 +166,8 @@ void battleCity::Object::setWorldIndex(Vector where)
     else if (sight.y == -1)
     {
         //std::cout << "WorldManager - getCollisions - 351" << std::endl;
-        worldIndexRelative.x = (int)((where.x - SCR.getBoundaryL()) / 16);
-        worldIndexRelative.y = (int)(((where.y - SCR.getBoundaryU()) / 16) - 1);
+        worldIndexRelative.x = (int)((position.x - SCR.getBoundaryL()) / 16);
+        worldIndexRelative.y = (int)(((position.y - SCR.getBoundaryU()) / 16) - 1);
         if (worldIndexRelative.y < 0)
             worldIndexRelative.y = 0;
         for (int i = 0; i < spriteIndexSize; i++)
@@ -184,7 +186,7 @@ void battleCity::Object::setWorldIndex(Vector where)
     }
 }
 
-battleCity::Vector battleCity::Object::getWorldIndex() const
+battleCity::Vector battleCity::Object::getWorldIndexRelative() const
 {
     return worldIndexRelative;
 }
@@ -199,6 +201,7 @@ float battleCity::Object::getSpeed() const
     return speed;
 }
 
+// Health += newHealth
 void battleCity::Object::setHealth(int newHealth)
 {
     health += newHealth;
@@ -256,13 +259,12 @@ battleCity::Vector battleCity::Object::getVelocity() const
 battleCity::Vector battleCity::Object::predictPosition()
 {
     Vector newPos = position + getVelocity();
-    setWorldIndex(newPos);
+    setWorldIndexRelative();
     return newPos;
 }
 
 int battleCity::Object::setPosition(Vector newPosition)
 {
-
     position = newPosition;
     return 0;
 }
@@ -316,19 +318,30 @@ battleCity::Box battleCity::Object::getBox() const
     return box;
 }
 
+bool battleCity::Object::getSpawnIntersection()
+{
+    return isSpawnIntersects;
+}
+
+void battleCity::Object::setSpawnIntersection(bool newSpawnIntersection)
+{
+    isSpawnIntersects = newSpawnIntersection;
+}
+
 void battleCity::Object::spriteSet(Sprite* newSprite, int index)
 {
-    if (spriteDB.size() == 0)
+    if (spriteDB == NULL)
     {
         sprite = newSprite;
     }
     else
     {
-        sprite = spriteDB[index];
+        sprite = spriteDB->at(index);
     }
     getSpriteSize(sprite, spriteX, spriteY);
     box = Box(Vector(), spriteX, spriteY);
     spriteIndexSize = (spriteX / 16) + 1;
+    newSprite = NULL;
 }
 
 void battleCity::Object::update()
@@ -345,5 +358,6 @@ battleCity::Object::~Object()
     std::cout << "Object Destructor" << std::endl;
 #endif
     WM.removeObject(this);
+    spriteDB = NULL;
     sprite = NULL;
 }

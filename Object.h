@@ -29,14 +29,14 @@ namespace battleCity
 		Vector worldIndexRelative;
 
 		// Relative to the next spriteIndexSize 16px blocks
-		void setWorldIndex(Vector where);
+		void setWorldIndexRelative();
 		void setSpeed(float newSpeed);
 		void setDirection(Vector newDirection);
 	protected:
 		int id;
 		std::string type;
 
-		// Boundary of windows default
+		// default = Boundary of windows
 		Vector position;
 
 		int health;
@@ -45,7 +45,7 @@ namespace battleCity
 		Solidness solidness;
 
 		/// <summary>
-		/// Database vector of direction sprites
+		/// Sprite database for each object
 		/// </summary>
 		/// <param name="">Initialize it in derived objects</param>
 		/// <param name="spriteSet(0, index)">to change direction</param>
@@ -54,12 +54,15 @@ namespace battleCity
 		/// <param name="1">LEFT</param>
 		/// <param name="2">DOWN</param>
 		/// <param name="3">UP</param>
-		std::vector<Sprite*> spriteDB;
+		std::vector<Sprite*>* spriteDB;
 		int spriteX, spriteY;
+		// Size of 16px cells
 		int spriteIndexSize;
 		Box box;
 		// spriteSet(Sprite*) initialize if no spriteDB
 		Sprite* sprite;
+		// Teleport tanks if true
+		bool isSpawnIntersects;
 
 		// Make it only once in Constructor of derived object
 		void initPosition(Vector initPosition);
@@ -98,10 +101,11 @@ namespace battleCity
 		int getWorldMoveID() const;
 
 		// Relative to the next spriteIndexSize 16px blocks
-		Vector getWorldIndex() const;
+		Vector getWorldIndexRelative() const;
 
 		float getSpeed() const;
 
+		// Health += newHealth
 		void setHealth(int newHealth);
 		int getHealth() const;
 
@@ -128,5 +132,8 @@ namespace battleCity
 		/// Get/Set Object's bounding box
 		void setBox(Box newBox);
 		Box getBox() const;
+
+		bool getSpawnIntersection();
+		void setSpawnIntersection(bool newSpawnIntersection);
 	};
 }

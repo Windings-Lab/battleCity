@@ -12,7 +12,7 @@ namespace battleCity
         void hit(const battleCity::EventCollision* CollisionEvent);
 
         Object& object;
-        /*int objectID;*/
+        int objectID;
         std::string objectType;
     public:
         Bullet(Object& ptrObj);
@@ -20,7 +20,6 @@ namespace battleCity
 
         void initBullet(const Object& ptrObj);
 
-        void update() override;
         void draw() override;
 
         int eventHandler(const battleCity::Event* ptrEvent);

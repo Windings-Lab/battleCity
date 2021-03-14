@@ -114,6 +114,15 @@
     <ClCompile Include="Screen.cpp">
       <Filter>Source Files\Utility</Filter>
     </ClCompile>
+    <ClCompile Include="PhoenixAndFlag.cpp">
+      <Filter>Source Files\BattleCity Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Explosion.cpp">
+      <Filter>Source Files\BattleCity Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="PowerUp.cpp">
+      <Filter>Source Files\BattleCity Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Vector.h">
@@ -184,6 +193,15 @@
     </ClInclude>
     <ClInclude Include="Screen.h">
       <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="PhoenixAndFlag.h">
+      <Filter>Header Files\BattleCity Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Explosion.h">
+      <Filter>Header Files\BattleCity Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="PowerUp.h">
+      <Filter>Header Files\BattleCity Objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
