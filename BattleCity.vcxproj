@@ -74,20 +74,6 @@
     <ClInclude Include="Wall.h" />
     <ClInclude Include="WorldManager.h" />
   </ItemGroup>
-  <ItemGroup>
-    <Image Include="data\bullet.png" />
-    <Image Include="data\circle.tga" />
-    <Image Include="data\Flash_1.png" />
-    <Image Include="data\Flash_2.png" />
-    <Image Include="data\Flash_3.png" />
-    <Image Include="data\Flash_4.png" />
-    <Image Include="data\NES - Battle City JPN - General Sprites.png" />
-    <Image Include="data\Tank.png" />
-    <Image Include="data\Wall.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="cpp.hint" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>

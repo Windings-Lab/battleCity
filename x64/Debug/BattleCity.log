@@ -1,41 +1,5 @@
-﻿  Bullet.cpp
-  EventCollision.cpp
-  Explosion.cpp
-  GameManager.cpp
-  Manager.cpp
-  Object.cpp
-D:\Desktop\Battle City\Game\BattleCity\Object.cpp(106,79): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\Desktop\Battle City\Game\BattleCity\Object.cpp(109,73): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\Desktop\Battle City\Game\BattleCity\Object.cpp(127,79): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\Desktop\Battle City\Game\BattleCity\Object.cpp(130,72): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\Desktop\Battle City\Game\BattleCity\Object.cpp(148,72): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\Desktop\Battle City\Game\BattleCity\Object.cpp(149,79): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\Desktop\Battle City\Game\BattleCity\Object.cpp(169,72): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\Desktop\Battle City\Game\BattleCity\Object.cpp(170,79): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\Desktop\Battle City\Game\BattleCity\Object.cpp(227,37): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\Desktop\Battle City\Game\BattleCity\Object.cpp(228,37): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\Desktop\Battle City\Game\BattleCity\Object.cpp(342,34): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Desktop\Battle City\Game\BattleCity\Object.cpp(342,25): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  PhoenixAndFlag.cpp
-  PowerUp.cpp
-D:\Desktop\Battle City\Game\BattleCity\PowerUp.cpp(14,63): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\Desktop\Battle City\Game\BattleCity\PowerUp.cpp(17,30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Desktop\Battle City\Game\BattleCity\PowerUp.cpp(17,22): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Desktop\Battle City\Game\BattleCity\PowerUp.cpp(33,63): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\Desktop\Battle City\Game\BattleCity\PowerUp.cpp(36,30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Desktop\Battle City\Game\BattleCity\PowerUp.cpp(36,22): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  Tank.cpp
-D:\Desktop\Battle City\Game\BattleCity\Tank.cpp(229,8): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Desktop\Battle City\Game\BattleCity\Tank.cpp(238,11): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  TankPlayer.cpp
-  WorldManager.cpp
-D:\Desktop\Battle City\Game\BattleCity\WorldManager.cpp(260,10): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-D:\Desktop\Battle City\Game\BattleCity\WorldManager.cpp(261,10): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-D:\Desktop\Battle City\Game\BattleCity\WorldManager.cpp(304,77): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-D:\Desktop\Battle City\Game\BattleCity\WorldManager.cpp(304,57): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  game.cpp
+﻿  game.cpp
 D:\Desktop\Battle City\Game\BattleCity\game.cpp(107,17): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 D:\Desktop\Battle City\Game\BattleCity\game.cpp(108,17): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\Desktop\Battle City\Game\BattleCity\game.cpp(215,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  Generating Code...
+D:\Desktop\Battle City\Game\BattleCity\game.cpp(218,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   BattleCity.vcxproj -> D:\Desktop\Battle City\Game\BattleCity\x64\Debug\BattleCity.exe

@@ -37,6 +37,7 @@ battleCity::WorldManager::WorldManager()
 
 	tankCount = 0;
 	killCount = 0;
+	tankStorage = 20;
 
 	powerUp = NULL;
 	isPowerUp = false;
@@ -169,7 +170,7 @@ std::vector<std::vector<int>>& battleCity::WorldManager::getPowerUpPositions()
 void battleCity::WorldManager::createSomeTanks()
 {
 	int rnd = randomNumber(0, 1);
-	if (GM.stepCount % 450 == 0 && tankCount != 4)
+	if (GM.stepCount % 450 == 0 && tankCount != 6 && tankStorage > 0)
 	{
 		if (rnd == 1)
 			new Tank(500, 45);
@@ -374,51 +375,54 @@ int battleCity::WorldManager::markForDelete(Object* objectPtr)
 
 void battleCity::WorldManager::createPowerUp()
 {
-	switch (killCount)
+	if (powerUpPositions.size() != 0)
 	{
-	case 4:
-		if (!isPowerUp && !powerUpisTaked)
+		switch (killCount)
 		{
-			powerUp = new PowerUp(1);
-			isPowerUp = true;
+		case 4:
+			if (!isPowerUp && !powerUpisTaked)
+			{
+				powerUp = new PowerUp(1);
+				isPowerUp = true;
+			}
+			break;
+		case 10:
+			if (isPowerUp)
+			{
+				markForDelete(powerUp);
+				powerUpisTaked = false;
+			}
+			else
+			{
+				powerUpisTaked = false;
+			}
+			break;
+		case 11:
+			if (!isPowerUp && !powerUpisTaked)
+			{
+				powerUp = new PowerUp(1);
+				isPowerUp = true;
+			}
+			break;
+		case 17:
+			if (isPowerUp)
+			{
+				markForDelete(powerUp);
+				powerUpisTaked = false;
+			}
+			else
+			{
+				powerUpisTaked = false;
+			}
+			break;
+		case 18:
+			if (!isPowerUp && !powerUpisTaked)
+			{
+				powerUp = new PowerUp(1);
+				isPowerUp = true;
+			}
+			break;
 		}
-		break;
-	case 10:
-		if (isPowerUp)
-		{
-			markForDelete(powerUp);
-			powerUpisTaked = false;
-		}
-		else
-		{
-			powerUpisTaked = false;
-		}
-		break;
-	case 11:
-		if (!isPowerUp && !powerUpisTaked)
-		{
-			powerUp = new PowerUp(1);
-			isPowerUp = true;
-		}
-		break;
-	case 17:
-		if (isPowerUp)
-		{
-			markForDelete(powerUp);
-			powerUpisTaked = false;
-		}
-		else
-		{
-			powerUpisTaked = false;
-		}
-		break;
-	case 18:
-		if (!isPowerUp && !powerUpisTaked)
-		{
-			powerUp = new PowerUp(1);
-			isPowerUp = true;
-		}
-		break;
 	}
 }
 

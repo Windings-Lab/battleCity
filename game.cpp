@@ -110,9 +110,12 @@ public:
 	}
 
 	virtual void onMouseButtonClick(FRMouseButton button, bool isReleased) {
-		eventMouse->setMouseButton(button);
-		eventMouse->setMouseAction(isReleased);
-		player->eventHandler(eventMouse);
+		if (player->getHealth() > 0)
+		{
+			eventMouse->setMouseButton(button);
+			eventMouse->setMouseAction(isReleased);
+			player->eventHandler(eventMouse);
+		}
 	}
 
 	virtual void onKeyPressed(FRKey k)
@@ -161,7 +164,7 @@ int main(int argc, char *argv[])
 {
 	int width = 800;
 	int height = 600;
-	bool fullScreen = true;
+	bool fullScreen = false;
 	std::vector<int> tokens;
 	if (argc != 1)
 	{

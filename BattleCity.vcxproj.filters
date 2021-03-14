@@ -204,34 +204,4 @@
       <Filter>Header Files\BattleCity Objects</Filter>
     </ClInclude>
   </ItemGroup>
-  <ItemGroup>
-    <Image Include="data\bullet.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="data\circle.tga" />
-    <Image Include="data\Flash_1.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="data\Flash_2.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="data\Flash_3.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="data\Flash_4.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="data\NES - Battle City JPN - General Sprites.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="data\Tank.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="data\Wall.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="cpp.hint" />
-  </ItemGroup>
 </Project>

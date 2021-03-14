@@ -43,6 +43,7 @@ namespace battleCity
 		bool gameOver;
 
 		int tankCount;
+		int tankStorage;
 		int killCount;
 
 		PowerUp* powerUp;

@@ -126,7 +126,7 @@ void battleCity::Tank::pathFind(const battleCity::EventCollision* CollisionEvent
 	}
 	else if (CollisionEvent->getObject1()->getType() == "Wall" || CollisionEvent->getObject2()->getType() == "Wall")
 	{
-		if (GM.stepCount % 150 == 0)
+		if (GM.stepCount % 125 == 0)
 		{
 			randomMove();
 		}
@@ -262,7 +262,7 @@ int battleCity::Tank::eventHandler(const battleCity::Event* eventPtr)
 	if (eventPtr->getType() == battleCity::STEP_EVENT)
 	{
 		const EventStep* stepEvent = dynamic_cast<const EventStep*> (eventPtr);
-		if (stepEvent->getStepCount() % 1000 == 0)
+		if (stepEvent->getStepCount() % 600 == 0)
 		{
 			pathFind();
 		}
