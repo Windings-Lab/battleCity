@@ -1,6 +1,5 @@
 ﻿  Bullet.cpp
   EventCollision.cpp
-  EventStep.cpp
   Explosion.cpp
   GameManager.cpp
   Manager.cpp
@@ -17,9 +16,6 @@ D:\Desktop\Battle City\Game\BattleCity\Object.cpp(227,37): warning C4244: '=': c
 D:\Desktop\Battle City\Game\BattleCity\Object.cpp(228,37): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 D:\Desktop\Battle City\Game\BattleCity\Object.cpp(342,34): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Desktop\Battle City\Game\BattleCity\Object.cpp(342,25): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  ObjectList.cpp
-D:\Desktop\Battle City\Game\BattleCity\ObjectList.cpp(93,29): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
-  ObjectListIterator.cpp
   PhoenixAndFlag.cpp
   PowerUp.cpp
 D:\Desktop\Battle City\Game\BattleCity\PowerUp.cpp(14,63): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
@@ -32,8 +28,6 @@ D:\Desktop\Battle City\Game\BattleCity\PowerUp.cpp(36,22): warning C4244: 'argum
 D:\Desktop\Battle City\Game\BattleCity\Tank.cpp(229,8): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Desktop\Battle City\Game\BattleCity\Tank.cpp(238,11): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   TankPlayer.cpp
-  Utility.cpp
-  Wall.cpp
   WorldManager.cpp
 D:\Desktop\Battle City\Game\BattleCity\WorldManager.cpp(260,10): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
 D:\Desktop\Battle City\Game\BattleCity\WorldManager.cpp(261,10): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
