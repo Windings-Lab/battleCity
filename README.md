@@ -1,5 +1,5 @@
 # battleCity
-This is my first game written on C++
+Source code of my first game written on C++
 
 How to create map
 
