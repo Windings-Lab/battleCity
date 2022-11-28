@@ -94,7 +94,7 @@ public:
 		eventKeyboard = nullptr;
 		eventMouse = nullptr;
 		mousePos = nullptr;
-		GM.shutDown();
+		GM.ShutDown();
 	}
 
 	virtual bool Tick() {

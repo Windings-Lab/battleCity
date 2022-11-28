@@ -28,7 +28,7 @@ battleCity::GameManager::GameManager()
 {
 	_stepCount = 0;
 	player = nullptr;
-	setType("GameManager"sv);
+	SetType("GameManager"sv);
 }
 
 battleCity::GameManager::~GameManager()
@@ -54,14 +54,14 @@ int battleCity::GameManager::startUp(TankPlayer& newPlayer)
 	_gameOver = false;
 	player = &newPlayer;
 	WM.startUp(newPlayer);
-	return Manager::startUp();
+	return Manager::StartUp();
 }
 
 
-void battleCity::GameManager::shutDown()
+void battleCity::GameManager::ShutDown()
 {
 	_gameOver = true;
-	WM.shutDown();
+	WM.ShutDown();
 	player = nullptr;
 	SPR.deleteAll();
 }
@@ -77,7 +77,7 @@ void battleCity::GameManager::gameOverState()
 void battleCity::GameManager::run()
 {
 	_clock.delta();
-	onEvent(&EventStep());
+	OnEvent(&EventStep());
 	WM.update();
 	WM.draw();
 	_frameTime = getTickCount() / 1000;
