@@ -1,5 +1,0 @@
-﻿  game.cpp
-D:\Desktop\Battle City\Game\BattleCity\game.cpp(107,17): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\Desktop\Battle City\Game\BattleCity\game.cpp(108,17): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\Desktop\Battle City\Game\BattleCity\game.cpp(218,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  BattleCity.vcxproj -> D:\Desktop\Battle City\Game\BattleCity\x64\Debug\BattleCity.exe

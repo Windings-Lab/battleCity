@@ -40,14 +40,14 @@ void battleCity::Bullet::initBullet(const Object& ptrObj)
 		pos.y = pos.y + (spriteObjY / 2) - 2; // -2 is Centerize
 		pos.x = pos.x + spriteObjX;
 		directionObj.x = constSpeed;
-		spriteSet(0, 0);
+		spriteSet(nullptr, 0);
 		setSight(Vector(1, 0));
 	}
 	else if (directionObj.x == -1)
 	{
 		pos.y = pos.y + (spriteObjY / 2) - 2; // -2 is Centerize
 		directionObj.x = -constSpeed;
-		spriteSet(0, 1);
+		spriteSet(nullptr, 1);
 		setSight(Vector(-1, 0));
 	}
 	// DOWN UP
@@ -56,14 +56,14 @@ void battleCity::Bullet::initBullet(const Object& ptrObj)
 		pos.x = pos.x + (spriteObjX / 2) - 2; // -2 is Centerize
 		pos.y = pos.y + spriteObjY;
 		directionObj.y = constSpeed;
-		spriteSet(0, 2);
+		spriteSet(nullptr, 2);
 		setSight(Vector(0, 1));
 	}
 	else if (directionObj.y == -1)
 	{
 		pos.x = pos.x + (spriteObjX / 2) - 2; // -2 is Centerize
 		directionObj.y = -constSpeed;
-		spriteSet(0, 3);
+		spriteSet(nullptr, 3);
 		setSight(Vector(0, -1));
 	}
 
@@ -119,11 +119,11 @@ int battleCity::Bullet::eventHandler(const Event* ptrEvent) {
 	if (ptrEvent->getType() == COLLISION_EVENT) {
 		const EventCollision* collisionEvent = dynamic_cast <const EventCollision*> (ptrEvent);
 		hit(collisionEvent);
-		collisionEvent = NULL;
+		collisionEvent = nullptr;
 		return 1;
 	}
 
-	ptrEvent = NULL;
+	ptrEvent = nullptr;
 	// If get here, have ignored this event.
 	return 0;
 }
@@ -134,5 +134,5 @@ battleCity::Bullet::~Bullet()
 	position.x -= 5;
 	Explosion* newExp = new Explosion(false);
 	newExp->setPosition(this->position);
-	newExp = NULL;
+	newExp = nullptr;
 }

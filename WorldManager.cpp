@@ -22,12 +22,14 @@
 #include <iostream>
 #include <fstream>
 
+using namespace std::string_view_literals;
+
 int battleCity::WorldManager::worldID = 1;
 int battleCity::WorldManager::moveID = 1;
 
 battleCity::WorldManager::WorldManager()
 {
-	setType("WorldManager");
+	SetType("WorldManager");
 	map = std::vector<std::vector<Object*>>(HEIGHT, std::vector<Object*>(WIDTH));
 	powerUpPositions = std::vector<std::vector<int>>(0, std::vector<int>(0));
 
@@ -39,7 +41,7 @@ battleCity::WorldManager::WorldManager()
 	killCount = 0;
 	tankStorage = 20;
 
-	powerUp = NULL;
+	powerUp = nullptr;
 	isPowerUp = false;
 	powerUpisTaked = false;
 }
@@ -56,10 +58,10 @@ int battleCity::WorldManager::startUp(TankPlayer& newPlayer)
 	if(initMap(newPlayer) == 0)
 	    return 0;
 	gameOverSpr = &SPR.getGameOverSprite();
-	return Manager::startUp();
+	return Manager::StartUp();
 }
 
-void battleCity::WorldManager::shutDown()
+void battleCity::WorldManager::ShutDown()
 {
 	//std::cout << "WorldManager - shutDown" << std::endl;
 	ObjectList listToDelete = worldList;
@@ -68,7 +70,7 @@ void battleCity::WorldManager::shutDown()
 	{
 		delete *it.currentObject();
 	}
-	Manager::shutDown();
+	Manager::ShutDown();
 }
 
 void battleCity::WorldManager::setGameOverState()
@@ -113,7 +115,7 @@ int battleCity::WorldManager::insertObject(Object* objectPtr)
 	}
 	worldID++;
 	check = worldList.insert(objectPtr);
-	objectPtr = NULL;
+	objectPtr = nullptr;
 	return check;
 }
 
@@ -128,7 +130,7 @@ int battleCity::WorldManager::removeObject(Object* objectPtr)
 			return check;
 	}
 	check = worldList.removeByWorldID(objectPtr->getWorldID());
-	objectPtr = NULL;
+	objectPtr = nullptr;
 	return check;
 }
 
@@ -260,10 +262,10 @@ void battleCity::WorldManager::update()
 			Vector pos = objToDelete->getPosition();
 			int x = (pos.x - SCR.getBoundaryL()) / 16;
 			int y = (pos.y - SCR.getBoundaryU()) / 16;
-			map[y][x] = NULL;
+			map[y][x] = nullptr;
 		}
 		delete objToDelete;
-		objToDelete = NULL;
+		objToDelete = nullptr;
 	}
 
 	deletionList.clear();
@@ -316,7 +318,7 @@ int battleCity::WorldManager::moveObject(Object* ptrObject, Vector where)
 		{
 			bool doMove = true;
 			ObjectListIterator it = ObjectListIterator(&newList);
-			Object* tempObject = NULL;
+			Object* tempObject = nullptr;
 
 			for (it.first(); !it.isDone(); it.next())
 			{
@@ -329,11 +331,11 @@ int battleCity::WorldManager::moveObject(Object* ptrObject, Vector where)
 				if (ptrObject->isSolid() && tempObject->isSolid())
 					doMove = false;
 			}
-			tempObject = NULL;
+			tempObject = nullptr;
 
 			if (!doMove)
 			{
-				ptrObject = NULL;
+				ptrObject = nullptr;
 				return -1;
 			}
 		}
@@ -349,7 +351,7 @@ int battleCity::WorldManager::moveObject(Object* ptrObject, Vector where)
 		ptrObject->eventHandler(&EventOut());
 	}
 
-	ptrObject = NULL;
+	ptrObject = nullptr;
 	return i;
 }
 
@@ -369,7 +371,7 @@ int battleCity::WorldManager::markForDelete(Object* objectPtr)
 	{
 		deletionList.insert(objectPtr);
 	}
-	objectPtr = NULL;
+	objectPtr = nullptr;
 	return 0;
 }
 
@@ -441,11 +443,11 @@ battleCity::ObjectList battleCity::WorldManager::getCollisions(const Object* ptr
 	ObjectList collisionList;
 	if (ptrObject->getSpeed() == 0)
 	{
-		ptrObject = NULL;
+		ptrObject = nullptr;
 		return collisionList;
 	}
 	ObjectListIterator it = ObjectListIterator(&objectsToMove);
-	Object* tempObject = NULL;
+	Object* tempObject = nullptr;
 	Vector objWorldIndex = ptrObject->getWorldIndexRelative();
 
 	tempObject = map[(int)objWorldIndex.y][(int)objWorldIndex.x];
@@ -469,7 +471,7 @@ battleCity::ObjectList battleCity::WorldManager::getCollisions(const Object* ptr
 		}
 	};
 	// IF NULL then check for other movable objects
-	if (tempObject == NULL)
+	if (tempObject == nullptr)
 	{
 		//std::cout << "WorldManager - getCollisions - 393" << std::endl;
 		iterateFullListFunc();
@@ -494,8 +496,8 @@ battleCity::ObjectList battleCity::WorldManager::getCollisions(const Object* ptr
 		}
 	}
 
-	tempObject = NULL;
-	ptrObject = NULL;
+	tempObject = nullptr;
+	ptrObject = nullptr;
 	return collisionList;
 }
 

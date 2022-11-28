@@ -2,8 +2,8 @@
 
 battleCity::EventCollision::EventCollision()
 {
-	ptrObj1 = NULL;
-	ptrObj2 = NULL;
+	ptrObj1 = nullptr;
+	ptrObj2 = nullptr;
 	setType(COLLISION_EVENT);
 }
 
@@ -15,14 +15,14 @@ battleCity::EventCollision::EventCollision(Object* newPtrObj1, Object* newPtrObj
 	ptrObj2 = newPtrObj2;
 	position = newPosition;
 	setType(COLLISION_EVENT);
-	newPtrObj1 = NULL;
-	newPtrObj2 = NULL;
+	newPtrObj1 = nullptr;
+	newPtrObj2 = nullptr;
 }
 
 void battleCity::EventCollision::setObject1(Object* newPtrObj1)
 {
 	ptrObj1 = newPtrObj1;
-	newPtrObj1 = NULL;
+	newPtrObj1 = nullptr;
 }
 
 battleCity::Object* battleCity::EventCollision::getObject1() const
@@ -33,7 +33,7 @@ battleCity::Object* battleCity::EventCollision::getObject1() const
 void battleCity::EventCollision::setObject2(Object* newPtrObj2)
 {
 	ptrObj2 = newPtrObj2;
-	newPtrObj2 = NULL;
+	newPtrObj2 = nullptr;
 }
 
 battleCity::Object* battleCity::EventCollision::getObject2() const

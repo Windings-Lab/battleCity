@@ -22,7 +22,7 @@ battleCity::PowerUp::PowerUp()
 	solidness = Solidness::SOFT;
 
 	spriteDB = &SPR.getPowerUpSprites();
-	spriteSet(0, 0);
+	spriteSet(nullptr, 0);
 }
 
 battleCity::PowerUp::PowerUp(int giveHealth)
@@ -41,7 +41,7 @@ battleCity::PowerUp::PowerUp(int giveHealth)
 	solidness = Solidness::SOFT;
 
 	spriteDB = &SPR.getPowerUpSprites();
-	spriteSet(0, 0);
+	spriteSet(nullptr, 0);
 }
 
 void battleCity::PowerUp::draw()
@@ -65,8 +65,8 @@ int battleCity::PowerUp::eventHandler(const Event* ptrEvent)
 	{
 		const EventCollision* collisionEvent = dynamic_cast <const EventCollision*> (ptrEvent);
 		makePowerUp(collisionEvent);
-		collisionEvent = NULL;
-		ptrEvent = NULL;
+		collisionEvent = nullptr;
+		ptrEvent = nullptr;
 		return 1;
 	}
 

@@ -26,7 +26,7 @@ battleCity::PhoenixAndFlag::PhoenixAndFlag(float x, float y)
 	(*spriteDB).push_back(&SPR.getPhoenixSprite());
 	(*spriteDB).push_back(&SPR.getWhiteFlagSprite());
 
-	spriteSet(0, 0);
+	spriteSet(nullptr, 0);
 }
 
 
@@ -41,7 +41,7 @@ void battleCity::PhoenixAndFlag::setGameOver(const battleCity::EventCollision* C
 		CollisionEvent->getObject1()->getType() == "Bullet")
 	{
 		gameOver = true;
-		spriteSet(0, 1);
+		spriteSet(nullptr, 1);
 		GM.setStepCount(1);
 		WM.setGameOverState();
 		return;
@@ -56,12 +56,12 @@ int battleCity::PhoenixAndFlag::eventHandler(const Event* eventPtr)
 		{
 			const EventCollision* collisionEvent = dynamic_cast <const EventCollision*> (eventPtr);
 			setGameOver(collisionEvent);
-			collisionEvent = NULL;
-			eventPtr = NULL;
+			collisionEvent = nullptr;
+			eventPtr = nullptr;
 			return 1;
 		}
 	}
-	eventPtr = NULL;
+	eventPtr = nullptr;
 	return 0;
 }
 
@@ -69,8 +69,8 @@ battleCity::PhoenixAndFlag::~PhoenixAndFlag()
 {
 	for (size_t i = 0; i < spriteDB->size(); i++)
 	{
-		spriteDB->at(i) = NULL;
+		spriteDB->at(i) = nullptr;
 	}
 	delete spriteDB;
-	spriteDB = NULL;
+	spriteDB = nullptr;
 }

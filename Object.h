@@ -82,7 +82,7 @@ namespace battleCity
 		/// <param name="0, 1">LEFT</param>
 		/// <param name="0, 2">DOWN</param>
 		/// <param name="0, 3">UP</param>
-		void spriteSet(Sprite* = NULL, int index = 3);
+		void spriteSet(Sprite* = nullptr, int index = 3);
 
 		virtual void update();
 		virtual void draw();

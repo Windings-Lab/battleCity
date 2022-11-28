@@ -30,7 +30,7 @@ private:
 public:
 	MyFramework()
 	{
-		player = 0;
+		player = nullptr;
 		eventKeyboard = new EventKeyboard();
 		mousePos = new Vector();
 		eventMouse = new EventMouse(*mousePos);
@@ -72,7 +72,7 @@ public:
 		// ------------------------------------------------------------
 		player = new TankPlayer(0, 0);
 		GM.startUp(*player);
-		return 1;
+		return true;
 	}
 
 	virtual void Close() {
@@ -81,7 +81,7 @@ public:
 		{
 			for (auto& it : demo)
 			{
-				it = NULL;
+				it = nullptr;
 			}
 		}
 		// ------------------------------------------------------------
@@ -91,10 +91,10 @@ public:
 		delete eventMouse;
 		delete mousePos;
 
-		eventKeyboard = NULL;
-		eventMouse = NULL;
-		mousePos = NULL;
-		GM.shutDown();
+		eventKeyboard = nullptr;
+		eventMouse = nullptr;
+		mousePos = nullptr;
+		GM.ShutDown();
 	}
 
 	virtual bool Tick() {
@@ -215,7 +215,7 @@ int main(int argc, char *argv[])
 		width = tokens[0];
 		height = tokens[1];
 	}
-	srand(time(0));
+	srand(time(nullptr));
 	Screen::set(width, height, fullScreen);
 	return run(new MyFramework);
 }

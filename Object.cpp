@@ -109,7 +109,7 @@ void battleCity::Object::setWorldIndexRelative()
         worldIndexRelative.y = (int)(((position.y - SCR.getBoundaryU()) / 16));
         for (int i = 0; i < spriteIndexSize; i++)
         {
-            if (WM.getWorldMap()[(int)worldIndexRelative.y][(int)worldIndexRelative.x] == NULL)
+            if (WM.getWorldMap()[(int)worldIndexRelative.y][(int)worldIndexRelative.x] == nullptr)
             {
                 worldIndexRelative.y++;
                 if (worldIndexRelative.y >= HEIGHT)
@@ -130,7 +130,7 @@ void battleCity::Object::setWorldIndexRelative()
         worldIndexRelative.y = (int)((position.y - SCR.getBoundaryU()) / 16);
         for (int i = 0; i < spriteIndexSize; i++)
         {
-            if (WM.getWorldMap()[(int)worldIndexRelative.y][(int)worldIndexRelative.x] == NULL)
+            if (WM.getWorldMap()[(int)worldIndexRelative.y][(int)worldIndexRelative.x] == nullptr)
             {
                 worldIndexRelative.y++;
                 if (worldIndexRelative.y >= HEIGHT)
@@ -151,7 +151,7 @@ void battleCity::Object::setWorldIndexRelative()
             worldIndexRelative.y = HEIGHT - 1;
         for (int i = 0; i < spriteIndexSize; i++)
         {
-            if (WM.getWorldMap()[(int)worldIndexRelative.y][(int)worldIndexRelative.x] == NULL)
+            if (WM.getWorldMap()[(int)worldIndexRelative.y][(int)worldIndexRelative.x] == nullptr)
             {
                 worldIndexRelative.x++;
                 if (worldIndexRelative.x >= WIDTH)
@@ -172,7 +172,7 @@ void battleCity::Object::setWorldIndexRelative()
             worldIndexRelative.y = 0;
         for (int i = 0; i < spriteIndexSize; i++)
         {
-            if (WM.getWorldMap()[(int)worldIndexRelative.y][(int)worldIndexRelative.x] == NULL)
+            if (WM.getWorldMap()[(int)worldIndexRelative.y][(int)worldIndexRelative.x] == nullptr)
             {
                 worldIndexRelative.x++;
                 if (worldIndexRelative.x >= WIDTH)
@@ -330,7 +330,7 @@ void battleCity::Object::setSpawnIntersection(bool newSpawnIntersection)
 
 void battleCity::Object::spriteSet(Sprite* newSprite, int index)
 {
-    if (spriteDB == NULL)
+    if (spriteDB == nullptr)
     {
         sprite = newSprite;
     }
@@ -341,7 +341,7 @@ void battleCity::Object::spriteSet(Sprite* newSprite, int index)
     getSpriteSize(sprite, spriteX, spriteY);
     box = Box(Vector(), spriteX, spriteY);
     spriteIndexSize = (spriteX / 16) + 1;
-    newSprite = NULL;
+    newSprite = nullptr;
 }
 
 void battleCity::Object::update()
@@ -358,6 +358,6 @@ battleCity::Object::~Object()
     std::cout << "Object Destructor" << std::endl;
 #endif
     WM.removeObject(this);
-    spriteDB = NULL;
-    sprite = NULL;
+    spriteDB = nullptr;
+    sprite = nullptr;
 }

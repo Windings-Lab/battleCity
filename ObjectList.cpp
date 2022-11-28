@@ -25,7 +25,7 @@ int battleCity::ObjectList::insert(Object* objectPtr)
 		std::cout << "Object insert error" << std::endl;
 		return -1;
 	}
-	objectPtr = NULL;
+	objectPtr = nullptr;
 	return 0;
 }
 
@@ -34,14 +34,14 @@ int battleCity::ObjectList::remove(Object* objectPtr)
 	auto it = std::find(objectPtrList.begin(), objectPtrList.end(), objectPtr);
 	if (it != objectPtrList.end())
 	{
-		*it = NULL;
+		*it = nullptr;
 		objectPtrList.erase(it);
 	}
 	else
 	{
 		return -1;
 	}
-	objectPtr = NULL;
+	objectPtr = nullptr;
 	return 0;
 }
 
@@ -54,7 +54,7 @@ int battleCity::ObjectList::removeByWorldID(int objID)
 
 	if (it != objectPtrList.end())
 	{
-		*it = NULL;
+		*it = nullptr;
 		objectPtrList.erase(it);
 	}
 	else
@@ -73,7 +73,7 @@ int battleCity::ObjectList::removeByMoveID(int objID)
 
 	if (it != objectPtrList.end())
 	{
-		*it = NULL;
+		*it = nullptr;
 		objectPtrList.erase(it);
 	}
 	else
@@ -102,7 +102,7 @@ void battleCity::ObjectList::clear()
 {
 	for (unsigned int i = 0; i < objectPtrList.size(); i++)
 	{
-		objectPtrList[i] = NULL;
+		objectPtrList[i] = nullptr;
 	}
 	objectPtrList.clear();
 	objectPtrList.shrink_to_fit();
@@ -113,7 +113,7 @@ battleCity::ObjectList::~ObjectList()
 {
 	for (unsigned int i = 0; i < objectPtrList.size(); i++)
 	{
-		objectPtrList[i] = NULL;
+		objectPtrList[i] = nullptr;
 	}
 	objectPtrList.clear();
 	objectPtrList.shrink_to_fit();

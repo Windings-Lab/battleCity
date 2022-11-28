@@ -1,41 +1,42 @@
 #pragma once
 
-#include <string>
+#include <string_view>
 
 #include "Event.h"
 
 namespace battleCity
 {
-	class Manager {
+	class Manager
+	{
 
 	private:
 		/// Manager type identifier
-		std::string type;
+		std::string_view _type;
 		/// True if startUp() succeeded.
-		bool started;
+		bool _started;
 
 	protected:
 		/// Set type identifier of Manager.
-		void setType(std::string newType);
+		void SetType(std::string_view newType);
 
 	public:
 		Manager();
 		virtual ~Manager();
 
-		std::string getType() const;
+		std::string_view GetType() const;
 
 		/// Startup Manager.
 		/// Return 0 if ok
-		virtual int startUp();
+		virtual int StartUp();
 
 		/// Shutdown Manager.
-		virtual void shutDown();
+		virtual void ShutDown();
 
 		/// Return status of is_started (true when startUp() was successful).
-		bool isStarted() const;
+		bool IsStarted() const;
 
 		/// Send eventStep to all Objects.
 		/// Return count of number of events sent.
-		int onEvent(const Event *ptrEvent) const;
+		int OnEvent(const Event *ptrEvent) const;
 	};
 }

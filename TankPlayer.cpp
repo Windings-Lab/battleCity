@@ -89,22 +89,22 @@ void battleCity::TankPlayer::keyboardInput()
 	if (movement.back() == "RIGHT")
 	{
 		move(constSpeed, 0);
-		spriteSet(0, 0);
+		spriteSet(nullptr, 0);
 	}
 	if (movement.back() == "LEFT")
 	{
 		move(-constSpeed, 0);
-		spriteSet(0, 1);
+		spriteSet(nullptr, 1);
 	}
 	if (movement.back() == "DOWN")
 	{
 		move(0, constSpeed);
-		spriteSet(0, 2);
+		spriteSet(nullptr, 2);
 	}
 	if (movement.back() == "UP")
 	{
 		move(0, -constSpeed);
-		spriteSet(0, 3);
+		spriteSet(nullptr, 3);
 	}
 	if (movement.back() == "IDLE")
 	{
@@ -139,14 +139,14 @@ int battleCity::TankPlayer::eventHandler(const battleCity::Event* eventPtr)
 {
 	if (eventPtr->getType() == battleCity::KEYBOARD_EVENT) {
 		keyboardInput();
-		eventPtr = NULL;
+		eventPtr = nullptr;
 		return 1;
 	}
 
 	if (eventPtr->getType() == battleCity::MSE_EVENT) {
 		const battleCity::EventMouse& mouseEvent = dynamic_cast <const battleCity::EventMouse&> (*eventPtr);
 		mouseInput(&mouseEvent);
-		eventPtr = NULL;
+		eventPtr = nullptr;
 		return 1;
 	}
 	return 0;
@@ -197,7 +197,7 @@ battleCity::TankPlayer::~TankPlayer()
 	WM.setGameOverState();
 	Explosion* newExp = new Explosion(true);
 	newExp->setPosition(this->position);
-	newExp = NULL;
+	newExp = nullptr;
 #if DEBUG == 2
 	std::cout << "TankPlayer Destructor" << std::endl;
 #endif

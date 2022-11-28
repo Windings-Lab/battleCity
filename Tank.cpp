@@ -98,19 +98,19 @@ void battleCity::Tank::move(float x, float y)
 	setSight(Vector(x, y));
 	if (getSight().x == 1)
 	{
-		spriteSet(0, 0);
+		spriteSet(nullptr, 0);
 	}
 	else if (getSight().x == -1)
 	{
-		spriteSet(0, 1);
+		spriteSet(nullptr, 1);
 	}
 	else if (getSight().y == 1)
 	{
-		spriteSet(0, 2);
+		spriteSet(nullptr, 2);
 	}
 	else if (getSight().y == -1)
 	{
-		spriteSet(0, 3);
+		spriteSet(nullptr, 3);
 	}
 	//std::cout << x << y << std::endl;
 	//std::cout << "sightX: " << getSight().x << " sightY: " << getSight().y << std::endl;
@@ -119,7 +119,7 @@ void battleCity::Tank::move(float x, float y)
 
 void battleCity::Tank::pathFind(const battleCity::EventCollision* CollisionEvent)
 {
-	if (CollisionEvent == NULL)
+	if (CollisionEvent == nullptr)
 	{
 		isSpawnIntersects = false;
 		randomMove();
@@ -246,8 +246,8 @@ int battleCity::Tank::eventHandler(const battleCity::Event* eventPtr)
 	{
 		const EventCollision* collisionEvent = dynamic_cast <const EventCollision*> (eventPtr);
 		pathFind(collisionEvent);
-		collisionEvent = NULL;
-		eventPtr = NULL;
+		collisionEvent = nullptr;
+		eventPtr = nullptr;
 		return 1;
 	}
 	if (eventPtr->getType() == battleCity::OUT_EVENT)
@@ -256,7 +256,7 @@ int battleCity::Tank::eventHandler(const battleCity::Event* eventPtr)
 		{
 			pathFind();
 		}
-		eventPtr = NULL;
+		eventPtr = nullptr;
 		return 1;
 	}
 	if (eventPtr->getType() == battleCity::STEP_EVENT)
@@ -266,11 +266,11 @@ int battleCity::Tank::eventHandler(const battleCity::Event* eventPtr)
 		{
 			pathFind();
 		}
-		stepEvent = NULL;
-		eventPtr = NULL;
+		stepEvent = nullptr;
+		eventPtr = nullptr;
 		return 1;
 	}
-	eventPtr = NULL;
+	eventPtr = nullptr;
 	return 0;
 }
 
@@ -283,5 +283,5 @@ battleCity::Tank::~Tank()
 	WM.setKillCount(1);
 	Explosion* newExp = new Explosion(true);
 	newExp->setPosition(this->position);
-	newExp = NULL;
+	newExp = nullptr;
 }

@@ -63,7 +63,7 @@ namespace battleCity
 		int startUp(TankPlayer& newPlayer);
 
 		// Shutdown game world (delete all game world Objects)
-		void shutDown() override;
+		void ShutDown() override;
 
 		void setGameOverState();
 		void setTankCount(int newTankCount);

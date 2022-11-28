@@ -43,5 +43,5 @@ battleCity::Vector& battleCity::EventMouse::getMousePosition() const
 
 battleCity::EventMouse::~EventMouse()
 {
-	mouseXY = NULL;
+	mouseXY = nullptr;
 }

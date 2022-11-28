@@ -60,7 +60,7 @@ bool battleCity::boxesIntersect(Box A, Box B)
 battleCity::Box battleCity::getWorldBox(const Object* ptrObject)
 {
     Box tempBox = getWorldBox(ptrObject, ptrObject->getPosition());
-    ptrObject = NULL;
+    ptrObject = nullptr;
     return tempBox;
 }
 
@@ -71,7 +71,7 @@ battleCity::Box battleCity::getWorldBox(const Object* ptrObject, Vector where)
     corner.x = corner.x + where.x;
     corner.y = corner.y + where.y;
     tempBox.setCorner(corner);
-    ptrObject = NULL;
+    ptrObject = nullptr;
     return tempBox;
 }
 

@@ -5,7 +5,7 @@
 //Constructor
 battleCity::ObjectListIterator::ObjectListIterator(const ObjectList* list) : managerPtrlist(list)
 {
-	list = NULL;
+	list = nullptr;
 	this->first();
 }
 

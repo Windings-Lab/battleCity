@@ -10,17 +10,17 @@ std::vector<std::string> battleCity::Sprites::path;
 
 battleCity::Sprites::Sprites()
 {
-    tank = NULL;
-    tankPlayer = NULL;
-    bullet = NULL;
+    tank = nullptr;
+    tankPlayer = nullptr;
+    bullet = nullptr;
     explosion = new std::vector<Sprite*>();
 
-    background = NULL;
-    wall = NULL;
+    background = nullptr;
+    wall = nullptr;
 
-    whiteFlag = NULL;
-    phoenix = NULL;
-    gameOverSpr = NULL;
+    whiteFlag = nullptr;
+    phoenix = nullptr;
+    gameOverSpr = nullptr;
 
     powerUp = new std::vector<Sprite*>();
 }
@@ -64,7 +64,7 @@ std::vector<Sprite*>& battleCity::Sprites::spriteInitDirections(std::string spri
     spriteVec->push_back(createSprite(std::regex_replace(spritePath, vowel_re, "D").c_str()));
     spriteVec->push_back(createSprite(std::regex_replace(spritePath, vowel_re, "U").c_str()));
 
-    if (spriteVec->at(0) == NULL)
+    if (spriteVec->at(0) == nullptr)
     {
         std::cout << "\"" << spritePath << "\" - not found/initialized" << std::endl;
         exit(0);
@@ -77,7 +77,7 @@ Sprite& battleCity::Sprites::spriteInit(std::string spritePath)
 {
     Sprite* newSprite = createSprite(spritePath.c_str());
 
-    if (newSprite == NULL)
+    if (newSprite == nullptr)
     {
         std::cout << "\"" << spritePath << "\" - not found/initialized" << std::endl;
         exit(0);
@@ -165,57 +165,57 @@ void battleCity::Sprites::deleteAll()
     for (size_t i = 0; i < tank->size(); i++)
     {
         destroySprite(tank->at(i));
-        tank->at(i) = NULL;
+        tank->at(i) = nullptr;
     }
     delete tank;
-    tank = NULL;
+    tank = nullptr;
 
     for (size_t i = 0; i < tankPlayer->size(); i++)
     {
         destroySprite(tankPlayer->at(i));
-        tankPlayer->at(i) = NULL;
+        tankPlayer->at(i) = nullptr;
     }
     delete tankPlayer;
-    tankPlayer = NULL;
+    tankPlayer = nullptr;
 
     for (size_t i = 0; i < bullet->size(); i++)
     {
         destroySprite(bullet->at(i));
-        bullet->at(i) = NULL;
+        bullet->at(i) = nullptr;
     }
     delete bullet;
-    bullet = NULL;
+    bullet = nullptr;
 
     for (size_t i = 0; i < explosion->size(); i++)
     {
         destroySprite(explosion->at(i));
-        explosion->at(i) = NULL;
+        explosion->at(i) = nullptr;
     }
     delete explosion;
-    explosion = NULL;
+    explosion = nullptr;
 
     destroySprite(background);
-    background = NULL;
+    background = nullptr;
 
     destroySprite(wall);
-    wall = NULL;
+    wall = nullptr;
 
     destroySprite(whiteFlag);
-    whiteFlag = NULL;
+    whiteFlag = nullptr;
 
     destroySprite(phoenix);
-    phoenix = NULL;
+    phoenix = nullptr;
 
     destroySprite(gameOverSpr);
-    gameOverSpr = NULL;
+    gameOverSpr = nullptr;
 
     for (size_t i = 0; i < powerUp->size(); i++)
     {
         destroySprite(powerUp->at(i));
-        powerUp->at(i) = NULL;
+        powerUp->at(i) = nullptr;
     }
     delete powerUp;
-    powerUp = NULL;
+    powerUp = nullptr;
 }
 
 battleCity::Sprites::~Sprites()

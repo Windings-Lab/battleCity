@@ -5,7 +5,7 @@
 //Variables to Set
 unsigned int Screen::_width = 0;
 unsigned int Screen::_height = 0;
-bool Screen::_fullscreen = 0;
+bool Screen::_fullscreen = false;
 
 // boundaryL = 40
 float Screen::_boundaryL = 0;

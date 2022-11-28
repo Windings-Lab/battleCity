@@ -43,7 +43,7 @@ namespace battleCity {
 		int startUp(TankPlayer& newPlayer);
 
 		/// Shut down GameManager services.
-		void shutDown() override;
+		void ShutDown() override;
 
 		void gameOverState();
 

@@ -8,7 +8,9 @@
 #include <iostream>
 #include <vector>
 
-battleCity::Manager::Manager() : type(""), started(false) {}
+using namespace std::string_view_literals;
+
+battleCity::Manager::Manager() : _type(""sv), _started(false) {}
 
 battleCity::Manager::~Manager()
 {
@@ -17,33 +19,33 @@ battleCity::Manager::~Manager()
 #endif
 }
 
-void battleCity::Manager::setType(std::string newType)
+void battleCity::Manager::SetType(std::string_view newType)
 {
-	type = newType;
+	_type = newType;
 }
 
-std::string battleCity::Manager::getType() const
+std::string_view battleCity::Manager::GetType() const
 {
-	return type;
+	return _type;
 }
 
-int battleCity::Manager::startUp()
+int battleCity::Manager::StartUp()
 {
-	started = true;
+	_started = true;
 	return 0;
 }
 
-void battleCity::Manager::shutDown()
+void battleCity::Manager::ShutDown()
 {
-	started = false;
+	_started = false;
 }
 
-bool battleCity::Manager::isStarted() const
+bool battleCity::Manager::IsStarted() const
 {
-	return started;
+	return _started;
 }
 
-int battleCity::Manager::onEvent(const Event* ptrEvent) const
+int battleCity::Manager::OnEvent(const Event* ptrEvent) const
 {
 	int count = 0;
 	ObjectList listToIt = WM.objectsToMove;
@@ -63,6 +65,6 @@ int battleCity::Manager::onEvent(const Event* ptrEvent) const
 		count++;
 	}
 
-	ptrEvent = NULL;
+	ptrEvent = nullptr;
 	return count;
 }
