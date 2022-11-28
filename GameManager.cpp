@@ -12,9 +12,7 @@
 #include <iostream>
 #include <vector>
 
-using namespace std::string_view_literals;
-
-bool battleCity::GameManager::_gameOver = false;
+bool battleCity::GameManager::_gameOver = 0;
 int battleCity::GameManager::_frameTime = 0;
 int battleCity::GameManager::_stepCount = 0;
 Clock battleCity::GameManager::_clock;
@@ -28,7 +26,7 @@ battleCity::GameManager::GameManager()
 {
 	_stepCount = 0;
 	player = nullptr;
-	SetType("GameManager"sv);
+	setType("GameManager");
 }
 
 battleCity::GameManager::~GameManager()
@@ -54,14 +52,14 @@ int battleCity::GameManager::startUp(TankPlayer& newPlayer)
 	_gameOver = false;
 	player = &newPlayer;
 	WM.startUp(newPlayer);
-	return Manager::StartUp();
+	return Manager::startUp();
 }
 
 
-void battleCity::GameManager::ShutDown()
+void battleCity::GameManager::shutDown()
 {
 	_gameOver = true;
-	WM.ShutDown();
+	WM.shutDown();
 	player = nullptr;
 	SPR.deleteAll();
 }
@@ -77,7 +75,7 @@ void battleCity::GameManager::gameOverState()
 void battleCity::GameManager::run()
 {
 	_clock.delta();
-	OnEvent(&EventStep());
+	onEvent(&EventStep());
 	WM.update();
 	WM.draw();
 	_frameTime = getTickCount() / 1000;

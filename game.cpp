@@ -72,7 +72,7 @@ public:
 		// ------------------------------------------------------------
 		player = new TankPlayer(0, 0);
 		GM.startUp(*player);
-		return true;
+		return 1;
 	}
 
 	virtual void Close() {
@@ -94,7 +94,7 @@ public:
 		eventKeyboard = nullptr;
 		eventMouse = nullptr;
 		mousePos = nullptr;
-		GM.ShutDown();
+		GM.shutDown();
 	}
 
 	virtual bool Tick() {
