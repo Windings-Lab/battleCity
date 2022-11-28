@@ -6,37 +6,36 @@
 
 namespace battleCity
 {
-	class Manager
-	{
+	class Manager {
 
 	private:
 		/// Manager type identifier
-		std::string_view _type;
+		std::string_view type;
 		/// True if startUp() succeeded.
-		bool _started;
+		bool started;
 
 	protected:
 		/// Set type identifier of Manager.
-		void SetType(std::string_view newType);
+		void setType(std::string_view newType);
 
 	public:
 		Manager();
 		virtual ~Manager();
 
-		std::string_view GetType() const;
+		std::string_view getType() const;
 
 		/// Startup Manager.
 		/// Return 0 if ok
-		virtual int StartUp();
+		virtual int startUp();
 
 		/// Shutdown Manager.
-		virtual void ShutDown();
+		virtual void shutDown();
 
 		/// Return status of is_started (true when startUp() was successful).
-		bool IsStarted() const;
+		bool isStarted() const;
 
 		/// Send eventStep to all Objects.
 		/// Return count of number of events sent.
-		int OnEvent(const Event *ptrEvent) const;
+		int onEvent(const Event *ptrEvent) const;
 	};
 }

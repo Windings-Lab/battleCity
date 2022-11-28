@@ -10,7 +10,7 @@
 
 using namespace std::string_view_literals;
 
-battleCity::Manager::Manager() : _type(""sv), _started(false) {}
+battleCity::Manager::Manager() : type(""sv), started(false) {}
 
 battleCity::Manager::~Manager()
 {
@@ -19,33 +19,33 @@ battleCity::Manager::~Manager()
 #endif
 }
 
-void battleCity::Manager::SetType(std::string_view newType)
+void battleCity::Manager::setType(std::string_view newType)
 {
-	_type = newType;
+	type = newType;
 }
 
-std::string_view battleCity::Manager::GetType() const
+std::string_view battleCity::Manager::getType() const
 {
-	return _type;
+	return type;
 }
 
-int battleCity::Manager::StartUp()
+int battleCity::Manager::startUp()
 {
-	_started = true;
+	started = true;
 	return 0;
 }
 
-void battleCity::Manager::ShutDown()
+void battleCity::Manager::shutDown()
 {
-	_started = false;
+	started = false;
 }
 
-bool battleCity::Manager::IsStarted() const
+bool battleCity::Manager::isStarted() const
 {
-	return _started;
+	return started;
 }
 
-int battleCity::Manager::OnEvent(const Event* ptrEvent) const
+int battleCity::Manager::onEvent(const Event* ptrEvent) const
 {
 	int count = 0;
 	ObjectList listToIt = WM.objectsToMove;
