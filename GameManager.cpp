@@ -14,7 +14,7 @@
 
 using namespace std::string_view_literals;
 
-bool battleCity::GameManager::_gameOver = 0;
+bool battleCity::GameManager::_gameOver = false;
 int battleCity::GameManager::_frameTime = 0;
 int battleCity::GameManager::_stepCount = 0;
 Clock battleCity::GameManager::_clock;

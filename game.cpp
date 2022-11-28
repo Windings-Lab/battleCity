@@ -72,7 +72,7 @@ public:
 		// ------------------------------------------------------------
 		player = new TankPlayer(0, 0);
 		GM.startUp(*player);
-		return 1;
+		return true;
 	}
 
 	virtual void Close() {
