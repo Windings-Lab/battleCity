@@ -1,16 +1,16 @@
 #include "Event.h"
 
 
-battleCity::Event::Event() : eventType(EventType::Event) {}
+battleCity::Event::Event() : _eventType(EventType::Event) {}
 
-void battleCity::Event::setType(EventType newType)
+void battleCity::Event::SetType(EventType newType)
 {
-	eventType = newType;
+	_eventType = newType;
 }
 
-battleCity::EventType battleCity::Event::getType() const
+battleCity::EventType battleCity::Event::GetType() const
 {
-	return eventType;
+	return _eventType;
 }
 
 battleCity::Event::~Event()

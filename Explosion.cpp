@@ -38,7 +38,7 @@ void battleCity::Explosion::step()
 
 int battleCity::Explosion::eventHandler(const Event* eventPtr)
 {
-    if (eventPtr->getType() == EventType::Step) {
+    if (eventPtr->GetType() == EventType::Step) {
         const EventStep* stepEvent = dynamic_cast <const EventStep*> (eventPtr);
         if (stepEvent->getStepCount() % 30 == 0)
         {

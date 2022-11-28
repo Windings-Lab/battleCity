@@ -52,7 +52,7 @@ int battleCity::PhoenixAndFlag::eventHandler(const Event* eventPtr)
 {
 	if (!gameOver)
 	{
-		if (eventPtr->getType() == EventType::Collision)
+		if (eventPtr->GetType() == EventType::Collision)
 		{
 			const EventCollision* collisionEvent = dynamic_cast <const EventCollision*> (eventPtr);
 			setGameOver(collisionEvent);

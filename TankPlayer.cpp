@@ -137,13 +137,13 @@ void battleCity::TankPlayer::fire()
 
 int battleCity::TankPlayer::eventHandler(const battleCity::Event* eventPtr)
 {
-	if (eventPtr->getType() == EventType::Keyboard) {
+	if (eventPtr->GetType() == EventType::Keyboard) {
 		keyboardInput();
 		eventPtr = nullptr;
 		return 1;
 	}
 
-	if (eventPtr->getType() == EventType::Mouse) {
+	if (eventPtr->GetType() == EventType::Mouse) {
 		const battleCity::EventMouse& mouseEvent = dynamic_cast <const battleCity::EventMouse&> (*eventPtr);
 		mouseInput(&mouseEvent);
 		eventPtr = nullptr;

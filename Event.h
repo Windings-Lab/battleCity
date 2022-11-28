@@ -17,7 +17,7 @@ namespace battleCity
 	{
 	private:
 		/// Holds event type
-		EventType eventType;
+		EventType _eventType;
 	public:
 		/// Create base event.
 		Event();
@@ -26,9 +26,9 @@ namespace battleCity
 		virtual ~Event();
 
 		/// Set event type.
-		void setType(EventType newType);
+		void SetType(EventType newType);
 
 		/// Get event type.
-		EventType getType() const;
+		EventType GetType() const;
 	};
 }
