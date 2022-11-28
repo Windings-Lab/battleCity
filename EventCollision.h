@@ -6,8 +6,6 @@
 
 namespace battleCity
 {
-    const std::string COLLISION_EVENT = "Collision";
-
     // newPtrObj1 = who moved
     // newPtrObj2 = collided with
     class EventCollision : public Event

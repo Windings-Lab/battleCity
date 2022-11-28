@@ -242,7 +242,7 @@ void battleCity::Tank::randomMove()
 
 int battleCity::Tank::eventHandler(const battleCity::Event* eventPtr)
 {
-	if (eventPtr->getType() == battleCity::COLLISION_EVENT)
+	if (eventPtr->getType() == EventType::Collision)
 	{
 		const EventCollision* collisionEvent = dynamic_cast <const EventCollision*> (eventPtr);
 		pathFind(collisionEvent);
@@ -250,7 +250,7 @@ int battleCity::Tank::eventHandler(const battleCity::Event* eventPtr)
 		eventPtr = nullptr;
 		return 1;
 	}
-	if (eventPtr->getType() == battleCity::OUT_EVENT)
+	if (eventPtr->getType() == EventType::Out)
 	{
 		if (GM.stepCount % 10 == 0)
 		{
@@ -259,7 +259,7 @@ int battleCity::Tank::eventHandler(const battleCity::Event* eventPtr)
 		eventPtr = nullptr;
 		return 1;
 	}
-	if (eventPtr->getType() == battleCity::STEP_EVENT)
+	if (eventPtr->getType() == EventType::Step)
 	{
 		const EventStep* stepEvent = dynamic_cast<const EventStep*> (eventPtr);
 		if (stepEvent->getStepCount() % 600 == 0)

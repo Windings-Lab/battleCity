@@ -4,7 +4,7 @@ battleCity::EventCollision::EventCollision()
 {
 	ptrObj1 = nullptr;
 	ptrObj2 = nullptr;
-	setType(COLLISION_EVENT);
+	setType(EventType::Collision);
 }
 
 // newPtrObj1 = who moved
@@ -14,7 +14,7 @@ battleCity::EventCollision::EventCollision(Object* newPtrObj1, Object* newPtrObj
 	ptrObj1 = newPtrObj1;
 	ptrObj2 = newPtrObj2;
 	position = newPosition;
-	setType(COLLISION_EVENT);
+	setType(EventType::Collision);
 	newPtrObj1 = nullptr;
 	newPtrObj2 = nullptr;
 }

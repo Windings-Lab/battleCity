@@ -8,8 +8,6 @@
 
 namespace battleCity
 {
-	const std::string MSE_EVENT = "Mouse";
-
 	enum class EventMouseAction {
 		PRESSED = 0,
 		RELEASED = 1,

@@ -6,8 +6,6 @@
 
 namespace battleCity
 {
-	const std::string STEP_EVENT = "Step";
-
 	class EventStep : public Event
 	{
 	private:

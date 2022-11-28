@@ -2,5 +2,5 @@
 
 battleCity::EventOut::EventOut()
 {
-	setType(OUT_EVENT);
+	setType(EventType::Out);
 }

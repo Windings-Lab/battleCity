@@ -1,14 +1,23 @@
 #pragma once
 
-#include <string>
-
 namespace battleCity
 {
+	enum class EventType
+	{
+		Error = 0,
+		Event,
+		Collision,
+		Keyboard,
+		Mouse,
+		Out,
+		Step
+	};
+
 	class Event
 	{
 	private:
 		/// Holds event type
-		std::string eventType;
+		EventType eventType;
 	public:
 		/// Create base event.
 		Event();
@@ -17,9 +26,9 @@ namespace battleCity
 		virtual ~Event();
 
 		/// Set event type.
-		void setType(std::string new_type);
+		void setType(EventType newType);
 
 		/// Get event type.
-		std::string getType() const;
+		EventType getType() const;
 	};
 }

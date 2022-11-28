@@ -5,8 +5,6 @@
 
 namespace battleCity
 {
-    const std::string KEYBOARD_EVENT = "Keyboard";
-
     // Types of keyboard actions BattleCity recognizes.
     enum class EventKeyboardAction {
         KEY_PRESSED,			  // Was down.

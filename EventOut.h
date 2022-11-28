@@ -6,7 +6,6 @@
 
 namespace battleCity
 {
-	const std::string OUT_EVENT = "Out";
 	class EventOut : public Event
 	{
 	public:

@@ -3,7 +3,7 @@
 
 battleCity::EventStep::EventStep() : stepCount(GM.stepCount)
 {
-	setType(STEP_EVENT);
+	setType(EventType::Step);
 }
 
 battleCity::EventStep::EventStep(unsigned int init) : stepCount(init) {}

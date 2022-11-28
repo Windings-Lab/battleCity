@@ -61,7 +61,7 @@ void battleCity::PowerUp::makePowerUp(const battleCity::EventCollision* Collisio
 
 int battleCity::PowerUp::eventHandler(const Event* ptrEvent)
 {
-	if (ptrEvent->getType() == battleCity::COLLISION_EVENT)
+	if (ptrEvent->getType() == EventType::Collision)
 	{
 		const EventCollision* collisionEvent = dynamic_cast <const EventCollision*> (ptrEvent);
 		makePowerUp(collisionEvent);

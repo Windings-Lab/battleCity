@@ -4,7 +4,7 @@ battleCity::EventKeyboard::EventKeyboard()
 {
 	keyValue = FRKey::COUNT;
 	keyboardAction = EventKeyboardAction::UNDEFINED;
-	setType(KEYBOARD_EVENT);
+	setType(EventType::Collision);
 }
 
 void battleCity::EventKeyboard::setKey(FRKey newKey)

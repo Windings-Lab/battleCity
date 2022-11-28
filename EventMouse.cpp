@@ -6,7 +6,7 @@
 
 battleCity::EventMouse::EventMouse(Vector& refMouseXY) : mouseXY(&refMouseXY)
 {
-	setType(MSE_EVENT);
+	setType(EventType::Mouse);
 	mouseAction = EventMouseAction::UNDEFINED_MOUSE_ACTION;
 	mouseButton = FRMouseButton::COUNT;
 }

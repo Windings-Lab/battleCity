@@ -111,12 +111,12 @@ void battleCity::Bullet::draw()
 
 int battleCity::Bullet::eventHandler(const Event* ptrEvent) {
 
-	if (ptrEvent->getType() == OUT_EVENT) {
+	if (ptrEvent->getType() == EventType::Out) {
 		out();
 		return 1;
 	}
 
-	if (ptrEvent->getType() == COLLISION_EVENT) {
+	if (ptrEvent->getType() == EventType::Collision) {
 		const EventCollision* collisionEvent = dynamic_cast <const EventCollision*> (ptrEvent);
 		hit(collisionEvent);
 		collisionEvent = nullptr;
