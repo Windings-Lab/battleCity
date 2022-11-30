@@ -12,8 +12,6 @@
 #include <iostream>
 #include <vector>
 
-using namespace std::string_view_literals;
-
 bool battleCity::GameManager::_gameOver = false;
 int battleCity::GameManager::_frameTime = 0;
 int battleCity::GameManager::_stepCount = 0;
@@ -28,7 +26,7 @@ battleCity::GameManager::GameManager()
 {
 	_stepCount = 0;
 	player = nullptr;
-	SetType("GameManager"sv);
+	SetType(ManagerType::Game);
 }
 
 battleCity::GameManager::~GameManager()

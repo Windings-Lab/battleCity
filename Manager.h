@@ -1,29 +1,35 @@
 #pragma once
 
-#include <string_view>
-
 #include "Event.h"
 
 namespace battleCity
 {
+	enum class ManagerType
+	{
+		Error = 0,
+		Manager,
+		Game,
+		World
+	};
+
 	class Manager
 	{
 
 	private:
 		/// Manager type identifier
-		std::string_view _type;
+		ManagerType _type;
 		/// True if startUp() succeeded.
 		bool _started;
 
 	protected:
 		/// Set type identifier of Manager.
-		void SetType(std::string_view newType);
+		void SetType(ManagerType newType);
 
 	public:
 		Manager();
 		virtual ~Manager();
 
-		std::string_view GetType() const;
+		ManagerType GetType() const;
 
 		/// Startup Manager.
 		/// Return 0 if ok

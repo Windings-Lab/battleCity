@@ -8,9 +8,7 @@
 #include <iostream>
 #include <vector>
 
-using namespace std::string_view_literals;
-
-battleCity::Manager::Manager() : _type(""sv), _started(false) {}
+battleCity::Manager::Manager() : _type(ManagerType::Manager), _started(false) {}
 
 battleCity::Manager::~Manager()
 {
@@ -19,12 +17,12 @@ battleCity::Manager::~Manager()
 #endif
 }
 
-void battleCity::Manager::SetType(std::string_view newType)
+void battleCity::Manager::SetType(ManagerType newType)
 {
 	_type = newType;
 }
 
-std::string_view battleCity::Manager::GetType() const
+battleCity::ManagerType battleCity::Manager::GetType() const
 {
 	return _type;
 }

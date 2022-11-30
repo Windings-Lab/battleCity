@@ -29,7 +29,7 @@ int battleCity::WorldManager::moveID = 1;
 
 battleCity::WorldManager::WorldManager()
 {
-	SetType("WorldManager");
+	SetType(ManagerType::World);
 	map = std::vector<std::vector<Object*>>(HEIGHT, std::vector<Object*>(WIDTH));
 	powerUpPositions = std::vector<std::vector<int>>(0, std::vector<int>(0));
 
