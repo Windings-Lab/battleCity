@@ -1,6 +1,5 @@
 #include "Manager.h"
 #include "WorldManager.h"
-#include "ObjectListIterator.h"
 #include "ObjectList.h"
 #include "Object.h"
 #include "Vector.h"

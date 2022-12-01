@@ -3,7 +3,6 @@
 #include "Object.h"
 #include "ObjectList.h"
 #include "Explosion.h"
-#include "ObjectListIterator.h"
 
 #include <iostream>
 #include <vector>

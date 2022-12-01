@@ -34,7 +34,6 @@
     <ClCompile Include="Manager.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="ObjectList.cpp" />
-    <ClCompile Include="ObjectListIterator.cpp" />
     <ClCompile Include="PhoenixAndFlag.cpp" />
     <ClCompile Include="PowerUp.cpp" />
     <ClCompile Include="Screen.cpp" />
@@ -62,7 +61,6 @@
     <ClInclude Include="Manager.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="ObjectList.h" />
-    <ClInclude Include="ObjectListIterator.h" />
     <ClInclude Include="PhoenixAndFlag.h" />
     <ClInclude Include="PowerUp.h" />
     <ClInclude Include="Screen.h" />
