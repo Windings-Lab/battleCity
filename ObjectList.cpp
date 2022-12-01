@@ -8,17 +8,12 @@
 
 namespace battleCity
 {
-	ObjectList::ObjectList() : ObjectList(0)
+	ObjectList::ObjectList()
 	{
 		mObjectPtrList.reserve(100);
 	}
 
-	ObjectList::ObjectList(int index) : mID(index)
-	{
-		
-	}
-
-	ObjectList::ObjectList(ObjectList&& mve) noexcept : ObjectList(mve.mID)
+	ObjectList::ObjectList(ObjectList&& mve) noexcept : ObjectList()
 	{
 		swap(*this, mve);
 	}
@@ -120,7 +115,6 @@ namespace battleCity
 	{
 		using std::swap;
 
-		swap(first.mID, second.mID);
 		swap(first.mObjectPtrList, second.mObjectPtrList);
 	}
 }

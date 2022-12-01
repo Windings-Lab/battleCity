@@ -16,14 +16,12 @@ namespace battleCity
 		struct Range;
 
 		std::vector<std::shared_ptr<Object>> mObjectPtrList;
-		int mID;
 
 		friend void swap(ObjectList&, ObjectList&) noexcept;
 	public:
 		friend class ObjectListIterator;
 
 		ObjectList();
-		explicit ObjectList(int index);
 
 		ObjectList(ObjectList& cpy) = delete;
 		ObjectList(ObjectList&& mve) noexcept;
