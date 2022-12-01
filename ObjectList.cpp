@@ -4,17 +4,23 @@
 #include <iostream>
 #include <algorithm>
 #include <vector>
+#include <utility>
 
 namespace battleCity
 {
 	ObjectList::ObjectList() : ObjectList(0)
 	{
-
+		mObjectPtrList.reserve(100);
 	}
 
 	ObjectList::ObjectList(int index) : mID(index)
 	{
-		mObjectPtrList.reserve(100);
+		
+	}
+
+	ObjectList::ObjectList(ObjectList&& mve) noexcept : ObjectList(mve.mID)
+	{
+		swap(*this, mve);
 	}
 
 	int ObjectList::Insert(const std::weak_ptr<Object> objectPtr)
@@ -96,5 +102,20 @@ namespace battleCity
 	{
 		mObjectPtrList.clear();
 		mObjectPtrList.shrink_to_fit();
+	}
+
+	ObjectList& ObjectList::operator=(ObjectList&& rhs) noexcept
+	{
+		ObjectList temp(std::move(rhs));
+		swap(*this, temp);
+		return *this;
+	}
+
+	void swap(ObjectList& first, ObjectList& second) noexcept
+	{
+		using std::swap;
+
+		swap(first.mID, second.mID);
+		swap(first.mObjectPtrList, second.mObjectPtrList);
 	}
 }
