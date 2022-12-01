@@ -2,9 +2,7 @@
 #include "Vector.h"
 #include "Framework.h"
 
-#include <string>
-
-battleCity::EventMouse::EventMouse(Vector& refMouseXY) : mouseXY(&refMouseXY)
+battleCity::EventMouse::EventMouse(std::unique_ptr<Vector>& refMouseXY) : mouseXY(refMouseXY)
 {
 	SetType(EventType::Mouse);
 	mouseAction = EventMouseAction::UNDEFINED_MOUSE_ACTION;
@@ -29,11 +27,6 @@ void battleCity::EventMouse::setMouseButton(FRMouseButton newMouseButton)
 FRMouseButton battleCity::EventMouse::getMouseButton() const
 {
 	return mouseButton;
-}
-
-void battleCity::EventMouse::setMousePosition(Vector& newMouseXY)
-{
-	mouseXY = &newMouseXY;
 }
 
 battleCity::Vector& battleCity::EventMouse::getMousePosition() const

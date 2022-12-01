@@ -4,7 +4,7 @@
 #include "Event.h"
 #include "Framework.h"
 
-#include <string>
+#include <memory>
 
 namespace battleCity
 {
@@ -18,13 +18,13 @@ namespace battleCity
 	class EventMouse : public Event
 	{
 	private:
-		EventMouse();
 		EventMouseAction mouseAction; // Mouse action.
 		FRMouseButton mouseButton;	   // Mouse button.
-		Vector* mouseXY;		   // Mouse (x,y) coordinates.
+		std::unique_ptr<Vector>& mouseXY;		   // Mouse (x,y) coordinates.
 
 	public:
-		EventMouse(Vector&);
+		EventMouse() = delete;
+		EventMouse(std::unique_ptr<Vector>&);
 		~EventMouse();
 
 		// Set mouse event's action.
@@ -45,9 +45,6 @@ namespace battleCity
 
 		// Get mouse event's button.
 		FRMouseButton getMouseButton() const;
-
-		// Set mouse event's position.
-		void setMousePosition(Vector& newMouseXY);
 
 		// Get mouse event's position.
 		Vector& getMousePosition() const;

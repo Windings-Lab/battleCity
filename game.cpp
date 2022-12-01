@@ -13,27 +13,30 @@
 #include <vector>
 #include <string>
 #include <sstream>
+#include <memory>
 
 using namespace battleCity;
 
 class MyFramework : public Framework {
 
 private:
-	TankPlayer* player;
+	std::unique_ptr<TankPlayer> player;
 	std::vector<Object*> demo;
 
-	EventKeyboard* eventKeyboard;
+	std::unique_ptr<EventKeyboard> eventKeyboard;
 
-	Vector* mousePos;
-	EventMouse* eventMouse;
+	std::unique_ptr<Vector> mousePos;
+	std::unique_ptr<EventMouse> eventMouse;
 
 public:
 	MyFramework()
 	{
+		using std::make_unique;
+
 		player = nullptr;
-		eventKeyboard = new EventKeyboard();
-		mousePos = new Vector();
-		eventMouse = new EventMouse(*mousePos);
+		eventKeyboard = make_unique<EventKeyboard>();
+		mousePos = make_unique<Vector>();
+		eventMouse = make_unique<EventMouse>(mousePos);
 	}
 
 	virtual void PreInit(int& width, int& height, bool& fullscreen)
@@ -70,7 +73,7 @@ public:
 			//demo[1]->spriteSet(0, 1);
 		}
 		// ------------------------------------------------------------
-		player = new TankPlayer(0, 0);
+		player = std::make_unique<TankPlayer>(0, 0);
 		GM.startUp(*player);
 		return true;
 	}
@@ -86,14 +89,9 @@ public:
 		}
 		// ------------------------------------------------------------
 
-
-		delete eventKeyboard;
-		delete eventMouse;
-		delete mousePos;
-
-		eventKeyboard = nullptr;
-		eventMouse = nullptr;
-		mousePos = nullptr;
+		eventKeyboard.reset();
+		eventMouse.reset();
+		mousePos.reset();
 		GM.ShutDown();
 	}
 
@@ -106,7 +104,6 @@ public:
 	{
 		mousePos->x = x;
 		mousePos->y = y;
-		eventMouse->setMousePosition(*mousePos);
 	}
 
 	virtual void onMouseButtonClick(FRMouseButton button, bool isReleased) {
@@ -114,7 +111,7 @@ public:
 		{
 			eventMouse->setMouseButton(button);
 			eventMouse->setMouseAction(isReleased);
-			player->eventHandler(eventMouse);
+			player->eventHandler(eventMouse.get());
 		}
 	}
 
@@ -125,7 +122,7 @@ public:
 			eventKeyboard->setKey(k);
 			eventKeyboard->setKeyboardAction(EventKeyboardAction::KEY_PRESSED);
 			player->movementSet(FRKeyStr[(int)k]);
-			player->eventHandler(eventKeyboard);
+			player->eventHandler(eventKeyboard.get());
 		}
 	}
 
@@ -136,7 +133,7 @@ public:
 			eventKeyboard->setKey(k);
 			eventKeyboard->setKeyboardAction(EventKeyboardAction::KEY_RELEASED);
 			player->movementErase(FRKeyStr[(int)k]);
-			player->eventHandler(eventKeyboard);
+			player->eventHandler(eventKeyboard.get());
 		}
 	}
 
