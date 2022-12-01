@@ -12,7 +12,7 @@ battleCity::Explosion::Explosion(bool isLarge) : Object(0)
     spriteIndex = isLarge ? 3 : 0;
     constSpeed = 0;
     bulletCount = 0;
-    solidness = Solidness::SPECTRAL;
+    solidness = Solidness::Spectral;
 
     spriteDB = &SPR.getExplosionSprites();
     sprite = spriteDB->at(spriteIndex);

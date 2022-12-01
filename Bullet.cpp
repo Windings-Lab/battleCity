@@ -19,7 +19,7 @@ battleCity::Bullet::Bullet(Object& ptrObj) : object(ptrObj)
 	health = 1;
 	constSpeed = 2;
 	bulletCount = 0;
-	solidness = Solidness::SOFT;
+	solidness = Solidness::Soft;
 
 	spriteDB = &SPR.getBulletSprites();
 

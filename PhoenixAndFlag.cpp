@@ -18,7 +18,7 @@ battleCity::PhoenixAndFlag::PhoenixAndFlag(float x, float y)
 	health = 0;
 	constSpeed = 0;
 	bulletCount = 0;
-	solidness = Solidness::SOFT;
+	solidness = Solidness::Soft;
 
 	gameOver = false;
 

@@ -34,7 +34,7 @@ battleCity::Tank::Tank()
 	health = 2;
 	constSpeed = 1;
 	bulletCount = 1;
-	solidness = Solidness::HARD;
+	solidness = Solidness::Hard;
 
 	spriteDB = &SPR.getTankSprites();
 	spriteSet();
@@ -55,7 +55,7 @@ battleCity::Tank::Tank(float x, float y)
 	health = 2;
 	constSpeed = 1;
 	bulletCount = 1;
-	solidness = Solidness::HARD;
+	solidness = Solidness::Hard;
 
 	spriteDB = &SPR.getTankSprites();
 	spriteSet();

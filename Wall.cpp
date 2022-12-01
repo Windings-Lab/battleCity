@@ -15,7 +15,7 @@ battleCity::Wall::Wall() : Object(0)
 #endif
 	constSpeed = 0;
 	bulletCount = 0;
-	solidness = Solidness::HARD;
+	solidness = Solidness::Hard;
 
 	spriteSet(&SPR.getWallSprite());
 }
@@ -35,7 +35,7 @@ battleCity::Wall::Wall(float x, float y) : Object(0)
 #endif
 	constSpeed = 0;
 	bulletCount = 0;
-	solidness = Solidness::HARD;
+	solidness = Solidness::Hard;
 
 	spriteSet(&SPR.getWallSprite());
 }

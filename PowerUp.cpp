@@ -19,7 +19,7 @@ battleCity::PowerUp::PowerUp()
 	health = 1;
 	constSpeed = 0;
 	bulletCount = 0;
-	solidness = Solidness::SOFT;
+	solidness = Solidness::Soft;
 
 	spriteDB = &SPR.getPowerUpSprites();
 	spriteSet(nullptr, 0);
@@ -38,7 +38,7 @@ battleCity::PowerUp::PowerUp(int giveHealth)
 	health = giveHealth;
 	constSpeed = 0;
 	bulletCount = 0;
-	solidness = Solidness::SOFT;
+	solidness = Solidness::Soft;
 
 	spriteDB = &SPR.getPowerUpSprites();
 	spriteSet(nullptr, 0);

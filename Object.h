@@ -12,15 +12,21 @@
 
 namespace battleCity
 {
-	/// Types of solidness of Object.
-	enum class Solidness {
-		HARD,       /// Object causes collisions and impedes.
-		SOFT,       /// Object causes collision, but doesn't impede.
-		SPECTRAL,   /// Object doesn't cause collisions.
-	};
-
 	class Object
 	{
+	public:
+		/// Types of solidness of Object.
+		enum class Solidness {
+			Hard,       /// Object causes collisions and impedes.
+			Soft,       /// Object causes collision, but doesn't impede.
+			Spectral,   /// Object doesn't cause collisions.
+		};
+
+		enum class Type
+		{
+			Error = 0,
+
+		};
 	private:
 		float speed;
 		Vector direction;

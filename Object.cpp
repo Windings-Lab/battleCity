@@ -18,7 +18,7 @@ battleCity::Object::Object() : worldID(WM.getWorldID()), moveID(WM.getMoveID())
     health = 1;
     constSpeed = 0;
     bulletCount = 1;
-    solidness = Solidness::HARD;
+    solidness = Solidness::Hard;
     isSpawnIntersects = true;
 
     initPosition(Vector(40, 44));
@@ -45,7 +45,7 @@ battleCity::Object::Object(int newMoveID) : worldID(WM.getWorldID()), moveID(new
     health = 1;
     constSpeed = 0;
     bulletCount = 1;
-    solidness = Solidness::HARD;
+    solidness = Solidness::Hard;
     isSpawnIntersects = true;
 
     initPosition(Vector(40, 44));
@@ -289,12 +289,12 @@ battleCity::Vector battleCity::Object::getPosition() const
 
 bool battleCity::Object::isSolid() const
 {
-    return solidness == Solidness::HARD ? 1 : 0;
+    return solidness == Solidness::Hard ? 1 : 0;
 }
 
 bool battleCity::Object::isSoft() const
 {
-    return solidness == Solidness::SOFT ? 1 : 0;
+    return solidness == Solidness::Soft ? 1 : 0;
 }
 
 int battleCity::Object::setSolidness(Solidness newSolid)
