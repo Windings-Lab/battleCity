@@ -24,47 +24,47 @@
 
 using namespace std::string_view_literals;
 
-int battleCity::WorldManager::worldID = 1;
-int battleCity::WorldManager::moveID = 1;
+int battleCity::WorldManager::mWorldId = 1;
+int battleCity::WorldManager::mOveId = 1;
 
 battleCity::WorldManager::WorldManager()
 {
 	SetType(ManagerType::World);
-	map = std::vector<std::vector<Object*>>(HEIGHT, std::vector<Object*>(WIDTH));
-	powerUpPositions = std::vector<std::vector<int>>(0, std::vector<int>(0));
+	mMap = std::vector<std::vector<Object*>>(HEIGHT, std::vector<Object*>(WIDTH));
+	mPowerUpPositions = std::vector<std::vector<int>>(0, std::vector<int>(0));
 
-	gameOverPos.x = 290;
-	gameOverPos.y = 600;
-	gameOver = false;
+	mGameOverPos.x = 290;
+	mGameOverPos.y = 600;
+	mGameOver = false;
 
-	tankCount = 0;
-	killCount = 0;
-	tankStorage = 20;
+	mTankCount = 0;
+	mKillCount = 0;
+	mTankStorage = 20;
 
-	powerUp = nullptr;
-	isPowerUp = false;
-	powerUpisTaked = false;
+	mPowerUp = nullptr;
+	mIsPowerUp = false;
+	mPowerUpTaked = false;
 }
 
-battleCity::WorldManager& battleCity::WorldManager::getInstance()
+battleCity::WorldManager& battleCity::WorldManager::GetInstance()
 {
 	static WorldManager single;
 	return single;
 }
 
-int battleCity::WorldManager::startUp(TankPlayer& newPlayer)
+int battleCity::WorldManager::StartUp(TankPlayer& newPlayer)
 {
 	//std::cout << "WorldManager - startUp" << std::endl;
-	if(initMap(newPlayer) == 0)
+	if(InitMap(newPlayer) == 0)
 	    return 0;
-	gameOverSpr = &SPR.getGameOverSprite();
+	mGameOverSpr = &SPR.getGameOverSprite();
 	return Manager::StartUp();
 }
 
 void battleCity::WorldManager::ShutDown()
 {
 	//std::cout << "WorldManager - shutDown" << std::endl;
-	ObjectList listToDelete = worldList;
+	ObjectList listToDelete = mWorldList;
 	ObjectListIterator it = ObjectListIterator(&listToDelete);
 	for (it.first(); !it.isDone(); it.next())
 	{
@@ -73,106 +73,106 @@ void battleCity::WorldManager::ShutDown()
 	Manager::ShutDown();
 }
 
-void battleCity::WorldManager::setGameOverState()
+void battleCity::WorldManager::SetGameOverState()
 {
-	if (gameOver)
+	if (mGameOver)
 		return;
 	GM.setStepCount(1);
 	GM.setPlayerHealthToZero();
-	gameOver = true;
+	mGameOver = true;
 }
 
-void battleCity::WorldManager::setTankCount(int newTankCount)
+void battleCity::WorldManager::SetTankCount(int newTankCount)
 {
-	tankCount += newTankCount;
+	mTankCount += newTankCount;
 }
 
-int battleCity::WorldManager::getTankCount()
+int battleCity::WorldManager::GetTankCount()
 {
-	return tankCount;
+	return mTankCount;
 }
 
-void battleCity::WorldManager::setKillCount(int newKillCount)
+void battleCity::WorldManager::SetKillCount(int newKillCount)
 {
-	killCount += newKillCount;
+	mKillCount += newKillCount;
 }
 
-int battleCity::WorldManager::getKillCount()
+int battleCity::WorldManager::GetKillCount()
 {
-	return killCount;
+	return mKillCount;
 }
 
-int battleCity::WorldManager::insertObject(Object* objectPtr)
+int battleCity::WorldManager::InsertObject(Object* objectPtr)
 {
 	//std::cout << "WorldManager - insertObject" << std::endl;
 	int check;
 	if (objectPtr->getWorldMoveID() != 0)
 	{
-		moveID++;
-		check = objectsToMove.insert(objectPtr);
+		mOveId++;
+		check = mObjectsToMove.insert(objectPtr);
 		if (check == -1)
 			return check;
 	}
-	worldID++;
-	check = worldList.insert(objectPtr);
+	mWorldId++;
+	check = mWorldList.insert(objectPtr);
 	objectPtr = nullptr;
 	return check;
 }
 
-int battleCity::WorldManager::removeObject(Object* objectPtr)
+int battleCity::WorldManager::RemoveObject(Object* objectPtr)
 {
 	//std::cout << "WorldManager - removeObject" << std::endl;
 	int check;
 	if (objectPtr->getWorldMoveID() != 0)
 	{
-		check = objectsToMove.RemoveByMoveId(objectPtr->getWorldMoveID());
+		check = mObjectsToMove.RemoveByMoveId(objectPtr->getWorldMoveID());
 		if (check == -1)
 			return check;
 	}
-	check = worldList.RemoveByWorldId(objectPtr->getWorldID());
+	check = mWorldList.RemoveByWorldId(objectPtr->getWorldID());
 	objectPtr = nullptr;
 	return check;
 }
 
-battleCity::ObjectList battleCity::WorldManager::getAllObjects() const
+battleCity::ObjectList battleCity::WorldManager::GetAllObjects() const
 {
-	return worldList;
+	return mWorldList;
 }
 
-int battleCity::WorldManager::getSizeOfWorldList()
+int battleCity::WorldManager::GetSizeOfWorldList()
 {
-	return worldList.GetSize();
+	return mWorldList.GetSize();
 }
 
-int battleCity::WorldManager::getSizeOfMoveList()
+int battleCity::WorldManager::GetSizeOfMoveList()
 {
-	return objectsToMove.GetSize();
+	return mObjectsToMove.GetSize();
 }
 
-int battleCity::WorldManager::getWorldID() const
+int battleCity::WorldManager::GetWorldId() const
 {
-	return worldID;
+	return mWorldId;
 }
 
-int battleCity::WorldManager::getMoveID() const
+int battleCity::WorldManager::GetMoveId() const
 {
-	return moveID;
+	return mOveId;
 }
 
-std::vector<std::vector<battleCity::Object*>>& battleCity::WorldManager::getWorldMap()
+std::vector<std::vector<battleCity::Object*>>& battleCity::WorldManager::GetWorldMap()
 {
-	return map;
+	return mMap;
 }
 
-std::vector<std::vector<int>>& battleCity::WorldManager::getPowerUpPositions()
+std::vector<std::vector<int>>& battleCity::WorldManager::GetPowerUpPositions()
 {
-	return powerUpPositions;
+	return mPowerUpPositions;
 }
 
-void battleCity::WorldManager::createSomeTanks()
+void battleCity::WorldManager::CreateSomeTanks()
 {
 	int rnd = randomNumber(0, 1);
-	if (GM.stepCount % 450 == 0 && tankCount != 6 && tankStorage > 0)
+	if (GM.stepCount % 450 == 0 && mTankCount != 6 && mTankStorage > 0)
 	{
 		if (rnd == 1)
 			new Tank(500, 45);
@@ -181,7 +181,7 @@ void battleCity::WorldManager::createSomeTanks()
 	}
 }
 
-int battleCity::WorldManager::initMap(TankPlayer& newPlayer)
+int battleCity::WorldManager::InitMap(TankPlayer& newPlayer)
 {
 	//std::cout << "WorldManager - initMap" << std::endl;
 	char charToStore;
@@ -197,7 +197,7 @@ int battleCity::WorldManager::initMap(TankPlayer& newPlayer)
 		for (int j = 0; j < WIDTH; j++) {
 			mapFile >> charToStore;
 			if (charToStore - '0' == 4)
-				map[i][j] = new Wall(SCR.getBoundaryL() + (16 * j), SCR.getBoundaryU() + (16 * i));
+				mMap[i][j] = new Wall(SCR.getBoundaryL() + (16 * j), SCR.getBoundaryU() + (16 * i));
 			else if (charToStore - '0' == 1)
 				newPlayer.setPosition(Vector(SCR.getBoundaryL() + (16 * j), SCR.getBoundaryU() + (16 * i)));
 			else if (charToStore - '0' == 2)
@@ -206,9 +206,9 @@ int battleCity::WorldManager::initMap(TankPlayer& newPlayer)
 				new PhoenixAndFlag(SCR.getBoundaryL() + (16 * j), SCR.getBoundaryU() + (16 * i));
 			else if (charToStore - '0' == 7)
 			{
-				powerUpPositions.push_back(std::vector<int>());
-				powerUpPositions[powerUpY].push_back((int)(SCR.getBoundaryL() + (16 * j)));
-				powerUpPositions[powerUpY].push_back((int)(SCR.getBoundaryU() + (16 * i)));
+				mPowerUpPositions.push_back(std::vector<int>());
+				mPowerUpPositions[powerUpY].push_back((int)(SCR.getBoundaryL() + (16 * j)));
+				mPowerUpPositions[powerUpY].push_back((int)(SCR.getBoundaryU() + (16 * i)));
 				powerUpY++;
 			}
 		}
@@ -217,10 +217,10 @@ int battleCity::WorldManager::initMap(TankPlayer& newPlayer)
 	return 1;
 }
 
-battleCity::ObjectList battleCity::WorldManager::objectsOfType(std::string type)
+battleCity::ObjectList battleCity::WorldManager::ObjectsOfType(std::string type)
 {
-	ObjectList newList = worldList;
-	ObjectListIterator it = ObjectListIterator(&worldList);
+	ObjectList newList = mWorldList;
+	ObjectListIterator it = ObjectListIterator(&mWorldList);
 
 	for (it.first(); !it.isDone(); it.next())
 	{
@@ -231,17 +231,17 @@ battleCity::ObjectList battleCity::WorldManager::objectsOfType(std::string type)
 	return newList;
 }
 
-void battleCity::WorldManager::update()
+void battleCity::WorldManager::Update()
 {
 #if DEBUG == 0
-	createSomeTanks();
+	CreateSomeTanks();
 #endif
 	//std::cout << "WorldManager - update" << std::endl;
-	ObjectList listToIt = objectsToMove;
-	ObjectListIterator it = ObjectListIterator(&objectsToMove);
+	ObjectList listToIt = mObjectsToMove;
+	ObjectListIterator it = ObjectListIterator(&mObjectsToMove);
 
-	ObjectListIterator itUpdate = ObjectListIterator(&worldList);
-	ObjectListIterator itDeletetion = ObjectListIterator(&deletionList);
+	ObjectListIterator itUpdate = ObjectListIterator(&mWorldList);
+	ObjectListIterator itDeletetion = ObjectListIterator(&mDeletionList);
 
 	for (itUpdate.first(); !itUpdate.isDone(); itUpdate.next())
 	{
@@ -251,7 +251,7 @@ void battleCity::WorldManager::update()
 	for (it.first(); !it.isDone(); it.next())
 	{
 		Vector newPos = (*it.currentObject())->predictPosition();
-		moveObject(*it.currentObject(), newPos);
+		MoveObject(*it.currentObject(), newPos);
 	}
 
 	for (itDeletetion.first(); !itDeletetion.isDone(); itDeletetion.next())
@@ -262,57 +262,57 @@ void battleCity::WorldManager::update()
 			Vector pos = objToDelete->getPosition();
 			int x = (pos.x - SCR.getBoundaryL()) / 16;
 			int y = (pos.y - SCR.getBoundaryU()) / 16;
-			map[y][x] = nullptr;
+			mMap[y][x] = nullptr;
 		}
 		delete objToDelete;
 		objToDelete = nullptr;
 	}
 
-	deletionList.Clear();
+	mDeletionList.Clear();
 
 #if DEBUG == 0
-	createPowerUp();
-	if (killCount >= 20)
+	CreatePowerUp();
+	if (mKillCount >= 20)
 	{
-		setGameOverState();
+		SetGameOverState();
 	}
 #endif
 }
 
-void battleCity::WorldManager::draw()
+void battleCity::WorldManager::Draw()
 {
-	ObjectListIterator it = ObjectListIterator(&worldList);
+	ObjectListIterator it = ObjectListIterator(&mWorldList);
 
-	drawBackground();
+	DrawBackground();
 
 	for (it.first(); !it.isDone(); it.next())
 	{
 		(*it.currentObject())->draw();
 	}
 
-	if (gameOver)
+	if (mGameOver)
 	{
 		GM.gameOverState();
-		if (gameOverPos.y != 247)
+		if (mGameOverPos.y != 247)
 		{
-			gameOverPos.y--;
+			mGameOverPos.y--;
 		}
-		drawSprite(gameOverSpr, (int)gameOverPos.x, (int)gameOverPos.y);
+		drawSprite(mGameOverSpr, (int)mGameOverPos.x, (int)mGameOverPos.y);
 	}
 }
 
-void battleCity::WorldManager::drawBackground()
+void battleCity::WorldManager::DrawBackground()
 {
 
 	drawSprite(&SPR.getBackgroundSprite(), SCR.getBoundaryL(), SCR.getBoundaryU());
 }
 
-int battleCity::WorldManager::moveObject(Object* ptrObject, Vector where)
+int battleCity::WorldManager::MoveObject(Object* ptrObject, Vector where)
 {
 	//std::cout << "moveObject" << std::endl;
 	if (ptrObject->isSolid() || ptrObject->isSoft())
 	{
-		ObjectList newList = getCollisions(ptrObject, where);
+		ObjectList newList = GetCollisions(ptrObject, where);
 
 		if (!newList.IsEmpty())
 		{
@@ -356,9 +356,9 @@ int battleCity::WorldManager::moveObject(Object* ptrObject, Vector where)
 	return i;
 }
 
-int battleCity::WorldManager::markForDelete(Object* objectPtr)
+int battleCity::WorldManager::MarkForDelete(Object* objectPtr)
 {
-	ObjectListIterator it = ObjectListIterator(&deletionList);
+	ObjectListIterator it = ObjectListIterator(&mDeletionList);
 
 	for (it.first(); !it.isDone(); it.next())
 	{
@@ -370,76 +370,76 @@ int battleCity::WorldManager::markForDelete(Object* objectPtr)
 
 	if (objectPtr->getHealth() == 0)
 	{
-		deletionList.insert(objectPtr);
+		mDeletionList.insert(objectPtr);
 	}
 	objectPtr = nullptr;
 	return 0;
 }
 
-void battleCity::WorldManager::createPowerUp()
+void battleCity::WorldManager::CreatePowerUp()
 {
-	if (powerUpPositions.size() != 0)
+	if (mPowerUpPositions.size() != 0)
 	{
-		switch (killCount)
+		switch (mKillCount)
 		{
 		case 4:
-			if (!isPowerUp && !powerUpisTaked)
+			if (!mIsPowerUp && !mPowerUpTaked)
 			{
-				powerUp = new PowerUp(1);
-				isPowerUp = true;
+				mPowerUp = new PowerUp(1);
+				mIsPowerUp = true;
 			}
 			break;
 		case 10:
-			if (isPowerUp)
+			if (mIsPowerUp)
 			{
-				markForDelete(powerUp);
-				powerUpisTaked = false;
+				MarkForDelete(mPowerUp);
+				mPowerUpTaked = false;
 			}
 			else
 			{
-				powerUpisTaked = false;
+				mPowerUpTaked = false;
 			}
 			break;
 		case 11:
-			if (!isPowerUp && !powerUpisTaked)
+			if (!mIsPowerUp && !mPowerUpTaked)
 			{
-				powerUp = new PowerUp(1);
-				isPowerUp = true;
+				mPowerUp = new PowerUp(1);
+				mIsPowerUp = true;
 			}
 			break;
 		case 17:
-			if (isPowerUp)
+			if (mIsPowerUp)
 			{
-				markForDelete(powerUp);
-				powerUpisTaked = false;
+				MarkForDelete(mPowerUp);
+				mPowerUpTaked = false;
 			}
 			else
 			{
-				powerUpisTaked = false;
+				mPowerUpTaked = false;
 			}
 			break;
 		case 18:
-			if (!isPowerUp && !powerUpisTaked)
+			if (!mIsPowerUp && !mPowerUpTaked)
 			{
-				powerUp = new PowerUp(1);
-				isPowerUp = true;
+				mPowerUp = new PowerUp(1);
+				mIsPowerUp = true;
 			}
 			break;
 		}
 	}
 }
 
-void battleCity::WorldManager::setPowerUpToFalse()
+void battleCity::WorldManager::SetPowerUpToFalse()
 {
-	isPowerUp = false;
+	mIsPowerUp = false;
 }
 
-void battleCity::WorldManager::setPowerUpisTakedToTrue()
+void battleCity::WorldManager::SetPowerUpisTakedToTrue()
 {
-	powerUpisTaked = true;
+	mPowerUpTaked = true;
 }
 
-battleCity::ObjectList battleCity::WorldManager::getCollisions(const Object* ptrObject, Vector where) const
+battleCity::ObjectList battleCity::WorldManager::GetCollisions(const Object* ptrObject, Vector where) const
 {
 	ObjectList collisionList;
 	if (ptrObject->getSpeed() == 0)
@@ -447,11 +447,11 @@ battleCity::ObjectList battleCity::WorldManager::getCollisions(const Object* ptr
 		ptrObject = nullptr;
 		return collisionList;
 	}
-	ObjectListIterator it = ObjectListIterator(&objectsToMove);
+	ObjectListIterator it = ObjectListIterator(&mObjectsToMove);
 	Object* tempObject = nullptr;
 	Vector objWorldIndex = ptrObject->getWorldIndexRelative();
 
-	tempObject = map[(int)objWorldIndex.y][(int)objWorldIndex.x];
+	tempObject = mMap[(int)objWorldIndex.y][(int)objWorldIndex.x];
 	auto iterateFullListFunc =
 	[&it, &ptrObject, &collisionList, &where]()
 	{
