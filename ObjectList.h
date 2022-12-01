@@ -13,7 +13,8 @@ namespace battleCity
 	class ObjectList
 	{
 	private:
-		/// Vector of pointers to objects
+		struct Range;
+
 		std::vector<std::shared_ptr<Object>> mObjectPtrList;
 		int mID;
 
@@ -29,6 +30,8 @@ namespace battleCity
 
 		~ObjectList() = default;
 
+		Range GetRange() const;
+
 		int Insert(const std::weak_ptr<Object> objectPtr);
 		int Remove(const std::weak_ptr<Object> objectPtr);
 
@@ -42,5 +45,13 @@ namespace battleCity
 
 		ObjectList& operator=(const ObjectList& rhs) = delete;
 		ObjectList& operator=(ObjectList&& rhs) noexcept;
+	};
+
+	struct ObjectList::Range
+	{
+		std::vector<std::shared_ptr<Object>>::const_iterator Begin;
+		std::vector<std::shared_ptr<Object>>::const_iterator End;
+		std::vector<std::shared_ptr<Object>>::const_iterator begin() { return Begin; }
+		std::vector<std::shared_ptr<Object>>::const_iterator end() { return End; }
 	};
 }

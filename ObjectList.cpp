@@ -23,6 +23,11 @@ namespace battleCity
 		swap(*this, mve);
 	}
 
+	ObjectList::Range ObjectList::GetRange() const
+	{
+		return Range {mObjectPtrList.begin(), mObjectPtrList.end()};
+	}
+
 	int ObjectList::Insert(const std::weak_ptr<Object> objectPtr)
 	{
 		try
