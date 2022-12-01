@@ -126,11 +126,11 @@ int battleCity::WorldManager::removeObject(Object* objectPtr)
 	int check;
 	if (objectPtr->getWorldMoveID() != 0)
 	{
-		check = objectsToMove.removeByMoveID(objectPtr->getWorldMoveID());
+		check = objectsToMove.RemoveByMoveId(objectPtr->getWorldMoveID());
 		if (check == -1)
 			return check;
 	}
-	check = worldList.removeByWorldID(objectPtr->getWorldID());
+	check = worldList.RemoveByWorldId(objectPtr->getWorldID());
 	objectPtr = nullptr;
 	return check;
 }
@@ -142,12 +142,12 @@ battleCity::ObjectList battleCity::WorldManager::getAllObjects() const
 
 int battleCity::WorldManager::getSizeOfWorldList()
 {
-	return worldList.getSize();
+	return worldList.GetSize();
 }
 
 int battleCity::WorldManager::getSizeOfMoveList()
 {
-	return objectsToMove.getSize();
+	return objectsToMove.GetSize();
 }
 
 int battleCity::WorldManager::getWorldID() const
@@ -269,7 +269,7 @@ void battleCity::WorldManager::update()
 		objToDelete = nullptr;
 	}
 
-	deletionList.clear();
+	deletionList.Clear();
 
 #if DEBUG == 0
 	createPowerUp();
@@ -315,7 +315,7 @@ int battleCity::WorldManager::moveObject(Object* ptrObject, Vector where)
 	{
 		ObjectList newList = getCollisions(ptrObject, where);
 
-		if (!newList.isEmpty())
+		if (!newList.IsEmpty())
 		{
 			bool doMove = true;
 			ObjectListIterator it = ObjectListIterator(&newList);

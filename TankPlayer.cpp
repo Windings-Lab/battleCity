@@ -164,9 +164,9 @@ void battleCity::TankPlayer::movementSet(std::string direction)
 	//std::cout << "x: " << position.x << " y: " << position.y << endl;
 	//std::cout << "movement capacity: " << movement.capacity() << std::endl;
 	std::cout << "PRESSED" << std::endl;
-	//for (const auto& i : movement)
+	//for (const auto& mID : movement)
 	//{
-	//	std::cout << i << " ";
+	//	std::cout << mID << " ";
 	//}
 	std::cout << std::endl << std::endl;
 #endif
@@ -184,9 +184,9 @@ void battleCity::TankPlayer::movementErase(std::string direction)
 	//std::cout << "x: " << position.x << " y: " << position.y << endl;
 	//std::cout << "movement capacity: " << movement.capacity() << std::endl;
 	std::cout << "RELEASED" << std::endl;
-	//for (const auto& i : movement)
+	//for (const auto& mID : movement)
 	//{
-	//	std::cout << i << " ";
+	//	std::cout << mID << " ";
 	//}
 	std::cout << std::endl << std::endl;
 #endif

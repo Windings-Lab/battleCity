@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <memory>
 
 #include "Object.h"
 
@@ -13,27 +14,24 @@ namespace battleCity
 	{
 	private:
 		/// Vector of pointers to objects
-		std::vector<Object*> objectPtrList;
-		int i;
+		std::vector<std::shared_ptr<Object>> mObjectPtrList;
+		int mID;
 	public:
 
 		friend class ObjectListIterator;
 		ObjectList();
-		ObjectList(int index);
-		~ObjectList();
+		explicit ObjectList(int index);
+		~ObjectList() = default;
 
-		int insert(Object* objectPtr);
-		int remove(Object* objectPtr);
+		int Insert(const std::weak_ptr<Object> objectPtr);
+		int Remove(const std::weak_ptr<Object> objectPtr);
 
-		int removeByWorldID(int objID);
-		int removeByMoveID(int objID);
+		int RemoveByWorldId(int objID);
+		int RemoveByMoveId(int objID);
 
-		std::vector<Object*>& getList();
-		int getSize();
+		size_t GetSize() const;
+		bool IsEmpty() const;
 
-		// List is Empty?
-		bool isEmpty();
-
-		void clear();
+		void Clear();
 	};
 }

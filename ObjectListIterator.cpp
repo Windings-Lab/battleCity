@@ -12,23 +12,23 @@ battleCity::ObjectListIterator::ObjectListIterator(const ObjectList* list) : man
 
 void battleCity::ObjectListIterator::first()
 {
-	this->itList = managerPtrlist->objectPtrList.begin();
+	this->itList = managerPtrlist->mObjectPtrList.begin();
 }
 
 void battleCity::ObjectListIterator::last()
 {
-	this->itList = managerPtrlist->objectPtrList.end() - 1;
+	this->itList = managerPtrlist->mObjectPtrList.end() - 1;
 }
 
 void battleCity::ObjectListIterator::next()
 {
-	if(this->itList < managerPtrlist->objectPtrList.end())
+	if(this->itList < managerPtrlist->mObjectPtrList.end())
 		++(this->itList);
 }
 
 bool battleCity::ObjectListIterator::isDone() const
 {
-	return this->itList == managerPtrlist->objectPtrList.end();
+	return this->itList == managerPtrlist->mObjectPtrList.end();
 }
 
 std::vector<battleCity::Object*>::const_iterator battleCity::ObjectListIterator::currentObject() const
