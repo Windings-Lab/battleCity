@@ -21,6 +21,7 @@
 #include <vector>
 #include <iostream>
 #include <fstream>
+#include <memory>
 
 using namespace std::string_view_literals;
 
@@ -348,7 +349,8 @@ int battleCity::WorldManager::moveObject(Object* ptrObject, Vector where)
 	}
 	else
 	{
-		ptrObject->eventHandler(&EventOut());
+		auto eventOut = std::make_unique<EventOut>();
+		ptrObject->eventHandler(eventOut.get());
 	}
 
 	ptrObject = nullptr;

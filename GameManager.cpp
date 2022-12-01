@@ -11,6 +11,7 @@
 #include "Framework.h"
 #include <iostream>
 #include <vector>
+#include <memory>
 
 bool battleCity::GameManager::_gameOver = false;
 int battleCity::GameManager::_frameTime = 0;
@@ -75,7 +76,8 @@ void battleCity::GameManager::gameOverState()
 void battleCity::GameManager::run()
 {
 	_clock.delta();
-	OnEvent(&EventStep());
+	auto eventStep = std::make_unique<EventStep>();
+	OnEvent(eventStep.get());
 	WM.update();
 	WM.draw();
 	_frameTime = getTickCount() / 1000;
