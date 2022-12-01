@@ -25,7 +25,13 @@ namespace battleCity
 		enum class Type
 		{
 			Error = 0,
-
+			TankPlayer,
+			Tank,
+			Bullet,
+			Wall,
+			PhoenixAndFlag,
+			Explosion,
+			PowerUp
 		};
 	private:
 		float speed;
@@ -40,8 +46,7 @@ namespace battleCity
 		void setSpeed(float newSpeed);
 		void setDirection(Vector newDirection);
 	protected:
-		int id;
-		std::string type;
+		Type mType;
 
 		// default = Boundary of windows
 		Vector position;
@@ -94,7 +99,6 @@ namespace battleCity
 		virtual void update();
 		virtual void draw();
 
-		std::string getType() const;
 		std::vector<Sprite*>& getSpriteList();
 
 		virtual int eventHandler(const Event* ptrEvent);
@@ -103,7 +107,7 @@ namespace battleCity
 		int getSpriteY() const;
 		int getSpriteIndexSize() const;
 
-		int getID() const;
+		Type getType() const;
 		int getWorldID() const;
 		int getWorldMoveID() const;
 

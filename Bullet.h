@@ -13,7 +13,7 @@ namespace battleCity
 
         Object& object;
         int objectID;
-        std::string objectType;
+        Type objectType;
     public:
         Bullet(Object& ptrObj);
         ~Bullet();

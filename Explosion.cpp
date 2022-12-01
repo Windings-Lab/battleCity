@@ -3,48 +3,50 @@
 #include "WorldManager.h"
 #include "Sprites.h"
 
-battleCity::Explosion::Explosion(bool isLarge) : Object(0)
+namespace battleCity
 {
-    id = 6;
-    type = "Explosion";
-
-    health = isLarge ? 1 : 3;
-    spriteIndex = isLarge ? 3 : 0;
-    constSpeed = 0;
-    bulletCount = 0;
-    solidness = Solidness::Spectral;
-
-    spriteDB = &SPR.getExplosionSprites();
-    sprite = spriteDB->at(spriteIndex);
-
-    initPosition(Vector(40, 44));
-}
-
-void battleCity::Explosion::draw()
-{
-    drawSprite(sprite, (int)position.x, (int)position.y);
-}
-
-void battleCity::Explosion::step()
-{
-    if (spriteIndex < 4)
+    Explosion::Explosion(bool isLarge) : Object(0)
     {
-        spriteIndex++;
+        mType = Type::Explosion;
+
+        health = isLarge ? 1 : 3;
+        spriteIndex = isLarge ? 3 : 0;
+        constSpeed = 0;
+        bulletCount = 0;
+        solidness = Solidness::Spectral;
+
+        spriteDB = &SPR.getExplosionSprites();
         sprite = spriteDB->at(spriteIndex);
-        WM.markForDelete(this);
+
+        initPosition(Vector(40, 44));
     }
-}
 
+    void Explosion::draw()
+    {
+        drawSprite(sprite, (int)position.x, (int)position.y);
+    }
 
-int battleCity::Explosion::eventHandler(const Event* eventPtr)
-{
-    if (eventPtr->GetType() == EventType::Step) {
-        const EventStep* stepEvent = dynamic_cast <const EventStep*> (eventPtr);
-        if (stepEvent->getStepCount() % 30 == 0)
+    void Explosion::step()
+    {
+        if (spriteIndex < 4)
         {
-            step();
+            spriteIndex++;
+            sprite = spriteDB->at(spriteIndex);
+            WM.markForDelete(this);
         }
-        return 1;
     }
-	return 0;
+
+
+    int Explosion::eventHandler(const Event* eventPtr)
+    {
+        if (eventPtr->GetType() == EventType::Step) {
+            const EventStep* stepEvent = dynamic_cast <const EventStep*> (eventPtr);
+            if (stepEvent->getStepCount() % 30 == 0)
+            {
+                step();
+            }
+            return 1;
+        }
+        return 0;
+    }
 }

@@ -8,8 +8,7 @@
 
 battleCity::PowerUp::PowerUp()
 {
-	id = 7;
-	type = "PowerUp";
+	mType = Type::PowerUp;
 
 	int rnd = randomNumber(0, WM.getPowerUpPositions().size() - 1);
 	indexX = WM.getPowerUpPositions()[rnd][0];
@@ -27,8 +26,7 @@ battleCity::PowerUp::PowerUp()
 
 battleCity::PowerUp::PowerUp(int giveHealth)
 {
-	id = 7;
-	type = "PowerUp";
+	mType = Type::PowerUp;
 
 	int rnd = randomNumber(0, WM.getPowerUpPositions().size() - 1);
 	indexX = WM.getPowerUpPositions()[rnd][0];
@@ -51,7 +49,7 @@ void battleCity::PowerUp::draw()
 
 void battleCity::PowerUp::makePowerUp(const battleCity::EventCollision* CollisionEvent)
 {
-	if	(CollisionEvent->getObject1()->getType() == "Player")
+	if	(CollisionEvent->getObject1()->getType() == Type::TankPlayer)
 	{
 		CollisionEvent->getObject1()->setHealth(health);
 		WM.markForDelete(this);
