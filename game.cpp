@@ -21,7 +21,7 @@ class MyFramework : public Framework {
 
 private:
 	std::unique_ptr<TankPlayer> player;
-	std::vector<Object*> demo;
+	std::vector<std::unique_ptr<Object>> demo;
 
 	std::unique_ptr<EventKeyboard> eventKeyboard;
 
@@ -48,25 +48,25 @@ public:
 
 	virtual bool Init() {
 		GM.spriteInit();
-		// Here you can create demo objecs
+		// Here you can create demo objects
 		// After this code you can create objects anywhere in the code
 		// Don't forget to set NULL to objects in Close()
 		// Objects are deleting automatically in GM.shutdown()
 		// ------------------------------------------------------------
 		{
-			//demo.push_back(new Tank(300, 100));
-			//demo.push_back(new Tank(500, 45));
-			//demo.push_back(new Tank(500, 45));
-			//demo.push_back(new Tank(500, 45));
-			//demo.push_back(new Tank(500, 45));
-			//demo.push_back(new Tank(500, 45));
-			//demo.push_back(new Tank(500, 45));
-			//demo.push_back(new Tank(500, 45));
-			//demo.push_back(new Tank(500, 200));
-			//demo.push_back(new Tank(400, 300));
-			//demo.push_back(new Tank(500, 400));
-			//demo.push_back(new Tank(200, 400));
-			//demo.push_back(new Tank(500, 620));
+			//demo.emplace_back(std::make_unique<Tank>(300, 100));
+			//demo.emplace_back(std::make_unique<Tank>(300, 100));
+			//demo.emplace_back(std::make_unique<Tank>(500, 45));
+			//demo.emplace_back(std::make_unique<Tank>(500, 45));
+			//demo.emplace_back(std::make_unique<Tank>(500, 45));
+			//demo.emplace_back(std::make_unique<Tank>(500, 45));
+			//demo.emplace_back(std::make_unique<Tank>(500, 45));
+			//demo.emplace_back(std::make_unique<Tank>(500, 45));
+			//demo.emplace_back(std::make_unique<Tank>(500, 200));
+			//demo.emplace_back(std::make_unique<Tank>(400, 300));
+			//demo.emplace_back(std::make_unique<Tank>(500, 400));
+			//demo.emplace_back(std::make_unique<Tank>(200, 400));
+			//demo.emplace_back(std::make_unique<Tank>(500, 620));
 			//demo[0]->setSight(Vector(1, 0));
 			//demo[1]->setSight(Vector(-1, 0));
 			//demo[0]->spriteSet(0, 0);
