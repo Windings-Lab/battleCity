@@ -435,6 +435,7 @@ namespace battleCity
 		{
 			for (const auto& [objID, colliderObj] : mWorldList.GetRange())
 			{
+				if(mapObjID == 0) continue;
 				Object& tempObject = mWorldList.GetObject(mapObjID);
 				if (objID == ptrObject.GetID())
 				{
