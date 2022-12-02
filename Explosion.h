@@ -12,8 +12,8 @@ namespace battleCity
     public:
         Explosion(bool isLarge);
 
-        virtual void draw() override;
+        void draw() override;
 
-        int eventHandler(const Event* eventPtr);
+        int EventHandler(Event eventPtr) override;
     };
 }
