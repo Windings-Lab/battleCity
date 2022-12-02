@@ -244,7 +244,7 @@ namespace battleCity
 		if (eventPtr->GetType() == EventType::Step)
 		{
 			const EventStep* stepEvent = dynamic_cast<const EventStep*> (eventPtr);
-			if (stepEvent->getStepCount() % 600 == 0)
+			if (stepEvent->GetStepCount() % 600 == 0)
 			{
 				pathFind();
 			}
