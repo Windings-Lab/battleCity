@@ -13,7 +13,7 @@
 
 namespace battleCity
 {
-	Bullet::Bullet(Object& ptrObj) : object(ptrObj)
+	Bullet::Bullet(int objID) : mObjectOwner(WM.GetAllObjects().GetObject(objID))
 	{
 		mType = Type::Bullet;
 
@@ -24,16 +24,16 @@ namespace battleCity
 
 		spriteDB = &SPR.getBulletSprites();
 
-		initBullet(object);
+		initBullet();
 		//std::cout << "bulletX: " << mCollisionPos.X << " bulletY: " << mCollisionPos.Y << std::endl;
 	}
 
-	void Bullet::initBullet(const Object& ptrObj)
+	void Bullet::initBullet()
 	{
-		Vector pos = ptrObj.getPosition();
-		Vector directionObj = ptrObj.getSight();
-		float spriteObjX = ptrObj.getBox().getHorizontal();
-		float spriteObjY = ptrObj.getBox().getVertical();
+		Vector pos = mObjectOwner.getPosition();
+		Vector directionObj = mObjectOwner.getSight();
+		float spriteObjX = mObjectOwner.getBox().getHorizontal();
+		float spriteObjY = mObjectOwner.getBox().getVertical();
 
 		// RIGHT LEFT
 		if (directionObj.X == 1)
@@ -70,37 +70,34 @@ namespace battleCity
 
 		position = pos;
 		setVelocity(directionObj);
-		objectID = object.GetID();
-		objectType = object.getType();
 	}
 
 	void Bullet::out()
 	{
-		WM.MarkForDelete(this);
+		WM.MarkForDelete(mID);
 	}
 
-	void Bullet::hit(const EventCollision* CollisionEvent)
+	void Bullet::hit(const EventCollision* collisionEvent)
 	{
 		if (health != 0)
 		{
-			if (objectID != CollisionEvent->GetObjectID()->GetID()
-				&&
-				objectID != CollisionEvent->GetColliderID()->GetID())
+			const auto& collisionObj = collisionEvent->GetObjectRef();
+			const auto& collider = collisionEvent->GetColliderRef();
+
+			if (mObjectOwner.GetID() != collisionObj.GetID() && mObjectOwner.GetID() != collider.GetID())
 			{
-				if ((CollisionEvent->GetColliderID()->getType() == Type::Tank ||
-					CollisionEvent->GetObjectID()->getType() == Type::Tank) && objectType == Type::Tank)
+				if ((collider.getType() == Type::Tank || collisionObj.getType() == Type::Tank) 
+					&& mObjectOwner.getType() == Type::Tank)
 				{
-					WM.MarkForDelete(this);
+					WM.MarkForDelete(mID);
 					return;
 				}
-				if ((CollisionEvent->GetColliderID()->getType() == Type::PowerUp ||
-					CollisionEvent->GetObjectID()->getType() == Type::PowerUp))
+				if (collider.getType() == Type::PowerUp || collisionObj.getType() == Type::PowerUp)
 				{
 					return;
 				}
-				WM.MarkForDelete(CollisionEvent->GetObjectID());
-				WM.MarkForDelete(CollisionEvent->GetColliderID());
-				return;
+				WM.MarkForDelete(collisionEvent->GetObjectID());
+				WM.MarkForDelete(collisionEvent->GetColliderID());
 			}
 		}
 	}
@@ -131,10 +128,11 @@ namespace battleCity
 
 	Bullet::~Bullet()
 	{
-		object.setBulletCount(1);
+		mObjectOwner.setBulletCount(1);
 		position.X -= 5;
-		Explosion* newExp = new Explosion(false);
-		newExp->setPosition(this->position);
-		newExp = nullptr;
+		const std::unique_ptr<Object> newExp = std::make_unique<Explosion>(false);
+		newExp->setPosition(position);
+
+		WM.InsertObject(newExp);
 	}
 }

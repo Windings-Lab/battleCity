@@ -131,7 +131,7 @@ namespace battleCity
 	{
 		if (bulletCount != 0)
 		{
-			Bullet* newBullet = new Bullet(*this);
+			WM.InsertObject(std::make_unique<Bullet>(mID));
 			bulletCount--;
 		}
 	}
@@ -195,10 +195,11 @@ namespace battleCity
 
 	TankPlayer::~TankPlayer()
 	{
-		WM.setGameOverState();
-		Explosion* newExp = new Explosion(true);
+		std::unique_ptr<Object> newExp = std::make_unique<Explosion>(true);
 		newExp->setPosition(this->position);
-		newExp = nullptr;
+		WM.InsertObject(newExp);
+
+		WM.SetGameOverState();
 #if DEBUG == 2
 		std::cout << "TankPlayer Destructor" << std::endl;
 #endif

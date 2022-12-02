@@ -1,7 +1,6 @@
 #pragma once
 #include "Object.h"
 #include "EventCollision.h"
-#include "Sprites.h"
 
 namespace battleCity
 {
@@ -9,19 +8,17 @@ namespace battleCity
     {
     private:
         void out();
-        void hit(const battleCity::EventCollision* CollisionEvent);
+        void hit(const EventCollision* collisionEvent);
 
-        Object& object;
-        int objectID;
-        Type objectType;
+        Object& mObjectOwner;
     public:
-        Bullet(Object& ptrObj);
+        Bullet(int objOwnerID);
         ~Bullet();
 
-        void initBullet(const Object& ptrObj);
+        void initBullet();
 
         void draw() override;
 
-        int eventHandler(const battleCity::Event* ptrEvent);
+        int eventHandler(const Event* ptrEvent);
     };
 }

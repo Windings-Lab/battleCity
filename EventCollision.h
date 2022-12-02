@@ -2,12 +2,13 @@
 
 #include "Event.h"
 #include "Vector.h"
+#include "Object.h"
 
 namespace battleCity
 {
     class EventCollision final : public Event
     {
-        Vector mCollisionPos;         // Where collision occurred.
+        Vector mCollisionPos;   // Where collision occurred.
         int mObjectID;          // Object moving, causing collision.
         int mCollider;          // Object being collided with.
 
@@ -20,9 +21,11 @@ namespace battleCity
 
         void SetObjectID(int objectID);
         int GetObjectID() const;
+        Object& GetObjectRef() const;
 
         void SetColliderID(int colliderID);
         int GetColliderID() const;
+        Object& GetColliderRef() const;
 
         void SetCollisionPos(const Vector& collisionPos);
         Vector GetCollisionPos() const;

@@ -1,6 +1,5 @@
 #pragma once
 
-#include <string>
 #include <unordered_set>
 
 #include "Manager.h"
@@ -38,7 +37,7 @@ namespace battleCity
 		int mTankStorage;
 		int mKillCount;
 
-		PowerUp* mPowerUp;
+		int mPowerUpID;
 		bool mIsPowerUp;
 		bool mPowerUpTaked;
 	public:

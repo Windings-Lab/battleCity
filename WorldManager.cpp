@@ -42,7 +42,7 @@ namespace battleCity
 		mKillCount = 0;
 		mTankStorage = 20;
 
-		mPowerUp = nullptr;
+		mPowerUpID = 0;
 		mIsPowerUp = false;
 		mPowerUpTaked = false;
 	}
@@ -172,16 +172,19 @@ namespace battleCity
 				case Object::Type::TankPlayer:
 					newPlayer.setPosition(Vector(SCR.getBoundaryL() + (16 * j), SCR.getBoundaryU() + (16 * i)));
 					break;
-				case Object::Type::Tank: 
-					new Tank(SCR.getBoundaryL() + (16 * j), SCR.getBoundaryU() + (16 * i));
+				case Object::Type::Tank:
+					InsertObject(std::make_unique<Tank>(SCR.getBoundaryL() + (16 * j), SCR.getBoundaryU() + (16 * i)));
 					break;
 				case Object::Type::Bullet: break;
 				case Object::Type::Wall:
-					auto wall = new Wall(SCR.getBoundaryL() + (16 * j), SCR.getBoundaryU() + (16 * i));
+				{
+					std::unique_ptr<Object> wall = std::make_unique<Wall>(SCR.getBoundaryL() + (16 * j), SCR.getBoundaryU() + (16 * i));
+					InsertObject(wall);
 					mMap[i][j] = wall->GetID();
 					break;
-				case Object::Type::PhoenixAndFlag: 
-					new PhoenixAndFlag(SCR.getBoundaryL() + (16 * j), SCR.getBoundaryU() + (16 * i));
+				}
+				case Object::Type::PhoenixAndFlag:
+					InsertObject(std::make_unique<PhoenixAndFlag>(SCR.getBoundaryL() + (16 * j), SCR.getBoundaryU() + (16 * i)));
 					break;
 				case Object::Type::Explosion: break;
 				case Object::Type::PowerUp: 
@@ -348,14 +351,16 @@ namespace battleCity
 			case 4:
 				if (!mIsPowerUp && !mPowerUpTaked)
 				{
-					mPowerUp = new PowerUp(1);
+					std::unique_ptr<Object> powerUP = std::make_unique<PowerUp>(1);
+					InsertObject(powerUP);
+					mPowerUpID = powerUP->GetID();
 					mIsPowerUp = true;
 				}
 				break;
 			case 10:
 				if (mIsPowerUp)
 				{
-					MarkForDelete(mPowerUp->GetID());
+					MarkForDelete(mPowerUpID);
 					mPowerUpTaked = false;
 				}
 				else
@@ -366,14 +371,16 @@ namespace battleCity
 			case 11:
 				if (!mIsPowerUp && !mPowerUpTaked)
 				{
-					mPowerUp = new PowerUp(1);
+					std::unique_ptr<Object> powerUP = std::make_unique<PowerUp>(1);
+					InsertObject(powerUP);
+					mPowerUpID = powerUP->GetID();
 					mIsPowerUp = true;
 				}
 				break;
 			case 17:
 				if (mIsPowerUp)
 				{
-					MarkForDelete(mPowerUp->GetID());
+					MarkForDelete(mPowerUpID);
 					mPowerUpTaked = false;
 				}
 				else
@@ -384,7 +391,9 @@ namespace battleCity
 			case 18:
 				if (!mIsPowerUp && !mPowerUpTaked)
 				{
-					mPowerUp = new PowerUp(1);
+					std::unique_ptr<Object> powerUP = std::make_unique<PowerUp>(1);
+					InsertObject(powerUP);
+					mPowerUpID = powerUP->GetID();
 					mIsPowerUp = true;
 				}
 				break;

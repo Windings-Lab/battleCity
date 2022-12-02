@@ -1,5 +1,7 @@
 #include "EventCollision.h"
 
+#include "WorldManager.h"
+
 namespace battleCity
 {
 	EventCollision::EventCollision(int objectID, int colliderID, Vector collisionPos)
@@ -17,6 +19,11 @@ namespace battleCity
 		return mObjectID;
 	}
 
+	Object& EventCollision::GetObjectRef() const
+	{
+		return WM.GetAllObjects().GetObject(mObjectID);
+	}
+
 	void EventCollision::SetColliderID(int colliderID)
 	{
 		mCollider = colliderID;
@@ -24,6 +31,11 @@ namespace battleCity
 	int EventCollision::GetColliderID() const
 	{
 		return mCollider;
+	}
+
+	Object& EventCollision::GetColliderRef() const
+	{
+		return WM.GetAllObjects().GetObject(mCollider);
 	}
 
 	void EventCollision::SetCollisionPos(const Vector& collisionPos)

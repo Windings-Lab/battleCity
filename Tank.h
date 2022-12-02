@@ -20,7 +20,7 @@ namespace battleCity
 		void fire();
 		void move(float x, float y);
 
-		void pathFind(const battleCity::EventCollision* CollisionEvent = nullptr);
+		void pathFind(const battleCity::EventCollision* collisionEvent = nullptr);
 		void randomMove();
 
 		virtual int eventHandler(const Event* eventPtr) override;
