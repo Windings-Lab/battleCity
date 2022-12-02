@@ -21,6 +21,7 @@ namespace battleCity
 		constSpeed = 2;
 		bulletCount = 0;
 		solidness = Solidness::Soft;
+		isMovable = true;
 
 		spriteDB = &SPR.getBulletSprites();
 

@@ -37,6 +37,7 @@ namespace battleCity
 		constSpeed = 1;
 		bulletCount = 1;
 		solidness = Solidness::Hard;
+		isMovable = true;
 
 		spriteDB = &SPR.getTankPlayerSprites();
 		spriteSet();
@@ -60,6 +61,7 @@ namespace battleCity
 		constSpeed = 1;
 		bulletCount = 1;
 		solidness = Solidness::Hard;
+		isMovable = true;
 
 		spriteDB = &SPR.getTankPlayerSprites();
 		spriteSet();

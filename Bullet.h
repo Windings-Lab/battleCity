@@ -12,7 +12,7 @@ namespace battleCity
 
         Object& mObjectOwner;
     public:
-        Bullet(int objOwnerID);
+        Bullet(int objID);
         ~Bullet();
 
         void initBullet();
