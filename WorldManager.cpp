@@ -47,11 +47,10 @@ namespace battleCity
 		return single;
 	}
 
-	int WorldManager::StartUp(Object& newPlayer)
+	int WorldManager::StartUp(int playerID)
 	{
 		//std::cout << "WorldManager - startUp" << std::endl;
-		if (InitMap(newPlayer) == 0)
-			return 0;
+		if (InitMap(playerID) == 0) return 0;
 		mGameOverSpr = &SPR.getGameOverSprite();
 		return Manager::StartUp();
 	}
@@ -149,7 +148,7 @@ namespace battleCity
 		}
 	}
 
-	int WorldManager::InitMap(Object& newPlayer)
+	int WorldManager::InitMap(int playerID)
 	{
 		//std::cout << "WorldManager - initMap" << std::endl;
 		char charToStore;
@@ -170,8 +169,11 @@ namespace battleCity
 				switch (auto type = static_cast<Object::Type>(charToStore - '0'))
 				{
 				case Object::Type::TankPlayer:
+				{
+					auto& newPlayer = mWorldList.GetObject(playerID);
 					newPlayer.setPosition(Vector(SCR.getBoundaryL() + (16 * j), SCR.getBoundaryU() + (16 * i)));
 					break;
+				}
 				case Object::Type::Tank:
 				{
 					std::unique_ptr<Object> tank = std::make_unique<Tank>(SCR.getBoundaryL() + (16 * j), SCR.getBoundaryU() + (16 * i));
@@ -182,8 +184,8 @@ namespace battleCity
 				case Object::Type::Wall:
 				{
 					std::unique_ptr<Object> wall = std::make_unique<Wall>(SCR.getBoundaryL() + (16 * j), SCR.getBoundaryU() + (16 * i));
-					InsertObject(wall);
 					mMap[i][j] = wall->GetID();
+					InsertObject(wall);
 					break;
 				}
 				case Object::Type::PhoenixAndFlag:

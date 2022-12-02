@@ -256,6 +256,7 @@ namespace battleCity
 #if DEBUG == 2
 		std::cout << "Tank Destructor" << std::endl;
 #endif
+		if(GM.gameOver) return; // TODO: Fix
 		WM.SetTankCount(-1);
 		WM.SetKillCount(1);
 		std::unique_ptr<Object> newExp = std::make_unique<Explosion>(true);

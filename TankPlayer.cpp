@@ -9,6 +9,8 @@
 
 #include <vector>
 
+#include "GameManager.h"
+
 
 namespace battleCity
 {
@@ -23,7 +25,7 @@ namespace battleCity
 	/// <param name="constSpeed">0</param>
 	/// <param name="bulletCount">1</param>
 	/// <param name="solidness">Solidness::HARD</param>
-	TankPlayer::TankPlayer()
+	TankPlayer::TankPlayer() : Object()
 	{
 		mType = Type::TankPlayer;
 
@@ -44,7 +46,7 @@ namespace battleCity
 #endif
 	}
 
-	TankPlayer::TankPlayer(float x, float y)
+	TankPlayer::TankPlayer(float x, float y) : Object()
 	{
 		mType = Type::TankPlayer;
 
@@ -167,6 +169,7 @@ namespace battleCity
 
 	TankPlayer::~TankPlayer()
 	{
+		if (GM.gameOver) return; // TODO: Fix
 		std::unique_ptr<Object> newExp = std::make_unique<Explosion>(true);
 		newExp->setPosition(this->position);
 		WM.InsertObject(newExp);

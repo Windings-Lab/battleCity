@@ -5,7 +5,6 @@
 #include "Explosion.h"
 
 #include <iostream>
-#include <vector>
 
 battleCity::Manager::Manager() : _type(ManagerType::Manager), _started(false) {}
 

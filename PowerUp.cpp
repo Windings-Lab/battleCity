@@ -6,6 +6,8 @@
 
 #include <iostream>
 
+#include "GameManager.h"
+
 battleCity::PowerUp::PowerUp()
 {
 	mType = Type::PowerUp;
@@ -74,5 +76,6 @@ int battleCity::PowerUp::eventHandler(const Event* ptrEvent)
 
 battleCity::PowerUp::~PowerUp()
 {
+	if (GM.gameOver) return; // TODO: Fix
 	WM.SetPowerUpToFalse();
 }

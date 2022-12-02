@@ -128,6 +128,7 @@ namespace battleCity
 
 	Bullet::~Bullet()
 	{
+		if (GM.gameOver) return; // TODO: Fix
 		mObjectOwner.setBulletCount(1);
 		position.X -= 5;
 		std::unique_ptr<Object> newExp = std::make_unique<Explosion>(false);

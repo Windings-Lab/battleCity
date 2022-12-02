@@ -26,7 +26,6 @@ const Clock& battleCity::GameManager::clock = _clock;
 battleCity::GameManager::GameManager()
 {
 	_stepCount = 0;
-	player = nullptr;
 	SetType(ManagerType::Game);
 }
 
@@ -48,11 +47,11 @@ int battleCity::GameManager::spriteInit()
 	return SPR.initAll();
 }
 
-int battleCity::GameManager::startUp(TankPlayer& newPlayer)
+int battleCity::GameManager::startUp(int playerID)
 {
 	_gameOver = false;
-	player = &newPlayer;
-	WM.StartUp(newPlayer);
+	this->playerID = playerID;
+	WM.StartUp(playerID);
 	return Manager::StartUp();
 }
 
@@ -61,7 +60,6 @@ void battleCity::GameManager::ShutDown()
 {
 	_gameOver = true;
 	WM.ShutDown();
-	player = nullptr;
 	SPR.deleteAll();
 }
 
@@ -95,7 +93,8 @@ void battleCity::GameManager::setGameOver(bool gameState)
 
 void battleCity::GameManager::setPlayerHealthToZero()
 {
-	player->setHealth(-player->getHealth());
+	auto& player = WM.mWorldList.GetObject(playerID);
+	player.setHealth(-player.getHealth());
 }
 
 void battleCity::GameManager::setStepCount(int newStepCount)

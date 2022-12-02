@@ -6,7 +6,7 @@
 #include "GameManager.h"
 #include "Screen.h"
 #include "Framework.h"
-#include "Wall.h"
+#include "WorldManager.h"
 
 #include <time.h>
 #include <iostream>
@@ -24,7 +24,6 @@ public:
 	{
 		using std::make_unique;
 
-		mPlayer = nullptr;
 		mEventKeyboard = make_unique<EventKeyboard>();
 		mMousePos = make_unique<Vector>();
 		mEventMouse = make_unique<EventMouse>(mMousePos);
@@ -64,8 +63,14 @@ public:
 			//demo[1]->spriteSet(0, 1);
 		}
 		// ------------------------------------------------------------
-		mPlayer = std::make_unique<TankPlayer>(0, 0);
-		GM.startUp(*mPlayer);
+
+		std::unique_ptr<Object> player = std::make_unique<TankPlayer>(0, 0);
+		int playerID = player->GetID();
+		mPlayer = dynamic_cast<TankPlayer*>(player.get());
+
+		WM.InsertObject(player);
+
+		GM.startUp(playerID);
 		return true;
 	}
 
@@ -97,7 +102,8 @@ public:
 		mMousePos->Y = y;
 	}
 
-	virtual void onMouseButtonClick(FRMouseButton button, bool isReleased) {
+	virtual void onMouseButtonClick(FRMouseButton button, bool isReleased)
+	{
 		if (mPlayer->getHealth() > 0)
 		{
 			mEventMouse->setMouseButton(button);
@@ -138,7 +144,7 @@ public:
 		std::cout << "MyFramework Destructor" << std::endl;
 	}
 	private:
-		std::unique_ptr<TankPlayer> mPlayer;
+		TankPlayer* mPlayer;
 		std::vector<std::unique_ptr<Object>> mDemo;
 
 		std::unique_ptr<EventKeyboard> mEventKeyboard;

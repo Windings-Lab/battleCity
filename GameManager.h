@@ -29,7 +29,7 @@ namespace battleCity {
 		static Clock _clock;
 		/// Count of game loop iterations
 		static int _stepCount;
-		TankPlayer* player;
+		int playerID;
 
 	public:
 		~GameManager();
@@ -40,7 +40,7 @@ namespace battleCity {
 		int spriteInit();
 
 		/// Startup all GameManager services.
-		int startUp(TankPlayer& newPlayer);
+		int startUp(int playerID);
 
 		/// Shut down GameManager services.
 		void ShutDown() override;

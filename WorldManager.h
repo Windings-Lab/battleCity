@@ -51,7 +51,7 @@ namespace battleCity
 
 		// Startup game world (initialize everything to empty)
         // Return 0
-		int StartUp(Object& newPlayer);
+		int StartUp(int playerID);
 
 		// Shutdown game world (delete all game world Objects)
 		void ShutDown() override;
@@ -82,7 +82,7 @@ namespace battleCity
 
 		void CreateSomeTanks();
 
-		int InitMap(Object& newPlayer);
+		int InitMap(int playerID);
 
 		// Return list of Objects matching type
 		// List is empty if none found
