@@ -14,7 +14,7 @@ namespace battleCity
 {
     int Object::IDCounter = 0;
 
-    Object::Object() : worldID(WM.getWorldID()), moveID(WM.getMoveID())
+    Object::Object()
     {
         mType = Type::Error;
 
@@ -27,34 +27,7 @@ namespace battleCity
         initPosition(Vector(40, 44));
 
         mID = IDCounter++;
-        WM.insertObject(this);
-    }
-
-    /// <summary>
-    /// Object default values
-    /// </summary>
-    /// <param name="type">0</param>
-    /// <param name="type">""</param>
-    /// <param name="position.x">SCR.getBoundaryL()</param>
-    /// <param name="position.y">SCR.getBoundaryU()</param>
-    /// <param name="health">1</param>
-    /// <param name="constSpeed">0</param>
-    /// <param name="bulletCount">1</param>
-    /// <param name="solidness">Solidness::HARD</param>
-    Object::Object(int newMoveID) : worldID(WM.getWorldID()), moveID(newMoveID)
-    {
-        mType = Type::Error;
-
-        health = 1;
-        constSpeed = 0;
-        bulletCount = 1;
-        solidness = Solidness::Hard;
-        isSpawnIntersects = true;
-
-        initPosition(Vector(40, 44));
-
-        mID = IDCounter++;
-        WM.insertObject(this);
+        WM.InsertObject(this);
     }
 
     std::vector<Sprite*>& Object::getSpriteList()
@@ -103,7 +76,7 @@ namespace battleCity
             worldIndexRelative.y = (int)(((position.y - SCR.getBoundaryU()) / 16));
             for (int i = 0; i < spriteIndexSize; i++)
             {
-                if (WM.getWorldMap()[(int)worldIndexRelative.y][(int)worldIndexRelative.x] == nullptr)
+                if (WM.GetWorldMap()[(int)worldIndexRelative.y][(int)worldIndexRelative.x] == nullptr)
                 {
                     worldIndexRelative.y++;
                     if (worldIndexRelative.y >= HEIGHT)
@@ -124,7 +97,7 @@ namespace battleCity
             worldIndexRelative.y = (int)((position.y - SCR.getBoundaryU()) / 16);
             for (int i = 0; i < spriteIndexSize; i++)
             {
-                if (WM.getWorldMap()[(int)worldIndexRelative.y][(int)worldIndexRelative.x] == nullptr)
+                if (WM.GetWorldMap()[(int)worldIndexRelative.y][(int)worldIndexRelative.x] == nullptr)
                 {
                     worldIndexRelative.y++;
                     if (worldIndexRelative.y >= HEIGHT)
@@ -145,7 +118,7 @@ namespace battleCity
                 worldIndexRelative.y = HEIGHT - 1;
             for (int i = 0; i < spriteIndexSize; i++)
             {
-                if (WM.getWorldMap()[(int)worldIndexRelative.y][(int)worldIndexRelative.x] == nullptr)
+                if (WM.GetWorldMap()[(int)worldIndexRelative.y][(int)worldIndexRelative.x] == nullptr)
                 {
                     worldIndexRelative.x++;
                     if (worldIndexRelative.x >= WIDTH)
@@ -166,7 +139,7 @@ namespace battleCity
                 worldIndexRelative.y = 0;
             for (int i = 0; i < spriteIndexSize; i++)
             {
-                if (WM.getWorldMap()[(int)worldIndexRelative.y][(int)worldIndexRelative.x] == nullptr)
+                if (WM.GetWorldMap()[(int)worldIndexRelative.y][(int)worldIndexRelative.x] == nullptr)
                 {
                     worldIndexRelative.x++;
                     if (worldIndexRelative.x >= WIDTH)
@@ -297,7 +270,7 @@ namespace battleCity
         return 0;
     }
 
-    battleCity::Solidness Object::getSolidness() const
+    Object::Solidness Object::getSolidness() const
     {
         return solidness;
     }
@@ -320,6 +293,11 @@ namespace battleCity
     void Object::setSpawnIntersection(bool newSpawnIntersection)
     {
         isSpawnIntersects = newSpawnIntersection;
+    }
+
+    bool Object::IsMovable() const
+    {
+        return isMovable;
     }
 
     void Object::spriteSet(Sprite* newSprite, int index)
@@ -351,7 +329,7 @@ namespace battleCity
 #if DEBUG == 2
         std::cout << "Object Destructor" << std::endl;
 #endif
-        WM.removeObject(this);
+        WM.RemoveObject(this);
         spriteDB = nullptr;
         sprite = nullptr;
     }

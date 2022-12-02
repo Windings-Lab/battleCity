@@ -77,6 +77,7 @@ namespace battleCity
 		Sprite* sprite;
 		// Teleport tanks if true
 		bool isSpawnIntersects;
+		bool isMovable;
 
 		// Make it only once in Constructor of derived object
 		void initPosition(Vector initPosition);
@@ -84,7 +85,6 @@ namespace battleCity
 		void setVelocity(Vector newVelocity);
 	public:
 		Object();
-		Object(int newWorldMoveID);
 		virtual ~Object();
 		/// <summary>
 		/// Change sprite direction
@@ -144,5 +144,7 @@ namespace battleCity
 
 		bool getSpawnIntersection();
 		void setSpawnIntersection(bool newSpawnIntersection);
+
+		bool IsMovable() const;
 	};
 }
