@@ -2,15 +2,13 @@
 #include "Object.h"
 
 #include <iostream>
-#include <algorithm>
-#include <vector>
 #include <utility>
 
 namespace battleCity
 {
 	ObjectList::ObjectList()
 	{
-		mObjectPtrList.reserve(100);
+		mList.reserve(100);
 	}
 
 	ObjectList::ObjectList(ObjectList&& mve) noexcept : ObjectList()
@@ -20,14 +18,19 @@ namespace battleCity
 
 	ObjectList::Range ObjectList::GetRange() const
 	{
-		return Range {mObjectPtrList.begin(), mObjectPtrList.end()};
+		return Range {mList.begin(), mList.end()};
 	}
 
-	int ObjectList::Insert(const std::weak_ptr<Object> objectPtr)
+	Object* ObjectList::GetObject(int id) const
+	{
+		return mList.at(id).get();
+	}
+
+	int ObjectList::Insert(int objID, const std::unique_ptr<Object>& objPtr)
 	{
 		try
 		{
-			mObjectPtrList.push_back(objectPtr.lock());
+			mList.try_emplace(objID, std::move(objPtr));
 		}
 		catch (...)
 		{
@@ -38,59 +41,14 @@ namespace battleCity
 		return 0;
 	}
 
-	int ObjectList::Remove(const std::weak_ptr<Object> objectPtr)
+	int ObjectList::Remove(int objID)
 	{
-		if (const auto it = std::find_if(mObjectPtrList.begin(), mObjectPtrList.end(),
-			[&objectPtr](const std::shared_ptr<Object>& ptr)
-			{ return ptr == objectPtr.lock(); }); it != mObjectPtrList.end())
-		{
-			mObjectPtrList.erase(it);
-		}
-		else
-		{
-			return -1;
-		}
-
-		return 0;
-	}
-
-	int ObjectList::RemoveByWorldId(int objID)
-	{
-		if (const auto it = std::lower_bound(mObjectPtrList.begin(), mObjectPtrList.end(), objID,
-			[](const std::shared_ptr<Object>& obj, int id)
-			{
-				return obj->worldID < id;
-			}); it != mObjectPtrList.end())
-		{
-			mObjectPtrList.erase(it);
-		}
-		else
-		{
-			return -1;
-		}
-		return 0;
-	}
-
-	int ObjectList::RemoveByMoveId(int objID)
-	{
-		if (const auto it = std::lower_bound(mObjectPtrList.begin(), mObjectPtrList.end(), objID,
-			[](const std::shared_ptr<Object>& obj, int id)
-			{
-				return obj->moveID < id;
-			}); it != mObjectPtrList.end())
-		{
-			mObjectPtrList.erase(it);
-		}
-		else
-		{
-			return -1;
-		}
-		return 0;
+		return mList.erase(objID) != 0 ? 0 : -1;
 	}
 
 	size_t ObjectList::GetSize() const
 	{
-		return mObjectPtrList.size();
+		return mList.size();
 	}
 
 	bool ObjectList::IsEmpty() const
@@ -100,8 +58,7 @@ namespace battleCity
 
 	void ObjectList::Clear()
 	{
-		mObjectPtrList.clear();
-		mObjectPtrList.shrink_to_fit();
+		mList.clear();
 	}
 
 	ObjectList& ObjectList::operator=(ObjectList&& rhs) noexcept
@@ -115,6 +72,6 @@ namespace battleCity
 	{
 		using std::swap;
 
-		swap(first.mObjectPtrList, second.mObjectPtrList);
+		swap(first.mList, second.mList);
 	}
 }

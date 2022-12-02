@@ -1,7 +1,6 @@
 #pragma once
 
-#include <vector>
-#include <map>
+#include <unordered_map>
 #include <memory>
 
 #include "Object.h"
@@ -16,7 +15,7 @@ namespace battleCity
 	private:
 		struct Range;
 
-		std::vector<std::shared_ptr<Object>> mObjectPtrList;
+		std::unordered_map<int, std::unique_ptr<Object>> mList;
 
 		friend void swap(ObjectList&, ObjectList&) noexcept;
 	public:
@@ -30,12 +29,10 @@ namespace battleCity
 		~ObjectList() = default;
 
 		Range GetRange() const;
+		Object* GetObject(int id) const;
 
-		int Insert(const std::weak_ptr<Object> objectPtr);
-		int Remove(const std::weak_ptr<Object> objectPtr);
-
-		int RemoveByWorldId(int objID);
-		int RemoveByMoveId(int objID);
+		int Insert(int objID, const std::unique_ptr<Object>& objectPtr);
+		int Remove(int objID);
 
 		size_t GetSize() const;
 		bool IsEmpty() const;
@@ -48,9 +45,9 @@ namespace battleCity
 
 	struct ObjectList::Range
 	{
-		std::vector<std::shared_ptr<Object>>::const_iterator Begin;
-		std::vector<std::shared_ptr<Object>>::const_iterator End;
-		std::vector<std::shared_ptr<Object>>::const_iterator begin() { return Begin; }
-		std::vector<std::shared_ptr<Object>>::const_iterator end() { return End; }
+		std::unordered_map<int, std::unique_ptr<Object>>::const_iterator Begin;
+		std::unordered_map<int, std::unique_ptr<Object>>::const_iterator End;
+		std::unordered_map<int, std::unique_ptr<Object>>::const_iterator begin() { return Begin; }
+		std::unordered_map<int, std::unique_ptr<Object>>::const_iterator end() { return End; }
 	};
 }
