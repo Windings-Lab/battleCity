@@ -21,9 +21,9 @@ namespace battleCity
 		return Range {mList.begin(), mList.end()};
 	}
 
-	Object* const ObjectList::GetObject(int id) const
+	Object& ObjectList::GetObject(int id) const
 	{
-		return mList.at(id).get();
+		return *mList.at(id).get();
 	}
 
 	int ObjectList::Insert(const std::unique_ptr<Object>& objPtr)

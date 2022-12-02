@@ -29,7 +29,7 @@ namespace battleCity
 		~ObjectList() = default;
 
 		Range GetRange() const;
-		Object* const GetObject(int id) const;
+		Object& GetObject(int id) const;
 
 		int Insert(const std::unique_ptr<Object>& objPtr);
 		int Remove(int objID);
