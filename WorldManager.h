@@ -19,14 +19,13 @@ namespace battleCity
 	private:
 		std::vector<std::vector<Object*>> mMap;
 		std::vector<std::vector<int>> mPowerUpPositions;
-		// Objects, that need to update
-		// every loop step
-		ObjectList mObjectsToMove;
+
 		// All Objects in game world
-		// to check collision with
 		ObjectList mWorldList;
+		// Objects, that need to update every loop step
+		std::vector<int> mObjectIDsToMove;
 		// List of all Objects to delete.
-		ObjectList mDeletionList;
+		std::vector<int> mObjectIDsToDelete;
 
 		static int mWorldId;
 		static int mOveId;
