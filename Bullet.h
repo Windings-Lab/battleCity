@@ -8,7 +8,7 @@ namespace battleCity
     {
     private:
         void out();
-        void hit(const EventCollision* collisionEvent);
+        void hit(EventCollision collisionEvent);
 
         Object& mObjectOwner;
     public:
@@ -19,6 +19,6 @@ namespace battleCity
 
         void draw() override;
 
-        int eventHandler(const Event* ptrEvent);
+        int EventHandler(Event event) override;
     };
 }
