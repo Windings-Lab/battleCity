@@ -19,24 +19,15 @@ using namespace battleCity;
 
 class MyFramework : public Framework {
 
-private:
-	std::unique_ptr<TankPlayer> player;
-	std::vector<std::unique_ptr<Object>> demo;
-
-	std::unique_ptr<EventKeyboard> eventKeyboard;
-
-	std::unique_ptr<Vector> mousePos;
-	std::unique_ptr<EventMouse> eventMouse;
-
 public:
 	MyFramework()
 	{
 		using std::make_unique;
 
-		player = nullptr;
-		eventKeyboard = make_unique<EventKeyboard>();
-		mousePos = make_unique<Vector>();
-		eventMouse = make_unique<EventMouse>(mousePos);
+		mPlayer = nullptr;
+		mEventKeyboard = make_unique<EventKeyboard>();
+		mMousePos = make_unique<Vector>();
+		mEventMouse = make_unique<EventMouse>(mMousePos);
 	}
 
 	virtual void PreInit(int& width, int& height, bool& fullscreen)
@@ -73,8 +64,8 @@ public:
 			//demo[1]->spriteSet(0, 1);
 		}
 		// ------------------------------------------------------------
-		player = std::make_unique<TankPlayer>(0, 0);
-		GM.startUp(*player);
+		mPlayer = std::make_unique<TankPlayer>(0, 0);
+		GM.startUp(*mPlayer);
 		return true;
 	}
 
@@ -82,16 +73,16 @@ public:
 		// Here you can set NULL to demo objects
 		// ------------------------------------------------------------
 		{
-			for (auto& it : demo)
+			for (auto& it : mDemo)
 			{
 				it = nullptr;
 			}
 		}
 		// ------------------------------------------------------------
 
-		eventKeyboard.reset();
-		eventMouse.reset();
-		mousePos.reset();
+		mEventKeyboard.reset();
+		mEventMouse.reset();
+		mMousePos.reset();
 		GM.ShutDown();
 	}
 
@@ -102,38 +93,38 @@ public:
 
 	virtual void onMouseMove(int x, int y, int xrelative, int yrelative)
 	{
-		mousePos->X = x;
-		mousePos->Y = y;
+		mMousePos->X = x;
+		mMousePos->Y = y;
 	}
 
 	virtual void onMouseButtonClick(FRMouseButton button, bool isReleased) {
-		if (player->getHealth() > 0)
+		if (mPlayer->getHealth() > 0)
 		{
-			eventMouse->setMouseButton(button);
-			eventMouse->setMouseAction(isReleased);
-			player->eventHandler(eventMouse.get());
+			mEventMouse->setMouseButton(button);
+			mEventMouse->setMouseAction(isReleased);
+			mPlayer->eventHandler(mEventMouse.get());
 		}
 	}
 
 	virtual void onKeyPressed(FRKey k)
 	{
-		if (player->getHealth() > 0)
+		if (mPlayer->getHealth() > 0)
 		{
-			eventKeyboard->setKey(k);
-			eventKeyboard->setKeyboardAction(EventKeyboardAction::KEY_PRESSED);
-			player->movementSet(k);
-			player->eventHandler(eventKeyboard.get());
+			mEventKeyboard->setKey(k);
+			mEventKeyboard->setKeyboardAction(EventKeyboardAction::KEY_PRESSED);
+			mPlayer->movementSet(k);
+			mPlayer->eventHandler(mEventKeyboard.get());
 		}
 	}
 
 	virtual void onKeyReleased(FRKey k)
 	{
-		if (player->getHealth() > 0)
+		if (mPlayer->getHealth() > 0)
 		{
-			eventKeyboard->setKey(k);
-			eventKeyboard->setKeyboardAction(EventKeyboardAction::KEY_RELEASED);
-			player->movementErase(k);
-			player->eventHandler(eventKeyboard.get());
+			mEventKeyboard->setKey(k);
+			mEventKeyboard->setKeyboardAction(EventKeyboardAction::KEY_RELEASED);
+			mPlayer->movementErase(k);
+			mPlayer->eventHandler(mEventKeyboard.get());
 		}
 	}
 
@@ -146,6 +137,14 @@ public:
 	{
 		std::cout << "MyFramework Destructor" << std::endl;
 	}
+	private:
+		std::unique_ptr<TankPlayer> mPlayer;
+		std::vector<std::unique_ptr<Object>> mDemo;
+
+		std::unique_ptr<EventKeyboard> mEventKeyboard;
+
+		std::unique_ptr<Vector> mMousePos;
+		std::unique_ptr<EventMouse> mEventMouse;
 };
 
 static void show_usage(std::string name)
@@ -214,6 +213,7 @@ int main(int argc, char *argv[])
 	}
 	srand(time(nullptr));
 	Screen::set(width, height, fullScreen);
+	// I don't know how to deallocate 'MyFramework' in this framework
 	return run(new MyFramework);
 }
 

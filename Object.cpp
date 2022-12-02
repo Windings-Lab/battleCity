@@ -73,7 +73,7 @@ namespace battleCity
             worldIndexRelative.Y = (int)(((position.Y - SCR.getBoundaryU()) / 16));
             for (int i = 0; i < spriteIndexSize; i++)
             {
-                if (WM.GetWorldMap()[(int)worldIndexRelative.Y][(int)worldIndexRelative.X] == nullptr)
+                if (WM.GetWorldMap()[(int)worldIndexRelative.Y][(int)worldIndexRelative.X] == 0)
                 {
                     worldIndexRelative.Y++;
                     if (worldIndexRelative.Y >= HEIGHT)
@@ -94,7 +94,7 @@ namespace battleCity
             worldIndexRelative.Y = (int)((position.Y - SCR.getBoundaryU()) / 16);
             for (int i = 0; i < spriteIndexSize; i++)
             {
-                if (WM.GetWorldMap()[(int)worldIndexRelative.Y][(int)worldIndexRelative.X] == nullptr)
+                if (WM.GetWorldMap()[(int)worldIndexRelative.Y][(int)worldIndexRelative.X] == 0)
                 {
                     worldIndexRelative.Y++;
                     if (worldIndexRelative.Y >= HEIGHT)
@@ -115,7 +115,7 @@ namespace battleCity
                 worldIndexRelative.Y = HEIGHT - 1;
             for (int i = 0; i < spriteIndexSize; i++)
             {
-                if (WM.GetWorldMap()[(int)worldIndexRelative.Y][(int)worldIndexRelative.X] == nullptr)
+                if (WM.GetWorldMap()[(int)worldIndexRelative.Y][(int)worldIndexRelative.X] == 0)
                 {
                     worldIndexRelative.X++;
                     if (worldIndexRelative.X >= WIDTH)
@@ -136,7 +136,7 @@ namespace battleCity
                 worldIndexRelative.Y = 0;
             for (int i = 0; i < spriteIndexSize; i++)
             {
-                if (WM.GetWorldMap()[(int)worldIndexRelative.Y][(int)worldIndexRelative.X] == nullptr)
+                if (WM.GetWorldMap()[(int)worldIndexRelative.Y][(int)worldIndexRelative.X] == 0)
                 {
                     worldIndexRelative.X++;
                     if (worldIndexRelative.X >= WIDTH)
@@ -326,7 +326,6 @@ namespace battleCity
 #if DEBUG == 2
         std::cout << "Object Destructor" << std::endl;
 #endif
-        WM.RemoveObject(this);
         spriteDB = nullptr;
         sprite = nullptr;
     }

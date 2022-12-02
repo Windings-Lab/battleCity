@@ -17,7 +17,7 @@ namespace battleCity
 
         void draw() override;
 
-        void setGameOver(const battleCity::EventCollision* CollisionEvent);
+        void setGameOver(const battleCity::EventCollision* collisionEvent);
 
         int eventHandler(const Event* ptrEvent);
 	};

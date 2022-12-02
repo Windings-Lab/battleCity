@@ -5,7 +5,7 @@
 
 namespace battleCity
 {
-    Explosion::Explosion(bool isLarge) : Object(0)
+    Explosion::Explosion(bool isLarge) : Object()
     {
         mType = Type::Explosion;
 
@@ -32,7 +32,7 @@ namespace battleCity
         {
             spriteIndex++;
             sprite = spriteDB->at(spriteIndex);
-            WM.MarkForDelete(this);
+            WM.MarkForDelete(mID);
         }
     }
 

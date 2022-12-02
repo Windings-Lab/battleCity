@@ -1,11 +1,9 @@
 #include "Wall.h"
 #include "Sprites.h"
 
-#include <iostream>
-
 namespace battleCity
 {
-	Wall::Wall() : Object(0)
+	Wall::Wall() : Object()
 	{
 		mType = Type::Wall;
 
@@ -21,7 +19,7 @@ namespace battleCity
 		spriteSet(&SPR.getWallSprite());
 	}
 
-	Wall::Wall(float x, float y) : Object(0)
+	Wall::Wall(float x, float y) : Object()
 	{
 		mType = Type::Wall;
 
@@ -56,8 +54,6 @@ namespace battleCity
 
 	Wall::~Wall()
 	{
-#if DEBUG == 2
-		std::cout << "Wall Destructor" << std::endl;
-#endif
+
 	}
 }

@@ -19,7 +19,7 @@ namespace battleCity
 
         void draw() override;
 
-        void makePowerUp(const battleCity::EventCollision* CollisionEvent);
+        void makePowerUp(const battleCity::EventCollision* collisionEvent);
 
         int eventHandler(const Event* ptrEvent);
 	};

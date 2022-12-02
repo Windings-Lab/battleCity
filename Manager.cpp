@@ -45,20 +45,18 @@ bool battleCity::Manager::IsStarted() const
 int battleCity::Manager::OnEvent(const Event* ptrEvent) const
 {
 	int count = 0;
-	ObjectList listToIt = WM.objectsToMove;
-	ObjectList explosion = WM.objectsOfType("Explosion");
-	ObjectListIterator itEvent = ObjectListIterator(&listToIt);
-	ObjectListIterator itEventExplosion = ObjectListIterator(&explosion);
 
-	for (itEvent.first(); !itEvent.isDone(); itEvent.next())
+	for (const int objID : WM.mObjectIDsToMove)
 	{
-		(*itEvent.currentObject())->eventHandler(ptrEvent);
+		auto& movableObject = WM.mWorldList.GetObject(objID);
+		movableObject.eventHandler(ptrEvent);
 		count++;
 	}
 
-	for (itEventExplosion.first(); !itEventExplosion.isDone(); itEventExplosion.next())
+	for (const int objID : WM.GetObjectsOfType(Object::Type::Explosion))
 	{
-		(*itEventExplosion.currentObject())->eventHandler(ptrEvent);
+		auto& explosionObj = WM.mWorldList.GetObject(objID);
+		explosionObj.eventHandler(ptrEvent);
 		count++;
 	}
 

@@ -47,12 +47,13 @@ void battleCity::PowerUp::draw()
 	drawSprite(sprite, (int)position.X, (int)position.Y);
 }
 
-void battleCity::PowerUp::makePowerUp(const battleCity::EventCollision* CollisionEvent)
+void battleCity::PowerUp::makePowerUp(const battleCity::EventCollision* collisionEvent)
 {
-	if	(CollisionEvent->GetObjectID()->getType() == Type::TankPlayer)
+	auto& collisionObj = collisionEvent->GetObjectRef();
+	if	(collisionObj.getType() == Type::TankPlayer)
 	{
-		CollisionEvent->GetObjectID()->setHealth(health);
-		WM.MarkForDelete(this);
+		collisionObj.setHealth(health);
+		WM.MarkForDelete(mID);
 		WM.SetPowerUpisTakedToTrue();
 	}
 }

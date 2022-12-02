@@ -36,10 +36,11 @@ namespace battleCity
 		drawSprite(sprite, (int)position.X, (int)position.Y);
 	}
 
-	void PhoenixAndFlag::setGameOver(const EventCollision* CollisionEvent)
+	void PhoenixAndFlag::setGameOver(const EventCollision* collisionEvent)
 	{
-		if (CollisionEvent->GetColliderID()->getType() == Type::Bullet ||
-			CollisionEvent->GetObjectID()->getType() == Type::Bullet)
+		const auto& collisionObj = collisionEvent->GetObjectRef();
+		const auto& collider = collisionEvent->GetColliderRef();
+		if (collider.getType() == Type::Bullet || collisionObj.getType() == Type::Bullet)
 		{
 			gameOver = true;
 			spriteSet(nullptr, 1);
