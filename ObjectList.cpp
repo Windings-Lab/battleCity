@@ -26,11 +26,11 @@ namespace battleCity
 		return mList.at(id).get();
 	}
 
-	int ObjectList::Insert(int objID, const std::unique_ptr<Object>& objPtr)
+	int ObjectList::Insert(const std::unique_ptr<Object>& objPtr)
 	{
 		try
 		{
-			mList.try_emplace(objID, std::move(objPtr));
+			mList.try_emplace(objPtr->GetID(), std::move(objPtr));
 		}
 		catch (...)
 		{
