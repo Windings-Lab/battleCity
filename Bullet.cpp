@@ -70,27 +70,27 @@ namespace battleCity
 
 		position = pos;
 		setVelocity(directionObj);
-		objectID = object.getWorldID();
+		objectID = object.GetID();
 		objectType = object.getType();
 	}
 
 	void Bullet::out()
 	{
-		WM.markForDelete(this);
+		WM.MarkForDelete(this);
 	}
 
 	void Bullet::hit(const EventCollision* CollisionEvent)
 	{
 		if (health != 0)
 		{
-			if (objectID != CollisionEvent->getObject1()->getWorldID()
+			if (objectID != CollisionEvent->getObject1()->GetID()
 				&&
-				objectID != CollisionEvent->getObject2()->getWorldID())
+				objectID != CollisionEvent->getObject2()->GetID())
 			{
 				if ((CollisionEvent->getObject2()->getType() == Type::Tank ||
 					CollisionEvent->getObject1()->getType() == Type::Tank) && objectType == Type::Tank)
 				{
-					WM.markForDelete(this);
+					WM.MarkForDelete(this);
 					return;
 				}
 				if ((CollisionEvent->getObject2()->getType() == Type::PowerUp ||
@@ -98,8 +98,8 @@ namespace battleCity
 				{
 					return;
 				}
-				WM.markForDelete(CollisionEvent->getObject1());
-				WM.markForDelete(CollisionEvent->getObject2());
+				WM.MarkForDelete(CollisionEvent->getObject1());
+				WM.MarkForDelete(CollisionEvent->getObject2());
 				return;
 			}
 		}

@@ -27,7 +27,6 @@ namespace battleCity
         initPosition(Vector(40, 44));
 
         mID = IDCounter++;
-        WM.InsertObject(this);
     }
 
     std::vector<Sprite*>& Object::getSpriteList()
@@ -256,12 +255,12 @@ namespace battleCity
 
     bool Object::isSolid() const
     {
-        return solidness == Solidness::Hard ? 1 : 0;
+        return solidness == Solidness::Hard;
     }
 
     bool Object::isSoft() const
     {
-        return solidness == Solidness::Soft ? 1 : 0;
+        return solidness == Solidness::Soft;
     }
 
     int Object::setSolidness(Solidness newSolid)

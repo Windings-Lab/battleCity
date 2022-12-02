@@ -21,7 +21,7 @@ namespace battleCity
 		return Range {mList.begin(), mList.end()};
 	}
 
-	Object* ObjectList::GetObject(int id) const
+	Object* const ObjectList::GetObject(int id) const
 	{
 		return mList.at(id).get();
 	}

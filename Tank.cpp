@@ -43,7 +43,7 @@ namespace battleCity
 
 		change = 1;
 		move(1, 0);
-		WM.setTankCount(1);
+		WM.SetTankCount(1);
 	}
 
 	Tank::Tank(float x, float y)
@@ -63,7 +63,7 @@ namespace battleCity
 
 		change = 1;
 		move(1, 0);
-		WM.setTankCount(1);
+		WM.SetTankCount(1);
 	}
 
 	inline void Tank::update()
@@ -279,8 +279,8 @@ namespace battleCity
 #if DEBUG == 2
 		std::cout << "Tank Destructor" << std::endl;
 #endif
-		WM.setTankCount(-1);
-		WM.setKillCount(1);
+		WM.SetTankCount(-1);
+		WM.SetKillCount(1);
 		Explosion* newExp = new Explosion(true);
 		newExp->setPosition(this->position);
 		newExp = nullptr;

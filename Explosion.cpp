@@ -32,7 +32,7 @@ namespace battleCity
         {
             spriteIndex++;
             sprite = spriteDB->at(spriteIndex);
-            WM.markForDelete(this);
+            WM.MarkForDelete(this);
         }
     }
 

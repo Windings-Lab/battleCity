@@ -10,9 +10,9 @@ battleCity::PowerUp::PowerUp()
 {
 	mType = Type::PowerUp;
 
-	int rnd = randomNumber(0, WM.getPowerUpPositions().size() - 1);
-	indexX = WM.getPowerUpPositions()[rnd][0];
-	indexY = WM.getPowerUpPositions()[rnd][1];
+	int rnd = randomNumber(0, WM.GetPowerUpPositions().size() - 1);
+	indexX = WM.GetPowerUpPositions()[rnd][0];
+	indexY = WM.GetPowerUpPositions()[rnd][1];
 	initPosition(Vector(indexX, indexY));
 
 	health = 1;
@@ -28,9 +28,9 @@ battleCity::PowerUp::PowerUp(int giveHealth)
 {
 	mType = Type::PowerUp;
 
-	int rnd = randomNumber(0, WM.getPowerUpPositions().size() - 1);
-	indexX = WM.getPowerUpPositions()[rnd][0];
-	indexY = WM.getPowerUpPositions()[rnd][1];
+	int rnd = randomNumber(0, WM.GetPowerUpPositions().size() - 1);
+	indexX = WM.GetPowerUpPositions()[rnd][0];
+	indexY = WM.GetPowerUpPositions()[rnd][1];
 	initPosition(Vector(indexX, indexY));
 
 	health = giveHealth;
@@ -52,8 +52,8 @@ void battleCity::PowerUp::makePowerUp(const battleCity::EventCollision* Collisio
 	if	(CollisionEvent->getObject1()->getType() == Type::TankPlayer)
 	{
 		CollisionEvent->getObject1()->setHealth(health);
-		WM.markForDelete(this);
-		WM.setPowerUpisTakedToTrue();
+		WM.MarkForDelete(this);
+		WM.SetPowerUpisTakedToTrue();
 	}
 }
 
@@ -73,5 +73,5 @@ int battleCity::PowerUp::eventHandler(const Event* ptrEvent)
 
 battleCity::PowerUp::~PowerUp()
 {
-	WM.setPowerUpToFalse();
+	WM.SetPowerUpToFalse();
 }

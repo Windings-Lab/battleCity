@@ -52,7 +52,7 @@ int battleCity::GameManager::startUp(TankPlayer& newPlayer)
 {
 	_gameOver = false;
 	player = &newPlayer;
-	WM.startUp(newPlayer);
+	WM.StartUp(newPlayer);
 	return Manager::StartUp();
 }
 
@@ -78,8 +78,8 @@ void battleCity::GameManager::run()
 	_clock.delta();
 	auto eventStep = std::make_unique<EventStep>();
 	OnEvent(eventStep.get());
-	WM.update();
-	WM.draw();
+	WM.Update();
+	WM.Draw();
 	_frameTime = getTickCount() / 1000;
 	_stepCount++;
 

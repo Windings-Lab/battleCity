@@ -22,14 +22,12 @@
 #include <fstream>
 #include <memory>
 
+#include "Object.h"
+
 using namespace std::string_view_literals;
 
 namespace battleCity
 {
-
-	int WorldManager::mWorldId = 1;
-	int WorldManager::mOveId = 1;
-
 	WorldManager::WorldManager()
 	{
 		SetType(ManagerType::World);
@@ -67,12 +65,7 @@ namespace battleCity
 	void WorldManager::ShutDown()
 	{
 		//std::cout << "WorldManager - shutDown" << std::endl;
-		ObjectList listToDelete = mWorldList;
-		ObjectListIterator it = ObjectListIterator(&listToDelete);
-		for (it.first(); !it.isDone(); it.next())
-		{
-			delete* it.currentObject();
-		}
+		mWorldList.Clear();
 		Manager::ShutDown();
 	}
 
@@ -105,61 +98,32 @@ namespace battleCity
 		return mKillCount;
 	}
 
-	int WorldManager::InsertObject(Object* objectPtr)
+	int WorldManager::InsertObject(const std::unique_ptr<Object>& objPtr)
 	{
 		//std::cout << "WorldManager - insertObject" << std::endl;
-		int check;
-		if (objectPtr->getWorldMoveID() != 0)
+		if (objPtr->IsMovable())
 		{
-			mOveId++;
-			check = mObjectsToMove.insert(objectPtr);
-			if (check == -1)
-				return check;
+			mObjectIDsToMove.insert(objPtr->GetID());
 		}
-		mWorldId++;
-		check = mWorldList.insert(objectPtr);
-		objectPtr = nullptr;
-		return check;
+		
+		return mWorldList.Insert(objPtr);
 	}
 
-	int WorldManager::RemoveObject(Object* objectPtr)
+	int WorldManager::RemoveObject(int objID)
 	{
 		//std::cout << "WorldManager - removeObject" << std::endl;
-		int check;
-		if (objectPtr->getWorldMoveID() != 0)
-		{
-			check = mObjectsToMove.RemoveByMoveId(objectPtr->getWorldMoveID());
-			if (check == -1)
-				return check;
-		}
-		check = mWorldList.RemoveByWorldId(objectPtr->getWorldID());
-		objectPtr = nullptr;
-		return check;
+		mObjectIDsToMove.erase(objID);
+		return mWorldList.Remove(objID);
 	}
 
-	ObjectList WorldManager::GetAllObjects() const
+	const ObjectList& WorldManager::GetAllObjects() const
 	{
 		return mWorldList;
 	}
 
-	int WorldManager::GetSizeOfWorldList()
+	int WorldManager::GetSizeOfWorldList() const
 	{
 		return mWorldList.GetSize();
-	}
-
-	int WorldManager::GetSizeOfMoveList()
-	{
-		return mObjectsToMove.GetSize();
-	}
-
-	int WorldManager::GetWorldId() const
-	{
-		return mWorldId;
-	}
-
-	int WorldManager::GetMoveId() const
-	{
-		return mOveId;
 	}
 
 	std::vector<std::vector<Object*>>& WorldManager::GetWorldMap()
@@ -178,9 +142,9 @@ namespace battleCity
 		if (GM.stepCount % 450 == 0 && mTankCount != 6 && mTankStorage > 0)
 		{
 			if (rnd == 1)
-				new Tank(500, 45);
+				InsertObject(std::make_unique<Tank>(500, 45));
 			else
-				new Tank(275, 45);
+				InsertObject(std::make_unique<Tank>(275, 45));
 		}
 	}
 
@@ -220,15 +184,13 @@ namespace battleCity
 		return 1;
 	}
 
-	ObjectList WorldManager::ObjectsOfType(std::string type)
+	std::unordered_set<int> WorldManager::GetObjectsOfType(Object::Type type) const
 	{
-		ObjectList newList = mWorldList;
-		ObjectListIterator it = ObjectListIterator(&mWorldList);
-
-		for (it.first(); !it.isDone(); it.next())
+		std::unordered_set<int> newList;
+		for (const auto& [objID, objRef] : mWorldList.GetRange())
 		{
-			if ((*it.currentObject())->getType() == type)
-				newList.insert(*it.currentObject());
+			if (objRef->getType() == type)
+				newList.insert(objRef->GetID());
 		}
 
 		return newList;
@@ -240,38 +202,37 @@ namespace battleCity
 		CreateSomeTanks();
 #endif
 		//std::cout << "WorldManager - update" << std::endl;
-		ObjectList listToIt = mObjectsToMove;
-		ObjectListIterator it = ObjectListIterator(&mObjectsToMove);
 
-		ObjectListIterator itUpdate = ObjectListIterator(&mWorldList);
-		ObjectListIterator itDeletetion = ObjectListIterator(&mDeletionList);
-
-		for (itUpdate.first(); !itUpdate.isDone(); itUpdate.next())
+		for (const auto& [objID, objRef] : mWorldList.GetRange())
 		{
-			(*itUpdate.currentObject())->update();
+			objRef->update();
 		}
 
-		for (it.first(); !it.isDone(); it.next())
+		for (const auto& [objID, objRef] : mWorldList.GetRange())
 		{
-			Vector newPos = (*it.currentObject())->predictPosition();
-			MoveObject(*it.currentObject(), newPos);
-		}
-
-		for (itDeletetion.first(); !itDeletetion.isDone(); itDeletetion.next())
-		{
-			Object* objToDelete = *itDeletetion.currentObject();
-			if (objToDelete->getType() == Object::Type::Wall)
+			if(mObjectIDsToMove.find(objID) != mObjectIDsToMove.end())
 			{
-				Vector pos = objToDelete->getPosition();
-				int x = (pos.x - SCR.getBoundaryL()) / 16;
-				int y = (pos.y - SCR.getBoundaryU()) / 16;
-				mMap[y][x] = nullptr;
+				Vector newPos = objRef->predictPosition();
+				MoveObject(objRef, newPos);
 			}
-			delete objToDelete;
-			objToDelete = nullptr;
 		}
 
-		mDeletionList.Clear();
+		for (const auto& [objID, objRef] : mWorldList.GetRange())
+		{
+			if (mObjectIDsToDelete.find(objID) != mObjectIDsToDelete.end())
+			{
+				if (objRef->getType() == Object::Type::Wall)
+				{
+					Vector pos = objRef->getPosition();
+					int x = (pos.x - SCR.getBoundaryL()) / 16;
+					int y = (pos.y - SCR.getBoundaryU()) / 16;
+					mMap[y][x] = nullptr;
+				}
+				RemoveObject(objID);
+			}
+		}
+
+		mObjectIDsToDelete.clear();
 
 #if DEBUG == 0
 		CreatePowerUp();
@@ -284,13 +245,11 @@ namespace battleCity
 
 	void WorldManager::Draw()
 	{
-		ObjectListIterator it = ObjectListIterator(&mWorldList);
-
 		DrawBackground();
 
-		for (it.first(); !it.isDone(); it.next())
+		for (const auto& [objID, objRef] : mWorldList.GetRange())
 		{
-			(*it.currentObject())->draw();
+			objRef->draw();
 		}
 
 		if (mGameOver)
@@ -306,76 +265,68 @@ namespace battleCity
 
 	void WorldManager::DrawBackground()
 	{
-
 		drawSprite(&SPR.getBackgroundSprite(), SCR.getBoundaryL(), SCR.getBoundaryU());
 	}
 
-	int WorldManager::MoveObject(Object* ptrObject, Vector where)
+	int WorldManager::MoveObject(const std::unique_ptr<Object>& movableObjt, Vector where)
 	{
 		//std::cout << "moveObject" << std::endl;
-		if (ptrObject->isSolid() || ptrObject->isSoft())
+		if (movableObjt->isSolid() || movableObjt->isSoft())
 		{
-			ObjectList newList = GetCollisions(ptrObject, where);
+			ObjectList newList = GetCollisions(movableObjt, where);
 
 			if (!newList.IsEmpty())
 			{
 				bool doMove = true;
-				ObjectListIterator it = ObjectListIterator(&newList);
-				Object* tempObject = nullptr;
 
-				for (it.first(); !it.isDone(); it.next())
+				for (const auto& [objID, colliderObj] : newList.GetRange())
 				{
-					tempObject = *it.currentObject();
-					EventCollision collision(ptrObject, tempObject, where);
+					EventCollision collision(movableObjt, colliderObj, where);
 
-					ptrObject->eventHandler(&collision);
-					tempObject->eventHandler(&collision);
+					movableObjt->eventHandler(&collision);
+					colliderObj->eventHandler(&collision);
 
-					if (ptrObject->isSolid() && tempObject->isSolid())
-						doMove = false;
+					if (movableObjt->isSolid() && colliderObj->isSolid()) doMove = false;
 				}
-				tempObject = nullptr;
 
 				if (!doMove)
 				{
-					ptrObject = nullptr;
 					return -1;
 				}
 			}
 		}
+
 		int i = 0;
-		if ((where.x >= SCR.getBoundaryL() && where.x + ptrObject->getSpriteX() <= SCR.getBoundaryR()) &&
-			(where.y >= SCR.getBoundaryU() && where.y + ptrObject->getSpriteY() <= SCR.getBoundaryD()))
+		if ((where.x >= SCR.getBoundaryL() && where.x + movableObjt->getSpriteX() <= SCR.getBoundaryR()) &&
+			(where.y >= SCR.getBoundaryU() && where.y + movableObjt->getSpriteY() <= SCR.getBoundaryD()))
 		{
-			i = ptrObject->setPosition(where);
+			i = movableObjt->setPosition(where);
 		}
 		else
 		{
 			auto eventOut = std::make_unique<EventOut>();
-			ptrObject->eventHandler(eventOut.get());
+			movableObjt->eventHandler(eventOut.get());
 		}
 
-		ptrObject = nullptr;
 		return i;
 	}
 
-	int WorldManager::MarkForDelete(Object* objectPtr)
+	int WorldManager::MarkForDelete(int objID)
 	{
-		ObjectListIterator it = ObjectListIterator(&mDeletionList);
-
-		for (it.first(); !it.isDone(); it.next())
+		if (mObjectIDsToDelete.find(objID) != mObjectIDsToDelete.end())
 		{
-			if (*it.currentObject() == objectPtr)
-				return 0;
+			return 0;
 		}
 
-		objectPtr->setHealth(-1);
+		const auto objRef = mWorldList.GetObject(objID);
 
-		if (objectPtr->getHealth() == 0)
+		objRef->setHealth(-1);
+
+		if (objRef->getHealth() == 0)
 		{
-			mDeletionList.insert(objectPtr);
+			mObjectIDsToDelete.insert(objID);
 		}
-		objectPtr = nullptr;
+		
 		return 0;
 	}
 
@@ -395,7 +346,7 @@ namespace battleCity
 			case 10:
 				if (mIsPowerUp)
 				{
-					MarkForDelete(mPowerUp);
+					MarkForDelete(mPowerUp->GetID());
 					mPowerUpTaked = false;
 				}
 				else
@@ -413,7 +364,7 @@ namespace battleCity
 			case 17:
 				if (mIsPowerUp)
 				{
-					MarkForDelete(mPowerUp);
+					MarkForDelete(mPowerUp->GetID());
 					mPowerUpTaked = false;
 				}
 				else
@@ -442,35 +393,31 @@ namespace battleCity
 		mPowerUpTaked = true;
 	}
 
-	ObjectList WorldManager::GetCollisions(const Object* ptrObject, Vector where) const
+	std::unordered_set<int> WorldManager::GetCollisions(const std::unique_ptr<Object>& ptrObject, Vector where) const
 	{
-		ObjectList collisionList;
+		std::unordered_set<int> collisionList;
 		if (ptrObject->getSpeed() == 0)
 		{
-			ptrObject = nullptr;
 			return collisionList;
 		}
-		ObjectListIterator it = ObjectListIterator(&mObjectsToMove);
 		Object* tempObject = nullptr;
 		Vector objWorldIndex = ptrObject->getWorldIndexRelative();
 
 		tempObject = mMap[(int)objWorldIndex.y][(int)objWorldIndex.x];
-		auto iterateFullListFunc =
-			[&it, &ptrObject, &collisionList, &where]()
+		auto iterateFullListFunc = [&]()
 		{
-			for (it.first(); !it.isDone(); it.next())
+			for (const auto& [objID, colliderObj] : mWorldList.GetRange())
 			{
-				Object* tempObject = *it.currentObject();
-				if (tempObject == ptrObject)
+				if (colliderObj == ptrObject)
 				{
 					continue;
 				}
 				Box b = getWorldBox(ptrObject, where);
 				Box bTemp = getWorldBox(tempObject);
-				if (boxesIntersect(b, bTemp) &&
-					(tempObject->isSolid() || tempObject->isSoft()))
+				if ((tempObject->isSolid() || tempObject->isSoft()) && 
+					boxesIntersect(b, bTemp))
 				{
-					collisionList.insert(tempObject);
+					collisionList.insert(tempObject->GetID());
 				}
 			}
 		};
@@ -491,7 +438,7 @@ namespace battleCity
 			if (boxesIntersect(b, bTemp) &&
 				(tempObject->isSolid() || tempObject->isSoft()))
 			{
-				collisionList.insert(tempObject);
+				collisionList.insert(tempObject->GetID());
 			}
 			// Check other movable objects
 			else

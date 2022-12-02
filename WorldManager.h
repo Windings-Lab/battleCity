@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <unordered_set>
 
 #include "Manager.h"
 #include "Vector.h"
@@ -9,7 +10,7 @@
 #include "TankPlayer.h"
 #include "PowerUp.h"
 
-#define WM battleCity::WorldManager::getInstance()
+#define WM battleCity::WorldManager::GetInstance()
 
 namespace battleCity
 {
@@ -17,18 +18,17 @@ namespace battleCity
 	class WorldManager : public Manager
 	{
 	private:
+		WorldManager();
+
 		std::vector<std::vector<Object*>> mMap;
 		std::vector<std::vector<int>> mPowerUpPositions;
 
 		// All Objects in game world
 		ObjectList mWorldList;
 		// Objects, that need to update every loop step
-		std::vector<int> mObjectIDsToMove;
+		std::unordered_set<int> mObjectIDsToMove;
 		// List of all Objects to delete.
-		std::vector<int> mObjectIDsToDelete;
-
-		static int mWorldId;
-		static int mOveId;
+		std::unordered_set<int> mObjectIDsToDelete;
 
 		Vector mGameOverPos;
 		Sprite* mGameOverSpr;
@@ -45,7 +45,6 @@ namespace battleCity
 		friend class Manager;
 		friend class GameManager;
 
-		WorldManager() = delete;
 		WorldManager(WorldManager const&) = delete;
 		void operator=(WorldManager const&) = delete;
 
@@ -71,20 +70,17 @@ namespace battleCity
 
 		// Insert Object into world
 		// Return 0 if ok, else -1
-		int InsertObject(Object* objectPtr);
+		int InsertObject(const std::unique_ptr<Object>& objPtr);
 
 		// Remove Object from world
 		// Return 0 if ok, else -1
-		int RemoveObject(Object* objectPtr);
+		int RemoveObject(int objID);
 
 		// Return list of all Objects in world
-		ObjectList GetAllObjects() const;
+		const ObjectList& GetAllObjects() const;
 
-		int GetSizeOfWorldList();
-		int GetSizeOfMoveList();
+		int GetSizeOfWorldList() const;
 
-		int GetWorldId() const;
-		int GetMoveId() const;
 		std::vector<std::vector<Object*>>& GetWorldMap();
 		std::vector<std::vector<int>>& GetPowerUpPositions();
 
@@ -94,7 +90,7 @@ namespace battleCity
 
 		// Return list of Objects matching type
 		// List is empty if none found
-		ObjectList ObjectsOfType(std::string type);
+		std::unordered_set<int> GetObjectsOfType(Object::Type type) const;
 
 		// Update world.
 		// Update positions of Objects based on their velocities.
@@ -111,11 +107,11 @@ namespace battleCity
 		/// If Object is spectral, move ok.
 		/// If move ok, move.
 		/// Return 0 if moved, else -1 if collision with solid.
-		int MoveObject(Object* ptrObject, Vector where);
+		int MoveObject(const std::unique_ptr<Object>& movableObjt, Vector where);
 
 		// Indicate Object is to be deleted at end of current game loop.
 		// Return 0 if ok
-		int MarkForDelete(Object* objectPtr);
+		int MarkForDelete(int objID);
 
 		void CreatePowerUp();
 		void SetPowerUpToFalse();
@@ -123,7 +119,7 @@ namespace battleCity
 
 		// Return list of Objects collided with at position 'where'.
 		// Collisions only with solid and soft Objects.
-		ObjectList GetCollisions(const Object* ptrObject, Vector where) const;
+		std::unordered_set<int> GetCollisions(const std::unique_ptr<Object>& ptrObject, Vector where) const;
 	};
 }
 
