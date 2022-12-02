@@ -36,6 +36,7 @@ namespace battleCity
 		constSpeed = 1;
 		bulletCount = 1;
 		solidness = Solidness::Hard;
+		isMovable = true;
 
 		spriteDB = &SPR.getTankSprites();
 		spriteSet();
@@ -56,6 +57,7 @@ namespace battleCity
 		constSpeed = 1;
 		bulletCount = 1;
 		solidness = Solidness::Hard;
+		isMovable = true;
 
 		spriteDB = &SPR.getTankSprites();
 		spriteSet();
@@ -120,14 +122,17 @@ namespace battleCity
 
 	void Tank::pathFind(const EventCollision* collisionEvent)
 	{
-		auto& collisionObj = collisionEvent->GetObjectRef();
-		const auto& collider = collisionEvent->GetColliderRef();
 		if (collisionEvent == nullptr)
 		{
 			isSpawnIntersects = false;
 			randomMove();
+			return;
 		}
-		else if (collisionObj.getType() == Type::Wall || collider.getType() == Type::Wall)
+
+		auto& collisionObj = collisionEvent->GetObjectRef();
+		const auto& collider = collisionEvent->GetColliderRef();
+
+		if (collisionObj.getType() == Type::Wall || collider.getType() == Type::Wall)
 		{
 			if (GM.stepCount % 125 == 0)
 			{
