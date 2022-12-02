@@ -1,28 +1,31 @@
 #include "EventKeyboard.h"
 
-battleCity::EventKeyboard::EventKeyboard()
+namespace battleCity
 {
-	keyValue = FRKey::COUNT;
-	keyboardAction = EventKeyboardAction::UNDEFINED;
-	SetType(EventType::Keyboard);
-}
+	EventKeyboard::EventKeyboard()
+	{
+		mKeyValue = FRKey::COUNT;
+		mKeyboardAction = EventKeyboardAction::UNDEFINED;
+		SetType(EventType::Keyboard);
+	}
 
-void battleCity::EventKeyboard::setKey(FRKey newKey)
-{
-	keyValue = newKey;
-}
+	void EventKeyboard::SetKey(FRKey newKey)
+	{
+		mKeyValue = newKey;
+	}
 
-FRKey battleCity::EventKeyboard::getKey() const
-{
-	return keyValue;
-}
+	FRKey EventKeyboard::GetKey() const
+	{
+		return mKeyValue;
+	}
 
-void battleCity::EventKeyboard::setKeyboardAction(EventKeyboardAction newAction)
-{
-	keyboardAction = newAction;
-}
+	void EventKeyboard::SetKeyboardAction(EventKeyboardAction newAction)
+	{
+		mKeyboardAction = newAction;
+	}
 
-battleCity::EventKeyboardAction battleCity::EventKeyboard::getKeyboardAction() const
-{
-	return keyboardAction;
+	EventKeyboardAction EventKeyboard::GetKeyboardAction() const
+	{
+		return mKeyboardAction;
+	}
 }

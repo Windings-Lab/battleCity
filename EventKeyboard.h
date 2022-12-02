@@ -12,27 +12,25 @@ namespace battleCity
         UNDEFINED
     };
 
-    class EventKeyboard : public Event
+    class EventKeyboard final : public Event
     {
-    private:
-        FRKey keyValue;	          // Key value.
-        EventKeyboardAction keyboardAction;  // Key action.
-
     public:
         EventKeyboard();
 
         // Set key in event.
-        void setKey(FRKey newKey);
+        void SetKey(FRKey newKey);
 
         // Get key from event.
-        FRKey getKey() const;
+        FRKey GetKey() const;
 
         // Set keyboard event action.
-        void setKeyboardAction(EventKeyboardAction newAction);
+        void SetKeyboardAction(EventKeyboardAction newAction);
 
         // Get keyboard event action.
-        EventKeyboardAction getKeyboardAction() const;
-
+        EventKeyboardAction GetKeyboardAction() const;
+    private:
+        FRKey mKeyValue;	          // Key value.
+        EventKeyboardAction mKeyboardAction;  // Key action.
     };
 }
 
