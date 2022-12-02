@@ -112,11 +112,11 @@ namespace battleCity
 		}
 	}
 
-	void TankPlayer::mouseInput(const EventMouse* mouseEvent)
+	void TankPlayer::mouseInput(EventMouse& mouseEvent)
 	{
 		// Pressed button?
-		if ((mouseEvent->GetMouseAction() == EventMouseAction::PRESSED) &&
-			(mouseEvent->GetMouseButton() == FRMouseButton::LEFT))
+		if ((mouseEvent.GetMouseAction() == EventMouseAction::PRESSED) &&
+			(mouseEvent.GetMouseButton() == FRMouseButton::LEFT))
 			fire();
 	}
 
@@ -136,18 +136,16 @@ namespace battleCity
 		}
 	}
 
-	int TankPlayer::eventHandler(const Event* eventPtr)
+	int TankPlayer::EventHandler(Event event)
 	{
-		if (eventPtr->GetType() == EventType::Keyboard) {
+		if (event.GetType() == EventType::Keyboard) {
 			keyboardInput();
-			eventPtr = nullptr;
 			return 1;
 		}
 
-		if (eventPtr->GetType() == EventType::Mouse) {
-			const EventMouse& mouseEvent = dynamic_cast <const EventMouse&> (*eventPtr);
-			mouseInput(&mouseEvent);
-			eventPtr = nullptr;
+		if (event.GetType() == EventType::Mouse) 
+		{
+			mouseInput(dynamic_cast <EventMouse&> (event));
 			return 1;
 		}
 		return 0;
