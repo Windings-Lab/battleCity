@@ -2,11 +2,9 @@
 #include "EventCollision.h"
 #include "Utility.h"
 #include "WorldManager.h"
-#include "Screen.h"
+#include "GameManager.h"
 
 #include <iostream>
-
-#include "GameManager.h"
 
 battleCity::PowerUp::PowerUp()
 {
@@ -49,9 +47,9 @@ void battleCity::PowerUp::draw()
 	drawSprite(sprite, (int)position.X, (int)position.Y);
 }
 
-void battleCity::PowerUp::makePowerUp(const battleCity::EventCollision* collisionEvent)
+void battleCity::PowerUp::makePowerUp(EventCollision& collisionEvent)
 {
-	auto& collisionObj = collisionEvent->GetObjectRef();
+	auto& collisionObj = collisionEvent.GetObjectRef();
 	if	(collisionObj.getType() == Type::TankPlayer)
 	{
 		collisionObj.setHealth(health);
@@ -60,14 +58,11 @@ void battleCity::PowerUp::makePowerUp(const battleCity::EventCollision* collisio
 	}
 }
 
-int battleCity::PowerUp::eventHandler(const Event* ptrEvent)
+int battleCity::PowerUp::EventHandler(Event event)
 {
-	if (ptrEvent->GetType() == EventType::Collision)
+	if (event.GetType() == EventType::Collision)
 	{
-		const EventCollision* collisionEvent = dynamic_cast <const EventCollision*> (ptrEvent);
-		makePowerUp(collisionEvent);
-		collisionEvent = nullptr;
-		ptrEvent = nullptr;
+		makePowerUp(dynamic_cast<EventCollision&>(event));
 		return 1;
 	}
 
