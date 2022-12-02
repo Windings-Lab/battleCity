@@ -22,10 +22,7 @@ class MyFramework : public Framework {
 public:
 	MyFramework()
 	{
-		using std::make_unique;
 
-		mEventKeyboard = make_unique<EventKeyboard>();
-		mEventMouse = make_unique<EventMouse>();
 	}
 
 	virtual void PreInit(int& width, int& height, bool& fullscreen)
@@ -84,8 +81,6 @@ public:
 		}
 		// ------------------------------------------------------------
 
-		mEventKeyboard.reset();
-		mEventMouse.reset();
 		GM.ShutDown();
 	}
 
@@ -96,16 +91,16 @@ public:
 
 	virtual void onMouseMove(int x, int y, int xrelative, int yrelative)
 	{
-		mEventMouse->SetMousePosition({ static_cast<float>(x), static_cast<float>(y) });
+		mEventMouse.SetMousePosition({ static_cast<float>(x), static_cast<float>(y) });
 	}
 
 	virtual void onMouseButtonClick(FRMouseButton button, bool isReleased)
 	{
 		if (mPlayer->getHealth() > 0)
 		{
-			mEventMouse->SetMouseButton(button);
-			mEventMouse->SetMouseAction(isReleased);
-			mPlayer->eventHandler(mEventMouse.get());
+			mEventMouse.SetMouseButton(button);
+			mEventMouse.SetMouseAction(isReleased);
+			mPlayer->EventHandler(mEventMouse);
 		}
 	}
 
@@ -113,10 +108,10 @@ public:
 	{
 		if (mPlayer->getHealth() > 0)
 		{
-			mEventKeyboard->SetKey(k);
-			mEventKeyboard->SetKeyboardAction(EventKeyboardAction::KEY_PRESSED);
+			mEventKeyboard.SetKey(k);
+			mEventKeyboard.SetKeyboardAction(EventKeyboardAction::KEY_PRESSED);
 			mPlayer->movementSet(k);
-			mPlayer->eventHandler(mEventKeyboard.get());
+			mPlayer->EventHandler(mEventKeyboard);
 		}
 	}
 
@@ -124,10 +119,10 @@ public:
 	{
 		if (mPlayer->getHealth() > 0)
 		{
-			mEventKeyboard->SetKey(k);
-			mEventKeyboard->SetKeyboardAction(EventKeyboardAction::KEY_RELEASED);
+			mEventKeyboard.SetKey(k);
+			mEventKeyboard.SetKeyboardAction(EventKeyboardAction::KEY_RELEASED);
 			mPlayer->movementErase(k);
-			mPlayer->eventHandler(mEventKeyboard.get());
+			mPlayer->EventHandler(mEventKeyboard);
 		}
 	}
 
@@ -144,8 +139,8 @@ public:
 		TankPlayer* mPlayer;
 		std::vector<std::unique_ptr<Object>> mDemo;
 
-		std::unique_ptr<EventKeyboard> mEventKeyboard;
-		std::unique_ptr<EventMouse> mEventMouse;
+		EventKeyboard mEventKeyboard;
+		EventMouse mEventMouse;
 };
 
 static void show_usage(std::string name)

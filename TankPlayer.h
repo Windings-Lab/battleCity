@@ -36,7 +36,7 @@ namespace battleCity
 		void move(float x, float y);
 		void fire();
 
-		int EventHandler(Event event) override;
+		int EventHandler(Event& event) override;
 	private:
 		std::vector<MovementDirection> mMovement = { MovementDirection::Idle };
 	};

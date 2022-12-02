@@ -18,7 +18,7 @@ namespace battleCity
 
         void setGameOver(EventCollision& collisionEvent);
 
-        int EventHandler(Event event) override;
+        int EventHandler(Event& event) override;
 	};
 }
 

@@ -50,7 +50,7 @@ namespace battleCity
 		}
 	}
 
-	int PhoenixAndFlag::EventHandler(Event event)
+	int PhoenixAndFlag::EventHandler(Event& event)
 	{
 		if (!gameOver)
 		{

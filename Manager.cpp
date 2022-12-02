@@ -48,14 +48,14 @@ int battleCity::Manager::OnEvent(const Event* ptrEvent) const
 	for (const int objID : WM.mObjectIDsToMove)
 	{
 		auto& movableObject = WM.mWorldList.GetObject(objID);
-		movableObject.eventHandler(ptrEvent);
+		movableObject.EventHandler(ptrEvent);
 		count++;
 	}
 
 	for (const int objID : WM.GetObjectsOfType(Object::Type::Explosion))
 	{
 		auto& explosionObj = WM.mWorldList.GetObject(objID);
-		explosionObj.eventHandler(ptrEvent);
+		explosionObj.EventHandler(ptrEvent);
 		count++;
 	}
 

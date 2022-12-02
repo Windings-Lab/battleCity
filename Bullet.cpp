@@ -107,7 +107,7 @@ namespace battleCity
 		drawSprite(sprite, (int)position.X, (int)position.Y);
 	}
 
-	int Bullet::EventHandler(Event event)
+	int Bullet::EventHandler(Event& event)
 	{
 		if (event.GetType() == EventType::Out) 
 		{

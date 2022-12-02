@@ -136,7 +136,7 @@ namespace battleCity
 		}
 	}
 
-	int TankPlayer::EventHandler(Event event)
+	int TankPlayer::EventHandler(Event& event)
 	{
 		if (event.GetType() == EventType::Keyboard) {
 			keyboardInput();

@@ -304,8 +304,8 @@ namespace battleCity
 					auto& colliderObj = mWorldList.GetObject(objID);
 					EventCollision collision(movableObj.GetID(), colliderObj.GetID(), where);
 
-					movableObj.eventHandler(&collision);
-					colliderObj.eventHandler(&collision);
+					movableObj.EventHandler(collision);
+					colliderObj.EventHandler(collision);
 
 					doMove = !(movableObj.isSolid() && colliderObj.isSolid());
 				}
@@ -325,8 +325,8 @@ namespace battleCity
 		}
 		else
 		{
-			auto eventOut = std::make_unique<EventOut>();
-			movableObj.eventHandler(eventOut.get());
+			auto eventOut = EventOut();
+			movableObj.EventHandler(eventOut);
 		}
 
 		return i;

@@ -37,7 +37,7 @@ namespace battleCity
     }
 
 
-    int Explosion::EventHandler(Event eventPtr)
+    int Explosion::EventHandler(Event& eventPtr)
     {
         if (eventPtr.GetType() == EventType::Step) 
         {

@@ -58,7 +58,7 @@ void battleCity::PowerUp::makePowerUp(EventCollision& collisionEvent)
 	}
 }
 
-int battleCity::PowerUp::EventHandler(Event event)
+int battleCity::PowerUp::EventHandler(Event& event)
 {
 	if (event.GetType() == EventType::Collision)
 	{

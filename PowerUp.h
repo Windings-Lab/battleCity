@@ -19,7 +19,7 @@ namespace battleCity
 
         void makePowerUp(EventCollision& collisionEvent);
 
-        int EventHandler(Event event) override;
+        int EventHandler(Event& event) override;
 	};
 }
 

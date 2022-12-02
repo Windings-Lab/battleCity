@@ -221,7 +221,7 @@ namespace battleCity
 		}
 	}
 
-	int Tank::EventHandler(Event event)
+	int Tank::EventHandler(Event& event)
 	{
 		if (event.GetType() == EventType::Collision)
 		{
