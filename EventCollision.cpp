@@ -2,11 +2,9 @@
 
 namespace battleCity
 {
-	EventCollision::EventCollision(const int objectID, const int colliderID, Vector collisionPos)
+	EventCollision::EventCollision(int objectID, int colliderID, Vector collisionPos)
+		: mCollisionPos(collisionPos), mObjectID(objectID), mCollider(colliderID)
 	{
-		mObjectID = objectID;
-		mCollider = colliderID;
-		mCollisionPos = collisionPos;
 		SetType(EventType::Collision);
 	}
 
