@@ -169,7 +169,6 @@ namespace battleCity
 
 				switch (type)
 				{
-				
 				case Object::Type::TankPlayer:
 					newPlayer.setPosition(Vector(SCR.getBoundaryL() + (16 * j), SCR.getBoundaryU() + (16 * i)));
 					break;
@@ -290,8 +289,8 @@ namespace battleCity
 
 				for (const auto& objID : newList)
 				{
-					auto colliderObj = mWorldList.GetObject(objID);
-					EventCollision collision(movableObj, colliderObj, where);
+					auto& colliderObj = mWorldList.GetObject(objID);
+					EventCollision collision(movableObj.GetID(), colliderObj.GetID(), where);
 
 					movableObj.eventHandler(&collision);
 					colliderObj.eventHandler(&collision);

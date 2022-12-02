@@ -117,7 +117,7 @@ namespace battleCity
 		void SetPowerUpToFalse();
 		void SetPowerUpisTakedToTrue();
 
-		// Return list of Objects collided with at position 'where'.
+		// Return list of Objects collided with at some position
 		// Collisions only with solid and soft Objects.
 		std::unordered_set<int> GetCollisions(const Object& ptrObject, Vector where) const;
 	};

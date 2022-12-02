@@ -46,7 +46,7 @@ namespace battleCity
 		// Get mouse event's button.
 		FRMouseButton getMouseButton() const;
 
-		// Get mouse event's position.
+		// Get mouse event's mCollisionPos.
 		Vector& getMousePosition() const;
 	};
 }

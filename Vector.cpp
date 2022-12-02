@@ -2,52 +2,33 @@
 
 #include <cmath>
 
-battleCity::Vector::Vector() : x(0), y(0) {}
-
-battleCity::Vector::Vector(float xValue, float yValue) : x(xValue), y(yValue) {}
-
-void battleCity::Vector::setXY(float newX, float newY)
+namespace battleCity
 {
-    x = newX;
-    y = newY;
-}
+    Vector::Vector() : Vector(.0f, .0f) {}
+    Vector::Vector(float x, float y) : X(x), Y(y) {}
 
-void battleCity::Vector::addToXY(float newX, float newY)
-{
-    x += newX;
-    y += newY;
-}
-
-float battleCity::Vector::magnitude() const
-{
-    return sqrt(x * x + y * y);
-}
-
-void battleCity::Vector::normalize()
-{
-    float length = magnitude();
-    if (length != 0)
+    float Vector::Magnitude() const
     {
-        x = x / abs(length);
-        y = y / abs(length);
+        return sqrt(X * X + Y * Y);
     }
-}
 
-battleCity::Vector& battleCity::Vector::operator+(const Vector& other) noexcept
-{
-    Vector vec = *this;
-    vec.x += other.x;
-    vec.y += other.y;
-    return vec;
-}
+    void Vector::Normalize()
+    {
+        float length = Magnitude();
+        if (length != .0f)
+        {
+            X = X / abs(length);
+            Y = Y / abs(length);
+        }
+    }
 
-battleCity::Vector battleCity::Vector::operator-()
-{
-    float newX = -x;
-    float newY = -y;
-    return Vector(newX, newY);
-}
+    Vector Vector::operator+(const Vector& other) const
+    {
+        return { X + other.X, Y + other.Y};
+    }
 
-battleCity::Vector::~Vector()
-{
+    Vector Vector::operator-() const
+    {
+        return { -X, -Y };
+    }
 }

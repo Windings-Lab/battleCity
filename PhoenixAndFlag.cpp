@@ -38,8 +38,8 @@ namespace battleCity
 
 	void PhoenixAndFlag::setGameOver(const EventCollision* CollisionEvent)
 	{
-		if (CollisionEvent->getObject2()->getType() == Type::Bullet ||
-			CollisionEvent->getObject1()->getType() == Type::Bullet)
+		if (CollisionEvent->GetColliderID()->getType() == Type::Bullet ||
+			CollisionEvent->GetObjectID()->getType() == Type::Bullet)
 		{
 			gameOver = true;
 			spriteSet(nullptr, 1);

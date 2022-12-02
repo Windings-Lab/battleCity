@@ -1,26 +1,21 @@
 #pragma once
 
-namespace battleCity {
-	class Vector
+namespace battleCity
+{
+	struct Vector
 	{
-	public:
-		float x;
-		float y;
+		float X;
+		float Y;
 
-		/// Default is (0,0).
 		Vector();
-		~Vector();
-		Vector(float xValue, float yValue);
+		Vector(float x, float y);
 
-		void setXY(float newX, float newY);
-		void addToXY(float newX, float newY);
-
-		float magnitude() const;
-		void normalize();
+		float Magnitude() const;
+		void Normalize();
 
 		/// Add Vector
-		Vector& operator+(const Vector& other) noexcept;
-		Vector operator-();
+		Vector operator+(const Vector& other) const;
+		Vector operator-() const;
 	};
 }
 

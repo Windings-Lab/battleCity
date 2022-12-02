@@ -1,52 +1,39 @@
 #include "EventCollision.h"
 
-battleCity::EventCollision::EventCollision()
+namespace battleCity
 {
-	ptrObj1 = nullptr;
-	ptrObj2 = nullptr;
-	SetType(EventType::Collision);
-}
+	EventCollision::EventCollision(int objectID, int colliderID, Vector collisionPos)
+	{
+		mObjectID = objectID;
+		mCollider = colliderID;
+		mCollisionPos = collisionPos;
+		SetType(EventType::Collision);
+	}
 
-// newPtrObj1 = who moved
-// newPtrObj2 = collided with
-battleCity::EventCollision::EventCollision(Object* newPtrObj1, Object* newPtrObj2, Vector newPosition)
-{
-	ptrObj1 = newPtrObj1;
-	ptrObj2 = newPtrObj2;
-	position = newPosition;
-	SetType(EventType::Collision);
-	newPtrObj1 = nullptr;
-	newPtrObj2 = nullptr;
-}
+	void EventCollision::SetObjectID(int objectID)
+	{
+		mObjectID = objectID;
+	}
+	int EventCollision::GetObjectID() const
+	{
+		return mObjectID;
+	}
 
-void battleCity::EventCollision::setObject1(Object* newPtrObj1)
-{
-	ptrObj1 = newPtrObj1;
-	newPtrObj1 = nullptr;
-}
+	void EventCollision::SetColliderID(int colliderID)
+	{
+		mCollider = colliderID;
+	}
+	int EventCollision::GetColliderID() const
+	{
+		return mCollider;
+	}
 
-battleCity::Object* battleCity::EventCollision::getObject1() const
-{
-	return ptrObj1;
-}
-
-void battleCity::EventCollision::setObject2(Object* newPtrObj2)
-{
-	ptrObj2 = newPtrObj2;
-	newPtrObj2 = nullptr;
-}
-
-battleCity::Object* battleCity::EventCollision::getObject2() const
-{
-	return ptrObj2;
-}
-
-void battleCity::EventCollision::setPosition(Vector newPosition)
-{
-	position = newPosition;
-}
-
-battleCity::Vector battleCity::EventCollision::getPosition() const
-{
-	return position;
+	void EventCollision::SetCollisionPos(const Vector& collisionPos)
+	{
+		mCollisionPos = collisionPos;
+	}
+	Vector EventCollision::GetCollisionPos() const
+	{
+		return mCollisionPos;
+	}
 }

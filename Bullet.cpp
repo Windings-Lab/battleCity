@@ -25,7 +25,7 @@ namespace battleCity
 		spriteDB = &SPR.getBulletSprites();
 
 		initBullet(object);
-		//std::cout << "bulletX: " << position.x << " bulletY: " << position.y << std::endl;
+		//std::cout << "bulletX: " << mCollisionPos.x << " bulletY: " << mCollisionPos.y << std::endl;
 	}
 
 	void Bullet::initBullet(const Object& ptrObj)
@@ -83,23 +83,23 @@ namespace battleCity
 	{
 		if (health != 0)
 		{
-			if (objectID != CollisionEvent->getObject1()->GetID()
+			if (objectID != CollisionEvent->GetObjectID()->GetID()
 				&&
-				objectID != CollisionEvent->getObject2()->GetID())
+				objectID != CollisionEvent->GetColliderID()->GetID())
 			{
-				if ((CollisionEvent->getObject2()->getType() == Type::Tank ||
-					CollisionEvent->getObject1()->getType() == Type::Tank) && objectType == Type::Tank)
+				if ((CollisionEvent->GetColliderID()->getType() == Type::Tank ||
+					CollisionEvent->GetObjectID()->getType() == Type::Tank) && objectType == Type::Tank)
 				{
 					WM.MarkForDelete(this);
 					return;
 				}
-				if ((CollisionEvent->getObject2()->getType() == Type::PowerUp ||
-					CollisionEvent->getObject1()->getType() == Type::PowerUp))
+				if ((CollisionEvent->GetColliderID()->getType() == Type::PowerUp ||
+					CollisionEvent->GetObjectID()->getType() == Type::PowerUp))
 				{
 					return;
 				}
-				WM.MarkForDelete(CollisionEvent->getObject1());
-				WM.MarkForDelete(CollisionEvent->getObject2());
+				WM.MarkForDelete(CollisionEvent->GetObjectID());
+				WM.MarkForDelete(CollisionEvent->GetColliderID());
 				return;
 			}
 		}

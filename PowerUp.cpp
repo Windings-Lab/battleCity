@@ -49,9 +49,9 @@ void battleCity::PowerUp::draw()
 
 void battleCity::PowerUp::makePowerUp(const battleCity::EventCollision* CollisionEvent)
 {
-	if	(CollisionEvent->getObject1()->getType() == Type::TankPlayer)
+	if	(CollisionEvent->GetObjectID()->getType() == Type::TankPlayer)
 	{
-		CollisionEvent->getObject1()->setHealth(health);
+		CollisionEvent->GetObjectID()->setHealth(health);
 		WM.MarkForDelete(this);
 		WM.SetPowerUpisTakedToTrue();
 	}

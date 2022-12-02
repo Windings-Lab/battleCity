@@ -22,8 +22,8 @@ namespace battleCity
 	/// </summary>
 	/// <param name="type">0</param>
 	/// <param name="type">""</param>
-	/// <param name="position.x">SCR.getBoundaryL()</param>
-	/// <param name="position.y">SCR.getBoundaryU()</param>
+	/// <param name="mCollisionPos.x">SCR.getBoundaryL()</param>
+	/// <param name="mCollisionPos.y">SCR.getBoundaryU()</param>
 	/// <param name="health">1</param>
 	/// <param name="constSpeed">0</param>
 	/// <param name="bulletCount">1</param>
@@ -124,52 +124,52 @@ namespace battleCity
 			isSpawnIntersects = false;
 			randomMove();
 		}
-		else if (CollisionEvent->getObject1()->getType() == Type::Wall || CollisionEvent->getObject2()->getType() == Type::Wall)
+		else if (CollisionEvent->GetObjectID()->getType() == Type::Wall || CollisionEvent->GetColliderID()->getType() == Type::Wall)
 		{
 			if (GM.stepCount % 125 == 0)
 			{
 				randomMove();
 			}
 		}
-		else if (CollisionEvent->getObject1()->getType() == Type::Tank && CollisionEvent->getObject2()->getType() == Type::Tank)
+		else if (CollisionEvent->GetObjectID()->getType() == Type::Tank && CollisionEvent->GetColliderID()->getType() == Type::Tank)
 		{
 			if (isSpawnIntersects)
 			{
-				/*Vector newVec = CollisionEvent->getObject1()->getPosition();
-				Vector sight1 = CollisionEvent->getObject1()->getSight();
-				Vector sight2 = CollisionEvent->getObject2()->getSight();
+				/*Vector newVec = CollisionEvent->GetObjectID()->GetCollisionPos();
+				Vector sight1 = CollisionEvent->GetObjectID()->getSight();
+				Vector sight2 = CollisionEvent->GetColliderID()->getSight();
 
 				if (sight1.x == 1 && sight2.x == 1)
 				{
 					newVec.x -= 16;
-					CollisionEvent->getObject1()->setPosition(newVec);
+					CollisionEvent->GetObjectID()->SetCollisionPos(newVec);
 				}
 				else if (sight1.x == -1 && sight2.x == -1)
 				{
 					newVec.x += 16;
-					CollisionEvent->getObject1()->setPosition(newVec);
+					CollisionEvent->GetObjectID()->SetCollisionPos(newVec);
 				}
 				else if ((sight1.x == 1 && sight2.x == -1) || (sight2.x == 1 && sight1.x == -1))
 				{
 					newVec.x -= 16;
-					CollisionEvent->getObject1()->setPosition(newVec);
+					CollisionEvent->GetObjectID()->SetCollisionPos(newVec);
 					newVec.x += 16;
-					CollisionEvent->getObject2()->setPosition(newVec);
+					CollisionEvent->GetColliderID()->SetCollisionPos(newVec);
 				}
 				else
 				{
 					newVec.x = newVec.x - 16 < SCR.getBoundaryL() ? newVec.x + 16 : newVec.x - 16;
-					CollisionEvent->getObject1()->setPosition(newVec);
+					CollisionEvent->GetObjectID()->SetCollisionPos(newVec);
 				}*/
-				CollisionEvent->getObject1()->setSpawnIntersection(true);
-				CollisionEvent->getObject2()->setSpawnIntersection(true);
-				Vector newVec = CollisionEvent->getObject1()->getPosition();
-				Box b1 = CollisionEvent->getObject1()->getBox();
-				Box b2 = CollisionEvent->getObject2()->getBox();
+				CollisionEvent->GetObjectID()->setSpawnIntersection(true);
+				CollisionEvent->GetColliderID()->setSpawnIntersection(true);
+				Vector newVec = CollisionEvent->GetObjectID()->getPosition();
+				Box b1 = CollisionEvent->GetObjectID()->getBox();
+				Box b2 = CollisionEvent->GetColliderID()->getBox();
 				if (boxesIntersect(b1, b2))
 				{
 					newVec.x = newVec.x - 32 < SCR.getBoundaryL() ? newVec.x + 32 : newVec.x - 32;
-					CollisionEvent->getObject1()->setPosition(newVec);
+					CollisionEvent->GetObjectID()->setPosition(newVec);
 					move(0, 0);
 				}
 				else
@@ -183,19 +183,19 @@ namespace battleCity
 				randomMove();
 			}
 		}
-		else if (CollisionEvent->getObject1()->getType() == Type::TankPlayer || CollisionEvent->getObject2()->getType() == Type::TankPlayer)
+		else if (CollisionEvent->GetObjectID()->getType() == Type::TankPlayer || CollisionEvent->GetColliderID()->getType() == Type::TankPlayer)
 		{
 			if (isSpawnIntersects)
 			{
-				CollisionEvent->getObject1()->setSpawnIntersection(true);
-				CollisionEvent->getObject2()->setSpawnIntersection(true);
-				Vector newVec = CollisionEvent->getObject1()->getPosition();
-				Box b1 = CollisionEvent->getObject1()->getBox();
-				Box b2 = CollisionEvent->getObject2()->getBox();
+				CollisionEvent->GetObjectID()->setSpawnIntersection(true);
+				CollisionEvent->GetColliderID()->setSpawnIntersection(true);
+				Vector newVec = CollisionEvent->GetObjectID()->getPosition();
+				Box b1 = CollisionEvent->GetObjectID()->getBox();
+				Box b2 = CollisionEvent->GetColliderID()->getBox();
 				if (boxesIntersect(b1, b2))
 				{
 					newVec.x = newVec.x - 32 < SCR.getBoundaryL() ? newVec.x + 32 : newVec.x - 32;
-					CollisionEvent->getObject1()->setPosition(newVec);
+					CollisionEvent->GetObjectID()->setPosition(newVec);
 					move(0, 0);
 				}
 				else
