@@ -31,7 +31,7 @@ namespace battleCity
 		Range GetRange() const;
 		Object& GetObject(int id) const;
 
-		int Insert(const std::unique_ptr<Object>& objPtr);
+		int Insert(std::unique_ptr<Object>& objPtr);
 		int Remove(int objID);
 
 		size_t GetSize() const;

@@ -126,7 +126,8 @@ namespace battleCity
 	{
 		if (bulletCount != 0)
 		{
-			WM.InsertObject(std::make_unique<Bullet>(mID));
+			std::unique_ptr<Object> bullet = std::make_unique<Bullet>(mID);
+			WM.InsertObject(bullet);
 			bulletCount--;
 		}
 	}

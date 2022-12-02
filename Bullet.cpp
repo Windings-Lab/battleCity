@@ -130,7 +130,7 @@ namespace battleCity
 	{
 		mObjectOwner.setBulletCount(1);
 		position.X -= 5;
-		const std::unique_ptr<Object> newExp = std::make_unique<Explosion>(false);
+		std::unique_ptr<Object> newExp = std::make_unique<Explosion>(false);
 		newExp->setPosition(position);
 
 		WM.InsertObject(newExp);

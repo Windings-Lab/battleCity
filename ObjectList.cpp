@@ -6,9 +6,8 @@
 
 namespace battleCity
 {
-	ObjectList::ObjectList()
+	ObjectList::ObjectList() : mList(100)
 	{
-		mList.reserve(100);
 	}
 
 	ObjectList::ObjectList(ObjectList&& mve) noexcept : ObjectList()
@@ -26,7 +25,7 @@ namespace battleCity
 		return *mList.at(id).get();
 	}
 
-	int ObjectList::Insert(const std::unique_ptr<Object>& objPtr)
+	int ObjectList::Insert(std::unique_ptr<Object>& objPtr)
 	{
 		try
 		{

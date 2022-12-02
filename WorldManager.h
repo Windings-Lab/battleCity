@@ -66,7 +66,7 @@ namespace battleCity
 
 		// Insert Object into world
 		// Return 0 if ok, else -1
-		int InsertObject(const std::unique_ptr<Object>& objPtr);
+		int InsertObject(std::unique_ptr<Object>& objPtr);
 
 		// Remove Object from world
 		// Return 0 if ok, else -1

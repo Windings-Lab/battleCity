@@ -92,7 +92,7 @@ namespace battleCity
 		return mKillCount;
 	}
 
-	int WorldManager::InsertObject(const std::unique_ptr<Object>& objPtr)
+	int WorldManager::InsertObject(std::unique_ptr<Object>& objPtr)
 	{
 		//std::cout << "WorldManager - insertObject" << std::endl;
 		if (objPtr->IsMovable())
@@ -136,9 +136,16 @@ namespace battleCity
 		if (GM.stepCount % 450 == 0 && mTankCount != 6 && mTankStorage > 0)
 		{
 			if (rnd == 1)
-				InsertObject(std::make_unique<Tank>(500, 45));
+			{
+				std::unique_ptr<Object> tank = std::make_unique<Tank>(500, 45);
+				InsertObject(tank);
+			}
 			else
-				InsertObject(std::make_unique<Tank>(275, 45));
+			{
+				std::unique_ptr<Object> tank = std::make_unique<Tank>(275, 45);
+				InsertObject(tank);
+			}
+				
 		}
 	}
 
@@ -166,8 +173,11 @@ namespace battleCity
 					newPlayer.setPosition(Vector(SCR.getBoundaryL() + (16 * j), SCR.getBoundaryU() + (16 * i)));
 					break;
 				case Object::Type::Tank:
-					InsertObject(std::make_unique<Tank>(SCR.getBoundaryL() + (16 * j), SCR.getBoundaryU() + (16 * i)));
+				{
+					std::unique_ptr<Object> tank = std::make_unique<Tank>(SCR.getBoundaryL() + (16 * j), SCR.getBoundaryU() + (16 * i));
+					InsertObject(tank);
 					break;
+				}
 				case Object::Type::Bullet: break;
 				case Object::Type::Wall:
 				{
@@ -177,8 +187,12 @@ namespace battleCity
 					break;
 				}
 				case Object::Type::PhoenixAndFlag:
-					InsertObject(std::make_unique<PhoenixAndFlag>(SCR.getBoundaryL() + (16 * j), SCR.getBoundaryU() + (16 * i)));
+				{
+					std::unique_ptr<Object> phoenixAndFlag = std::make_unique<PhoenixAndFlag>
+						(SCR.getBoundaryL() + (16 * j), SCR.getBoundaryU() + (16 * i));
+					InsertObject(phoenixAndFlag);
 					break;
+				}
 				case Object::Type::Explosion: break;
 				case Object::Type::PowerUp: 
 					mPowerUpPositions.push_back(std::vector<int>());
