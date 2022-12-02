@@ -3,7 +3,6 @@
 // Bonus for any found bugs in the framework!
 
 #define FRAMEWORK_API extern "C" __declspec(dllimport)
-#define ENUM_TO_STR(ENUM) # ENUM
 
 // DEBUG 0		- Standart game
 // DEBUG 1		- Some position informations
@@ -48,14 +47,6 @@ enum class FRMouseButton {
 	MIDDLE,
 	RIGHT,
 	COUNT
-};
-
-const std::string FRKeyStr[] =
-{
-	ENUM_TO_STR(RIGHT),
-	ENUM_TO_STR(LEFT),
-	ENUM_TO_STR(DOWN),
-	ENUM_TO_STR(UP)
 };
 
 class Framework {

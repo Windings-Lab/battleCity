@@ -1,18 +1,13 @@
 #include "TankPlayer.h"
 #include "WorldManager.h"
-#include "GameManager.h"
-#include "EventOut.h"
 #include "EventMouse.h"
-#include "EventKeyboard.h"
 #include "Explosion.h"
 #include "Framework.h"
 #include "Vector.h"
 #include "Event.h"
-#include "Screen.h"
 #include "Bullet.h"
 
 #include <vector>
-#include <iostream>
 
 
 namespace battleCity
@@ -87,27 +82,27 @@ namespace battleCity
 
 	void TankPlayer::keyboardInput()
 	{
-		if (movement.back() == "RIGHT")
+		if (mMovement.back() == MovementDirection::Right)
 		{
 			move(constSpeed, 0);
 			spriteSet(nullptr, 0);
 		}
-		if (movement.back() == "LEFT")
+		if (mMovement.back() == MovementDirection::Left)
 		{
 			move(-constSpeed, 0);
 			spriteSet(nullptr, 1);
 		}
-		if (movement.back() == "DOWN")
+		if (mMovement.back() == MovementDirection::Down)
 		{
 			move(0, constSpeed);
 			spriteSet(nullptr, 2);
 		}
-		if (movement.back() == "UP")
+		if (mMovement.back() == MovementDirection::Up)
 		{
 			move(0, -constSpeed);
 			spriteSet(nullptr, 3);
 		}
-		if (movement.back() == "IDLE")
+		if (mMovement.back() == MovementDirection::Idle)
 		{
 			move(0, 0);
 		}
@@ -153,44 +148,20 @@ namespace battleCity
 		return 0;
 	}
 
-	void TankPlayer::movementSet(std::string direction)
+	void TankPlayer::movementSet(FRKey direction)
 	{
-		movement.push_back(direction);
-		if (movement.size() > 2)
+		mMovement.push_back(static_cast<MovementDirection>(direction));
+		if (mMovement.size() > 2)
 		{
-			movement.push_back("IDLE");
+			mMovement.push_back(MovementDirection::Idle);
 		}
-
-#if DEBUG == 1
-		//std::cout << "x: " << mCollisionPos.X << " y: " << mCollisionPos.Y << endl;
-		//std::cout << "movement capacity: " << movement.capacity() << std::endl;
-		std::cout << "PRESSED" << std::endl;
-		//for (const auto& mID : movement)
-		//{
-		//	std::cout << mID << " ";
-		//}
-		std::cout << std::endl << std::endl;
-#endif
 	}
 
-	void TankPlayer::movementErase(std::string direction)
+	void TankPlayer::movementErase(FRKey direction)
 	{
-		movement.erase(std::find(movement.begin() + 1, movement.end(), direction));
-		auto it = std::find(movement.begin() + 1, movement.end(), "IDLE");
-		if (it != movement.end())
-			movement.erase(it);
-		movement.shrink_to_fit();
-
-#if DEBUG == 1
-		//std::cout << "x: " << mCollisionPos.X << " y: " << mCollisionPos.Y << endl;
-		//std::cout << "movement capacity: " << movement.capacity() << std::endl;
-		std::cout << "RELEASED" << std::endl;
-		//for (const auto& mID : movement)
-		//{
-		//	std::cout << mID << " ";
-		//}
-		std::cout << std::endl << std::endl;
-#endif
+		mMovement.erase(std::find(mMovement.begin() + 1, mMovement.end(), static_cast<MovementDirection>(direction)));
+		auto it = std::find(mMovement.begin() + 1, mMovement.end(), MovementDirection::Idle);
+		if (it != mMovement.end()) mMovement.erase(it);
 	}
 
 	TankPlayer::~TankPlayer()

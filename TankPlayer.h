@@ -1,6 +1,5 @@
 #pragma once
 
-#include <string>
 #include <vector>
 
 #include "Object.h"
@@ -11,15 +10,23 @@ namespace battleCity
 {
 	class TankPlayer : public Object
 	{
-	private:
-		std::vector<std::string> movement = { "IDLE" };
+		// Do not use int(4) since framework using it for another purpose
+		// Look at FRKey
+		enum class MovementDirection
+		{
+			Right,
+			Left,
+			Down,
+			Up,
+			Idle = 5
+		};
 	public:
 		TankPlayer();
 		TankPlayer(float x, float y);
 		~TankPlayer();
 
-		void movementSet(std::string direction);
-		void movementErase(std::string direction);
+		void movementSet(FRKey direction);
+		void movementErase(FRKey direction);
 
 		void update() override;
 		void draw() override;
@@ -29,6 +36,8 @@ namespace battleCity
 		void move(float x, float y);
 		void fire();
 
-		virtual int eventHandler(const Event* ptrEvent) override;
+		int eventHandler(const Event* ptrEvent) override;
+	private:
+		std::vector<MovementDirection> mMovement = { MovementDirection::Idle };
 	};
 }

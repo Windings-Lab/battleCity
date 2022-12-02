@@ -102,8 +102,8 @@ public:
 
 	virtual void onMouseMove(int x, int y, int xrelative, int yrelative)
 	{
-		mousePos->x = x;
-		mousePos->y = y;
+		mousePos->X = x;
+		mousePos->Y = y;
 	}
 
 	virtual void onMouseButtonClick(FRMouseButton button, bool isReleased) {
@@ -121,7 +121,7 @@ public:
 		{
 			eventKeyboard->setKey(k);
 			eventKeyboard->setKeyboardAction(EventKeyboardAction::KEY_PRESSED);
-			player->movementSet(FRKeyStr[(int)k]);
+			player->movementSet(k);
 			player->eventHandler(eventKeyboard.get());
 		}
 	}
@@ -132,7 +132,7 @@ public:
 		{
 			eventKeyboard->setKey(k);
 			eventKeyboard->setKeyboardAction(EventKeyboardAction::KEY_RELEASED);
-			player->movementErase(FRKeyStr[(int)k]);
+			player->movementErase(k);
 			player->eventHandler(eventKeyboard.get());
 		}
 	}
