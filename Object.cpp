@@ -14,7 +14,7 @@ namespace battleCity
 {
     int Object::IDCounter = 1;
 
-    Object::Object()
+    Object::Object() : mID(IDCounter++)
     {
         mType = Type::Error;
 
@@ -25,8 +25,6 @@ namespace battleCity
         isSpawnIntersects = true;
 
         initPosition(Vector(40, 44));
-
-        mID = IDCounter++;
     }
 
     std::vector<Sprite*>& Object::getSpriteList()
