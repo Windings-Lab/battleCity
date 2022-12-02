@@ -43,6 +43,6 @@ namespace battleCity
 
 		/// Send eventStep to all Objects.
 		/// Return count of number of events sent.
-		int OnEvent(const Event *ptrEvent) const;
+		int OnEvent(Event& eventRef) const;
 	};
 }

@@ -41,24 +41,23 @@ bool battleCity::Manager::IsStarted() const
 	return _started;
 }
 
-int battleCity::Manager::OnEvent(const Event* ptrEvent) const
+int battleCity::Manager::OnEvent(Event& eventRef) const
 {
 	int count = 0;
 
 	for (const int objID : WM.mObjectIDsToMove)
 	{
 		auto& movableObject = WM.mWorldList.GetObject(objID);
-		movableObject.EventHandler(ptrEvent);
+		movableObject.EventHandler(eventRef);
 		count++;
 	}
 
 	for (const int objID : WM.GetObjectsOfType(Object::Type::Explosion))
 	{
 		auto& explosionObj = WM.mWorldList.GetObject(objID);
-		explosionObj.EventHandler(ptrEvent);
+		explosionObj.EventHandler(eventRef);
 		count++;
 	}
 
-	ptrEvent = nullptr;
 	return count;
 }
