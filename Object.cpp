@@ -12,7 +12,7 @@
 
 namespace battleCity
 {
-    int Object::IDCounter = 0;
+    int Object::IDCounter = 1;
 
     Object::Object()
     {

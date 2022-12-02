@@ -20,7 +20,7 @@ namespace battleCity
 	private:
 		WorldManager();
 
-		std::vector<std::vector<Object*>> mMap;
+		std::vector<std::vector<int>> mMap;
 		std::vector<std::vector<int>> mPowerUpPositions;
 
 		// All Objects in game world
@@ -81,7 +81,7 @@ namespace battleCity
 
 		int GetSizeOfWorldList() const;
 
-		std::vector<std::vector<Object*>>& GetWorldMap();
+		std::vector<std::vector<int>>& GetWorldMap();
 		std::vector<std::vector<int>>& GetPowerUpPositions();
 
 		void CreateSomeTanks();

@@ -31,7 +31,7 @@ namespace battleCity
 	WorldManager::WorldManager()
 	{
 		SetType(ManagerType::World);
-		mMap = std::vector(HEIGHT, std::vector<Object*>(WIDTH));
+		mMap = std::vector(HEIGHT, std::vector<int>(WIDTH));
 		mPowerUpPositions = std::vector(0, std::vector<int>(0));
 
 		mGameOverPos.x = 290;
@@ -126,7 +126,7 @@ namespace battleCity
 		return mWorldList.GetSize();
 	}
 
-	std::vector<std::vector<Object*>>& WorldManager::GetWorldMap()
+	std::vector<std::vector<int>>& WorldManager::GetWorldMap()
 	{
 		return mMap;
 	}
@@ -160,23 +160,39 @@ namespace battleCity
 		}
 
 		int powerUpY = 0;
-		for (int i = 0; i < HEIGHT; i++) {
-			for (int j = 0; j < WIDTH; j++) {
+		for (int i = 0; i < HEIGHT; i++) 
+		{
+			for (int j = 0; j < WIDTH; j++) 
+			{
 				mapFile >> charToStore;
-				if (charToStore - '0' == 4)
-					mMap[i][j] = new Wall(SCR.getBoundaryL() + (16 * j), SCR.getBoundaryU() + (16 * i));
-				else if (charToStore - '0' == 1)
-					newPlayer.setPosition(Vector(SCR.getBoundaryL() + (16 * j), SCR.getBoundaryU() + (16 * i)));
-				else if (charToStore - '0' == 2)
-					new Tank(SCR.getBoundaryL() + (16 * j), SCR.getBoundaryU() + (16 * i));
-				else if (charToStore - '0' == 5)
-					new PhoenixAndFlag(SCR.getBoundaryL() + (16 * j), SCR.getBoundaryU() + (16 * i));
-				else if (charToStore - '0' == 7)
+				auto type = static_cast<Object::Type>(charToStore - '0');
+
+				switch (type)
 				{
+				
+				case Object::Type::TankPlayer:
+					newPlayer.setPosition(Vector(SCR.getBoundaryL() + (16 * j), SCR.getBoundaryU() + (16 * i)));
+					break;
+				case Object::Type::Tank: 
+					new Tank(SCR.getBoundaryL() + (16 * j), SCR.getBoundaryU() + (16 * i));
+					break;
+				case Object::Type::Bullet: break;
+				case Object::Type::Wall:
+					auto wall = new Wall(SCR.getBoundaryL() + (16 * j), SCR.getBoundaryU() + (16 * i));
+					mMap[i][j] = wall->GetID();
+					break;
+				case Object::Type::PhoenixAndFlag: 
+					new PhoenixAndFlag(SCR.getBoundaryL() + (16 * j), SCR.getBoundaryU() + (16 * i));
+					break;
+				case Object::Type::Explosion: break;
+				case Object::Type::PowerUp: 
 					mPowerUpPositions.push_back(std::vector<int>());
 					mPowerUpPositions[powerUpY].push_back((int)(SCR.getBoundaryL() + (16 * j)));
 					mPowerUpPositions[powerUpY].push_back((int)(SCR.getBoundaryU() + (16 * i)));
 					powerUpY++;
+					break;
+				case Object::Type::Error:
+				default: break;
 				}
 			}
 		}
@@ -222,7 +238,7 @@ namespace battleCity
 				Vector pos = objPtr.getPosition();
 				int x = (pos.x - SCR.getBoundaryL()) / 16;
 				int y = (pos.y - SCR.getBoundaryU()) / 16;
-				mMap[y][x] = nullptr;
+				mMap[y][x] = 0;
 			}
 			RemoveObject(objID);
 		}
@@ -397,32 +413,34 @@ namespace battleCity
 		}
 		Vector objWorldIndex = ptrObject.getWorldIndexRelative();
 
-		Object& tempObject = mMap[(int)objWorldIndex.y][(int)objWorldIndex.x];
+		int mapObjID = mMap[(int)objWorldIndex.y][(int)objWorldIndex.x];
 		auto iterateFullListFunc = [&]
 		{
 			for (const auto& [objID, colliderObj] : mWorldList.GetRange())
 			{
+				Object& tempObject = mWorldList.GetObject(mapObjID);
 				if (objID == ptrObject.GetID())
 				{
 					continue;
 				}
 				Box b = getWorldBox(ptrObject, where);
 				Box bTemp = getWorldBox(tempObject);
-				if ((tempObject->isSolid() || tempObject->isSoft()) && 
+				if ((tempObject.isSolid() || tempObject.isSoft()) && 
 					boxesIntersect(b, bTemp))
 				{
-					collisionList.insert(tempObject->GetID());
+					collisionList.insert(tempObject.GetID());
 				}
 			}
 		};
 		// IF NULL then check for other movable objects
-		if (tempObject == nullptr)
+		if (mapObjID == 0)
 		{
 			iterateFullListFunc();
 		}
 		// Else we are checking this wall for collision
 		else
 		{
+			Object& tempObject = mWorldList.GetObject(mapObjID);
 			Box b = getWorldBox(ptrObject, where);
 			Box bTemp = getWorldBox(tempObject);
 			// If false, then check other objects for collision
