@@ -12,6 +12,8 @@
 
 namespace battleCity
 {
+    int Object::IDCounter = 0;
+
     Object::Object() : worldID(WM.getWorldID()), moveID(WM.getMoveID())
     {
         mType = Type::Error;
@@ -24,6 +26,7 @@ namespace battleCity
 
         initPosition(Vector(40, 44));
 
+        mID = IDCounter++;
         WM.insertObject(this);
     }
 
@@ -50,6 +53,7 @@ namespace battleCity
 
         initPosition(Vector(40, 44));
 
+        mID = IDCounter++;
         WM.insertObject(this);
     }
 
@@ -78,19 +82,14 @@ namespace battleCity
         return spriteIndexSize;
     }
 
+    int Object::GetID() const
+    {
+        return mID;
+    }
+
     Object::Type Object::getType() const
     {
         return mType;
-    }
-
-    int Object::getWorldID() const
-    {
-        return worldID;
-    }
-
-    int Object::getWorldMoveID() const
-    {
-        return moveID;
     }
 
     void Object::setWorldIndexRelative()

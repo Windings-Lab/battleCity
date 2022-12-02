@@ -34,6 +34,7 @@ namespace battleCity
 			PowerUp
 		};
 	private:
+		static int IDCounter;
 		float speed;
 		Vector direction;
 		// setSight() in derived objects
@@ -46,6 +47,7 @@ namespace battleCity
 		void setSpeed(float newSpeed);
 		void setDirection(Vector newDirection);
 	protected:
+		int mID;
 		Type mType;
 
 		// default = Boundary of windows
@@ -81,9 +83,6 @@ namespace battleCity
 		void setSight(Vector newSight);
 		void setVelocity(Vector newVelocity);
 	public:
-		const int worldID;
-		const int moveID;
-
 		Object();
 		Object(int newWorldMoveID);
 		virtual ~Object();
@@ -107,9 +106,8 @@ namespace battleCity
 		int getSpriteY() const;
 		int getSpriteIndexSize() const;
 
+		int GetID() const;
 		Type getType() const;
-		int getWorldID() const;
-		int getWorldMoveID() const;
 
 		// Relative to the next spriteIndexSize 16px blocks
 		Vector getWorldIndexRelative() const;
