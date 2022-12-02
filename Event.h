@@ -15,20 +15,14 @@ namespace battleCity
 
 	class Event
 	{
-	private:
-		/// Holds event type
-		EventType _eventType;
 	public:
-		/// Create base event.
 		Event();
 
-		/// Destructor.
-		virtual ~Event();
+		virtual ~Event() = default;
 
-		/// Set event type.
 		void SetType(EventType newType);
-
-		/// Get event type.
 		EventType GetType() const;
+	private:
+		EventType mEventType;
 	};
 }
