@@ -5,7 +5,7 @@
 namespace battleCity
 {
 	EventCollision::EventCollision(int objectID, int colliderID, Vector collisionPos)
-		: mCollisionPos(collisionPos), mObjectID(objectID), mCollider(colliderID)
+		: mCollisionPos(collisionPos), mObjectID(objectID), mColliderID(colliderID)
 	{
 		SetType(EventType::Collision);
 	}
@@ -26,16 +26,16 @@ namespace battleCity
 
 	void EventCollision::SetColliderID(int colliderID)
 	{
-		mCollider = colliderID;
+		mColliderID = colliderID;
 	}
 	int EventCollision::GetColliderID() const
 	{
-		return mCollider;
+		return mColliderID;
 	}
 
 	Object& EventCollision::GetColliderRef() const
 	{
-		return WM.GetAllObjects().GetObject(mCollider);
+		return WM.GetAllObjects().GetObject(mColliderID);
 	}
 
 	void EventCollision::SetCollisionPos(const Vector& collisionPos)
