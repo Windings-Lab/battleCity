@@ -7,42 +7,23 @@ namespace battleCity
 	enum class ManagerType
 	{
 		Error = 0,
-		Manager,
 		Game,
 		World
 	};
 
 	class Manager
 	{
-
-	private:
-		/// Manager type identifier
-		ManagerType _type;
-		/// True if startUp() succeeded.
-		bool _started;
-
 	protected:
-		/// Set type identifier of Manager.
-		void SetType(ManagerType newType);
+		Manager(ManagerType);
 
 	public:
-		Manager();
-		virtual ~Manager();
+		virtual ~Manager() = 0;
+		virtual void StartUp() = 0;
+		virtual void ShutDown() = 0;
 
 		ManagerType GetType() const;
-
-		/// Startup Manager.
-		/// Return 0 if ok
-		virtual int StartUp();
-
-		/// Shutdown Manager.
-		virtual void ShutDown();
-
-		/// Return status of is_started (true when startUp() was successful).
-		bool IsStarted() const;
-
-		/// Send eventStep to all Objects.
-		/// Return count of number of events sent.
-		int OnEvent(Event& eventRef) const;
+		void SendEvent(Event& eventRef) const;
+	private:
+		ManagerType mType;
 	};
 }
