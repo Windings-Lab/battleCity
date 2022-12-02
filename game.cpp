@@ -25,8 +25,7 @@ public:
 		using std::make_unique;
 
 		mEventKeyboard = make_unique<EventKeyboard>();
-		mMousePos = make_unique<Vector>();
-		mEventMouse = make_unique<EventMouse>(mMousePos);
+		mEventMouse = make_unique<EventMouse>();
 	}
 
 	virtual void PreInit(int& width, int& height, bool& fullscreen)
@@ -87,7 +86,6 @@ public:
 
 		mEventKeyboard.reset();
 		mEventMouse.reset();
-		mMousePos.reset();
 		GM.ShutDown();
 	}
 
@@ -98,16 +96,15 @@ public:
 
 	virtual void onMouseMove(int x, int y, int xrelative, int yrelative)
 	{
-		mMousePos->X = x;
-		mMousePos->Y = y;
+		mEventMouse->SetMousePosition({ static_cast<float>(x), static_cast<float>(y) });
 	}
 
 	virtual void onMouseButtonClick(FRMouseButton button, bool isReleased)
 	{
 		if (mPlayer->getHealth() > 0)
 		{
-			mEventMouse->setMouseButton(button);
-			mEventMouse->setMouseAction(isReleased);
+			mEventMouse->SetMouseButton(button);
+			mEventMouse->SetMouseAction(isReleased);
 			mPlayer->eventHandler(mEventMouse.get());
 		}
 	}
@@ -116,8 +113,8 @@ public:
 	{
 		if (mPlayer->getHealth() > 0)
 		{
-			mEventKeyboard->setKey(k);
-			mEventKeyboard->setKeyboardAction(EventKeyboardAction::KEY_PRESSED);
+			mEventKeyboard->SetKey(k);
+			mEventKeyboard->SetKeyboardAction(EventKeyboardAction::KEY_PRESSED);
 			mPlayer->movementSet(k);
 			mPlayer->eventHandler(mEventKeyboard.get());
 		}
@@ -127,8 +124,8 @@ public:
 	{
 		if (mPlayer->getHealth() > 0)
 		{
-			mEventKeyboard->setKey(k);
-			mEventKeyboard->setKeyboardAction(EventKeyboardAction::KEY_RELEASED);
+			mEventKeyboard->SetKey(k);
+			mEventKeyboard->SetKeyboardAction(EventKeyboardAction::KEY_RELEASED);
 			mPlayer->movementErase(k);
 			mPlayer->eventHandler(mEventKeyboard.get());
 		}
@@ -148,8 +145,6 @@ public:
 		std::vector<std::unique_ptr<Object>> mDemo;
 
 		std::unique_ptr<EventKeyboard> mEventKeyboard;
-
-		std::unique_ptr<Vector> mMousePos;
 		std::unique_ptr<EventMouse> mEventMouse;
 };
 

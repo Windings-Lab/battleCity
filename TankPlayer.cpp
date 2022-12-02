@@ -115,8 +115,8 @@ namespace battleCity
 	void TankPlayer::mouseInput(const EventMouse* mouseEvent)
 	{
 		// Pressed button?
-		if ((mouseEvent->getMouseAction() == EventMouseAction::PRESSED) &&
-			(mouseEvent->getMouseButton() == FRMouseButton::LEFT))
+		if ((mouseEvent->GetMouseAction() == EventMouseAction::PRESSED) &&
+			(mouseEvent->GetMouseButton() == FRMouseButton::LEFT))
 			fire();
 	}
 

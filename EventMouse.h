@@ -4,34 +4,37 @@
 #include "Event.h"
 #include "Framework.h"
 
-#include <memory>
-
 namespace battleCity
 {
-	enum class EventMouseAction {
+	enum class EventMouseAction
+	{
 		PRESSED = 0,
 		RELEASED = 1,
 		MOVED,
 		UNDEFINED_MOUSE_ACTION = -1
 	};
 
-	class EventMouse : public Event
+	class EventMouse final : public Event
 	{
-	private:
-		EventMouseAction mouseAction; // Mouse action.
-		FRMouseButton mouseButton;	   // Mouse button.
-		std::unique_ptr<Vector>& mouseXY;		   // Mouse (x,y) coordinates.
-
 	public:
-		EventMouse() = delete;
-		EventMouse(std::unique_ptr<Vector>&);
-		~EventMouse();
+		EventMouse();
+
+		EventMouse(const EventMouse&) = default;
+		EventMouse(EventMouse&&) = default;
+
+		EventMouse& operator=(const EventMouse&) = default;
+		EventMouse& operator=(EventMouse&&) = default;
+
+		~EventMouse() override = default;
+
+		Vector GetMousePosition() const;
+		void SetMousePosition(Vector newPos);
 
 		// Set mouse event's action.
-		void setMouseAction(bool newMouseAction);
+		void SetMouseAction(bool newMouseAction);
 
 		// Get mouse event's action.
-		EventMouseAction getMouseAction() const;
+		EventMouseAction GetMouseAction() const;
 
 		// Set mouse event's button.
 		/// <summary>
@@ -41,13 +44,13 @@ namespace battleCity
 		/// <param name="1">MIDDLE</param>
 		/// <param name="2">RIGHT</param>
 		/// <param name="3">UNDEFINED</param>
-		void setMouseButton(FRMouseButton newMouseButton);
+		void SetMouseButton(FRMouseButton newMouseButton);
 
 		// Get mouse event's button.
-		FRMouseButton getMouseButton() const;
-
-		// Get mouse event's mCollisionPos.
-		Vector& getMousePosition() const;
+		FRMouseButton GetMouseButton() const;
+	private:
+		EventMouseAction mouseAction;			// Mouse action.
+		FRMouseButton mouseButton;				// Mouse button.
+		Vector mMouseXY;		// Mouse (x,y) coordinates.
 	};
 }
-
