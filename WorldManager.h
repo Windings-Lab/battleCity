@@ -107,7 +107,7 @@ namespace battleCity
 		/// If Object is spectral, move ok.
 		/// If move ok, move.
 		/// Return 0 if moved, else -1 if collision with solid.
-		int MoveObject(const std::unique_ptr<Object>& movableObjt, Vector where);
+		int MoveObject(Object& movableObj, Vector where);
 
 		// Indicate Object is to be deleted at end of current game loop.
 		// Return 0 if ok
@@ -119,7 +119,7 @@ namespace battleCity
 
 		// Return list of Objects collided with at position 'where'.
 		// Collisions only with solid and soft Objects.
-		std::unordered_set<int> GetCollisions(const std::unique_ptr<Object>& ptrObject, Vector where) const;
+		std::unordered_set<int> GetCollisions(const Object& ptrObject, Vector where) const;
 	};
 }
 

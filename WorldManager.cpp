@@ -31,8 +31,8 @@ namespace battleCity
 	WorldManager::WorldManager()
 	{
 		SetType(ManagerType::World);
-		mMap = std::vector<std::vector<Object*>>(HEIGHT, std::vector<Object*>(WIDTH));
-		mPowerUpPositions = std::vector<std::vector<int>>(0, std::vector<int>(0));
+		mMap = std::vector(HEIGHT, std::vector<Object*>(WIDTH));
+		mPowerUpPositions = std::vector(0, std::vector<int>(0));
 
 		mGameOverPos.x = 290;
 		mGameOverPos.y = 600;
@@ -208,28 +208,23 @@ namespace battleCity
 			objRef->update();
 		}
 
-		for (const auto& [objID, objRef] : mWorldList.GetRange())
+		for(const int objID : mObjectIDsToMove)
 		{
-			if(mObjectIDsToMove.find(objID) != mObjectIDsToMove.end())
-			{
-				Vector newPos = objRef->predictPosition();
-				MoveObject(objRef, newPos);
-			}
+			Object& objPtr = mWorldList.GetObject(objID);
+			MoveObject(objPtr, objPtr.predictPosition());
 		}
 
-		for (const auto& [objID, objRef] : mWorldList.GetRange())
+		for (const int objID : mObjectIDsToDelete)
 		{
-			if (mObjectIDsToDelete.find(objID) != mObjectIDsToDelete.end())
+			const Object& objPtr = mWorldList.GetObject(objID);
+			if (objPtr.getType() == Object::Type::Wall)
 			{
-				if (objRef->getType() == Object::Type::Wall)
-				{
-					Vector pos = objRef->getPosition();
-					int x = (pos.x - SCR.getBoundaryL()) / 16;
-					int y = (pos.y - SCR.getBoundaryU()) / 16;
-					mMap[y][x] = nullptr;
-				}
-				RemoveObject(objID);
+				Vector pos = objPtr.getPosition();
+				int x = (pos.x - SCR.getBoundaryL()) / 16;
+				int y = (pos.y - SCR.getBoundaryU()) / 16;
+				mMap[y][x] = nullptr;
 			}
+			RemoveObject(objID);
 		}
 
 		mObjectIDsToDelete.clear();
@@ -268,25 +263,24 @@ namespace battleCity
 		drawSprite(&SPR.getBackgroundSprite(), SCR.getBoundaryL(), SCR.getBoundaryU());
 	}
 
-	int WorldManager::MoveObject(const std::unique_ptr<Object>& movableObjt, Vector where)
+	int WorldManager::MoveObject(Object& movableObj, Vector where)
 	{
 		//std::cout << "moveObject" << std::endl;
-		if (movableObjt->isSolid() || movableObjt->isSoft())
+		if (movableObj.isSolid() || movableObj.isSoft())
 		{
-			ObjectList newList = GetCollisions(movableObjt, where);
-
-			if (!newList.IsEmpty())
+			if (auto newList = GetCollisions(movableObj, where); !newList.empty())
 			{
 				bool doMove = true;
 
-				for (const auto& [objID, colliderObj] : newList.GetRange())
+				for (const auto& objID : newList)
 				{
-					EventCollision collision(movableObjt, colliderObj, where);
+					auto colliderObj = mWorldList.GetObject(objID);
+					EventCollision collision(movableObj, colliderObj, where);
 
-					movableObjt->eventHandler(&collision);
-					colliderObj->eventHandler(&collision);
+					movableObj.eventHandler(&collision);
+					colliderObj.eventHandler(&collision);
 
-					if (movableObjt->isSolid() && colliderObj->isSolid()) doMove = false;
+					doMove = !(movableObj.isSolid() && colliderObj.isSolid());
 				}
 
 				if (!doMove)
@@ -297,15 +291,15 @@ namespace battleCity
 		}
 
 		int i = 0;
-		if ((where.x >= SCR.getBoundaryL() && where.x + movableObjt->getSpriteX() <= SCR.getBoundaryR()) &&
-			(where.y >= SCR.getBoundaryU() && where.y + movableObjt->getSpriteY() <= SCR.getBoundaryD()))
+		if ((where.x >= SCR.getBoundaryL() && where.x + movableObj.getSpriteX() <= SCR.getBoundaryR()) &&
+			(where.y >= SCR.getBoundaryU() && where.y + movableObj.getSpriteY() <= SCR.getBoundaryD()))
 		{
-			i = movableObjt->setPosition(where);
+			i = movableObj.setPosition(where);
 		}
 		else
 		{
 			auto eventOut = std::make_unique<EventOut>();
-			movableObjt->eventHandler(eventOut.get());
+			movableObj.eventHandler(eventOut.get());
 		}
 
 		return i;
@@ -318,11 +312,11 @@ namespace battleCity
 			return 0;
 		}
 
-		const auto objRef = mWorldList.GetObject(objID);
+		auto& objRef = mWorldList.GetObject(objID);
 
-		objRef->setHealth(-1);
+		objRef.setHealth(-1);
 
-		if (objRef->getHealth() == 0)
+		if (objRef.getHealth() == 0)
 		{
 			mObjectIDsToDelete.insert(objID);
 		}
@@ -393,22 +387,22 @@ namespace battleCity
 		mPowerUpTaked = true;
 	}
 
-	std::unordered_set<int> WorldManager::GetCollisions(const std::unique_ptr<Object>& ptrObject, Vector where) const
+	// TODO: Fix
+	std::unordered_set<int> WorldManager::GetCollisions(const Object& ptrObject, Vector where) const
 	{
 		std::unordered_set<int> collisionList;
-		if (ptrObject->getSpeed() == 0)
+		if (ptrObject.getSpeed() == 0)
 		{
 			return collisionList;
 		}
-		Object* tempObject = nullptr;
-		Vector objWorldIndex = ptrObject->getWorldIndexRelative();
+		Vector objWorldIndex = ptrObject.getWorldIndexRelative();
 
-		tempObject = mMap[(int)objWorldIndex.y][(int)objWorldIndex.x];
-		auto iterateFullListFunc = [&]()
+		Object& tempObject = mMap[(int)objWorldIndex.y][(int)objWorldIndex.x];
+		auto iterateFullListFunc = [&]
 		{
 			for (const auto& [objID, colliderObj] : mWorldList.GetRange())
 			{
-				if (colliderObj == ptrObject)
+				if (objID == ptrObject.GetID())
 				{
 					continue;
 				}
@@ -424,9 +418,7 @@ namespace battleCity
 		// IF NULL then check for other movable objects
 		if (tempObject == nullptr)
 		{
-			//std::cout << "WorldManager - getCollisions - 393" << std::endl;
 			iterateFullListFunc();
-			/*std::cout << "WorldManager - getCollisions - 395" << std::endl;*/
 		}
 		// Else we are checking this wall for collision
 		else
@@ -436,9 +428,9 @@ namespace battleCity
 			// If false, then check other objects for collision
 			// for example Player(14, 0), Wall(15, 0) no collision
 			if (boxesIntersect(b, bTemp) &&
-				(tempObject->isSolid() || tempObject->isSoft()))
+				(tempObject.isSolid() || tempObject.isSoft()))
 			{
-				collisionList.insert(tempObject->GetID());
+				collisionList.insert(tempObject.GetID());
 			}
 			// Check other movable objects
 			else
@@ -447,8 +439,6 @@ namespace battleCity
 			}
 		}
 
-		tempObject = nullptr;
-		ptrObject = nullptr;
 		return collisionList;
 	}
 

@@ -57,21 +57,19 @@ bool battleCity::boxesIntersect(Box A, Box B)
         return false;
 }
 
-battleCity::Box battleCity::getWorldBox(const Object* ptrObject)
+battleCity::Box battleCity::getWorldBox(const Object& ptrObject)
 {
-    Box tempBox = getWorldBox(ptrObject, ptrObject->getPosition());
-    ptrObject = nullptr;
+    Box tempBox = getWorldBox(ptrObject, ptrObject.getPosition());
     return tempBox;
 }
 
-battleCity::Box battleCity::getWorldBox(const Object* ptrObject, Vector where)
+battleCity::Box battleCity::getWorldBox(const Object& ptrObject, Vector where)
 {
-    Box tempBox = ptrObject->getBox();
+    Box tempBox = ptrObject.getBox();
     Vector corner = tempBox.getCorner();
     corner.x = corner.x + where.x;
     corner.y = corner.y + where.y;
     tempBox.setCorner(corner);
-    ptrObject = nullptr;
     return tempBox;
 }
 
