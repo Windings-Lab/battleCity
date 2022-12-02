@@ -22,8 +22,8 @@ namespace battleCity
 	/// </summary>
 	/// <param name="type">0</param>
 	/// <param name="type">""</param>
-	/// <param name="mCollisionPos.x">SCR.getBoundaryL()</param>
-	/// <param name="mCollisionPos.y">SCR.getBoundaryU()</param>
+	/// <param name="mCollisionPos.X">SCR.getBoundaryL()</param>
+	/// <param name="mCollisionPos.Y">SCR.getBoundaryU()</param>
 	/// <param name="health">1</param>
 	/// <param name="constSpeed">0</param>
 	/// <param name="bulletCount">1</param>
@@ -81,7 +81,7 @@ namespace battleCity
 
 	inline void Tank::draw()
 	{
-		drawSprite(sprite, (int)position.x, (int)position.y);
+		drawSprite(sprite, (int)position.X, (int)position.Y);
 	}
 
 	void Tank::fire()
@@ -96,24 +96,24 @@ namespace battleCity
 	void Tank::move(float x, float y)
 	{
 		setSight(Vector(x, y));
-		if (getSight().x == 1)
+		if (getSight().X == 1)
 		{
 			spriteSet(nullptr, 0);
 		}
-		else if (getSight().x == -1)
+		else if (getSight().X == -1)
 		{
 			spriteSet(nullptr, 1);
 		}
-		else if (getSight().y == 1)
+		else if (getSight().Y == 1)
 		{
 			spriteSet(nullptr, 2);
 		}
-		else if (getSight().y == -1)
+		else if (getSight().Y == -1)
 		{
 			spriteSet(nullptr, 3);
 		}
 		//std::cout << x << y << std::endl;
-		//std::cout << "sightX: " << getSight().x << " sightY: " << getSight().y << std::endl;
+		//std::cout << "sightX: " << getSight().X << " sightY: " << getSight().Y << std::endl;
 		setVelocity(Vector(x, y));
 	}
 
@@ -139,26 +139,26 @@ namespace battleCity
 				Vector sight1 = CollisionEvent->GetObjectID()->getSight();
 				Vector sight2 = CollisionEvent->GetColliderID()->getSight();
 
-				if (sight1.x == 1 && sight2.x == 1)
+				if (sight1.X == 1 && sight2.X == 1)
 				{
-					newVec.x -= 16;
+					newVec.X -= 16;
 					CollisionEvent->GetObjectID()->SetCollisionPos(newVec);
 				}
-				else if (sight1.x == -1 && sight2.x == -1)
+				else if (sight1.X == -1 && sight2.X == -1)
 				{
-					newVec.x += 16;
+					newVec.X += 16;
 					CollisionEvent->GetObjectID()->SetCollisionPos(newVec);
 				}
-				else if ((sight1.x == 1 && sight2.x == -1) || (sight2.x == 1 && sight1.x == -1))
+				else if ((sight1.X == 1 && sight2.X == -1) || (sight2.X == 1 && sight1.X == -1))
 				{
-					newVec.x -= 16;
+					newVec.X -= 16;
 					CollisionEvent->GetObjectID()->SetCollisionPos(newVec);
-					newVec.x += 16;
+					newVec.X += 16;
 					CollisionEvent->GetColliderID()->SetCollisionPos(newVec);
 				}
 				else
 				{
-					newVec.x = newVec.x - 16 < SCR.getBoundaryL() ? newVec.x + 16 : newVec.x - 16;
+					newVec.X = newVec.X - 16 < SCR.getBoundaryL() ? newVec.X + 16 : newVec.X - 16;
 					CollisionEvent->GetObjectID()->SetCollisionPos(newVec);
 				}*/
 				CollisionEvent->GetObjectID()->setSpawnIntersection(true);
@@ -168,7 +168,7 @@ namespace battleCity
 				Box b2 = CollisionEvent->GetColliderID()->getBox();
 				if (boxesIntersect(b1, b2))
 				{
-					newVec.x = newVec.x - 32 < SCR.getBoundaryL() ? newVec.x + 32 : newVec.x - 32;
+					newVec.X = newVec.X - 32 < SCR.getBoundaryL() ? newVec.X + 32 : newVec.X - 32;
 					CollisionEvent->GetObjectID()->setPosition(newVec);
 					move(0, 0);
 				}
@@ -194,7 +194,7 @@ namespace battleCity
 				Box b2 = CollisionEvent->GetColliderID()->getBox();
 				if (boxesIntersect(b1, b2))
 				{
-					newVec.x = newVec.x - 32 < SCR.getBoundaryL() ? newVec.x + 32 : newVec.x - 32;
+					newVec.X = newVec.X - 32 < SCR.getBoundaryL() ? newVec.X + 32 : newVec.X - 32;
 					CollisionEvent->GetObjectID()->setPosition(newVec);
 					move(0, 0);
 				}
@@ -225,7 +225,7 @@ namespace battleCity
 			do
 			{
 				rnd = randomNumber(-1, 1);
-			} while (rnd == getSight().x || rnd == 0);
+			} while (rnd == getSight().X || rnd == 0);
 			move(rnd, 0);
 			change = 2;
 		}
@@ -234,7 +234,7 @@ namespace battleCity
 			do
 			{
 				rnd = randomNumber(-1, 1);
-			} while (rnd == getSight().y || rnd == 0);
+			} while (rnd == getSight().Y || rnd == 0);
 			move(0, rnd);
 			change = 1;
 		}

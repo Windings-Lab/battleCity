@@ -8,8 +8,8 @@
 
 bool battleCity::positionsIntersect(Vector p1, Vector p2)
 {
-    if (abs(p1.x - p2.x) <= 1 &&
-        abs(p1.y - p2.y) <= 1)
+    if (abs(p1.X - p2.X) <= 1 &&
+        abs(p1.Y - p2.Y) <= 1)
     {
         return true;
     }
@@ -23,11 +23,11 @@ bool battleCity::boxesIntersect(Box A, Box B)
     bool yOverlap;
     Vector vecA = A.getCorner();
     Vector vecB = B.getCorner();
-    float Ax1 = vecA.x, Ax2 = vecA.x + A.getHorizontal();
-    float Ay1 = vecA.y, Ay2 = vecA.y + A.getVertical();
+    float Ax1 = vecA.X, Ax2 = vecA.X + A.getHorizontal();
+    float Ay1 = vecA.Y, Ay2 = vecA.Y + A.getVertical();
 
-    float Bx1 = vecB.x, Bx2 = vecB.x + B.getHorizontal();
-    float By1 = vecB.y, By2 = vecB.y + B.getVertical();
+    float Bx1 = vecB.X, Bx2 = vecB.X + B.getHorizontal();
+    float By1 = vecB.Y, By2 = vecB.Y + B.getVertical();
 
     //if (GM.stepCount % 1000 == 0)
     //{
@@ -67,8 +67,8 @@ battleCity::Box battleCity::getWorldBox(const Object& ptrObject, Vector where)
 {
     Box tempBox = ptrObject.getBox();
     Vector corner = tempBox.getCorner();
-    corner.x = corner.x + where.x;
-    corner.y = corner.y + where.y;
+    corner.X = corner.X + where.X;
+    corner.Y = corner.Y + where.Y;
     tempBox.setCorner(corner);
     return tempBox;
 }

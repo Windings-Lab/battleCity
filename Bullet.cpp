@@ -25,7 +25,7 @@ namespace battleCity
 		spriteDB = &SPR.getBulletSprites();
 
 		initBullet(object);
-		//std::cout << "bulletX: " << mCollisionPos.x << " bulletY: " << mCollisionPos.y << std::endl;
+		//std::cout << "bulletX: " << mCollisionPos.X << " bulletY: " << mCollisionPos.Y << std::endl;
 	}
 
 	void Bullet::initBullet(const Object& ptrObj)
@@ -36,34 +36,34 @@ namespace battleCity
 		float spriteObjY = ptrObj.getBox().getVertical();
 
 		// RIGHT LEFT
-		if (directionObj.x == 1)
+		if (directionObj.X == 1)
 		{
-			pos.y = pos.y + (spriteObjY / 2) - 2; // -2 is Centerize
-			pos.x = pos.x + spriteObjX;
-			directionObj.x = constSpeed;
+			pos.Y = pos.Y + (spriteObjY / 2) - 2; // -2 is Centerize
+			pos.X = pos.X + spriteObjX;
+			directionObj.X = constSpeed;
 			spriteSet(nullptr, 0);
 			setSight(Vector(1, 0));
 		}
-		else if (directionObj.x == -1)
+		else if (directionObj.X == -1)
 		{
-			pos.y = pos.y + (spriteObjY / 2) - 2; // -2 is Centerize
-			directionObj.x = -constSpeed;
+			pos.Y = pos.Y + (spriteObjY / 2) - 2; // -2 is Centerize
+			directionObj.X = -constSpeed;
 			spriteSet(nullptr, 1);
 			setSight(Vector(-1, 0));
 		}
 		// DOWN UP
-		else if (directionObj.y == 1)
+		else if (directionObj.Y == 1)
 		{
-			pos.x = pos.x + (spriteObjX / 2) - 2; // -2 is Centerize
-			pos.y = pos.y + spriteObjY;
-			directionObj.y = constSpeed;
+			pos.X = pos.X + (spriteObjX / 2) - 2; // -2 is Centerize
+			pos.Y = pos.Y + spriteObjY;
+			directionObj.Y = constSpeed;
 			spriteSet(nullptr, 2);
 			setSight(Vector(0, 1));
 		}
-		else if (directionObj.y == -1)
+		else if (directionObj.Y == -1)
 		{
-			pos.x = pos.x + (spriteObjX / 2) - 2; // -2 is Centerize
-			directionObj.y = -constSpeed;
+			pos.X = pos.X + (spriteObjX / 2) - 2; // -2 is Centerize
+			directionObj.Y = -constSpeed;
 			spriteSet(nullptr, 3);
 			setSight(Vector(0, -1));
 		}
@@ -107,7 +107,7 @@ namespace battleCity
 
 	void Bullet::draw()
 	{
-		drawSprite(sprite, (int)position.x, (int)position.y);
+		drawSprite(sprite, (int)position.X, (int)position.Y);
 	}
 
 	int Bullet::eventHandler(const Event* ptrEvent) {
@@ -132,7 +132,7 @@ namespace battleCity
 	Bullet::~Bullet()
 	{
 		object.setBulletCount(1);
-		position.x -= 5;
+		position.X -= 5;
 		Explosion* newExp = new Explosion(false);
 		newExp->setPosition(this->position);
 		newExp = nullptr;

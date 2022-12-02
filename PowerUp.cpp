@@ -44,7 +44,7 @@ battleCity::PowerUp::PowerUp(int giveHealth)
 
 void battleCity::PowerUp::draw()
 {
-	drawSprite(sprite, (int)position.x, (int)position.y);
+	drawSprite(sprite, (int)position.X, (int)position.Y);
 }
 
 void battleCity::PowerUp::makePowerUp(const battleCity::EventCollision* CollisionEvent)

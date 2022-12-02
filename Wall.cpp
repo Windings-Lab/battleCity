@@ -25,8 +25,8 @@ namespace battleCity
 	{
 		mType = Type::Wall;
 
-		position.x = x;
-		position.y = y;
+		position.X = x;
+		position.Y = y;
 
 #if DEBUG == 0
 		health = 2;
@@ -46,7 +46,7 @@ namespace battleCity
 
 	void Wall::draw()
 	{
-		drawSprite(sprite, (int)position.x, (int)position.y);
+		drawSprite(sprite, (int)position.X, (int)position.Y);
 	}
 
 	int Wall::eventHandler(const Event* ptrEvent)

@@ -23,7 +23,7 @@ namespace battleCity
 
     void Explosion::draw()
     {
-        drawSprite(sprite, (int)position.x, (int)position.y);
+        drawSprite(sprite, (int)position.X, (int)position.Y);
     }
 
     void Explosion::step()

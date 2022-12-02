@@ -22,8 +22,8 @@ namespace battleCity
 	/// </summary>
 	/// <param name="type">0</param>
 	/// <param name="type">""</param>
-	/// <param name="mCollisionPos.x">SCR.getBoundaryL()</param>
-	/// <param name="mCollisionPos.y">SCR.getBoundaryU()</param>
+	/// <param name="mCollisionPos.X">SCR.getBoundaryL()</param>
+	/// <param name="mCollisionPos.Y">SCR.getBoundaryU()</param>
 	/// <param name="health">1</param>
 	/// <param name="constSpeed">0</param>
 	/// <param name="bulletCount">1</param>
@@ -45,7 +45,7 @@ namespace battleCity
 		spriteSet();
 		setSight(Vector(0, -1));
 #if DEBUG == 1
-		std::cout << "x: " << mCollisionPos.x << " y: " << mCollisionPos.y << std::endl;
+		std::cout << "x: " << mCollisionPos.X << " y: " << mCollisionPos.Y << std::endl;
 #endif
 	}
 
@@ -74,15 +74,15 @@ namespace battleCity
 		//if (GM.stepCount % 5000 == 0)
 		//{
 		//	//std::cout << "speed: " << getSpeed() << std::endl;
-		//	std::cout << "Player x: " << mCollisionPos.x << " y: " << mCollisionPos.y << std::endl;
-		//	std::cout << "x: " << getDirection().x << " y: " << getDirection().y << std::endl;
-		//	std::cout << "sight.x: " << getSight().x << " sight.y: " << getSight().y << std::endl << std::endl;
+		//	std::cout << "Player x: " << mCollisionPos.X << " y: " << mCollisionPos.Y << std::endl;
+		//	std::cout << "x: " << getDirection().X << " y: " << getDirection().Y << std::endl;
+		//	std::cout << "sight.X: " << getSight().X << " sight.Y: " << getSight().Y << std::endl << std::endl;
 		//}
 	}
 
 	inline void TankPlayer::draw()
 	{
-		drawSprite(sprite, (int)position.x, (int)position.y);
+		drawSprite(sprite, (int)position.X, (int)position.Y);
 	}
 
 	void TankPlayer::keyboardInput()
@@ -162,7 +162,7 @@ namespace battleCity
 		}
 
 #if DEBUG == 1
-		//std::cout << "x: " << mCollisionPos.x << " y: " << mCollisionPos.y << endl;
+		//std::cout << "x: " << mCollisionPos.X << " y: " << mCollisionPos.Y << endl;
 		//std::cout << "movement capacity: " << movement.capacity() << std::endl;
 		std::cout << "PRESSED" << std::endl;
 		//for (const auto& mID : movement)
@@ -182,7 +182,7 @@ namespace battleCity
 		movement.shrink_to_fit();
 
 #if DEBUG == 1
-		//std::cout << "x: " << mCollisionPos.x << " y: " << mCollisionPos.y << endl;
+		//std::cout << "x: " << mCollisionPos.X << " y: " << mCollisionPos.Y << endl;
 		//std::cout << "movement capacity: " << movement.capacity() << std::endl;
 		std::cout << "RELEASED" << std::endl;
 		//for (const auto& mID : movement)

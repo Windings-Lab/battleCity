@@ -66,20 +66,20 @@ namespace battleCity
 
     void Object::setWorldIndexRelative()
     {
-        if (sight.x == 1)
+        if (sight.X == 1)
         {
             //std::cout << "WorldManager - getCollisions - 294" << std::endl;
-            worldIndexRelative.x = (int)(((position.x - SCR.getBoundaryL()) / 16) + spriteIndexSize);
-            if (worldIndexRelative.x >= WIDTH)
-                worldIndexRelative.x = WIDTH - 1;
-            worldIndexRelative.y = (int)(((position.y - SCR.getBoundaryU()) / 16));
+            worldIndexRelative.X = (int)(((position.X - SCR.getBoundaryL()) / 16) + spriteIndexSize);
+            if (worldIndexRelative.X >= WIDTH)
+                worldIndexRelative.X = WIDTH - 1;
+            worldIndexRelative.Y = (int)(((position.Y - SCR.getBoundaryU()) / 16));
             for (int i = 0; i < spriteIndexSize; i++)
             {
-                if (WM.GetWorldMap()[(int)worldIndexRelative.y][(int)worldIndexRelative.x] == nullptr)
+                if (WM.GetWorldMap()[(int)worldIndexRelative.Y][(int)worldIndexRelative.X] == nullptr)
                 {
-                    worldIndexRelative.y++;
-                    if (worldIndexRelative.y >= HEIGHT)
-                        worldIndexRelative.y = HEIGHT - 1;
+                    worldIndexRelative.Y++;
+                    if (worldIndexRelative.Y >= HEIGHT)
+                        worldIndexRelative.Y = HEIGHT - 1;
                 }
                 else
                 {
@@ -87,20 +87,20 @@ namespace battleCity
                 }
             }
         }
-        else if (sight.x == -1)
+        else if (sight.X == -1)
         {
             //std::cout << "WorldManager - getCollisions - 313" << std::endl;
-            worldIndexRelative.x = (int)(((position.x - SCR.getBoundaryL()) / 16) - 1);
-            if (worldIndexRelative.x < 0)
-                worldIndexRelative.x = 0;
-            worldIndexRelative.y = (int)((position.y - SCR.getBoundaryU()) / 16);
+            worldIndexRelative.X = (int)(((position.X - SCR.getBoundaryL()) / 16) - 1);
+            if (worldIndexRelative.X < 0)
+                worldIndexRelative.X = 0;
+            worldIndexRelative.Y = (int)((position.Y - SCR.getBoundaryU()) / 16);
             for (int i = 0; i < spriteIndexSize; i++)
             {
-                if (WM.GetWorldMap()[(int)worldIndexRelative.y][(int)worldIndexRelative.x] == nullptr)
+                if (WM.GetWorldMap()[(int)worldIndexRelative.Y][(int)worldIndexRelative.X] == nullptr)
                 {
-                    worldIndexRelative.y++;
-                    if (worldIndexRelative.y >= HEIGHT)
-                        worldIndexRelative.y = HEIGHT - 1;
+                    worldIndexRelative.Y++;
+                    if (worldIndexRelative.Y >= HEIGHT)
+                        worldIndexRelative.Y = HEIGHT - 1;
                 }
                 else
                 {
@@ -108,20 +108,20 @@ namespace battleCity
                 }
             }
         }
-        else if (sight.y == 1)
+        else if (sight.Y == 1)
         {
             /*std::cout << "WorldManager - getCollisions - 332" << std::endl;*/
-            worldIndexRelative.x = (int)((position.x - SCR.getBoundaryL()) / 16);
-            worldIndexRelative.y = (int)(((position.y - SCR.getBoundaryU()) / 16) + spriteIndexSize);
-            if (worldIndexRelative.y >= HEIGHT)
-                worldIndexRelative.y = HEIGHT - 1;
+            worldIndexRelative.X = (int)((position.X - SCR.getBoundaryL()) / 16);
+            worldIndexRelative.Y = (int)(((position.Y - SCR.getBoundaryU()) / 16) + spriteIndexSize);
+            if (worldIndexRelative.Y >= HEIGHT)
+                worldIndexRelative.Y = HEIGHT - 1;
             for (int i = 0; i < spriteIndexSize; i++)
             {
-                if (WM.GetWorldMap()[(int)worldIndexRelative.y][(int)worldIndexRelative.x] == nullptr)
+                if (WM.GetWorldMap()[(int)worldIndexRelative.Y][(int)worldIndexRelative.X] == nullptr)
                 {
-                    worldIndexRelative.x++;
-                    if (worldIndexRelative.x >= WIDTH)
-                        worldIndexRelative.x = WIDTH - 1;
+                    worldIndexRelative.X++;
+                    if (worldIndexRelative.X >= WIDTH)
+                        worldIndexRelative.X = WIDTH - 1;
                 }
                 else
                 {
@@ -129,20 +129,20 @@ namespace battleCity
                 }
             }
         }
-        else if (sight.y == -1)
+        else if (sight.Y == -1)
         {
             //std::cout << "WorldManager - getCollisions - 351" << std::endl;
-            worldIndexRelative.x = (int)((position.x - SCR.getBoundaryL()) / 16);
-            worldIndexRelative.y = (int)(((position.y - SCR.getBoundaryU()) / 16) - 1);
-            if (worldIndexRelative.y < 0)
-                worldIndexRelative.y = 0;
+            worldIndexRelative.X = (int)((position.X - SCR.getBoundaryL()) / 16);
+            worldIndexRelative.Y = (int)(((position.Y - SCR.getBoundaryU()) / 16) - 1);
+            if (worldIndexRelative.Y < 0)
+                worldIndexRelative.Y = 0;
             for (int i = 0; i < spriteIndexSize; i++)
             {
-                if (WM.GetWorldMap()[(int)worldIndexRelative.y][(int)worldIndexRelative.x] == nullptr)
+                if (WM.GetWorldMap()[(int)worldIndexRelative.Y][(int)worldIndexRelative.X] == nullptr)
                 {
-                    worldIndexRelative.x++;
-                    if (worldIndexRelative.x >= WIDTH)
-                        worldIndexRelative.x = WIDTH - 1;
+                    worldIndexRelative.X++;
+                    if (worldIndexRelative.X >= WIDTH)
+                        worldIndexRelative.X = WIDTH - 1;
                 }
                 else
                 {
@@ -190,9 +190,9 @@ namespace battleCity
 
     void Object::setDirection(Vector newDirection)
     {
-        newDirection.x = newDirection.x > 0 ? 1 : (newDirection.x < 0 ? -1 : 0);
-        newDirection.y = newDirection.y > 0 ? 1 : (newDirection.y < 0 ? -1 : 0);
-        direction = Vector(newDirection.x, newDirection.y);
+        newDirection.X = newDirection.X > 0 ? 1 : (newDirection.X < 0 ? -1 : 0);
+        newDirection.Y = newDirection.Y > 0 ? 1 : (newDirection.Y < 0 ? -1 : 0);
+        direction = Vector(newDirection.X, newDirection.Y);
     }
 
     Vector Object::getDirection() const
@@ -207,19 +207,19 @@ namespace battleCity
 
     void Object::setSight(Vector newSight)
     {
-        if (!(newSight.x == 0 && newSight.y == 0))
+        if (!(newSight.X == 0 && newSight.Y == 0))
             sight = newSight;
     }
 
     void Object::setVelocity(Vector newVelocity)
     {
-        setDirection(Vector(newVelocity.x, newVelocity.y));
-        setSpeed(newVelocity.x == 0 ? newVelocity.y : newVelocity.x);
+        setDirection(Vector(newVelocity.X, newVelocity.Y));
+        setSpeed(newVelocity.X == 0 ? newVelocity.Y : newVelocity.X);
     }
 
     Vector Object::getVelocity() const
     {
-        return Vector(direction.x == 0 ? 0 : speed, direction.y == 0 ? 0 : speed);
+        return Vector(direction.X == 0 ? 0 : speed, direction.Y == 0 ? 0 : speed);
     }
 
     Vector Object::predictPosition()
@@ -238,13 +238,13 @@ namespace battleCity
     void Object::initPosition(Vector initPosition)
     {
         position = initPosition;
-        if (initPosition.x < SCR.getBoundaryL() || initPosition.x > SCR.getBoundaryR())
+        if (initPosition.X < SCR.getBoundaryL() || initPosition.X > SCR.getBoundaryR())
         {
-            position.x = SCR.getBoundaryL();
+            position.X = SCR.getBoundaryL();
         }
-        if (initPosition.y < SCR.getBoundaryU() || initPosition.y > SCR.getBoundaryD())
+        if (initPosition.Y < SCR.getBoundaryU() || initPosition.Y > SCR.getBoundaryD())
         {
-            position.y = SCR.getBoundaryU();
+            position.Y = SCR.getBoundaryU();
         }
     }
 

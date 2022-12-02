@@ -47,7 +47,7 @@ namespace battleCity
 		void setSpeed(float newSpeed);
 		void setDirection(Vector newDirection);
 	protected:
-		int mID;
+		const int mID;
 		Type mType;
 
 		// default = Boundary of windows

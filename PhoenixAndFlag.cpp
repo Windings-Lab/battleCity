@@ -13,8 +13,8 @@ namespace battleCity
 	{
 		mType = Type::PhoenixAndFlag;
 
-		position.x = x;
-		position.y = y;
+		position.X = x;
+		position.Y = y;
 
 		health = 0;
 		constSpeed = 0;
@@ -33,7 +33,7 @@ namespace battleCity
 
 	void PhoenixAndFlag::draw()
 	{
-		drawSprite(sprite, (int)position.x, (int)position.y);
+		drawSprite(sprite, (int)position.X, (int)position.Y);
 	}
 
 	void PhoenixAndFlag::setGameOver(const EventCollision* CollisionEvent)

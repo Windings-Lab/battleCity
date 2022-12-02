@@ -34,8 +34,8 @@ namespace battleCity
 		mMap = std::vector(HEIGHT, std::vector<int>(WIDTH));
 		mPowerUpPositions = std::vector(0, std::vector<int>(0));
 
-		mGameOverPos.x = 290;
-		mGameOverPos.y = 600;
+		mGameOverPos.X = 290;
+		mGameOverPos.Y = 600;
 		mGameOver = false;
 
 		mTankCount = 0;
@@ -235,8 +235,8 @@ namespace battleCity
 			if (objPtr.getType() == Object::Type::Wall)
 			{
 				Vector pos = objPtr.getPosition();
-				int x = (pos.x - SCR.getBoundaryL()) / 16;
-				int y = (pos.y - SCR.getBoundaryU()) / 16;
+				int x = (pos.X - SCR.getBoundaryL()) / 16;
+				int y = (pos.Y - SCR.getBoundaryU()) / 16;
 				mMap[y][x] = 0;
 			}
 			RemoveObject(objID);
@@ -265,11 +265,11 @@ namespace battleCity
 		if (mGameOver)
 		{
 			GM.gameOverState();
-			if (mGameOverPos.y != 247)
+			if (mGameOverPos.Y != 247)
 			{
-				mGameOverPos.y--;
+				mGameOverPos.Y--;
 			}
-			drawSprite(mGameOverSpr, (int)mGameOverPos.x, (int)mGameOverPos.y);
+			drawSprite(mGameOverSpr, (int)mGameOverPos.X, (int)mGameOverPos.Y);
 		}
 	}
 
@@ -306,8 +306,8 @@ namespace battleCity
 		}
 
 		int i = 0;
-		if ((where.x >= SCR.getBoundaryL() && where.x + movableObj.getSpriteX() <= SCR.getBoundaryR()) &&
-			(where.y >= SCR.getBoundaryU() && where.y + movableObj.getSpriteY() <= SCR.getBoundaryD()))
+		if ((where.X >= SCR.getBoundaryL() && where.X + movableObj.getSpriteX() <= SCR.getBoundaryR()) &&
+			(where.Y >= SCR.getBoundaryU() && where.Y + movableObj.getSpriteY() <= SCR.getBoundaryD()))
 		{
 			i = movableObj.setPosition(where);
 		}
@@ -412,7 +412,7 @@ namespace battleCity
 		}
 		Vector objWorldIndex = ptrObject.getWorldIndexRelative();
 
-		int mapObjID = mMap[(int)objWorldIndex.y][(int)objWorldIndex.x];
+		int mapObjID = mMap[(int)objWorldIndex.Y][(int)objWorldIndex.X];
 		auto iterateFullListFunc = [&]
 		{
 			for (const auto& [objID, colliderObj] : mWorldList.GetRange())
