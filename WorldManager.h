@@ -6,14 +6,11 @@
 #include "Vector.h"
 #include "Object.h"
 #include "ObjectList.h"
-#include "TankPlayer.h"
-#include "PowerUp.h"
 
 #define WM battleCity::WorldManager::GetInstance()
 
 namespace battleCity
 {
-	class PowerUp;
 	class WorldManager : public Manager
 	{
 	private:
@@ -54,7 +51,7 @@ namespace battleCity
 
 		// Startup game world (initialize everything to empty)
         // Return 0
-		int StartUp(TankPlayer& newPlayer);
+		int StartUp(Object& newPlayer);
 
 		// Shutdown game world (delete all game world Objects)
 		void ShutDown() override;
@@ -85,7 +82,7 @@ namespace battleCity
 
 		void CreateSomeTanks();
 
-		int InitMap(TankPlayer& newPlayer);
+		int InitMap(Object& newPlayer);
 
 		// Return list of Objects matching type
 		// List is empty if none found

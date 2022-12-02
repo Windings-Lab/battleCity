@@ -1,28 +1,22 @@
-#include "Manager.h"
 #include "WorldManager.h"
-#include "ObjectList.h"
-#include "Object.h"
-#include "Vector.h"
-#include "EventCollision.h"
-#include "EventOut.h"
-#include "Screen.h"
-#include "PhoenixAndFlag.h"
-#include "Box.h"
 #include "GameManager.h"
-#include "PowerUp.h"
-#include "Utility.h"
-#include "Framework.h"
+#include "Object.h"
+#include "PhoenixAndFlag.h"
 #include "Tank.h"
-#include "Sprites.h"
+#include "Utility.h"
+#include "Screen.h"
 #include "Wall.h"
+#include "EventOut.h"
+#include "EventCollision.h"
 #include "PowerUp.h"
+#include "Vector.h"
+#include "Box.h"
 
 #include <vector>
-#include <iostream>
 #include <fstream>
+#include <iostream>
 #include <memory>
-
-#include "Object.h"
+#include <unordered_set>
 
 using namespace std::string_view_literals;
 
@@ -53,7 +47,7 @@ namespace battleCity
 		return single;
 	}
 
-	int WorldManager::StartUp(TankPlayer& newPlayer)
+	int WorldManager::StartUp(Object& newPlayer)
 	{
 		//std::cout << "WorldManager - startUp" << std::endl;
 		if (InitMap(newPlayer) == 0)
@@ -148,7 +142,7 @@ namespace battleCity
 		}
 	}
 
-	int WorldManager::InitMap(TankPlayer& newPlayer)
+	int WorldManager::InitMap(Object& newPlayer)
 	{
 		//std::cout << "WorldManager - initMap" << std::endl;
 		char charToStore;
@@ -165,9 +159,8 @@ namespace battleCity
 			for (int j = 0; j < WIDTH; j++) 
 			{
 				mapFile >> charToStore;
-				auto type = static_cast<Object::Type>(charToStore - '0');
 
-				switch (type)
+				switch (auto type = static_cast<Object::Type>(charToStore - '0'))
 				{
 				case Object::Type::TankPlayer:
 					newPlayer.setPosition(Vector(SCR.getBoundaryL() + (16 * j), SCR.getBoundaryU() + (16 * i)));
