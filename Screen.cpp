@@ -15,17 +15,17 @@ namespace battleCity
 		mFullscreen = fullscreenMode;
 	}
 
-	unsigned int Screen::GetWidth()
+	int Screen::GetWidth() const
 	{
 		return mWidth;
 	}
 
-	unsigned int Screen::GetHeight()
+	int Screen::GetHeight() const
 	{
 		return mHeight;
 	}
 
-	bool Screen::GetFullscreen()
+	bool Screen::GetFullscreen() const
 	{
 		return mFullscreen;
 	}
