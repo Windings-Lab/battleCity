@@ -19,14 +19,18 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AABB.cpp" />
     <ClCompile Include="FrameworkWrapper.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="Screen.cpp" />
+    <ClCompile Include="Vector2Int.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AABB.h" />
     <ClInclude Include="Framework.h" />
     <ClInclude Include="FrameworkWrapper.h" />
     <ClInclude Include="Screen.h" />
+    <ClInclude Include="Vector2Int.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
