@@ -7,13 +7,68 @@
 #include "Object.h"
 #include "ObjectList.h"
 
-#define WM battleCity::WorldManager::GetInstance()
-
 namespace battleCity
 {
-	class WorldManager : public Manager
+#define WM WorldManager::GetInstance()
+
+	class WorldManager final : Manager
 	{
 	private:
+		void InitMap();
+		void CreateSomeTanks();
+	public:
+		WorldManager(WorldManager&&) = delete;
+		WorldManager(const WorldManager&) = delete;
+
+		void operator=(const WorldManager&) = delete;
+		void operator=(WorldManager&&) = delete;
+
+		~WorldManager() override = default;
+
+		// Singleton
+		static WorldManager& GetInstance();
+
+		void StartUp() override;
+		void ShutDown() override;
+		void SetGameOverState();
+
+		// Update world.
+		void Update();
+
+		// Draw all Objects
+		void Draw();
+		void DrawBackground();
+
+		void InsertObject(std::unique_ptr<Object>& objPtr);
+		void RemoveObject(int objID);
+		// Indicate Object is to be deleted at end of current game loop.
+		void MarkForDelete(int objID);
+
+		const ObjectList& GetAllObjects() const;
+		std::unordered_set<int> GetObjectsOfType(Object::Type type) const;
+		int GetObjectCount() const;
+
+		void SetPlayerID(int playerID);
+		int GetPlayerID() const;
+
+		void IncrementTankCount(int count);
+		int GetTankCount();
+
+		void IncrementKillCount(int newKillCount = 1);
+		int GetKillCount();
+
+		std::vector<std::vector<int>>& GetWorldMap();
+		std::vector<std::vector<int>>& GetPowerUpPositions();
+
+		void MoveObject(Object& movableObj, Vector where);
+		// Return list of Objects collided with at some position
+		std::unordered_set<int> GetCollisions(const Object& ptrObject, Vector where) const;
+
+		void CreatePowerUp();
+		void SetPowerUpToFalse();
+		void SetPowerUpisTakedToTrue();
+	private:
+		// Singleton
 		WorldManager();
 
 		std::vector<std::vector<int>> mMap;
@@ -30,6 +85,7 @@ namespace battleCity
 		Sprite* mGameOverSpr;
 		bool mGameOver;
 
+		int mPlayerID;
 		int mTankCount;
 		int mTankStorage;
 		int mKillCount;
@@ -37,85 +93,6 @@ namespace battleCity
 		int mPowerUpID;
 		bool mIsPowerUp;
 		bool mPowerUpTaked;
-	public:
-		friend class Manager;
-		friend class GameManager;
-
-		WorldManager(WorldManager const&) = delete;
-		void operator=(WorldManager const&) = delete;
-
-		~WorldManager();
-
-		// Get the one and only instance of the WorldManager
-		static WorldManager& GetInstance();
-
-		// Startup game world (initialize everything to empty)
-        // Return 0
-		int StartUp(int playerID);
-
-		// Shutdown game world (delete all game world Objects)
-		void ShutDown() override;
-
-		void SetGameOverState();
-		void SetTankCount(int newTankCount);
-		int GetTankCount();
-
-		// killCount += newKillCount;
-		void SetKillCount(int newKillCount);
-		int GetKillCount();
-
-		// Insert Object into world
-		// Return 0 if ok, else -1
-		int InsertObject(std::unique_ptr<Object>& objPtr);
-
-		// Remove Object from world
-		// Return 0 if ok, else -1
-		int RemoveObject(int objID);
-
-		// Return list of all Objects in world
-		const ObjectList& GetAllObjects() const;
-
-		int GetSizeOfWorldList() const;
-
-		std::vector<std::vector<int>>& GetWorldMap();
-		std::vector<std::vector<int>>& GetPowerUpPositions();
-
-		void CreateSomeTanks();
-
-		int InitMap(int playerID);
-
-		// Return list of Objects matching type
-		// List is empty if none found
-		std::unordered_set<int> GetObjectsOfType(Object::Type type) const;
-
-		// Update world.
-		// Update positions of Objects based on their velocities.
-		void Update();
-
-		// Draw all Objects
-		void Draw();
-		void DrawBackground();
-
-		/// Move Object.
-		/// If collision with solid, send collision events.
-		/// If no collision with solid, move ok.
-		/// If all collided objects soft, move ok.
-		/// If Object is spectral, move ok.
-		/// If move ok, move.
-		/// Return 0 if moved, else -1 if collision with solid.
-		int MoveObject(Object& movableObj, Vector where);
-
-		// Indicate Object is to be deleted at end of current game loop.
-		// Return 0 if ok
-		int MarkForDelete(int objID);
-
-		void CreatePowerUp();
-		void SetPowerUpToFalse();
-		void SetPowerUpisTakedToTrue();
-
-		// Return list of Objects collided with at some position
-		// Collisions only with solid and soft Objects.
-		std::unordered_set<int> GetCollisions(const Object& ptrObject, Vector where) const;
 	};
 }
 

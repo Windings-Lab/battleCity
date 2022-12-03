@@ -44,7 +44,7 @@ namespace battleCity
 
 		change = 1;
 		move(1, 0);
-		WM.SetTankCount(1);
+		WM.IncrementTankCount(1);
 	}
 
 	Tank::Tank(float x, float y)
@@ -65,7 +65,7 @@ namespace battleCity
 
 		change = 1;
 		move(1, 0);
-		WM.SetTankCount(1);
+		WM.IncrementTankCount(1);
 	}
 
 	inline void Tank::update()
@@ -254,8 +254,8 @@ namespace battleCity
 		std::cout << "Tank Destructor" << std::endl;
 #endif
 		if(GM.gameOver) return; // TODO: Fix
-		WM.SetTankCount(-1);
-		WM.SetKillCount(1);
+		WM.IncrementTankCount(-1);
+		WM.IncrementKillCount(1);
 		std::unique_ptr<Object> newExp = std::make_unique<Explosion>(true);
 		newExp->setPosition(position);
 

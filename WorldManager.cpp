@@ -23,11 +23,13 @@ using namespace std::string_view_literals;
 namespace battleCity
 {
 	WorldManager::WorldManager()
+		: Manager(ManagerType::World)
+		  , mMap(std::vector(HEIGHT, std::vector<int>(WIDTH)))
+		  , mPowerUpPositions(std::vector(0, std::vector<int>(0)))
 	{
-		SetType(ManagerType::World);
-		mMap = std::vector(HEIGHT, std::vector<int>(WIDTH));
-		mPowerUpPositions = std::vector(0, std::vector<int>(0));
+		mPlayerID = 0;
 
+		mGameOverSpr = nullptr;
 		mGameOverPos.X = 290;
 		mGameOverPos.Y = 600;
 		mGameOver = false;
@@ -47,19 +49,15 @@ namespace battleCity
 		return single;
 	}
 
-	int WorldManager::StartUp(int playerID)
+	void WorldManager::StartUp()
 	{
-		//std::cout << "WorldManager - startUp" << std::endl;
-		if (InitMap(playerID) == 0) return 0;
+		InitMap();
 		mGameOverSpr = &SPR.getGameOverSprite();
-		return Manager::StartUp();
 	}
 
 	void WorldManager::ShutDown()
 	{
-		//std::cout << "WorldManager - shutDown" << std::endl;
 		mWorldList.Clear();
-		Manager::ShutDown();
 	}
 
 	void WorldManager::SetGameOverState()
@@ -71,9 +69,9 @@ namespace battleCity
 		mGameOver = true;
 	}
 
-	void WorldManager::SetTankCount(int newTankCount)
+	void WorldManager::IncrementTankCount(int count)
 	{
-		mTankCount += newTankCount;
+		mTankCount += count;
 	}
 
 	int WorldManager::GetTankCount()
@@ -81,7 +79,7 @@ namespace battleCity
 		return mTankCount;
 	}
 
-	void WorldManager::SetKillCount(int newKillCount)
+	void WorldManager::IncrementKillCount(int newKillCount)
 	{
 		mKillCount += newKillCount;
 	}
@@ -91,22 +89,20 @@ namespace battleCity
 		return mKillCount;
 	}
 
-	int WorldManager::InsertObject(std::unique_ptr<Object>& objPtr)
+	void WorldManager::InsertObject(std::unique_ptr<Object>& objPtr)
 	{
-		//std::cout << "WorldManager - insertObject" << std::endl;
 		if (objPtr->IsMovable())
 		{
 			mObjectIDsToMove.insert(objPtr->GetID());
 		}
-		
-		return mWorldList.Insert(objPtr);
+
+		mWorldList.Insert(objPtr);
 	}
 
-	int WorldManager::RemoveObject(int objID)
+	void WorldManager::RemoveObject(int objID)
 	{
-		//std::cout << "WorldManager - removeObject" << std::endl;
 		mObjectIDsToMove.erase(objID);
-		return mWorldList.Remove(objID);
+		mWorldList.Remove(objID);
 	}
 
 	const ObjectList& WorldManager::GetAllObjects() const
@@ -114,9 +110,19 @@ namespace battleCity
 		return mWorldList;
 	}
 
-	int WorldManager::GetSizeOfWorldList() const
+	int WorldManager::GetObjectCount() const
 	{
 		return mWorldList.GetSize();
+	}
+
+	void WorldManager::SetPlayerID(int playerID)
+	{
+		mPlayerID = playerID;
+	}
+
+	int WorldManager::GetPlayerID() const
+	{
+		return mPlayerID;
 	}
 
 	std::vector<std::vector<int>>& WorldManager::GetWorldMap()
@@ -144,11 +150,10 @@ namespace battleCity
 				std::unique_ptr<Object> tank = std::make_unique<Tank>(275, 45);
 				InsertObject(tank);
 			}
-				
 		}
 	}
 
-	int WorldManager::InitMap(int playerID)
+	void WorldManager::InitMap()
 	{
 		//std::cout << "WorldManager - initMap" << std::endl;
 		char charToStore;
@@ -156,50 +161,52 @@ namespace battleCity
 		if (!mapFile)
 		{
 			std::cout << "Map not found" << std::endl;
-			exit(0);
+			throw;
 		}
 
 		int powerUpY = 0;
-		for (int i = 0; i < HEIGHT; i++) 
+		for (int i = 0; i < HEIGHT; i++)
 		{
-			for (int j = 0; j < WIDTH; j++) 
+			for (int j = 0; j < WIDTH; j++)
 			{
 				mapFile >> charToStore;
 
 				switch (auto type = static_cast<Object::Type>(charToStore - '0'))
 				{
 				case Object::Type::TankPlayer:
-				{
-					auto& newPlayer = mWorldList.GetObject(playerID);
-					newPlayer.setPosition(Vector(SCR.getBoundaryL() + (16 * j), SCR.getBoundaryU() + (16 * i)));
-					break;
-				}
+					{
+						auto& newPlayer = mWorldList.GetObject(mPlayerID);
+						newPlayer.setPosition(Vector(SCR.getBoundaryL() + (16 * j), SCR.getBoundaryU() + (16 * i)));
+						break;
+					}
 				case Object::Type::Tank:
-				{
-					std::unique_ptr<Object> tank = std::make_unique<Tank>(SCR.getBoundaryL() + (16 * j), SCR.getBoundaryU() + (16 * i));
-					InsertObject(tank);
-					break;
-				}
+					{
+						std::unique_ptr<Object> tank = std::make_unique<Tank>(
+							SCR.getBoundaryL() + (16 * j), SCR.getBoundaryU() + (16 * i));
+						InsertObject(tank);
+						break;
+					}
 				case Object::Type::Bullet: break;
 				case Object::Type::Wall:
-				{
-					std::unique_ptr<Object> wall = std::make_unique<Wall>(SCR.getBoundaryL() + (16 * j), SCR.getBoundaryU() + (16 * i));
-					mMap[i][j] = wall->GetID();
-					InsertObject(wall);
-					break;
-				}
+					{
+						std::unique_ptr<Object> wall = std::make_unique<Wall>(
+							SCR.getBoundaryL() + (16 * j), SCR.getBoundaryU() + (16 * i));
+						mMap[i][j] = wall->GetID();
+						InsertObject(wall);
+						break;
+					}
 				case Object::Type::PhoenixAndFlag:
-				{
-					std::unique_ptr<Object> phoenixAndFlag = std::make_unique<PhoenixAndFlag>
-						(SCR.getBoundaryL() + (16 * j), SCR.getBoundaryU() + (16 * i));
-					InsertObject(phoenixAndFlag);
-					break;
-				}
+					{
+						std::unique_ptr<Object> phoenixAndFlag = std::make_unique<PhoenixAndFlag>
+							(SCR.getBoundaryL() + (16 * j), SCR.getBoundaryU() + (16 * i));
+						InsertObject(phoenixAndFlag);
+						break;
+					}
 				case Object::Type::Explosion: break;
-				case Object::Type::PowerUp: 
+				case Object::Type::PowerUp:
 					mPowerUpPositions.push_back(std::vector<int>());
-					mPowerUpPositions[powerUpY].push_back((int)(SCR.getBoundaryL() + (16 * j)));
-					mPowerUpPositions[powerUpY].push_back((int)(SCR.getBoundaryU() + (16 * i)));
+					mPowerUpPositions[powerUpY].push_back(static_cast<int>((SCR.getBoundaryL() + (16 * j))));
+					mPowerUpPositions[powerUpY].push_back(static_cast<int>((SCR.getBoundaryU() + (16 * i))));
 					powerUpY++;
 					break;
 				case Object::Type::Error:
@@ -208,7 +215,6 @@ namespace battleCity
 			}
 		}
 		mapFile.close();
-		return 1;
 	}
 
 	std::unordered_set<int> WorldManager::GetObjectsOfType(Object::Type type) const
@@ -235,7 +241,7 @@ namespace battleCity
 			objRef->update();
 		}
 
-		for(const int objID : mObjectIDsToMove)
+		for (const int objID : mObjectIDsToMove)
 		{
 			Object& objPtr = mWorldList.GetObject(objID);
 			MoveObject(objPtr, objPtr.predictPosition());
@@ -281,7 +287,7 @@ namespace battleCity
 			{
 				mGameOverPos.Y--;
 			}
-			drawSprite(mGameOverSpr, (int)mGameOverPos.X, (int)mGameOverPos.Y);
+			drawSprite(mGameOverSpr, static_cast<int>(mGameOverPos.X), static_cast<int>(mGameOverPos.Y));
 		}
 	}
 
@@ -290,7 +296,7 @@ namespace battleCity
 		drawSprite(&SPR.getBackgroundSprite(), SCR.getBoundaryL(), SCR.getBoundaryU());
 	}
 
-	int WorldManager::MoveObject(Object& movableObj, Vector where)
+	void WorldManager::MoveObject(Object& movableObj, Vector where)
 	{
 		//std::cout << "moveObject" << std::endl;
 		if (movableObj.isSolid() || movableObj.isSoft())
@@ -312,7 +318,7 @@ namespace battleCity
 
 				if (!doMove)
 				{
-					return -1;
+					return;
 				}
 			}
 		}
@@ -328,15 +334,13 @@ namespace battleCity
 			auto eventOut = EventOut();
 			movableObj.EventHandler(eventOut);
 		}
-
-		return i;
 	}
 
-	int WorldManager::MarkForDelete(int objID)
+	void WorldManager::MarkForDelete(int objID)
 	{
 		if (mObjectIDsToDelete.find(objID) != mObjectIDsToDelete.end())
 		{
-			return 0;
+			return;
 		}
 
 		auto& objRef = mWorldList.GetObject(objID);
@@ -347,8 +351,6 @@ namespace battleCity
 		{
 			mObjectIDsToDelete.insert(objID);
 		}
-		
-		return 0;
 	}
 
 	void WorldManager::CreatePowerUp()
@@ -430,12 +432,12 @@ namespace battleCity
 		}
 		Vector objWorldIndex = ptrObject.getWorldIndexRelative();
 
-		int mapObjID = mMap[(int)objWorldIndex.Y][(int)objWorldIndex.X];
+		int mapObjID = mMap[static_cast<int>(objWorldIndex.Y)][static_cast<int>(objWorldIndex.X)];
 		auto iterateFullListFunc = [&]
 		{
 			for (const auto& [objID, colliderObj] : mWorldList.GetRange())
 			{
-				if(mapObjID == 0) continue;
+				if (mapObjID == 0) continue;
 				Object& tempObject = mWorldList.GetObject(mapObjID);
 				if (objID == ptrObject.GetID())
 				{
@@ -443,7 +445,7 @@ namespace battleCity
 				}
 				Box b = getWorldBox(ptrObject, where);
 				Box bTemp = getWorldBox(tempObject);
-				if ((tempObject.isSolid() || tempObject.isSoft()) && 
+				if ((tempObject.isSolid() || tempObject.isSoft()) &&
 					boxesIntersect(b, bTemp))
 				{
 					collisionList.insert(tempObject.GetID());
@@ -476,13 +478,5 @@ namespace battleCity
 		}
 
 		return collisionList;
-	}
-
-	WorldManager::~WorldManager()
-	{
-#if DEBUG == 2
-		std::cout << "WorldManager Destructor" << std::endl;
-		std::cout << std::endl;
-#endif
 	}
 }
