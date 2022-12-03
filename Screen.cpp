@@ -1,7 +1,5 @@
 #include "Screen.h"
 
-#include <iostream>
-
 //Variables to Set
 unsigned int Screen::_width = 0;
 unsigned int Screen::_height = 0;
@@ -59,13 +57,6 @@ void Screen::boundaryLSet(unsigned int newWidth)
 void Screen::boundaryUSet(unsigned int newHeight)
 {
 	_boundaryU = newHeight;
-}
-
-Screen::~Screen()
-{
-#if DEBUG == 2
-	std::cout << "Screen destructor" << std::endl;
-#endif
 }
 
 unsigned int Screen::getWidth()

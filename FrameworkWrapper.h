@@ -1,17 +1,13 @@
 #pragma once
 
-// #include "EventKeyboard.h"
-// #include "EventMouse.h"
 #include "Framework.h"
 
 namespace battleCity
 {
-	// class TankPlayer;
-
 	class FrameworkWrapper final : public Framework
 	{
 	public:
-		FrameworkWrapper() /*: mPlayer(nullptr)*/ {}
+		FrameworkWrapper() {}
 
 		FrameworkWrapper(const FrameworkWrapper&) = delete;
 		FrameworkWrapper(FrameworkWrapper&&) = delete;
@@ -38,10 +34,5 @@ namespace battleCity
 	private:
 		void StartAllManagers();
 		void ShutDownAllManagers();
-
-		// TankPlayer* mPlayer;
-		//
-		// EventKeyboard mEventKeyboard;
-		// EventMouse mEventMouse;
 	};
 }

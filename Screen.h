@@ -5,12 +5,11 @@
 class Screen
 {
 public:
-	virtual ~Screen();
+	~Screen() = default;
 
 	unsigned int getWidth();
 	unsigned int getHeight();
 	bool getFullscreen();
-
 
 	/// <summary>
 	/// boundaryR = 760
