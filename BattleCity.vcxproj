@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <!--
     <ClCompile Include="Box.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Clock.cpp" />
@@ -29,15 +30,19 @@
     <ClCompile Include="EventOut.cpp" />
     <ClCompile Include="EventStep.cpp" />
     <ClCompile Include="Explosion.cpp" />
+		-->
     <ClCompile Include="FrameworkWrapper.cpp" />
     <ClCompile Include="game.cpp" />
+    <!--
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Manager.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="ObjectList.cpp" />
     <ClCompile Include="PhoenixAndFlag.cpp" />
     <ClCompile Include="PowerUp.cpp" />
+	-->
     <ClCompile Include="Screen.cpp" />
+    <!--
     <ClCompile Include="Sprites.cpp" />
     <ClCompile Include="Tank.cpp" />
     <ClCompile Include="TankPlayer.cpp" />
@@ -45,8 +50,10 @@
     <ClCompile Include="Vector.cpp" />
     <ClCompile Include="Wall.cpp" />
     <ClCompile Include="WorldManager.cpp" />
+	-->
   </ItemGroup>
   <ItemGroup>
+    <!--
     <ClInclude Include="Box.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Clock.h" />
@@ -57,8 +64,10 @@
     <ClInclude Include="EventOut.h" />
     <ClInclude Include="EventStep.h" />
     <ClInclude Include="Explosion.h" />
+	-->
     <ClInclude Include="Framework.h" />
     <ClInclude Include="FrameworkWrapper.h" />
+    <!--
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="Manager.h" />
     <ClInclude Include="Object.h" />
@@ -73,9 +82,7 @@
     <ClInclude Include="Vector.h" />
     <ClInclude Include="Wall.h" />
     <ClInclude Include="WorldManager.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="cpp.hint" />
+	-->
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
