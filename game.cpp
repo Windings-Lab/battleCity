@@ -81,7 +81,7 @@ namespace battleCity
 		}
 
 		srand(time(nullptr));
-		Screen::Instance.Set(width, height, fullScreen);
+		SCR.Set(width, height, fullScreen);
 
 		auto framework = std::make_unique<FrameworkWrapper>();
 
