@@ -1,6 +1,6 @@
+#include "WorldManager.h"
 #include "EventCollision.h"
 
-#include "WorldManager.h"
 
 namespace battleCity
 {

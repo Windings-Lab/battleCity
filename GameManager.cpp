@@ -1,103 +1,90 @@
-#include "Manager.h"
 #include "GameManager.h"
 #include "WorldManager.h"
 #include "TankPlayer.h"
 #include "EventStep.h"
-#include "Object.h"
-#include "ObjectList.h"
 #include "Clock.h"
 #include "Sprites.h"
-
 #include "Framework.h"
-#include <iostream>
-#include <vector>
-#include <memory>
 
-bool battleCity::GameManager::_gameOver = false;
-int battleCity::GameManager::_frameTime = 0;
-int battleCity::GameManager::_stepCount = 0;
-Clock battleCity::GameManager::_clock;
-
-const bool& battleCity::GameManager::gameOver = _gameOver;
-const int& battleCity::GameManager::frameTime = _frameTime;
-const int& battleCity::GameManager::stepCount = _stepCount;
-const Clock& battleCity::GameManager::clock = _clock;
-
-battleCity::GameManager::GameManager()
+namespace battleCity
 {
-	_stepCount = 0;
-	SetType(ManagerType::Game);
-}
-
-battleCity::GameManager::~GameManager()
-{
-#if DEBUG == 2
-	std::cout << "GameManager Destructor" << std::endl;
-#endif
-}
-
-battleCity::GameManager& battleCity::GameManager::getInstance()
-{
-	static GameManager single;
-	return single;
-}
-
-int battleCity::GameManager::spriteInit()
-{
-	return SPR.initAll();
-}
-
-int battleCity::GameManager::startUp(int playerID)
-{
-	_gameOver = false;
-	this->playerID = playerID;
-	WM.StartUp(playerID);
-	return Manager::StartUp();
-}
-
-
-void battleCity::GameManager::ShutDown()
-{
-	_gameOver = true;
-	WM.ShutDown();
-	SPR.deleteAll();
-}
-
-void battleCity::GameManager::gameOverState()
-{
-	if (stepCount >= 500)
+	GameManager::GameManager() : Manager(ManagerType::Game)
 	{
-		setGameOver(true);
+		mGameOver = false;
+		mFrameTime = 0;
+		mStepCount = 0;
 	}
-}
 
-void battleCity::GameManager::run()
-{
-	_clock.delta();
-	EventStep eventStep;
-	OnEvent(eventStep);
-	WM.Update();
-	WM.Draw();
-	_frameTime = getTickCount() / 1000;
-	_stepCount++;
+	void GameManager::SetGameOverState()
+	{
+		SetCustomStepCount(0);
+		WM.SetPlayerHealthToZero();
+		mGameOverState = true;
+	}
 
-	//std::cout << "frameTime: " << frameTime << " stepCount: " << stepCount << std::endl;
+	bool GameManager::GetGameOverState() const
+	{
+		return mGameOverState;
+	}
 
-	_clock.sleep(clock.split());
-}
+	GameManager& GameManager::GetInstance()
+	{
+		static GameManager single;
+		return single;
+	}
 
-void battleCity::GameManager::setGameOver(bool gameState)
-{
-	_gameOver = gameState;
-}
+	int GameManager::SpriteInit()
+	{
+		return SPR.initAll();
+	}
 
-void battleCity::GameManager::setPlayerHealthToZero()
-{
-	auto& player = WM.mWorldList.GetObject(playerID);
-	player.setHealth(-player.getHealth());
-}
+	void GameManager::StartUp()
+	{
+		mGameOver = false;
+	}
 
-void battleCity::GameManager::setStepCount(int newStepCount)
-{
-	_stepCount = newStepCount;
+	void GameManager::ShutDown()
+	{
+		mGameOver = true;
+	}
+
+	bool GameManager::GameOverTimerEnded()
+	{
+		if (mCustomStepCount >= 500)
+		{
+			mGameOver = true;
+		}
+		return mGameOver;
+	}
+
+	void GameManager::Update()
+	{
+		mClock.delta();
+		EventStep eventStep;
+		SendEvent(eventStep);
+		WM.Update();
+		WM.Draw();
+		mFrameTime = getTickCount() / 1000;
+		mStepCount++;
+		mCustomStepCount++;
+
+		mClock.sleep(mClock.split());
+	}
+
+	bool GameManager::GetGameOver() const
+	{
+		return mGameOver;
+	}
+	int GameManager::GetStepCount() const
+	{
+		return mStepCount;
+	}
+	void GameManager::SetCustomStepCount(int stepCount)
+	{
+		mCustomStepCount = stepCount;
+	}
+	int GameManager::GetCustomStepCount() const
+	{
+		return mCustomStepCount;
+	}
 }

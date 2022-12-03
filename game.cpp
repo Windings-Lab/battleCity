@@ -3,12 +3,11 @@
 #include "TankPlayer.h"
 #include "EventKeyboard.h"
 #include "EventMouse.h"
-#include "GameManager.h"
 #include "Screen.h"
 #include "Framework.h"
+#include "GameManager.h"
 #include "WorldManager.h"
 
-#include <time.h>
 #include <iostream>
 #include <vector>
 #include <string>
@@ -19,6 +18,18 @@ using namespace battleCity;
 
 class MyFramework : public Framework
 {
+	void StartAllManagers()
+	{
+		GM.StartUp();
+		WM.StartUp();
+	}
+
+	void ShutDownAllManagers()
+	{
+		GM.ShutDown();
+		SPR.deleteAll();
+		WM.ShutDown();
+	}
 public:
 	MyFramework()
 	{
@@ -31,27 +42,29 @@ public:
 		fullscreen = SCR.getFullscreen();
 	}
 
-	virtual bool Init() {
-		GM.spriteInit();
+	virtual bool Init()
+	{
+		GM.SpriteInit();
 
 		std::unique_ptr<Object> player = std::make_unique<TankPlayer>(0, 0);
-		int playerID = player->GetID();
 		mPlayer = dynamic_cast<TankPlayer*>(player.get());
-		WM.SetPlayerID(playerID);
+
+		WM.SetPlayerID(player->GetID());
 		WM.InsertObject(player);
 
-		GM.startUp(playerID);
+		StartAllManagers();
 		return true;
 	}
 
 	virtual void Close()
 	{
-		GM.ShutDown();
+		ShutDownAllManagers();
 	}
 
-	virtual bool Tick() {
-		GM.run();
-		return GM.gameOver;
+	virtual bool Tick()
+	{
+		GM.Update();
+		return GM.GetGameOver();
 	}
 
 	virtual void onMouseMove(int x, int y, int xrelative, int yrelative)

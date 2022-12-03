@@ -169,12 +169,12 @@ namespace battleCity
 
 	TankPlayer::~TankPlayer()
 	{
-		if (GM.gameOver) return; // TODO: Fix
+		if (GM.GetGameOver()) return; // TODO: Fix
 		std::unique_ptr<Object> newExp = std::make_unique<Explosion>(true);
 		newExp->setPosition(this->position);
 		WM.InsertObject(newExp);
 
-		WM.SetGameOverState();
+		GM.SetGameOverState();
 #if DEBUG == 2
 		std::cout << "TankPlayer Destructor" << std::endl;
 #endif

@@ -4,8 +4,6 @@
 #include "WorldManager.h"
 #include "GameManager.h"
 
-#include <iostream>
-
 battleCity::PowerUp::PowerUp()
 {
 	mType = Type::PowerUp;
@@ -71,6 +69,6 @@ int battleCity::PowerUp::EventHandler(Event& event)
 
 battleCity::PowerUp::~PowerUp()
 {
-	if (GM.gameOver) return; // TODO: Fix
+	if (GM.GetGameOver()) return; // TODO: Fix
 	WM.SetPowerUpToFalse();
 }

@@ -9,8 +9,6 @@
 
 namespace battleCity
 {
-#define WM WorldManager::GetInstance()
-
 	class WorldManager final : Manager
 	{
 	private:
@@ -30,7 +28,6 @@ namespace battleCity
 
 		void StartUp() override;
 		void ShutDown() override;
-		void SetGameOverState();
 
 		// Update world.
 		void Update();
@@ -45,11 +42,14 @@ namespace battleCity
 		void MarkForDelete(int objID);
 
 		const ObjectList& GetAllObjects() const;
+		std::unordered_set<int> GetObjectsToMove() const;
 		std::unordered_set<int> GetObjectsOfType(Object::Type type) const;
 		int GetObjectCount() const;
 
 		void SetPlayerID(int playerID);
 		int GetPlayerID() const;
+
+		void SetPlayerHealthToZero() const;
 
 		void IncrementTankCount(int count);
 		int GetTankCount();
@@ -83,7 +83,6 @@ namespace battleCity
 
 		Vector mGameOverPos;
 		Sprite* mGameOverSpr;
-		bool mGameOver;
 
 		int mPlayerID;
 		int mTankCount;
@@ -94,5 +93,7 @@ namespace battleCity
 		bool mIsPowerUp;
 		bool mPowerUpTaked;
 	};
+
+	inline WorldManager& WM = WorldManager::GetInstance();
 }
 

@@ -1,5 +1,4 @@
 #include "WorldManager.h"
-#include "GameManager.h"
 #include "Object.h"
 #include "PhoenixAndFlag.h"
 #include "Tank.h"
@@ -18,6 +17,8 @@
 #include <memory>
 #include <unordered_set>
 
+#include "GameManager.h"
+
 using namespace std::string_view_literals;
 
 namespace battleCity
@@ -32,7 +33,6 @@ namespace battleCity
 		mGameOverSpr = nullptr;
 		mGameOverPos.X = 290;
 		mGameOverPos.Y = 600;
-		mGameOver = false;
 
 		mTankCount = 0;
 		mKillCount = 0;
@@ -58,15 +58,6 @@ namespace battleCity
 	void WorldManager::ShutDown()
 	{
 		mWorldList.Clear();
-	}
-
-	void WorldManager::SetGameOverState()
-	{
-		if (mGameOver)
-			return;
-		GM.setStepCount(1);
-		GM.setPlayerHealthToZero();
-		mGameOver = true;
 	}
 
 	void WorldManager::IncrementTankCount(int count)
@@ -110,6 +101,11 @@ namespace battleCity
 		return mWorldList;
 	}
 
+	std::unordered_set<int> WorldManager::GetObjectsToMove() const
+	{
+		return mObjectIDsToMove;
+	}
+
 	int WorldManager::GetObjectCount() const
 	{
 		return mWorldList.GetSize();
@@ -125,6 +121,12 @@ namespace battleCity
 		return mPlayerID;
 	}
 
+	void WorldManager::SetPlayerHealthToZero() const
+	{
+		auto& player = mWorldList.GetObject(GetPlayerID());
+		player.setHealth(-player.getHealth());
+	}
+
 	std::vector<std::vector<int>>& WorldManager::GetWorldMap()
 	{
 		return mMap;
@@ -138,7 +140,7 @@ namespace battleCity
 	void WorldManager::CreateSomeTanks()
 	{
 		int rnd = randomNumber(0, 1);
-		if (GM.stepCount % 450 == 0 && mTankCount != 6 && mTankStorage > 0)
+		if (GM.GetStepCount() % 450 == 0 && mTankCount != 6 && mTankStorage > 0)
 		{
 			if (rnd == 1)
 			{
@@ -266,7 +268,7 @@ namespace battleCity
 		CreatePowerUp();
 		if (mKillCount >= 20)
 		{
-			SetGameOverState();
+			GM.SetGameOverState();
 		}
 #endif
 	}
@@ -280,9 +282,8 @@ namespace battleCity
 			objRef->draw();
 		}
 
-		if (mGameOver)
+		if (GM.GetGameOverState() && !GM.GameOverTimerEnded())
 		{
-			GM.gameOverState();
 			if (mGameOverPos.Y != 247)
 			{
 				mGameOverPos.Y--;

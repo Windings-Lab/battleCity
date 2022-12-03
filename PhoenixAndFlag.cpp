@@ -44,9 +44,7 @@ namespace battleCity
 		{
 			gameOver = true;
 			spriteSet(nullptr, 1);
-			GM.setStepCount(1);
-			WM.SetGameOverState();
-			return;
+			GM.SetGameOverState();
 		}
 	}
 

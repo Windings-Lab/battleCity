@@ -1,10 +1,11 @@
 #include "Manager.h"
-#include "WorldManager.h"
 #include "Object.h"
+#include "WorldManager.h"
 
 namespace battleCity
 {
 	Manager::Manager(ManagerType type) : mType(type) {}
+	Manager::~Manager() {}
 
 	ManagerType Manager::GetType() const
 	{
@@ -13,14 +14,14 @@ namespace battleCity
 
 	void Manager::SendEvent(Event& eventRef) const
 	{
-		for (const int objID : WM.mObjectIDsToMove)
+		for (const int objID : WM.GetObjectsToMove())
 		{
-			WM.mWorldList.GetObject(objID).EventHandler(eventRef);
+			WM.GetAllObjects().GetObject(objID).EventHandler(eventRef);
 		}
 
 		for (const int objID : WM.GetObjectsOfType(Object::Type::Explosion))
 		{
-			WM.mWorldList.GetObject(objID).EventHandler(eventRef);
+			WM.GetAllObjects().GetObject(objID).EventHandler(eventRef);
 		}
 	}
 }
