@@ -47,11 +47,6 @@ namespace battleCity
 		drawSprite(sprite, (int)position.X, (int)position.Y);
 	}
 
-	int Wall::eventHandler(const Event* ptrEvent)
-	{
-		return 0;
-	}
-
 	Wall::~Wall()
 	{
 

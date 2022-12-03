@@ -44,7 +44,7 @@ namespace battleCity
 
 		change = 1;
 		move(1, 0);
-		WM.SetTankCount(1);
+		WM.IncrementTankCount(1);
 	}
 
 	Tank::Tank(float x, float y)
@@ -65,7 +65,7 @@ namespace battleCity
 
 		change = 1;
 		move(1, 0);
-		WM.SetTankCount(1);
+		WM.IncrementTankCount(1);
 	}
 
 	inline void Tank::update()
@@ -120,17 +120,16 @@ namespace battleCity
 		setVelocity(Vector(x, y));
 	}
 
-	void Tank::pathFind(const EventCollision* collisionEvent)
+	void Tank::pathFind()
 	{
-		if (collisionEvent == nullptr)
-		{
-			isSpawnIntersects = false;
-			randomMove();
-			return;
-		}
+		isSpawnIntersects = false;
+		randomMove();
+	}
 
-		auto& collisionObj = collisionEvent->GetObjectRef();
-		const auto& collider = collisionEvent->GetColliderRef();
+	void Tank::pathFind(EventCollision& collisionEvent)
+	{
+		auto& collisionObj = collisionEvent.GetObjectRef();
+		const auto& collider = collisionEvent.GetColliderRef();
 
 		if (collisionObj.getType() == Type::Wall || collider.getType() == Type::Wall)
 		{
@@ -222,37 +221,30 @@ namespace battleCity
 		}
 	}
 
-	int Tank::eventHandler(const Event* eventPtr)
+	int Tank::EventHandler(Event& event)
 	{
-		if (eventPtr->GetType() == EventType::Collision)
+		if (event.GetType() == EventType::Collision)
 		{
-			const EventCollision* collisionEvent = dynamic_cast <const EventCollision*> (eventPtr);
-			pathFind(collisionEvent);
-			collisionEvent = nullptr;
-			eventPtr = nullptr;
+			pathFind(dynamic_cast<EventCollision&>(event));
 			return 1;
 		}
-		if (eventPtr->GetType() == EventType::Out)
+		if (event.GetType() == EventType::Out)
 		{
 			if (GM.stepCount % 10 == 0)
 			{
 				pathFind();
 			}
-			eventPtr = nullptr;
 			return 1;
 		}
-		if (eventPtr->GetType() == EventType::Step)
+		if (event.GetType() == EventType::Step)
 		{
-			const EventStep* stepEvent = dynamic_cast<const EventStep*> (eventPtr);
-			if (stepEvent->getStepCount() % 600 == 0)
+			EventStep& stepEvent = dynamic_cast<EventStep&> (event);
+			if (stepEvent.GetStepCount() % 600 == 0)
 			{
 				pathFind();
 			}
-			stepEvent = nullptr;
-			eventPtr = nullptr;
 			return 1;
 		}
-		eventPtr = nullptr;
 		return 0;
 	}
 
@@ -262,8 +254,8 @@ namespace battleCity
 		std::cout << "Tank Destructor" << std::endl;
 #endif
 		if(GM.gameOver) return; // TODO: Fix
-		WM.SetTankCount(-1);
-		WM.SetKillCount(1);
+		WM.IncrementTankCount(-1);
+		WM.IncrementKillCount(1);
 		std::unique_ptr<Object> newExp = std::make_unique<Explosion>(true);
 		newExp->setPosition(position);
 

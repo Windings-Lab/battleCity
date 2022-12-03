@@ -17,7 +17,7 @@ namespace battleCity
 	class EventMouse final : public Event
 	{
 	public:
-		EventMouse() = default;
+		EventMouse();
 
 		EventMouse(const EventMouse&) = default;
 		EventMouse(EventMouse&&) = default;

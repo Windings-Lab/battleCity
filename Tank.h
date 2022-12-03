@@ -15,14 +15,16 @@ namespace battleCity
 		Tank(float x, float y);
 		~Tank();
 
-		virtual void update() override;
-		virtual void draw() override;
+		void update() override;
+		void draw() override;
 		void fire();
 		void move(float x, float y);
 
-		void pathFind(const battleCity::EventCollision* collisionEvent = nullptr);
+		void pathFind();
+		void pathFind(EventCollision& collisionEvent);
+
 		void randomMove();
 
-		virtual int eventHandler(const Event* eventPtr) override;
+		int EventHandler(Event& event) override;
 	};
 }

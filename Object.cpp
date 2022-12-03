@@ -32,7 +32,7 @@ namespace battleCity
         return *spriteDB;
     }
 
-    int Object::eventHandler(const Event* ptrEvent)
+    int Object::EventHandler(Event& ptrEvent)
     {
         return 0;
     }

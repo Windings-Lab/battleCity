@@ -31,12 +31,12 @@ namespace battleCity
 		void update() override;
 		void draw() override;
 		void keyboardInput();
-		void mouseInput(const EventMouse* mouseEvent);
+		void mouseInput(EventMouse& mouseEvent);
 
 		void move(float x, float y);
 		void fire();
 
-		int eventHandler(const Event* ptrEvent) override;
+		int EventHandler(Event& event) override;
 	private:
 		std::vector<MovementDirection> mMovement = { MovementDirection::Idle };
 	};

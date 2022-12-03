@@ -4,7 +4,7 @@
 
 namespace battleCity
 {
-	EventMouse::EventMouse(Vector mouseXY) : mMouseXY(mouseXY)
+	EventMouse::EventMouse()
 	{
 		SetType(EventType::Mouse);
 		mouseAction = EventMouseAction::UNDEFINED_MOUSE_ACTION;

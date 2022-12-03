@@ -1,7 +1,6 @@
 #include "Bullet.h"
 #include "Vector.h"
 #include "Box.h"
-#include "EventOut.h"
 #include "EventCollision.h"
 #include "WorldManager.h"
 #include "Explosion.h"
@@ -78,12 +77,12 @@ namespace battleCity
 		WM.MarkForDelete(mID);
 	}
 
-	void Bullet::hit(const EventCollision* collisionEvent)
+	void Bullet::hit(EventCollision collisionEvent)
 	{
 		if (health != 0)
 		{
-			const auto& collisionObj = collisionEvent->GetObjectRef();
-			const auto& collider = collisionEvent->GetColliderRef();
+			const auto& collisionObj = collisionEvent.GetObjectRef();
+			const auto& collider = collisionEvent.GetColliderRef();
 
 			if (mObjectOwner.GetID() != collisionObj.GetID() && mObjectOwner.GetID() != collider.GetID())
 			{
@@ -97,8 +96,8 @@ namespace battleCity
 				{
 					return;
 				}
-				WM.MarkForDelete(collisionEvent->GetObjectID());
-				WM.MarkForDelete(collisionEvent->GetColliderID());
+				WM.MarkForDelete(collisionEvent.GetObjectID());
+				WM.MarkForDelete(collisionEvent.GetColliderID());
 			}
 		}
 	}
@@ -108,22 +107,20 @@ namespace battleCity
 		drawSprite(sprite, (int)position.X, (int)position.Y);
 	}
 
-	int Bullet::eventHandler(const Event* ptrEvent) {
-
-		if (ptrEvent->GetType() == EventType::Out) {
+	int Bullet::EventHandler(Event& event)
+	{
+		if (event.GetType() == EventType::Out) 
+		{
 			out();
 			return 1;
 		}
 
-		if (ptrEvent->GetType() == EventType::Collision) {
-			const EventCollision* collisionEvent = dynamic_cast <const EventCollision*> (ptrEvent);
-			hit(collisionEvent);
-			collisionEvent = nullptr;
+		if (event.GetType() == EventType::Collision) 
+		{
+			hit(dynamic_cast<EventCollision&>(event));
 			return 1;
 		}
 
-		ptrEvent = nullptr;
-		// If get here, have ignored this event.
 		return 0;
 	}
 

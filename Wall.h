@@ -12,8 +12,6 @@ namespace battleCity
 
         void update() override;
         void draw() override;
-
-        int eventHandler(const Event* ptrEvent);
     };
 }
 

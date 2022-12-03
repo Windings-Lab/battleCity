@@ -1,64 +1,26 @@
 #include "Manager.h"
 #include "WorldManager.h"
 #include "Object.h"
-#include "ObjectList.h"
-#include "Explosion.h"
 
-#include <iostream>
-
-battleCity::Manager::Manager() : _type(ManagerType::Manager), _started(false) {}
-
-battleCity::Manager::~Manager()
+namespace battleCity
 {
-#if DEBUG == 2
-	std::cout << "Manager Destructor" << std::endl;
-#endif
-}
+	Manager::Manager(ManagerType type) : mType(type) {}
 
-void battleCity::Manager::SetType(ManagerType newType)
-{
-	_type = newType;
-}
-
-battleCity::ManagerType battleCity::Manager::GetType() const
-{
-	return _type;
-}
-
-int battleCity::Manager::StartUp()
-{
-	_started = true;
-	return 0;
-}
-
-void battleCity::Manager::ShutDown()
-{
-	_started = false;
-}
-
-bool battleCity::Manager::IsStarted() const
-{
-	return _started;
-}
-
-int battleCity::Manager::OnEvent(const Event* ptrEvent) const
-{
-	int count = 0;
-
-	for (const int objID : WM.mObjectIDsToMove)
+	ManagerType Manager::GetType() const
 	{
-		auto& movableObject = WM.mWorldList.GetObject(objID);
-		movableObject.eventHandler(ptrEvent);
-		count++;
+		return mType;
 	}
 
-	for (const int objID : WM.GetObjectsOfType(Object::Type::Explosion))
+	void Manager::SendEvent(Event& eventRef) const
 	{
-		auto& explosionObj = WM.mWorldList.GetObject(objID);
-		explosionObj.eventHandler(ptrEvent);
-		count++;
-	}
+		for (const int objID : WM.mObjectIDsToMove)
+		{
+			WM.mWorldList.GetObject(objID).EventHandler(eventRef);
+		}
 
-	ptrEvent = nullptr;
-	return count;
+		for (const int objID : WM.GetObjectsOfType(Object::Type::Explosion))
+		{
+			WM.mWorldList.GetObject(objID).EventHandler(eventRef);
+		}
+	}
 }

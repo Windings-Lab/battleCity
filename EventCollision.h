@@ -10,7 +10,7 @@ namespace battleCity
     {
         Vector mCollisionPos;   // Where collision occurred.
         int mObjectID;          // Object moving, causing collision.
-        int mCollider;          // Object being collided with.
+        int mColliderID;        // Object being collided with.
 
     public:
         EventCollision() = delete;

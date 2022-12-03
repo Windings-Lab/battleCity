@@ -2,8 +2,6 @@
 #include "Object.h"
 #include "Event.h"
 #include "EventCollision.h"
-#include "WorldManager.h"
-#include "Screen.h"
 
 namespace battleCity
 {
@@ -19,9 +17,9 @@ namespace battleCity
 
         void draw() override;
 
-        void makePowerUp(const battleCity::EventCollision* collisionEvent);
+        void makePowerUp(EventCollision& collisionEvent);
 
-        int eventHandler(const Event* ptrEvent);
+        int EventHandler(Event& event) override;
 	};
 }
 

@@ -36,10 +36,10 @@ namespace battleCity
 		drawSprite(sprite, (int)position.X, (int)position.Y);
 	}
 
-	void PhoenixAndFlag::setGameOver(const EventCollision* collisionEvent)
+	void PhoenixAndFlag::setGameOver(EventCollision& collisionEvent)
 	{
-		const auto& collisionObj = collisionEvent->GetObjectRef();
-		const auto& collider = collisionEvent->GetColliderRef();
+		const auto& collisionObj = collisionEvent.GetObjectRef();
+		const auto& collider = collisionEvent.GetColliderRef();
 		if (collider.getType() == Type::Bullet || collisionObj.getType() == Type::Bullet)
 		{
 			gameOver = true;
@@ -50,20 +50,16 @@ namespace battleCity
 		}
 	}
 
-	int PhoenixAndFlag::eventHandler(const Event* eventPtr)
+	int PhoenixAndFlag::EventHandler(Event& event)
 	{
 		if (!gameOver)
 		{
-			if (eventPtr->GetType() == EventType::Collision)
+			if (event.GetType() == EventType::Collision)
 			{
-				const EventCollision* collisionEvent = dynamic_cast <const EventCollision*> (eventPtr);
-				setGameOver(collisionEvent);
-				collisionEvent = nullptr;
-				eventPtr = nullptr;
+				setGameOver(dynamic_cast<EventCollision&>(event));
 				return 1;
 			}
 		}
-		eventPtr = nullptr;
 		return 0;
 	}
 

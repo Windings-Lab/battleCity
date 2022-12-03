@@ -100,7 +100,7 @@ namespace battleCity
 
 		std::vector<Sprite*>& getSpriteList();
 
-		virtual int eventHandler(const Event* ptrEvent);
+		virtual int EventHandler(Event& ptrEvent);
 
 		int getSpriteX() const;
 		int getSpriteY() const;

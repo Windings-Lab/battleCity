@@ -1,30 +1,25 @@
 #pragma once
 
-#include <string>
-
 #include "Event.h"
 
 namespace battleCity
 {
-	class EventStep : public Event
+	class EventStep final : public Event
 	{
+	public:
+		EventStep();
+
+		EventStep(const EventStep&) = default;
+		EventStep(EventStep&&) = default;
+
+		EventStep& operator=(const EventStep&) = default;
+		EventStep& operator=(EventStep&&) = default;
+
+		~EventStep() override = default;
+
+		int GetStepCount() const;
 	private:
 		/// Iteration number of game loop
-		unsigned int stepCount;
-
-	public:
-		/// Default constructor.
-		EventStep();
-		~EventStep();
-
-		/// Constructor with initial step count.
-		EventStep(unsigned int init);
-
-		/// Set step count.
-		void setStepCount(unsigned int newStep);
-
-		/// Get step count.
-		int getStepCount() const;
+		unsigned int mStepCount;
 	};
 }
-

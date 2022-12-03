@@ -37,11 +37,12 @@ namespace battleCity
     }
 
 
-    int Explosion::eventHandler(const Event* eventPtr)
+    int Explosion::EventHandler(Event& eventPtr)
     {
-        if (eventPtr->GetType() == EventType::Step) {
-            const EventStep* stepEvent = dynamic_cast <const EventStep*> (eventPtr);
-            if (stepEvent->getStepCount() % 30 == 0)
+        if (eventPtr.GetType() == EventType::Step) 
+        {
+	        auto& stepEvent = dynamic_cast<EventStep&>(eventPtr);
+            if (stepEvent.GetStepCount() % 30 == 0)
             {
                 step();
             }

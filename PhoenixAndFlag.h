@@ -2,7 +2,6 @@
 #include "Object.h"
 #include "Event.h"
 #include "EventCollision.h"
-#include "Vector.h"
 
 namespace battleCity
 {
@@ -17,9 +16,9 @@ namespace battleCity
 
         void draw() override;
 
-        void setGameOver(const battleCity::EventCollision* collisionEvent);
+        void setGameOver(EventCollision& collisionEvent);
 
-        int eventHandler(const Event* ptrEvent);
+        int EventHandler(Event& event) override;
 	};
 }
 

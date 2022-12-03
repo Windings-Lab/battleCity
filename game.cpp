@@ -17,17 +17,13 @@
 
 using namespace battleCity;
 
-class MyFramework : public Framework {
-
+class MyFramework : public Framework
+{
 public:
 	MyFramework()
 	{
-		using std::make_unique;
 
-		mEventKeyboard = make_unique<EventKeyboard>();
-		mEventMouse = make_unique<EventMouse>();
 	}
-
 	virtual void PreInit(int& width, int& height, bool& fullscreen)
 	{
 		width = SCR.getWidth();
@@ -37,55 +33,19 @@ public:
 
 	virtual bool Init() {
 		GM.spriteInit();
-		// Here you can create demo objects
-		// After this code you can create objects anywhere in the code
-		// Don't forget to set NULL to objects in Close()
-		// Objects are deleting automatically in GM.shutdown()
-		// ------------------------------------------------------------
-		{
-			//demo.emplace_back(std::make_unique<Tank>(300, 100));
-			//demo.emplace_back(std::make_unique<Tank>(300, 100));
-			//demo.emplace_back(std::make_unique<Tank>(500, 45));
-			//demo.emplace_back(std::make_unique<Tank>(500, 45));
-			//demo.emplace_back(std::make_unique<Tank>(500, 45));
-			//demo.emplace_back(std::make_unique<Tank>(500, 45));
-			//demo.emplace_back(std::make_unique<Tank>(500, 45));
-			//demo.emplace_back(std::make_unique<Tank>(500, 45));
-			//demo.emplace_back(std::make_unique<Tank>(500, 200));
-			//demo.emplace_back(std::make_unique<Tank>(400, 300));
-			//demo.emplace_back(std::make_unique<Tank>(500, 400));
-			//demo.emplace_back(std::make_unique<Tank>(200, 400));
-			//demo.emplace_back(std::make_unique<Tank>(500, 620));
-			//demo[0]->setSight(Vector(1, 0));
-			//demo[1]->setSight(Vector(-1, 0));
-			//demo[0]->spriteSet(0, 0);
-			//demo[1]->spriteSet(0, 1);
-		}
-		// ------------------------------------------------------------
 
 		std::unique_ptr<Object> player = std::make_unique<TankPlayer>(0, 0);
 		int playerID = player->GetID();
 		mPlayer = dynamic_cast<TankPlayer*>(player.get());
-
+		WM.SetPlayerID(playerID);
 		WM.InsertObject(player);
 
 		GM.startUp(playerID);
 		return true;
 	}
 
-	virtual void Close() {
-		// Here you can set NULL to demo objects
-		// ------------------------------------------------------------
-		{
-			for (auto& it : mDemo)
-			{
-				it = nullptr;
-			}
-		}
-		// ------------------------------------------------------------
-
-		mEventKeyboard.reset();
-		mEventMouse.reset();
+	virtual void Close()
+	{
 		GM.ShutDown();
 	}
 
@@ -96,16 +56,16 @@ public:
 
 	virtual void onMouseMove(int x, int y, int xrelative, int yrelative)
 	{
-		mEventMouse->SetMousePosition({ static_cast<float>(x), static_cast<float>(y) });
+		mEventMouse.SetMousePosition({ static_cast<float>(x), static_cast<float>(y) });
 	}
 
 	virtual void onMouseButtonClick(FRMouseButton button, bool isReleased)
 	{
 		if (mPlayer->getHealth() > 0)
 		{
-			mEventMouse->SetMouseButton(button);
-			mEventMouse->SetMouseAction(isReleased);
-			mPlayer->eventHandler(mEventMouse.get());
+			mEventMouse.SetMouseButton(button);
+			mEventMouse.SetMouseAction(isReleased);
+			mPlayer->EventHandler(mEventMouse);
 		}
 	}
 
@@ -113,10 +73,10 @@ public:
 	{
 		if (mPlayer->getHealth() > 0)
 		{
-			mEventKeyboard->SetKey(k);
-			mEventKeyboard->SetKeyboardAction(EventKeyboardAction::KEY_PRESSED);
+			mEventKeyboard.SetKey(k);
+			mEventKeyboard.SetKeyboardAction(EventKeyboardAction::KEY_PRESSED);
 			mPlayer->movementSet(k);
-			mPlayer->eventHandler(mEventKeyboard.get());
+			mPlayer->EventHandler(mEventKeyboard);
 		}
 	}
 
@@ -124,10 +84,10 @@ public:
 	{
 		if (mPlayer->getHealth() > 0)
 		{
-			mEventKeyboard->SetKey(k);
-			mEventKeyboard->SetKeyboardAction(EventKeyboardAction::KEY_RELEASED);
+			mEventKeyboard.SetKey(k);
+			mEventKeyboard.SetKeyboardAction(EventKeyboardAction::KEY_RELEASED);
 			mPlayer->movementErase(k);
-			mPlayer->eventHandler(mEventKeyboard.get());
+			mPlayer->EventHandler(mEventKeyboard);
 		}
 	}
 
@@ -142,10 +102,9 @@ public:
 	}
 	private:
 		TankPlayer* mPlayer;
-		std::vector<std::unique_ptr<Object>> mDemo;
 
-		std::unique_ptr<EventKeyboard> mEventKeyboard;
-		std::unique_ptr<EventMouse> mEventMouse;
+		EventKeyboard mEventKeyboard;
+		EventMouse mEventMouse;
 };
 
 static void show_usage(std::string name)

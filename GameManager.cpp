@@ -74,8 +74,8 @@ void battleCity::GameManager::gameOverState()
 void battleCity::GameManager::run()
 {
 	_clock.delta();
-	auto eventStep = std::make_unique<EventStep>();
-	OnEvent(eventStep.get());
+	EventStep eventStep;
+	OnEvent(eventStep);
 	WM.Update();
 	WM.Draw();
 	_frameTime = getTickCount() / 1000;
