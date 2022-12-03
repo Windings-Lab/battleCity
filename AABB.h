@@ -23,8 +23,12 @@ namespace battleCity
 		AABB(int width, int height, Vector2Int position);
 		AABB(int xMin, int xMax, int yMin, int yMax);
 
+		void SetPosition(Vector2Int position);
 		Vector2Int GetPosition() const;
+		int GetX() const;
+		int GetY() const;
 
+		void SetSize(Vector2Int size);
 		Vector2Int GetSize() const;
 		int GetWidth() const;
 		int GetHeight() const;

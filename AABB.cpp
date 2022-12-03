@@ -21,9 +21,26 @@ namespace battleCity
 		mSize = Vector2Int(xMax, yMax);
 	}
 
+	void AABB::SetPosition(Vector2Int position)
+	{
+		mPosition = position;
+	}
 	Vector2Int AABB::GetPosition() const
 	{
 		return mPosition;
+	}
+	int AABB::GetX() const
+	{
+		return mPosition.X;
+	}
+	int AABB::GetY() const
+	{
+		return mPosition.Y;
+	}
+
+	void AABB::SetSize(Vector2Int size)
+	{
+		mSize = size;
 	}
 
 	Vector2Int AABB::GetSize() const
