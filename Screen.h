@@ -5,7 +5,7 @@ namespace battleCity
 	class Screen
 	{
 	public:
-		static Screen Instance;
+		static Screen& GetInstance();
 
 		Screen(const Screen&) = delete;
 		Screen(Screen&&) = delete;
@@ -23,8 +23,10 @@ namespace battleCity
 
 	private:
 		Screen();
-		static unsigned int mWidth;
-		static unsigned int mHeight;
-		static bool mFullscreen;
+		int mWidth;
+		int mHeight;
+		bool mFullscreen;
 	};
+
+	inline Screen& SCR = Screen::GetInstance();
 }

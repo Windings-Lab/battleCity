@@ -6,9 +6,9 @@ namespace battleCity
 {
 	void FrameworkWrapper::PreInit(int& width, int& height, bool& fullscreen)
 	{
-		width = Screen::Instance.GetWidth();
-		height = Screen::Instance.GetHeight();
-		fullscreen = Screen::Instance.GetFullscreen();
+		width = SCR.GetWidth();
+		height = SCR.GetHeight();
+		fullscreen = SCR.GetFullscreen();
 	}
 
 	bool FrameworkWrapper::Init()
