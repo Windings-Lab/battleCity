@@ -74,16 +74,17 @@ namespace battleCity
 		}
 	}
 
+	TankPlayer* GetPlayer(int id)
+	{
+		return dynamic_cast<TankPlayer*>(WM.GetAllObjects().mList.at(id).get());
+	}
+
 	void FrameworkWrapper::StartAllManagers()
 	{
 		GM.StartUp();
 		WM.StartUp();
 
-		std::unique_ptr<Object> player = std::make_unique<TankPlayer>(0, 0);
-		mPlayer = dynamic_cast<TankPlayer*>(player.get());
-
-		WM.SetPlayerID(player->ID);
-		WM.InsertObject(player);
+		mPlayer = GetPlayer(WM.GetPlayerID());
 	}
 
 	void FrameworkWrapper::ShutDownAllManagers()

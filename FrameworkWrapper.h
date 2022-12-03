@@ -8,10 +8,10 @@ namespace battleCity
 {
 	class TankPlayer;
 
-	class FrameworkWrapper : public Framework
+	class FrameworkWrapper final : public Framework
 	{
 	public:
-		FrameworkWrapper() = default;
+		FrameworkWrapper() : mPlayer(nullptr) {}
 
 		FrameworkWrapper(const FrameworkWrapper&) = delete;
 		FrameworkWrapper(FrameworkWrapper&&) = delete;

@@ -18,6 +18,8 @@
 #include <unordered_set>
 
 #include "GameManager.h"
+#include "Sprites.h"
+#include "TankPlayer.h"
 
 using namespace std::string_view_literals;
 
@@ -51,6 +53,9 @@ namespace battleCity
 
 	void WorldManager::StartUp()
 	{
+		std::unique_ptr<Object> player = std::make_unique<TankPlayer>(0, 0);
+		mPlayerID = player->ID;
+		WM.InsertObject(player);
 		InitMap();
 		mGameOverSpr = &SPR.getGameOverSprite();
 	}
@@ -109,11 +114,6 @@ namespace battleCity
 	int WorldManager::GetObjectCount() const
 	{
 		return mWorldList.GetSize();
-	}
-
-	void WorldManager::SetPlayerID(int playerID)
-	{
-		mPlayerID = playerID;
 	}
 
 	int WorldManager::GetPlayerID() const
