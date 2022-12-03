@@ -9,10 +9,8 @@
 #include "Vector.h"
 #include "Screen.h"
 #include "Sprites.h"
-#include "EventOut.h"
 #include "Bullet.h"
 
-#include <iostream>
 #include <vector>
 
 namespace battleCity
@@ -75,7 +73,7 @@ namespace battleCity
 		{
 			fire();
 		}
-		if (getSpeed() == 0.0f && (GM.stepCount + 1) % 250 == 0)
+		if (getSpeed() == 0.0f && (GM.GetStepCount() + 1) % 250 == 0)
 		{
 			randomMove();
 		}
@@ -133,7 +131,7 @@ namespace battleCity
 
 		if (collisionObj.getType() == Type::Wall || collider.getType() == Type::Wall)
 		{
-			if (GM.stepCount % 125 == 0)
+			if (GM.GetStepCount() % 125 == 0)
 			{
 				randomMove();
 			}
@@ -159,7 +157,7 @@ namespace battleCity
 					randomMove();
 				}
 			}
-			if (GM.stepCount % 50 == 0)
+			if (GM.GetStepCount() % 50 == 0)
 			{
 				randomMove();
 			}
@@ -185,7 +183,7 @@ namespace battleCity
 					randomMove();
 				}
 			}
-			if (GM.stepCount % 150 == 0)
+			if (GM.GetStepCount() % 150 == 0)
 			{
 				randomMove();
 				fire();
@@ -230,7 +228,7 @@ namespace battleCity
 		}
 		if (event.GetType() == EventType::Out)
 		{
-			if (GM.stepCount % 10 == 0)
+			if (GM.GetStepCount() % 10 == 0)
 			{
 				pathFind();
 			}
@@ -250,10 +248,7 @@ namespace battleCity
 
 	Tank::~Tank()
 	{
-#if DEBUG == 2
-		std::cout << "Tank Destructor" << std::endl;
-#endif
-		if(GM.gameOver) return; // TODO: Fix
+		if(GM.GetGameOver()) return; // TODO: Fix
 		WM.IncrementTankCount(-1);
 		WM.IncrementKillCount(1);
 		std::unique_ptr<Object> newExp = std::make_unique<Explosion>(true);

@@ -1,66 +1,57 @@
 #pragma once
 
-#include <string>
-
-#include "Manager.h"
-#include "TankPlayer.h"
 #include "Clock.h"
-#include "EventStep.h"
-
-// Two-letter acronym for easier access to manager.
-#define GM battleCity::GameManager::getInstance()
+#include "Manager.h"
 
 const int FRAME_TIME_DEFAULT = 16;
 
-namespace battleCity {
-	class GameManager : public Manager {
-
-	private:
-		// Private since a singleton.
-		GameManager();
-		GameManager(GameManager const&);
-		void operator=(GameManager const&);
-
-		/// True->game loop should stop
-		static bool _gameOver;
-		// Target time per game loop, in seconds
-		static int _frameTime;
-		// Clock managment
-		static Clock _clock;
-		/// Count of game loop iterations
-		static int _stepCount;
-		int playerID;
-
+namespace battleCity
+{
+	class GameManager final : Manager
+	{
 	public:
-		~GameManager();
+		// Singleton
+		static GameManager& GetInstance();
 
-		/// Get the singleton instance of the GameManager.
-		static GameManager& getInstance();
+		GameManager(const GameManager&) = delete;
+		GameManager(GameManager&&) = delete;
 
-		int spriteInit();
+		void operator=(const GameManager&) = delete;
+		void operator=(GameManager&&) = delete;
 
-		/// Startup all GameManager services.
-		int startUp(int playerID);
+		~GameManager() override = default;
 
-		/// Shut down GameManager services.
+		void StartUp() override;
 		void ShutDown() override;
 
-		void gameOverState();
+		void Update();
 
-		/// Run game loop.
-		void run();
+		void SetGameOverState();
+		bool GetGameOverState() const;
 
-		/// Set game over status to indicated value.
-		/// If true (default), will stop game loop.
-		void static setGameOver(bool gameState = true);
-		void setPlayerHealthToZero();
+		bool GetGameOver() const;
 
-		//Use this function carefull
-		static void setStepCount(int newStepCount);
+		int GetStepCount() const;
 
-		static const bool& gameOver;
-		static const int& frameTime;
-		static const int& stepCount;
-		static const Clock& clock;
+		void SetCustomStepCount(int stepCount);
+		int GetCustomStepCount() const;
+
+		int SpriteInit();
+		bool GameOverTimerEnded();
+	private:
+		// Singleton
+		GameManager();
+
+		bool mGameOver;
+		bool mGameOverState;
+		// Clock management
+		Clock mClock;
+		// Target time per game loop, in seconds
+		int mFrameTime;
+		// Count of game loop iterations
+		int mStepCount;
+		int mCustomStepCount;
 	};
+
+	inline GameManager& GM = GameManager::GetInstance();
 }

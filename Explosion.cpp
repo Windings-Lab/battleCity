@@ -1,7 +1,7 @@
 #include "Explosion.h"
 #include "EventStep.h"
-#include "WorldManager.h"
 #include "Sprites.h"
+#include "WorldManager.h"
 
 namespace battleCity
 {
