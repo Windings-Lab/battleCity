@@ -8,16 +8,29 @@ namespace battleCity
 	class AABB
 	{
 	public:
-		// Create with default 16x16 vertexes
-		// Position (0, 0)
+		// Width		= 16
+		// Height		= 16
+		// Position		= (0, 0)
 		AABB();
-		// Create with default 16x16 vertexes
+		// Width		= 16
+		// Height		= 16
+		// Position		= position
 		AABB(Vector2Int position);
+		// Width		= width
+		// Height		= height
+		// Position		= (0, 0)
+		AABB(int width, int height);
 		AABB(int width, int height, Vector2Int position);
 		AABB(int xMin, int xMax, int yMin, int yMax);
 
+		Vector2Int GetPosition() const;
+
+		Vector2Int GetSize() const;
+		int GetWidth() const;
+		int GetHeight() const;
+
 	private:
-		Vector2Int mMin;
-		Vector2Int mMax;
+		Vector2Int mPosition;
+		Vector2Int mSize;
 	};
 }
