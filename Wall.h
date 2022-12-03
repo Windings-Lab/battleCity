@@ -10,8 +10,8 @@ namespace battleCity
         ~Wall();
         Wall(float x, float y);
 
-        void update() override;
-        void draw() override;
+        void Update() override;
+        void Draw() override;
     };
 }
 

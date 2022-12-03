@@ -13,13 +13,13 @@ namespace battleCity
 	{
 		mType = Type::PhoenixAndFlag;
 
-		position.X = x;
-		position.Y = y;
+		mPosition.X = x;
+		mPosition.Y = y;
 
-		health = 0;
-		constSpeed = 0;
-		bulletCount = 0;
-		solidness = Solidness::Soft;
+		mHealth = 0;
+		mConstSpeed = 0;
+		mBulletCount = 0;
+		mSolidness = Solidness::Soft;
 
 		gameOver = false;
 
@@ -27,23 +27,23 @@ namespace battleCity
 		(*spriteDB).push_back(&SPR.getPhoenixSprite());
 		(*spriteDB).push_back(&SPR.getWhiteFlagSprite());
 
-		spriteSet(nullptr, 0);
+		SpriteSet(nullptr, 0);
 	}
 
 
-	void PhoenixAndFlag::draw()
+	void PhoenixAndFlag::Draw()
 	{
-		drawSprite(sprite, (int)position.X, (int)position.Y);
+		drawSprite(mSprite, (int)mPosition.X, (int)mPosition.Y);
 	}
 
 	void PhoenixAndFlag::setGameOver(EventCollision& collisionEvent)
 	{
 		const auto& collisionObj = collisionEvent.GetObjectRef();
 		const auto& collider = collisionEvent.GetColliderRef();
-		if (collider.getType() == Type::Bullet || collisionObj.getType() == Type::Bullet)
+		if (collider.GetType() == Type::Bullet || collisionObj.GetType() == Type::Bullet)
 		{
 			gameOver = true;
-			spriteSet(nullptr, 1);
+			SpriteSet(nullptr, 1);
 			GM.SetGameOverState();
 		}
 	}

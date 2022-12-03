@@ -30,15 +30,15 @@ namespace battleCity
 	{
 		mType = Type::Tank;
 
-		health = 2;
-		constSpeed = 1;
-		bulletCount = 1;
-		solidness = Solidness::Hard;
-		isMovable = true;
+		mHealth = 2;
+		mConstSpeed = 1;
+		mBulletCount = 1;
+		mSolidness = Solidness::Hard;
+		mIsMovable = true;
 
 		spriteDB = &SPR.getTankSprites();
-		spriteSet();
-		setSight(Vector(0, -1));
+		SpriteSet();
+		SetSight(Vector(0, -1));
 
 		change = 1;
 		move(1, 0);
@@ -51,71 +51,71 @@ namespace battleCity
 
 		initPosition(Vector(x, y));
 
-		health = 2;
-		constSpeed = 1;
-		bulletCount = 1;
-		solidness = Solidness::Hard;
-		isMovable = true;
+		mHealth = 2;
+		mConstSpeed = 1;
+		mBulletCount = 1;
+		mSolidness = Solidness::Hard;
+		mIsMovable = true;
 
 		spriteDB = &SPR.getTankSprites();
-		spriteSet();
-		setSight(Vector(0, -1));
+		SpriteSet();
+		SetSight(Vector(0, -1));
 
 		change = 1;
 		move(1, 0);
 		WM.IncrementTankCount(1);
 	}
 
-	inline void Tank::update()
+	inline void Tank::Update()
 	{
 		int rnd = randomNumber(-30, 30);
 		if (rnd == 0)
 		{
 			fire();
 		}
-		if (getSpeed() == 0.0f && (GM.GetStepCount() + 1) % 250 == 0)
+		if (GetSpeed() == 0.0f && (GM.GetStepCount() + 1) % 250 == 0)
 		{
 			randomMove();
 		}
 	}
 
-	inline void Tank::draw()
+	inline void Tank::Draw()
 	{
-		drawSprite(sprite, (int)position.X, (int)position.Y);
+		drawSprite(mSprite, (int)mPosition.X, (int)mPosition.Y);
 	}
 
 	void Tank::fire()
 	{
-		if (bulletCount != 0)
+		if (mBulletCount != 0)
 		{
 			std::unique_ptr<Object> bullet = std::make_unique<Bullet>(mID);
 			WM.InsertObject(bullet);
-			bulletCount--;
+			mBulletCount--;
 		}
 	}
 
 	void Tank::move(float x, float y)
 	{
-		setSight(Vector(x, y));
-		if (getSight().X == 1.0f)
+		SetSight(Vector(x, y));
+		if (GetSight().X == 1.0f)
 		{
-			spriteSet(nullptr, 0);
+			SpriteSet(nullptr, 0);
 		}
-		else if (getSight().X == -1.0f)
+		else if (GetSight().X == -1.0f)
 		{
-			spriteSet(nullptr, 1);
+			SpriteSet(nullptr, 1);
 		}
-		else if (getSight().Y == 1.0f)
+		else if (GetSight().Y == 1.0f)
 		{
-			spriteSet(nullptr, 2);
+			SpriteSet(nullptr, 2);
 		}
-		else if (getSight().Y == -1.0f)
+		else if (GetSight().Y == -1.0f)
 		{
-			spriteSet(nullptr, 3);
+			SpriteSet(nullptr, 3);
 		}
 		//std::cout << x << y << std::endl;
 		//std::cout << "sightX: " << getSight().X << " sightY: " << getSight().Y << std::endl;
-		setVelocity(Vector(x, y));
+		SetVelocity(Vector(x, y));
 	}
 
 	void Tank::pathFind()
@@ -129,26 +129,26 @@ namespace battleCity
 		auto& collisionObj = collisionEvent.GetObjectRef();
 		const auto& collider = collisionEvent.GetColliderRef();
 
-		if (collisionObj.getType() == Type::Wall || collider.getType() == Type::Wall)
+		if (collisionObj.GetType() == Type::Wall || collider.GetType() == Type::Wall)
 		{
 			if (GM.GetStepCount() % 125 == 0)
 			{
 				randomMove();
 			}
 		}
-		else if (collisionObj.getType() == Type::Tank && collisionObj.getType() == Type::Tank)
+		else if (collisionObj.GetType() == Type::Tank && collisionObj.GetType() == Type::Tank)
 		{
 			if (isSpawnIntersects)
 			{
 				collisionObj.setSpawnIntersection(true);
 				collisionObj.setSpawnIntersection(true);
-				Vector newVec = collisionObj.getPosition();
+				Vector newVec = collisionObj.GetPosition();
 				Box b1 = collisionObj.getBox();
 				Box b2 = collisionObj.getBox();
 				if (boxesIntersect(b1, b2))
 				{
 					newVec.X = newVec.X - 32 < SCR.getBoundaryL() ? newVec.X + 32 : newVec.X - 32;
-					collisionObj.setPosition(newVec);
+					collisionObj.SetPosition(newVec);
 					move(0, 0);
 				}
 				else
@@ -162,19 +162,19 @@ namespace battleCity
 				randomMove();
 			}
 		}
-		else if (collisionObj.getType() == Type::TankPlayer || collisionObj.getType() == Type::TankPlayer)
+		else if (collisionObj.GetType() == Type::TankPlayer || collisionObj.GetType() == Type::TankPlayer)
 		{
 			if (isSpawnIntersects)
 			{
 				collisionObj.setSpawnIntersection(true);
 				collisionObj.setSpawnIntersection(true);
-				Vector newVec = collisionObj.getPosition();
+				Vector newVec = collisionObj.GetPosition();
 				Box b1 = collisionObj.getBox();
 				Box b2 = collisionObj.getBox();
 				if (boxesIntersect(b1, b2))
 				{
 					newVec.X = newVec.X - 32 < SCR.getBoundaryL() ? newVec.X + 32 : newVec.X - 32;
-					collisionObj.setPosition(newVec);
+					collisionObj.SetPosition(newVec);
 					move(0, 0);
 				}
 				else
@@ -204,7 +204,7 @@ namespace battleCity
 			do
 			{
 				rnd = randomNumber(-1, 1);
-			} while (rnd == getSight().X || rnd == 0);
+			} while (rnd == GetSight().X || rnd == 0);
 			move(rnd, 0);
 			change = 2;
 		}
@@ -213,7 +213,7 @@ namespace battleCity
 			do
 			{
 				rnd = randomNumber(-1, 1);
-			} while (rnd == getSight().Y || rnd == 0);
+			} while (rnd == GetSight().Y || rnd == 0);
 			move(0, rnd);
 			change = 1;
 		}
@@ -252,7 +252,7 @@ namespace battleCity
 		WM.IncrementTankCount(-1);
 		WM.IncrementKillCount(1);
 		std::unique_ptr<Object> newExp = std::make_unique<Explosion>(true);
-		newExp->setPosition(position);
+		newExp->SetPosition(mPosition);
 
 		WM.InsertObject(newExp);
 	}

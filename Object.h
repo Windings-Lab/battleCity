@@ -1,27 +1,20 @@
 #pragma once
 
-#include <string>
-#include <vector>
-#include <memory>
-
-#include "Framework.h"
 #include "Event.h"
-#include "Box.h"
+#include "Framework.h"
 #include "Vector.h"
-#include "Sprites.h"
 
 namespace battleCity
 {
 	class Object
 	{
+		static int IDCounter;
 	public:
-		/// Types of solidness of Object.
 		enum class Solidness {
 			Hard,       /// Object causes collisions and impedes.
 			Soft,       /// Object causes collision, but doesn't impede.
 			Spectral,   /// Object doesn't cause collisions.
 		};
-
 		enum class Type
 		{
 			Error = 0,
@@ -34,117 +27,70 @@ namespace battleCity
 			PowerUp
 		};
 	private:
-		static int IDCounter;
-		float speed;
-		Vector direction;
-		// setSight() in derived objects
-		Vector sight;
+		// Object
+		Vector mPosition;
+		Solidness mSolidness;
+		Sprite* mSprite;
 
-		Vector worldIndexRelative;
+		// IDestroyable Interface
+		int mHealth;
 
-		// Relative to the next spriteIndexSize 16px blocks
-		void setWorldIndexRelative();
-		void setSpeed(float newSpeed);
-		void setDirection(Vector newDirection);
-	protected:
-		const int mID;
-		Type mType;
+		// IShoot Interface
+		int mBulletCount;
 
-		// default = Boundary of windows
-		Vector position;
+		// IMovable Interface
+		float mMaxSpeed;
+		float mVelocity;
+		Vector mDirection;
 
-		int health;
-		float constSpeed;
-		int bulletCount;
-		Solidness solidness;
-
-		/// <summary>
-		/// Sprite database for each object
-		/// </summary>
-		/// <param name="">Initialize it in derived objects</param>
-		/// <param name="spriteSet(0, index)">to change direction</param>
-		/// <param name=""></param>
-		/// <param name="0">RIGHT</param>
-		/// <param name="1">LEFT</param>
-		/// <param name="2">DOWN</param>
-		/// <param name="3">UP</param>
-		std::vector<Sprite*>* spriteDB;
-		int spriteX, spriteY;
-		// Size of 16px cells
-		int spriteIndexSize;
-		Box box;
-		// spriteSet(Sprite*) initialize if no spriteDB
-		Sprite* sprite;
-		// Teleport tanks if true
-		bool isSpawnIntersects;
-		bool isMovable;
-
-		// Make it only once in Constructor of derived object
-		void initPosition(Vector initPosition);
-		void setSight(Vector newSight);
-		void setVelocity(Vector newVelocity);
 	public:
 		Object();
-		virtual ~Object();
-		/// <summary>
-		/// Change sprite direction
-		/// </summary>
-		/// <param name="0, 0">RIGHT</param>
-		/// <param name="0, 1">LEFT</param>
-		/// <param name="0, 2">DOWN</param>
-		/// <param name="0, 3">UP</param>
-		void spriteSet(Sprite* = nullptr, int index = 3);
 
-		virtual void update();
-		virtual void draw();
+		Object(const Object&) = delete;
+		Object(Object&&) = delete;
 
-		std::vector<Sprite*>& getSpriteList();
+		Object& operator=(const Object&) = delete;
+		Object& operator=(Object&&) = delete;
 
-		virtual int EventHandler(Event& ptrEvent);
+		virtual ~Object() = 0;
 
-		int getSpriteX() const;
-		int getSpriteY() const;
-		int getSpriteIndexSize() const;
+		const int ID;
+		const Type ObjectType;
 
-		int GetID() const;
-		Type getType() const;
+		virtual void Update() = 0;
+		virtual void Draw() = 0;
 
-		// Relative to the next spriteIndexSize 16px blocks
-		Vector getWorldIndexRelative() const;
+		virtual void EventHandler(Event& ptrEvent) = 0;
 
-		float getSpeed() const;
+		#pragma region Object
+		void SetPosition(Vector position);
+		Vector GetPosition() const;
 
-		// Health += newHealth
-		void setHealth(int newHealth);
-		int getHealth() const;
+		void SetSolidness(Solidness solidness);
+		Solidness GetSolidness() const;
 
-		void setBulletCount(int newBulletCount);
-		int getBulletCount();
+		void SetSprite(Sprite*);
+		#pragma endregion
 
-		Vector getDirection() const;
-		Vector getSight() const;
+		#pragma region IDestroyable
+		void SetHealth(int health);
+		int GetHealth() const;
+		#pragma endregion
 
-		Vector getVelocity() const;
-		Vector predictPosition();
+		#pragma region IShoot
+		void IncrementBulletCount(int count = 1);
+		int GetBulletCount();
+		#pragma endregion
 
-		/// Set position of Object.
-		int setPosition(Vector newPosition);
-		Vector getPosition() const;
+		#pragma region IMovable
+		void SetSpeed(float speed);
+		float GetSpeed() const;
 
-		/// Get/Set solidness of Object
-		int setSolidness(Solidness newSolid);
-		Solidness getSolidness() const;
+		float GetVelocity() const;
+		void SetVelocity(float velocity);
 
-		bool isSolid() const;
-		bool isSoft() const;
-
-		/// Get/Set Object's bounding box
-		void setBox(Box newBox);
-		Box getBox() const;
-
-		bool getSpawnIntersection();
-		void setSpawnIntersection(bool newSpawnIntersection);
-
-		bool IsMovable() const;
+		void SetDirection(Vector direction);
+		Vector GetDirection() const;
+		#pragma endregion
 	};
 }

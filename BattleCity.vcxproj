@@ -29,6 +29,7 @@
     <ClCompile Include="EventOut.cpp" />
     <ClCompile Include="EventStep.cpp" />
     <ClCompile Include="Explosion.cpp" />
+    <ClCompile Include="FrameworkWrapper.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Manager.cpp" />
@@ -57,6 +58,7 @@
     <ClInclude Include="EventStep.h" />
     <ClInclude Include="Explosion.h" />
     <ClInclude Include="Framework.h" />
+    <ClInclude Include="FrameworkWrapper.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="Manager.h" />
     <ClInclude Include="Object.h" />
@@ -71,6 +73,9 @@
     <ClInclude Include="Vector.h" />
     <ClInclude Include="Wall.h" />
     <ClInclude Include="WorldManager.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

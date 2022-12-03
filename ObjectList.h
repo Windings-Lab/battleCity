@@ -7,6 +7,7 @@
 
 namespace battleCity
 {
+	class TankPlayer;
 	class ObjectListIterator;
 	class Object;
 
@@ -20,6 +21,7 @@ namespace battleCity
 		friend void swap(ObjectList&, ObjectList&) noexcept;
 	public:
 		friend class ObjectListIterator;
+		friend TankPlayer* GetPlayer(int id); // TODO: Temporary
 
 		ObjectList();
 

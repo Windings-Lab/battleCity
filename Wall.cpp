@@ -8,43 +8,43 @@ namespace battleCity
 		mType = Type::Wall;
 
 #if DEBUG == 0
-		health = 2;
+		mHealth = 2;
 #else
 		health = 10;
 #endif
-		constSpeed = 0;
-		bulletCount = 0;
-		solidness = Solidness::Hard;
+		mConstSpeed = 0;
+		mBulletCount = 0;
+		mSolidness = Solidness::Hard;
 
-		spriteSet(&SPR.getWallSprite());
+		SetSprite(&SPR.getWallSprite());
 	}
 
 	Wall::Wall(float x, float y) : Object()
 	{
 		mType = Type::Wall;
 
-		position.X = x;
-		position.Y = y;
+		mPosition.X = x;
+		mPosition.Y = y;
 
 #if DEBUG == 0
-		health = 2;
+		mHealth = 2;
 #else
 		health = 10;
 #endif
-		constSpeed = 0;
-		bulletCount = 0;
-		solidness = Solidness::Hard;
+		mConstSpeed = 0;
+		mBulletCount = 0;
+		mSolidness = Solidness::Hard;
 
-		spriteSet(&SPR.getWallSprite());
+		SetSprite(&SPR.getWallSprite());
 	}
 
-	void Wall::update()
+	void Wall::Update()
 	{
 	}
 
-	void Wall::draw()
+	void Wall::Draw()
 	{
-		drawSprite(sprite, (int)position.X, (int)position.Y);
+		drawSprite(mSprite, (int)mPosition.X, (int)mPosition.Y);
 	}
 
 	Wall::~Wall()

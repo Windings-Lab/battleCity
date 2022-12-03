@@ -14,7 +14,7 @@ namespace battleCity
         PhoenixAndFlag(float x, float y);
         ~PhoenixAndFlag();
 
-        void draw() override;
+        void Draw() override;
 
         void setGameOver(EventCollision& collisionEvent);
 

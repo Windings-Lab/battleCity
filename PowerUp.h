@@ -15,7 +15,7 @@ namespace battleCity
         ~PowerUp();
         PowerUp(int giveHealth);
 
-        void draw() override;
+        void Draw() override;
 
         void makePowerUp(EventCollision& collisionEvent);
 

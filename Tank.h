@@ -15,8 +15,8 @@ namespace battleCity
 		Tank(float x, float y);
 		~Tank();
 
-		void update() override;
-		void draw() override;
+		void Update() override;
+		void Draw() override;
 		void fire();
 		void move(float x, float y);
 

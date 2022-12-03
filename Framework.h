@@ -17,8 +17,6 @@
 #define HEIGHT 32
 #define WIDTH 45
 
-#include <string>
-
 class Sprite;
 
 FRAMEWORK_API Sprite* createSprite(const char* path);
@@ -49,9 +47,10 @@ enum class FRMouseButton {
 	COUNT
 };
 
-class Framework {
+class Framework
+{
 public:
-	Framework() {}
+	Framework() = default;
 	// no function calls are available here, this function should only return width, height and fullscreen values
 	virtual void PreInit(int& width, int& height, bool& fullscreen) = 0;
 
@@ -75,7 +74,7 @@ public:
 
 	virtual const char* GetTitle() = 0;
 
-	virtual ~Framework() {};
+	virtual ~Framework() {}
 };
 
 FRAMEWORK_API int run(Framework*);

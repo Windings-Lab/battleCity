@@ -6,8 +6,6 @@
 
 #include "Framework.h"
 
-#define SPR battleCity::Sprites::getInstance()
-
 namespace battleCity
 {
 	class Sprites
@@ -88,4 +86,6 @@ namespace battleCity
 		int initAll();
 		void deleteAll();
 	};
+
+	Sprites& SPR = Sprites::getInstance();
 }

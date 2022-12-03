@@ -12,7 +12,7 @@ namespace battleCity
     public:
         Explosion(bool isLarge);
 
-        void draw() override;
+        void Draw() override;
 
         int EventHandler(Event& eventPtr) override;
     };

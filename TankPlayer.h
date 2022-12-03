@@ -28,15 +28,15 @@ namespace battleCity
 		void movementSet(FRKey direction);
 		void movementErase(FRKey direction);
 
-		void update() override;
-		void draw() override;
+		void Update() override;
+		void Draw() override;
 		void keyboardInput();
 		void mouseInput(EventMouse& mouseEvent);
 
 		void move(float x, float y);
 		void fire();
 
-		int EventHandler(Event& event) override;
+		void EventHandler(Event& event) override;
 	private:
 		std::vector<MovementDirection> mMovement = { MovementDirection::Idle };
 	};

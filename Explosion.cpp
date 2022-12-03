@@ -9,21 +9,21 @@ namespace battleCity
     {
         mType = Type::Explosion;
 
-        health = isLarge ? 1 : 3;
+        mHealth = isLarge ? 1 : 3;
         spriteIndex = isLarge ? 3 : 0;
-        constSpeed = 0;
-        bulletCount = 0;
-        solidness = Solidness::Spectral;
+        mConstSpeed = 0;
+        mBulletCount = 0;
+        mSolidness = Solidness::Spectral;
 
         spriteDB = &SPR.getExplosionSprites();
-        sprite = spriteDB->at(spriteIndex);
+        mSprite = spriteDB->at(spriteIndex);
 
         initPosition(Vector(40, 44));
     }
 
-    void Explosion::draw()
+    void Explosion::Draw()
     {
-        drawSprite(sprite, (int)position.X, (int)position.Y);
+        drawSprite(mSprite, (int)mPosition.X, (int)mPosition.Y);
     }
 
     void Explosion::step()
@@ -31,7 +31,7 @@ namespace battleCity
         if (spriteIndex < 4)
         {
             spriteIndex++;
-            sprite = spriteDB->at(spriteIndex);
+            mSprite = spriteDB->at(spriteIndex);
             WM.MarkForDelete(mID);
         }
     }
