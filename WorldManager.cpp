@@ -58,11 +58,13 @@ namespace battleCity
 		WM.InsertObject(player);
 		InitMap();
 		mGameOverSpr = &SPR.getGameOverSprite();
+		mStarted = true;
 	}
 
 	void WorldManager::ShutDown()
 	{
 		mWorldList.Clear();
+		mStarted = false;
 	}
 
 	void WorldManager::IncrementTankCount(int count)

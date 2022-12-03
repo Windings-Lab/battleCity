@@ -7,7 +7,7 @@ const int FRAME_TIME_DEFAULT = 16;
 
 namespace battleCity
 {
-	class GameManager final : Manager
+	class GameManager final : public Manager
 	{
 	public:
 		// Singleton

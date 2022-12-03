@@ -7,6 +7,11 @@ namespace battleCity
 	Manager::Manager(ManagerType type) : mType(type) {}
 	Manager::~Manager() {}
 
+	bool Manager::GetStarted() const
+	{
+		return mStarted;
+	}
+
 	ManagerType Manager::GetType() const
 	{
 		return mType;

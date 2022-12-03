@@ -9,7 +9,7 @@
 
 namespace battleCity
 {
-	class WorldManager final : Manager
+	class WorldManager final : public Manager
 	{
 	private:
 		void InitMap();

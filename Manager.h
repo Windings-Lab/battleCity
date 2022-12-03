@@ -28,9 +28,13 @@ namespace battleCity
 		virtual void StartUp() = 0;
 		virtual void ShutDown() = 0;
 
+		bool IsStarted() const;
+
 		ManagerType GetType() const;
 		void SendEvent(Event& eventRef) const;
 	private:
 		ManagerType mType;
+	protected:
+		bool mStarted;
 	};
 }

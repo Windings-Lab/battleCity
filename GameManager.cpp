@@ -42,11 +42,13 @@ namespace battleCity
 	{
 		SpriteInit();
 		mGameOver = false;
+		mStarted = true;
 	}
 
 	void GameManager::ShutDown()
 	{
 		mGameOver = true;
+		mStarted = false;
 	}
 
 	bool GameManager::GameOverTimerEnded()
