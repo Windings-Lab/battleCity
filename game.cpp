@@ -72,8 +72,10 @@ int main(int argc, char *argv[])
 	}
 	srand(time(nullptr));
 	Screen::set(width, height, fullScreen);
-	// I don't know how to deallocate 'MyFramework' in this framework
-	return run(new battleCity::FrameworkWrapper());
+	
+	auto framework = std::make_unique<battleCity::FrameworkWrapper>();
+
+	return run(framework.get());
 }
 
 // ---> ^ X
