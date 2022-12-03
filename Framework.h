@@ -17,8 +17,6 @@
 #define HEIGHT 32
 #define WIDTH 45
 
-#include <string>
-
 class Sprite;
 
 FRAMEWORK_API Sprite* createSprite(const char* path);

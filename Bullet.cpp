@@ -14,11 +14,11 @@ namespace battleCity
 	{
 		mType = Type::Bullet;
 
-		health = 1;
-		constSpeed = 2;
-		bulletCount = 0;
-		solidness = Solidness::Soft;
-		isMovable = true;
+		mHealth = 1;
+		mConstSpeed = 2;
+		mBulletCount = 0;
+		mSolidness = Solidness::Soft;
+		mIsMovable = true;
 
 		spriteDB = &SPR.getBulletSprites();
 
@@ -28,8 +28,8 @@ namespace battleCity
 
 	void Bullet::initBullet()
 	{
-		Vector pos = mObjectOwner.getPosition();
-		Vector directionObj = mObjectOwner.getSight();
+		Vector pos = mObjectOwner.GetPosition();
+		Vector directionObj = mObjectOwner.GetSight();
 		float spriteObjX = mObjectOwner.getBox().getHorizontal();
 		float spriteObjY = mObjectOwner.getBox().getVertical();
 
@@ -38,36 +38,36 @@ namespace battleCity
 		{
 			pos.Y = pos.Y + (spriteObjY / 2) - 2; // -2 is Centerize
 			pos.X = pos.X + spriteObjX;
-			directionObj.X = constSpeed;
-			spriteSet(nullptr, 0);
-			setSight(Vector(1, 0));
+			directionObj.X = mConstSpeed;
+			SpriteSet(nullptr, 0);
+			SetSight(Vector(1, 0));
 		}
 		else if (directionObj.X == -1)
 		{
 			pos.Y = pos.Y + (spriteObjY / 2) - 2; // -2 is Centerize
-			directionObj.X = -constSpeed;
-			spriteSet(nullptr, 1);
-			setSight(Vector(-1, 0));
+			directionObj.X = -mConstSpeed;
+			SpriteSet(nullptr, 1);
+			SetSight(Vector(-1, 0));
 		}
 		// DOWN UP
 		else if (directionObj.Y == 1)
 		{
 			pos.X = pos.X + (spriteObjX / 2) - 2; // -2 is Centerize
 			pos.Y = pos.Y + spriteObjY;
-			directionObj.Y = constSpeed;
-			spriteSet(nullptr, 2);
-			setSight(Vector(0, 1));
+			directionObj.Y = mConstSpeed;
+			SpriteSet(nullptr, 2);
+			SetSight(Vector(0, 1));
 		}
 		else if (directionObj.Y == -1)
 		{
 			pos.X = pos.X + (spriteObjX / 2) - 2; // -2 is Centerize
-			directionObj.Y = -constSpeed;
-			spriteSet(nullptr, 3);
-			setSight(Vector(0, -1));
+			directionObj.Y = -mConstSpeed;
+			SpriteSet(nullptr, 3);
+			SetSight(Vector(0, -1));
 		}
 
-		position = pos;
-		setVelocity(directionObj);
+		mPosition = pos;
+		SetVelocity(directionObj);
 	}
 
 	void Bullet::out()
@@ -77,20 +77,20 @@ namespace battleCity
 
 	void Bullet::hit(EventCollision collisionEvent)
 	{
-		if (health != 0)
+		if (mHealth != 0)
 		{
 			const auto& collisionObj = collisionEvent.GetObjectRef();
 			const auto& collider = collisionEvent.GetColliderRef();
 
 			if (mObjectOwner.GetID() != collisionObj.GetID() && mObjectOwner.GetID() != collider.GetID())
 			{
-				if ((collider.getType() == Type::Tank || collisionObj.getType() == Type::Tank) 
-					&& mObjectOwner.getType() == Type::Tank)
+				if ((collider.GetType() == Type::Tank || collisionObj.GetType() == Type::Tank) 
+					&& mObjectOwner.GetType() == Type::Tank)
 				{
 					WM.MarkForDelete(mID);
 					return;
 				}
-				if (collider.getType() == Type::PowerUp || collisionObj.getType() == Type::PowerUp)
+				if (collider.GetType() == Type::PowerUp || collisionObj.GetType() == Type::PowerUp)
 				{
 					return;
 				}
@@ -100,9 +100,9 @@ namespace battleCity
 		}
 	}
 
-	void Bullet::draw()
+	void Bullet::Draw()
 	{
-		drawSprite(sprite, (int)position.X, (int)position.Y);
+		drawSprite(mSprite, (int)mPosition.X, (int)mPosition.Y);
 	}
 
 	int Bullet::EventHandler(Event& event)
@@ -125,10 +125,10 @@ namespace battleCity
 	Bullet::~Bullet()
 	{
 		if (GM.GetGameOver()) return; // TODO: Fix
-		mObjectOwner.setBulletCount(1);
-		position.X -= 5;
+		mObjectOwner.IncrementBulletCount(1);
+		mPosition.X -= 5;
 		std::unique_ptr<Object> newExp = std::make_unique<Explosion>(false);
-		newExp->setPosition(position);
+		newExp->SetPosition(mPosition);
 
 		WM.InsertObject(newExp);
 	}

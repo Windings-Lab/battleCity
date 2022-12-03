@@ -124,7 +124,7 @@ namespace battleCity
 	void WorldManager::SetPlayerHealthToZero() const
 	{
 		auto& player = mWorldList.GetObject(GetPlayerID());
-		player.setHealth(-player.getHealth());
+		player.SetHealth(-player.GetHealth());
 	}
 
 	std::vector<std::vector<int>>& WorldManager::GetWorldMap()
@@ -173,12 +173,12 @@ namespace battleCity
 			{
 				mapFile >> charToStore;
 
-				switch (auto type = static_cast<Object::Type>(charToStore - '0'))
+				switch (auto type = static_cast<Object::ObjectType>(charToStore - '0'))
 				{
 				case Object::Type::TankPlayer:
 					{
 						auto& newPlayer = mWorldList.GetObject(mPlayerID);
-						newPlayer.setPosition(Vector(SCR.getBoundaryL() + (16 * j), SCR.getBoundaryU() + (16 * i)));
+						newPlayer.SetPosition(Vector(SCR.getBoundaryL() + (16 * j), SCR.getBoundaryU() + (16 * i)));
 						break;
 					}
 				case Object::Type::Tank:
@@ -219,12 +219,12 @@ namespace battleCity
 		mapFile.close();
 	}
 
-	std::unordered_set<int> WorldManager::GetObjectsOfType(Object::Type type) const
+	std::unordered_set<int> WorldManager::GetObjectsOfType(Object::ObjectType type) const
 	{
 		std::unordered_set<int> newList;
 		for (const auto& [objID, objRef] : mWorldList.GetRange())
 		{
-			if (objRef->getType() == type)
+			if (objRef->GetType() == type)
 				newList.insert(objRef->GetID());
 		}
 
@@ -240,21 +240,21 @@ namespace battleCity
 
 		for (const auto& [objID, objRef] : mWorldList.GetRange())
 		{
-			objRef->update();
+			objRef->Update();
 		}
 
 		for (const int objID : mObjectIDsToMove)
 		{
 			Object& objPtr = mWorldList.GetObject(objID);
-			MoveObject(objPtr, objPtr.predictPosition());
+			MoveObject(objPtr, objPtr.PredictPosition());
 		}
 
 		for (const int objID : mObjectIDsToDelete)
 		{
 			const Object& objPtr = mWorldList.GetObject(objID);
-			if (objPtr.getType() == Object::Type::Wall)
+			if (objPtr.GetType() == Object::Type::Wall)
 			{
-				Vector pos = objPtr.getPosition();
+				Vector pos = objPtr.GetPosition();
 				int x = (pos.X - SCR.getBoundaryL()) / 16;
 				int y = (pos.Y - SCR.getBoundaryU()) / 16;
 				mMap[y][x] = 0;
@@ -279,7 +279,7 @@ namespace battleCity
 
 		for (const auto& [objID, objRef] : mWorldList.GetRange())
 		{
-			objRef->draw();
+			objRef->Draw();
 		}
 
 		if (GM.GetGameOverState() && !GM.GameOverTimerEnded())
@@ -300,7 +300,7 @@ namespace battleCity
 	void WorldManager::MoveObject(Object& movableObj, Vector where)
 	{
 		//std::cout << "moveObject" << std::endl;
-		if (movableObj.isSolid() || movableObj.isSoft())
+		if (movableObj.IsSolid() || movableObj.IsSoft())
 		{
 			if (auto newList = GetCollisions(movableObj, where); !newList.empty())
 			{
@@ -314,7 +314,7 @@ namespace battleCity
 					movableObj.EventHandler(collision);
 					colliderObj.EventHandler(collision);
 
-					doMove = !(movableObj.isSolid() && colliderObj.isSolid());
+					doMove = !(movableObj.IsSolid() && colliderObj.IsSolid());
 				}
 
 				if (!doMove)
@@ -328,7 +328,7 @@ namespace battleCity
 		if ((where.X >= SCR.getBoundaryL() && where.X + movableObj.getSpriteX() <= SCR.getBoundaryR()) &&
 			(where.Y >= SCR.getBoundaryU() && where.Y + movableObj.getSpriteY() <= SCR.getBoundaryD()))
 		{
-			i = movableObj.setPosition(where);
+			i = movableObj.SetPosition(where);
 		}
 		else
 		{
@@ -346,9 +346,9 @@ namespace battleCity
 
 		auto& objRef = mWorldList.GetObject(objID);
 
-		objRef.setHealth(-1);
+		objRef.SetHealth(-1);
 
-		if (objRef.getHealth() == 0)
+		if (objRef.GetHealth() == 0)
 		{
 			mObjectIDsToDelete.insert(objID);
 		}
@@ -427,7 +427,7 @@ namespace battleCity
 	std::unordered_set<int> WorldManager::GetCollisions(const Object& ptrObject, Vector where) const
 	{
 		std::unordered_set<int> collisionList;
-		if (ptrObject.getSpeed() == 0)
+		if (ptrObject.GetSpeed() == 0)
 		{
 			return collisionList;
 		}
@@ -446,7 +446,7 @@ namespace battleCity
 				}
 				Box b = getWorldBox(ptrObject, where);
 				Box bTemp = getWorldBox(tempObject);
-				if ((tempObject.isSolid() || tempObject.isSoft()) &&
+				if ((tempObject.IsSolid() || tempObject.IsSoft()) &&
 					boxesIntersect(b, bTemp))
 				{
 					collisionList.insert(tempObject.GetID());
@@ -467,7 +467,7 @@ namespace battleCity
 			// If false, then check other objects for collision
 			// for example Player(14, 0), Wall(15, 0) no collision
 			if (boxesIntersect(b, bTemp) &&
-				(tempObject.isSolid() || tempObject.isSoft()))
+				(tempObject.IsSolid() || tempObject.IsSoft()))
 			{
 				collisionList.insert(tempObject.GetID());
 			}

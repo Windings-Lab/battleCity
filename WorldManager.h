@@ -43,7 +43,7 @@ namespace battleCity
 
 		const ObjectList& GetAllObjects() const;
 		std::unordered_set<int> GetObjectsToMove() const;
-		std::unordered_set<int> GetObjectsOfType(Object::Type type) const;
+		std::unordered_set<int> GetObjectsOfType(Object::ObjectType type) const;
 		int GetObjectCount() const;
 
 		void SetPlayerID(int playerID);

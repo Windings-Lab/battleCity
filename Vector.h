@@ -4,6 +4,8 @@ namespace battleCity
 {
 	struct Vector
 	{
+		static Vector Zero();
+
 		float X;
 		float Y;
 
@@ -13,8 +15,8 @@ namespace battleCity
 		float Magnitude() const;
 		void Normalize();
 
-		/// Add Vector
 		Vector operator+(const Vector& other) const;
+		Vector operator*(float num) const;
 		Vector operator-() const;
 	};
 }

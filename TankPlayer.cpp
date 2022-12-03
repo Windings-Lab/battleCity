@@ -30,18 +30,18 @@ namespace battleCity
 		mType = Type::TankPlayer;
 
 #if DEBUG == 0
-		health = 1;
+		mHealth = 1;
 #else
 		health = 10;
 #endif
-		constSpeed = 1;
-		bulletCount = 1;
-		solidness = Solidness::Hard;
-		isMovable = true;
+		mConstSpeed = 1;
+		mBulletCount = 1;
+		mSolidness = Solidness::Hard;
+		mIsMovable = true;
 
 		spriteDB = &SPR.getTankPlayerSprites();
-		spriteSet();
-		setSight(Vector(0, -1));
+		SpriteSet();
+		SetSight(Vector(0, -1));
 #if DEBUG == 1
 		std::cout << "x: " << mCollisionPos.X << " y: " << mCollisionPos.Y << std::endl;
 #endif
@@ -54,21 +54,21 @@ namespace battleCity
 		initPosition(Vector(x, y));
 
 #if DEBUG == 0
-		health = 1;
+		mHealth = 1;
 #else
 		health = 10;
 #endif
-		constSpeed = 1;
-		bulletCount = 1;
-		solidness = Solidness::Hard;
-		isMovable = true;
+		mConstSpeed = 1;
+		mBulletCount = 1;
+		mSolidness = Solidness::Hard;
+		mIsMovable = true;
 
 		spriteDB = &SPR.getTankPlayerSprites();
-		spriteSet();
-		setSight(Vector(0, -1));
+		SpriteSet();
+		SetSight(Vector(0, -1));
 	}
 
-	void TankPlayer::update()
+	void TankPlayer::Update()
 	{
 		//if (GM.stepCount % 5000 == 0)
 		//{
@@ -79,32 +79,32 @@ namespace battleCity
 		//}
 	}
 
-	inline void TankPlayer::draw()
+	inline void TankPlayer::Draw()
 	{
-		drawSprite(sprite, (int)position.X, (int)position.Y);
+		drawSprite(mSprite, (int)mPosition.X, (int)mPosition.Y);
 	}
 
 	void TankPlayer::keyboardInput()
 	{
 		if (mMovement.back() == MovementDirection::Right)
 		{
-			move(constSpeed, 0);
-			spriteSet(nullptr, 0);
+			move(mConstSpeed, 0);
+			SpriteSet(nullptr, 0);
 		}
 		if (mMovement.back() == MovementDirection::Left)
 		{
-			move(-constSpeed, 0);
-			spriteSet(nullptr, 1);
+			move(-mConstSpeed, 0);
+			SpriteSet(nullptr, 1);
 		}
 		if (mMovement.back() == MovementDirection::Down)
 		{
-			move(0, constSpeed);
-			spriteSet(nullptr, 2);
+			move(0, mConstSpeed);
+			SpriteSet(nullptr, 2);
 		}
 		if (mMovement.back() == MovementDirection::Up)
 		{
-			move(0, -constSpeed);
-			spriteSet(nullptr, 3);
+			move(0, -mConstSpeed);
+			SpriteSet(nullptr, 3);
 		}
 		if (mMovement.back() == MovementDirection::Idle)
 		{
@@ -122,17 +122,17 @@ namespace battleCity
 
 	void TankPlayer::move(float x, float y)
 	{
-		setSight(Vector(x, y));
-		setVelocity(Vector(x, y));
+		SetSight(Vector(x, y));
+		SetVelocity(Vector(x, y));
 	}
 
 	void TankPlayer::fire()
 	{
-		if (bulletCount != 0)
+		if (mBulletCount != 0)
 		{
 			std::unique_ptr<Object> bullet = std::make_unique<Bullet>(mID);
 			WM.InsertObject(bullet);
-			bulletCount--;
+			mBulletCount--;
 		}
 	}
 
@@ -171,7 +171,7 @@ namespace battleCity
 	{
 		if (GM.GetGameOver()) return; // TODO: Fix
 		std::unique_ptr<Object> newExp = std::make_unique<Explosion>(true);
-		newExp->setPosition(this->position);
+		newExp->SetPosition(this->mPosition);
 		WM.InsertObject(newExp);
 
 		GM.SetGameOverState();

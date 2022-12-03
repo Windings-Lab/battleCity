@@ -28,8 +28,8 @@ namespace battleCity
 		void movementSet(FRKey direction);
 		void movementErase(FRKey direction);
 
-		void update() override;
-		void draw() override;
+		void Update() override;
+		void Draw() override;
 		void keyboardInput();
 		void mouseInput(EventMouse& mouseEvent);
 

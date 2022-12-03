@@ -17,7 +17,7 @@ namespace battleCity
 
         void initBullet();
 
-        void draw() override;
+        void Draw() override;
 
         int EventHandler(Event& event) override;
     };

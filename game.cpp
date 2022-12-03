@@ -74,7 +74,7 @@ public:
 
 	virtual void onMouseButtonClick(FRMouseButton button, bool isReleased)
 	{
-		if (mPlayer->getHealth() > 0)
+		if (mPlayer->GetHealth() > 0)
 		{
 			mEventMouse.SetMouseButton(button);
 			mEventMouse.SetMouseAction(isReleased);
@@ -84,7 +84,7 @@ public:
 
 	virtual void onKeyPressed(FRKey k)
 	{
-		if (mPlayer->getHealth() > 0)
+		if (mPlayer->GetHealth() > 0)
 		{
 			mEventKeyboard.SetKey(k);
 			mEventKeyboard.SetKeyboardAction(EventKeyboardAction::KEY_PRESSED);
@@ -95,7 +95,7 @@ public:
 
 	virtual void onKeyReleased(FRKey k)
 	{
-		if (mPlayer->getHealth() > 0)
+		if (mPlayer->GetHealth() > 0)
 		{
 			mEventKeyboard.SetKey(k);
 			mEventKeyboard.SetKeyboardAction(EventKeyboardAction::KEY_RELEASED);

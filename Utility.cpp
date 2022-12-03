@@ -59,7 +59,7 @@ bool battleCity::boxesIntersect(Box A, Box B)
 
 battleCity::Box battleCity::getWorldBox(const Object& ptrObject)
 {
-    Box tempBox = getWorldBox(ptrObject, ptrObject.getPosition());
+    Box tempBox = getWorldBox(ptrObject, ptrObject.GetPosition());
     return tempBox;
 }
 

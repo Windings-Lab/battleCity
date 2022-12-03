@@ -13,13 +13,13 @@ battleCity::PowerUp::PowerUp()
 	indexY = WM.GetPowerUpPositions()[rnd][1];
 	initPosition(Vector(indexX, indexY));
 
-	health = 1;
-	constSpeed = 0;
-	bulletCount = 0;
-	solidness = Solidness::Soft;
+	mHealth = 1;
+	mConstSpeed = 0;
+	mBulletCount = 0;
+	mSolidness = Solidness::Soft;
 
 	spriteDB = &SPR.getPowerUpSprites();
-	spriteSet(nullptr, 0);
+	SpriteSet(nullptr, 0);
 }
 
 battleCity::PowerUp::PowerUp(int giveHealth)
@@ -31,26 +31,26 @@ battleCity::PowerUp::PowerUp(int giveHealth)
 	indexY = WM.GetPowerUpPositions()[rnd][1];
 	initPosition(Vector(indexX, indexY));
 
-	health = giveHealth;
-	constSpeed = 0;
-	bulletCount = 0;
-	solidness = Solidness::Soft;
+	mHealth = giveHealth;
+	mConstSpeed = 0;
+	mBulletCount = 0;
+	mSolidness = Solidness::Soft;
 
 	spriteDB = &SPR.getPowerUpSprites();
-	spriteSet(nullptr, 0);
+	SpriteSet(nullptr, 0);
 }
 
-void battleCity::PowerUp::draw()
+void battleCity::PowerUp::Draw()
 {
-	drawSprite(sprite, (int)position.X, (int)position.Y);
+	drawSprite(mSprite, (int)mPosition.X, (int)mPosition.Y);
 }
 
 void battleCity::PowerUp::makePowerUp(EventCollision& collisionEvent)
 {
 	auto& collisionObj = collisionEvent.GetObjectRef();
-	if	(collisionObj.getType() == Type::TankPlayer)
+	if	(collisionObj.GetType() == Type::TankPlayer)
 	{
-		collisionObj.setHealth(health);
+		collisionObj.SetHealth(mHealth);
 		WM.MarkForDelete(mID);
 		WM.SetPowerUpisTakedToTrue();
 	}
