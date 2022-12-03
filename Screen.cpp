@@ -10,19 +10,18 @@ namespace battleCity
 
 	void Screen::Set(int width, int height, bool fullscreenMode)
 	{
-		mWidth = width;
-		mHeight = height;
+		mScreenBounds = AABB(width, height);
 		mFullscreen = fullscreenMode;
 	}
 
 	int Screen::GetWidth() const
 	{
-		return mWidth;
+		return mScreenBounds.GetWidth();
 	}
 
 	int Screen::GetHeight() const
 	{
-		return mHeight;
+		return mScreenBounds.GetHeight();
 	}
 
 	bool Screen::GetFullscreen() const

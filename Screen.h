@@ -1,5 +1,7 @@
 #pragma once
 
+#include "AABB.h"
+
 namespace battleCity
 {
 	class Screen
@@ -23,8 +25,7 @@ namespace battleCity
 
 	private:
 		Screen() = default;
-		int mWidth;
-		int mHeight;
+		AABB mScreenBounds;
 		bool mFullscreen;
 	};
 
