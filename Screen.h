@@ -15,14 +15,14 @@ namespace battleCity
 
 		~Screen() = default;
 
-		unsigned int GetWidth();
-		unsigned int GetHeight();
-		bool GetFullscreen();
+		int GetWidth() const;
+		int GetHeight() const;
+		bool GetFullscreen() const;
 
 		void Set(int width, int height, bool fullscreenMode);
 
 	private:
-		Screen();
+		Screen() = default;
 		int mWidth;
 		int mHeight;
 		bool mFullscreen;
