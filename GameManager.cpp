@@ -40,6 +40,7 @@ namespace battleCity
 
 	void GameManager::StartUp()
 	{
+		SpriteInit();
 		mGameOver = false;
 	}
 

@@ -1,124 +1,10 @@
-#include "Object.h"
-#include "Tank.h"
-#include "TankPlayer.h"
-#include "EventKeyboard.h"
-#include "EventMouse.h"
+#include "FrameworkWrapper.h"
 #include "Screen.h"
-#include "Framework.h"
-#include "GameManager.h"
-#include "WorldManager.h"
 
 #include <iostream>
-#include <vector>
-#include <string>
 #include <sstream>
-#include <memory>
-
-using namespace battleCity;
-
-class MyFramework : public Framework
-{
-	void StartAllManagers()
-	{
-		GM.StartUp();
-		WM.StartUp();
-	}
-
-	void ShutDownAllManagers()
-	{
-		GM.ShutDown();
-		SPR.deleteAll();
-		WM.ShutDown();
-	}
-public:
-	MyFramework()
-	{
-
-	}
-	virtual void PreInit(int& width, int& height, bool& fullscreen)
-	{
-		width = SCR.getWidth();
-		height = SCR.getHeight();
-		fullscreen = SCR.getFullscreen();
-	}
-
-	virtual bool Init()
-	{
-		GM.SpriteInit();
-
-		std::unique_ptr<Object> player = std::make_unique<TankPlayer>(0, 0);
-		mPlayer = dynamic_cast<TankPlayer*>(player.get());
-
-		WM.SetPlayerID(player->GetID());
-		WM.InsertObject(player);
-
-		StartAllManagers();
-		return true;
-	}
-
-	virtual void Close()
-	{
-		ShutDownAllManagers();
-	}
-
-	virtual bool Tick()
-	{
-		GM.Update();
-		return GM.GetGameOver();
-	}
-
-	virtual void onMouseMove(int x, int y, int xrelative, int yrelative)
-	{
-		mEventMouse.SetMousePosition({ static_cast<float>(x), static_cast<float>(y) });
-	}
-
-	virtual void onMouseButtonClick(FRMouseButton button, bool isReleased)
-	{
-		if (mPlayer->GetHealth() > 0)
-		{
-			mEventMouse.SetMouseButton(button);
-			mEventMouse.SetMouseAction(isReleased);
-			mPlayer->EventHandler(mEventMouse);
-		}
-	}
-
-	virtual void onKeyPressed(FRKey k)
-	{
-		if (mPlayer->GetHealth() > 0)
-		{
-			mEventKeyboard.SetKey(k);
-			mEventKeyboard.SetKeyboardAction(EventKeyboardAction::KEY_PRESSED);
-			mPlayer->movementSet(k);
-			mPlayer->EventHandler(mEventKeyboard);
-		}
-	}
-
-	virtual void onKeyReleased(FRKey k)
-	{
-		if (mPlayer->GetHealth() > 0)
-		{
-			mEventKeyboard.SetKey(k);
-			mEventKeyboard.SetKeyboardAction(EventKeyboardAction::KEY_RELEASED);
-			mPlayer->movementErase(k);
-			mPlayer->EventHandler(mEventKeyboard);
-		}
-	}
-
-	virtual const char* GetTitle() override
-	{
-		return "Tanks";
-	}
-
-	~MyFramework()
-	{
-		std::cout << "MyFramework Destructor" << std::endl;
-	}
-	private:
-		TankPlayer* mPlayer;
-
-		EventKeyboard mEventKeyboard;
-		EventMouse mEventMouse;
-};
+#include <string>
+#include <vector>
 
 static void show_usage(std::string name)
 {
@@ -187,7 +73,7 @@ int main(int argc, char *argv[])
 	srand(time(nullptr));
 	Screen::set(width, height, fullScreen);
 	// I don't know how to deallocate 'MyFramework' in this framework
-	return run(new MyFramework);
+	return run(new battleCity::FrameworkWrapper());
 }
 
 // ---> ^ X
