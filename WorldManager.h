@@ -3,7 +3,6 @@
 #include <unordered_set>
 
 #include "Manager.h"
-#include "Vector.h"
 #include "Object.h"
 #include "ObjectList.h"
 
