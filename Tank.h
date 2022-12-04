@@ -1,30 +1,20 @@
 #pragma once
 
-#include "Object.h"
 #include "Event.h"
-#include "EventCollision.h"
+#include "Object.h"
 
 namespace battleCity
 {
-	class Tank : public Object
+	class Tank final : public Object
 	{
-	private:
-		int change;
 	public:
 		Tank();
-		Tank(float x, float y);
-		~Tank();
 
 		void Update() override;
 		void Draw() override;
-		void fire();
-		void move(float x, float y);
 
-		void pathFind();
-		void pathFind(EventCollision& collisionEvent);
+		void Fire();
 
-		void randomMove();
-
-		int EventHandler(Event& event) override;
+		void EventHandler(Event& event) override;
 	};
 }

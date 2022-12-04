@@ -49,12 +49,6 @@ namespace battleCity
 		int GetPlayerID() const;
 		void SetPlayerHealthToZero() const;
 
-		void IncrementTankCount(int count);
-		int GetTankCount();
-
-		void IncrementKillCount(int newKillCount = 1);
-		int GetKillCount();
-
 		std::vector<std::vector<int>>& GetWorldMap();
 		std::vector<std::vector<int>>& GetPowerUpPositions();
 

@@ -1,25 +1,24 @@
 #include "WorldManager.h"
+
+#include "EventCollision.h"
+#include "EventOutOfWorld.h"
+#include "GameManager.h"
 #include "Object.h"
 #include "PhoenixAndFlag.h"
-#include "Tank.h"
-#include "Utility.h"
 #include "Screen.h"
+#include "Sprites.h"
+#include "Tank.h"
+#include "TankPlayer.h"
+#include "Utility.h"
 #include "Wall.h"
-#include "EventOutOfWorld.h"
-#include "EventCollision.h"
-#include "PowerUp.h"
-#include "Vector.h"
-#include "Box.h"
 
-#include <vector>
 #include <fstream>
 #include <iostream>
 #include <memory>
 #include <unordered_set>
+#include <vector>
 
-#include "GameManager.h"
-#include "Sprites.h"
-#include "TankPlayer.h"
+
 
 using namespace std::string_view_literals;
 
@@ -65,32 +64,12 @@ namespace battleCity
 		mWorldList.Clear();
 	}
 
-	void WorldManager::IncrementTankCount(int count)
-	{
-		mTankCount += count;
-	}
-
-	int WorldManager::GetTankCount()
-	{
-		return mTankCount;
-	}
-
-	void WorldManager::IncrementKillCount(int newKillCount)
-	{
-		mKillCount += newKillCount;
-	}
-
-	int WorldManager::GetKillCount()
-	{
-		return mKillCount;
-	}
-
 	void WorldManager::InsertObject(std::unique_ptr<Object>& objPtr)
 	{
-		if (objPtr->IsMovable())
-		{
-			mObjectIDsToMove.insert(objPtr->GetID());
-		}
+		// if (objPtr->IsMovable())
+		// {
+		// 	mObjectIDsToMove.insert(objPtr->GetID());
+		// }
 
 		mWorldList.Insert(objPtr);
 	}
