@@ -1,7 +1,7 @@
 #include "PowerUp.h"
 #include "EventCollision.h"
 
-namespace battleCity
+namespace BattleCity
 {
 	PowerUp::PowerUp() : Object(Type::PowerUp)
 	{

@@ -1,6 +1,6 @@
 #include "Wall.h"
 
-namespace battleCity
+namespace BattleCity
 {
 	Wall::Wall() : Object(Type::Wall)
 	{

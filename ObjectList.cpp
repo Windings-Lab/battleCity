@@ -4,7 +4,7 @@
 #include <iostream>
 #include <utility>
 
-namespace battleCity
+namespace BattleCity
 {
 	ObjectList::ObjectList() : mList(100)
 	{

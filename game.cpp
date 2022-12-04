@@ -80,9 +80,9 @@ int main(int argc, char* argv[])
 	}
 
 	srand(time(nullptr));
-	battleCity::SCR.Set(width, height, fullScreen);
+	BattleCity::SCR.Set(width, height, fullScreen);
 
-	auto framework = std::make_unique<battleCity::FrameworkWrapper>();
+	auto framework = std::make_unique<BattleCity::FrameworkWrapper>();
 
 	return run(framework.get());
 }

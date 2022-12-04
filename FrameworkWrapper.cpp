@@ -4,7 +4,7 @@
 #include "Screen.h"
 #include "WorldManager.h"
 
-namespace battleCity
+namespace BattleCity
 {
 	void FrameworkWrapper::PreInit(int& width, int& height, bool& fullscreen)
 	{

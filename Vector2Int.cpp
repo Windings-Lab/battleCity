@@ -1,6 +1,6 @@
 #include "Vector2Int.h"
 
-namespace battleCity
+namespace BattleCity
 {
     Vector2Int Vector2Int::Zero()
     {

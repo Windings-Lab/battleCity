@@ -5,7 +5,7 @@
 #include "Vector2Int.h"
 #include "Rectangle.h"
 
-namespace battleCity
+namespace BattleCity
 {
 	class Object
 	{

@@ -1,7 +1,7 @@
 #include "EventStep.h"
 #include "GameManager.h"
 
-namespace battleCity
+namespace BattleCity
 {
 	EventStep::EventStep() : mStepCount()
 	{

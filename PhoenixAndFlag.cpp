@@ -1,6 +1,6 @@
 #include "PhoenixAndFlag.h"
 
-namespace battleCity
+namespace BattleCity
 {
 	PhoenixAndFlag::PhoenixAndFlag(float x, float y) : Object(Type::PhoenixAndFlag)
 	{

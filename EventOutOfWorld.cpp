@@ -1,6 +1,6 @@
 #include "EventOutOfWorld.h"
 
-battleCity::EventOutOfWorld::EventOutOfWorld()
+BattleCity::EventOutOfWorld::EventOutOfWorld()
 {
 	SetType(EventType::Out);
 }

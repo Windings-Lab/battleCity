@@ -3,7 +3,7 @@
 #include <algorithm>
 #include <cmath>
 
-namespace battleCity
+namespace BattleCity
 {
 	Rectangle::Rectangle() : Rectangle(Vector2Int::Zero())
 	{

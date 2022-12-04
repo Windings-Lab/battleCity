@@ -2,7 +2,7 @@
 
 #include "TankPlayer.h"
 
-namespace battleCity
+namespace BattleCity::Manager
 {
 	WorldManager& WorldManager::GetInstance()
 	{
@@ -48,7 +48,7 @@ namespace battleCity
 	}
 	void WorldManager::RemoveObject(int objID)
 	{
-		mObjectsToMove.erase(objID);
+		mMovableObjects.erase(objID);
 		mWorldList.Remove(objID);
 	}
 	void WorldManager::MarkForDelete(int objID)
@@ -56,9 +56,9 @@ namespace battleCity
 		mObjectsToDelete.insert(objID);
 	}
 
-	const std::unordered_set<int>& WorldManager::GetObjectsToMove() const
+	const std::unordered_set<int>& WorldManager::GetMovableObjects() const
 	{
-		return mObjectsToMove;
+		return mMovableObjects;
 	}
 	std::unordered_set<int> WorldManager::GetObjectsOfType(Object::Type type) const
 	{

@@ -2,7 +2,7 @@
 
 #include "WorldManager.h"
 
-namespace battleCity
+namespace BattleCity::Manager
 {
 	GameManager::GameManager() : Manager(ManagerType::Game), mGameOver(false), mGameOverState(false)
 	{}

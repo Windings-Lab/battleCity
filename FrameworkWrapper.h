@@ -2,7 +2,7 @@
 
 #include "Framework.h"
 
-namespace battleCity
+namespace BattleCity
 {
 	class TankPlayer;
 

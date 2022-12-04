@@ -3,7 +3,7 @@
 #include "WorldManager.h"
 
 
-namespace battleCity
+namespace BattleCity
 {
 	EventCollision::EventCollision(int objectID, int colliderID, Vector2Int collisionPos)
 		: mCollisionPos(std::move(collisionPos)), mObjectID(objectID), mColliderID(colliderID)

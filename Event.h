@@ -1,6 +1,6 @@
 #pragma once
 
-namespace battleCity
+namespace BattleCity
 {
 	enum class EventType
 	{

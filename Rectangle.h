@@ -2,7 +2,7 @@
 
 #include "Vector2Int.h"
 
-namespace battleCity
+namespace BattleCity
 {
 	// Create Rectangle at World position
 	class Rectangle

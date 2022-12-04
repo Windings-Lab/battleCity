@@ -5,7 +5,7 @@
 
 #include "Object.h"
 
-namespace battleCity
+namespace BattleCity
 {
 	class ObjectList
 	{

@@ -3,7 +3,7 @@
 #include "Event.h"
 #include "Tank.h"
 
-namespace battleCity
+namespace BattleCity
 {
 	class TankPlayer final : public Tank
 	{

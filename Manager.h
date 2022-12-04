@@ -1,8 +1,6 @@
 #pragma once
 
-#include "Event.h"
-
-namespace battleCity
+namespace BattleCity::Manager
 {
 	enum class ManagerType
 	{

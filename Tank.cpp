@@ -6,7 +6,7 @@
 
 #include <memory>
 
-namespace battleCity
+namespace BattleCity
 {
 	Tank::Tank(Type type) : Object(type) {	}
 

@@ -3,7 +3,7 @@
 #include "GameManager.h"
 #include "WorldManager.h"
 
-namespace battleCity
+namespace BattleCity
 {
 	Bullet::Bullet(Type ownerType) : Object(Type::Bullet), mOwnerType(ownerType)
 	{

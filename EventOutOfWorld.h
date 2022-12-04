@@ -2,7 +2,7 @@
 
 #include "Event.h"
 
-namespace battleCity
+namespace BattleCity
 {
 	class EventOutOfWorld : public Event
 	{

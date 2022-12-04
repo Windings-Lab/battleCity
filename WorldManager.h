@@ -7,7 +7,7 @@
 #include "Object.h"
 #include "ObjectList.h"
 
-namespace battleCity
+namespace BattleCity::Manager
 {
 	class WorldManager final : public Manager
 	{

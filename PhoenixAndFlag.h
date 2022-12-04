@@ -4,7 +4,7 @@
 #include "EventCollision.h"
 #include "Object.h"
 
-namespace battleCity
+namespace BattleCity
 {
 	class PhoenixAndFlag final : public Object
 	{

@@ -2,7 +2,7 @@
 #include "EventStep.h"
 #include "WorldManager.h"
 
-namespace battleCity
+namespace BattleCity
 {
     Explosion::Explosion(bool isLarge) : Object(Type::Explosion)
     {

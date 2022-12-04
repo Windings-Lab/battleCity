@@ -2,7 +2,7 @@
 
 #include <cstdlib>
 
-namespace battleCity
+namespace BattleCity
 {
 	int RandomNumber(int start, int end)
 	{

@@ -4,7 +4,7 @@
 
 #include "Vector2Int.h"
 
-namespace battleCity
+namespace BattleCity
 {
     int Object::IDCounter = 1;
 

@@ -3,7 +3,7 @@
 #include "Event.h"
 #include "Object.h"
 
-namespace battleCity
+namespace BattleCity
 {
     class Explosion final : public Object
     {

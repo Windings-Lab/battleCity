@@ -1,6 +1,6 @@
 #include "Manager.h"
 
-namespace battleCity
+namespace BattleCity::Manager
 {
 	Manager::Manager(ManagerType type) : mType(type) {}
 	Manager::~Manager() {}

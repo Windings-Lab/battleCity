@@ -2,7 +2,7 @@
 
 #include "Manager.h"
 
-namespace battleCity
+namespace BattleCity::Manager
 {
 	class GameManager final : Manager
 	{
