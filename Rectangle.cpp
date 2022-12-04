@@ -2,57 +2,26 @@
 
 namespace battleCity
 {
-	Rectangle::Rectangle() : Rectangle(Vector2Int::Zero())
+	Rectangle::Rectangle() : Rectangle(0, 0) {}
+	Rectangle::Rectangle(int x, int y) : Rectangle(x, y, 16, 16) {}
+	Rectangle::Rectangle(int x, int y, int width, int height) : mX(x), mY(y), mW(width), mH(height)
+	{}
+
+	int Rectangle::X() const
 	{
+		return mX;
 	}
-	Rectangle::Rectangle(Vector2Int position) : Rectangle(16, 16, position)
+	int Rectangle::Y() const
 	{
-	}
-	Rectangle::Rectangle(int width, int height) : Rectangle(0, width, 0, height)
-	{
-	}
-	Rectangle::Rectangle(int width, int height, Vector2Int position)
-		: Rectangle(position.X, width, position.Y, height)
-	{
-	}
-	Rectangle::Rectangle(int xMin, int xMax, int yMin, int yMax)
-	{
-		mPosition = Vector2Int(xMin, yMin);
-		mSize = Vector2Int(xMax, yMax);
+		return mY;
 	}
 
-	void Rectangle::SetPosition(Vector2Int position)
+	int Rectangle::W() const
 	{
-		mPosition = position;
+		return mW;
 	}
-	Vector2Int Rectangle::GetPosition() const
+	int Rectangle::H() const
 	{
-		return mPosition;
-	}
-	int Rectangle::GetX() const
-	{
-		return mPosition.X;
-	}
-	int Rectangle::GetY() const
-	{
-		return mPosition.Y;
-	}
-
-	void Rectangle::SetSize(Vector2Int size)
-	{
-		mSize = size;
-	}
-
-	Vector2Int Rectangle::GetSize() const
-	{
-		return mSize;
-	}
-	int Rectangle::GetWidth() const
-	{
-		return mSize.X;
-	}
-	int Rectangle::GetHeight() const
-	{
-		return mSize.Y;
+		return mH;
 	}
 }

@@ -16,12 +16,12 @@ namespace battleCity
 
 	int Screen::GetWidth() const
 	{
-		return mScreenBounds.GetWidth();
+		return mScreenBounds.W();
 	}
 
 	int Screen::GetHeight() const
 	{
-		return mScreenBounds.GetHeight();
+		return mScreenBounds.H();
 	}
 
 	bool Screen::GetFullscreen() const
