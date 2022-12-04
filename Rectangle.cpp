@@ -1,32 +1,61 @@
 #include "Rectangle.h"
 
+#include <algorithm>
+
 namespace battleCity
 {
-	Rectangle::Rectangle() : Rectangle(0, 0) {}
-	Rectangle::Rectangle(int x, int y) : Rectangle(x, y, 16, 16) {}
-	Rectangle::Rectangle(int x, int y, int width, int height) : mX(x), mY(y), mW(width), mH(height)
-	{}
+	Rectangle::Rectangle() : Rectangle(Vector2Int::Zero())
+	{
+	}
+	Rectangle::Rectangle(Vector2Int position) : Rectangle(16, 16, std::move(position))
+	{
+	}
+	Rectangle::Rectangle(int width, int height) : Rectangle(0, width, 0, height)
+	{
+	}
+	Rectangle::Rectangle(int width, int height, Vector2Int position)
+		: Rectangle(position.mX, width, position.mY, height)
+	{
+	}
+	Rectangle::Rectangle(int xMin, int xMax, int yMin, int yMax)
+	{
+		mPosition = Vector2Int(xMin, yMin);
+		mSize = Vector2Int(xMax, yMax);
+	}
 
 	void Rectangle::SetPosition(int x, int y)
 	{
-		mX = x;
-		mY = y;
+		mPosition.SetX(x);
+		mPosition.SetY(y);
 	}
-	int Rectangle::X() const
+	const Vector2Int& Rectangle::GetPosition() const
 	{
-		return mX;
+		return mPosition;
 	}
-	int Rectangle::Y() const
+	const int& Rectangle::X() const
 	{
-		return mY;
+		return mPosition.X();
+	}
+	const int& Rectangle::Y() const
+	{
+		return mPosition.Y();
 	}
 
-	int Rectangle::W() const
+	void Rectangle::SetSize(int width, int height)
 	{
-		return mW;
+		mSize.SetX(width);
+		mSize.SetY(height);
 	}
-	int Rectangle::H() const
+	const Vector2Int& Rectangle::GetSize() const
 	{
-		return mH;
+		return mSize;
+	}
+	const int& Rectangle::W() const
+	{
+		return mSize.X();
+	}
+	const int& Rectangle::H() const
+	{
+		return mSize.Y();
 	}
 }

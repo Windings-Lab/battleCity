@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Vector2Int.h"
+
 namespace battleCity
 {
 	// Create Rectangle at World position
@@ -12,19 +14,35 @@ namespace battleCity
 		Rectangle();
 		// Width		= 16
 		// Height		= 16
-		// Position		= (x, y)
-		Rectangle(int x, int y);
-		Rectangle(int x, int y, int width, int height);
+		// Position		= position
+		Rectangle(Vector2Int position);
+		// Width		= width
+		// Height		= height
+		// Position		= (0, 0)
+		Rectangle(int width, int height);
+		Rectangle(int width, int height, Vector2Int position);
+		Rectangle(int xMin, int xMax, int yMin, int yMax);
+
+		Rectangle(Rectangle&&) = default;
+		Rectangle& operator=(Rectangle&&) = default;
+
+		Rectangle(const Rectangle&) = delete;
+		Rectangle& operator=(const Rectangle&) = delete;
+
+		~Rectangle() = default;
 
 		void SetPosition(int x, int y);
-		int X() const;
-		int Y() const;
+		const Vector2Int& GetPosition() const;
+		const int& X() const;
+		const int& Y() const;
 
-		int W() const;
-		int H() const;
+		void SetSize(int width, int height);
+		const Vector2Int& GetSize() const;
+		const int& W() const;
+		const int& H() const;
 
 	private:
-		int mX, mY;
-		int mW, mH;
+		Vector2Int mPosition;
+		Vector2Int mSize;
 	};
 }
