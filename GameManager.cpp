@@ -1,10 +1,6 @@
 #include "GameManager.h"
+
 #include "WorldManager.h"
-#include "TankPlayer.h"
-#include "EventStep.h"
-#include "Clock.h"
-#include "Sprites.h"
-#include "Framework.h"
 
 namespace battleCity
 {
@@ -18,7 +14,6 @@ namespace battleCity
 	void GameManager::SetGameOverState()
 	{
 		SetCustomStepCount(0);
-		WM.SetPlayerHealthToZero();
 		mGameOverState = true;
 	}
 
@@ -33,14 +28,8 @@ namespace battleCity
 		return single;
 	}
 
-	int GameManager::SpriteInit()
-	{
-		return SPR.initAll();
-	}
-
 	void GameManager::StartUp()
 	{
-		SpriteInit();
 		mGameOver = false;
 	}
 
@@ -61,9 +50,7 @@ namespace battleCity
 	void GameManager::Update()
 	{
 		mClock.delta();
-		EventStep eventStep;
-		SendEvent(eventStep);
-		WM.Update();
+		WM.Step();
 		WM.Draw();
 		mFrameTime = getTickCount() / 1000;
 		mStepCount++;

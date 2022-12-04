@@ -1,7 +1,5 @@
 #pragma once
 
-#include "EventKeyboard.h"
-#include "EventMouse.h"
 #include "Framework.h"
 
 namespace battleCity
@@ -40,8 +38,5 @@ namespace battleCity
 		void ShutDownAllManagers();
 
 		TankPlayer* mPlayer;
-
-		EventKeyboard mEventKeyboard;
-		EventMouse mEventMouse;
 	};
 }

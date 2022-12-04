@@ -1,7 +1,8 @@
 #pragma once
-#include "Object.h"
+
 #include "Event.h"
 #include "EventCollision.h"
+#include "Object.h"
 
 namespace battleCity
 {

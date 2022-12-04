@@ -7,8 +7,11 @@ namespace battleCity
     {
     public:
         Wall();
+        ~Wall() override = default;
 
         void Update() override;
+
+        void EventHandler(Event& ptrEvent) override;
     };
 }
 

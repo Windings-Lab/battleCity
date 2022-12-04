@@ -23,6 +23,8 @@ namespace battleCity
 
 		void Update() override;
 
+		void Fire() override;
+
 		void EventHandler(Event& event) override;
 	};
 }

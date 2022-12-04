@@ -1,5 +1,6 @@
 #pragma once
 
+#include <memory>
 #include <unordered_set>
 
 #include "Manager.h"
@@ -8,12 +9,12 @@
 
 namespace battleCity
 {
-	class WorldManager final : Manager
+	class WorldManager final : public Manager
 	{
-	private:
-		void InitMap();
-		void CreateSomeTanks();
 	public:
+		// Singleton
+		static WorldManager& GetInstance();
+
 		WorldManager(WorldManager&&) = delete;
 		WorldManager(const WorldManager&) = delete;
 
@@ -22,66 +23,31 @@ namespace battleCity
 
 		~WorldManager() override = default;
 
-		// Singleton
-		static WorldManager& GetInstance();
-
 		void StartUp() override;
 		void ShutDown() override;
 
-		// Update world.
-		void Update();
-
-		// Draw all Objects
+		void Step();
 		void Draw();
-		void DrawBackground();
 
 		void InsertObject(std::unique_ptr<Object>& objPtr);
 		void RemoveObject(int objID);
-		// Indicate Object is to be deleted at end of current game loop.
 		void MarkForDelete(int objID);
 
-		const ObjectList& GetAllObjects() const;
 		std::unordered_set<int> GetObjectsToMove() const;
-		std::unordered_set<int> GetObjectsOfType(Object::ObjectType type) const;
-		int GetObjectCount() const;
-
-		void SetPlayerID(int playerID);
-		int GetPlayerID() const;
-		void SetPlayerHealthToZero() const;
-
-		std::vector<std::vector<int>>& GetWorldMap();
-		std::vector<std::vector<int>>& GetPowerUpPositions();
-
-		void MoveObject(Object& movableObj, Vector where);
-		// Return list of Objects collided with at some position
-		std::unordered_set<int> GetCollisions(const Object& ptrObject, Vector where) const;
+		std::unordered_set<int> GetObjectsOfType(Object::Type type) const;
 	private:
 		// Singleton
 		WorldManager();
 
-		std::vector<std::vector<int>> mMap;
-		std::vector<std::vector<int>> mPowerUpPositions;
-
 		// All Objects in game world
 		ObjectList mWorldList;
 		// Objects, that need to update every loop step
-		std::unordered_set<int> mObjectIDsToMove;
+		std::unordered_set<int> mObjectsToMove;
 		// List of all Objects to delete.
-		std::unordered_set<int> mObjectIDsToDelete;
-
-		Vector mGameOverPos;
-		Sprite* mGameOverSpr;
+		std::unordered_set<int> mObjectsToDelete;
 
 		int mPlayerID;
-		int mTankCount;
-		int mTankStorage;
-		int mKillCount;
-
-		int mPowerUpID;
-		bool mIsPowerUp;
-		bool mPowerUpTaked;
 	};
 
 	inline WorldManager& WM = WorldManager::GetInstance();
 }
-

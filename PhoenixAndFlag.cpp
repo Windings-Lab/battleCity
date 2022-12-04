@@ -6,13 +6,12 @@ namespace battleCity
 	{
 	}
 
-
-	void PhoenixAndFlag::Draw()
+	void PhoenixAndFlag::OnHit(EventCollision& collisionEvent)
 	{
-		// drawSprite(mSprite, (int)mPosition.X, (int)mPosition.Y);
+
 	}
 
-	void PhoenixAndFlag::OnHit(EventCollision& collisionEvent)
+	void PhoenixAndFlag::Update()
 	{
 
 	}

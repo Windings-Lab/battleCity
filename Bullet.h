@@ -1,4 +1,5 @@
 #pragma once
+
 #include "Event.h"
 #include "EventCollision.h"
 #include "Object.h"
@@ -20,7 +21,7 @@ namespace battleCity
 
         void Update() override;
 
-        void EventHandler(Event& event) override;
+        void EventHandler(Event& myEvent) override;
     private:
         void OutOfWorld();
         void Hit(EventCollision collisionEvent);

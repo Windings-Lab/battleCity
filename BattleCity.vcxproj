@@ -23,8 +23,6 @@
     <ClCompile Include="Clock.cpp" />
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="EventCollision.cpp" />
-    <ClCompile Include="EventKeyboard.cpp" />
-    <ClCompile Include="EventMouse.cpp" />
     <ClCompile Include="EventOutOfWorld.cpp" />
     <ClCompile Include="EventStep.cpp" />
     <ClCompile Include="Explosion.cpp" />
@@ -38,11 +36,9 @@
     <ClCompile Include="PowerUp.cpp" />
     <ClCompile Include="Rectangle.cpp" />
     <ClCompile Include="Screen.cpp" />
-    <ClCompile Include="Sprites.cpp" />
     <ClCompile Include="Vector2Int.cpp" />
     <ClCompile Include="Tank.cpp" />
     <ClCompile Include="TankPlayer.cpp" />
-    <ClCompile Include="Utility.cpp" />
     <ClCompile Include="Wall.cpp" />
     <ClCompile Include="WorldManager.cpp" />
   </ItemGroup>
@@ -51,8 +47,6 @@
     <ClInclude Include="Clock.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="EventCollision.h" />
-    <ClInclude Include="EventKeyboard.h" />
-    <ClInclude Include="EventMouse.h" />
     <ClInclude Include="EventOutOfWorld.h" />
     <ClInclude Include="EventStep.h" />
     <ClInclude Include="Explosion.h" />
