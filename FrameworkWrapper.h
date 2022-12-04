@@ -1,17 +1,13 @@
 #pragma once
 
-#include "EventKeyboard.h"
-#include "EventMouse.h"
 #include "Framework.h"
 
 namespace battleCity
 {
-	class TankPlayer;
-
 	class FrameworkWrapper final : public Framework
 	{
 	public:
-		FrameworkWrapper() : mPlayer(nullptr) {}
+		FrameworkWrapper() {}
 
 		FrameworkWrapper(const FrameworkWrapper&) = delete;
 		FrameworkWrapper(FrameworkWrapper&&) = delete;
@@ -21,27 +17,22 @@ namespace battleCity
 
 		~FrameworkWrapper() override = default;
 
-		void PreInit(int& width, int& height, bool& fullscreen) override;
-		bool Init() override;
-		void Close() override;
+		virtual void PreInit(int& width, int& height, bool& fullscreen);
+		virtual bool Init();
+		virtual void Close();
 
-		bool Tick() override;
+		virtual bool Tick();
 
-		const char* GetTitle() override;
+		virtual const char* GetTitle();
 
-		void onKeyPressed(FRKey k) override;
-		void onKeyReleased(FRKey k) override;
+		virtual void onKeyPressed(FRKey k);
+		virtual void onKeyReleased(FRKey k);
 
-		void onMouseMove(int x, int y, int xrelative, int yrelative) override;
-		void onMouseButtonClick(FRMouseButton button, bool isReleased) override;
+		virtual void onMouseMove(int x, int y, int xrelative, int yrelative);
+		virtual void onMouseButtonClick(FRMouseButton button, bool isReleased);
 
 	private:
 		void StartAllManagers();
 		void ShutDownAllManagers();
-
-		TankPlayer* mPlayer;
-
-		EventKeyboard mEventKeyboard;
-		EventMouse mEventMouse;
 	};
 }
