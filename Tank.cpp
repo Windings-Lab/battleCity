@@ -8,29 +8,7 @@
 
 namespace battleCity
 {
-	Tank::Tank() : Object(Type::Tank)
-	{
-	}
-
-	void Tank::Draw()
-	{
-		// drawSprite(mSprite, (int)mPosition.X, (int)mPosition.Y);
-	}
-
-	void Tank::Fire()
-	{
-		// if (mBulletCount != 0)
-		// {
-		// 	std::unique_ptr<Object> bullet = std::make_unique<Bullet>(ObjectType);
-		// 	WM.InsertObject(bullet);
-		// 	mBulletCount--;
-		// }
-	}
-
-	void Tank::EventHandler(Event& event)
-	{
-
-	}
+	Tank::Tank(Type type) : Object(type) {	}
 
 	Tank::~Tank()
 	{

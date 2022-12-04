@@ -1,20 +1,15 @@
 #pragma once
 
-#include "Event.h"
 #include "Object.h"
 
 namespace battleCity
 {
-	class Tank final : public Object
+	class Tank : public Object
 	{
 	public:
-		Tank();
+		Tank(Type);
+		~Tank() override;
 
-		void Update() override;
-		void Draw() override;
-
-		void Fire();
-
-		void EventHandler(Event& event) override;
+		virtual void Fire() = 0;
 	};
 }

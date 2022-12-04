@@ -1,14 +1,11 @@
 #pragma once
 
-#include <vector>
-
-#include "Object.h"
 #include "Event.h"
-#include "EventMouse.h"
+#include "Tank.h"
 
 namespace battleCity
 {
-	class TankPlayer : public Object
+	class TankPlayer final : public Tank
 	{
 		// Do not use int(4) since framework using it for another purpose
 		// Look at FRKey
@@ -22,22 +19,11 @@ namespace battleCity
 		};
 	public:
 		TankPlayer();
-		TankPlayer(float x, float y);
-		~TankPlayer();
-
-		void movementSet(FRKey direction);
-		void movementErase(FRKey direction);
+		~TankPlayer() override;
 
 		void Update() override;
 		void Draw() override;
-		void keyboardInput();
-		void mouseInput(EventMouse& mouseEvent);
-
-		void move(float x, float y);
-		void fire();
 
 		void EventHandler(Event& event) override;
-	private:
-		std::vector<MovementDirection> mMovement = { MovementDirection::Idle };
 	};
 }
