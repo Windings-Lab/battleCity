@@ -4,16 +4,17 @@
 
 namespace battleCity
 {
-    class Explosion : public Object
+    class Explosion final : public Object
     {
-    private:
-        void step();
-        int spriteIndex;
     public:
-        Explosion(bool isLarge);
+	    explicit Explosion(bool isLarge);
 
+        void Update() override;
         void Draw() override;
 
-        int EventHandler(Event& eventPtr) override;
+        void EventHandler(Event& eventPtr) override;
+
+    private:
+        void HandleAnimation();
     };
 }
