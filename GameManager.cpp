@@ -4,7 +4,8 @@
 
 namespace battleCity
 {
-	GameManager::GameManager() : Manager(ManagerType::Game) {}
+	GameManager::GameManager() : Manager(ManagerType::Game), mGameOver(false), mGameOverState(false)
+	{}
 
 	GameManager& GameManager::GetInstance()
 	{

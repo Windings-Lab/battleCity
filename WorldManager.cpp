@@ -4,15 +4,14 @@
 
 namespace battleCity
 {
-	WorldManager::WorldManager() : Manager(ManagerType::World)
-	{
-		mPlayerID = 0;
-	}
-
 	WorldManager& WorldManager::GetInstance()
 	{
 		static WorldManager single;
 		return single;
+	}
+	WorldManager::WorldManager() : Manager(ManagerType::World)
+	{
+		mPlayerID = 0;
 	}
 
 	void WorldManager::StartUp()
@@ -21,7 +20,6 @@ namespace battleCity
 		mPlayerID = player->ID;
 		WM.InsertObject(player);
 	}
-
 	void WorldManager::ShutDown()
 	{
 		mWorldList.Clear();
@@ -34,9 +32,13 @@ namespace battleCity
 		// Delete All
 		// Draw All
 	}
-
 	void WorldManager::Draw()
 	{
+	}
+
+	Object& WorldManager::GetObject(int id)
+	{
+		return mWorldList.GetObject(id);
 	}
 
 	void WorldManager::InsertObject(std::unique_ptr<Object>& objPtr)
@@ -44,18 +46,20 @@ namespace battleCity
 		// Insert Movable Objects
 		mWorldList.Insert(objPtr);
 	}
-
 	void WorldManager::RemoveObject(int objID)
 	{
 		mObjectsToMove.erase(objID);
 		mWorldList.Remove(objID);
+	}
+	void WorldManager::MarkForDelete(int objID)
+	{
+		mObjectsToDelete.insert(objID);
 	}
 
 	std::unordered_set<int> WorldManager::GetObjectsToMove() const
 	{
 		return mObjectsToMove;
 	}
-
 	std::unordered_set<int> WorldManager::GetObjectsOfType(Object::Type type) const
 	{
 		std::unordered_set<int> newList;
@@ -66,10 +70,5 @@ namespace battleCity
 		}
 
 		return newList;
-	}
-
-	void WorldManager::MarkForDelete(int objID)
-	{
-		mObjectsToDelete.insert(objID);
 	}
 }

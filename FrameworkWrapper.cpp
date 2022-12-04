@@ -2,7 +2,6 @@
 
 #include "GameManager.h"
 #include "Screen.h"
-#include "Sprites.h"
 #include "WorldManager.h"
 
 namespace battleCity

@@ -1,21 +1,6 @@
 #pragma once
 
-// Bonus for any found bugs in the framework!
-
 #define FRAMEWORK_API extern "C" __declspec(dllimport)
-
-// DEBUG 0		- Standart game
-// DEBUG 1		- Some position informations
-// DEBUG 2		- Destructor informations
-// DEBUG >= 1	- Creative game
-#define DEBUG 0
-
-// NewValue > FPS - game is slower
-// NewValue < FPS - game is faster
-#define FPS 13
-
-#define HEIGHT 32
-#define WIDTH 45
 
 class Sprite;
 
@@ -28,7 +13,6 @@ FRAMEWORK_API void destroySprite(Sprite* s);
 FRAMEWORK_API void drawTestBackground();
 FRAMEWORK_API void getScreenSize(int& w, int& h);
 
-// Get the number of milliseconds since library initialization.
 FRAMEWORK_API unsigned int getTickCount();
 FRAMEWORK_API void showCursor(bool bShow);
 

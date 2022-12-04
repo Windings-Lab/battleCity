@@ -1,27 +1,22 @@
 #pragma once
 
-#include <unordered_map>
 #include <memory>
+#include <unordered_map>
 
 #include "Object.h"
 
 namespace battleCity
 {
-	class TankPlayer;
-	class ObjectListIterator;
-	class Object;
-
 	class ObjectList
 	{
-	private:
-		struct Range;
-
-		std::unordered_map<int, std::unique_ptr<Object>> mList;
-
-		friend void swap(ObjectList&, ObjectList&) noexcept;
+		struct Range
+		{
+			std::unordered_map<int, std::unique_ptr<Object>>::const_iterator Begin;
+			std::unordered_map<int, std::unique_ptr<Object>>::const_iterator End;
+			std::unordered_map<int, std::unique_ptr<Object>>::const_iterator begin() { return Begin; }
+			std::unordered_map<int, std::unique_ptr<Object>>::const_iterator end() { return End; }
+		};
 	public:
-		friend class ObjectListIterator;
-
 		ObjectList();
 
 		ObjectList(ObjectList& cpy) = delete;
@@ -42,13 +37,9 @@ namespace battleCity
 
 		ObjectList& operator=(const ObjectList& rhs) = delete;
 		ObjectList& operator=(ObjectList&& rhs) noexcept;
-	};
+	private:
+		std::unordered_map<int, std::unique_ptr<Object>> mList;
 
-	struct ObjectList::Range
-	{
-		std::unordered_map<int, std::unique_ptr<Object>>::const_iterator Begin;
-		std::unordered_map<int, std::unique_ptr<Object>>::const_iterator End;
-		std::unordered_map<int, std::unique_ptr<Object>>::const_iterator begin() { return Begin; }
-		std::unordered_map<int, std::unique_ptr<Object>>::const_iterator end() { return End; }
+		friend void swap(ObjectList&, ObjectList&) noexcept;
 	};
 }

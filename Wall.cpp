@@ -10,4 +10,9 @@ namespace battleCity
 	{
 
 	}
+
+	void Wall::EventHandler(Event& ptrEvent)
+	{
+		
+	}
 }

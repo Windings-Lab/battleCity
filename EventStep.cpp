@@ -3,7 +3,7 @@
 
 namespace battleCity
 {
-	EventStep::EventStep() : mStepCount(GM.GetStepCount())
+	EventStep::EventStep() : mStepCount()
 	{
 		SetType(EventType::Step);
 	}

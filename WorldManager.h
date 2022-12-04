@@ -29,6 +29,8 @@ namespace battleCity
 		void Step();
 		void Draw();
 
+		Object& GetObject(int id);
+
 		void InsertObject(std::unique_ptr<Object>& objPtr);
 		void RemoveObject(int objID);
 		void MarkForDelete(int objID);
