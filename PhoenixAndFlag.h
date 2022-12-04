@@ -5,20 +5,17 @@
 
 namespace battleCity
 {
-	class PhoenixAndFlag : public Object
+	class PhoenixAndFlag final : public Object
 	{
-    private:
-        bool gameOver;
     public:
-        /*PhoenixAndFlag();*/
         PhoenixAndFlag(float x, float y);
-        ~PhoenixAndFlag();
 
+        void Update() override;
         void Draw() override;
 
-        void setGameOver(EventCollision& collisionEvent);
-
-        int EventHandler(Event& event) override;
+        void EventHandler(Event& event) override;
+	private:
+        void OnHit(EventCollision& collisionEvent);
 	};
 }
 
