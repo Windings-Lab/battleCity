@@ -56,7 +56,7 @@ namespace battleCity
 		mObjectsToDelete.insert(objID);
 	}
 
-	std::unordered_set<int> WorldManager::GetObjectsToMove() const
+	const std::unordered_set<int>& WorldManager::GetObjectsToMove() const
 	{
 		return mObjectsToMove;
 	}

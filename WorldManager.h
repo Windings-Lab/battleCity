@@ -35,7 +35,8 @@ namespace battleCity
 		void RemoveObject(int objID);
 		void MarkForDelete(int objID);
 
-		std::unordered_set<int> GetObjectsToMove() const;
+		const std::unordered_set<int>& GetMovableObjects() const;
+		// Expensive
 		std::unordered_set<int> GetObjectsOfType(Object::Type type) const;
 	private:
 		// Singleton
@@ -43,9 +44,9 @@ namespace battleCity
 
 		// All Objects in game world
 		ObjectList mWorldList;
-		// Objects, that need to update every loop step
-		std::unordered_set<int> mObjectsToMove;
-		// List of all Objects to delete.
+		// Objects, that needed to move every loop step
+		std::unordered_set<int> mMovableObjects;
+		// List of all Objects to delete in the end of loop step.
 		std::unordered_set<int> mObjectsToDelete;
 
 		int mPlayerID;
