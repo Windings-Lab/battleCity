@@ -66,8 +66,8 @@
     <ClCompile Include="Rectangle.cpp">
       <Filter>Source Files\Collision</Filter>
     </ClCompile>
-    <ClCompile Include="CollisionDetection.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Collision.cpp">
+      <Filter>Source Files\Collision</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -86,7 +86,7 @@
     <ClInclude Include="Rectangle.h">
       <Filter>Header Files\Collision</Filter>
     </ClInclude>
-    <ClInclude Include="CollisionDetection.h">
+    <ClInclude Include="Collision.h">
       <Filter>Header Files\Collision</Filter>
     </ClInclude>
   </ItemGroup>

@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CollisionDetection.cpp" />
+    <ClCompile Include="Collision.cpp" />
     <ClCompile Include="Rectangle.cpp" />
     <ClCompile Include="FrameworkWrapper.cpp" />
     <ClCompile Include="game.cpp" />
@@ -27,7 +27,7 @@
     <ClCompile Include="Vector2Int.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CollisionDetection.h" />
+    <ClInclude Include="Collision.h" />
     <ClInclude Include="Rectangle.h" />
     <ClInclude Include="Framework.h" />
     <ClInclude Include="FrameworkWrapper.h" />
