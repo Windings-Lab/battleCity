@@ -1,13 +1,16 @@
 #include "Object.h"
-#include "Vector.h"
+
+#include <algorithm>
+
+#include "Vector2Int.h"
 
 namespace battleCity
 {
     int Object::IDCounter = 1;
 
-    Object::Object() : ID(IDCounter++), ObjectType(Type::Error)
+    Object::Object(Type type) : ID(IDCounter++), ObjectType(type)
     {
-        mPosition = Vector::Zero();
+        mRectangle = Rectangle();
         mSolidness = Solidness::Hard;
         mSprite = nullptr;
 
@@ -15,22 +18,29 @@ namespace battleCity
 
         mBulletCount = 1;
 
-        mMaxSpeed = 1.0f;
-        mVelocity = .0f;
-        mDirection = Vector::Zero();
+        mSpeed = 1;
+        mDirection = Vector2Int::Zero();
     }
 
     Object::~Object() {}
 
 	#pragma region Object
 
-    void Object::SetPosition(Vector position)
+    void Object::SetPosition(int x, int y)
     {
-        mPosition = position;
+        mRectangle.SetPosition(x, y);
     }
-    Vector Object::GetPosition() const
+    const Vector2Int& Object::GetPosition() const
     {
-        return mPosition;
+        return mRectangle.GetPosition();
+    }
+    const int& Object::X() const
+    {
+        return mRectangle.X();
+    }
+    const int& Object::Y() const
+    {
+        return mRectangle.Y();
     }
 
     void Object::SetSolidness(Solidness solidness)
@@ -76,29 +86,20 @@ namespace battleCity
 
 	#pragma region IMovable
 
-    void Object::SetSpeed(float speed)
+    void Object::SetSpeed(int speed)
     {
-        mMaxSpeed = speed;
+        mSpeed = speed;
     }
-    float Object::GetSpeed() const
+    const int& Object::GetSpeed() const
     {
-        return mMaxSpeed;
-    }
-
-    void Object::SetVelocity(float velocity)
-    {
-        mVelocity = velocity;
-    }
-    float Object::GetVelocity() const
-    {
-        return mVelocity;
+        return mSpeed;
     }
 
-    void Object::SetDirection(Vector direction)
+    void Object::SetDirection(Vector2Int direction)
     {
-        mDirection = direction;
+        mDirection = std::move(direction);
     }
-    Vector Object::GetDirection() const
+    const Vector2Int& Object::GetDirection() const
     {
         return mDirection;
     }

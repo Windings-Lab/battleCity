@@ -2,7 +2,8 @@
 
 #include "Event.h"
 #include "Framework.h"
-#include "Vector.h"
+#include "Vector2Int.h"
+#include "Rectangle.h"
 
 namespace battleCity
 {
@@ -28,7 +29,7 @@ namespace battleCity
 		};
 	private:
 		// Object
-		Vector mPosition;
+		Rectangle mRectangle;
 		Solidness mSolidness;
 		Sprite* mSprite;
 
@@ -39,12 +40,11 @@ namespace battleCity
 		int mBulletCount;
 
 		// IMovable Interface
-		float mMaxSpeed;
-		float mVelocity;
-		Vector mDirection;
+		int mSpeed;
+		Vector2Int mDirection;
 
 	public:
-		Object();
+		Object(Type type);
 
 		Object(const Object&) = delete;
 		Object(Object&&) = delete;
@@ -63,34 +63,41 @@ namespace battleCity
 		virtual void EventHandler(Event& ptrEvent) = 0;
 
 		#pragma region Object
-		void SetPosition(Vector position);
-		Vector GetPosition() const;
+
+		void SetPosition(int x, int y);
+		const Vector2Int& GetPosition() const;
+		const int& X() const;
+		const int& Y() const;
 
 		void SetSolidness(Solidness solidness);
 		Solidness GetSolidness() const;
 
 		void SetSprite(Sprite*);
+
 		#pragma endregion
 
 		#pragma region IDestroyable
+
 		void SetHealth(int health);
 		int GetHealth() const;
+
 		#pragma endregion
 
 		#pragma region IShoot
+
 		void IncrementBulletCount(int count = 1);
 		int GetBulletCount();
+
 		#pragma endregion
 
 		#pragma region IMovable
-		void SetSpeed(float speed);
-		float GetSpeed() const;
 
-		float GetVelocity() const;
-		void SetVelocity(float velocity);
+		void SetSpeed(int speed);
+		const int& GetSpeed() const;
 
-		void SetDirection(Vector direction);
-		Vector GetDirection() const;
+		void SetDirection(Vector2Int direction);
+		const Vector2Int& GetDirection() const;
+
 		#pragma endregion
 	};
 }
