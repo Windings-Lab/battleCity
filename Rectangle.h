@@ -31,6 +31,8 @@ namespace battleCity
 
 		~Rectangle() = default;
 
+		bool Intersects(const Rectangle& other);
+
 		void SetPosition(int x, int y);
 		const Vector2Int& GetPosition() const;
 		const int& X() const;

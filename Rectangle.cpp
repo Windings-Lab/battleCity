@@ -1,6 +1,7 @@
 #include "Rectangle.h"
 
 #include <algorithm>
+#include <cmath>
 
 namespace battleCity
 {
@@ -14,13 +15,22 @@ namespace battleCity
 	{
 	}
 	Rectangle::Rectangle(int width, int height, Vector2Int position)
-		: Rectangle(position.mX, width, position.mY, height)
+		: Rectangle(position.X(), width, position.Y(), height)
 	{
 	}
 	Rectangle::Rectangle(int xMin, int xMax, int yMin, int yMax)
 	{
 		mPosition = Vector2Int(xMin, yMin);
 		mSize = Vector2Int(xMax, yMax);
+	}
+
+	bool Rectangle::Intersects(const Rectangle& other)
+	{
+		return
+			std::max(X(), other.X())
+			< std::min(X() + W(), other.X() + other.W())
+			& std::max(Y(), other.Y())
+			< std::min(Y() + H(), other.Y() + other.H());
 	}
 
 	void Rectangle::SetPosition(int x, int y)
