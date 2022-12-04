@@ -1,14 +1,18 @@
 #include "FrameworkWrapper.h"
 
+#include <iostream>
+
 #include "Screen.h"
 
 namespace battleCity
 {
-	Sprite* mouseSprite = nullptr;
-	Sprite* testSprite = nullptr;
+	Sprite* MovableBoxSprite = nullptr;
+	Sprite* BigWallSprite = nullptr;
 
-	Rectangle spriteBounds;
-	Rectangle mouseBounds;
+	Rectangle BigWallBounds;
+	Rectangle MovableBoxBounds;
+
+	Vector2Int velocity(10, 0);
 
 	void FrameworkWrapper::PreInit(int& width, int& height, bool& fullscreen)
 	{
@@ -19,23 +23,34 @@ namespace battleCity
 
 	bool FrameworkWrapper::Init()
 	{
-		testSprite = createSprite(R"(.\data\Wall.png)");
-		mouseSprite = createSprite(R"(.\data\Box\Box20x20.png)");
-		spriteBounds = Rectangle(Vector2Int(SCR.GetWidth() / 2, SCR.GetHeight() / 2));
-		mouseBounds = Rectangle(20, 20);
+		BigWallSprite = createSprite(R"(.\data\CollisionTest\BigWall.png)");
+		MovableBoxSprite = createSprite(R"(.\data\CollisionTest\Box100x100.png)");
+		BigWallBounds = Rectangle(20, 600, Vector2Int(SCR.GetWidth() / 2, 0));
+		MovableBoxBounds = Rectangle(100, 100, Vector2Int(0, SCR.GetHeight() / 2));
 		return true;
 	}
 
 	void FrameworkWrapper::Close()
 	{
-		destroySprite(testSprite);
-		destroySprite(mouseSprite);
+		destroySprite(BigWallSprite);
+		destroySprite(MovableBoxSprite);
 	}
 
 	bool FrameworkWrapper::Tick()
 	{
-		drawSprite(testSprite, spriteBounds.GetX(), spriteBounds.GetY());
-		drawSprite(mouseSprite, mouseBounds.GetX(), mouseBounds.GetY());
+		MovableBoxBounds.SetPosition(MovableBoxBounds.X() + velocity.X(), MovableBoxBounds.Y());
+
+		Rectangle BoxAtNextPosition(MovableBoxBounds.W(), MovableBoxBounds.H()
+			, Vector2Int(MovableBoxBounds.X() - velocity.X(), MovableBoxBounds.Y()));
+
+		drawSprite(BigWallSprite, BigWallBounds.X(), BigWallBounds.Y());
+		drawSprite(MovableBoxSprite, MovableBoxBounds.X(), MovableBoxBounds.Y());
+
+		if (BoxAtNextPosition.Intersects(BigWallBounds))
+		{
+			velocity = Vector2Int::Zero();
+		}
+
 		return false;
 	}
 
@@ -54,7 +69,6 @@ namespace battleCity
 
 	void FrameworkWrapper::onMouseMove(int x, int y, int xrelative, int yrelative)
 	{
-		mouseBounds.SetPosition(Vector2Int(x, y));
 	}
 
 	void FrameworkWrapper::onMouseButtonClick(FRMouseButton button, bool isReleased)
