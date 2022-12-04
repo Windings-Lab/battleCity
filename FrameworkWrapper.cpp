@@ -5,7 +5,7 @@
 namespace battleCity
 {
 	Sprite* mouseSprite = nullptr;
-	//Sprite* testSprite = nullptr;
+	Sprite* testSprite = nullptr;
 
 	AABB spriteBounds;
 	AABB mouseBounds;
@@ -19,7 +19,7 @@ namespace battleCity
 
 	bool FrameworkWrapper::Init()
 	{
-		//testSprite = createSprite(R"(data\Wall.png)");
+		testSprite = createSprite(R"(.\data\Wall.png)");
 		mouseSprite = createSprite(R"(.\data\Box\Box20x20.png)");
 		spriteBounds = AABB(Vector2Int(SCR.GetWidth() / 2, SCR.GetHeight() / 2));
 		mouseBounds = AABB(20, 20);
@@ -28,13 +28,13 @@ namespace battleCity
 
 	void FrameworkWrapper::Close()
 	{
-		//destroySprite(testSprite);
+		destroySprite(testSprite);
 		destroySprite(mouseSprite);
 	}
 
 	bool FrameworkWrapper::Tick()
 	{
-		//drawSprite(testSprite, spriteBounds.GetX(), spriteBounds.GetY());
+		drawSprite(testSprite, spriteBounds.GetX(), spriteBounds.GetY());
 		drawSprite(mouseSprite, mouseBounds.GetX(), mouseBounds.GetY());
 		return false;
 	}
