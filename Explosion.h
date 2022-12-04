@@ -10,7 +10,6 @@ namespace battleCity
 	    explicit Explosion(bool isLarge);
 
         void Update() override;
-        void Draw() override;
 
         void EventHandler(Event& eventPtr) override;
 

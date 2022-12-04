@@ -24,6 +24,11 @@ namespace battleCity
 
     Object::~Object() {}
 
+    void Object::Draw() const
+    {
+	    // drawSprite
+    }
+
 	#pragma region Object
 
     void Object::SetPosition(int x, int y)

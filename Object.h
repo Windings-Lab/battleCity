@@ -58,7 +58,7 @@ namespace battleCity
 		const Type ObjectType;
 
 		virtual void Update() = 0;
-		virtual void Draw() = 0;
+		void Draw() const;
 
 		virtual void EventHandler(Event& ptrEvent) = 0;
 

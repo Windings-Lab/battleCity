@@ -11,7 +11,6 @@ namespace battleCity
         PowerUp();
 
         void Update() override;
-        void Draw() override;
 
         void EventHandler(Event& event) override;
 	};

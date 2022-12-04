@@ -22,7 +22,6 @@ namespace battleCity
 		~TankPlayer() override;
 
 		void Update() override;
-		void Draw() override;
 
 		void EventHandler(Event& event) override;
 	};
