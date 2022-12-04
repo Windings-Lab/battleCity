@@ -20,7 +20,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Bullet.cpp" />
-    <ClCompile Include="Clock.cpp" />
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="EventCollision.cpp" />
     <ClCompile Include="EventOutOfWorld.cpp" />
@@ -44,7 +43,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bullet.h" />
-    <ClInclude Include="Clock.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="EventCollision.h" />
     <ClInclude Include="EventOutOfWorld.h" />

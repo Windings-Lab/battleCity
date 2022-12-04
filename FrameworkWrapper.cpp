@@ -27,7 +27,7 @@ namespace battleCity
 
 	bool FrameworkWrapper::Tick()
 	{
-		GM.Update();
+		GM.Step();
 		return GM.GetGameOver();
 	}
 

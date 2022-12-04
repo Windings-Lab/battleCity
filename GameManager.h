@@ -1,9 +1,6 @@
 #pragma once
 
-#include "Clock.h"
 #include "Manager.h"
-
-const int FRAME_TIME_DEFAULT = 16;
 
 namespace battleCity
 {
@@ -21,35 +18,22 @@ namespace battleCity
 
 		~GameManager() override = default;
 
+	public:
 		void StartUp() override;
 		void ShutDown() override;
 
-		void Update();
+		void Step();
 
 		void SetGameOverState();
 		bool GetGameOverState() const;
 
 		bool GetGameOver() const;
-
-		int GetStepCount() const;
-
-		void SetCustomStepCount(int stepCount);
-		int GetCustomStepCount() const;
-
-		bool GameOverTimerEnded();
 	private:
 		// Singleton
 		GameManager();
 
 		bool mGameOver;
 		bool mGameOverState;
-		// Clock management
-		Clock mClock;
-		// Target time per game loop, in seconds
-		int mFrameTime;
-		// Count of game loop iterations
-		int mStepCount;
-		int mCustomStepCount;
 	};
 
 	inline GameManager& GM = GameManager::GetInstance();
