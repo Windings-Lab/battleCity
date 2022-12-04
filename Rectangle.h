@@ -16,6 +16,7 @@ namespace battleCity
 		Rectangle(int x, int y);
 		Rectangle(int x, int y, int width, int height);
 
+		void SetPosition(int x, int y);
 		int X() const;
 		int Y() const;
 
