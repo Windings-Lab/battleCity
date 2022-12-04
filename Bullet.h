@@ -1,24 +1,31 @@
 #pragma once
-#include "Object.h"
+#include "Event.h"
 #include "EventCollision.h"
+#include "Object.h"
 
 namespace battleCity
 {
-    class Bullet : public Object
+    class Bullet final : public Object
     {
-    private:
-        void out();
-        void hit(EventCollision collisionEvent);
-
-        Object& mObjectOwner;
     public:
-        Bullet(int objID);
-        ~Bullet();
+	    explicit Bullet(Type ownerType);
 
-        void initBullet();
+        Bullet(const Bullet&) = delete;
+        Bullet(Bullet&&) = delete;
 
+        Bullet& operator=(const Bullet&) = delete;
+        Bullet& operator=(Bullet&&) = delete;
+
+        ~Bullet() override;
+
+        void Update() override;
         void Draw() override;
 
-        int EventHandler(Event& event) override;
+        void EventHandler(Event& event) override;
+    private:
+        void OutOfWorld();
+        void Hit(EventCollision collisionEvent);
+
+        Type mOwnerType;
     };
 }
