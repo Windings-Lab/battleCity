@@ -5,4 +5,9 @@ namespace battleCity
 	Wall::Wall() : Object(Type::Wall)
 	{
 	}
+
+	void Wall::Update()
+	{
+
+	}
 }

@@ -19,21 +19,20 @@ namespace battleCity
 
 	}
 
-	void Bullet::Draw()
+	void Bullet::Update()
 	{
-		// drawSprite(mSprite, (int)mPosition.X, (int)mPosition.Y);
+
 	}
 
-	void Bullet::EventHandler(Event& event)
+	void Bullet::EventHandler(Event& myEvent)
 	{
-		if (event.GetType() == EventType::Out)
+		if (myEvent.GetType() == EventType::Out)
 		{
 			OutOfWorld();
 		}
 
-		if (event.GetType() == EventType::Collision)
+		if (myEvent.GetType() == EventType::Collision)
 		{
-			Hit(dynamic_cast<EventCollision&>(event));
 		}
 	}
 

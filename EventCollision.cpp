@@ -1,11 +1,12 @@
-#include "WorldManager.h"
 #include "EventCollision.h"
+
+#include "WorldManager.h"
 
 
 namespace battleCity
 {
-	EventCollision::EventCollision(int objectID, int colliderID, Vector collisionPos)
-		: mCollisionPos(collisionPos), mObjectID(objectID), mColliderID(colliderID)
+	EventCollision::EventCollision(int objectID, int colliderID, Vector2Int collisionPos)
+		: mCollisionPos(std::move(collisionPos)), mObjectID(objectID), mColliderID(colliderID)
 	{
 		SetType(EventType::Collision);
 	}
@@ -19,10 +20,6 @@ namespace battleCity
 		return mObjectID;
 	}
 
-	Object& EventCollision::GetObjectRef() const
-	{
-		return WM.GetAllObjects().GetObject(mObjectID);
-	}
 
 	void EventCollision::SetColliderID(int colliderID)
 	{
@@ -33,16 +30,12 @@ namespace battleCity
 		return mColliderID;
 	}
 
-	Object& EventCollision::GetColliderRef() const
-	{
-		return WM.GetAllObjects().GetObject(mColliderID);
-	}
 
-	void EventCollision::SetCollisionPos(const Vector& collisionPos)
+	void EventCollision::SetCollisionPos(Vector2Int collisionPos)
 	{
-		mCollisionPos = collisionPos;
+		mCollisionPos = std::move(collisionPos);
 	}
-	Vector EventCollision::GetCollisionPos() const
+	const Vector2Int& EventCollision::GetCollisionPos() const
 	{
 		return mCollisionPos;
 	}

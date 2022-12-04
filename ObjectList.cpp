@@ -29,7 +29,7 @@ namespace battleCity
 	{
 		try
 		{
-			mList.try_emplace(objPtr->GetID(), std::move(objPtr));
+			mList.try_emplace(objPtr->ID, std::move(objPtr));
 		}
 		catch (...)
 		{

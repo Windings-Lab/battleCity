@@ -43,15 +43,15 @@
     <Filter Include="Source Files\BattleCity Objects">
       <UniqueIdentifier>{add61852-e9fd-4215-b961-49865336e084}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Collision">
+      <UniqueIdentifier>{ff3291a5-647c-4a9d-9e26-51b645b19b93}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Clock.cpp">
-      <Filter>Source Files\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="Vector.cpp">
       <Filter>Source Files\Utility</Filter>
     </ClCompile>
     <ClCompile Include="Object.cpp">
@@ -75,25 +75,7 @@
     <ClCompile Include="WorldManager.cpp">
       <Filter>Source Files\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="EventKeyboard.cpp">
-      <Filter>Source Files\Event</Filter>
-    </ClCompile>
     <ClCompile Include="EventCollision.cpp">
-      <Filter>Source Files\Event</Filter>
-    </ClCompile>
-    <ClCompile Include="Box.cpp">
-      <Filter>Source Files\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="Utility.cpp">
-      <Filter>Source Files\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="EventOut.cpp">
-      <Filter>Source Files\Event</Filter>
-    </ClCompile>
-    <ClCompile Include="Sprites.cpp">
-      <Filter>Source Files\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="EventMouse.cpp">
       <Filter>Source Files\Event</Filter>
     </ClCompile>
     <ClCompile Include="Bullet.cpp">
@@ -123,11 +105,17 @@
     <ClCompile Include="FrameworkWrapper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Rectangle.cpp">
+      <Filter>Source Files\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector2Int.cpp">
+      <Filter>Source Files\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="EventOutOfWorld.cpp">
+      <Filter>Source Files\Event</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Vector.h">
-      <Filter>Header Files\Utility</Filter>
-    </ClInclude>
     <ClInclude Include="Clock.h">
       <Filter>Header Files\Utility</Filter>
     </ClInclude>
@@ -155,20 +143,11 @@
     <ClInclude Include="WorldManager.h">
       <Filter>Header Files\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="EventKeyboard.h">
-      <Filter>Header Files\Event</Filter>
-    </ClInclude>
     <ClInclude Include="Utility.h">
       <Filter>Header Files\Utility</Filter>
     </ClInclude>
     <ClInclude Include="EventCollision.h">
       <Filter>Header Files\Event</Filter>
-    </ClInclude>
-    <ClInclude Include="EventOut.h">
-      <Filter>Header Files\Event</Filter>
-    </ClInclude>
-    <ClInclude Include="Box.h">
-      <Filter>Header Files\Utility</Filter>
     </ClInclude>
     <ClInclude Include="TankPlayer.h">
       <Filter>Header Files\BattleCity Objects</Filter>
@@ -181,9 +160,6 @@
     </ClInclude>
     <ClInclude Include="Sprites.h">
       <Filter>Header Files\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="EventMouse.h">
-      <Filter>Header Files\Event</Filter>
     </ClInclude>
     <ClInclude Include="Wall.h">
       <Filter>Header Files\BattleCity Objects</Filter>
@@ -201,6 +177,15 @@
       <Filter>Header Files\BattleCity Objects</Filter>
     </ClInclude>
     <ClInclude Include="FrameworkWrapper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EventOutOfWorld.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Rectangle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2Int.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

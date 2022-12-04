@@ -67,7 +67,7 @@ namespace battleCity
 
     void Object::SetHealth(int health)
     {
-        mHealth += health;
+        mHealth = health;
     }
     int Object::GetHealth() const
     {

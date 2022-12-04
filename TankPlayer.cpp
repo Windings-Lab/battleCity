@@ -1,8 +1,4 @@
 #include "TankPlayer.h"
-
-#include "Explosion.h"
-#include "WorldManager.h"
-
 #include "GameManager.h"
 
 
@@ -12,15 +8,19 @@ namespace battleCity
 	{
 	}
 
-
-	inline void TankPlayer::Draw()
-	{
-		// drawSprite(mSprite, (int)mPosition.X, (int)mPosition.Y);
-	}
-
 	void TankPlayer::EventHandler(Event& event)
 	{
 
+	}
+
+	void TankPlayer::Update()
+	{
+
+	}
+
+	void TankPlayer::Fire()
+	{
+		
 	}
 
 	TankPlayer::~TankPlayer()

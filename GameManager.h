@@ -36,7 +36,6 @@ namespace battleCity
 		void SetCustomStepCount(int stepCount);
 		int GetCustomStepCount() const;
 
-		int SpriteInit();
 		bool GameOverTimerEnded();
 	private:
 		// Singleton

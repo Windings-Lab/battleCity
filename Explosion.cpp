@@ -8,13 +8,13 @@ namespace battleCity
     {
     }
 
-    void Explosion::Draw()
-    {
-        // drawSprite(mSprite, (int)mPosition.X, (int)mPosition.Y);
-    }
-
     void Explosion::HandleAnimation()
     {
+    }
+
+    void Explosion::Update()
+    {
+
     }
 
     void Explosion::EventHandler(Event& eventPtr)

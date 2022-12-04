@@ -20,7 +20,7 @@ namespace battleCity
 
         void Update() override;
 
-        void EventHandler(Event& event) override;
+        void EventHandler(Event& myEvent) override;
     private:
         void OutOfWorld();
         void Hit(EventCollision collisionEvent);

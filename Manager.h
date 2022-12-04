@@ -29,7 +29,6 @@ namespace battleCity
 		virtual void ShutDown() = 0;
 
 		ManagerType GetType() const;
-		void SendEvent(Event& eventRef) const;
 	private:
 		ManagerType mType;
 	};

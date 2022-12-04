@@ -7,9 +7,9 @@ namespace battleCity
 	{
 	}
 
-	void PowerUp::Draw()
+	void PowerUp::Update()
 	{
-		// drawSprite(mSprite, (int)mPosition.X, (int)mPosition.Y);
+
 	}
 
 
