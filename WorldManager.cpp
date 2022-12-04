@@ -5,7 +5,7 @@
 #include "Utility.h"
 #include "Screen.h"
 #include "Wall.h"
-#include "EventOut.h"
+#include "EventOutOfWorld.h"
 #include "EventCollision.h"
 #include "PowerUp.h"
 #include "Vector.h"
@@ -332,7 +332,7 @@ namespace battleCity
 		}
 		else
 		{
-			auto eventOut = EventOut();
+			auto eventOut = EventOutOfWorld();
 			movableObj.EventHandler(eventOut);
 		}
 	}

@@ -4,9 +4,9 @@
 
 namespace battleCity
 {
-	class EventOut : public Event
+	class EventOutOfWorld : public Event
 	{
 	public:
-		EventOut();
+		EventOutOfWorld();
 	};
 }
