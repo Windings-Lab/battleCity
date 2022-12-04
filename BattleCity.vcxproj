@@ -36,13 +36,13 @@
     <ClCompile Include="ObjectList.cpp" />
     <ClCompile Include="PhoenixAndFlag.cpp" />
     <ClCompile Include="PowerUp.cpp" />
+    <ClCompile Include="Rectangle.cpp" />
     <ClCompile Include="Screen.cpp" />
     <ClCompile Include="Sprites.cpp" />
     <ClCompile Include="Vector2Int.cpp" />
     <ClCompile Include="Tank.cpp" />
     <ClCompile Include="TankPlayer.cpp" />
     <ClCompile Include="Utility.cpp" />
-    <ClCompile Include="Vector.cpp" />
     <ClCompile Include="Wall.cpp" />
     <ClCompile Include="WorldManager.cpp" />
   </ItemGroup>
@@ -64,13 +64,13 @@
     <ClInclude Include="ObjectList.h" />
     <ClInclude Include="PhoenixAndFlag.h" />
     <ClInclude Include="PowerUp.h" />
+    <ClInclude Include="Rectangle.h" />
     <ClInclude Include="Screen.h" />
     <ClInclude Include="Sprites.h" />
     <ClInclude Include="Tank.h" />
     <ClInclude Include="TankPlayer.h" />
     <ClInclude Include="Vector2Int.h" />
     <ClInclude Include="Utility.h" />
-    <ClInclude Include="Vector.h" />
     <ClInclude Include="Wall.h" />
     <ClInclude Include="WorldManager.h" />
   </ItemGroup>
