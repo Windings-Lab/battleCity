@@ -10,7 +10,7 @@ namespace battleCity
 
 	void Screen::Set(int width, int height, bool fullscreenMode)
 	{
-		mScreenBounds = AABB(width, height);
+		mScreenBounds = Rectangle(width, height);
 		mFullscreen = fullscreenMode;
 	}
 

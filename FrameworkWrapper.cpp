@@ -7,8 +7,8 @@ namespace battleCity
 	Sprite* mouseSprite = nullptr;
 	Sprite* testSprite = nullptr;
 
-	AABB spriteBounds;
-	AABB mouseBounds;
+	Rectangle spriteBounds;
+	Rectangle mouseBounds;
 
 	void FrameworkWrapper::PreInit(int& width, int& height, bool& fullscreen)
 	{
@@ -21,8 +21,8 @@ namespace battleCity
 	{
 		testSprite = createSprite(R"(.\data\Wall.png)");
 		mouseSprite = createSprite(R"(.\data\Box\Box20x20.png)");
-		spriteBounds = AABB(Vector2Int(SCR.GetWidth() / 2, SCR.GetHeight() / 2));
-		mouseBounds = AABB(20, 20);
+		spriteBounds = Rectangle(Vector2Int(SCR.GetWidth() / 2, SCR.GetHeight() / 2));
+		mouseBounds = Rectangle(20, 20);
 		return true;
 	}
 

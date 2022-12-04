@@ -1,6 +1,6 @@
 #pragma once
 
-#include "AABB.h"
+#include "Rectangle.h"
 
 namespace battleCity
 {
@@ -25,7 +25,7 @@ namespace battleCity
 
 	private:
 		Screen() = default;
-		AABB mScreenBounds;
+		Rectangle mScreenBounds;
 		bool mFullscreen;
 	};
 

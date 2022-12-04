@@ -4,24 +4,24 @@
 
 namespace battleCity
 {
-	// Create AABBox at World position
-	class AABB
+	// Create Rectangle at World position
+	class Rectangle
 	{
 	public:
 		// Width		= 16
 		// Height		= 16
 		// Position		= (0, 0)
-		AABB();
+		Rectangle();
 		// Width		= 16
 		// Height		= 16
 		// Position		= position
-		AABB(Vector2Int position);
+		Rectangle(Vector2Int position);
 		// Width		= width
 		// Height		= height
 		// Position		= (0, 0)
-		AABB(int width, int height);
-		AABB(int width, int height, Vector2Int position);
-		AABB(int xMin, int xMax, int yMin, int yMax);
+		Rectangle(int width, int height);
+		Rectangle(int width, int height, Vector2Int position);
+		Rectangle(int xMin, int xMax, int yMin, int yMax);
 
 		void SetPosition(Vector2Int position);
 		Vector2Int GetPosition() const;
