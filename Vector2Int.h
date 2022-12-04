@@ -19,6 +19,7 @@ namespace battleCity
 		Vector2Int operator+(const Vector2Int& other) const;
 
 		Vector2Int operator*(int num) const;
+		Vector2Int operator/(int num) const;
 
 		Vector2Int operator-() const;
 	};

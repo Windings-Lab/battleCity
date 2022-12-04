@@ -33,6 +33,11 @@ namespace battleCity
         return { X * num, Y * num };
     }
 
+    Vector2Int Vector2Int::operator/(int num) const
+    {
+        return { X / num, Y / num };
+    }
+
     Vector2Int Vector2Int::operator-() const
     {
         return { -X, -Y };
