@@ -3,15 +3,12 @@
 
 namespace battleCity
 {
-    class Wall : public Object
+    class Wall final : public Object
     {
     public:
         Wall();
-        ~Wall();
-        Wall(float x, float y);
 
         void Update() override;
-        void Draw() override;
     };
 }
 
