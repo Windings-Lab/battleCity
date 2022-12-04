@@ -47,7 +47,6 @@ namespace battleCity
 
 		void SetPlayerID(int playerID);
 		int GetPlayerID() const;
-
 		void SetPlayerHealthToZero() const;
 
 		void IncrementTankCount(int count);
@@ -62,10 +61,6 @@ namespace battleCity
 		void MoveObject(Object& movableObj, Vector where);
 		// Return list of Objects collided with at some position
 		std::unordered_set<int> GetCollisions(const Object& ptrObject, Vector where) const;
-
-		void CreatePowerUp();
-		void SetPowerUpToFalse();
-		void SetPowerUpisTakedToTrue();
 	private:
 		// Singleton
 		WorldManager();
