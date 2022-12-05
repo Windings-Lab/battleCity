@@ -4,82 +4,85 @@
 #include <iostream>
 #include <sstream>
 #include <string>
-#include <vector>
 
-void ShowUsage(std::string name)
+void ShowUsage()
 {
-	std::cerr << "Usage: " << name << " <option(s)> SOURCES\n"
+	std::cout
+		<< "Usage: " << "BattleCity.exe\n"
 		<< "Options:\n"
-		<< "\t-h,--help\t\tShow this help message\n"
-		<< "\t-w,-window 800x600\tSpecify window size"
+		<< "\t-w, -window 800x600\tSpecify window size"
 		<< std::endl;
 }
 
-int main(int argc, char* argv[])
+int main(int argc, const char* argv[])
 {
 	int width = 800;
 	int height = 600;
+#ifdef _DEBUG
 	bool fullScreen = false;
+#else
+	bool fullScreen = true;
+#endif
+
 	if (argc != 1)
 	{
-		std::vector<int> tokens;
-		std::vector<std::string> sources;
-		if (argc < 3)
+		if (argc != 3)
 		{
-			ShowUsage(argv[0]);
+			ShowUsage();
 			return 1;
 		}
-		std::string window;
-		for (int i = 1; i < argc; ++i)
+
+		std::string argv1 = argv[1];
+
+		if(!(argv1 == "-w" || argv1 == "-window"))
 		{
-			std::string arg = argv[i];
-			if ((arg == "-h") || (arg == "--help"))
+			ShowUsage();
+			return 1;
+		}
+
+		int it = 0;
+		int token[2]{};
+
+		std::istringstream input;
+		input.str(argv[2]);
+		for (std::string line; std::getline(input, line, 'x'); )
+		{
+			it++;
+			if(it > 2)
 			{
-				ShowUsage(argv[0]);
-				return 0;
-			}
-			if ((arg == "-w") || (arg == "-window"))
-			{
-				if (i + 1 < argc)
-				{
-					// Make sure we aren't at the end of argv!
-					window = argv[i++]; // Increment 'i' so we don't get the argument as the next argv[i].
-				}
-				else
-				{
-					// Uh-oh, there was no argument to the window option.
-					std::cerr << "--window option requires one argument." << std::endl;
-					return 1;
-				}
-			}
-			else
-			{
-				ShowUsage(argv[0]);
+				ShowUsage();
 				return 1;
 			}
-			sources.push_back(argv[i]);
-		}
-		std::string token;
-		std::istringstream tokenStream(sources[0]);
-		while (getline(tokenStream, token, 'x'))
-		{
 			try
 			{
-				tokens.push_back(stoi(token));
+				token[it - 1] = std::stoi(line);
 			}
-			catch (const std::exception&)
+			catch (...)
 			{
-				ShowUsage(argv[0]);
+				ShowUsage();
 				return 1;
 			}
 		}
+
+		if(it != 2)
+		{
+			ShowUsage();
+			return 1;
+		}
+
+		if (!SCR.IsValidSize(token[0], token[1]))
+		{
+			std::cout << "Incorrect window size" << std::endl;
+			return 1;
+		}
+
 		fullScreen = false;
-		width = tokens[0];
-		height = tokens[1];
+		width = token[0];
+		height = token[1];
 	}
-
+	
 	SCR.Set(width, height, fullScreen);
-
+	
 	const auto framework = std::make_unique<BattleCity::FrameworkWrapper>();
 
 	return run(framework.get());

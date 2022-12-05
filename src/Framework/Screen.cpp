@@ -16,6 +16,14 @@ void Screen::Set(int width, int height, bool fullscreenMode)
 	mFullscreen = fullscreenMode;
 }
 
+bool Screen::IsValidSize(int w, int h) const
+{
+	return 
+		w >= 800 && w <= 1920
+		&&
+		h >= 600 && h <= 1080;
+}
+
 int Screen::GetWidth() const
 {
 	return mScreenBounds.W();

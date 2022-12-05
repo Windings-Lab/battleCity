@@ -15,6 +15,8 @@ public:
 
 	~Screen() = default;
 
+	bool IsValidSize(int w, int h) const;
+
 	int GetWidth() const;
 	int GetHeight() const;
 	bool GetFullscreen() const;
