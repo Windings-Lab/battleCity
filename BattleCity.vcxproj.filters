@@ -1,195 +1,184 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="Header Files\Utility">
-      <UniqueIdentifier>{48467620-58fe-41c1-ab49-a8e81af7904b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Object">
-      <UniqueIdentifier>{a4281b0f-e02a-4208-b211-0697391218cc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Utility">
-      <UniqueIdentifier>{c55b46c8-52c3-4f9e-b883-7f217537b230}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Object">
-      <UniqueIdentifier>{0b910c8d-afe1-4cbe-945b-c605b9e18afe}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Manager">
-      <UniqueIdentifier>{7b33a953-a4e9-4e86-b278-436ab7e8793d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Event">
-      <UniqueIdentifier>{9bba60d2-3add-4d81-8391-c22cb2b13176}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Manager">
-      <UniqueIdentifier>{4a118dbb-d1f6-4da8-ad64-2154685a55ed}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Event">
-      <UniqueIdentifier>{8578686e-55f6-4f03-ab9e-fdaeb99cda45}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\BattleCity Objects">
-      <UniqueIdentifier>{30df22b6-d6fe-41a8-86d3-c3d2625a34ea}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\BattleCity Objects">
-      <UniqueIdentifier>{add61852-e9fd-4215-b961-49865336e084}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Collision">
-      <UniqueIdentifier>{ff3291a5-647c-4a9d-9e26-51b645b19b93}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="game.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="src\Object\Bullet.cpp">
+      <Filter>Source\Object</Filter>
     </ClCompile>
-    <ClCompile Include="Clock.cpp">
-      <Filter>Source Files\Utility</Filter>
+    <ClCompile Include="src\Event\Event.cpp">
+      <Filter>Source\Event</Filter>
     </ClCompile>
-    <ClCompile Include="Object.cpp">
-      <Filter>Source Files\Object</Filter>
+    <ClCompile Include="src\Event\EventCollision.cpp">
+      <Filter>Source\Event</Filter>
     </ClCompile>
-    <ClCompile Include="ObjectList.cpp">
-      <Filter>Source Files\Object</Filter>
+    <ClCompile Include="src\Event\EventOutOfWorld.cpp">
+      <Filter>Source\Event</Filter>
     </ClCompile>
-    <ClCompile Include="Manager.cpp">
-      <Filter>Source Files\Manager</Filter>
+    <ClCompile Include="src\Event\EventStep.cpp">
+      <Filter>Source\Event</Filter>
     </ClCompile>
-    <ClCompile Include="Event.cpp">
-      <Filter>Source Files\Event</Filter>
+    <ClCompile Include="src\Object\Explosion.cpp">
+      <Filter>Source\Object</Filter>
     </ClCompile>
-    <ClCompile Include="GameManager.cpp">
-      <Filter>Source Files\Manager</Filter>
+    <ClCompile Include="src\Framework\FrameworkWrapper.cpp">
+      <Filter>Source\Framework</Filter>
     </ClCompile>
-    <ClCompile Include="EventStep.cpp">
-      <Filter>Source Files\Event</Filter>
+    <ClCompile Include="src\Manager\GameManager.cpp">
+      <Filter>Source\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="WorldManager.cpp">
-      <Filter>Source Files\Manager</Filter>
+    <ClCompile Include="src\Manager\Manager.cpp">
+      <Filter>Source\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="EventCollision.cpp">
-      <Filter>Source Files\Event</Filter>
+    <ClCompile Include="src\Object\Object.cpp">
+      <Filter>Source\Object</Filter>
     </ClCompile>
-    <ClCompile Include="Bullet.cpp">
-      <Filter>Source Files\BattleCity Objects</Filter>
+    <ClCompile Include="src\ObjectList.cpp">
+      <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Tank.cpp">
-      <Filter>Source Files\BattleCity Objects</Filter>
+    <ClCompile Include="src\Object\PhoenixAndFlag.cpp">
+      <Filter>Source\Object</Filter>
     </ClCompile>
-    <ClCompile Include="TankPlayer.cpp">
-      <Filter>Source Files\BattleCity Objects</Filter>
+    <ClCompile Include="src\Object\PowerUp.cpp">
+      <Filter>Source\Object</Filter>
     </ClCompile>
-    <ClCompile Include="Wall.cpp">
-      <Filter>Source Files\BattleCity Objects</Filter>
+    <ClCompile Include="src\Object\Tank.cpp">
+      <Filter>Source\Object</Filter>
     </ClCompile>
-    <ClCompile Include="Screen.cpp">
-      <Filter>Source Files\Utility</Filter>
+    <ClCompile Include="src\Object\TankPlayer.cpp">
+      <Filter>Source\Object</Filter>
     </ClCompile>
-    <ClCompile Include="PhoenixAndFlag.cpp">
-      <Filter>Source Files\BattleCity Objects</Filter>
+    <ClCompile Include="src\Object\Wall.cpp">
+      <Filter>Source\Object</Filter>
     </ClCompile>
-    <ClCompile Include="Explosion.cpp">
-      <Filter>Source Files\BattleCity Objects</Filter>
+    <ClCompile Include="src\Collision\Rectangle.cpp">
+      <Filter>Source\Collision</Filter>
     </ClCompile>
-    <ClCompile Include="PowerUp.cpp">
-      <Filter>Source Files\BattleCity Objects</Filter>
+    <ClCompile Include="src\Utility\Vector2Int.cpp">
+      <Filter>Source\Utility</Filter>
     </ClCompile>
-    <ClCompile Include="FrameworkWrapper.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\Framework\Screen.cpp">
+      <Filter>Source\Framework</Filter>
     </ClCompile>
-    <ClCompile Include="Rectangle.cpp">
-      <Filter>Source Files\Collision</Filter>
-    </ClCompile>
-    <ClCompile Include="Vector2Int.cpp">
-      <Filter>Source Files\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="EventOutOfWorld.cpp">
-      <Filter>Source Files\Event</Filter>
+    <ClCompile Include="src\Manager\WorldManager.cpp">
+      <Filter>Source\Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Clock.h">
-      <Filter>Header Files\Utility</Filter>
+    <ClInclude Include="include\Object\Bullet.h">
+      <Filter>Headers\Object</Filter>
     </ClInclude>
-    <ClInclude Include="Object.h">
-      <Filter>Header Files\Object</Filter>
+    <ClInclude Include="include\Event\Event.h">
+      <Filter>Headers\Event</Filter>
     </ClInclude>
-    <ClInclude Include="ObjectList.h">
-      <Filter>Header Files\Object</Filter>
+    <ClInclude Include="include\Event\EventCollision.h">
+      <Filter>Headers\Event</Filter>
     </ClInclude>
-    <ClInclude Include="Framework.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="include\Event\EventOutOfWorld.h">
+      <Filter>Headers\Event</Filter>
     </ClInclude>
-    <ClInclude Include="Manager.h">
-      <Filter>Header Files\Manager</Filter>
+    <ClInclude Include="include\Event\EventStep.h">
+      <Filter>Headers\Event</Filter>
     </ClInclude>
-    <ClInclude Include="GameManager.h">
-      <Filter>Header Files\Manager</Filter>
+    <ClInclude Include="include\Object\Explosion.h">
+      <Filter>Headers\Object</Filter>
     </ClInclude>
-    <ClInclude Include="Event.h">
-      <Filter>Header Files\Event</Filter>
+    <ClInclude Include="include\Framework\Framework.h">
+      <Filter>Headers\Framework</Filter>
     </ClInclude>
-    <ClInclude Include="EventStep.h">
-      <Filter>Header Files\Event</Filter>
+    <ClInclude Include="include\Framework\FrameworkWrapper.h">
+      <Filter>Headers\Framework</Filter>
     </ClInclude>
-    <ClInclude Include="WorldManager.h">
-      <Filter>Header Files\Manager</Filter>
+    <ClInclude Include="include\Manager\GameManager.h">
+      <Filter>Headers\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="Utility.h">
-      <Filter>Header Files\Utility</Filter>
+    <ClInclude Include="include\Manager\Manager.h">
+      <Filter>Headers\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="EventCollision.h">
-      <Filter>Header Files\Event</Filter>
+    <ClInclude Include="include\Object\Object.h">
+      <Filter>Headers\Object</Filter>
     </ClInclude>
-    <ClInclude Include="TankPlayer.h">
-      <Filter>Header Files\BattleCity Objects</Filter>
+    <ClInclude Include="include\ObjectList.h">
+      <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="Tank.h">
-      <Filter>Header Files\BattleCity Objects</Filter>
+    <ClInclude Include="include\Object\PhoenixAndFlag.h">
+      <Filter>Headers\Object</Filter>
     </ClInclude>
-    <ClInclude Include="Bullet.h">
-      <Filter>Header Files\BattleCity Objects</Filter>
+    <ClInclude Include="include\Object\PowerUp.h">
+      <Filter>Headers\Object</Filter>
     </ClInclude>
-    <ClInclude Include="Sprites.h">
-      <Filter>Header Files\Utility</Filter>
+    <ClInclude Include="include\Object\Tank.h">
+      <Filter>Headers\Object</Filter>
     </ClInclude>
-    <ClInclude Include="Wall.h">
-      <Filter>Header Files\BattleCity Objects</Filter>
+    <ClInclude Include="include\Object\TankPlayer.h">
+      <Filter>Headers\Object</Filter>
     </ClInclude>
-    <ClInclude Include="Screen.h">
-      <Filter>Header Files\Utility</Filter>
+    <ClInclude Include="include\Object\Wall.h">
+      <Filter>Headers\Object</Filter>
     </ClInclude>
-    <ClInclude Include="PhoenixAndFlag.h">
-      <Filter>Header Files\BattleCity Objects</Filter>
+    <ClInclude Include="include\Collision\Rectangle.h">
+      <Filter>Headers\Collision</Filter>
     </ClInclude>
-    <ClInclude Include="Explosion.h">
-      <Filter>Header Files\BattleCity Objects</Filter>
+    <ClInclude Include="include\Framework\Screen.h">
+      <Filter>Headers\Framework</Filter>
     </ClInclude>
-    <ClInclude Include="PowerUp.h">
-      <Filter>Header Files\BattleCity Objects</Filter>
+    <ClInclude Include="include\Manager\SpriteManager.h">
+      <Filter>Headers\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="FrameworkWrapper.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="include\Utility\Utility.h">
+      <Filter>Headers\Utility</Filter>
     </ClInclude>
-    <ClInclude Include="EventOutOfWorld.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="include\Utility\Vector2Int.h">
+      <Filter>Headers\Utility</Filter>
     </ClInclude>
-    <ClInclude Include="Rectangle.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Vector2Int.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="include\Manager\WorldManager.h">
+      <Filter>Headers\Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Headers">
+      <UniqueIdentifier>{8db73797-1160-4427-9135-b24753f01c93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source">
+      <UniqueIdentifier>{53a6e30b-413c-4983-aafe-23ac415c2480}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Collision">
+      <UniqueIdentifier>{66508cac-38f7-44be-9cec-cfd041fbca8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Event">
+      <UniqueIdentifier>{30ebceff-0c91-4ca1-baaf-8321f88dcc60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Framework">
+      <UniqueIdentifier>{4e80204e-52f5-4951-9ae0-a5c80e5802a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Manager">
+      <UniqueIdentifier>{6f45e7dd-52d6-4d87-8ac6-2c8bad9fbf52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Object">
+      <UniqueIdentifier>{85d26384-d2e2-43ee-83aa-927e9b87fe07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Utility">
+      <UniqueIdentifier>{c462b0d0-44c5-485c-8cdd-4be1fd9dac56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Collision">
+      <UniqueIdentifier>{d74916be-fec8-4142-aa99-958b74029552}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Event">
+      <UniqueIdentifier>{fc96c148-8886-4c83-9700-a65834e50099}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Framework">
+      <UniqueIdentifier>{340da608-4e03-44a9-b2c5-c5e953d7f08a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Manager">
+      <UniqueIdentifier>{cb029feb-0984-4641-b87b-152f0b69cfc1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Utility">
+      <UniqueIdentifier>{25c6241a-728e-4793-9516-9ba413f8f8e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Object">
+      <UniqueIdentifier>{07204f34-c876-4173-abb0-8f7961da8f89}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>
