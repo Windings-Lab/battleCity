@@ -1,6 +1,7 @@
 #include "FrameworkWrapper.h"
 #include "Screen.h"
 
+#include <filesystem>
 #include <iostream>
 #include <sstream>
 #include <string>
@@ -14,8 +15,18 @@ void ShowUsage()
 		<< std::endl;
 }
 
+void TestFolderPath()
+{
+	std::string path = R"(.\data\)";
+	for (const auto& entry : std::filesystem::directory_iterator(path))
+		std::cout << entry.path() << std::endl;
+}
+
 int main(int argc, const char* argv[])
 {
+	TestFolderPath();
+	return 0;
+
 	int width = 800;
 	int height = 600;
 #ifdef _DEBUG
