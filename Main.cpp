@@ -6,8 +6,7 @@
 #include <string>
 #include <vector>
 
-
-static void show_usage(std::string name)
+void ShowUsage(std::string name)
 {
 	std::cerr << "Usage: " << name << " <option(s)> SOURCES\n"
 		<< "Options:\n"
@@ -27,7 +26,7 @@ int main(int argc, char* argv[])
 		std::vector<std::string> sources;
 		if (argc < 3)
 		{
-			show_usage(argv[0]);
+			ShowUsage(argv[0]);
 			return 1;
 		}
 		std::string window;
@@ -36,7 +35,7 @@ int main(int argc, char* argv[])
 			std::string arg = argv[i];
 			if ((arg == "-h") || (arg == "--help"))
 			{
-				show_usage(argv[0]);
+				ShowUsage(argv[0]);
 				return 0;
 			}
 			if ((arg == "-w") || (arg == "-window"))
@@ -55,7 +54,7 @@ int main(int argc, char* argv[])
 			}
 			else
 			{
-				show_usage(argv[0]);
+				ShowUsage(argv[0]);
 				return 1;
 			}
 			sources.push_back(argv[i]);
@@ -70,7 +69,7 @@ int main(int argc, char* argv[])
 			}
 			catch (const std::exception&)
 			{
-				show_usage(argv[0]);
+				ShowUsage(argv[0]);
 				return 1;
 			}
 		}
@@ -79,10 +78,9 @@ int main(int argc, char* argv[])
 		height = tokens[1];
 	}
 
-	srand(time(nullptr));
 	SCR.Set(width, height, fullScreen);
 
-	auto framework = std::make_unique<BattleCity::FrameworkWrapper>();
+	const auto framework = std::make_unique<BattleCity::FrameworkWrapper>();
 
 	return run(framework.get());
 }
