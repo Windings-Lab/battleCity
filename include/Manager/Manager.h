@@ -2,17 +2,19 @@
 
 namespace BattleCity::Manager
 {
-	enum class ManagerType
-	{
-		Error = 0,
-		Game,
-		World
-	};
+
 
 	class Manager
 	{
 	protected:
-		explicit Manager(ManagerType);
+		enum class Type
+		{
+			Error = 0,
+			Game,
+			World,
+			Sprite
+		};
+		explicit Manager(Type);
 	public:
 		Manager() = delete;
 		Manager(const Manager&) = delete;
@@ -26,8 +28,8 @@ namespace BattleCity::Manager
 		virtual void StartUp() = 0;
 		virtual void ShutDown() = 0;
 
-		ManagerType GetType() const;
+		Type GetType() const;
 	private:
-		ManagerType mType;
+		Type mType;
 	};
 }

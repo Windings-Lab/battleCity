@@ -9,7 +9,7 @@ namespace BattleCity::Manager
 		static WorldManager single;
 		return single;
 	}
-	WorldManager::WorldManager() : Manager(ManagerType::World)
+	WorldManager::WorldManager() : Manager(Type::World)
 	{
 		mPlayerID = 0;
 	}

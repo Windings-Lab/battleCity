@@ -2,7 +2,7 @@
 
 namespace BattleCity::Manager
 {
-	Manager::Manager(ManagerType type) : mType(type) {}
+	Manager::Manager(Type type) : mType(type) {}
 	Manager::~Manager() {}
 
 	ManagerType Manager::GetType() const

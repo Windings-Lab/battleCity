@@ -30,6 +30,7 @@
     <ClCompile Include="src\Manager\GameManager.cpp" />
     <ClCompile Include="src\Manager\Manager.cpp" />
     <ClCompile Include="src\Manager\WorldManager.cpp" />
+	<ClCompile Include="src\Manager\SpriteManager.cpp" />
     <ClCompile Include="src\ObjectList.cpp" />
     <ClCompile Include="src\Object\Bullet.cpp" />
     <ClCompile Include="src\Object\Explosion.cpp" />
@@ -131,6 +132,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <PublicIncludeDirectories>$(ProjectDir)include;$(ProjectDir)src;$(PublicIncludeDirectories)</PublicIncludeDirectories>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
