@@ -2,32 +2,29 @@
 
 #include "Rectangle.h"
 
-namespace BattleCity
+class Screen
 {
-	class Screen
-	{
-	public:
-		static Screen& GetInstance();
+public:
+	static Screen& GetInstance();
 
-		Screen(const Screen&) = delete;
-		Screen(Screen&&) = delete;
+	Screen(const Screen&) = delete;
+	Screen(Screen&&) = delete;
 
-		void operator=(const Screen&) = delete;
-		void operator=(Screen&&) = delete;
+	void operator=(const Screen&) = delete;
+	void operator=(Screen&&) = delete;
 
-		~Screen() = default;
+	~Screen() = default;
 
-		int GetWidth() const;
-		int GetHeight() const;
-		bool GetFullscreen() const;
+	int GetWidth() const;
+	int GetHeight() const;
+	bool GetFullscreen() const;
 
-		void Set(int width, int height, bool fullscreenMode);
+	void Set(int width, int height, bool fullscreenMode);
 
-	private:
-		Screen() = default;
-		Rectangle mScreenBounds;
-		bool mFullscreen;
-	};
+private:
+	Screen();
+	BattleCity::Rectangle mScreenBounds;
+	bool mFullscreen;
+};
 
-	inline Screen& SCR = Screen::GetInstance();
-}
+inline Screen& SCR = Screen::GetInstance();
