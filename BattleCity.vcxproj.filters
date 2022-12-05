@@ -62,6 +62,9 @@
     <ClCompile Include="src\Manager\WorldManager.cpp">
       <Filter>Source\Manager</Filter>
     </ClCompile>
+    <ClCompile Include="src\Manager\SpriteManager.cpp">
+      <Filter>Source\Manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Object\Bullet.h">

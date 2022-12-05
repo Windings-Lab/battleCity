@@ -30,7 +30,7 @@
     <ClCompile Include="src\Manager\GameManager.cpp" />
     <ClCompile Include="src\Manager\Manager.cpp" />
     <ClCompile Include="src\Manager\WorldManager.cpp" />
-	<ClCompile Include="src\Manager\SpriteManager.cpp" />
+    <ClCompile Include="src\Manager\SpriteManager.cpp" />
     <ClCompile Include="src\ObjectList.cpp" />
     <ClCompile Include="src\Object\Bullet.cpp" />
     <ClCompile Include="src\Object\Explosion.cpp" />
