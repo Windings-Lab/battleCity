@@ -26,8 +26,8 @@ namespace BattleCity
 
 	bool FrameworkWrapper::Tick()
 	{
-		GM.Step();
-		return GM.GetGameOver();
+		Manager::GM.Step();
+		return Manager::GM.GetGameOver();
 	}
 
 	const char* FrameworkWrapper::GetTitle()
@@ -53,14 +53,14 @@ namespace BattleCity
 
 	void FrameworkWrapper::StartAllManagers()
 	{
-		GM.StartUp();
-		WM.StartUp();
+		Manager::GM.StartUp();
+		Manager::WM.StartUp();
 	}
 
 	void FrameworkWrapper::ShutDownAllManagers()
 	{
-		GM.ShutDown();
-		WM.ShutDown();
+		Manager::GM.ShutDown();
+		Manager::WM.ShutDown();
 		// Deallocate all sprites
 	}
 }

@@ -1,4 +1,5 @@
 #include "Bullet.h"
+
 #include "Explosion.h"
 #include "GameManager.h"
 #include "WorldManager.h"
@@ -11,7 +12,7 @@ namespace BattleCity
 
 	void Bullet::OutOfWorld()
 	{
-		WM.MarkForDelete(ID);
+		Manager::WM.MarkForDelete(ID);
 	}
 
 	void Bullet::Hit(EventCollision collisionEvent)
@@ -38,10 +39,10 @@ namespace BattleCity
 
 	Bullet::~Bullet()
 	{
-		if (GM.GetGameOver()) return; // TODO: Fix
+		if (Manager::GM.GetGameOver()) return; // TODO: Fix
 		std::unique_ptr<Object> newExp = std::make_unique<Explosion>(false);
 		newExp->SetPosition(X(), Y());
 
-		WM.InsertObject(newExp);
+		Manager::WM.InsertObject(newExp);
 	}
 }

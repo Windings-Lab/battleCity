@@ -12,11 +12,11 @@ namespace BattleCity
 
 	Tank::~Tank()
 	{
-		if(GM.GetGameOver()) return; // TODO: Fix
+		if(Manager::GM.GetGameOver()) return; // TODO: Fix
 
 		std::unique_ptr<Object> newExp = std::make_unique<Explosion>(true);
 		newExp->SetPosition(X(), Y());
 
-		WM.InsertObject(newExp);
+		Manager::WM.InsertObject(newExp);
 	}
 }
