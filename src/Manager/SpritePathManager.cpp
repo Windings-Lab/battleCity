@@ -31,4 +31,9 @@ namespace BattleCity::Manager
 	void SpritePathManager::ShutDown()
 	{
 	}
+
+	const SpritePathList& SpritePathManager::GetSpritePathList() const
+	{
+		return mSpritePathList;
+	}
 }

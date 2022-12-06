@@ -2,13 +2,17 @@
 
 #include "Manager.h"
 
+#include <SpriteManager.h>
 #include <string>
-#include <vector>
+#include <unordered_map>
 
 namespace BattleCity::Manager
 {
+	using SpritePathList = std::unordered_map<SpriteManager::SpriteType, std::unordered_map<SpriteManager::SpriteBehaviour, std::string>>;
+
 	class SpritePathManager final : public Manager
 	{
+		
 	public:
 		static SpritePathManager& GetInstance();
 
@@ -23,10 +27,12 @@ namespace BattleCity::Manager
 	public:
 		void StartUp() override;
 		void ShutDown() override;
+
+		const SpritePathList& GetSpritePathList() const;
 	private:
 		SpritePathManager();
 
-		std::vector<std::string> mSpritePathList;
+		SpritePathList mSpritePathList;
 	};
 
 	inline SpritePathManager& PM = SpritePathManager::GetInstance();

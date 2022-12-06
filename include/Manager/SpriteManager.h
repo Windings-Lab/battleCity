@@ -1,7 +1,6 @@
 #pragma once
 
 #include <memory>
-#include <string>
 #include <unordered_map>
 
 #include "Framework.h"
@@ -11,13 +10,12 @@ namespace BattleCity::Manager
 {
 	class SpriteManager final : public Manager
 	{
-		enum class Behaviour;
-		enum class Type;
+		enum class SpriteBehaviour;
+		enum class SpriteType;
 
-		using SpriteList = std::unordered_map<Type, std::unordered_map<Behaviour, std::string>>;
-		using SpriteAtlas = std::unordered_map<Type, std::unordered_map<Behaviour, SpriteObject>>;
-
-		enum class Behaviour
+		using SpriteAtlas = std::unordered_map<SpriteType, std::unordered_map<SpriteBehaviour, SpriteObject>>;
+	public:
+		enum class SpriteBehaviour
 		{
 			Error,
 			Basic,
@@ -32,7 +30,7 @@ namespace BattleCity::Manager
 			ExplosionLarge2,
 		};
 
-		enum class Type
+		enum class SpriteType
 		{
 			Error,
 			TankPlayer,
@@ -64,6 +62,5 @@ namespace BattleCity::Manager
 		SpriteManager();
 
 		SpriteAtlas mSpriteAtlas;
-		SpriteList mSpriteList;
 	};
 }
