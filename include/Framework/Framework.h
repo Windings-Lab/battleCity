@@ -2,7 +2,12 @@
 
 #define FRAMEWORK_API extern "C" __declspec(dllimport)
 
+#include <memory>
+
+struct SpriteDeleter;
 class Sprite;
+
+using SpriteObject = std::unique_ptr<Sprite, SpriteDeleter>;
 
 FRAMEWORK_API Sprite* createSprite(const char* path);
 FRAMEWORK_API void drawSprite(Sprite*, int x, int y);
@@ -29,6 +34,23 @@ enum class FRMouseButton {
 	MIDDLE,
 	RIGHT,
 	COUNT
+};
+
+struct SpriteDeleter
+{
+	SpriteDeleter() = default;
+	SpriteDeleter(const SpriteDeleter&) = delete;
+	SpriteDeleter(SpriteDeleter&&) noexcept = delete;
+
+	SpriteDeleter& operator=(const SpriteDeleter&) = delete;
+	SpriteDeleter& operator=(SpriteDeleter&&) noexcept = delete;
+
+	~SpriteDeleter() = default;
+
+	void operator()(Sprite* p) const
+	{
+		destroySprite(p);
+	}
 };
 
 class Framework
