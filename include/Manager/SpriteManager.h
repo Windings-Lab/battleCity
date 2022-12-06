@@ -40,8 +40,8 @@ namespace BattleCity::Manager
 		void StartUp() override;
 		void ShutDown() override;
 
-		const Sprite* GetSprite(SpriteType spriteType, Object::Behaviour objectBehaviour);
-		void AddSpriteToAtlas(Sprite* sprite, SpriteType spriteType, Object::Behaviour objectBehaviour);
+		const Sprite* GetSprite(SpriteType spriteType, Object::Behaviour objectBehaviour) const;
+		void SetSprite(SpriteType spriteType, Object::Behaviour objectBehaviour);
 
 	private:
 		SpriteManager();

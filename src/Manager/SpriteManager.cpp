@@ -24,7 +24,7 @@ namespace BattleCity::Manager
 		mSpriteAtlas.clear();
 	}
 
-	const Sprite* SpriteManager::GetSprite(SpriteType spriteType, Object::Behaviour objectBehaviour)
+	const Sprite* SpriteManager::GetSprite(SpriteType spriteType, Object::Behaviour objectBehaviour) const
 	{
 		try
 		{
@@ -32,21 +32,21 @@ namespace BattleCity::Manager
 		}
 		catch (std::out_of_range& ex)
 		{
-			const auto path = PM.GetSpritePath(spriteType, objectBehaviour);
-			if(!path.empty())
-			{
-				auto sprite = createSprite(path.data());
-				AddSpriteToAtlas(sprite, spriteType, objectBehaviour);
-				return sprite;
-			}
-
 			std::cerr << ex.what() << std::endl;
 			return nullptr;
 		}
 	}
 
-	void SpriteManager::AddSpriteToAtlas(Sprite* sprite, SpriteType spriteType, Object::Behaviour objectBehaviour)
+	void SpriteManager::SetSprite(SpriteType spriteType, Object::Behaviour objectBehaviour)
 	{
+		const auto path = PM.GetSpritePath(spriteType, objectBehaviour);
+		Sprite* sprite = nullptr;
+
+		if (!path.empty())
+		{
+			sprite = createSprite(path.data());
+		}
+
 		if(mSpriteAtlas.count(spriteType) == 0)
 		{
 			SpriteObjectBehaviour spriteObjectBehaviour;
