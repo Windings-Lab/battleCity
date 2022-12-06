@@ -8,7 +8,7 @@ namespace BattleCity::Manager
 		return spriteManager;
 	}
 
-	SpriteManager::SpriteManager() : Manager(Type::Sprite)
+	SpriteManager::SpriteManager() : Manager(Behaviour::Sprite)
 	{
 
 	}

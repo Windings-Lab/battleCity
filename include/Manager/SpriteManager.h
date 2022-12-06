@@ -5,18 +5,17 @@
 
 #include "Framework.h"
 #include "Manager.h"
-#include "Object.h"
 
 namespace BattleCity::Manager
 {
-	enum class SpriteType;
-	enum class SpriteObjects;
-
-	//using SpriteAtlas = std::unordered_map<SpriteObjects, std::unordered_map<SpriteType, std::unique_ptr<Sprite>>>;
-
 	class SpriteManager final : public Manager
 	{
-		enum class SpriteType
+		enum class Behaviour;
+		enum class Type;
+
+		using SpriteAtlas = std::unordered_map<Type, std::unordered_map<Behaviour, SpriteObject>>;
+
+		enum class Behaviour
 		{
 			Error,
 			Basic,
@@ -24,26 +23,26 @@ namespace BattleCity::Manager
 			Left,
 			Right,
 			Up,
-			ExplosionL1,
-			ExplosionL2,
-			ExplosionS1,
-			ExplosionS2,
-			ExplosionS3
+			ExplosionSmall1,
+			ExplosionSmall2,
+			ExplosionSmall3,
+			ExplosionLarge1,
+			ExplosionLarge2,
 		};
 
-		enum class SpriteObjects
+		enum class Type
 		{
 			Error,
-			TankPlayer = static_cast<int>(Object::Type::TankPlayer),
-			Tank = static_cast<int>(Object::Type::Tank),
-			Bullet = static_cast<int>(Object::Type::Bullet),
-			Wall = static_cast<int>(Object::Type::Wall),
-			Explosion = static_cast<int>(Object::Type::Explosion),
-			PowerUp = static_cast<int>(Object::Type::PowerUp),
+			TankPlayer,
+			Tank,
+			Bullet,
+			Wall,
+			Explosion,
+			PowerUp,
 			Phoenix,
 			Flag,
 			Background,
-			GameOverLogo
+			GameOver
 		};
 	public:
 		static SpriteManager& GetInstance();
