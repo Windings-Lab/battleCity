@@ -10,7 +10,7 @@ namespace BattleCity
         Wall();
         ~Wall() override = default;
 
-        void Update(const float& deltaTime) override;
+        void Update() override;
 
         void EventHandler(Event& ptrEvent) override;
     };

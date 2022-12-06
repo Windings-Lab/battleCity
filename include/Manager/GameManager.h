@@ -25,15 +25,12 @@ namespace BattleCity::Manager
 		void Step();
 
 		bool GetGameOver() const;
-
-		const float& GetTime();
 	private:
 		// Singleton
 		GameManager();
 
 		bool mGameOver;
-		double mTime = 0.0f;
-		float mDeltaTime = 1.0f / 60.f;
+
 	};
 
 	inline GameManager& GM = GameManager::GetInstance();

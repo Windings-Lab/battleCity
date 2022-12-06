@@ -10,7 +10,7 @@ namespace BattleCity
     public:
         PowerUp();
 
-        void Update(const float& deltaTime) override;
+        void Update() override;
 
         void EventHandler(Event& event) override;
 	};

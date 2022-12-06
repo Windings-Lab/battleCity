@@ -24,7 +24,7 @@ namespace BattleCity
 
     Object::~Object() {}
 
-    void Object::Update(const float& deltaTime)
+    void Object::Update()
     {
         SetPosition(X() + mSpeed, Y());
     }

@@ -24,16 +24,14 @@ namespace BattleCity::Manager
 
 	void GameManager::Step()
 	{
-		WM.Step(mDeltaTime);
-		mTime += mDeltaTime;
+		using namespace std::chrono;
+		using Framerate = duration<steady_clock::rep, std::ratio<1, 60>>;
+		auto next = steady_clock::now() + Framerate{ 1 };
+		WM.Step();
 	}
 
 	bool GameManager::GetGameOver() const
 	{
 		return mGameOver;
-	}
-	const float& GameManager::GetTime()
-	{
-		return mTime;
 	}
 }

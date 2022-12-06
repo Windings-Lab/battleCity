@@ -14,7 +14,7 @@ namespace BattleCity
     {
     }
 
-    void Explosion::Update(const float& deltaTime)
+    void Explosion::Update()
     {
 
     }

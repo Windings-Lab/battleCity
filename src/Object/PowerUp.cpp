@@ -9,7 +9,7 @@ namespace BattleCity
 	{
 	}
 
-	void PowerUp::Update(const float& deltaTime)
+	void PowerUp::Update()
 	{
 
 	}

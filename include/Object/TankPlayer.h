@@ -21,7 +21,7 @@ namespace BattleCity
 		TankPlayer();
 		~TankPlayer() override;
 
-		void Update(const float& deltaTime) override;
+		void Update() override;
 
 		void Fire() override;
 

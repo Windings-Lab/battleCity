@@ -8,7 +8,7 @@ namespace BattleCity
 	{
 	}
 
-	void Wall::Update(const float& deltaTime)
+	void Wall::Update()
 	{
 
 	}
