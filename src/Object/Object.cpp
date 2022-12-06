@@ -18,7 +18,7 @@ namespace BattleCity
 
         mBulletCount = 1;
 
-        mSpeed = 1;
+        mMaxSpeed = 1;
         mDirection = Vector2Int::Zero();
     }
 
@@ -91,21 +91,21 @@ namespace BattleCity
 
 	#pragma region IMovable
 
-    void Object::SetSpeed(int speed)
+    void Object::SetMaxSpeed(int speed)
     {
-        mSpeed = speed;
+        mMaxSpeed = speed;
     }
-    const int& Object::GetSpeed() const
+    const int& Object::GetMaxSpeed() const
     {
-        return mSpeed;
+        return mMaxSpeed;
     }
 
-    void Object::SetVelocity(int velocity)
+    void Object::SetVelocity(float velocity)
     {
         mVelocity = velocity;
     }
 
-    const int& Object::GetVelocity() const
+    const float& Object::GetVelocity() const
     {
         return mVelocity;
     }
