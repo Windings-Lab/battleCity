@@ -18,10 +18,16 @@ namespace BattleCity::Manager
 
 	void SpriteManager::StartUp()
 	{
+
 	}
 	void SpriteManager::ShutDown()
 	{
 		mSpriteAtlas.clear();
+	}
+
+	const Sprite* SpriteManager::SetAndGetSprite(SpriteType spriteType, Object::Behaviour objectBehaviour)
+	{
+		return SetSprite(spriteType, objectBehaviour);
 	}
 
 	const Sprite* SpriteManager::GetSprite(SpriteType spriteType, Object::Behaviour objectBehaviour) const
@@ -37,7 +43,7 @@ namespace BattleCity::Manager
 		}
 	}
 
-	void SpriteManager::SetSprite(SpriteType spriteType, Object::Behaviour objectBehaviour)
+	const Sprite* SpriteManager::SetSprite(SpriteType spriteType, Object::Behaviour objectBehaviour)
 	{
 		const auto path = PM.GetSpritePath(spriteType, objectBehaviour);
 		Sprite* sprite = nullptr;
@@ -46,23 +52,28 @@ namespace BattleCity::Manager
 		{
 			sprite = createSprite(path.data());
 		}
+		else
+		{
+			return nullptr;
+		}
 
 		if(mSpriteAtlas.count(spriteType) == 0)
 		{
 			SpriteObjectBehaviour spriteObjectBehaviour;
 			spriteObjectBehaviour.try_emplace(objectBehaviour, sprite);
 			mSpriteAtlas.try_emplace(spriteType, std::move(spriteObjectBehaviour));
+			return sprite;
 		}
-		else
+
+		try
 		{
-			try
-			{
-				mSpriteAtlas.at(spriteType).try_emplace(objectBehaviour, sprite);
-			}
-			catch (std::out_of_range& ex)
-			{
-				std::cerr << ex.what() << std::endl;
-			}
+			mSpriteAtlas.at(spriteType).try_emplace(objectBehaviour, sprite);
+			return sprite;
+		}
+		catch (std::out_of_range& ex)
+		{
+			std::cerr << ex.what() << std::endl;
+			return nullptr;
 		}
 	}
 }

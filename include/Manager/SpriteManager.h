@@ -40,9 +40,11 @@ namespace BattleCity::Manager
 		void StartUp() override;
 		void ShutDown() override;
 
-		const Sprite* GetSprite(SpriteType spriteType, Object::Behaviour objectBehaviour) const;
-		void SetSprite(SpriteType spriteType, Object::Behaviour objectBehaviour);
+		const Sprite* SetAndGetSprite(SpriteType spriteType, Object::Behaviour objectBehaviour);
 
+	private:
+		const Sprite* GetSprite(SpriteType spriteType, Object::Behaviour objectBehaviour) const;
+		const Sprite* SetSprite(SpriteType spriteType, Object::Behaviour objectBehaviour);
 	private:
 		SpriteManager();
 
