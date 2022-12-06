@@ -42,7 +42,7 @@ namespace BattleCity
 			Explosion,
 			PowerUp
 		};
-	private:
+	protected:
 		// Object
 		Rectangle mRectangle;
 		Solidness mSolidness;
@@ -57,10 +57,12 @@ namespace BattleCity
 		// IMovable Interface
 		float mMaxSpeed;
 		float mVelocity;
+		float mForce;
+		float mMass;
 		Vector2Int mDirection;
 
 	public:
-		Object(Type type);
+		explicit Object(Type type);
 
 		Object(const Object&) = delete;
 		Object(Object&&) = delete;
@@ -73,7 +75,7 @@ namespace BattleCity
 		const int ID;
 		const Type ObjectType;
 
-		virtual void Update() = 0;
+		virtual void Update();
 		void Draw() const;
 
 		virtual void EventHandler(Event& ptrEvent) = 0;
@@ -85,6 +87,7 @@ namespace BattleCity
 		const int& X() const;
 		const int& Y() const;
 
+	protected:
 		void SetSolidness(Solidness solidness);
 		Solidness GetSolidness() const;
 
@@ -93,26 +96,32 @@ namespace BattleCity
 		#pragma endregion
 
 		#pragma region IDestroyable
-
+	public:
 		void SetHealth(int health);
 		int GetHealth() const;
 
 		#pragma endregion
 
 		#pragma region IShoot
-
+	public:
 		void IncrementBulletCount(int count = 1);
 		int GetBulletCount();
 
 		#pragma endregion
 
 		#pragma region IMovable
-
+	public:
 		void SetMaxSpeed(int speed);
 		const float& GetMaxSpeed() const;
 
 		void SetVelocity(float velocity);
 		const float& GetVelocity() const;
+
+		void SetForce(float force);
+		const float& GetForce() const;
+
+		void SetMass(float mass);
+		const float& GetMass() const;
 
 		void SetDirection(Vector2Int direction);
 		const Vector2Int& GetDirection() const;

@@ -18,15 +18,21 @@ namespace BattleCity
 
         mBulletCount = 1;
 
-        mMaxSpeed = 1;
+        mMaxSpeed = 1.0f;
+        mVelocity = 0.0f;
         mDirection = Vector2Int::Zero();
     }
 
     Object::~Object() {}
 
+    void Object::Update()
+    {
+
+    }
+
     void Object::Draw() const
     {
-	    // drawSprite
+        drawSprite(mSprite, X(), Y());
     }
 
 	#pragma region Object
@@ -108,6 +114,26 @@ namespace BattleCity
     const float& Object::GetVelocity() const
     {
         return mVelocity;
+    }
+
+    void Object::SetForce(float force)
+    {
+        mForce = force;
+    }
+
+    const float& Object::GetForce() const
+    {
+        return mForce;
+    }
+
+    void Object::SetMass(float mass)
+    {
+        mMass = mass;
+    }
+
+    const float& Object::GetMass() const
+    {
+        return mMass;
     }
 
     void Object::SetDirection(Vector2Int direction)
