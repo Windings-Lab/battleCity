@@ -48,11 +48,13 @@ namespace BattleCity::Manager
 		}
 #ifdef _DEBUG
 		OutputAllPathes();
+		std::cout << "Sprite Path Manager loaded." << std::endl;
 #endif
 	}
 
 	void SpritePathManager::ShutDown()
 	{
+		mSpritePathList.clear();
 	}
 
 	std::string SpritePathManager::GetSpritePath(SpriteManager::SpriteType spriteType, Object::Behaviour objectBehaviour) const
@@ -97,5 +99,6 @@ namespace BattleCity::Manager
 					<< magic_enum::enum_name(objectBehaviour) << ": " << path << std::endl;
 			}
 		}
+		std::cout << std::endl;
 	}
 }

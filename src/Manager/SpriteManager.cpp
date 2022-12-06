@@ -1,7 +1,7 @@
 #include "PCHeader.h"
+
 #include "SpriteManager.h"
 #include "SpritePathManager.h"
-#include "Framework.h"
 
 namespace BattleCity::Manager
 {
@@ -21,6 +21,7 @@ namespace BattleCity::Manager
 	}
 	void SpriteManager::ShutDown()
 	{
+		mSpriteAtlas.clear();
 	}
 
 	const Sprite* SpriteManager::GetSprite(SpriteType spriteType, Object::Behaviour objectBehaviour)
