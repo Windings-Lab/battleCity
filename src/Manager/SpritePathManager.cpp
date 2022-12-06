@@ -1,8 +1,6 @@
 #include "SpritePathManager.h"
 
-#include <filesystem>
 #include <iostream>
-
 #include <magic_enum.hpp>
 
 namespace BattleCity::Manager
@@ -13,19 +11,17 @@ namespace BattleCity::Manager
 		return pathManager;
 	}
 
-	SpritePathManager::SpritePathManager() : Manager(Manager::Type::SpritePath)
+	SpritePathManager::SpritePathManager() : Manager(Type::SpritePath),
+		Path(".\\data"), FileExtension(".png")
 	{
 		
 	}
 
 	void SpritePathManager::StartUp()
 	{
-		std::filesystem::path pngPath(".\\data");
-		std::filesystem::path ext(".png");
-
-		for (const auto& entry : std::filesystem::recursive_directory_iterator(pngPath))
+		for (const auto& entry : std::filesystem::recursive_directory_iterator(Path))
 		{
-			if (entry.path().extension() == ext)
+			if (entry.path().extension() == FileExtension)
 			{
 				std::string spriteTypeStr = entry.path().stem().string();
 				auto spriteTypeCast
@@ -35,7 +31,7 @@ namespace BattleCity::Manager
 				{
 					std::string spriteBehaviourStr = entry.path().parent_path().stem().string();
 					auto spriteBehaviourCast
-						= magic_enum::enum_cast<SpriteManager::SpriteBehaviour>(spriteBehaviourStr);
+						= magic_enum::enum_cast<Object::Behaviour>(spriteBehaviourStr);
 					if(spriteBehaviourCast.has_value())
 					{
 						if(mSpritePathList.count(spriteTypeCast.value()) == 0)
@@ -50,6 +46,14 @@ namespace BattleCity::Manager
 								.try_emplace(spriteBehaviourCast.value(), entry.path().string());
 						}
 					}
+					else
+					{
+						std::cerr << "No sprite behaviour value: " << spriteBehaviourStr << std::endl;
+					}
+				}
+				else
+				{
+					std::cerr << "No object type value: " << spriteTypeStr << std::endl;
 				}
 			}
 		}

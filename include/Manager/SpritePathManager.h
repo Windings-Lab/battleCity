@@ -1,19 +1,18 @@
 #pragma once
 
 #include "Manager.h"
+#include "SpriteManager.h"
 
-#include <SpriteManager.h>
-#include <string>
+#include <filesystem>
 #include <unordered_map>
 
 namespace BattleCity::Manager
 {
-	using SpriteBehaviourList = std::unordered_map<SpriteManager::SpriteBehaviour, std::string>;
+	using SpriteBehaviourList = std::unordered_map<Object::Behaviour, std::string>;
 	using SpritePathList = std::unordered_map<SpriteManager::SpriteType, SpriteBehaviourList>;
 
 	class SpritePathManager final : public Manager
 	{
-		
 	public:
 		static SpritePathManager& GetInstance();
 
@@ -33,6 +32,8 @@ namespace BattleCity::Manager
 	private:
 		SpritePathManager();
 
+		const std::filesystem::path Path;
+		const std::filesystem::path FileExtension;
 		SpritePathList mSpritePathList;
 	};
 

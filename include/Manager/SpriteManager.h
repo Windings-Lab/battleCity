@@ -5,31 +5,16 @@
 
 #include "Framework.h"
 #include "Manager.h"
+#include "Object.h"
 
 namespace BattleCity::Manager
 {
 	class SpriteManager final : public Manager
 	{
-		enum class SpriteBehaviour;
 		enum class SpriteType;
 
-		using SpriteAtlas = std::unordered_map<SpriteType, std::unordered_map<SpriteBehaviour, SpriteObject>>;
+		using SpriteAtlas = std::unordered_map<SpriteType, std::unordered_map<Object::Behaviour, SpriteObject>>;
 	public:
-		enum class SpriteBehaviour
-		{
-			Error,
-			Basic,
-			Down,
-			Left,
-			Right,
-			Up,
-			ExplosionSmall1,
-			ExplosionSmall2,
-			ExplosionSmall3,
-			ExplosionLarge1,
-			ExplosionLarge2,
-		};
-
 		enum class SpriteType
 		{
 			Error,

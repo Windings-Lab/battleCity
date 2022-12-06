@@ -11,10 +11,25 @@ namespace BattleCity
 	{
 		static int IDCounter;
 	public:
-		enum class Solidness {
+		enum class Solidness
+		{
 			Hard,       /// Object causes collisions and impedes.
 			Soft,       /// Object causes collision, but doesn't impede.
 			Spectral,   /// Object doesn't cause collisions.
+		};
+		enum class Behaviour
+		{
+			Error,
+			Basic,
+			Down,
+			Left,
+			Right,
+			Up,
+			ExplosionSmall1,
+			ExplosionSmall2,
+			ExplosionSmall3,
+			ExplosionLarge1,
+			ExplosionLarge2,
 		};
 		enum class Type
 		{
