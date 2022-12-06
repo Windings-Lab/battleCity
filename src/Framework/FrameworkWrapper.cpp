@@ -5,6 +5,7 @@
 #include "Screen.h"
 #include "SpriteManager.h"
 #include "SpritePathManager.h"
+#include "WorldManager.h"
 
 namespace BattleCity
 {
@@ -28,8 +29,6 @@ namespace BattleCity
 
 	bool FrameworkWrapper::Tick()
 	{
-		return false;
-
 		Manager::GM.Step();
 		return Manager::GM.GetGameOver();
 	}
@@ -59,14 +58,14 @@ namespace BattleCity
 	{
 		Manager::PM.StartUp();
 		Manager::SM.StartUp();
-		//Manager::GM.StartUp();
-		//Manager::WM.StartUp();
+		Manager::GM.StartUp();
+		Manager::WM.StartUp();
 	}
 
 	void FrameworkWrapper::ShutDownAllManagers()
 	{
-		//Manager::WM.ShutDown();
-		//Manager::GM.ShutDown();
+		Manager::WM.ShutDown();
+		Manager::GM.ShutDown();
 		Manager::SM.ShutDown();
 		Manager::PM.ShutDown();
 	}

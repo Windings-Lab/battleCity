@@ -3,13 +3,16 @@
 #include "Bullet.h"
 
 #include "Explosion.h"
+#include "SpriteManager.h"
 #include "WorldManager.h"
 
 namespace BattleCity
 {
 	Bullet::Bullet(Type ownerType) : Object(Type::Bullet), mOwnerType(ownerType)
 	{
+		mSprite = Manager::SM.SetAndGetSprite(Manager::SpriteManager::SpriteType::Tank, Behaviour::Right);
 	}
+
 	Bullet::~Bullet()
 	{
 	}

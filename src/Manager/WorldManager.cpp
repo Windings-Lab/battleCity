@@ -2,11 +2,13 @@
 
 #include "WorldManager.h"
 
+#include "Bullet.h"
+#include "Screen.h"
 #include "TankPlayer.h"
 
 namespace BattleCity::Manager
 {
-		WorldManager& WorldManager::GetInstance()
+	WorldManager& WorldManager::GetInstance()
 	{
 		static WorldManager single;
 		return single;
@@ -18,9 +20,13 @@ namespace BattleCity::Manager
 
 	void WorldManager::StartUp()
 	{
-		std::unique_ptr<Object> player = std::make_unique<TankPlayer>();
-		mPlayerID = player->ID;
-		WM.InsertObject(player);
+		// std::unique_ptr<Object> player = std::make_unique<TankPlayer>();
+		// mPlayerID = player->ID;
+		// WM.InsertObject(player);
+
+		std::unique_ptr<Object> bullet = std::make_unique<Bullet>(Object::Type::Error);
+		bullet->SetPosition(0, SCR.GetHeight() / 2);
+		WM.InsertObject(bullet);
 	}
 	void WorldManager::ShutDown()
 	{
@@ -29,8 +35,7 @@ namespace BattleCity::Manager
 
 	void WorldManager::Step()
 	{
-		// Step All
-		// Move All
+		Update();
 		// Delete All
 		Draw();
 	}
@@ -40,6 +45,14 @@ namespace BattleCity::Manager
 		for (auto& [id, obj] : mWorldList.GetRange())
 		{
 			obj->Draw();
+		}
+	}
+
+	void WorldManager::Update()
+	{
+		for (auto& [id, obj] : mWorldList.GetRange())
+		{
+			obj->Update();
 		}
 	}
 
