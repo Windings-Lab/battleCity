@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="PathManager.cpp" />
     <ClCompile Include="src\Collision\Rectangle.cpp" />
     <ClCompile Include="src\Event\Event.cpp" />
     <ClCompile Include="src\Event\EventCollision.cpp" />
@@ -66,6 +67,7 @@
     <ClInclude Include="include\Object\Wall.h" />
     <ClInclude Include="include\Utility\Utility.h" />
     <ClInclude Include="include\Utility\Vector2Int.h" />
+    <ClInclude Include="PathManager.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />

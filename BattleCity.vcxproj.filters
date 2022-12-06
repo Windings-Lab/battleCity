@@ -65,6 +65,9 @@
     <ClCompile Include="src\Manager\SpriteManager.cpp">
       <Filter>Source\Manager</Filter>
     </ClCompile>
+    <ClCompile Include="PathManager.cpp">
+      <Filter>Source\Manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Object\Bullet.h">
@@ -134,6 +137,9 @@
       <Filter>Headers\Utility</Filter>
     </ClInclude>
     <ClInclude Include="include\Manager\WorldManager.h">
+      <Filter>Headers\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="PathManager.h">
       <Filter>Headers\Manager</Filter>
     </ClInclude>
   </ItemGroup>
