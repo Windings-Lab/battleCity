@@ -1,7 +1,6 @@
-#include "Rectangle.h"
+#include "PCHeader.h"
 
-#include <algorithm>
-#include <cmath>
+#include "Rectangle.h"
 
 namespace BattleCity
 {

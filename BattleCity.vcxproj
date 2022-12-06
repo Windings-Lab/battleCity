@@ -41,6 +41,11 @@
     <ClCompile Include="src\Object\Tank.cpp" />
     <ClCompile Include="src\Object\TankPlayer.cpp" />
     <ClCompile Include="src\Object\Wall.cpp" />
+    <ClCompile Include="src\PCHeader.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </PrecompiledHeaderFile>
+    </ClCompile>
     <ClCompile Include="src\Utility\Vector2Int.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -66,6 +71,7 @@
     <ClInclude Include="include\Object\Tank.h" />
     <ClInclude Include="include\Object\TankPlayer.h" />
     <ClInclude Include="include\Object\Wall.h" />
+    <ClInclude Include="include\PCHeader.h" />
     <ClInclude Include="include\Utility\magic_enum.hpp" />
     <ClInclude Include="include\Utility\Utility.h" />
     <ClInclude Include="include\Utility\Vector2Int.h" />
@@ -178,6 +184,8 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)include\;$(ProjectDir)include\Collision\;$(ProjectDir)include\Event\;$(ProjectDir)include\Framework\;$(ProjectDir)include\Manager\;$(ProjectDir)include\Object\;$(ProjectDir)include\Utility\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <PrecompiledHeaderFile>PCHeader.h</PrecompiledHeaderFile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

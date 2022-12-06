@@ -1,10 +1,6 @@
+#include "PCHeader.h"
 #include "FrameworkWrapper.h"
 #include "Screen.h"
-
-#include <filesystem>
-#include <iostream>
-#include <sstream>
-#include <string>
 
 void ShowUsage()
 {

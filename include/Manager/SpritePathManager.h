@@ -1,10 +1,9 @@
 #pragma once
 
+#include "PCHeader.h"
+
 #include "Manager.h"
 #include "SpriteManager.h"
-
-#include <filesystem>
-#include <unordered_map>
 
 namespace BattleCity::Manager
 {

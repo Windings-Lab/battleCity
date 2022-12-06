@@ -1,3 +1,5 @@
+#include "PCHeader.h"
+
 #include "Screen.h"
 
 Screen::Screen() : mFullscreen(false)

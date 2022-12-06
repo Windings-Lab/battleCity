@@ -1,5 +1,5 @@
+#include "PCHeader.h"
 #include "EventStep.h"
-#include "GameManager.h"
 
 namespace BattleCity
 {

@@ -1,3 +1,5 @@
+#include "PCHeader.h"
+
 #include "Manager.h"
 
 namespace BattleCity::Manager

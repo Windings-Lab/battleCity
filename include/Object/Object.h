@@ -2,8 +2,8 @@
 
 #include "Event.h"
 #include "Framework.h"
-#include "Vector2Int.h"
 #include "Rectangle.h"
+#include "Vector2Int.h"
 
 namespace BattleCity
 {

@@ -2,8 +2,6 @@
 
 namespace BattleCity::Manager
 {
-
-
 	class Manager
 	{
 	protected:

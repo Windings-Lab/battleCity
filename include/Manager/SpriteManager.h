@@ -1,8 +1,5 @@
 #pragma once
 
-#include <memory>
-#include <unordered_map>
-
 #include "Framework.h"
 #include "Manager.h"
 #include "Object.h"

@@ -1,3 +1,5 @@
+#include "PCHeader.h"
+
 #include "Explosion.h"
 #include "EventStep.h"
 #include "WorldManager.h"

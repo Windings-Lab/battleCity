@@ -1,8 +1,5 @@
+#include "PCHeader.h"
 #include "SpritePathManager.h"
-
-#include <iostream>
-#include <magic_enum.hpp>
-#include <string>
 
 namespace BattleCity::Manager
 {
