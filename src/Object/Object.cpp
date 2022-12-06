@@ -95,7 +95,7 @@ namespace BattleCity
     {
         mMaxSpeed = speed;
     }
-    const int& Object::GetMaxSpeed() const
+    const float& Object::GetMaxSpeed() const
     {
         return mMaxSpeed;
     }
