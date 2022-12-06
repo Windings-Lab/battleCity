@@ -100,6 +100,16 @@ namespace BattleCity
         return mSpeed;
     }
 
+    void Object::SetVelocity(int velocity)
+    {
+        mVelocity = velocity;
+    }
+
+    const int& Object::GetVelocity() const
+    {
+        return mVelocity;
+    }
+
     void Object::SetDirection(Vector2Int direction)
     {
         mDirection = std::move(direction);

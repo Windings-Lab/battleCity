@@ -56,6 +56,7 @@ namespace BattleCity
 
 		// IMovable Interface
 		int mSpeed;
+		int mVelocity;
 		Vector2Int mDirection;
 
 	public:
@@ -109,6 +110,9 @@ namespace BattleCity
 
 		void SetSpeed(int speed);
 		const int& GetSpeed() const;
+
+		void SetVelocity(int velocity);
+		const int& GetVelocity() const;
 
 		void SetDirection(Vector2Int direction);
 		const Vector2Int& GetDirection() const;
