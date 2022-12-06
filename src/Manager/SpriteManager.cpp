@@ -25,9 +25,9 @@ namespace BattleCity::Manager
 		mSpriteAtlas.clear();
 	}
 
-	const Sprite* SpriteManager::SetAndGetSprite(SpriteType spriteType, Object::Behaviour objectBehaviour)
+	Sprite* SpriteManager::SetAndGetSprite(SpriteType spriteType, Object::Behaviour objectBehaviour)
 	{
-		return SetSprite(spriteType, objectBehaviour);
+		return const_cast<Sprite*>(SetSprite(spriteType, objectBehaviour));
 	}
 
 	const Sprite* SpriteManager::GetSprite(SpriteType spriteType, Object::Behaviour objectBehaviour) const
