@@ -46,6 +46,9 @@ namespace BattleCity::Manager
 				}
 			}
 		}
+#ifdef _DEBUG
+		OutputAllPathes();
+#endif
 	}
 
 	void SpritePathManager::ShutDown()
@@ -81,6 +84,17 @@ namespace BattleCity::Manager
 			catch (std::out_of_range& ex)
 			{
 				std::cerr << ex.what() << std::endl;
+			}
+		}
+	}
+	void SpritePathManager::OutputAllPathes()
+	{
+		for (auto& [spriteType, list] : mSpritePathList)
+		{
+			for (auto& [objectBehaviour, path] : list)
+			{
+				std::cout << magic_enum::enum_name(spriteType) << " - "
+					<< magic_enum::enum_name(objectBehaviour) << ": " << path << std::endl;
 			}
 		}
 	}
