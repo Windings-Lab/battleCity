@@ -26,8 +26,12 @@ namespace BattleCity::Manager
 	{
 		using namespace std::chrono;
 		using Framerate = duration<steady_clock::rep, std::ratio<1, 60>>;
-		auto next = steady_clock::now() + Framerate{ 1 };
+		mNextFrame = steady_clock::now() + Framerate{ 1 };
+
 		WM.Step();
+
+		std::this_thread::sleep_until(mNextFrame);
+		mNextFrame += Framerate{ 1 };
 	}
 
 	bool GameManager::GetGameOver() const

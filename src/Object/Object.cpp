@@ -18,7 +18,7 @@ namespace BattleCity
 
         mBulletCount = 1;
 
-        mSpeed = 1.0f;
+        mSpeed = 2;
         mDirection = Vector2Int::Zero();
     }
 
