@@ -38,6 +38,7 @@ namespace BattleCity::Manager
 		std::unordered_set<int> GetObjectsOfType(Object::Type type) const;
 	private:
 		void Draw();
+		void Update();
 
 	private:
 		// Singleton
