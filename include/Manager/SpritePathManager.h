@@ -8,7 +8,8 @@
 
 namespace BattleCity::Manager
 {
-	using SpritePathList = std::unordered_map<SpriteManager::SpriteType, std::unordered_map<SpriteManager::SpriteBehaviour, std::string>>;
+	using SpriteBehaviourList = std::unordered_map<SpriteManager::SpriteBehaviour, std::string>;
+	using SpritePathList = std::unordered_map<SpriteManager::SpriteType, SpriteBehaviourList>;
 
 	class SpritePathManager final : public Manager
 	{
