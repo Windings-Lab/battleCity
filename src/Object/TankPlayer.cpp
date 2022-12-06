@@ -13,7 +13,7 @@ namespace BattleCity
 
 	}
 
-	void TankPlayer::Update(float)
+	void TankPlayer::Update(const float& deltaTime)
 	{
 
 	}

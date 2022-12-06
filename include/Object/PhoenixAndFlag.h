@@ -11,7 +11,7 @@ namespace BattleCity
     public:
         PhoenixAndFlag(float x, float y);
 
-        void Update(float) override;
+        void Update(const float& deltaTime) override;
 
         void EventHandler(Event& event) override;
 	private:

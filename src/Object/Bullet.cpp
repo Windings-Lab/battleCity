@@ -27,9 +27,9 @@ namespace BattleCity
 
 	}
 
-	void Bullet::Update(float)
+	void Bullet::Update(const float& deltaTime)
 	{
-
+		__super::Update(deltaTime);
 	}
 
 	void Bullet::EventHandler(Event& myEvent)

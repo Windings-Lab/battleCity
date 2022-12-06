@@ -27,10 +27,12 @@ namespace BattleCity
 
     Object::~Object() {}
 
-    void Object::Update(float deltaTime)
+    void Object::Update(const float& deltaTime)
     {
         SetPosition(X() + static_cast<int>(mVelocity * deltaTime), Y());
         mVelocity += (mForce / mMass) * deltaTime;
+
+        std::cout << "position = " << X() << "\tvelocity = " << mVelocity << std::endl;
     }
 
     void Object::Draw() const

@@ -19,7 +19,7 @@ namespace BattleCity
 
         ~Bullet() override;
 
-        void Update(float) override;
+        void Update(const float& deltaTime) override;
 
         void EventHandler(Event& myEvent) override;
     private:

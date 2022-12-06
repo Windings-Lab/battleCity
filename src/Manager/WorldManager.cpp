@@ -3,6 +3,7 @@
 #include "WorldManager.h"
 
 #include "Bullet.h"
+#include "GameManager.h"
 #include "Screen.h"
 #include "TankPlayer.h"
 
@@ -33,9 +34,12 @@ namespace BattleCity::Manager
 		mWorldList.Clear();
 	}
 
-	void WorldManager::Step(float deltaTime)
+	void WorldManager::Step(const float& deltaTime)
 	{
-		Update(deltaTime);
+		if(GM.GetTime() < 10.0f)
+		{
+			Update(deltaTime);
+		}
 		// Delete All
 		Draw();
 	}
@@ -48,7 +52,7 @@ namespace BattleCity::Manager
 		}
 	}
 
-	void WorldManager::Update(float deltaTime)
+	void WorldManager::Update(const float& deltaTime)
 	{
 		for (auto& [id, obj] : mWorldList.GetRange())
 		{

@@ -13,7 +13,7 @@ namespace BattleCity
 
 	}
 
-	void PhoenixAndFlag::Update(float)
+	void PhoenixAndFlag::Update(const float& deltaTime)
 	{
 
 	}
