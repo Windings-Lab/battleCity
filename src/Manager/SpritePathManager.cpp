@@ -70,7 +70,7 @@ namespace BattleCity::Manager
 		{
 			SpriteObjectBehaviourPath behaviourMap;
 			behaviourMap.try_emplace(objectBehaviour, path);
-			mSpritePathList.try_emplace(spriteType, behaviourMap);
+			mSpritePathList.try_emplace(spriteType, std::move(behaviourMap));
 		}
 		else
 		{

@@ -1,6 +1,7 @@
 #include "PCHeader.h"
 #include "SpriteManager.h"
 #include "SpritePathManager.h"
+#include "Framework.h"
 
 namespace BattleCity::Manager
 {
@@ -34,30 +35,28 @@ namespace BattleCity::Manager
 			if(!path.empty())
 			{
 				auto sprite = createSprite(path.data());
-				SpriteObject spritePtr(sprite);
-				AddSpriteToAtlas(spritePtr, spriteType, objectBehaviour);
+				AddSpriteToAtlas(sprite, spriteType, objectBehaviour);
+				return sprite;
 			}
-			else
-			{
-				std::cerr << ex.what() << std::endl;
-				return nullptr;
-			}
+
+			std::cerr << ex.what() << std::endl;
+			return nullptr;
 		}
 	}
 
-	void SpriteManager::AddSpriteToAtlas(SpriteObject& sprite, SpriteType spriteType, Object::Behaviour objectBehaviour)
+	void SpriteManager::AddSpriteToAtlas(Sprite* sprite, SpriteType spriteType, Object::Behaviour objectBehaviour)
 	{
 		if(mSpriteAtlas.count(spriteType) == 0)
 		{
 			SpriteObjectBehaviour spriteObjectBehaviour;
-			spriteObjectBehaviour.try_emplace(objectBehaviour, std::move(sprite));
-			mSpriteAtlas.try_emplace(spriteType, spriteObjectBehaviour);
+			spriteObjectBehaviour.try_emplace(objectBehaviour, sprite);
+			mSpriteAtlas.try_emplace(spriteType, std::move(spriteObjectBehaviour));
 		}
 		else
 		{
 			try
 			{
-				mSpriteAtlas.at(spriteType).try_emplace(objectBehaviour, std::move(sprite));
+				mSpriteAtlas.at(spriteType).try_emplace(objectBehaviour, sprite);
 			}
 			catch (std::out_of_range& ex)
 			{

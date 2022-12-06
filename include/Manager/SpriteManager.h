@@ -8,10 +8,6 @@ namespace BattleCity::Manager
 {
 	class SpriteManager final : public Manager
 	{
-		enum class SpriteType;
-
-		using SpriteObjectBehaviour = std::unordered_map<Object::Behaviour, SpriteObject>;
-		using SpriteAtlas = std::unordered_map<SpriteType, SpriteObjectBehaviour>;
 	public:
 		enum class SpriteType
 		{
@@ -27,6 +23,9 @@ namespace BattleCity::Manager
 			Background,
 			GameOver
 		};
+
+		using SpriteObjectBehaviour = std::unordered_map<Object::Behaviour, SpriteObject>;
+		using SpriteAtlas = std::unordered_map<SpriteType, SpriteObjectBehaviour>;
 	public:
 		static SpriteManager& GetInstance();
 
@@ -42,7 +41,7 @@ namespace BattleCity::Manager
 		void ShutDown() override;
 
 		const Sprite* GetSprite(SpriteType spriteType, Object::Behaviour objectBehaviour);
-		void AddSpriteToAtlas(SpriteObject& sprite, SpriteType spriteType, Object::Behaviour objectBehaviour);
+		void AddSpriteToAtlas(Sprite* sprite, SpriteType spriteType, Object::Behaviour objectBehaviour);
 
 	private:
 		SpriteManager();
