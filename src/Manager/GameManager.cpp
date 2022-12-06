@@ -25,17 +25,8 @@ namespace BattleCity::Manager
 	void GameManager::Step()
 	{
 		WM.Step();
-		WM.Draw();
 	}
 
-	void GameManager::SetGameOverState()
-	{
-		mGameOverState = true;
-	}
-	bool GameManager::GetGameOverState() const
-	{
-		return mGameOverState;
-	}
 	bool GameManager::GetGameOver() const
 	{
 		return mGameOver;

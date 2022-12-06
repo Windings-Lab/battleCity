@@ -21,11 +21,8 @@ namespace BattleCity::Manager
 	public:
 		void StartUp() override;
 		void ShutDown() override;
-
+	public:
 		void Step();
-
-		void SetGameOverState();
-		bool GetGameOverState() const;
 
 		bool GetGameOver() const;
 	private:

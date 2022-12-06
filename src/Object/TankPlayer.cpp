@@ -26,6 +26,6 @@ namespace BattleCity
 
 	TankPlayer::~TankPlayer()
 	{
-		Manager::GM.SetGameOverState();
+		
 	}
 }

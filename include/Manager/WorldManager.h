@@ -21,12 +21,11 @@ namespace BattleCity::Manager
 		void operator=(WorldManager&&) = delete;
 
 		~WorldManager() override = default;
-
+	public:
 		void StartUp() override;
 		void ShutDown() override;
-
+	public:
 		void Step();
-		void Draw();
 
 		Object& GetObject(int id);
 
@@ -37,6 +36,9 @@ namespace BattleCity::Manager
 		const std::unordered_set<int>& GetMovableObjects() const;
 		// Expensive
 		std::unordered_set<int> GetObjectsOfType(Object::Type type) const;
+	private:
+		void Draw();
+
 	private:
 		// Singleton
 		WorldManager();

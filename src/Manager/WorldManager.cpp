@@ -32,10 +32,15 @@ namespace BattleCity::Manager
 		// Step All
 		// Move All
 		// Delete All
-		// Draw All
+		Draw();
 	}
+
 	void WorldManager::Draw()
 	{
+		for (auto& [id, obj] : mWorldList.GetRange())
+		{
+			obj->Draw();
+		}
 	}
 
 	Object& WorldManager::GetObject(int id)
