@@ -24,15 +24,16 @@ namespace BattleCity::Manager
 
 	void GameManager::Step()
 	{
-		if(mTime != 10.0)
-		{
-			WM.Step(mDeltaTime);
-			mTime += mDeltaTime;
-		}
+		WM.Step(mDeltaTime);
+		mTime += mDeltaTime;
 	}
 
 	bool GameManager::GetGameOver() const
 	{
 		return mGameOver;
+	}
+	const float& GameManager::GetTime()
+	{
+		return mTime;
 	}
 }

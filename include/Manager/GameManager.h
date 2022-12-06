@@ -25,6 +25,8 @@ namespace BattleCity::Manager
 		void Step();
 
 		bool GetGameOver() const;
+
+		const float& GetTime();
 	private:
 		// Singleton
 		GameManager();
