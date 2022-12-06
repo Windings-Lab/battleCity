@@ -6,7 +6,7 @@
 
 namespace BattleCity::Manager
 {
-	WorldManager& WorldManager::GetInstance()
+		WorldManager& WorldManager::GetInstance()
 	{
 		static WorldManager single;
 		return single;

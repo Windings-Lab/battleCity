@@ -1,7 +1,6 @@
 #include "PCHeader.h"
 
 #include "TankPlayer.h"
-#include "GameManager.h"
 
 namespace BattleCity
 {
