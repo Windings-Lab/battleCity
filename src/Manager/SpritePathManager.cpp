@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <magic_enum.hpp>
+#include <string>
 
 namespace BattleCity::Manager
 {
@@ -23,9 +24,9 @@ namespace BattleCity::Manager
 		{
 			if (entry.path().extension() == FileExtension)
 			{
-				std::string spriteTypeStr = entry.path().stem().string();
+				std::string objectTypeStr = entry.path().stem().string();
 				auto spriteTypeCast
-					= magic_enum::enum_cast<SpriteManager::SpriteType>(spriteTypeStr);
+					= magic_enum::enum_cast<SpriteManager::SpriteType>(objectTypeStr);
 
 				if(spriteTypeCast.has_value())
 				{
@@ -53,7 +54,7 @@ namespace BattleCity::Manager
 				}
 				else
 				{
-					std::cerr << "No object type value: " << spriteTypeStr << std::endl;
+					std::cerr << "No object type value: " << objectTypeStr << std::endl;
 				}
 			}
 		}
