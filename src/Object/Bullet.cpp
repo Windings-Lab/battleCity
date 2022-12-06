@@ -27,7 +27,7 @@ namespace BattleCity
 
 	}
 
-	void Bullet::Update()
+	void Bullet::Update(float)
 	{
 
 	}

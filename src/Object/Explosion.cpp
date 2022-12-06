@@ -14,7 +14,7 @@ namespace BattleCity
     {
     }
 
-    void Explosion::Update()
+    void Explosion::Update(float)
     {
 
     }

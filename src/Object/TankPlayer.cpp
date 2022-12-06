@@ -13,7 +13,7 @@ namespace BattleCity
 
 	}
 
-	void TankPlayer::Update()
+	void TankPlayer::Update(float)
 	{
 
 	}

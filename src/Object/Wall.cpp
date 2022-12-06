@@ -8,7 +8,7 @@ namespace BattleCity
 	{
 	}
 
-	void Wall::Update()
+	void Wall::Update(float)
 	{
 
 	}

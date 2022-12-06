@@ -13,7 +13,7 @@ namespace BattleCity
 
 	}
 
-	void PhoenixAndFlag::Update()
+	void PhoenixAndFlag::Update(float)
 	{
 
 	}

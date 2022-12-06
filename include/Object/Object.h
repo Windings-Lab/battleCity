@@ -75,7 +75,7 @@ namespace BattleCity
 		const int ID;
 		const Type ObjectType;
 
-		virtual void Update();
+		virtual void Update(float deltaTime);
 		void Draw() const;
 
 		virtual void EventHandler(Event& ptrEvent) = 0;

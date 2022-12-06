@@ -25,7 +25,7 @@ namespace BattleCity::Manager
 		void StartUp() override;
 		void ShutDown() override;
 	public:
-		void Step();
+		void Step(float deltaTime);
 
 		Object& GetObject(int id);
 
@@ -37,8 +37,9 @@ namespace BattleCity::Manager
 		// Expensive
 		std::unordered_set<int> GetObjectsOfType(Object::Type type) const;
 	private:
+		void Update(float deltaTime);
 		void Draw();
-		void Update();
+
 
 	private:
 		// Singleton

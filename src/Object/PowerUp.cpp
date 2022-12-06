@@ -9,7 +9,7 @@ namespace BattleCity
 	{
 	}
 
-	void PowerUp::Update()
+	void PowerUp::Update(float)
 	{
 
 	}

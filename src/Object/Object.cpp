@@ -20,14 +20,17 @@ namespace BattleCity
 
         mMaxSpeed = 1.0f;
         mVelocity = 0.0f;
+        mForce = 10.0f;
+        mMass = 1.0f;
         mDirection = Vector2Int::Zero();
     }
 
     Object::~Object() {}
 
-    void Object::Update()
+    void Object::Update(float deltaTime)
     {
-
+        SetPosition(X() + static_cast<int>(mVelocity * deltaTime), Y());
+        mVelocity += (mForce / mMass) * deltaTime;
     }
 
     void Object::Draw() const

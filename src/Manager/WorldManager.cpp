@@ -33,9 +33,9 @@ namespace BattleCity::Manager
 		mWorldList.Clear();
 	}
 
-	void WorldManager::Step()
+	void WorldManager::Step(float deltaTime)
 	{
-		Update();
+		Update(deltaTime);
 		// Delete All
 		Draw();
 	}
@@ -48,11 +48,11 @@ namespace BattleCity::Manager
 		}
 	}
 
-	void WorldManager::Update()
+	void WorldManager::Update(float deltaTime)
 	{
 		for (auto& [id, obj] : mWorldList.GetRange())
 		{
-			obj->Update();
+			obj->Update(deltaTime);
 		}
 	}
 
