@@ -66,6 +66,7 @@
     <ClInclude Include="include\Object\Tank.h" />
     <ClInclude Include="include\Object\TankPlayer.h" />
     <ClInclude Include="include\Object\Wall.h" />
+    <ClInclude Include="include\Utility\magic_enum.hpp" />
     <ClInclude Include="include\Utility\Utility.h" />
     <ClInclude Include="include\Utility\Vector2Int.h" />
   </ItemGroup>
