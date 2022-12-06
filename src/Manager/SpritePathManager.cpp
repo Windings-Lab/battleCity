@@ -10,7 +10,8 @@ namespace BattleCity::Manager
 	}
 
 	SpritePathManager::SpritePathManager() : Manager(Type::SpritePath),
-		Path(".\\data"), FileExtension(".png")
+		Path(".\\data"), FileExtension(".png"),
+		mSpritePathList(0)
 	{
 		
 	}
@@ -32,17 +33,7 @@ namespace BattleCity::Manager
 						= magic_enum::enum_cast<Object::Behaviour>(spriteBehaviourStr);
 					if(spriteBehaviourCast.has_value())
 					{
-						if(mSpritePathList.count(objectTypeCast.value()) == 0)
-						{
-							SpriteBehaviourList behaviourMap;
-							behaviourMap.try_emplace(spriteBehaviourCast.value(), entry.path().string());
-							mSpritePathList.try_emplace(objectTypeCast.value(), behaviourMap);
-						}
-						else
-						{
-							mSpritePathList.at(objectTypeCast.value())
-								.try_emplace(spriteBehaviourCast.value(), entry.path().string());
-						}
+						SetSpritePath(entry.path().string(), objectTypeCast.value(), spriteBehaviourCast.value());
 					}
 					else
 					{
@@ -61,16 +52,36 @@ namespace BattleCity::Manager
 	{
 	}
 
-	const std::filesystem::path* SpritePathManager::GetSpritePath(SpriteManager::SpriteType spriteType, Object::Behaviour objectBehaviour) const
+	std::string SpritePathManager::GetSpritePath(SpriteManager::SpriteType spriteType, Object::Behaviour objectBehaviour) const
 	{
 		try
 		{
-			return &mSpritePathList.at(spriteType).at(objectBehaviour);
+			return mSpritePathList.at(spriteType).at(objectBehaviour).string();
 		}
 		catch (std::out_of_range& ex)
 		{
 			std::cerr << ex.what() << std::endl;
-			return nullptr;
+			return "";
+		}
+	}
+	void SpritePathManager::SetSpritePath(std::string path, SpriteManager::SpriteType spriteType, Object::Behaviour objectBehaviour)
+	{
+		if (mSpritePathList.count(spriteType) == 0)
+		{
+			SpriteObjectBehaviourPath behaviourMap;
+			behaviourMap.try_emplace(objectBehaviour, path);
+			mSpritePathList.try_emplace(spriteType, std::move(behaviourMap));
+		}
+		else
+		{
+			try
+			{
+				mSpritePathList.at(spriteType).try_emplace(objectBehaviour, path);
+			}
+			catch (std::out_of_range& ex)
+			{
+				std::cerr << ex.what() << std::endl;
+			}
 		}
 	}
 }
