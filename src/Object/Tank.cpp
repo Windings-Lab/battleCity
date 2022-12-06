@@ -7,4 +7,7 @@
 namespace BattleCity
 {
 	Tank::Tank(Type type) : Object(type) {	}
+	Tank::~Tank()
+	{
+	}
 }

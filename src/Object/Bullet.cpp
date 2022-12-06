@@ -3,12 +3,14 @@
 #include "Bullet.h"
 
 #include "Explosion.h"
-#include "GameManager.h"
 #include "WorldManager.h"
 
 namespace BattleCity
 {
 	Bullet::Bullet(Type ownerType) : Object(Type::Bullet), mOwnerType(ownerType)
+	{
+	}
+	Bullet::~Bullet()
 	{
 	}
 
