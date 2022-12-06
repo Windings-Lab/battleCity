@@ -3,6 +3,7 @@
 #include "FrameworkWrapper.h"
 #include "GameManager.h"
 #include "Screen.h"
+#include "SpriteManager.h"
 #include "SpritePathManager.h"
 
 namespace BattleCity
@@ -57,15 +58,16 @@ namespace BattleCity
 	void FrameworkWrapper::StartAllManagers()
 	{
 		Manager::PM.StartUp();
+		Manager::SM.StartUp();
 		//Manager::GM.StartUp();
 		//Manager::WM.StartUp();
 	}
 
 	void FrameworkWrapper::ShutDownAllManagers()
 	{
-
 		//Manager::WM.ShutDown();
 		//Manager::GM.ShutDown();
+		Manager::SM.ShutDown();
 		Manager::PM.ShutDown();
 	}
 }
