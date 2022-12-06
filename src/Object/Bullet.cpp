@@ -38,13 +38,4 @@ namespace BattleCity
 		{
 		}
 	}
-
-	Bullet::~Bullet()
-	{
-		if (Manager::GM.GetGameOver()) return; // TODO: Fix
-		std::unique_ptr<Object> newExp = std::make_unique<Explosion>(false);
-		newExp->SetPosition(X(), Y());
-
-		Manager::WM.InsertObject(newExp);
-	}
 }

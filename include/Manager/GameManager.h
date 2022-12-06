@@ -30,7 +30,6 @@ namespace BattleCity::Manager
 		GameManager();
 
 		bool mGameOver;
-		bool mGameOverState;
 	};
 
 	inline GameManager& GM = GameManager::GetInstance();
