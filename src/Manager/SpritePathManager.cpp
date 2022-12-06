@@ -25,25 +25,25 @@ namespace BattleCity::Manager
 			if (entry.path().extension() == FileExtension)
 			{
 				std::string objectTypeStr = entry.path().stem().string();
-				auto spriteTypeCast
+				auto objectTypeCast
 					= magic_enum::enum_cast<SpriteManager::SpriteType>(objectTypeStr);
 
-				if(spriteTypeCast.has_value())
+				if(objectTypeCast.has_value())
 				{
 					std::string spriteBehaviourStr = entry.path().parent_path().stem().string();
 					auto spriteBehaviourCast
 						= magic_enum::enum_cast<Object::Behaviour>(spriteBehaviourStr);
 					if(spriteBehaviourCast.has_value())
 					{
-						if(mSpritePathList.count(spriteTypeCast.value()) == 0)
+						if(mSpritePathList.count(objectTypeCast.value()) == 0)
 						{
-							SpriteBehaviourList testBehaviourList;
-							testBehaviourList.try_emplace(spriteBehaviourCast.value(), entry.path().string());
-							mSpritePathList.try_emplace(spriteTypeCast.value(), testBehaviourList);
+							SpriteBehaviourList behaviourMap;
+							behaviourMap.try_emplace(spriteBehaviourCast.value(), entry.path().string());
+							mSpritePathList.try_emplace(objectTypeCast.value(), behaviourMap);
 						}
 						else
 						{
-							mSpritePathList.at(spriteTypeCast.value())
+							mSpritePathList.at(objectTypeCast.value())
 								.try_emplace(spriteBehaviourCast.value(), entry.path().string());
 						}
 					}
@@ -64,8 +64,16 @@ namespace BattleCity::Manager
 	{
 	}
 
-	const SpritePathList& SpritePathManager::GetSpritePathList() const
+	const std::filesystem::path* SpritePathManager::GetSpritePath(SpriteManager::SpriteType spriteType, Object::Behaviour objectBehaviour) const
 	{
-		return mSpritePathList;
+		try
+		{
+			return &mSpritePathList.at(spriteType).at(objectBehaviour);
+		}
+		catch (std::out_of_range& ex)
+		{
+			std::cerr << ex.what() << std::endl;
+			return nullptr;
+		}
 	}
 }
