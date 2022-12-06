@@ -1,6 +1,7 @@
 #include "FrameworkWrapper.h"
 
 #include "GameManager.h"
+#include "SpritePathManager.h"
 #include "Screen.h"
 #include "WorldManager.h"
 
@@ -26,6 +27,8 @@ namespace BattleCity
 
 	bool FrameworkWrapper::Tick()
 	{
+		return false;
+
 		Manager::GM.Step();
 		return Manager::GM.GetGameOver();
 	}
@@ -53,14 +56,16 @@ namespace BattleCity
 
 	void FrameworkWrapper::StartAllManagers()
 	{
-		Manager::GM.StartUp();
-		Manager::WM.StartUp();
+		Manager::PM.StartUp();
+		//Manager::GM.StartUp();
+		//Manager::WM.StartUp();
 	}
 
 	void FrameworkWrapper::ShutDownAllManagers()
 	{
-		Manager::GM.ShutDown();
-		Manager::WM.ShutDown();
-		// Deallocate all sprites
+
+		//Manager::WM.ShutDown();
+		//Manager::GM.ShutDown();
+		Manager::PM.ShutDown();
 	}
 }

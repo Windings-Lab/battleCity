@@ -12,7 +12,8 @@ namespace BattleCity::Manager
 			Error = 0,
 			Game,
 			World,
-			Sprite
+			Sprite,
+			SpritePath
 		};
 		explicit Manager(Type);
 	public:
