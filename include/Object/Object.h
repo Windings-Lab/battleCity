@@ -55,10 +55,7 @@ namespace BattleCity
 		int mBulletCount;
 
 		// IMovable Interface
-		float mMaxSpeed;
-		float mVelocity;
-		float mForce;
-		float mMass;
+		int mSpeed;
 		Vector2Int mDirection;
 
 	public:
@@ -111,17 +108,8 @@ namespace BattleCity
 
 		#pragma region IMovable
 	public:
-		void SetMaxSpeed(int speed);
-		const float& GetMaxSpeed() const;
-
-		void SetVelocity(float velocity);
-		const float& GetVelocity() const;
-
-		void SetForce(float force);
-		const float& GetForce() const;
-
-		void SetMass(float mass);
-		const float& GetMass() const;
+		void SetSpeed(int speed);
+		const float& GetSpeed() const;
 
 		void SetDirection(Vector2Int direction);
 		const Vector2Int& GetDirection() const;

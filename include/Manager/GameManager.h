@@ -33,7 +33,7 @@ namespace BattleCity::Manager
 
 		bool mGameOver;
 		double mTime = 0.0f;
-		float mDeltaTime = 1.0f;
+		float mDeltaTime = 1.0f / 60.f;
 	};
 
 	inline GameManager& GM = GameManager::GetInstance();

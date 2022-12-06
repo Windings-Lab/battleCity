@@ -18,10 +18,7 @@ namespace BattleCity
 
         mBulletCount = 1;
 
-        mMaxSpeed = 1.0f;
-        mVelocity = 0.0f;
-        mForce = 10.0f;
-        mMass = 1.0f;
+        mSpeed = 1.0f;
         mDirection = Vector2Int::Zero();
     }
 
@@ -29,10 +26,7 @@ namespace BattleCity
 
     void Object::Update(const float& deltaTime)
     {
-        SetPosition(X() + static_cast<int>(mVelocity * deltaTime), Y());
-        mVelocity += (mForce / mMass) * deltaTime;
-
-        std::cout << "position = " << X() << "\tvelocity = " << mVelocity << std::endl;
+        SetPosition(X() + mSpeed, Y());
     }
 
     void Object::Draw() const
@@ -102,43 +96,13 @@ namespace BattleCity
 
 	#pragma region IMovable
 
-    void Object::SetMaxSpeed(int speed)
+    void Object::SetSpeed(int speed)
     {
-        mMaxSpeed = speed;
+        mSpeed = speed;
     }
-    const float& Object::GetMaxSpeed() const
+    const float& Object::GetSpeed() const
     {
-        return mMaxSpeed;
-    }
-
-    void Object::SetVelocity(float velocity)
-    {
-        mVelocity = velocity;
-    }
-
-    const float& Object::GetVelocity() const
-    {
-        return mVelocity;
-    }
-
-    void Object::SetForce(float force)
-    {
-        mForce = force;
-    }
-
-    const float& Object::GetForce() const
-    {
-        return mForce;
-    }
-
-    void Object::SetMass(float mass)
-    {
-        mMass = mass;
-    }
-
-    const float& Object::GetMass() const
-    {
-        return mMass;
+        return mSpeed;
     }
 
     void Object::SetDirection(Vector2Int direction)
