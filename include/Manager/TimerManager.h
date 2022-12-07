@@ -1,14 +1,16 @@
 #pragma once
 
 #include "Manager.h"
-#include "TFunction.h"
 #include "TimerHandle.h"
 
 namespace BattleCity::Manager
 {
 	class TimerManager final : public Manager
 	{
+		using TimerFuncPair = std::pair<std::unique_ptr<TimerHandle>, std::function<void()>>;
 	public:
+		static TimerManager& GetInstance();
+
 		TimerManager(const TimerManager&) = delete;
 		TimerManager(TimerManager&&) = delete;
 
@@ -22,13 +24,15 @@ namespace BattleCity::Manager
 
 		void Step();
 
-		template <typename FuncType, typename... ArgTypes>
-		void SetTimer(TFunction<FuncType, ArgTypes&...> onTimerEndFunc, int durationInSec);
+		void SetTimer(std::function<void()>&& onTimerEndFunc, long long durationInSec);
+		void SetTimer(std::function<void()>&& onTimerEndFunc, std::string_view timerName, long long durationInSec);
 
 	private:
 		TimerManager();
 
-		std::vector<TimerHandle> mTimerList;
+		std::vector<TimerFuncPair> mTimerList;
 	};
+
+	inline TimerManager& TM = TimerManager::GetInstance();
 }
 

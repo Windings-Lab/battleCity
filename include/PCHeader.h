@@ -5,6 +5,7 @@
 #include <cmath>
 #include <cstdlib>
 #include <filesystem>
+#include <functional>
 #include <iostream>
 #include <magic_enum.hpp>
 #include <memory>

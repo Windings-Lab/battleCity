@@ -3,14 +3,13 @@
 
 namespace BattleCity
 {
-	TimerHandle::TimerHandle() : TimerHandle(0)
-	{
-		
-	}
+	using namespace std::string_view_literals;
 
-	TimerHandle::TimerHandle(int duration) : mRunning(false), mDuration(duration)
+	TimerHandle::TimerHandle() : TimerHandle(0) {}
+	TimerHandle::TimerHandle(int duration) : TimerHandle(""sv, duration) {}
+	TimerHandle::TimerHandle(std::string_view timerName, int duration)
+		: mTimerName(timerName), mDuration(duration), mRunning(false)
 	{
-
 	}
 
 	void TimerHandle::Start()
@@ -27,6 +26,17 @@ namespace BattleCity
 
 	bool TimerHandle::HasEnded()
 	{
+		if (GetSeconds() <= mDuration)
+		{
+			return false;
+		}
+
+		Stop();
+		return true;
+	}
+
+	long long TimerHandle::GetSeconds()
+	{
 		std::chrono::time_point<std::chrono::system_clock> endTime;
 
 		if (mRunning)
@@ -38,13 +48,12 @@ namespace BattleCity
 			endTime = mEndTime;
 		}
 
-		if(std::chrono::duration_cast<std::chrono::seconds>(endTime - mStartTime).count() <= mDuration)
-		{
-			return false;
-		}
+		return std::chrono::duration_cast<std::chrono::seconds>(endTime - mStartTime).count();
+	}
 
-		Stop();
-		return true;
+	std::string_view TimerHandle::GetName() const
+	{
+		return mTimerName;
 	}
 
 
