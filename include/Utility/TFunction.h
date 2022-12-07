@@ -2,6 +2,8 @@
 
 namespace BattleCity
 {
+	// My Experimentation
+
 	template <typename ReturnType, typename... ArgsType>
 	class TFunction
 	{
