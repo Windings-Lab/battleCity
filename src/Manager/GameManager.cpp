@@ -1,6 +1,8 @@
 #include "PCHeader.h"
 
 #include "GameManager.h"
+
+#include "TimerManager.h"
 #include "WorldManager.h"
 
 namespace BattleCity::Manager
@@ -29,6 +31,7 @@ namespace BattleCity::Manager
 		mNextFrame = steady_clock::now() + Framerate{ 1 };
 
 		WM.Step();
+		TM.Step();
 
 		std::this_thread::sleep_until(mNextFrame);
 		mNextFrame += Framerate{ 1 };
