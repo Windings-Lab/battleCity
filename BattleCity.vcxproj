@@ -30,6 +30,7 @@
     <ClCompile Include="src\Manager\GameManager.cpp" />
     <ClCompile Include="src\Manager\Manager.cpp" />
     <ClCompile Include="src\Manager\SpritePathManager.cpp" />
+    <ClCompile Include="src\Manager\TimerManager.cpp" />
     <ClCompile Include="src\Manager\WorldManager.cpp" />
     <ClCompile Include="src\Manager\SpriteManager.cpp" />
     <ClCompile Include="src\ObjectList.cpp" />
@@ -47,6 +48,7 @@
       </PrecompiledHeaderFile>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\Utility\TimerHandle.cpp" />
     <ClCompile Include="src\Utility\Vector2Int.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -62,6 +64,7 @@
     <ClInclude Include="include\Manager\Manager.h" />
     <ClInclude Include="include\Manager\SpritePathManager.h" />
     <ClInclude Include="include\Manager\SpriteManager.h" />
+    <ClInclude Include="include\Manager\TimerManager.h" />
     <ClInclude Include="include\Manager\WorldManager.h" />
     <ClInclude Include="include\ObjectList.h" />
     <ClInclude Include="include\Object\Bullet.h" />
@@ -74,7 +77,8 @@
     <ClInclude Include="include\Object\Wall.h" />
     <ClInclude Include="include\PCHeader.h" />
     <ClInclude Include="include\Utility\magic_enum.hpp" />
-    <ClInclude Include="include\Utility\Utility.h" />
+    <ClInclude Include="include\Utility\TFunction.h" />
+    <ClInclude Include="include\Utility\TimerHandle.h" />
     <ClInclude Include="include\Utility\Vector2Int.h" />
   </ItemGroup>
   <ItemGroup>
