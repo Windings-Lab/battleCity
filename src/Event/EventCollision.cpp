@@ -1,9 +1,6 @@
 #include "PCHeader.h"
 #include "EventCollision.h"
 
-#include "WorldManager.h"
-
-
 namespace BattleCity::Event
 {
 	EventCollision::EventCollision(int objectID, int colliderID, Vector2Int collisionPos)

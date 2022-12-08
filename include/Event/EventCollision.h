@@ -1,8 +1,12 @@
 #pragma once
 
 #include "Event.h"
-#include "Object.h"
 #include "Vector2Int.h"
+
+namespace BattleCity::Object
+{
+    class Object;
+}
 
 namespace BattleCity::Event
 {
