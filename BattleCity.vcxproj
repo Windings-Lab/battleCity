@@ -38,6 +38,7 @@
     <ClCompile Include="src\Object\Bullet.cpp" />
     <ClCompile Include="src\Object\Explosion.cpp" />
     <ClCompile Include="src\Object\Object.cpp" />
+    <ClCompile Include="src\Object\ObjectList.cpp" />
     <ClCompile Include="src\Object\PhoenixAndFlag.cpp" />
     <ClCompile Include="src\Object\PowerUp.cpp" />
     <ClCompile Include="src\Object\Tank.cpp" />
@@ -73,6 +74,7 @@
     <ClInclude Include="include\Object\Bullet.h" />
     <ClInclude Include="include\Object\Explosion.h" />
     <ClInclude Include="include\Object\Object.h" />
+    <ClInclude Include="include\Object\ObjectList.h" />
     <ClInclude Include="include\Object\PhoenixAndFlag.h" />
     <ClInclude Include="include\Object\PowerUp.h" />
     <ClInclude Include="include\Object\Tank.h" />
