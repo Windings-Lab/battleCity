@@ -2,13 +2,14 @@
 
 #include "GameManager.h"
 
+#include "SpriteManager.h"
+#include "SpritePathManager.h"
 #include "TimerManager.h"
 #include "WorldManager.h"
 
 namespace BattleCity::Manager
 {
-	GameManager::GameManager() : Manager(Type::Game), mGameOver(false)
-	{}
+	GameManager::GameManager() : Manager(Type::Game), mGameOver(false) {}
 
 	GameManager& GameManager::GetInstance()
 	{
@@ -18,10 +19,17 @@ namespace BattleCity::Manager
 
 	void GameManager::StartUp()
 	{
-		mGameOver = false;
+		TM.StartUp();
+		PM.StartUp();
+		SM.StartUp();
+		WM.StartUp();
 	}
 	void GameManager::ShutDown()
 	{
+		WM.ShutDown();
+		SM.ShutDown();
+		PM.ShutDown();
+		TM.ShutDown();
 	}
 
 	void GameManager::Step()

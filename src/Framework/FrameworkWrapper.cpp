@@ -3,10 +3,6 @@
 #include "FrameworkWrapper.h"
 #include "GameManager.h"
 #include "Screen.h"
-#include "SpriteManager.h"
-#include "SpritePathManager.h"
-#include "TimerManager.h"
-#include "WorldManager.h"
 
 namespace BattleCity
 {
@@ -19,13 +15,13 @@ namespace BattleCity
 
 	bool FrameworkWrapper::Init()
 	{
-		StartAllManagers();
+		Manager::GM.StartUp();
 		return true;
 	}
 
 	void FrameworkWrapper::Close()
 	{
-		ShutDownAllManagers();
+		Manager::GM.ShutDown();
 	}
 
 	bool FrameworkWrapper::Tick()
@@ -53,23 +49,5 @@ namespace BattleCity
 
 	void FrameworkWrapper::onMouseButtonClick(FRMouseButton button, bool isReleased)
 	{
-	}
-
-	void FrameworkWrapper::StartAllManagers()
-	{
-		Manager::TM.StartUp();
-		Manager::PM.StartUp();
-		Manager::SM.StartUp();
-		Manager::GM.StartUp();
-		Manager::WM.StartUp();
-	}
-
-	void FrameworkWrapper::ShutDownAllManagers()
-	{
-		Manager::WM.ShutDown();
-		Manager::GM.ShutDown();
-		Manager::SM.ShutDown();
-		Manager::PM.ShutDown();
-		Manager::TM.ShutDown();
 	}
 }

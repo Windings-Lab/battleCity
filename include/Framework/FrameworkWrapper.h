@@ -34,9 +34,6 @@ namespace BattleCity
 		void onMouseButtonClick(FRMouseButton button, bool isReleased) override;
 
 	private:
-		void StartAllManagers();
-		void ShutDownAllManagers();
-
 		TankPlayer* mPlayer;
 	};
 }
