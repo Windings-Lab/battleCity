@@ -3,8 +3,6 @@
 #include "PCHeader.h"
 
 #include "Manager.h"
-#include "Object.h"
-#include "SpriteManager.h"
 
 namespace BattleCity::Manager
 {
