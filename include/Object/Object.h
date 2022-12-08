@@ -1,47 +1,16 @@
 #pragma once
 
 #include "Event.h"
-#include "Framework.h"
 #include "Rectangle.h"
 #include "Vector2Int.h"
 
-namespace BattleCity
+class Sprite;
+
+namespace BattleCity::Object
 {
 	class Object
 	{
 		static int IDCounter;
-	public:
-		enum class Solidness
-		{
-			Hard,       /// Object causes collisions and impedes.
-			Soft,       /// Object causes collision, but doesn't impede.
-			Spectral,   /// Object doesn't cause collisions.
-		};
-		enum class Behaviour
-		{
-			Error,
-			Basic,
-			Down,
-			Left,
-			Right,
-			Up,
-			ExplosionSmall1,
-			ExplosionSmall2,
-			ExplosionSmall3,
-			ExplosionLarge1,
-			ExplosionLarge2,
-		};
-		enum class Type
-		{
-			Error = 0,
-			TankPlayer,
-			Tank,
-			Bullet,
-			Wall,
-			PhoenixAndFlag,
-			Explosion,
-			PowerUp
-		};
 	protected:
 		// Object
 		Rectangle mRectangle;

@@ -2,7 +2,7 @@
 
 #include "PhoenixAndFlag.h"
 
-namespace BattleCity
+namespace BattleCity::Object
 {
 	PhoenixAndFlag::PhoenixAndFlag(float x, float y) : Object(Type::PhoenixAndFlag)
 	{

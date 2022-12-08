@@ -2,7 +2,7 @@
 
 #include "TankPlayer.h"
 
-namespace BattleCity
+namespace BattleCity::Object
 {
 	TankPlayer::TankPlayer() : Tank(Type::TankPlayer)
 	{

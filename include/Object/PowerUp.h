@@ -3,7 +3,7 @@
 #include "Event.h"
 #include "Object.h"
 
-namespace BattleCity
+namespace BattleCity::Object
 {
 	class PowerUp final : public Object
 	{

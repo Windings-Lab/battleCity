@@ -2,7 +2,7 @@
 
 #include "Object.h"
 
-namespace BattleCity
+namespace BattleCity::Object
 {
     class Wall final : public Object
     {

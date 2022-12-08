@@ -6,7 +6,7 @@
 #include "SpriteManager.h"
 #include "WorldManager.h"
 
-namespace BattleCity
+namespace BattleCity::Object
 {
 	Bullet::Bullet(Type ownerType) : Object(Type::Bullet), mOwnerType(ownerType)
 	{
