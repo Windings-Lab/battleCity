@@ -5,16 +5,6 @@ namespace BattleCity::Manager
 	class Manager
 	{
 	protected:
-		enum class Type
-		{
-			Error = 0,
-			Game,
-			World,
-			Sprite,
-			SpritePath,
-			Timer,
-			Map
-		};
 		explicit Manager(Type);
 	public:
 		Manager() = delete;
