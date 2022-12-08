@@ -4,7 +4,7 @@
 
 namespace BattleCity::Object
 {
-	PhoenixAndFlag::PhoenixAndFlag(float x, float y) : Object(Type::PhoenixAndFlag)
+	PhoenixAndFlag::PhoenixAndFlag() : Object(Type::PhoenixAndFlag)
 	{
 	}
 

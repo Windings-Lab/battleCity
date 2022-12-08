@@ -4,7 +4,7 @@
 
 namespace BattleCity::Object
 {
-    Explosion::Explosion(bool isLarge) : Object(Type::Explosion)
+    Explosion::Explosion() : Object(Type::Explosion)
     {
     }
 

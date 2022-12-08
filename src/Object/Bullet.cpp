@@ -8,7 +8,7 @@ namespace BattleCity::Object
 {
 	Bullet::Bullet(Type ownerType) : Object(Type::Bullet), mOwnerType(ownerType)
 	{
-		mSprite = Manager::SM.SetAndGetSprite(Manager::SpriteType::Tank, Behaviour::Right);
+		mSprite = Manager::SM.SetAndGetSprite(Manager::SpriteType::TankNPC, Behaviour::Right);
 	}
 
 	Bullet::~Bullet()

@@ -7,7 +7,7 @@ namespace BattleCity::Object
     class Explosion final : public Object
     {
     public:
-	    explicit Explosion(bool isLarge);
+	    explicit Explosion();
 
         void Update() override;
     };
