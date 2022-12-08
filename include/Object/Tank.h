@@ -7,7 +7,7 @@ namespace BattleCity::Object
 	class Tank : public Object
 	{
 	public:
-		Tank(Type);
+		explicit Tank(Type);
 		~Tank() override;
 
 		virtual void Fire() = 0;

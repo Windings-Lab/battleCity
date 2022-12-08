@@ -37,6 +37,7 @@
     <ClCompile Include="src\Object\PhoenixAndFlag.cpp" />
     <ClCompile Include="src\Object\PowerUp.cpp" />
     <ClCompile Include="src\Object\Tank.cpp" />
+    <ClCompile Include="src\Object\TankNPC.cpp" />
     <ClCompile Include="src\Object\TankPlayer.cpp" />
     <ClCompile Include="src\Object\Wall.cpp" />
     <ClCompile Include="src\PCHeader.cpp">
@@ -68,6 +69,7 @@
     <ClInclude Include="include\Object\PhoenixAndFlag.h" />
     <ClInclude Include="include\Object\PowerUp.h" />
     <ClInclude Include="include\Object\Tank.h" />
+    <ClInclude Include="include\Object\TankNPC.h" />
     <ClInclude Include="include\Object\TankPlayer.h" />
     <ClInclude Include="include\Object\Wall.h" />
     <ClInclude Include="include\PCHeader.h" />
