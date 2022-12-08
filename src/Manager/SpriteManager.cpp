@@ -30,6 +30,14 @@ namespace BattleCity::Manager
 		return const_cast<Sprite*>(SetSprite(spriteType, objectBehaviour));
 	}
 
+	Rectangle SpriteManager::GetSpriteRectangle(Sprite* sprite) const
+	{
+		int width = 0;
+		int height = 0;
+		getSpriteSize(sprite, width, height);
+		return {width, height};
+	}
+
 	const Sprite* SpriteManager::GetSprite(SpriteType spriteType, Object::Behaviour objectBehaviour) const
 	{
 		try
