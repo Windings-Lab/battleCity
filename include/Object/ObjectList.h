@@ -1,7 +1,5 @@
 #pragma once
 
-#include "PCHeader.h"
-
 namespace BattleCity::Object
 {
 	class Object;
