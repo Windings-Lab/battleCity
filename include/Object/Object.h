@@ -109,7 +109,7 @@ namespace BattleCity
 		#pragma region IMovable
 	public:
 		void SetSpeed(int speed);
-		const float& GetSpeed() const;
+		const int& GetSpeed() const;
 
 		void SetDirection(Vector2Int direction);
 		const Vector2Int& GetDirection() const;

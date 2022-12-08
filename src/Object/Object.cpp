@@ -100,7 +100,7 @@ namespace BattleCity
     {
         mSpeed = speed;
     }
-    const float& Object::GetSpeed() const
+    const int& Object::GetSpeed() const
     {
         return mSpeed;
     }
