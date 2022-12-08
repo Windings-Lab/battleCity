@@ -3,8 +3,12 @@
 #include "PCHeader.h"
 
 #include "Manager.h"
-#include "Object.h"
 #include "ObjectList.h"
+
+namespace BattleCity::Object
+{
+	class Object;
+}
 
 namespace BattleCity::Manager
 {
@@ -29,7 +33,7 @@ namespace BattleCity::Manager
 
 		Object::Object& GetObject(int id);
 
-		void InsertObject(std::unique_ptr<Object::Object>& objPtr);
+		void InsertObject(Object::Object* objPtr);
 		void RemoveObject(int objID);
 		void MarkForDelete(int objID);
 

@@ -4,6 +4,7 @@
 
 #include "Bullet.h"
 #include "GameManager.h"
+#include "Object.h"
 #include "Screen.h"
 #include "TankPlayer.h"
 
@@ -27,7 +28,7 @@ namespace BattleCity::Manager
 
 		std::unique_ptr<Object::Object> bullet = std::make_unique<Object::Bullet>(Object::Type::Error);
 		bullet->SetPosition(0, SCR.GetHeight() / 2);
-		WM.InsertObject(bullet);
+		WM.InsertObject(bullet.release());
 	}
 	void WorldManager::ShutDown()
 	{
@@ -62,7 +63,7 @@ namespace BattleCity::Manager
 		return mWorldList.GetObject(id);
 	}
 
-	void WorldManager::InsertObject(std::unique_ptr<Object::Object>& objPtr)
+	void WorldManager::InsertObject(Object::Object* objPtr)
 	{
 		// Insert Movable Objects
 		mWorldList.Insert(objPtr);
