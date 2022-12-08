@@ -21,10 +21,10 @@ namespace BattleCity::Object
 
         void Update() override;
 
-        void EventHandler(Event& myEvent) override;
+        void EventHandler(Event::Event& myEvent) override;
     private:
         void OutOfWorld();
-        void Hit(EventCollision collisionEvent);
+        void Hit(Event::EventCollision collisionEvent);
 
         Type mOwnerType;
     };

@@ -27,9 +27,9 @@ namespace BattleCity::Manager
 	public:
 		void Step();
 
-		Object& GetObject(int id);
+		Object::Object& GetObject(int id);
 
-		void InsertObject(std::unique_ptr<Object>& objPtr);
+		void InsertObject(std::unique_ptr<Object::Object>& objPtr);
 		void RemoveObject(int objID);
 		void MarkForDelete(int objID);
 
@@ -46,7 +46,7 @@ namespace BattleCity::Manager
 		WorldManager();
 
 		// All Objects in game world
-		ObjectList mWorldList;
+		Object::ObjectList mWorldList;
 		// Objects, that needed to move every loop step
 		std::unordered_set<int> mMovableObjects;
 		// List of all Objects to delete in the end of loop step.

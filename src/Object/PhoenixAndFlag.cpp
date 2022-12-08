@@ -8,7 +8,7 @@ namespace BattleCity::Object
 	{
 	}
 
-	void PhoenixAndFlag::OnHit(EventCollision& collisionEvent)
+	void PhoenixAndFlag::OnHit(Event::EventCollision& collisionEvent)
 	{
 
 	}
@@ -18,11 +18,7 @@ namespace BattleCity::Object
 
 	}
 
-	void PhoenixAndFlag::EventHandler(Event& event)
+	void PhoenixAndFlag::EventHandler(Event::Event& event)
 	{
-		if (event.GetType() == EventType::Collision)
-		{
-			OnHit(dynamic_cast<EventCollision&>(event));
-		}
 	}
 }

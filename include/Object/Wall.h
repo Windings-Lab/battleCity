@@ -12,7 +12,7 @@ namespace BattleCity::Object
 
         void Update() override;
 
-        void EventHandler(Event& ptrEvent) override;
+        void EventHandler(Event::Event& ptrEvent) override;
     };
 }
 

@@ -8,7 +8,7 @@ namespace BattleCity::Object
 	{
 	}
 
-	void TankPlayer::EventHandler(Event& event)
+	void TankPlayer::EventHandler(Event::Event& event)
 	{
 
 	}

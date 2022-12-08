@@ -2,28 +2,13 @@
 
 #include "Framework.h"
 #include "Manager.h"
-#include "Object.h"
+#include "Rectangle.h"
 
 namespace BattleCity::Manager
 {
 	class SpriteManager final : public Manager
 	{
 	public:
-		enum class SpriteType
-		{
-			Error,
-			TankPlayer,
-			Tank,
-			Bullet,
-			Wall,
-			Explosion,
-			PowerUp,
-			Phoenix,
-			Flag,
-			Background,
-			GameOver
-		};
-
 		using SpriteObjectBehaviour = std::unordered_map<Object::Behaviour, SpriteObject>;
 		using SpriteAtlas = std::unordered_map<SpriteType, SpriteObjectBehaviour>;
 	public:

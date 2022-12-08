@@ -10,24 +10,12 @@ namespace BattleCity::Object
     {
     }
 
-    void Explosion::HandleAnimation()
-    {
-    }
-
     void Explosion::Update()
     {
 
     }
 
-    void Explosion::EventHandler(Event& eventPtr)
+    void Explosion::EventHandler(Event::Event& eventPtr)
     {
-        if (eventPtr.GetType() == EventType::Step) 
-        {
-	        auto& stepEvent = dynamic_cast<EventStep&>(eventPtr);
-            if (stepEvent.GetStepCount() % 30 == 0)
-            {
-                HandleAnimation();
-            }
-        }
     }
 }

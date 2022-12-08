@@ -9,7 +9,7 @@
 namespace BattleCity::Manager
 {
 	using SpriteObjectBehaviourPath = std::unordered_map<Object::Behaviour, std::filesystem::path>;
-	using SpritePathUMap = std::unordered_map<SpriteManager::SpriteType, SpriteObjectBehaviourPath>;
+	using SpritePathUMap = std::unordered_map<SpriteType, SpriteObjectBehaviourPath>;
 
 	class SpritePathManager final : public Manager
 	{
@@ -28,9 +28,9 @@ namespace BattleCity::Manager
 		void StartUp() override;
 		void ShutDown() override;
 
-		std::string GetSpritePath(SpriteManager::SpriteType spriteType, Object::Behaviour objectBehaviour) const;
+		std::string GetSpritePath(SpriteType spriteType, Object::Behaviour objectBehaviour) const;
 	private:
-		void SetSpritePath(std::string path, SpriteManager::SpriteType spriteType, Object::Behaviour objectBehaviour);
+		void SetSpritePath(std::string path, SpriteType spriteType, Object::Behaviour objectBehaviour);
 		void OutputAllPathes();
 	private:
 		SpritePathManager();

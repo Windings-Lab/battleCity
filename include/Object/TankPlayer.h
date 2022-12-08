@@ -3,7 +3,7 @@
 #include "Event.h"
 #include "Tank.h"
 
-namespace BattleCity
+namespace BattleCity::Object
 {
 	class TankPlayer final : public Tank
 	{
@@ -15,6 +15,6 @@ namespace BattleCity
 
 		void Fire() override;
 
-		void EventHandler(Event& event) override;
+		void EventHandler(Event::Event& event) override;
 	};
 }

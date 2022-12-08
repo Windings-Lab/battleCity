@@ -10,7 +10,7 @@ namespace BattleCity::Object
 {
 	Bullet::Bullet(Type ownerType) : Object(Type::Bullet), mOwnerType(ownerType)
 	{
-		mSprite = Manager::SM.SetAndGetSprite(Manager::SpriteManager::SpriteType::Tank, Behaviour::Right);
+		mSprite = Manager::SM.SetAndGetSprite(Manager::SpriteType::Tank, Behaviour::Right);
 	}
 
 	Bullet::~Bullet()
@@ -22,7 +22,7 @@ namespace BattleCity::Object
 		Manager::WM.MarkForDelete(ID);
 	}
 
-	void Bullet::Hit(EventCollision collisionEvent)
+	void Bullet::Hit(Event::EventCollision collisionEvent)
 	{
 
 	}
@@ -32,14 +32,14 @@ namespace BattleCity::Object
 		__super::Update();
 	}
 
-	void Bullet::EventHandler(Event& myEvent)
+	void Bullet::EventHandler(Event::Event& myEvent)
 	{
-		if (myEvent.GetType() == EventType::Out)
+		if (myEvent.GetType() == Event::Type::Out)
 		{
 			OutOfWorld();
 		}
 
-		if (myEvent.GetType() == EventType::Collision)
+		if (myEvent.GetType() == Event::Type::Collision)
 		{
 		}
 	}

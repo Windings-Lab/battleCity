@@ -25,7 +25,7 @@ namespace BattleCity::Manager
 		// mPlayerID = player->ID;
 		// WM.InsertObject(player);
 
-		std::unique_ptr<Object> bullet = std::make_unique<Bullet>(Object::Type::Error);
+		std::unique_ptr<Object::Object> bullet = std::make_unique<Object::Bullet>(Object::Type::Error);
 		bullet->SetPosition(0, SCR.GetHeight() / 2);
 		WM.InsertObject(bullet);
 	}
@@ -57,12 +57,12 @@ namespace BattleCity::Manager
 		}
 	}
 
-	Object& WorldManager::GetObject(int id)
+	Object::Object& WorldManager::GetObject(int id)
 	{
 		return mWorldList.GetObject(id);
 	}
 
-	void WorldManager::InsertObject(std::unique_ptr<Object>& objPtr)
+	void WorldManager::InsertObject(std::unique_ptr<Object::Object>& objPtr)
 	{
 		// Insert Movable Objects
 		mWorldList.Insert(objPtr);

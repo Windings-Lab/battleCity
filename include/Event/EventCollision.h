@@ -21,11 +21,11 @@ namespace BattleCity::Event
 
         void SetObjectID(int objectID);
         int GetObjectID() const;
-        Object& GetObjectRef() const;
+        Object::Object& GetObjectRef() const;
 
         void SetColliderID(int colliderID);
         int GetColliderID() const;
-        Object& GetColliderRef() const;
+        Object::Object& GetColliderRef() const;
 
         void SetCollisionPos(Vector2Int collisionPos);
         const Vector2Int& GetCollisionPos() const;

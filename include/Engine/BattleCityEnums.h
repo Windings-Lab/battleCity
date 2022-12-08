@@ -2,7 +2,7 @@
 
 namespace BattleCity
 {
-	namespace ManagerEnum
+	namespace Manager
 	{
 		enum class Type
 		{
@@ -14,25 +14,8 @@ namespace BattleCity
 			Timer,
 			Map
 		};
-	}
 
-	namespace EventEnum
-	{
-		enum class Type
-		{
-			Error,
-			Event,
-			Collision,
-			Keyboard,
-			Mouse,
-			Out,
-			Step
-		};
-	}
-
-	namespace SpriteEnum
-	{
-		enum class Type
+		enum class SpriteType
 		{
 			Error,
 			TankPlayer,
@@ -48,7 +31,21 @@ namespace BattleCity
 		};
 	}
 
-	namespace ObjectEnum
+	namespace Event
+	{
+		enum class Type
+		{
+			Error,
+			Event,
+			Collision,
+			Keyboard,
+			Mouse,
+			Out,
+			Step
+		};
+	}
+
+	namespace Object
 	{
 		enum class Solidness
 		{

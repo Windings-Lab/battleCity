@@ -13,9 +13,9 @@ namespace BattleCity::Object
 
         void Update() override;
 
-        void EventHandler(Event& event) override;
+        void EventHandler(Event::Event& event) override;
 	private:
-        void OnHit(EventCollision& collisionEvent);
+        void OnHit(Event::EventCollision& collisionEvent);
 	};
 }
 

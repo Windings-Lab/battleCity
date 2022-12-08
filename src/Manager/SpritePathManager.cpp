@@ -26,7 +26,7 @@ namespace BattleCity::Manager
 				{
 					std::string objectTypeStr = entry.path().stem().string();
 					auto objectTypeCast
-						= magic_enum::enum_cast<SpriteManager::SpriteType>(objectTypeStr);
+						= magic_enum::enum_cast<SpriteType>(objectTypeStr);
 
 					if (objectTypeCast.has_value())
 					{
@@ -66,7 +66,7 @@ namespace BattleCity::Manager
 		mSpritePathList.clear();
 	}
 
-	std::string SpritePathManager::GetSpritePath(SpriteManager::SpriteType spriteType, Object::Behaviour objectBehaviour) const
+	std::string SpritePathManager::GetSpritePath(SpriteType spriteType, Object::Behaviour objectBehaviour) const
 	{
 		try
 		{
@@ -78,7 +78,7 @@ namespace BattleCity::Manager
 			return "";
 		}
 	}
-	void SpritePathManager::SetSpritePath(std::string path, SpriteManager::SpriteType spriteType, Object::Behaviour objectBehaviour)
+	void SpritePathManager::SetSpritePath(std::string path, SpriteType spriteType, Object::Behaviour objectBehaviour)
 	{
 		if (mSpritePathList.count(spriteType) == 0)
 		{

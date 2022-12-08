@@ -15,9 +15,9 @@ namespace BattleCity::Object
 	}
 
 
-	void PowerUp::EventHandler(Event& event)
+	void PowerUp::EventHandler(Event::Event& event)
 	{
-		if (event.GetType() == EventType::Collision)
+		if (event.GetType() == Event::Type::Collision)
 		{
 		}
 	}

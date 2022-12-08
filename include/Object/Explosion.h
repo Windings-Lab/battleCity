@@ -12,9 +12,6 @@ namespace BattleCity::Object
 
         void Update() override;
 
-        void EventHandler(Event& eventPtr) override;
-
-    private:
-        void HandleAnimation();
+        void EventHandler(Event::Event& eventPtr) override;
     };
 }

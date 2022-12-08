@@ -57,7 +57,7 @@ namespace BattleCity::Object
     {
         mSolidness = solidness;
     }
-    Object::Solidness Object::GetSolidness() const
+    Solidness Object::GetSolidness() const
     {
         return mSolidness;
     }
