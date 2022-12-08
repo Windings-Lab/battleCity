@@ -1,8 +1,11 @@
 #pragma once
 
-#include "Event.h"
-#include "EventCollision.h"
 #include "Object.h"
+
+namespace BattleCity::Event
+{
+    class EventCollision;
+}
 
 namespace BattleCity::Object
 {
@@ -24,7 +27,7 @@ namespace BattleCity::Object
         void EventHandler(Event::Event& myEvent) override;
     private:
         void OutOfWorld();
-        void Hit(Event::EventCollision collisionEvent);
+        void Hit(Event::EventCollision& collisionEvent);
 
         Type mOwnerType;
     };

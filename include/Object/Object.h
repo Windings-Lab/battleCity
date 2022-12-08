@@ -1,10 +1,14 @@
 #pragma once
 
-#include "Event.h"
 #include "Rectangle.h"
 #include "Vector2Int.h"
 
 class Sprite;
+
+namespace BattleCity::Event
+{
+	class Event;
+}
 
 namespace BattleCity::Object
 {

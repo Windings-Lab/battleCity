@@ -1,8 +1,11 @@
 #pragma once
 
-#include "Event.h"
-#include "EventCollision.h"
 #include "Object.h"
+
+namespace BattleCity::Event
+{
+    class EventCollision;
+}
 
 namespace BattleCity::Object
 {

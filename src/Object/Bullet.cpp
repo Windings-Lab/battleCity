@@ -22,7 +22,7 @@ namespace BattleCity::Object
 		Manager::WM.MarkForDelete(ID);
 	}
 
-	void Bullet::Hit(Event::EventCollision collisionEvent)
+	void Bullet::Hit(Event::EventCollision& collisionEvent)
 	{
 
 	}
