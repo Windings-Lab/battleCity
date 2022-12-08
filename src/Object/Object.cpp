@@ -31,7 +31,7 @@ namespace BattleCity
 
     void Object::Draw() const
     {
-        drawSprite(mSprite, X(), Y());
+        drawSprite(const_cast<Sprite*>(mSprite), X(), Y());
     }
 
 	#pragma region Object

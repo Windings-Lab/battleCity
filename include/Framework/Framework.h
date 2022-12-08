@@ -7,7 +7,7 @@
 struct SpriteDeleter;
 class Sprite;
 
-using SpriteObject = std::unique_ptr<Sprite, SpriteDeleter>;
+using SpriteObject = std::unique_ptr<const Sprite, SpriteDeleter>;
 
 FRAMEWORK_API Sprite* createSprite(const char* path);
 FRAMEWORK_API void drawSprite(Sprite*, int x, int y);
@@ -47,9 +47,9 @@ struct SpriteDeleter
 
 	~SpriteDeleter() = default;
 
-	void operator()(Sprite* p) const
+	void operator()(const Sprite* p) const
 	{
-		destroySprite(p);
+		destroySprite(const_cast<Sprite*>(p));
 	}
 };
 

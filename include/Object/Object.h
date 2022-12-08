@@ -46,7 +46,7 @@ namespace BattleCity
 		// Object
 		Rectangle mRectangle;
 		Solidness mSolidness;
-		Sprite* mSprite;
+		const Sprite* mSprite;
 
 		// IDestroyable Interface
 		int mHealth;

@@ -40,8 +40,8 @@ namespace BattleCity::Manager
 		void StartUp() override;
 		void ShutDown() override;
 
-		Sprite* SetAndGetSprite(SpriteType spriteType, Object::Behaviour objectBehaviour);
-		Rectangle GetSpriteRectangle(Sprite* sprite) const;
+		const Sprite* SetAndGetSprite(SpriteType spriteType, Object::Behaviour objectBehaviour);
+		Rectangle GetSpriteRectangle(const Sprite* sprite) const;
 
 	private:
 		const Sprite* GetSprite(SpriteType spriteType, Object::Behaviour objectBehaviour) const;
