@@ -3,10 +3,12 @@
 #include "BattleCityEnums.h"
 
 #include <algorithm>
+#include <array>
 #include <chrono>
 #include <cmath>
 #include <cstdlib>
 #include <filesystem>
+#include <fstream>
 #include <functional>
 #include <iostream>
 #include <magic_enum.hpp>

@@ -26,6 +26,8 @@ namespace BattleCity
 
 	bool FrameworkWrapper::Tick()
 	{
+		return false;
+
 		Manager::GM.Step();
 		return Manager::GM.GetGameOver();
 	}

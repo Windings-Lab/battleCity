@@ -59,6 +59,7 @@ namespace BattleCity
 		enum class Type
 		{
 			Error,
+			None,
 			TankPlayer,
 			Tank,
 			Bullet,

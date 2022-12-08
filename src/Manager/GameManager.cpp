@@ -2,6 +2,7 @@
 
 #include "GameManager.h"
 
+#include "MapManager.h"
 #include "SpriteManager.h"
 #include "SpritePathManager.h"
 #include "TimerManager.h"
@@ -22,11 +23,13 @@ namespace BattleCity::Manager
 		TM.StartUp();
 		PM.StartUp();
 		SM.StartUp();
+		MAP.StartUp();
 		WM.StartUp();
 	}
 	void GameManager::ShutDown()
 	{
 		WM.ShutDown();
+		MAP.ShutDown();
 		SM.ShutDown();
 		PM.ShutDown();
 		TM.ShutDown();
