@@ -2,17 +2,6 @@
 
 namespace BattleCity
 {
-	enum class EventType
-	{
-		Error = 0,
-		Event,
-		Collision,
-		Keyboard,
-		Mouse,
-		Out,
-		Step
-	};
-
 	class Event
 	{
 	public:
@@ -20,9 +9,9 @@ namespace BattleCity
 
 		virtual ~Event() = default;
 
-		void SetType(EventType newType);
-		EventType GetType() const;
+		void SetType(EventEnum::Type newType);
+		EventEnum::Type GetType() const;
 	private:
-		EventType mEventType;
+		EventEnum::Type mEventType;
 	};
 }

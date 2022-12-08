@@ -2,14 +2,17 @@
 #include "Event.h"
 
 
-BattleCity::Event::Event() : mEventType(EventType::Event) {}
-
-void BattleCity::Event::SetType(EventType newType)
+namespace BattleCity
 {
-	mEventType = newType;
-}
+	Event::Event() : mEventType(EventEnum::Type::Event) {}
 
-BattleCity::EventType BattleCity::Event::GetType() const
-{
-	return mEventType;
+	void Event::SetType(EventEnum::Type newType)
+	{
+		mEventType = newType;
+	}
+
+	EventEnum::Type Event::GetType() const
+	{
+		return mEventType;
+	}
 }
