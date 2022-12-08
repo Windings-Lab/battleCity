@@ -10,7 +10,7 @@ namespace BattleCity::Manager
 	}
 
 	SpritePathManager::SpritePathManager() : Manager(Type::SpritePath),
-		Path(".\\data2"), FileExtension(".png"),
+		SpriteFolderPath(".\\data"), FileExtension(".png"),
 		mSpritePathList(0)
 	{
 		
@@ -18,37 +18,46 @@ namespace BattleCity::Manager
 
 	void SpritePathManager::StartUp()
 	{
-		for (const auto& entry : std::filesystem::recursive_directory_iterator(Path))
+		try
 		{
-			if (entry.path().extension() == FileExtension)
+			for (const auto& entry : std::filesystem::recursive_directory_iterator(SpriteFolderPath))
 			{
-				std::string objectTypeStr = entry.path().stem().string();
-				auto objectTypeCast
-					= magic_enum::enum_cast<SpriteManager::SpriteType>(objectTypeStr);
-
-				if(objectTypeCast.has_value())
+				if (entry.path().extension() == FileExtension)
 				{
-					std::string spriteBehaviourStr = entry.path().parent_path().stem().string();
-					auto spriteBehaviourCast
-						= magic_enum::enum_cast<Object::Behaviour>(spriteBehaviourStr);
-					if(spriteBehaviourCast.has_value())
+					std::string objectTypeStr = entry.path().stem().string();
+					auto objectTypeCast
+						= magic_enum::enum_cast<SpriteManager::SpriteType>(objectTypeStr);
+
+					if (objectTypeCast.has_value())
 					{
-						SetSpritePath(entry.path().string(), objectTypeCast.value(), spriteBehaviourCast.value());
+						std::string spriteBehaviourStr = entry.path().parent_path().stem().string();
+						auto spriteBehaviourCast
+							= magic_enum::enum_cast<Object::Behaviour>(spriteBehaviourStr);
+						if (spriteBehaviourCast.has_value())
+						{
+							SetSpritePath(entry.path().string(), objectTypeCast.value(), spriteBehaviourCast.value());
+						}
+						else
+						{
+							std::cerr << "No sprite behaviour value: " << spriteBehaviourStr << std::endl;
+						}
 					}
 					else
 					{
-						std::cerr << "No sprite behaviour value: " << spriteBehaviourStr << std::endl;
+						std::cerr << "No object type value: " << objectTypeStr << std::endl;
 					}
-				}
-				else
-				{
-					std::cerr << "No object type value: " << objectTypeStr << std::endl;
 				}
 			}
 		}
+		catch (...)
+		{
+			std::cerr << "Sprite Folder Path has not been found" << std::endl;
+			std::cerr << "Make sure that .\\data in folder with BattleCity.exe file" << std::endl;
+			std::exit(1);
+		}
 #ifdef _DEBUG
 		OutputAllPathes();
-		std::cout << "Sprite Path Manager loaded." << std::endl;
+		std::cout << "Sprite SpriteFolderPath Manager loaded." << std::endl;
 #endif
 	}
 

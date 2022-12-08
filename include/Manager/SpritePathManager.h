@@ -35,7 +35,7 @@ namespace BattleCity::Manager
 	private:
 		SpritePathManager();
 
-		const std::filesystem::path Path;
+		const std::filesystem::path SpriteFolderPath;
 		const std::filesystem::path FileExtension;
 		SpritePathUMap mSpritePathList;
 	};
