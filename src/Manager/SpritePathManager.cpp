@@ -10,7 +10,7 @@ namespace BattleCity::Manager
 	}
 
 	SpritePathManager::SpritePathManager() : Manager(Type::SpritePath),
-		Path(".\\data"), FileExtension(".png"),
+		Path(".\\data2"), FileExtension(".png"),
 		mSpritePathList(0)
 	{
 		
