@@ -2,10 +2,10 @@
 
 #include "PCHeader.h"
 
-#include "Object.h"
-
 namespace BattleCity::Object
 {
+	class Object;
+
 	class ObjectList
 	{
 		struct Range
@@ -26,7 +26,7 @@ namespace BattleCity::Object
 		Range GetRange() const;
 		Object& GetObject(int id) const;
 
-		int Insert(std::unique_ptr<Object>& objPtr);
+		int Insert(Object* objPtr);
 		int Remove(int objID);
 
 		size_t GetSize() const;

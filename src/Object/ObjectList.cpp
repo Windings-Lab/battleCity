@@ -24,11 +24,11 @@ namespace BattleCity::Object
 		return *mList.at(id).get();
 	}
 
-	int ObjectList::Insert(std::unique_ptr<Object>& objPtr)
+	int ObjectList::Insert(Object* objPtr)
 	{
 		try
 		{
-			mList.try_emplace(objPtr->ID, std::move(objPtr));
+			mList.try_emplace(objPtr->ID, objPtr);
 		}
 		catch (...)
 		{
