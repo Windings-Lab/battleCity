@@ -2,6 +2,7 @@
 
 #include "Object.h"
 
+#include "SpriteManager.h"
 #include "Vector2Int.h"
 
 namespace BattleCity::Object
@@ -31,7 +32,7 @@ namespace BattleCity::Object
 
     void Object::Draw() const
     {
-        drawSprite(const_cast<Sprite*>(mSprite), X(), Y());
+        Manager::SM.DrawSprite(const_cast<Sprite*>(mSprite), X(), Y());
     }
 
 	#pragma region Object

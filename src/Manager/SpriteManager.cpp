@@ -25,9 +25,9 @@ namespace BattleCity::Manager
 		mSpriteAtlas.clear();
 	}
 
-	const Sprite* SpriteManager::SetAndGetSprite(SpriteType spriteType, Object::Behaviour objectBehaviour)
+	void SpriteManager::DrawSprite(Sprite* sprite, const int& w, const int& h)
 	{
-		return SetSprite(spriteType, objectBehaviour);
+		drawSprite(sprite, w, h);
 	}
 
 	Rectangle SpriteManager::GetSpriteRectangle(const Sprite* sprite) const
@@ -35,8 +35,14 @@ namespace BattleCity::Manager
 		int width = 0;
 		int height = 0;
 		getSpriteSize(const_cast<Sprite*>(sprite), width, height);
-		return {width, height};
+		return { width, height };
 	}
+
+	const Sprite* SpriteManager::SetAndGetSprite(SpriteType spriteType, Object::Behaviour objectBehaviour)
+	{
+		return SetSprite(spriteType, objectBehaviour);
+	}
+
 
 	const Sprite* SpriteManager::GetSprite(SpriteType spriteType, Object::Behaviour objectBehaviour) const
 	{

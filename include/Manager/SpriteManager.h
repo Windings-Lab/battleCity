@@ -25,6 +25,8 @@ namespace BattleCity::Manager
 		void StartUp() override;
 		void ShutDown() override;
 
+		void DrawSprite(Sprite*, const int& w, const int& h);
+
 		const Sprite* SetAndGetSprite(SpriteType spriteType, Object::Behaviour objectBehaviour);
 		Rectangle GetSpriteRectangle(const Sprite* sprite) const;
 
