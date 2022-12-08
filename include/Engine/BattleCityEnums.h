@@ -19,7 +19,7 @@ namespace BattleCity
 		{
 			Error,
 			TankPlayer,
-			Tank,
+			TankNPC,
 			Bullet,
 			Wall,
 			Explosion,
@@ -61,7 +61,7 @@ namespace BattleCity
 			Error,
 			None,
 			TankPlayer,
-			Tank,
+			TankNPC,
 			Bullet,
 			Wall,
 			PhoenixAndFlag,
