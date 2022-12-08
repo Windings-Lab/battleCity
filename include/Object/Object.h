@@ -5,11 +5,6 @@
 
 class Sprite;
 
-namespace BattleCity::Event
-{
-	class Event;
-}
-
 namespace BattleCity::Object
 {
 	class Object
@@ -47,8 +42,6 @@ namespace BattleCity::Object
 
 		virtual void Update();
 		void Draw() const;
-
-		virtual void EventHandler(Event::Event& ptrEvent) = 0;
 
 		#pragma region Object
 

@@ -31,20 +31,6 @@ namespace BattleCity
 		};
 	}
 
-	namespace Event
-	{
-		enum class Type
-		{
-			Error,
-			Event,
-			Collision,
-			Keyboard,
-			Mouse,
-			Out,
-			Step
-		};
-	}
-
 	namespace Object
 	{
 		enum class Solidness

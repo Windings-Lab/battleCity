@@ -8,17 +8,8 @@ namespace BattleCity::Object
 	{
 	}
 
-	void PhoenixAndFlag::OnHit(Event::EventCollision& collisionEvent)
-	{
-
-	}
-
 	void PhoenixAndFlag::Update()
 	{
 
-	}
-
-	void PhoenixAndFlag::EventHandler(Event::Event& event)
-	{
 	}
 }

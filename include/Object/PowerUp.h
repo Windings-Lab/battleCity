@@ -10,8 +10,6 @@ namespace BattleCity::Object
         PowerUp();
 
         void Update() override;
-
-        void EventHandler(Event::Event& event) override;
 	};
 }
 

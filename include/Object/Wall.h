@@ -11,8 +11,6 @@ namespace BattleCity::Object
         ~Wall() override = default;
 
         void Update() override;
-
-        void EventHandler(Event::Event& ptrEvent) override;
     };
 }
 

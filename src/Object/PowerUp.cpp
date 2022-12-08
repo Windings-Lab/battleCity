@@ -1,7 +1,6 @@
 #include "PCHeader.h"
 
 #include "PowerUp.h"
-#include "EventCollision.h"
 
 namespace BattleCity::Object
 {
@@ -12,13 +11,5 @@ namespace BattleCity::Object
 	void PowerUp::Update()
 	{
 
-	}
-
-
-	void PowerUp::EventHandler(Event::Event& event)
-	{
-		if (event.GetType() == Event::Type::Collision)
-		{
-		}
 	}
 }

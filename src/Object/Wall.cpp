@@ -12,9 +12,4 @@ namespace BattleCity::Object
 	{
 
 	}
-
-	void Wall::EventHandler(Event::Event& ptrEvent)
-	{
-		
-	}
 }

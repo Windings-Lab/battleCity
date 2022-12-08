@@ -10,7 +10,5 @@ namespace BattleCity::Object
 	    explicit Explosion(bool isLarge);
 
         void Update() override;
-
-        void EventHandler(Event::Event& eventPtr) override;
     };
 }

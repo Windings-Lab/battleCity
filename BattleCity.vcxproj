@@ -21,10 +21,6 @@
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="src\Collision\Rectangle.cpp" />
-    <ClCompile Include="src\Event\Event.cpp" />
-    <ClCompile Include="src\Event\EventCollision.cpp" />
-    <ClCompile Include="src\Event\EventOutOfWorld.cpp" />
-    <ClCompile Include="src\Event\EventStep.cpp" />
     <ClCompile Include="src\Framework\FrameworkWrapper.cpp" />
     <ClCompile Include="src\Framework\Screen.cpp" />
     <ClCompile Include="src\Manager\GameManager.cpp" />
@@ -55,10 +51,6 @@
   <ItemGroup>
     <ClInclude Include="include\Collision\Rectangle.h" />
     <ClInclude Include="include\Engine\BattleCityEnums.h" />
-    <ClInclude Include="include\Event\Event.h" />
-    <ClInclude Include="include\Event\EventCollision.h" />
-    <ClInclude Include="include\Event\EventOutOfWorld.h" />
-    <ClInclude Include="include\Event\EventStep.h" />
     <ClInclude Include="include\Framework\Framework.h" />
     <ClInclude Include="include\Framework\FrameworkWrapper.h" />
     <ClInclude Include="include\Framework\Screen.h" />

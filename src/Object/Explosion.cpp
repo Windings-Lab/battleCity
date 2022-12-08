@@ -1,8 +1,6 @@
 #include "PCHeader.h"
 
 #include "Explosion.h"
-#include "EventStep.h"
-#include "WorldManager.h"
 
 namespace BattleCity::Object
 {
@@ -13,9 +11,5 @@ namespace BattleCity::Object
     void Explosion::Update()
     {
 
-    }
-
-    void Explosion::EventHandler(Event::Event& eventPtr)
-    {
     }
 }

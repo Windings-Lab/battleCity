@@ -8,11 +8,6 @@ namespace BattleCity::Object
 	{
 	}
 
-	void TankPlayer::EventHandler(Event::Event& event)
-	{
-
-	}
-
 	void TankPlayer::Update()
 	{
 

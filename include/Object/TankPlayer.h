@@ -2,11 +2,6 @@
 
 #include "Tank.h"
 
-namespace BattleCity::Event
-{
-	class EventCollision;
-}
-
 namespace BattleCity::Object
 {
 	class TankPlayer final : public Tank
@@ -18,7 +13,5 @@ namespace BattleCity::Object
 		void Update() override;
 
 		void Fire() override;
-
-		void EventHandler(Event::Event& event) override;
 	};
 }
