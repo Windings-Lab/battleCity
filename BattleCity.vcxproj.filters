@@ -77,6 +77,9 @@
     <ClCompile Include="src\Utility\TimerHandle.cpp">
       <Filter>Source\Utility</Filter>
     </ClCompile>
+    <ClCompile Include="src\Manager\MapManager.cpp">
+      <Filter>Source\Manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Object\Bullet.h">
@@ -162,6 +165,9 @@
     </ClInclude>
     <ClInclude Include="include\Utility\TimerHandle.h">
       <Filter>Headers\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Manager\MapManager.h">
+      <Filter>Headers\Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

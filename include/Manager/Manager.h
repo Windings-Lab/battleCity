@@ -12,7 +12,8 @@ namespace BattleCity::Manager
 			World,
 			Sprite,
 			SpritePath,
-			Timer
+			Timer,
+			Map
 		};
 		explicit Manager(Type);
 	public:

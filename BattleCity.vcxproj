@@ -29,6 +29,7 @@
     <ClCompile Include="src\Framework\Screen.cpp" />
     <ClCompile Include="src\Manager\GameManager.cpp" />
     <ClCompile Include="src\Manager\Manager.cpp" />
+    <ClCompile Include="src\Manager\MapManager.cpp" />
     <ClCompile Include="src\Manager\SpritePathManager.cpp" />
     <ClCompile Include="src\Manager\TimerManager.cpp" />
     <ClCompile Include="src\Manager\WorldManager.cpp" />
@@ -62,6 +63,7 @@
     <ClInclude Include="include\Framework\Screen.h" />
     <ClInclude Include="include\Manager\GameManager.h" />
     <ClInclude Include="include\Manager\Manager.h" />
+    <ClInclude Include="include\Manager\MapManager.h" />
     <ClInclude Include="include\Manager\SpritePathManager.h" />
     <ClInclude Include="include\Manager\SpriteManager.h" />
     <ClInclude Include="include\Manager\TimerManager.h" />
