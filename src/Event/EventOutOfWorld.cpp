@@ -1,7 +1,10 @@
 #include "PCHeader.h"
 #include "EventOutOfWorld.h"
 
-BattleCity::EventOutOfWorld::EventOutOfWorld()
+namespace BattleCity::Event
 {
-	SetType(EventType::Out);
+	EventOutOfWorld::EventOutOfWorld()
+	{
+		SetType(Type::Out);
+	}
 }

@@ -1,11 +1,11 @@
 #include "PCHeader.h"
 #include "EventStep.h"
 
-namespace BattleCity
+namespace BattleCity::Event
 {
 	EventStep::EventStep() : mStepCount()
 	{
-		SetType(EventType::Step);
+		SetType(Type::Step);
 	}
 
 	int EventStep::GetStepCount() const

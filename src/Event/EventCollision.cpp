@@ -4,12 +4,12 @@
 #include "WorldManager.h"
 
 
-namespace BattleCity
+namespace BattleCity::Event
 {
 	EventCollision::EventCollision(int objectID, int colliderID, Vector2Int collisionPos)
 		: mCollisionPos(std::move(collisionPos)), mObjectID(objectID), mColliderID(colliderID)
 	{
-		SetType(EventType::Collision);
+		SetType(Type::Collision);
 	}
 
 	void EventCollision::SetObjectID(int objectID)

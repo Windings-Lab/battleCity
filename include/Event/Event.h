@@ -1,6 +1,6 @@
 #pragma once
 
-namespace BattleCity
+namespace BattleCity::Event
 {
 	class Event
 	{
@@ -9,9 +9,9 @@ namespace BattleCity
 
 		virtual ~Event() = default;
 
-		void SetType(EventEnum::Type newType);
-		EventEnum::Type GetType() const;
+		void SetType(Type newType);
+		Type GetType() const;
 	private:
-		EventEnum::Type mEventType;
+		Type mEventType;
 	};
 }

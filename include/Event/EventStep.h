@@ -2,7 +2,7 @@
 
 #include "Event.h"
 
-namespace BattleCity
+namespace BattleCity::Event
 {
 	class EventStep final : public Event
 	{

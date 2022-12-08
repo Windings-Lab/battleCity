@@ -4,7 +4,7 @@
 #include "Object.h"
 #include "Vector2Int.h"
 
-namespace BattleCity
+namespace BattleCity::Event
 {
     class EventCollision final : public Event
     {
