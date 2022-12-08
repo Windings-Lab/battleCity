@@ -1,5 +1,7 @@
 #pragma once
 
+#include "BattleCityEnums.h"
+
 #include <algorithm>
 #include <chrono>
 #include <cmath>
