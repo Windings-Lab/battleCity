@@ -27,4 +27,3 @@
 using SpriteTypeBehaviourPair = std::pair<BattleCity::Manager::SpriteType, BattleCity::Object::Behaviour>;
 
 #include "Hashes.h"
-
