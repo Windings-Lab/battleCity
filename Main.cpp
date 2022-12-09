@@ -1,13 +1,16 @@
 #include "PCHeader.h"
 #include "FrameworkWrapper.h"
 
-void ShowUsage()
+namespace 
 {
-	std::cout
-		<< "Usage: " << "BattleCity.exe\n"
-		<< "Options:\n"
-		<< "\t-w, -window 800x600\tSpecify window size"
-		<< std::endl;
+	void ShowUsage()
+	{
+		std::cout
+			<< "Usage: " << "BattleCity.exe\n"
+			<< "Options:\n"
+			<< "\t-w, -window 800x600\tSpecify window size"
+			<< std::endl;
+	}
 }
 
 namespace Screen
