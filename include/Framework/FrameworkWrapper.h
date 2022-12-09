@@ -14,8 +14,8 @@ namespace BattleCity
 		FrameworkWrapper(const FrameworkWrapper&) = delete;
 		FrameworkWrapper(FrameworkWrapper&&) = delete;
 
-		FrameworkWrapper& operator=(const FrameworkWrapper&) = default;
-		FrameworkWrapper& operator=(FrameworkWrapper&&) = default;
+		FrameworkWrapper& operator=(const FrameworkWrapper&) = delete;
+		FrameworkWrapper& operator=(FrameworkWrapper&&) = delete;
 
 		~FrameworkWrapper() override = default;
 

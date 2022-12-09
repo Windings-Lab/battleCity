@@ -1,6 +1,5 @@
 #include "PCHeader.h"
 #include "FrameworkWrapper.h"
-#include "Screen.h"
 
 void ShowUsage()
 {
@@ -11,15 +10,18 @@ void ShowUsage()
 		<< std::endl;
 }
 
+namespace Screen
+{
+	void Set(int, int, bool);
+	bool IsValidSize(int w, int h);
+}
 
 int main(int argc, const char* argv[])
 {
-	int width = 800;
-	int height = 600;
 #ifdef _DEBUG
-	bool fullScreen = false;
+	Screen::Set(800, 600, false);
 #else
-	bool fullScreen = true;
+	Screen::Set(800, 600, true);
 #endif
 
 	if (argc != 1)
@@ -32,7 +34,7 @@ int main(int argc, const char* argv[])
 
 		std::string argv1 = argv[1];
 
-		if(!(argv1 == "-w" || argv1 == "-window"))
+		if (!(argv1 == "-w" || argv1 == "-window"))
 		{
 			ShowUsage();
 			return 1;
@@ -46,7 +48,7 @@ int main(int argc, const char* argv[])
 		for (std::string line; std::getline(input, line, 'x'); )
 		{
 			it++;
-			if(it > 2)
+			if (it > 2)
 			{
 				ShowUsage();
 				return 1;
@@ -62,29 +64,22 @@ int main(int argc, const char* argv[])
 			}
 		}
 
-		if(it != 2)
+		if (it != 2)
 		{
 			ShowUsage();
 			return 1;
 		}
 
-		if (!SCR.IsValidSize(token[0], token[1]))
+		if (!Screen::IsValidSize(token[0], token[1]))
 		{
 			std::cout << "Incorrect window size" << std::endl;
 			return 1;
 		}
 
-		fullScreen = false;
-		width = token[0];
-		height = token[1];
+		Screen::Set(token[0], token[1], false);
 	}
-	
-	SCR.Set(width, height, fullScreen);
 	
 	const auto framework = std::make_unique<BattleCity::FrameworkWrapper>();
 
 	return run(framework.get());
 }
-
-// ---> ^ X
-// ^ ---> O

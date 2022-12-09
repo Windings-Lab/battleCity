@@ -2,15 +2,21 @@
 
 #include "FrameworkWrapper.h"
 #include "GameManager.h"
-#include "Screen.h"
+
+namespace Screen
+{
+	const int& W();
+	const int& H();
+	const bool& IsFullscreen();
+}
 
 namespace BattleCity
 {
 	void FrameworkWrapper::PreInit(int& width, int& height, bool& fullscreen)
 	{
-		width = SCR.GetWidth();
-		height = SCR.GetHeight();
-		fullscreen = SCR.GetFullscreen();
+		width = Screen::W();
+		height = Screen::H();
+		fullscreen = Screen::IsFullscreen();
 	}
 
 	bool FrameworkWrapper::Init()
