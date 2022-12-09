@@ -28,7 +28,7 @@ namespace BattleCity::Object
 
     void Object::Update()
     {
-        SetPosition(X() + mSpeed, Y());
+
     }
 
     void Object::Draw() const

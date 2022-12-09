@@ -15,6 +15,6 @@ namespace BattleCity::Object
 
 	void Bullet::Update()
 	{
-		__super::Update();
+
 	}
 }
