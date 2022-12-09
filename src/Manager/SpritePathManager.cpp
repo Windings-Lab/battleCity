@@ -72,15 +72,18 @@ namespace BattleCity::Manager
 		{
 			return mSpritePathList.at(spriteType).at(objectBehaviour).string();
 		}
-		catch (std::out_of_range& ex)
+		catch (...)
 		{
-			std::cerr << ex.what() << std::endl;
+			std::cerr << __FUNCTION__ << ": No sprite with \nSpriteType: "
+				<< magic_enum::enum_name(spriteType)
+				<< "\nBehaviour: " << magic_enum::enum_name(objectBehaviour)
+				<< std::endl;
 			return "";
 		}
 	}
 	void SpritePathManager::SetSpritePath(std::string path, SpriteType spriteType, Object::Behaviour objectBehaviour)
 	{
-		if (mSpritePathList.count(spriteType) == 0)
+		if (mSpritePathList.find(spriteType) == mSpritePathList.end())
 		{
 			SpriteObjectBehaviourPath behaviourMap;
 			behaviourMap.try_emplace(objectBehaviour, path);
@@ -88,16 +91,10 @@ namespace BattleCity::Manager
 		}
 		else
 		{
-			try
-			{
-				mSpritePathList.at(spriteType).try_emplace(objectBehaviour, path);
-			}
-			catch (std::out_of_range& ex)
-			{
-				std::cerr << ex.what() << std::endl;
-			}
+			mSpritePathList.at(spriteType).try_emplace(objectBehaviour, path);
 		}
 	}
+
 	void SpritePathManager::OutputAllPathes()
 	{
 		for (auto& [spriteType, list] : mSpritePathList)
