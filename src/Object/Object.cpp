@@ -11,7 +11,7 @@ namespace BattleCity::Object
 
     Object::Object(int x, int y, Type type, Manager::SpriteType spriteType, Behaviour behaviour)
 		: mSprite(Manager::SM().SetAndGetSprite(spriteType, behaviour))
-		, mRectangle(Manager::SM().GetSpriteRectangle(mSprite, x, y))
+		, mRectangle(Manager::SpriteManager::GetSpriteRectangle(mSprite, x, y))
 		, ID(IDCounter++), ObjectType(type)
     {
         mSolidness = Solidness::Hard;
@@ -33,7 +33,7 @@ namespace BattleCity::Object
 
     void Object::Draw() const
     {
-        Manager::SM().DrawSprite(mSprite, X(), Y());
+        Manager::SpriteManager::DrawSprite(mSprite, X(), Y());
     }
 
 	#pragma region Object
@@ -85,7 +85,7 @@ namespace BattleCity::Object
     {
         mBulletCount += count;
     }
-    int Object::GetBulletCount()
+    int Object::GetBulletCount() const
     {
         return mBulletCount;
     }

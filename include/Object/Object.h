@@ -68,7 +68,7 @@ namespace BattleCity::Object
 		#pragma region IShoot
 	public:
 		void IncrementBulletCount(int count = 1);
-		int GetBulletCount();
+		int GetBulletCount() const;
 
 		#pragma endregion
 

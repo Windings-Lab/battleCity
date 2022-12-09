@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="src\Framework\FrameworkWrapper.cpp" />
+    <ClCompile Include="src\Framework\Screen.cpp" />
     <ClCompile Include="src\Manager\GameManager.cpp" />
     <ClCompile Include="src\Manager\Manager.cpp" />
     <ClCompile Include="src\Manager\MapManager.cpp" />

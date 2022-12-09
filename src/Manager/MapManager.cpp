@@ -1,7 +1,6 @@
 #include "PCHeader.h"
 #include "MapManager.h"
 
-#include "Screen.h"
 #include "SpriteManager.h"
 
 namespace BattleCity::Manager
@@ -14,7 +13,7 @@ namespace BattleCity::Manager
 
 	MapManager::MapManager() : Manager(Type::Map)
 	, mBackground(SM().SetAndGetSprite(SpriteType::Background, Object::Behaviour::Basic))
-	, mBoundaries(SM().GetSpriteRectangle(mBackground, 40, 44))
+	, mBoundaries(SpriteManager::GetSpriteRectangle(mBackground, 40, 44))
 	{
 		
 	}
@@ -31,7 +30,7 @@ namespace BattleCity::Manager
 
 	void MapManager::Step()
 	{
-		SM().DrawSprite(mBackground, mBoundaries.X(), mBoundaries.Y());
+		SpriteManager::DrawSprite(mBackground, mBoundaries.X(), mBoundaries.Y());
 	}
 
 	void MapManager::ReadMapFile()

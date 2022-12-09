@@ -2,7 +2,6 @@
 
 #include "WorldManager.h"
 
-#include "GameManager.h"
 #include "MapManager.h"
 
 #include "Object.h"

@@ -68,6 +68,9 @@
     <ClCompile Include="src\Utility\Rectangle.cpp">
       <Filter>Source\Utility</Filter>
     </ClCompile>
+    <ClCompile Include="src\Framework\Screen.cpp">
+      <Filter>Source\Framework</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Object\Bullet.h">
