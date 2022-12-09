@@ -7,7 +7,7 @@ namespace BattleCity::Object
 	class PhoenixAndFlag final : public Object
 	{
     public:
-        PhoenixAndFlag();
+        PhoenixAndFlag(int x, int y);
 
         void Update() override;
 	};

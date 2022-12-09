@@ -4,7 +4,8 @@
 
 namespace BattleCity::Object
 {
-	PhoenixAndFlag::PhoenixAndFlag() : Object(Type::PhoenixAndFlag)
+	PhoenixAndFlag::PhoenixAndFlag(int x, int y)
+		: Object(x, y, Type::PhoenixAndFlag, Manager::SpriteType::Phoenix, Behaviour::Basic)
 	{
 	}
 

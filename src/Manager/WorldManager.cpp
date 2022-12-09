@@ -2,11 +2,14 @@
 
 #include "WorldManager.h"
 
-#include "Bullet.h"
 #include "GameManager.h"
+#include "MapManager.h"
+
 #include "Object.h"
-#include "Screen.h"
+#include "PhoenixAndFlag.h"
+#include "TankNPC.h"
 #include "TankPlayer.h"
+#include "Wall.h"
 
 namespace BattleCity::Manager
 {
@@ -22,17 +25,13 @@ namespace BattleCity::Manager
 
 	void WorldManager::StartUp()
 	{
-		// std::unique_ptr<Object> player = std::make_unique<TankPlayer>();
-		// mPlayerID = player->ID;
-		// WM.InsertObject(player);
-
-		std::unique_ptr<Object::Object> bullet = std::make_unique<Object::Bullet>(Object::Type::Error);
-		bullet->SetPosition(0, SCR.GetHeight() / 2);
-		WM.InsertObject(bullet.release());
+		InitMap();
 	}
 	void WorldManager::ShutDown()
 	{
 		mWorldList.Clear();
+		mMovableObjects.clear();
+		mObjectsToDelete.clear();
 	}
 
 	void WorldManager::Step()
@@ -47,6 +46,47 @@ namespace BattleCity::Manager
 		for (auto& [id, obj] : mWorldList.GetRange())
 		{
 			obj->Draw();
+		}
+	}
+
+	void WorldManager::InitMap()
+	{
+		int posX = MAP.mBoundaries.X();
+		int posY = MAP.mBoundaries.Y();
+		for (const auto& mapRow : MAP.mMap)
+		{
+			for (const auto& objectType : mapRow)
+			{
+				std::unique_ptr<Object::Object> object = nullptr;
+				switch (objectType)
+				{
+				case Object::Type::None: 
+					break;
+				case Object::Type::TankPlayer:
+					object = std::make_unique<Object::TankPlayer>(posX, posY);
+					InsertObject(object.release());
+					break;
+				case Object::Type::TankNPC:
+					object = std::make_unique<Object::TankNPC>(posX, posY);
+					InsertObject(object.release());
+					break;
+				case Object::Type::Wall:
+					object = std::make_unique<Object::Wall>(posX, posY);
+					InsertObject(object.release());
+					break;
+				case Object::Type::PhoenixAndFlag:
+					object = std::make_unique<Object::PhoenixAndFlag>(posX, posY);
+					InsertObject(object.release());
+					break;
+				default: 
+					break;
+				}
+
+				posX += 16;
+			}
+
+			posY += 16;
+			posX = MAP.mBoundaries.X();
 		}
 	}
 

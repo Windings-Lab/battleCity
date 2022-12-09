@@ -4,7 +4,9 @@
 
 namespace BattleCity::Object
 {
-	PowerUp::PowerUp() : Object(Type::PowerUp)
+	PowerUp::PowerUp()
+		: Object(0, 0, Type::PowerUp, Manager::SpriteType::PowerUp, Behaviour::Basic)
+
 	{
 	}
 

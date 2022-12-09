@@ -25,9 +25,14 @@ namespace BattleCity::Manager
 		mSpriteAtlas.clear();
 	}
 
-	void SpriteManager::DrawSprite(Sprite* sprite, const int& w, const int& h)
+	void SpriteManager::DrawSprite(const Sprite* sprite, const int& w, const int& h)
 	{
-		drawSprite(sprite, w, h);
+		drawSprite(const_cast<Sprite*>(sprite), w, h);
+	}
+
+	void SpriteManager::GetSpriteSize(const Sprite* sprite, int& w, int& h)
+	{
+		getSpriteSize(const_cast<Sprite*>(sprite), w, h);
 	}
 
 	Rectangle SpriteManager::GetSpriteRectangle(const Sprite* sprite) const

@@ -3,7 +3,8 @@
 
 namespace BattleCity::Object
 {
-	TankNPC::TankNPC() : Tank(Type::TankNPC)
+	TankNPC::TankNPC(int x, int y)
+		: Tank(x, y, Type::TankNPC, Manager::SpriteType::TankNPC, Behaviour::Up)
 	{
 
 	}

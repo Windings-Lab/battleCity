@@ -9,11 +9,18 @@ namespace BattleCity::Object
 {
     int Object::IDCounter = 1;
 
-    Object::Object(Type type) : ID(IDCounter++), ObjectType(type)
+    Object::Object(int x, int y, Type type, Manager::SpriteType spriteType
+        , Behaviour behaviour)
+		: mSprite(Manager::SM.SetAndGetSprite(spriteType, behaviour))
+		, ID(IDCounter++), ObjectType(type)
     {
-        mRectangle = Rectangle();
+        int width = 0, height = 0;
+        Manager::SM.GetSpriteSize
+    		(mSprite, width, height);
+        mRectangle.SetPosition(x, y);
+        mRectangle.SetSize(width, height);
+
         mSolidness = Solidness::Hard;
-        mSprite = nullptr;
 
         mHealth = 1;
 
@@ -32,7 +39,7 @@ namespace BattleCity::Object
 
     void Object::Draw() const
     {
-        Manager::SM.DrawSprite(const_cast<Sprite*>(mSprite), X(), Y());
+        Manager::SM.DrawSprite(mSprite, X(), Y());
     }
 
 	#pragma region Object

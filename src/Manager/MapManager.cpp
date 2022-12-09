@@ -1,6 +1,7 @@
 #include "PCHeader.h"
 #include "MapManager.h"
 
+#include "Screen.h"
 #include "SpriteManager.h"
 
 namespace BattleCity::Manager
@@ -11,26 +12,28 @@ namespace BattleCity::Manager
 		return mapManager;
 	}
 
-	MapManager::MapManager() : Manager(Type::Map), mBackground(nullptr)
-	{
-		
-	}
-
+	MapManager::MapManager() : Manager(Type::Map), mBackground(nullptr) {	}
 
 	void MapManager::StartUp()
 	{
 		mBackground = SM.SetAndGetSprite(SpriteType::Background, Object::Behaviour::Basic);
 		mBoundaries = SM.GetSpriteRectangle(mBackground);
-		mBoundaries.SetPosition(80, 88);
+		int width = 0, height = 0;
+		SM.GetSpriteSize(mBackground, width, height);
+		mBoundaries.SetPosition((SCR.GetWidth() - width) / 2, (SCR.GetHeight() - height) / 2);
+		mBoundaries.SetSize(width, height);
+
 		ReadMapFile();
 	}
 
 	void MapManager::ShutDown()
 	{
+		mMap.clear();
 	}
 
 	void MapManager::Step()
 	{
+		SM.DrawSprite(mBackground, mBoundaries.X(), mBoundaries.Y());
 	}
 
 	void MapManager::ReadMapFile()
@@ -49,9 +52,9 @@ namespace BattleCity::Manager
 
 				std::vector<Object::Type> mapRow;
 				mapRow.reserve(str.size());
-				for (auto& numChar : str)
+				for (const auto& numChar : str)
 				{
-					auto objectTypeCasted = magic_enum::enum_cast<Object::Type>(numChar);
+					auto objectTypeCasted = magic_enum::enum_cast<Object::Type>(numChar - '0');
 					if(objectTypeCasted.has_value())
 					{
 						mapRow.emplace_back(objectTypeCasted.value());

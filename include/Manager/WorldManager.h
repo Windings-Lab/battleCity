@@ -39,9 +39,9 @@ namespace BattleCity::Manager
 		// Expensive
 		std::unordered_set<int> GetObjectsOfType(Object::Type type) const;
 	private:
+		void InitMap();
 		void Update();
 		void Draw();
-
 
 	private:
 		// Singleton

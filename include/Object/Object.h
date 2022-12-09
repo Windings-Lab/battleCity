@@ -12,9 +12,9 @@ namespace BattleCity::Object
 		static int IDCounter;
 	protected:
 		// Object
+		const Sprite* mSprite;
 		Rectangle mRectangle;
 		Solidness mSolidness;
-		const Sprite* mSprite;
 
 		// IDestroyable Interface
 		int mHealth;
@@ -27,7 +27,9 @@ namespace BattleCity::Object
 		Vector2Int mDirection;
 
 	public:
-		explicit Object(Type type);
+		Object(int x, int y, Type type
+				, Manager::SpriteType spriteType
+				, Behaviour behaviour);
 
 		Object(const Object&) = delete;
 		Object(Object&&) = delete;

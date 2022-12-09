@@ -4,8 +4,11 @@
 
 namespace BattleCity::Object
 {
-	Wall::Wall() : Object(Type::Wall)
+	Wall::Wall(int x, int y)
+		: Object(x, y, Type::Wall, Manager::SpriteType::Wall, Behaviour::Basic)
+
 	{
+
 	}
 
 	void Wall::Update()

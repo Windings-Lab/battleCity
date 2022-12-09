@@ -7,7 +7,7 @@ namespace BattleCity::Object
     class Wall final : public Object
     {
     public:
-        Wall();
+        Wall(int x, int y);
         ~Wall() override = default;
 
         void Update() override;

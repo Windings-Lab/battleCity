@@ -5,18 +5,6 @@
     <ClCompile Include="src\Object\Bullet.cpp">
       <Filter>Source\Object</Filter>
     </ClCompile>
-    <ClCompile Include="src\Event\Event.cpp">
-      <Filter>Source\Event</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Event\EventCollision.cpp">
-      <Filter>Source\Event</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Event\EventOutOfWorld.cpp">
-      <Filter>Source\Event</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Event\EventStep.cpp">
-      <Filter>Source\Event</Filter>
-    </ClCompile>
     <ClCompile Include="src\Object\Explosion.cpp">
       <Filter>Source\Object</Filter>
     </ClCompile>
@@ -31,9 +19,6 @@
     </ClCompile>
     <ClCompile Include="src\Object\Object.cpp">
       <Filter>Source\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ObjectList.cpp">
-      <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="src\Object\PhoenixAndFlag.cpp">
       <Filter>Source\Object</Filter>
@@ -80,22 +65,16 @@
     <ClCompile Include="src\Manager\MapManager.cpp">
       <Filter>Source\Manager</Filter>
     </ClCompile>
+    <ClCompile Include="src\Object\TankNPC.cpp">
+      <Filter>Source\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object\ObjectList.cpp">
+      <Filter>Source\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Object\Bullet.h">
       <Filter>Headers\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Event\Event.h">
-      <Filter>Headers\Event</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Event\EventCollision.h">
-      <Filter>Headers\Event</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Event\EventOutOfWorld.h">
-      <Filter>Headers\Event</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Event\EventStep.h">
-      <Filter>Headers\Event</Filter>
     </ClInclude>
     <ClInclude Include="include\Object\Explosion.h">
       <Filter>Headers\Object</Filter>
@@ -114,9 +93,6 @@
     </ClInclude>
     <ClInclude Include="include\Object\Object.h">
       <Filter>Headers\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ObjectList.h">
-      <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="include\Object\PhoenixAndFlag.h">
       <Filter>Headers\Object</Filter>
@@ -169,6 +145,15 @@
     <ClInclude Include="include\Manager\MapManager.h">
       <Filter>Headers\Manager</Filter>
     </ClInclude>
+    <ClInclude Include="include\Object\TankNPC.h">
+      <Filter>Headers\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Object\ObjectList.h">
+      <Filter>Headers\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Engine\BattleCityEnums.h">
+      <Filter>Headers\Engine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
@@ -182,9 +167,6 @@
     </Filter>
     <Filter Include="Headers\Collision">
       <UniqueIdentifier>{66508cac-38f7-44be-9cec-cfd041fbca8b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Headers\Event">
-      <UniqueIdentifier>{30ebceff-0c91-4ca1-baaf-8321f88dcc60}</UniqueIdentifier>
     </Filter>
     <Filter Include="Headers\Framework">
       <UniqueIdentifier>{4e80204e-52f5-4951-9ae0-a5c80e5802a4}</UniqueIdentifier>
@@ -215,6 +197,9 @@
     </Filter>
     <Filter Include="Source\Object">
       <UniqueIdentifier>{07204f34-c876-4173-abb0-8f7961da8f89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Engine">
+      <UniqueIdentifier>{49ecc4e6-30ce-4b46-87bd-485610a80a87}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

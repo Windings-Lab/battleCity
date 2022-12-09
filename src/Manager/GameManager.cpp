@@ -41,6 +41,7 @@ namespace BattleCity::Manager
 		using Framerate = duration<steady_clock::rep, std::ratio<1, 60>>;
 		mNextFrame = steady_clock::now() + Framerate{ 1 };
 
+		MAP.Step();
 		WM.Step();
 		TM.Step();
 

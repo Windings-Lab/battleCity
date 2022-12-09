@@ -4,7 +4,8 @@
 
 namespace BattleCity::Object
 {
-    Explosion::Explosion() : Object(Type::Explosion)
+    Explosion::Explosion()
+        : Object(0, 0, Type::Explosion, Manager::SpriteType::Explosion, Behaviour::ExplosionLarge1)
     {
     }
 

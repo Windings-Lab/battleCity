@@ -7,7 +7,7 @@ namespace BattleCity::Object
 	class TankPlayer final : public Tank
 	{
 	public:
-		TankPlayer();
+		TankPlayer(int x, int y);
 		~TankPlayer() override;
 
 		void Update() override;

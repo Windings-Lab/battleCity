@@ -4,8 +4,10 @@
 
 namespace BattleCity::Object
 {
-	TankPlayer::TankPlayer() : Tank(Type::TankPlayer)
+	TankPlayer::TankPlayer(int x, int y)
+		: Tank(x, y, Type::TankPlayer, Manager::SpriteType::TankPlayer, Behaviour::Up)
 	{
+
 	}
 
 	void TankPlayer::Update()

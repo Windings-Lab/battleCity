@@ -1,14 +1,12 @@
 #include "PCHeader.h"
 
 #include "Bullet.h"
-#include "SpriteManager.h"
-#include "WorldManager.h"
 
 namespace BattleCity::Object
 {
-	Bullet::Bullet(Type ownerType) : Object(Type::Bullet), mOwnerType(ownerType)
+	Bullet::Bullet(Type ownerType)
+		: Object(0, 0, Type::Bullet, Manager::SpriteType::Bullet, Behaviour::Up), mOwnerType(ownerType)
 	{
-		mSprite = Manager::SM.SetAndGetSprite(Manager::SpriteType::TankNPC, Behaviour::Right);
 	}
 
 	Bullet::~Bullet()

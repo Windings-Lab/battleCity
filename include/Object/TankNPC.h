@@ -6,7 +6,7 @@ namespace BattleCity::Object
 	class TankNPC : public Tank
 	{
 	public:
-		TankNPC();
+		TankNPC(int x, int y);
 
 		void Fire() override;
 		void Update() override;

@@ -9,6 +9,7 @@ namespace BattleCity::Manager
 {
 	class MapManager final : public Manager
 	{
+		friend class WorldManager;
 	public:
 		static MapManager& GetInstance();
 
