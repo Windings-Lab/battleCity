@@ -9,8 +9,7 @@ namespace BattleCity::Manager
 	class SpriteManager final : public Manager
 	{
 	public:
-		using SpriteObjectBehaviour = std::unordered_map<Object::Behaviour, SpriteObject>;
-		using SpriteAtlas = std::unordered_map<SpriteType, SpriteObjectBehaviour>;
+		using SpriteAtlas = std::unordered_map<SpriteTypeBehaviourPair, SpriteObject>;
 	public:
 		static SpriteManager& GetInstance();
 

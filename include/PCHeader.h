@@ -1,7 +1,5 @@
 #pragma once
 
-#include "BattleCityEnums.h"
-
 #include <algorithm>
 #include <array>
 #include <chrono>
@@ -21,3 +19,6 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <utility>
+
+#include "BattleCityEnums.h"
+#include "Hashes.h"

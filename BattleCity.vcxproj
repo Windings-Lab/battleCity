@@ -73,6 +73,7 @@
     <ClInclude Include="include\Object\TankPlayer.h" />
     <ClInclude Include="include\Object\Wall.h" />
     <ClInclude Include="include\PCHeader.h" />
+    <ClInclude Include="include\Utility\Hashes.h" />
     <ClInclude Include="include\Utility\magic_enum.hpp" />
     <ClInclude Include="include\Utility\TFunction.h" />
     <ClInclude Include="include\Utility\TimerHandle.h" />

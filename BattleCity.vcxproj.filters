@@ -154,6 +154,9 @@
     <ClInclude Include="include\Engine\BattleCityEnums.h">
       <Filter>Headers\Engine</Filter>
     </ClInclude>
+    <ClInclude Include="include\Utility\Hashes.h">
+      <Filter>Headers\Utility</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
