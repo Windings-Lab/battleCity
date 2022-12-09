@@ -4,10 +4,9 @@
 
 namespace BattleCity::Manager
 {
-	using SpritePathList = std::unordered_map<SpriteTypeBehaviourPair, std::string>;
-
 	class SpritePathManager final : public Manager
 	{
+		using SpritePathList = std::unordered_map<SpriteTypeBehaviourPair, std::string>;
 	public:
 		static SpritePathManager& GetInstance();
 

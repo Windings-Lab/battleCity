@@ -1,7 +1,5 @@
 #pragma once
 
-using SpriteTypeBehaviourPair = std::pair<BattleCity::Manager::SpriteType, BattleCity::Object::Behaviour>;
-
 template<>
 struct std::hash<SpriteTypeBehaviourPair>
 {

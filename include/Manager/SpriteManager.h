@@ -1,14 +1,38 @@
 #pragma once
 
-#include "Framework.h"
 #include "Manager.h"
 #include "Rectangle.h"
 
+struct SpriteDeleter;
+class Sprite;
+using SpriteObject = std::unique_ptr<const Sprite, SpriteDeleter>;
+
 namespace BattleCity::Manager
 {
+	FRAMEWORK_API Sprite* createSprite(const char* path);
+	FRAMEWORK_API void drawSprite(Sprite*, int x, int y);
+	FRAMEWORK_API void destroySprite(Sprite* s);
+	FRAMEWORK_API void getSpriteSize(Sprite* s, int& w, int& h);
+
+	struct SpriteDeleter
+	{
+		SpriteDeleter() = default;
+		SpriteDeleter(const SpriteDeleter&) = delete;
+		SpriteDeleter(SpriteDeleter&&) noexcept = delete;
+
+		SpriteDeleter& operator=(const SpriteDeleter&) = delete;
+		SpriteDeleter& operator=(SpriteDeleter&&) noexcept = delete;
+
+		~SpriteDeleter() = default;
+
+		void operator()(const Sprite* p) const
+		{
+			destroySprite(const_cast<Sprite*>(p));
+		}
+	};
+
 	class SpriteManager final : public Manager
 	{
-	public:
 		using SpriteAtlas = std::unordered_map<SpriteTypeBehaviourPair, SpriteObject>;
 	public:
 		static SpriteManager& GetInstance();

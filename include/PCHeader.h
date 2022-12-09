@@ -1,5 +1,7 @@
 #pragma once
 
+#define FRAMEWORK_API extern "C" __declspec(dllimport)
+
 #include <algorithm>
 #include <array>
 #include <chrono>
@@ -21,4 +23,8 @@
 #include <utility>
 
 #include "BattleCityEnums.h"
+
+using SpriteTypeBehaviourPair = std::pair<BattleCity::Manager::SpriteType, BattleCity::Object::Behaviour>;
+
 #include "Hashes.h"
+
