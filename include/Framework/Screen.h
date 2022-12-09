@@ -6,7 +6,7 @@ namespace BattleCity::Framework::Screen
 {
 	namespace 
 	{
-		BattleCity::Rectangle Bounds;
+		Rectangle Bounds;
 		bool FullScreen;
 	}
 
