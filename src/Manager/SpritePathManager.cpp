@@ -72,12 +72,17 @@ namespace BattleCity::Manager
 		{
 			return mSpritePathList.at(spriteType).at(objectBehaviour).string();
 		}
-		catch (...)
+		catch (std::out_of_range&)
 		{
 			std::cerr << __FUNCTION__ << ": No sprite with \nSpriteType: "
 				<< magic_enum::enum_name(spriteType)
 				<< "\nBehaviour: " << magic_enum::enum_name(objectBehaviour)
 				<< std::endl;
+			return "";
+		}
+		catch (...)
+		{
+			std::cerr << __FUNCTION__ << ": Unexpected error" << std::endl;
 			return "";
 		}
 	}

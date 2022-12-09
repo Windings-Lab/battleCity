@@ -25,7 +25,7 @@ namespace BattleCity::Manager
 		mSpriteAtlas.clear();
 	}
 
-	void SpriteManager::DrawSprite(const Sprite* sprite, const int& w, const int& h)
+	void SpriteManager::DrawSprite(const Sprite* sprite, const int& w, const int& h) const
 	{
 		drawSprite(const_cast<Sprite*>(sprite), w, h);
 	}
@@ -44,9 +44,14 @@ namespace BattleCity::Manager
 		{
 			return mSpriteAtlas.at(spriteType).at(objectBehaviour).get();
 		}
-		catch (...)
+		catch (std::out_of_range&)
 		{
 			return SetSprite(spriteType, objectBehaviour);
+		}
+		catch (...)
+		{
+			std::cerr << __FUNCTION__ << ": Unexpected error" << std::endl;
+			return nullptr;
 		}
 	}
 
@@ -57,12 +62,17 @@ namespace BattleCity::Manager
 		{
 			return mSpriteAtlas.at(spriteType).at(objectBehaviour).get();
 		}
-		catch (...)
+		catch (std::out_of_range&)
 		{
 			std::cerr << __FUNCTION__ << ": No sprite with \nSpriteType: "
 				<< magic_enum::enum_name(spriteType)
 				<< "\nBehaviour: " << magic_enum::enum_name(objectBehaviour)
 				<< std::endl;
+			return nullptr;
+		}
+		catch (...)
+		{
+			std::cerr << __FUNCTION__ << ": Unexpected error" << std::endl;
 			return nullptr;
 		}
 	}
