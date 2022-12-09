@@ -42,7 +42,7 @@ namespace BattleCity::Manager
 	{
 		try
 		{
-			return mSpriteAtlas.at(spriteType).at(objectBehaviour).get();
+			return mSpriteAtlas.at({ spriteType, objectBehaviour }).get();
 		}
 		catch (std::out_of_range&)
 		{
@@ -60,7 +60,7 @@ namespace BattleCity::Manager
 	{
 		try
 		{
-			return mSpriteAtlas.at(spriteType).at(objectBehaviour).get();
+			return mSpriteAtlas.at({spriteType, objectBehaviour}).get();
 		}
 		catch (std::out_of_range&)
 		{
@@ -91,15 +91,7 @@ namespace BattleCity::Manager
 			return nullptr;
 		}
 
-		if(mSpriteAtlas.find(spriteType) == mSpriteAtlas.end())
-		{
-			SpriteObjectBehaviour spriteObjectBehaviour;
-			spriteObjectBehaviour.try_emplace(objectBehaviour, sprite);
-			mSpriteAtlas.try_emplace(spriteType, std::move(spriteObjectBehaviour));
-			return sprite;
-		}
-
-		mSpriteAtlas.at(spriteType).try_emplace(objectBehaviour, sprite);
+		mSpriteAtlas.try_emplace({ spriteType, objectBehaviour }, sprite);
 		return sprite;
 	}
 }

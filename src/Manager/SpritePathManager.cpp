@@ -24,27 +24,22 @@ namespace BattleCity::Manager
 			{
 				if (entry.path().extension() == FileExtension)
 				{
-					std::string objectTypeStr = entry.path().stem().string();
-					auto objectTypeCast
-						= magic_enum::enum_cast<SpriteType>(objectTypeStr);
+					std::string spriteTypeStr = entry.path().stem().string();
+					std::string objectBehaviourStr = entry.path().parent_path().stem().string();
 
-					if (objectTypeCast.has_value())
+					auto spriteTypeCast
+						= magic_enum::enum_cast<SpriteType>(spriteTypeStr);
+					auto objectBehaviourCast
+						= magic_enum::enum_cast<Object::Behaviour>(objectBehaviourStr);
+
+					if (spriteTypeCast.has_value() && objectBehaviourCast.has_value())
 					{
-						std::string spriteBehaviourStr = entry.path().parent_path().stem().string();
-						auto spriteBehaviourCast
-							= magic_enum::enum_cast<Object::Behaviour>(spriteBehaviourStr);
-						if (spriteBehaviourCast.has_value())
-						{
-							SetSpritePath(entry.path().string(), objectTypeCast.value(), spriteBehaviourCast.value());
-						}
-						else
-						{
-							std::cerr << "No sprite behaviour value: " << spriteBehaviourStr << std::endl;
-						}
+						SetSpritePath(entry.path().string(), spriteTypeCast.value(), objectBehaviourCast.value());
 					}
 					else
 					{
-						std::cerr << "No object type value: " << objectTypeStr << std::endl;
+						std::cerr << spriteTypeStr << " - " << objectBehaviourStr << ": has not been found\n"
+							<< "in folder: " << SpriteFolderPath.string() << std::endl;
 					}
 				}
 			}
@@ -56,7 +51,7 @@ namespace BattleCity::Manager
 			std::exit(1);
 		}
 #ifdef _DEBUG
-		OutputAllPathes();
+		OutputAllPath();
 		std::cout << "Sprite SpriteFolderPath Manager loaded." << std::endl;
 #endif
 	}
@@ -70,7 +65,7 @@ namespace BattleCity::Manager
 	{
 		try
 		{
-			return mSpritePathList.at(spriteType).at(objectBehaviour).string();
+			return mSpritePathList.at({ spriteType, objectBehaviour });
 		}
 		catch (std::out_of_range&)
 		{
@@ -88,27 +83,15 @@ namespace BattleCity::Manager
 	}
 	void SpritePathManager::SetSpritePath(std::string path, SpriteType spriteType, Object::Behaviour objectBehaviour)
 	{
-		if (mSpritePathList.find(spriteType) == mSpritePathList.end())
-		{
-			SpriteObjectBehaviourPath behaviourMap;
-			behaviourMap.try_emplace(objectBehaviour, path);
-			mSpritePathList.try_emplace(spriteType, std::move(behaviourMap));
-		}
-		else
-		{
-			mSpritePathList.at(spriteType).try_emplace(objectBehaviour, path);
-		}
+		mSpritePathList.try_emplace({ spriteType, objectBehaviour }, path);
 	}
 
-	void SpritePathManager::OutputAllPathes()
+	void SpritePathManager::OutputAllPath()
 	{
-		for (auto& [spriteType, list] : mSpritePathList)
+		for (auto& [pair, path] : mSpritePathList)
 		{
-			for (auto& [objectBehaviour, path] : list)
-			{
-				std::cout << magic_enum::enum_name(spriteType) << " - "
-					<< magic_enum::enum_name(objectBehaviour) << ": " << path << std::endl;
-			}
+			std::cout << magic_enum::enum_name(pair.first) << " - "
+				<< magic_enum::enum_name(pair.second) << ": " << path << std::endl;
 		}
 		std::cout << std::endl;
 	}
