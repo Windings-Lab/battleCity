@@ -16,7 +16,7 @@
 
 #include "Framework.h"
 
-namespace BattleCity
+namespace BattleCity::Framework
 {
 	class TankPlayer;
 

@@ -1,6 +1,6 @@
 #pragma once
 
-namespace BattleCity
+namespace BattleCity::Framework
 {
 	enum class FRKey
 	{

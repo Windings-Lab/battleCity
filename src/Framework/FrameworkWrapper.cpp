@@ -3,15 +3,15 @@
 #include "FrameworkWrapper.h"
 #include "GameManager.h"
 
-namespace Screen
+namespace BattleCity::Framework
 {
-	const int& W();
-	const int& H();
-	const bool& IsFullscreen();
-}
+	namespace Screen
+	{
+		const int& W();
+		const int& H();
+		const bool& IsFullscreen();
+	}
 
-namespace BattleCity
-{
 	void FrameworkWrapper::PreInit(int& width, int& height, bool& fullscreen)
 	{
 		width = Screen::W();

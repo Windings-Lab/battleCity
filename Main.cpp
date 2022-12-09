@@ -13,7 +13,7 @@ namespace
 	}
 }
 
-namespace Screen
+namespace BattleCity::Framework::Screen
 {
 	void Set(int, int, bool);
 	bool IsValidSize(int w, int h);
@@ -22,9 +22,9 @@ namespace Screen
 int main(int argc, const char* argv[])
 {
 #ifdef _DEBUG
-	Screen::Set(800, 600, false);
+	BattleCity::Framework::Screen::Set(800, 600, false);
 #else
-	Screen::Set(800, 600, true);
+	BattleCity::Framework::Screen::Set(800, 600, true);
 #endif
 
 	if (argc != 1)
@@ -73,16 +73,16 @@ int main(int argc, const char* argv[])
 			return 1;
 		}
 
-		if (!Screen::IsValidSize(token[0], token[1]))
+		if (!BattleCity::Framework::Screen::IsValidSize(token[0], token[1]))
 		{
 			std::cout << "Incorrect window size" << std::endl;
 			return 1;
 		}
 
-		Screen::Set(token[0], token[1], false);
+		BattleCity::Framework::Screen::Set(token[0], token[1], false);
 	}
 	
-	const auto framework = std::make_unique<BattleCity::FrameworkWrapper>();
+	const auto framework = std::make_unique<BattleCity::Framework::FrameworkWrapper>();
 
 	return run(framework.get());
 }

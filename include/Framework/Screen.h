@@ -2,7 +2,7 @@
 
 #include "Rectangle.h"
 
-namespace Screen
+namespace BattleCity::Framework::Screen
 {
 	namespace 
 	{
