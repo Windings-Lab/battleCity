@@ -7,10 +7,10 @@ namespace BattleCity
 	Rectangle::Rectangle() : Rectangle(Vector2Int::Zero())
 	{
 	}
-	Rectangle::Rectangle(Vector2Int position) : Rectangle(16, 16, position.X(), position.Y())
+	Rectangle::Rectangle(Vector2Int position) : Rectangle(position.X(), position.Y(), 16, 16)
 	{
 	}
-	Rectangle::Rectangle(int width, int height) : Rectangle(width, height, 0, 0)
+	Rectangle::Rectangle(int width, int height) : Rectangle(0, 0, width, height)
 	{
 	}
 	Rectangle::Rectangle(int x, int y, int width, int height)

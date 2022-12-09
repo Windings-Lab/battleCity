@@ -35,7 +35,7 @@ namespace BattleCity::Manager
 		int width = 0;
 		int height = 0;
 		getSpriteSize(const_cast<Sprite*>(sprite), width, height);
-		return { width, height, x, y };
+		return { x, y, width, height };
 	}
 
 	const Sprite* SpriteManager::SetAndGetSprite(SpriteType spriteType, Object::Behaviour objectBehaviour)
