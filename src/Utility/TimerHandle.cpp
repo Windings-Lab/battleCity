@@ -3,9 +3,7 @@
 
 namespace BattleCity
 {
-	using namespace std::string_view_literals;
-
-	TimerHandle::TimerHandle() : TimerHandle(0) {}
+		TimerHandle::TimerHandle() : TimerHandle(0) {}
 	TimerHandle::TimerHandle(int duration) : TimerHandle(""sv, duration) {}
 	TimerHandle::TimerHandle(std::string_view timerName, int duration)
 		: mTimerName(timerName), mDuration(duration), mRunning(false)

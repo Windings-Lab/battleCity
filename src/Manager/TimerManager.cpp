@@ -3,8 +3,6 @@
 
 namespace BattleCity::Manager
 {
-	using namespace std::string_view_literals;
-
 	TimerManager& TimerManager::GetInstance()
 	{
 		static TimerManager timerManager;
