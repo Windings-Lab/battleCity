@@ -38,8 +38,9 @@ namespace BattleCity::Manager
 					}
 					else
 					{
-						std::cerr << spriteTypeStr << " - " << objectBehaviourStr << ": has not been found\n"
-							<< "in folder: " << SpriteFolderPath.string() << std::endl;
+						std::cerr << spriteTypeStr << " - " << objectBehaviourStr
+						<< ": have no usage."
+						<< std::endl;
 					}
 				}
 			}
