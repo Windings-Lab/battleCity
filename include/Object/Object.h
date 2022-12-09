@@ -56,8 +56,6 @@ namespace BattleCity::Object
 		void SetSolidness(Solidness solidness);
 		Solidness GetSolidness() const;
 
-		void SetSprite(Sprite*);
-
 		#pragma endregion
 
 		#pragma region IDestroyable

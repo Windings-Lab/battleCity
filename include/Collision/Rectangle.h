@@ -20,8 +20,7 @@ namespace BattleCity
 		// Height		= height
 		// Position		= (0, 0)
 		Rectangle(int width, int height);
-		Rectangle(int width, int height, Vector2Int position);
-		Rectangle(int xMin, int xMax, int yMin, int yMax);
+		Rectangle(int x, int y, int width, int height);
 
 		Rectangle(Rectangle&&) = default;
 		Rectangle& operator=(Rectangle&&) = default;

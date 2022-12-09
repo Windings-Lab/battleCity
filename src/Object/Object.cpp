@@ -15,10 +15,8 @@ namespace BattleCity::Object
 		, ID(IDCounter++), ObjectType(type)
     {
         int width = 0, height = 0;
-        Manager::SM.GetSpriteSize
-    		(mSprite, width, height);
-        mRectangle.SetPosition(x, y);
-        mRectangle.SetSize(width, height);
+        Manager::SM.GetSpriteSize(mSprite, width, height);
+        mRectangle = Rectangle(width, height, Vector2Int(x, y));
 
         mSolidness = Solidness::Hard;
 
@@ -30,7 +28,7 @@ namespace BattleCity::Object
         mDirection = Vector2Int::Zero();
     }
 
-    Object::~Object() {}
+    Object::~Object() = default;
 
     void Object::Update()
     {
@@ -68,10 +66,6 @@ namespace BattleCity::Object
     Solidness Object::GetSolidness() const
     {
         return mSolidness;
-    }
-
-    void Object::SetSprite(Sprite*)
-    {
     }
 
 	#pragma endregion
