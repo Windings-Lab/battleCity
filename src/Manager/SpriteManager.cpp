@@ -40,7 +40,14 @@ namespace BattleCity::Manager
 
 	const Sprite* SpriteManager::SetAndGetSprite(SpriteType spriteType, Object::Behaviour objectBehaviour)
 	{
-		return SetSprite(spriteType, objectBehaviour);
+		try
+		{
+			return mSpriteAtlas.at(spriteType).at(objectBehaviour).get();
+		}
+		catch (...)
+		{
+			return SetSprite(spriteType, objectBehaviour);
+		}
 	}
 
 
@@ -50,9 +57,12 @@ namespace BattleCity::Manager
 		{
 			return mSpriteAtlas.at(spriteType).at(objectBehaviour).get();
 		}
-		catch (std::out_of_range& ex)
+		catch (...)
 		{
-			std::cerr << ex.what() << std::endl;
+			std::cerr << __FUNCTION__ << ": No sprite with \nSpriteType: "
+				<< magic_enum::enum_name(spriteType)
+				<< "\nBehaviour: " << magic_enum::enum_name(objectBehaviour)
+				<< std::endl;
 			return nullptr;
 		}
 	}
@@ -71,7 +81,7 @@ namespace BattleCity::Manager
 			return nullptr;
 		}
 
-		if(mSpriteAtlas.count(spriteType) == 0)
+		if(mSpriteAtlas.find(spriteType) == mSpriteAtlas.end())
 		{
 			SpriteObjectBehaviour spriteObjectBehaviour;
 			spriteObjectBehaviour.try_emplace(objectBehaviour, sprite);
@@ -79,15 +89,7 @@ namespace BattleCity::Manager
 			return sprite;
 		}
 
-		try
-		{
-			mSpriteAtlas.at(spriteType).try_emplace(objectBehaviour, sprite);
-			return sprite;
-		}
-		catch (std::out_of_range& ex)
-		{
-			std::cerr << ex.what() << std::endl;
-			return nullptr;
-		}
+		mSpriteAtlas.at(spriteType).try_emplace(objectBehaviour, sprite);
+		return sprite;
 	}
 }
