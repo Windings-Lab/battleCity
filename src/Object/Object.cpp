@@ -9,15 +9,11 @@ namespace BattleCity::Object
 {
     int Object::IDCounter = 1;
 
-    Object::Object(int x, int y, Type type, Manager::SpriteType spriteType
-        , Behaviour behaviour)
+    Object::Object(int x, int y, Type type, Manager::SpriteType spriteType, Behaviour behaviour)
 		: mSprite(Manager::SM.SetAndGetSprite(spriteType, behaviour))
+		, mRectangle(Manager::SM.GetSpriteRectangle(mSprite, x, y))
 		, ID(IDCounter++), ObjectType(type)
     {
-        int width = 0, height = 0;
-        Manager::SM.GetSpriteSize(mSprite, width, height);
-        mRectangle = Rectangle(width, height, Vector2Int(x, y));
-
         mSolidness = Solidness::Hard;
 
         mHealth = 1;

@@ -17,11 +17,7 @@ namespace BattleCity::Manager
 	void MapManager::StartUp()
 	{
 		mBackground = SM.SetAndGetSprite(SpriteType::Background, Object::Behaviour::Basic);
-		mBoundaries = SM.GetSpriteRectangle(mBackground);
-		int width = 0, height = 0;
-		SM.GetSpriteSize(mBackground, width, height);
-		mBoundaries.SetPosition((SCR.GetWidth() - width) / 2, (SCR.GetHeight() - height) / 2);
-		mBoundaries.SetSize(width, height);
+		mBoundaries = SM.GetSpriteRectangle(mBackground, 40, 44);
 
 		ReadMapFile();
 	}

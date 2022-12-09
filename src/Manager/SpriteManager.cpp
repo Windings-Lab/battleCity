@@ -30,17 +30,12 @@ namespace BattleCity::Manager
 		drawSprite(const_cast<Sprite*>(sprite), w, h);
 	}
 
-	void SpriteManager::GetSpriteSize(const Sprite* sprite, int& w, int& h)
-	{
-		getSpriteSize(const_cast<Sprite*>(sprite), w, h);
-	}
-
-	Rectangle SpriteManager::GetSpriteRectangle(const Sprite* sprite) const
+	Rectangle SpriteManager::GetSpriteRectangle(const Sprite* sprite, int x, int y) const
 	{
 		int width = 0;
 		int height = 0;
 		getSpriteSize(const_cast<Sprite*>(sprite), width, height);
-		return { width, height };
+		return { width, height, x, y };
 	}
 
 	const Sprite* SpriteManager::SetAndGetSprite(SpriteType spriteType, Object::Behaviour objectBehaviour)
@@ -65,7 +60,7 @@ namespace BattleCity::Manager
 	const Sprite* SpriteManager::SetSprite(SpriteType spriteType, Object::Behaviour objectBehaviour)
 	{
 		const auto path = PM.GetSpritePath(spriteType, objectBehaviour);
-		Sprite* sprite = nullptr;
+		Sprite* sprite;
 
 		if (!path.empty())
 		{
