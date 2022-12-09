@@ -35,9 +35,6 @@
     <ClCompile Include="src\Object\Wall.cpp">
       <Filter>Source\Object</Filter>
     </ClCompile>
-    <ClCompile Include="src\Collision\Rectangle.cpp">
-      <Filter>Source\Collision</Filter>
-    </ClCompile>
     <ClCompile Include="src\Utility\Vector2Int.cpp">
       <Filter>Source\Utility</Filter>
     </ClCompile>
@@ -67,6 +64,9 @@
     </ClCompile>
     <ClCompile Include="src\Object\ObjectList.cpp">
       <Filter>Source\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Utility\Rectangle.cpp">
+      <Filter>Source\Utility</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -105,9 +105,6 @@
     </ClInclude>
     <ClInclude Include="include\Object\Wall.h">
       <Filter>Headers\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Collision\Rectangle.h">
-      <Filter>Headers\Collision</Filter>
     </ClInclude>
     <ClInclude Include="include\Framework\Screen.h">
       <Filter>Headers\Framework</Filter>
@@ -148,10 +145,13 @@
     <ClInclude Include="include\Object\ObjectList.h">
       <Filter>Headers\Object</Filter>
     </ClInclude>
-    <ClInclude Include="include\Engine\BattleCityEnums.h">
-      <Filter>Headers\Engine</Filter>
-    </ClInclude>
     <ClInclude Include="include\Utility\Hashes.h">
+      <Filter>Headers\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCityEnums.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utility\Rectangle.h">
       <Filter>Headers\Utility</Filter>
     </ClInclude>
   </ItemGroup>
@@ -165,9 +165,6 @@
     <Filter Include="Source">
       <UniqueIdentifier>{53a6e30b-413c-4983-aafe-23ac415c2480}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Headers\Collision">
-      <UniqueIdentifier>{66508cac-38f7-44be-9cec-cfd041fbca8b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Headers\Framework">
       <UniqueIdentifier>{4e80204e-52f5-4951-9ae0-a5c80e5802a4}</UniqueIdentifier>
     </Filter>
@@ -180,12 +177,6 @@
     <Filter Include="Headers\Utility">
       <UniqueIdentifier>{c462b0d0-44c5-485c-8cdd-4be1fd9dac56}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Collision">
-      <UniqueIdentifier>{d74916be-fec8-4142-aa99-958b74029552}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Event">
-      <UniqueIdentifier>{fc96c148-8886-4c83-9700-a65834e50099}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source\Framework">
       <UniqueIdentifier>{340da608-4e03-44a9-b2c5-c5e953d7f08a}</UniqueIdentifier>
     </Filter>
@@ -197,9 +188,6 @@
     </Filter>
     <Filter Include="Source\Object">
       <UniqueIdentifier>{07204f34-c876-4173-abb0-8f7961da8f89}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Headers\Engine">
-      <UniqueIdentifier>{49ecc4e6-30ce-4b46-87bd-485610a80a87}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

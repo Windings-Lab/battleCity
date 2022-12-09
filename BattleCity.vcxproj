@@ -20,7 +20,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="src\Collision\Rectangle.cpp" />
     <ClCompile Include="src\Framework\FrameworkWrapper.cpp" />
     <ClCompile Include="src\Manager\GameManager.cpp" />
     <ClCompile Include="src\Manager\Manager.cpp" />
@@ -45,12 +44,12 @@
       </PrecompiledHeaderFile>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\Utility\Rectangle.cpp" />
     <ClCompile Include="src\Utility\TimerHandle.cpp" />
     <ClCompile Include="src\Utility\Vector2Int.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Collision\Rectangle.h" />
-    <ClInclude Include="include\Engine\BattleCityEnums.h" />
+    <ClInclude Include="include\BattleCityEnums.h" />
     <ClInclude Include="include\Framework\Framework.h" />
     <ClInclude Include="include\Framework\FrameworkWrapper.h" />
     <ClInclude Include="include\Framework\Screen.h" />
@@ -74,6 +73,7 @@
     <ClInclude Include="include\PCHeader.h" />
     <ClInclude Include="include\Utility\Hashes.h" />
     <ClInclude Include="include\Utility\magic_enum.hpp" />
+    <ClInclude Include="include\Utility\Rectangle.h" />
     <ClInclude Include="include\Utility\TFunction.h" />
     <ClInclude Include="include\Utility\TimerHandle.h" />
     <ClInclude Include="include\Utility\Vector2Int.h" />
@@ -184,7 +184,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)include\;$(ProjectDir)include\Collision\;$(ProjectDir)include\Event\;$(ProjectDir)include\Framework\;$(ProjectDir)include\Manager\;$(ProjectDir)include\Object\;$(ProjectDir)include\Utility\;$(ProjectDir)include\Engine\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include\;$(ProjectDir)include\Framework\;$(ProjectDir)include\Manager\;$(ProjectDir)include\Object\;$(ProjectDir)include\Utility\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <PrecompiledHeaderFile>PCHeader.h</PrecompiledHeaderFile>
       <PrecompiledHeader>Use</PrecompiledHeader>
