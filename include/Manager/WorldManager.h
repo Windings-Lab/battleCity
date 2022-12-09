@@ -57,5 +57,5 @@ namespace BattleCity::Manager
 		int mPlayerID;
 	};
 
-	inline WorldManager& WM = WorldManager::GetInstance();
+	constexpr auto& WM = WorldManager::GetInstance;
 }

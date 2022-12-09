@@ -12,13 +12,15 @@ namespace BattleCity::Manager
 		return mapManager;
 	}
 
-	MapManager::MapManager() : Manager(Type::Map), mBackground(nullptr) {	}
+	MapManager::MapManager() : Manager(Type::Map)
+	, mBackground(SM().SetAndGetSprite(SpriteType::Background, Object::Behaviour::Basic))
+	, mBoundaries(SM().GetSpriteRectangle(mBackground, 40, 44))
+	{
+		
+	}
 
 	void MapManager::StartUp()
 	{
-		mBackground = SM.SetAndGetSprite(SpriteType::Background, Object::Behaviour::Basic);
-		mBoundaries = SM.GetSpriteRectangle(mBackground, 40, 44);
-
 		ReadMapFile();
 	}
 
@@ -29,7 +31,7 @@ namespace BattleCity::Manager
 
 	void MapManager::Step()
 	{
-		SM.DrawSprite(mBackground, mBoundaries.X(), mBoundaries.Y());
+		SM().DrawSprite(mBackground, mBoundaries.X(), mBoundaries.Y());
 	}
 
 	void MapManager::ReadMapFile()

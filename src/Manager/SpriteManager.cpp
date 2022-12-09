@@ -79,7 +79,7 @@ namespace BattleCity::Manager
 
 	const Sprite* SpriteManager::SetSprite(SpriteType spriteType, Object::Behaviour objectBehaviour)
 	{
-		const auto path = PM.GetSpritePath(spriteType, objectBehaviour);
+		const auto path = PM().GetSpritePath(spriteType, objectBehaviour);
 		Sprite* sprite;
 
 		if (!path.empty())

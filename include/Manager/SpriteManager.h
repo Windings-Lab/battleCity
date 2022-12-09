@@ -38,5 +38,5 @@ namespace BattleCity::Manager
 		SpriteAtlas mSpriteAtlas;
 	};
 
-	inline SpriteManager& SM = SpriteManager::GetInstance();
+	constexpr auto& SM = SpriteManager::GetInstance;
 }

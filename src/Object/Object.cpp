@@ -10,8 +10,8 @@ namespace BattleCity::Object
     int Object::IDCounter = 1;
 
     Object::Object(int x, int y, Type type, Manager::SpriteType spriteType, Behaviour behaviour)
-		: mSprite(Manager::SM.SetAndGetSprite(spriteType, behaviour))
-		, mRectangle(Manager::SM.GetSpriteRectangle(mSprite, x, y))
+		: mSprite(Manager::SM().SetAndGetSprite(spriteType, behaviour))
+		, mRectangle(Manager::SM().GetSpriteRectangle(mSprite, x, y))
 		, ID(IDCounter++), ObjectType(type)
     {
         mSolidness = Solidness::Hard;
@@ -33,7 +33,7 @@ namespace BattleCity::Object
 
     void Object::Draw() const
     {
-        Manager::SM.DrawSprite(mSprite, X(), Y());
+        Manager::SM().DrawSprite(mSprite, X(), Y());
     }
 
 	#pragma region Object

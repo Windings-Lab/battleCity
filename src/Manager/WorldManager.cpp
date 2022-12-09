@@ -51,9 +51,9 @@ namespace BattleCity::Manager
 
 	void WorldManager::InitMap()
 	{
-		int posX = MAP.mBoundaries.X();
-		int posY = MAP.mBoundaries.Y();
-		for (const auto& mapRow : MAP.mMap)
+		int posX = MAP().mBoundaries.X();
+		int posY = MAP().mBoundaries.Y();
+		for (const auto& mapRow : MAP().mMap)
 		{
 			for (const auto& objectType : mapRow)
 			{
@@ -86,7 +86,7 @@ namespace BattleCity::Manager
 			}
 
 			posY += 16;
-			posX = MAP.mBoundaries.X();
+			posX = MAP().mBoundaries.X();
 		}
 	}
 

@@ -20,19 +20,19 @@ namespace BattleCity::Manager
 
 	void GameManager::StartUp()
 	{
-		TM.StartUp();
-		PM.StartUp();
-		SM.StartUp();
-		MAP.StartUp();
-		WM.StartUp();
+		TM().StartUp();
+		PM().StartUp();
+		SM().StartUp();
+		MAP().StartUp();
+		WM().StartUp();
 	}
 	void GameManager::ShutDown()
 	{
-		WM.ShutDown();
-		MAP.ShutDown();
-		SM.ShutDown();
-		PM.ShutDown();
-		TM.ShutDown();
+		WM().ShutDown();
+		MAP().ShutDown();
+		SM().ShutDown();
+		PM().ShutDown();
+		TM().ShutDown();
 	}
 
 	void GameManager::Step()
@@ -41,9 +41,9 @@ namespace BattleCity::Manager
 		using Framerate = duration<steady_clock::rep, std::ratio<1, 60>>;
 		mNextFrame = steady_clock::now() + Framerate{ 1 };
 
-		MAP.Step();
-		WM.Step();
-		TM.Step();
+		MAP().Step();
+		WM().Step();
+		TM().Step();
 
 		std::this_thread::sleep_until(mNextFrame);
 		mNextFrame += Framerate{ 1 };

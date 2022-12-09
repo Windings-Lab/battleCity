@@ -37,5 +37,5 @@ namespace BattleCity::Manager
 		std::vector<std::vector<Object::Type>> mMap;
 	};
 
-	inline MapManager& MAP = MapManager::GetInstance();
+	constexpr auto& MAP = MapManager::GetInstance;
 }

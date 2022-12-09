@@ -33,6 +33,6 @@ namespace BattleCity::Manager
 		std::vector<TimerFuncPair> mTimerList;
 	};
 
-	inline TimerManager& TM = TimerManager::GetInstance();
+	constexpr auto& TM = TimerManager::GetInstance;
 }
 

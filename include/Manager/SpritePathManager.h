@@ -35,5 +35,5 @@ namespace BattleCity::Manager
 		SpritePathList mSpritePathList;
 	};
 
-	inline SpritePathManager& PM = SpritePathManager::GetInstance();
+	constexpr auto& PM = SpritePathManager::GetInstance;
 }
