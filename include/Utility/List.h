@@ -5,13 +5,6 @@ namespace BattleCity
 	template<typename T>
 	class List
 	{
-		struct Range
-		{
-			std::unordered_map<int, std::unique_ptr<T>>::const_iterator Begin;
-			std::unordered_map<int, std::unique_ptr<T>>::const_iterator End;
-			std::unordered_map<int, std::unique_ptr<T>>::const_iterator begin() { return Begin; }
-			std::unordered_map<int, std::unique_ptr<T>>::const_iterator end() { return End; }
-		};
 	public:
 		List();
 
@@ -22,8 +15,6 @@ namespace BattleCity
 		List<T>& operator=(List&& rhs) noexcept = default;
 
 		~List() = default;
-
-		Range GetRange() const;
 		T& GetT(int id) const;
 
 		void Insert(T* objPtr);

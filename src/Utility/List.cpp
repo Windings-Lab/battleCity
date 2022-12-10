@@ -10,12 +10,6 @@ namespace BattleCity
 	}
 
 	template<typename T>
-	typename List<T>::Range List<T>::GetRange() const
-	{
-		return { mList.begin(), mList.end() };
-	}
-
-	template<typename T>
 	T& List<T>::GetT(int id) const
 	{
 		return mList.at(id);
