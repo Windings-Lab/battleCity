@@ -24,7 +24,7 @@ namespace BattleCity::Manager
 
 		std::string GetSpritePath(SpriteType spriteType, Object::Behaviour objectBehaviour) const;
 	private:
-		void SetSpritePath(std::string path, SpriteType spriteType, Object::Behaviour objectBehaviour);
+		void SetSpritePath(const std::filesystem::path& folderPath);
 		void OutputAllPath();
 	private:
 		SpritePathManager();
