@@ -68,22 +68,14 @@ namespace BattleCity::Manager
 		mSpritePathList.clear();
 	}
 
-	std::string SpritePathManager::GetSpritePath(SpriteType spriteType, Object::Behaviour objectBehaviour) const
+	std::optional<std::string> SpritePathManager::GetSpritePath(SpriteType spriteType, Object::Behaviour objectBehaviour) const
 	{
 		const SpriteTypeBehaviourPair pair = { spriteType, objectBehaviour };
 
-		if(mSpritePathList.find(pair) != mSpritePathList.end())
-		{
-			return mSpritePathList.at(pair);
-		}
-
-		using magic_enum::enum_name;
-		std::cerr << __FUNCTION__ << ": No sprite with\n"
-			<< "SpriteType: "  << enum_name(spriteType)
-			<< "\nBehaviour: " << enum_name(objectBehaviour)
-			<< std::endl;
-
-		return "";
+		return
+				mSpritePathList.find(pair) != mSpritePathList.end()
+				? std::optional(mSpritePathList.at(pair))
+				: std::optional<std::string>();
 	}
 
 	void SpritePathManager::OutputAllPath()

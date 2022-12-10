@@ -57,24 +57,18 @@ namespace BattleCity::Manager
 			return mSpriteAtlas.at(pair).get();
 		}
 
-		using magic_enum::enum_name;
-		std::cerr << __FUNCTION__ << ": No sprite with\n"
-			<< "SpriteType: " << enum_name(spriteType)
-			<< "\nBehaviour: " << enum_name(objectBehaviour)
-			<< std::endl;
-
 		return nullptr;
 	}
 
 	const Sprite* SpriteManager::SetSprite(SpriteType spriteType, Object::Behaviour objectBehaviour)
 	{
 		const auto path = PM().GetSpritePath(spriteType, objectBehaviour);
-		if (path.empty())
+		if (!path.has_value())
 		{
 			return nullptr;
 		}
 
-		Sprite* sprite = createSprite(path.data());
+		Sprite* sprite = createSprite(path.value().data());
 		mSpriteAtlas.try_emplace({ spriteType, objectBehaviour }, sprite);
 		return sprite;
 	}

@@ -22,7 +22,7 @@ namespace BattleCity::Manager
 		void StartUp() override;
 		void ShutDown() override;
 
-		std::string GetSpritePath(SpriteType spriteType, Object::Behaviour objectBehaviour) const;
+		std::optional<std::string> GetSpritePath(SpriteType spriteType, Object::Behaviour objectBehaviour) const;
 	private:
 		void SetSpritePath(const std::filesystem::path& folderPath);
 		void OutputAllPath();
