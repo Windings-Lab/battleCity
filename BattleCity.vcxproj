@@ -45,6 +45,7 @@
       </PrecompiledHeaderFile>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\Utility\List.cpp" />
     <ClCompile Include="src\Utility\Rectangle.cpp" />
     <ClCompile Include="src\Utility\TimerHandle.cpp" />
     <ClCompile Include="src\Utility\Vector2Int.cpp" />
@@ -73,6 +74,7 @@
     <ClInclude Include="include\Object\Wall.h" />
     <ClInclude Include="include\PCHeader.h" />
     <ClInclude Include="include\Utility\Hashes.h" />
+    <ClInclude Include="include\Utility\List.h" />
     <ClInclude Include="include\Utility\magic_enum.hpp" />
     <ClInclude Include="include\Utility\Rectangle.h" />
     <ClInclude Include="include\Utility\TFunction.h" />
