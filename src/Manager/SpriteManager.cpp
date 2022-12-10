@@ -38,56 +38,43 @@ namespace BattleCity::Manager
 
 	const Sprite* SpriteManager::SetAndGetSprite(SpriteType spriteType, Object::Behaviour objectBehaviour)
 	{
-		try
+		const SpriteTypeBehaviourPair pair = { spriteType, objectBehaviour };
+
+		if(mSpriteAtlas.find(pair) != mSpriteAtlas.end())
 		{
-			return mSpriteAtlas.at({ spriteType, objectBehaviour }).get();
+			return mSpriteAtlas.at(pair).get();
 		}
-		catch (std::out_of_range&)
-		{
-			return SetSprite(spriteType, objectBehaviour);
-		}
-		catch (...)
-		{
-			std::cerr << __FUNCTION__ << ": Unexpected error" << std::endl;
-			return nullptr;
-		}
+
+		return SetSprite(spriteType, objectBehaviour);
 	}
 
 	const Sprite* SpriteManager::GetSprite(SpriteType spriteType, Object::Behaviour objectBehaviour) const
 	{
-		try
+		const SpriteTypeBehaviourPair pair = { spriteType, objectBehaviour };
+
+		if (mSpriteAtlas.find(pair) != mSpriteAtlas.end())
 		{
-			return mSpriteAtlas.at({spriteType, objectBehaviour}).get();
+			return mSpriteAtlas.at(pair).get();
 		}
-		catch (std::out_of_range&)
-		{
-			std::cerr << __FUNCTION__ << ": No sprite with \nSpriteType: "
-				<< magic_enum::enum_name(spriteType)
-				<< "\nBehaviour: " << magic_enum::enum_name(objectBehaviour)
-				<< std::endl;
-			return nullptr;
-		}
-		catch (...)
-		{
-			std::cerr << __FUNCTION__ << ": Unexpected error" << std::endl;
-			return nullptr;
-		}
+
+		using magic_enum::enum_name;
+		std::cerr << __FUNCTION__ << ": No sprite with\n"
+			<< "SpriteType: " << enum_name(spriteType)
+			<< "\nBehaviour: " << enum_name(objectBehaviour)
+			<< std::endl;
+
+		return nullptr;
 	}
 
 	const Sprite* SpriteManager::SetSprite(SpriteType spriteType, Object::Behaviour objectBehaviour)
 	{
 		const auto path = PM().GetSpritePath(spriteType, objectBehaviour);
-		Sprite* sprite;
-
-		if (!path.empty())
-		{
-			sprite = createSprite(path.data());
-		}
-		else
+		if (path.empty())
 		{
 			return nullptr;
 		}
 
+		Sprite* sprite = createSprite(path.data());
 		mSpriteAtlas.try_emplace({ spriteType, objectBehaviour }, sprite);
 		return sprite;
 	}
