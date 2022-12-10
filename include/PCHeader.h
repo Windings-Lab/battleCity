@@ -22,6 +22,9 @@
 #include <unordered_set>
 #include <utility>
 
+using namespace std::string_view_literals;
+using namespace std::string_literals;
+
 #include "BattleCityEnums.h"
 
 using SpriteTypeBehaviourPair = std::pair<BattleCity::Manager::SpriteType, BattleCity::Object::Behaviour>;
