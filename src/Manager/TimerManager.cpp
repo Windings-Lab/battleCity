@@ -36,25 +36,29 @@ namespace BattleCity::Manager
 		mTimerList.push_back(std::move(pair));
 	}
 
-	bool TimerManager::TimerFilterDelegate(const TimerFuncPair& pair)
-	{
-		if (pair.first->HasEnded())
-		{
-			pair.second();
-			return true;
-		}
-
-#ifdef _DEBUG
-		std::cout << pair.first->GetName() << ": " << pair.first->GetSeconds() << std::endl;
-#endif
-		return false;
-	}
-
 	void TimerManager::Step()
 	{
-		mTimerList.erase(
-			std::remove_if(mTimerList.begin(), mTimerList.end(), TimerFilterDelegate),
-			mTimerList.end());
+		auto filterLambda = [](const TimerFuncPair& pair)
+		{
+			if (!pair.first->HasEnded())
+			{
+#ifdef _DEBUG
+				std::cout << pair.first->GetName() << ": " << pair.first->GetSeconds() << std::endl;
+#endif
+				return false;
+			}
+
+			pair.second();
+			return true;
+		};
+
+		std::vector<TimerFuncPair>::const_iterator filtered
+			= std::remove_if(
+				mTimerList.begin(),
+				mTimerList.end(),
+				filterLambda);
+
+		mTimerList.erase(mTimerList.begin(), std::move(filtered));
 	}
 }
 
