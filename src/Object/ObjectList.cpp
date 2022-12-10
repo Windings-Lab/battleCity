@@ -24,24 +24,14 @@ namespace BattleCity::Object
 		return *mList.at(id).get();
 	}
 
-	int ObjectList::Insert(Object* objPtr)
+	void ObjectList::Insert(Object* objPtr)
 	{
-		try
-		{
-			mList.try_emplace(objPtr->ID, objPtr);
-		}
-		catch (...)
-		{
-			std::cout << "Object insert error" << std::endl;
-			return -1;
-		}
-
-		return 0;
+		mList.try_emplace(objPtr->ID, objPtr);
 	}
 
-	int ObjectList::Remove(int objID)
+	void ObjectList::Remove(int objID)
 	{
-		return mList.erase(objID) != 0 ? 0 : -1;
+		mList.erase(objID);
 	}
 
 	size_t ObjectList::GetSize() const

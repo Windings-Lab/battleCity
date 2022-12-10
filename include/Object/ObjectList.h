@@ -16,24 +16,26 @@ namespace BattleCity::Object
 	public:
 		ObjectList();
 
-		ObjectList(ObjectList& cpy) = delete;
+		ObjectList(const ObjectList& cpy) = delete;
+		ObjectList& operator=(const ObjectList& rhs) = delete;
+
 		ObjectList(ObjectList&& mve) noexcept;
+		ObjectList& operator=(ObjectList&& rhs) noexcept;
 
 		~ObjectList() = default;
 
 		Range GetRange() const;
 		Object& GetObject(int id) const;
 
-		int Insert(Object* objPtr);
-		int Remove(int objID);
+		void Insert(Object* objPtr);
+		void Remove(int objID);
 
 		size_t GetSize() const;
 		bool IsEmpty() const;
 
 		void Clear();
 
-		ObjectList& operator=(const ObjectList& rhs) = delete;
-		ObjectList& operator=(ObjectList&& rhs) noexcept;
+
 	private:
 		std::unordered_map<int, std::unique_ptr<Object>> mList;
 
