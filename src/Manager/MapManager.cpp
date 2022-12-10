@@ -39,36 +39,35 @@ namespace BattleCity::Manager
 		file.open(R"(.\data\Maps\level1.txt)",
 		         std::ios::in);  // input file stream
 
-		if (file)
-		{
-
-			while (!file.eof())
-			{
-				std::string str;
-				std::getline(file, str);
-
-				std::vector<Object::Type> mapRow;
-				mapRow.reserve(str.size());
-				for (const auto& numChar : str)
-				{
-					auto objectTypeCasted = magic_enum::enum_cast<Object::Type>(numChar - '0');
-					if(objectTypeCasted.has_value())
-					{
-						mapRow.emplace_back(objectTypeCasted.value());
-					}
-					else
-					{
-						mapRow.emplace_back(Object::Type::None);
-					}
-				}
-
-				mMap.push_back(mapRow);
-			}
-			file.close();
-		}
-		else
+		if (!file)
 		{
 			std::cout << "Unable to open file to read" << std::endl;
+			return;
 		}
+
+		while (!file.eof())
+		{
+			std::string str;
+			std::getline(file, str);
+
+			std::vector<Object::Type> mapRow;
+			mapRow.reserve(str.size());
+			for (const auto& numChar : str)
+			{
+				auto objectTypeCasted = magic_enum::enum_cast<Object::Type>(numChar - '0');
+				if(objectTypeCasted.has_value())
+				{
+					mapRow.emplace_back(objectTypeCasted.value());
+				}
+				else
+				{
+					mapRow.emplace_back(Object::Type::None);
+				}
+			}
+
+			mMap.push_back(mapRow);
+		}
+
+		file.close();
 	}
 }
