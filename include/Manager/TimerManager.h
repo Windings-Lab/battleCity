@@ -26,6 +26,8 @@ namespace BattleCity::Manager
 
 		void SetTimer(std::function<void()>&& onTimerEndFunc, long long durationInSec);
 		void SetTimer(std::function<void()>&& onTimerEndFunc, std::string_view timerName, long long durationInSec);
+	private:
+		bool TimerFilterDelegate(const TimerFuncPair& pair);
 
 	private:
 		TimerManager();
