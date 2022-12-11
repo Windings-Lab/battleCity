@@ -45,29 +45,20 @@ namespace BattleCity::Manager
 			return;
 		}
 
-		while (!file.eof())
+		std::vector<Object::Type> mapRow;
+		std::string line;
+		while (std::getline(file, line))
 		{
-			std::string str;
-			std::getline(file, str);
-
-			std::vector<Object::Type> mapRow;
-			mapRow.reserve(str.size());
-			for (const auto& numChar : str)
+			std::stringstream lineStream(line);
+			for (char num; lineStream >> num; )
 			{
-				auto objectTypeCasted = magic_enum::enum_cast<Object::Type>(numChar - '0');
-				if(objectTypeCasted.has_value())
-				{
-					mapRow.emplace_back(objectTypeCasted.value());
-				}
-				else
-				{
-					mapRow.emplace_back(Object::Type::None);
-				}
+				auto objectType
+					= magic_enum::enum_cast<Object::Type>(num - '0');
+				mapRow.emplace_back(objectType.value_or(Object::Type::None));
 			}
-
-			mMap.push_back(mapRow);
+			mapRow.shrink_to_fit();
+			mMap.emplace_back(std::move(mapRow));
+			mapRow.clear();
 		}
-
-		file.close();
 	}
 }
