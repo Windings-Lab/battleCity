@@ -19,13 +19,17 @@
 #include <exception>
 #include <stdexcept>
 
-#include <algorithm>
+// Sleep_until GameLoop
 #include <chrono>
-#include <cmath>
+#include <thread>
+
+// Stoi and etc
 #include <cstdlib>
+
+#include <algorithm>
+#include <cmath>
 #include <functional>
 #include <memory>
-#include <thread>
 #include <type_traits>
 #include <utility>
 
