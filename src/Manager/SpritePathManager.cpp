@@ -28,7 +28,7 @@ namespace BattleCity::Manager
 
 		if (!spriteTypeCast.has_value() || !objectBehaviourCast.has_value())
 		{
-			std::cerr << spriteTypeStr << " - " << objectBehaviourStr << ": have no usage." << std::endl;
+			std::cerr << spriteTypeStr << " - " << objectBehaviourStr << ": have no usage.\n";
 			return;
 		}
 
@@ -42,8 +42,8 @@ namespace BattleCity::Manager
 
 		if(!exists(SpriteFolderPath))
 		{
-			std::cerr << "Sprite Folder Path has not been found" << std::endl;
-			std::cerr << "Make sure that .\\data in folder with BattleCity.exe file" << std::endl;
+			std::cerr << "Sprite Folder Path has not been found\n";
+			std::cerr << "Make sure that .\\data in folder with BattleCity.exe file\n";
 			throw std::exception();
 		}
 
