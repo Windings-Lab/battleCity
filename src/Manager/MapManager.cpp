@@ -41,8 +41,8 @@ namespace BattleCity::Manager
 
 		if (!file)
 		{
-			std::cout << "Unable to open file to read" << std::endl;
-			return;
+			std::cerr << "Unable to open file to read\n";
+			throw std::exception();
 		}
 
 		std::vector<Object::Type> mapRow;
