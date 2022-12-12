@@ -41,8 +41,8 @@ namespace BattleCity::Manager
 
 		if (!file)
 		{
-			std::cerr << "Unable to open file to read\n";
-			throw std::exception();
+			std::cerr << "Unable to open map file. Folder path invalid\n";
+			throw std::invalid_argument("Unable to open map file. Folder path invalid");
 		}
 
 		std::vector<Object::Type> mapRow;
