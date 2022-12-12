@@ -18,37 +18,43 @@ namespace
 			<< std::endl;
 	}
 
-	bool IsValidArgCount(const int argc)
+	void IsValidArgCount(const int argc)
 	{
-		return argc == 3;
+		if (argc != 3)
+		{
+			throw std::invalid_argument("Invalid argument count");
+		}
 	}
 
-	bool IsValidWindowOption(std::string_view option)
+	void IsValidWindowArg(std::string_view arg)
 	{
-		return option == "-w" || option == "-window";
+		if(!(arg == "-w" || arg == "-window"))
+		{
+			throw std::invalid_argument("Invalid first argument");
+		}
 	}
 
-	bool IsValidWindowSize(std::string_view option, int& width, int& height)
+	void IsValidSizeArg(std::string_view arg)
 	{
+		int width = 0, height = 0;
 		char delim;
 
-		std::istringstream argv2(option.data());
+		std::istringstream argv2(arg.data());
 		argv2 >> width;
 		argv2.get(delim);
 		argv2 >> height;
 
 		if (!argv2 || !argv2.eof() || delim != 'x')
 		{
-			return false;
+			throw std::invalid_argument("Invalid third argument");
 		}
 
 		if (!BattleCity::Framework::Screen::IsValidSize(width, height))
 		{
-			std::cerr << "Incorrect window size\n";
-			return false;
+			throw std::invalid_argument("Incorrect window size");
 		}
 
-		return true;
+		BattleCity::Framework::Screen::Set(width, height, false);
 	}
 }
 
@@ -62,27 +68,18 @@ int main(const int argc, const char* argv[])
 
 	if (argc != 1)
 	{
-		if (!IsValidArgCount(argc))
+		try
 		{
-			ShowUsage();
-			return 1;
+			IsValidArgCount(argc);
+			IsValidWindowArg(argv[1]);
+			IsValidSizeArg(argv[2]); // Sets window size if everything correct
 		}
-
-		if(!IsValidWindowOption(argv[1]))
+		catch (const std::invalid_argument& ex)
 		{
+			std::cerr << ex.what() << "\n";
 			ShowUsage();
-			return 1;
+			return 0;
 		}
-
-		int width = 0, height = 0;
-
-		if(!IsValidWindowSize(argv[2], width, height))
-		{
-			ShowUsage();
-			return 1;
-		}
-
-		BattleCity::Framework::Screen::Set(width, height, false);
 	}
 	
 	const auto framework = std::make_unique<BattleCity::Framework::FrameworkWrapper>();
