@@ -1,6 +1,12 @@
 #include "PCHeader.h"
 #include "FrameworkWrapper.h"
 
+namespace BattleCity::Framework::Screen
+{
+	void Set(int, int, bool);
+	bool IsValidSize(int w, int h);
+}
+
 namespace 
 {
 	void ShowUsage()
@@ -11,15 +17,42 @@ namespace
 			<< "\t-w, -window 800x600\tSpecify window size"
 			<< std::endl;
 	}
+
+	bool IsValidArgCount(const int argc)
+	{
+		return argc == 3;
+	}
+
+	bool IsValidWindowOption(std::string_view option)
+	{
+		return option == "-w" || option == "-window";
+	}
+
+	bool IsValidWindowSize(std::string_view option, int& width, int& height)
+	{
+		char delim;
+
+		std::istringstream argv2(option.data());
+		argv2 >> width;
+		argv2.get(delim);
+		argv2 >> height;
+
+		if (!argv2 || !argv2.eof() || delim != 'x')
+		{
+			return false;
+		}
+
+		if (!BattleCity::Framework::Screen::IsValidSize(width, height))
+		{
+			std::cerr << "Incorrect window size\n";
+			return false;
+		}
+
+		return true;
+	}
 }
 
-namespace BattleCity::Framework::Screen
-{
-	void Set(int, int, bool);
-	bool IsValidSize(int w, int h);
-}
-
-int main(int argc, const char* argv[])
+int main(const int argc, const char* argv[])
 {
 #ifdef _DEBUG
 	BattleCity::Framework::Screen::Set(800, 600, false);
@@ -29,57 +62,27 @@ int main(int argc, const char* argv[])
 
 	if (argc != 1)
 	{
-		if (argc != 3)
+		if (!IsValidArgCount(argc))
 		{
 			ShowUsage();
 			return 1;
 		}
 
-		std::string argv1 = argv[1];
-
-		if (!(argv1 == "-w" || argv1 == "-window"))
+		if(!IsValidWindowOption(argv[1]))
 		{
 			ShowUsage();
 			return 1;
 		}
 
-		int it = 0;
-		int token[2]{};
+		int width = 0, height = 0;
 
-		std::istringstream input;
-		input.str(argv[2]);
-		for (std::string line; std::getline(input, line, 'x'); )
-		{
-			it++;
-			if (it > 2)
-			{
-				ShowUsage();
-				return 1;
-			}
-			try
-			{
-				token[it - 1] = std::stoi(line);
-			}
-			catch (...)
-			{
-				ShowUsage();
-				return 1;
-			}
-		}
-
-		if (it != 2)
+		if(!IsValidWindowSize(argv[2], width, height))
 		{
 			ShowUsage();
 			return 1;
 		}
 
-		if (!BattleCity::Framework::Screen::IsValidSize(token[0], token[1]))
-		{
-			std::cout << "Incorrect window size" << std::endl;
-			return 1;
-		}
-
-		BattleCity::Framework::Screen::Set(token[0], token[1], false);
+		BattleCity::Framework::Screen::Set(width, height, false);
 	}
 	
 	const auto framework = std::make_unique<BattleCity::Framework::FrameworkWrapper>();
