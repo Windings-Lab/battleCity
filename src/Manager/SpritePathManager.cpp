@@ -44,7 +44,7 @@ namespace BattleCity::Manager
 		{
 			std::cerr << "Sprite Folder Path has not been found" << std::endl;
 			std::cerr << "Make sure that .\\data in folder with BattleCity.exe file" << std::endl;
-			std::exit(1);
+			throw std::exception();
 		}
 
 		for (const auto& folderEntry : recursive_directory_iterator(SpriteFolderPath))
