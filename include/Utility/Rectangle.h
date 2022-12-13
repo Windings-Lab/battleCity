@@ -28,7 +28,7 @@ namespace BattleCity
 		Rectangle(const Rectangle&) = delete;
 		Rectangle& operator=(const Rectangle&) = delete;
 
-		~Rectangle() = default;
+		virtual ~Rectangle() = default;
 
 		bool Intersects(const Rectangle& other);
 

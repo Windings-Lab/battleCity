@@ -15,7 +15,7 @@ namespace BattleCity
         TimerHandle& operator=(const TimerHandle&) = delete;
         TimerHandle& operator=(TimerHandle&&) noexcept = delete;
 
-        ~TimerHandle() = default;
+        virtual ~TimerHandle() = default;
 
         void Start();
         void Stop();
