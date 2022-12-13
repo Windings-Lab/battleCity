@@ -4,11 +4,6 @@
 
 namespace BattleCity
 {
-    Vector2Int Vector2Int::Zero()
-    {
-        return {};
-    }
-
     Vector2Int::Vector2Int() : Vector2Int(0, 0) {}
     Vector2Int::Vector2Int(int x, int y) : mX(x), mY(y) {}
 

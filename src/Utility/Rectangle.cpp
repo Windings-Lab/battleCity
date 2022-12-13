@@ -4,7 +4,7 @@
 
 namespace BattleCity
 {
-	Rectangle::Rectangle() : Rectangle(Vector2Int::Zero())
+	Rectangle::Rectangle() : Rectangle(Vector2Int(0, 0))
 	{
 	}
 	Rectangle::Rectangle(Vector2Int position) : Rectangle(position.X(), position.Y(), 16, 16)

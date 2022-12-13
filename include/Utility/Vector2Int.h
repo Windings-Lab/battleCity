@@ -5,8 +5,6 @@ namespace BattleCity
 	class Vector2Int
 	{
 	public:
-		static Vector2Int Zero();
-
 		Vector2Int();
 		Vector2Int(int x, int y);
 

@@ -21,7 +21,6 @@ namespace BattleCity::Object
         mBulletCount = 1;
 
         mSpeed = 2;
-        mDirection = Vector2Int::Zero();
     }
 
     Object::~Object() = default;
