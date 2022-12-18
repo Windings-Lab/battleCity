@@ -15,7 +15,6 @@
 
 # Build results
 x64/Debug/*
-!x64/Debug/data
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/

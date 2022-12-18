@@ -201,6 +201,11 @@
     <ProjectReference>
       <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
     </ProjectReference>
+    <PostBuildEvent>
+      <Command>call robocopy "$(SolutionDir)data" "$(TargetDir)data" /MIR
+call robocopy "$(SolutionDir)lib" "$(TargetDir)." /XF FrameworkRelease_x64.lib
+if %errorlevel% LEQ 3 exit 0</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -226,6 +231,11 @@
     <ProjectReference>
       <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
     </ProjectReference>
+    <PostBuildEvent>
+      <Command>call robocopy "$(SolutionDir)data" "$(TargetDir)data" /MIR
+call robocopy "$(SolutionDir)lib" "$(TargetDir)." /XF FrameworkRelease_x64.lib
+if %errorlevel% LEQ 3 exit 0</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
