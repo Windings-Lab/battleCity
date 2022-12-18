@@ -11,4 +11,12 @@ namespace BattleCity::Manager
 	{
 		return mType;
 	}
+
+	void Manager::StartUp()
+	{
+#ifdef _DEBUG
+		std::cout << "===========" << typeid(*this).name() << " start up.===========\n" << std::endl;
+#endif
+	}
+
 }

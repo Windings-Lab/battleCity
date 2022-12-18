@@ -20,7 +20,13 @@ namespace BattleCity::Manager
 
 	void MapManager::StartUp()
 	{
+		__super::StartUp();
+
 		ReadMapFile();
+
+#ifdef _DEBUG
+		std::cout << "Map Manager raw count: " << mMap.size() << "\n";
+#endif
 	}
 
 	void MapManager::ShutDown()

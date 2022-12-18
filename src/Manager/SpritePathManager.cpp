@@ -38,6 +38,8 @@ namespace BattleCity::Manager
 
 	void SpritePathManager::StartUp()
 	{
+		__super::StartUp();
+
 		using namespace std::filesystem;
 
 		if(!exists(SpriteFolderPath))
@@ -59,7 +61,6 @@ namespace BattleCity::Manager
 
 #ifdef _DEBUG
 		OutputAllPath();
-		std::cout << "Sprite SpriteFolderPath Manager loaded." << std::endl;
 #endif
 	}
 

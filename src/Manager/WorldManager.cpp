@@ -24,7 +24,13 @@ namespace BattleCity::Manager
 
 	void WorldManager::StartUp()
 	{
+		__super::StartUp();
+
 		InitMap();
+
+#ifdef _DEBUG
+		std::cout << "World Manager object count: " << mWorldList.GetSize() << "\n";
+#endif
 	}
 	void WorldManager::ShutDown()
 	{
