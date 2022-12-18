@@ -85,11 +85,15 @@ namespace BattleCity::Manager
 		using std::cout;
 		using std::endl;
 
-		for (auto& [pair, path] : mSpritePathList)
+		std::vector<SpriteTypeBehaviourPair> keys(mSpritePathList.size());
+		transform(mSpritePathList.begin(), mSpritePathList.end(), keys.begin(), [](auto& pair) { return pair.first; });
+		std::sort(keys.begin(), keys.end());
+
+		for (auto& pair : keys)
 		{
 			cout << enum_name(pair.first) << " - "
 				 << enum_name(pair.second)
-			     << ": " << path << endl;
+			     << ": " << mSpritePathList.at(pair) << endl;
 		}
 		cout << endl;
 	}
