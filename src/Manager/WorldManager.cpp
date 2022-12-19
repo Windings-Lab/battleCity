@@ -42,6 +42,7 @@ namespace BattleCity::Manager
 	void WorldManager::Step()
 	{
 		Update();
+		// Resolve Collisions
 		// Delete All
 		Draw();
 	}
