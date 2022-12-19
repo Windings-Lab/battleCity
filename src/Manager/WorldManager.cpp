@@ -63,26 +63,21 @@ namespace BattleCity::Manager
 		{
 			for (const auto& objectType : mapRow)
 			{
-				std::unique_ptr<Object::Object> object = nullptr;
 				switch (objectType)
 				{
 				case Object::Type::None: 
 					break;
 				case Object::Type::TankPlayer:
-					object = std::make_unique<Object::TankPlayer>(posX, posY);
-					InsertObject(object.release());
+					InsertObject(std::make_unique<Object::TankPlayer>(posX, posY));
 					break;
 				case Object::Type::TankNPC:
-					object = std::make_unique<Object::TankNPC>(posX, posY);
-					InsertObject(object.release());
+					InsertObject(std::make_unique<Object::TankNPC>(posX, posY));
 					break;
 				case Object::Type::Wall:
-					object = std::make_unique<Object::Wall>(posX, posY);
-					InsertObject(object.release());
+					InsertObject(std::make_unique<Object::Wall>(posX, posY));
 					break;
 				case Object::Type::PhoenixAndFlag:
-					object = std::make_unique<Object::PhoenixAndFlag>(posX, posY);
-					InsertObject(object.release());
+					InsertObject(std::make_unique<Object::PhoenixAndFlag>(posX, posY));
 					break;
 				default: 
 					break;
@@ -109,10 +104,10 @@ namespace BattleCity::Manager
 		return mWorldList.GetObject(id);
 	}
 
-	void WorldManager::InsertObject(Object::Object* objPtr)
+	void WorldManager::InsertObject(std::unique_ptr<Object::Object>&& objPtr)
 	{
-		// Insert Movable Objects
-		mWorldList.Insert(objPtr);
+		// Pseudo: Insert Movable Objects
+		mWorldList.Insert(std::move(objPtr));
 	}
 	void WorldManager::RemoveObject(int objID)
 	{

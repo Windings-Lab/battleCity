@@ -31,7 +31,7 @@ namespace BattleCity::Manager
 
 		Object::Object& GetObject(int id);
 
-		void InsertObject(Object::Object* objPtr);
+		void InsertObject(std::unique_ptr<Object::Object>&& objPtr);
 		void RemoveObject(int objID);
 		void MarkForDelete(int objID);
 
