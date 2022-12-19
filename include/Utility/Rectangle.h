@@ -30,7 +30,7 @@ namespace BattleCity
 
 		virtual ~Rectangle() = default;
 
-		bool Intersects(const Rectangle& other);
+		bool Intersects(const Rectangle& other) const noexcept;
 
 		void SetPosition(int x, int y);
 		const Vector2Int& GetPosition() const;

@@ -18,7 +18,7 @@ namespace BattleCity
 	{
 	}
 
-	bool Rectangle::Intersects(const Rectangle& other)
+	bool Rectangle::Intersects(const Rectangle& other) const noexcept
 	{
 		return
 			std::max(X(), other.X())
