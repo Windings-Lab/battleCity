@@ -8,13 +8,6 @@ namespace BattleCity
 		Vector2Int();
 		Vector2Int(int x, int y);
 
-		Vector2Int(Vector2Int&&) = default;
-		Vector2Int& operator=(Vector2Int&&) = default;
-
-		Vector2Int(const Vector2Int&) = delete;
-		Vector2Int& operator=(const Vector2Int&) = delete;
-
-		virtual ~Vector2Int() = default;
 
 		void SetX(int x);
 		const int& X() const;
