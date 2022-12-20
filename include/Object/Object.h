@@ -27,9 +27,9 @@ namespace BattleCity::Object
 		Vector2Int mDirection;
 
 	public:
-		Object(const int& x, const int& y, const Type& type
-				, const Manager::SpriteType& spriteType
-				, const Behaviour& behaviour);
+		Object(int x, int y, Type type
+				, Manager::SpriteType spriteType
+				, Behaviour behaviour);
 
 		Object(const Object&) = delete;
 		Object(Object&&) = delete;
@@ -47,35 +47,35 @@ namespace BattleCity::Object
 
 		#pragma region Object
 
-		void SetPosition(const int& x, const int& y);
+		void SetPosition(int x, int y);
 		const Vector2Int& GetPosition() const;
-		const int& X() const;
-		const int& Y() const;
+		int X() const;
+		int Y() const;
 
 	protected:
-		void SetSolidness(const Solidness& solidness);
+		void SetSolidness(Solidness solidness);
 		Solidness GetSolidness() const;
 
 		#pragma endregion
 
 		#pragma region IDestroyable
 	public:
-		void SetHealth(const int& health);
+		void SetHealth(int health);
 		int GetHealth() const;
 
 		#pragma endregion
 
 		#pragma region IShoot
 	public:
-		void IncrementBulletCount(const int& count = 1);
+		void IncrementBulletCount(int count = 1);
 		int GetBulletCount() const;
 
 		#pragma endregion
 
 		#pragma region IMovable
 	public:
-		void SetSpeed(const int& speed);
-		const int& GetSpeed() const;
+		void SetSpeed(int speed);
+		int GetSpeed() const;
 
 		void SetDirection(const Vector2Int& direction);
 		const Vector2Int& GetDirection() const;

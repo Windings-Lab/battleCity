@@ -16,7 +16,7 @@ namespace BattleCity::Manager
 	{
 	public:
 		static SpriteManager& GetInstance();
-		static void DrawSprite(const Sprite*, const int& w, const int& h);
+		static void DrawSprite(const Sprite*, int w, int h);
 		static Rectangle GetSpriteRectangle(const Sprite* sprite, int x = 0, int y = 0);
 
 		SpriteManager(const SpriteManager&) = delete;

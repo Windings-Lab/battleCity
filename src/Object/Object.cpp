@@ -9,7 +9,7 @@ namespace BattleCity::Object
 {
     int Object::IDCounter = 1;
 
-    Object::Object(const int& x, const int& y, const Type& type, const Manager::SpriteType& spriteType, const Behaviour& behaviour)
+    Object::Object(int x, int y, Type type, Manager::SpriteType spriteType, Behaviour behaviour)
 		: mSprite(Manager::SM().SetAndGetSprite(spriteType, behaviour))
 		, mRectangle(Manager::SpriteManager::GetSpriteRectangle(mSprite, x, y))
 		, ID(IDCounter++), ObjectType(type)
@@ -37,7 +37,7 @@ namespace BattleCity::Object
 
 	#pragma region Object
 
-    void Object::SetPosition(const int& x, const int& y)
+    void Object::SetPosition(int x, int y)
     {
         mRectangle.SetPosition(x, y);
     }
@@ -45,16 +45,16 @@ namespace BattleCity::Object
     {
         return mRectangle.GetPosition();
     }
-    const int& Object::X() const
+    int Object::X() const
     {
         return mRectangle.X();
     }
-    const int& Object::Y() const
+    int Object::Y() const
     {
         return mRectangle.Y();
     }
 
-    void Object::SetSolidness(const Solidness& solidness)
+    void Object::SetSolidness(Solidness solidness)
     {
         mSolidness = solidness;
     }
@@ -67,7 +67,7 @@ namespace BattleCity::Object
 
 	#pragma region IDestroyable
 
-    void Object::SetHealth(const int& health)
+    void Object::SetHealth(int health)
     {
         mHealth = health;
     }
@@ -80,7 +80,7 @@ namespace BattleCity::Object
 
 	#pragma region IShoot
 
-    void Object::IncrementBulletCount(const int& count)
+    void Object::IncrementBulletCount(int count)
     {
         mBulletCount += count;
     }
@@ -93,11 +93,11 @@ namespace BattleCity::Object
 
 	#pragma region IMovable
 
-    void Object::SetSpeed(const int& speed)
+    void Object::SetSpeed(int speed)
     {
         mSpeed = speed;
     }
-    const int& Object::GetSpeed() const
+    int Object::GetSpeed() const
     {
         return mSpeed;
     }

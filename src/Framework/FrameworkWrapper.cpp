@@ -7,8 +7,8 @@ namespace BattleCity::Framework
 {
 	namespace Screen
 	{
-		const int& W();
-		const int& H();
+		int W();
+		int H();
 		const bool& IsFullscreen();
 	}
 

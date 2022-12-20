@@ -19,8 +19,8 @@ namespace BattleCity
 		// Width		= width
 		// Height		= height
 		// Position		= (0, 0)
-		Rectangle(const int& width, const int& height);
-		Rectangle(const int& x, const int& y, const int& width, const int& height);
+		Rectangle(int width, int height);
+		Rectangle(int x, int y, int width, int height);
 
 		Rectangle(const Rectangle&) = delete;
 		Rectangle& operator=(const Rectangle&) = delete;
@@ -32,15 +32,15 @@ namespace BattleCity
 
 		bool Intersects(const Rectangle& other) const noexcept;
 
-		void SetPosition(const int& x, const int& y);
+		void SetPosition(int x, int y);
 		const Vector2Int& GetPosition() const;
-		const int& X() const;
-		const int& Y() const;
+		int X() const;
+		int Y() const;
 
-		void SetSize(const int& width, const int& height);
+		void SetSize(int width, int height);
 		const Vector2Int& GetSize() const;
-		const int& W() const;
-		const int& H() const;
+		int W() const;
+		int H() const;
 
 	private:
 		Vector2Int mPosition;

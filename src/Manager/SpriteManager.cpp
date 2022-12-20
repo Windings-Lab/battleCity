@@ -10,7 +10,7 @@ namespace BattleCity::Manager
 		static SpriteManager spriteManager;
 		return spriteManager;
 	}
-	void SpriteManager::DrawSprite(const Sprite* sprite, const int& w, const int& h)
+	void SpriteManager::DrawSprite(const Sprite* sprite, int w, int h)
 	{
 		drawSprite(const_cast<Sprite*>(sprite), w, h);
 	}

@@ -10,12 +10,12 @@ namespace BattleCity::Framework::Screen
 		bool FullScreen;
 	}
 
-	const int& W()
+	int W()
 	{
 		return Bounds.W();
 	}
 
-	const int& H()
+	int H()
 	{
 		return Bounds.H();
 	}

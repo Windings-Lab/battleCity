@@ -9,10 +9,10 @@ namespace BattleCity
 	Rectangle::Rectangle(const Vector2Int& position)
 		: Rectangle(position.X(), position.Y(), 16, 16) {}
 
-	Rectangle::Rectangle(const int& width, const int& height)
+	Rectangle::Rectangle(int width, int height)
 		: Rectangle(0, 0, width, height) {}
 
-	Rectangle::Rectangle(const int& x, const int& y, const int& width, const int& height)
+	Rectangle::Rectangle(int x, int y, int width, int height)
 		: mPosition(x, y)
 		, mSize(width, height)
 	{}
@@ -26,7 +26,7 @@ namespace BattleCity
 			< std::min(Y() + H(), other.Y() + other.H());
 	}
 
-	void Rectangle::SetPosition(const int& x, const int& y)
+	void Rectangle::SetPosition(int x, int y)
 	{
 		mPosition.SetXY(x, y);
 	}
@@ -34,16 +34,16 @@ namespace BattleCity
 	{
 		return mPosition;
 	}
-	const int& Rectangle::X() const
+	int Rectangle::X() const
 	{
 		return mPosition.X();
 	}
-	const int& Rectangle::Y() const
+	int Rectangle::Y() const
 	{
 		return mPosition.Y();
 	}
 
-	void Rectangle::SetSize(const int& width, const int& height)
+	void Rectangle::SetSize(int width, int height)
 	{
 		mSize.SetXY(width, height);
 	}
@@ -51,11 +51,11 @@ namespace BattleCity
 	{
 		return mSize;
 	}
-	const int& Rectangle::W() const
+	int Rectangle::W() const
 	{
 		return mSize.X();
 	}
-	const int& Rectangle::H() const
+	int Rectangle::H() const
 	{
 		return mSize.Y();
 	}
