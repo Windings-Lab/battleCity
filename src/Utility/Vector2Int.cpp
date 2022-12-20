@@ -5,9 +5,15 @@
 namespace BattleCity
 {
     Vector2Int::Vector2Int() : Vector2Int(0, 0) {}
-    Vector2Int::Vector2Int(int x, int y) : mX(x), mY(y) {}
+    Vector2Int::Vector2Int(const int& x, const int& y) : mX(x), mY(y) {}
 
-    void Vector2Int::SetX(int x)
+    void Vector2Int::SetXY(const int& x, const int& y)
+    {
+        mX = x;
+        mY = y;
+    }
+
+    void Vector2Int::SetX(const int& x)
     {
         mX = x;
     }
@@ -17,7 +23,7 @@ namespace BattleCity
         return mX;
     }
 
-    void Vector2Int::SetY(int y)
+    void Vector2Int::SetY(const int& y)
     {
         mY = y;
     }
@@ -26,7 +32,7 @@ namespace BattleCity
         return mY;
     }
 
-    Vector2Int Vector2Int::operator-(int num) const
+    Vector2Int Vector2Int::operator-(const int& num) const
     {
         return { mX - num, mY - num };
     }
@@ -35,7 +41,7 @@ namespace BattleCity
         return { mX - other.mX, mY - other.mY };
     }
 
-    Vector2Int Vector2Int::operator+(int num) const
+    Vector2Int Vector2Int::operator+(const int& num) const
     {
         return { mX + num, mY + num };
     }
@@ -44,12 +50,12 @@ namespace BattleCity
         return { mX + other.mX, mY + other.mY};
     }
 
-    Vector2Int Vector2Int::operator*(int num) const
+    Vector2Int Vector2Int::operator*(const int& num) const
     {
         return { mX * num, mY * num };
     }
 
-    Vector2Int Vector2Int::operator/(int num) const
+    Vector2Int Vector2Int::operator/(const int& num) const
     {
         return { mX / num, mY / num };
     }

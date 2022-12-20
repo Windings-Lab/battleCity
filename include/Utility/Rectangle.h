@@ -15,21 +15,21 @@ namespace BattleCity
 		// Width		= 16
 		// Height		= 16
 		// Position		= position
-		Rectangle(Vector2Int position);
+		explicit Rectangle(const Vector2Int& position);
 		// Width		= width
 		// Height		= height
 		// Position		= (0, 0)
-		Rectangle(int width, int height);
-		Rectangle(int x, int y, int width, int height);
+		Rectangle(const int& width, const int& height);
+		Rectangle(const int& x, const int& y, const int& width, const int& height);
 
 		bool Intersects(const Rectangle& other) const noexcept;
 
-		void SetPosition(int x, int y);
+		void SetPosition(const int& x, const int& y);
 		const Vector2Int& GetPosition() const;
 		const int& X() const;
 		const int& Y() const;
 
-		void SetSize(int width, int height);
+		void SetSize(const int& width, const int& height);
 		const Vector2Int& GetSize() const;
 		const int& W() const;
 		const int& H() const;

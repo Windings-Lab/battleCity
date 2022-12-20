@@ -4,19 +4,18 @@
 
 namespace BattleCity
 {
-	Rectangle::Rectangle() : Rectangle(Vector2Int(0, 0))
-	{
-	}
-	Rectangle::Rectangle(Vector2Int position) : Rectangle(position.X(), position.Y(), 16, 16)
-	{
-	}
-	Rectangle::Rectangle(int width, int height) : Rectangle(0, 0, width, height)
-	{
-	}
-	Rectangle::Rectangle(int x, int y, int width, int height)
-		: mPosition(x, y), mSize(width, height)
-	{
-	}
+	Rectangle::Rectangle() : Rectangle(Vector2Int(0, 0)) {}
+
+	Rectangle::Rectangle(const Vector2Int& position)
+		: Rectangle(position.X(), position.Y(), 16, 16) {}
+
+	Rectangle::Rectangle(const int& width, const int& height)
+		: Rectangle(0, 0, width, height) {}
+
+	Rectangle::Rectangle(const int& x, const int& y, const int& width, const int& height)
+		: mPosition(x, y)
+		, mSize(width, height)
+	{}
 
 	bool Rectangle::Intersects(const Rectangle& other) const noexcept
 	{
@@ -27,10 +26,9 @@ namespace BattleCity
 			< std::min(Y() + H(), other.Y() + other.H());
 	}
 
-	void Rectangle::SetPosition(int x, int y)
+	void Rectangle::SetPosition(const int& x, const int& y)
 	{
-		mPosition.SetX(x);
-		mPosition.SetY(y);
+		mPosition.SetXY(x, y);
 	}
 	const Vector2Int& Rectangle::GetPosition() const
 	{
@@ -45,10 +43,9 @@ namespace BattleCity
 		return mPosition.Y();
 	}
 
-	void Rectangle::SetSize(int width, int height)
+	void Rectangle::SetSize(const int& width, const int& height)
 	{
-		mSize.SetX(width);
-		mSize.SetY(height);
+		mSize.SetXY(width, height);
 	}
 	const Vector2Int& Rectangle::GetSize() const
 	{
