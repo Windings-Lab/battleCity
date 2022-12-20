@@ -27,7 +27,7 @@ namespace BattleCity::Framework::Screen
 
 	void Set(int width, int height, bool fullScreen)
 	{
-		Bounds = BattleCity::Rectangle(width, height);
+		Bounds.SetSize(width, height);
 		FullScreen = fullScreen;
 	}
 

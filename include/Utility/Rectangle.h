@@ -22,6 +22,12 @@ namespace BattleCity
 		Rectangle(const int& width, const int& height);
 		Rectangle(const int& x, const int& y, const int& width, const int& height);
 
+		Rectangle(const Rectangle&) = delete;
+		Rectangle& operator=(const Rectangle&) = delete;
+
+		Rectangle(Rectangle&&) = delete;
+		Rectangle& operator=(Rectangle&&) noexcept = delete;
+
 		bool Intersects(const Rectangle& other) const noexcept;
 
 		void SetPosition(const int& x, const int& y);
