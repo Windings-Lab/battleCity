@@ -2,7 +2,7 @@
 
 namespace BattleCity
 {
-	class Vector2Int
+	class Vector2Int final
 	{
 	public:
 		Vector2Int();
@@ -13,6 +13,8 @@ namespace BattleCity
 
 		Vector2Int(Vector2Int&&) = delete;
 		Vector2Int& operator=(Vector2Int&&) noexcept = delete;
+
+		~Vector2Int() = default;
 
 		void SetXY(const int& x, const int& y);
 

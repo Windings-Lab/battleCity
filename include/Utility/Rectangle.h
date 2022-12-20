@@ -5,7 +5,7 @@
 namespace BattleCity
 {
 	// Create Rectangle at World position
-	class Rectangle
+	class Rectangle final
 	{
 	public:
 		// Width		= 16
@@ -27,6 +27,8 @@ namespace BattleCity
 
 		Rectangle(Rectangle&&) = delete;
 		Rectangle& operator=(Rectangle&&) noexcept = delete;
+
+		~Rectangle() = default;
 
 		bool Intersects(const Rectangle& other) const noexcept;
 
