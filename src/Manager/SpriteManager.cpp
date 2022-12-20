@@ -36,7 +36,7 @@ namespace BattleCity::Manager
 		mSpriteAtlas.clear();
 	}
 
-	const Sprite* SpriteManager::SetAndGetSprite(SpriteType spriteType, Object::Behaviour objectBehaviour)
+	Sprite* SpriteManager::SetAndGetSprite(SpriteType spriteType, Object::Behaviour objectBehaviour)
 	{
 		const SpriteTypeBehaviourPair pair = { spriteType, objectBehaviour };
 
@@ -48,7 +48,7 @@ namespace BattleCity::Manager
 		return SetSprite(spriteType, objectBehaviour);
 	}
 
-	const Sprite* SpriteManager::GetSprite(SpriteType spriteType, Object::Behaviour objectBehaviour) const
+	Sprite* SpriteManager::GetSprite(SpriteType spriteType, Object::Behaviour objectBehaviour) const
 	{
 		const SpriteTypeBehaviourPair pair = { spriteType, objectBehaviour };
 
@@ -60,7 +60,7 @@ namespace BattleCity::Manager
 		return nullptr;
 	}
 
-	const Sprite* SpriteManager::SetSprite(SpriteType spriteType, Object::Behaviour objectBehaviour)
+	Sprite* SpriteManager::SetSprite(SpriteType spriteType, Object::Behaviour objectBehaviour)
 	{
 		const auto path = PM().GetSpritePath(spriteType, objectBehaviour);
 		if (!path.has_value())

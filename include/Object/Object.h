@@ -12,7 +12,7 @@ namespace BattleCity::Object
 		static int IDCounter;
 	protected:
 		// Object
-		const Sprite* mSprite;
+		Sprite* mSprite;
 		Rectangle mRectangle;
 		Solidness mSolidness;
 

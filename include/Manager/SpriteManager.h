@@ -30,14 +30,14 @@ namespace BattleCity::Manager
 		void StartUp() override;
 		void ShutDown() override;
 
-		const Sprite* SetAndGetSprite(SpriteType spriteType, Object::Behaviour objectBehaviour);
+		Sprite* SetAndGetSprite(SpriteType spriteType, Object::Behaviour objectBehaviour);
 	private:
-		const Sprite* GetSprite(SpriteType spriteType, Object::Behaviour objectBehaviour) const;
-		const Sprite* SetSprite(SpriteType spriteType, Object::Behaviour objectBehaviour);
+		Sprite* GetSprite(SpriteType spriteType, Object::Behaviour objectBehaviour) const;
+		Sprite* SetSprite(SpriteType spriteType, Object::Behaviour objectBehaviour);
 
 	private:
 		struct SpriteDeleter;
-		using SpriteObject = std::unique_ptr<const Sprite, SpriteDeleter>;
+		using SpriteObject = std::unique_ptr<Sprite, SpriteDeleter>;
 		using SpriteAtlas = std::unordered_map<SpriteTypeBehaviourPair, SpriteObject>;
 	private:
 		SpriteManager();
