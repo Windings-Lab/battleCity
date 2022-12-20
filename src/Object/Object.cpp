@@ -104,7 +104,7 @@ namespace BattleCity::Object
 
     void Object::SetDirection(const Vector2Int& direction)
     {
-        mDirection.SetXY(direction.X(), direction.Y());
+        mDirection.SetXY(direction.X, direction.Y);
     }
     const Vector2Int& Object::GetDirection() const
     {

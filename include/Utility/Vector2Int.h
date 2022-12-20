@@ -18,12 +18,6 @@ namespace BattleCity
 
 		void SetXY(int x, int y);
 
-		void SetX(int x);
-		int X() const;
-
-		void SetY(int y);
-		int Y() const;
-
 		Vector2Int operator-(int num) const;
 		Vector2Int operator-(const Vector2Int& other) const;
 
@@ -34,8 +28,8 @@ namespace BattleCity
 		Vector2Int operator/(int num) const;
 
 		Vector2Int operator-() const;
-	private:
-		int mX;
-		int mY;
+	public:
+		int X;
+		int Y;
 	};
 }

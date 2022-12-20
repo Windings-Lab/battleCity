@@ -7,7 +7,7 @@ namespace BattleCity
 	Rectangle::Rectangle() : Rectangle(Vector2Int(0, 0)) {}
 
 	Rectangle::Rectangle(const Vector2Int& position)
-		: Rectangle(position.X(), position.Y(), 16, 16) {}
+		: Rectangle(position.X, position.Y, 16, 16) {}
 
 	Rectangle::Rectangle(int width, int height)
 		: Rectangle(0, 0, width, height) {}
@@ -36,11 +36,11 @@ namespace BattleCity
 	}
 	int Rectangle::X() const
 	{
-		return mPosition.X();
+		return mPosition.X;
 	}
 	int Rectangle::Y() const
 	{
-		return mPosition.Y();
+		return mPosition.Y;
 	}
 
 	void Rectangle::SetSize(int width, int height)
@@ -53,10 +53,10 @@ namespace BattleCity
 	}
 	int Rectangle::W() const
 	{
-		return mSize.X();
+		return mSize.X;
 	}
 	int Rectangle::H() const
 	{
-		return mSize.Y();
+		return mSize.Y;
 	}
 }
