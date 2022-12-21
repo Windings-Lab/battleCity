@@ -9,10 +9,10 @@ namespace BattleCity::Object
 {
     int Object::IDCounter = 1;
 
-    Object::Object(int x, int y, Type type, const SpriteBehaviour& spriteBehaviour)
-		: mSprite(Manager::SM().SetAndGetSprite(spriteBehaviour))
+    Object::Object(int x, int y, const SpriteBehaviour& spriteBehaviour)
+		: ID(IDCounter++)
+		, mSprite(Manager::SM().SetAndGetSprite(spriteBehaviour))
 		, mRectangle(Manager::SpriteManager::GetSpriteRectangle(mSprite, x, y))
-		, ID(IDCounter++), ObjectType(type)
     {
         mSolidness = Solidness::Hard;
 
@@ -36,6 +36,11 @@ namespace BattleCity::Object
     }
 
 	#pragma region Object
+
+    Type Object::GetType() const
+    {
+        return mObjectType;
+    }
 
     void Object::SetPosition(int x, int y)
     {

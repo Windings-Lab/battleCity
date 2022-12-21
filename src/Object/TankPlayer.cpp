@@ -5,9 +5,9 @@
 namespace BattleCity::Object
 {
 	TankPlayer::TankPlayer(int x, int y)
-		: Tank(x, y, Type::TankPlayer, { Manager::SpriteType::TankPlayer, Behaviour::Up })
+		: Tank(x, y, { Manager::SpriteType::TankPlayer, Behaviour::Up })
 	{
-
+		mObjectType = Type::TankPlayer;
 	}
 
 	void TankPlayer::Update()

@@ -5,8 +5,9 @@
 namespace BattleCity::Object
 {
 	PhoenixAndFlag::PhoenixAndFlag(int x, int y)
-		: Object(x, y, Type::PhoenixAndFlag, { Manager::SpriteType::Phoenix, Behaviour::Basic })
+		: Object(x, y, { Manager::SpriteType::Phoenix, Behaviour::Basic })
 	{
+		mObjectType = Type::PhoenixAndFlag;
 	}
 
 	void PhoenixAndFlag::Update()

@@ -5,10 +5,9 @@
 namespace BattleCity::Object
 {
 	Wall::Wall(int x, int y)
-		: Object(x, y, Type::Wall, { Manager::SpriteType::Wall, Behaviour::Basic })
-
+		: Object(x, y, { Manager::SpriteType::Wall, Behaviour::Basic })
 	{
-
+		mObjectType = Type::Wall;
 	}
 
 	void Wall::Update()

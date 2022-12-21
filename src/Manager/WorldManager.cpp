@@ -126,10 +126,10 @@ namespace BattleCity::Manager
 	std::unordered_set<int> WorldManager::GetObjectsOfType(Object::Type type) const
 	{
 		std::unordered_set<int> newList;
-		for (const auto& [objID, objRef] : mWorldList.GetRange())
+		for (const auto& [ID, object] : mWorldList.GetRange())
 		{
-			if (objRef->ObjectType == type)
-				newList.insert(objRef->ID);
+			if (object->GetType() == type)
+				newList.insert(object->ID);
 		}
 
 		return newList;

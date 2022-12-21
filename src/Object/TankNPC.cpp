@@ -4,9 +4,9 @@
 namespace BattleCity::Object
 {
 	TankNPC::TankNPC(int x, int y)
-		: Tank(x, y, Type::TankNPC, { Manager::SpriteType::TankNPC, Behaviour::Up })
+		: Tank(x, y, { Manager::SpriteType::TankNPC, Behaviour::Up })
 	{
-
+		mObjectType = Type::TankNPC;
 	}
 
 	void TankNPC::Fire()

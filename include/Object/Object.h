@@ -10,7 +10,7 @@ namespace BattleCity::Object
 	class Object
 	{
 	public:
-		Object(int x, int y, Type type, const SpriteBehaviour& spriteBehaviour);
+		Object(int x, int y, const SpriteBehaviour& spriteBehaviour);
 
 		Object(const Object&) = delete;
 		Object(Object&&) = delete;
@@ -24,6 +24,8 @@ namespace BattleCity::Object
 		void Draw() const;
 
 		#pragma region Object
+
+		Type GetType() const;
 
 		void SetPosition(int x, int y);
 		const Vector2Int& GetPosition() const;
@@ -64,10 +66,11 @@ namespace BattleCity::Object
 
 	public:
 		const int ID;
-		const Type ObjectType;
 		
 	protected:
 		// Object
+		Type mObjectType;
+
 		Sprite* mSprite;
 		Rectangle mRectangle;
 		Solidness mSolidness;
