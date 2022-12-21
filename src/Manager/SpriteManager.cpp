@@ -36,40 +36,36 @@ namespace BattleCity::Manager
 		mSpriteAtlas.clear();
 	}
 
-	Sprite* SpriteManager::SetAndGetSprite(SpriteType spriteType, Object::Behaviour objectBehaviour)
+	Sprite* SpriteManager::SetAndGetSprite(const SpriteBehaviour& spriteBehaviour)
 	{
-		const SpriteBehaviour pair = { spriteType, objectBehaviour };
-
-		if(mSpriteAtlas.find(pair) != mSpriteAtlas.end())
+		if(mSpriteAtlas.find(spriteBehaviour) != mSpriteAtlas.end())
 		{
-			return mSpriteAtlas.at(pair).get();
+			return mSpriteAtlas.at(spriteBehaviour).get();
 		}
 
-		return SetSprite(spriteType, objectBehaviour);
+		return SetSprite(spriteBehaviour);
 	}
 
-	Sprite* SpriteManager::GetSprite(SpriteType spriteType, Object::Behaviour objectBehaviour) const
+	Sprite* SpriteManager::GetSprite(const SpriteBehaviour& spriteBehaviour) const
 	{
-		const SpriteBehaviour pair = { spriteType, objectBehaviour };
-
-		if (mSpriteAtlas.find(pair) != mSpriteAtlas.end())
+		if (mSpriteAtlas.find(spriteBehaviour) != mSpriteAtlas.end())
 		{
-			return mSpriteAtlas.at(pair).get();
+			return mSpriteAtlas.at(spriteBehaviour).get();
 		}
 
 		return nullptr;
 	}
 
-	Sprite* SpriteManager::SetSprite(SpriteType spriteType, Object::Behaviour objectBehaviour)
+	Sprite* SpriteManager::SetSprite(const SpriteBehaviour& spriteBehaviour)
 	{
-		const auto path = PM().GetSpritePath(spriteType, objectBehaviour);
+		const auto path = PM().GetSpritePath(spriteBehaviour);
 		if (!path.has_value())
 		{
 			return nullptr;
 		}
 
 		Sprite* sprite = createSprite(path.value().data());
-		mSpriteAtlas.try_emplace({ spriteType, objectBehaviour }, sprite);
+		mSpriteAtlas.try_emplace(spriteBehaviour, sprite);
 		return sprite;
 	}
 }
