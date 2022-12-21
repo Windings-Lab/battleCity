@@ -2,166 +2,157 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="src\Object\Bullet.cpp">
-      <Filter>Source\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Object\Explosion.cpp">
-      <Filter>Source\Object</Filter>
-    </ClCompile>
     <ClCompile Include="src\Framework\FrameworkWrapper.cpp">
       <Filter>Source\Framework</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Manager\GameManager.cpp">
-      <Filter>Source\Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Manager\Manager.cpp">
-      <Filter>Source\Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Object\Object.cpp">
-      <Filter>Source\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Object\PhoenixAndFlag.cpp">
-      <Filter>Source\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Object\PowerUp.cpp">
-      <Filter>Source\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Object\Tank.cpp">
-      <Filter>Source\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Object\TankPlayer.cpp">
-      <Filter>Source\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Object\Wall.cpp">
-      <Filter>Source\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Utility\Vector2Int.cpp">
-      <Filter>Source\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Manager\WorldManager.cpp">
-      <Filter>Source\Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Manager\SpriteManager.cpp">
-      <Filter>Source\Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Manager\SpritePathManager.cpp">
-      <Filter>Source\Manager</Filter>
     </ClCompile>
     <ClCompile Include="src\PCHeader.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="src\Manager\TimerManager.cpp">
-      <Filter>Source\Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Utility\TimerHandle.cpp">
-      <Filter>Source\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Manager\MapManager.cpp">
-      <Filter>Source\Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Object\TankNPC.cpp">
-      <Filter>Source\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Object\ObjectList.cpp">
-      <Filter>Source\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Utility\Rectangle.cpp">
-      <Filter>Source\Utility</Filter>
-    </ClCompile>
     <ClCompile Include="src\Framework\Screen.cpp">
       <Filter>Source\Framework</Filter>
     </ClCompile>
-    <ClCompile Include="src\Utility\List.cpp">
-      <Filter>Source\Utility</Filter>
+    <ClCompile Include="src\App\Manager\GameManager.cpp">
+      <Filter>Source\App\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\App\Manager\Manager.cpp">
+      <Filter>Source\App\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\App\Manager\MapManager.cpp">
+      <Filter>Source\App\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\App\Manager\SpriteManager.cpp">
+      <Filter>Source\App\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\App\Manager\SpritePathManager.cpp">
+      <Filter>Source\App\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\App\Manager\TimerManager.cpp">
+      <Filter>Source\App\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\App\Manager\WorldManager.cpp">
+      <Filter>Source\App\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\App\Object\Bullet.cpp">
+      <Filter>Source\App\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="src\App\Object\Explosion.cpp">
+      <Filter>Source\App\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="src\App\Object\Object.cpp">
+      <Filter>Source\App\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="src\App\Object\ObjectList.cpp">
+      <Filter>Source\App\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="src\App\Object\PhoenixAndFlag.cpp">
+      <Filter>Source\App\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="src\App\Object\PowerUp.cpp">
+      <Filter>Source\App\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="src\App\Object\Tank.cpp">
+      <Filter>Source\App\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="src\App\Object\TankNPC.cpp">
+      <Filter>Source\App\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="src\App\Object\TankPlayer.cpp">
+      <Filter>Source\App\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="src\App\Object\Wall.cpp">
+      <Filter>Source\App\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Toolkit\Rectangle.cpp">
+      <Filter>Source\Toolkit</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Toolkit\TimerHandle.cpp">
+      <Filter>Source\Toolkit</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Toolkit\Vector2Int.cpp">
+      <Filter>Source\Toolkit</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Object\Bullet.h">
-      <Filter>Headers\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Object\Explosion.h">
-      <Filter>Headers\Object</Filter>
-    </ClInclude>
     <ClInclude Include="include\Framework\Framework.h">
       <Filter>Headers\Framework</Filter>
     </ClInclude>
     <ClInclude Include="include\Framework\FrameworkWrapper.h">
       <Filter>Headers\Framework</Filter>
     </ClInclude>
-    <ClInclude Include="include\Manager\GameManager.h">
-      <Filter>Headers\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Manager\Manager.h">
-      <Filter>Headers\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Object\Object.h">
-      <Filter>Headers\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Object\PhoenixAndFlag.h">
-      <Filter>Headers\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Object\PowerUp.h">
-      <Filter>Headers\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Object\Tank.h">
-      <Filter>Headers\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Object\TankPlayer.h">
-      <Filter>Headers\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Object\Wall.h">
-      <Filter>Headers\Object</Filter>
-    </ClInclude>
     <ClInclude Include="include\Framework\Screen.h">
       <Filter>Headers\Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Manager\SpriteManager.h">
-      <Filter>Headers\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Utility\Vector2Int.h">
-      <Filter>Headers\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Manager\WorldManager.h">
-      <Filter>Headers\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Manager\SpritePathManager.h">
-      <Filter>Headers\Manager</Filter>
     </ClInclude>
     <ClInclude Include="include\PCHeader.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="include\Utility\magic_enum.hpp">
-      <Filter>Headers\Utility</Filter>
+    <ClInclude Include="include\App\Manager\GameManager.h">
+      <Filter>Headers\App\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="include\Manager\TimerManager.h">
-      <Filter>Headers\Manager</Filter>
+    <ClInclude Include="include\App\Manager\Manager.h">
+      <Filter>Headers\App\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="include\Utility\TFunction.h">
-      <Filter>Headers\Utility</Filter>
+    <ClInclude Include="include\App\Manager\MapManager.h">
+      <Filter>Headers\App\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="include\Utility\TimerHandle.h">
-      <Filter>Headers\Utility</Filter>
+    <ClInclude Include="include\App\Manager\SpriteManager.h">
+      <Filter>Headers\App\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="include\Manager\MapManager.h">
-      <Filter>Headers\Manager</Filter>
+    <ClInclude Include="include\App\Manager\SpritePathManager.h">
+      <Filter>Headers\App\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="include\Object\TankNPC.h">
-      <Filter>Headers\Object</Filter>
+    <ClInclude Include="include\App\Manager\TimerManager.h">
+      <Filter>Headers\App\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="include\Object\ObjectList.h">
-      <Filter>Headers\Object</Filter>
+    <ClInclude Include="include\App\Manager\WorldManager.h">
+      <Filter>Headers\App\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="include\Utility\Hashes.h">
-      <Filter>Headers\Utility</Filter>
+    <ClInclude Include="include\App\Object\Bullet.h">
+      <Filter>Headers\App\Object</Filter>
     </ClInclude>
-    <ClInclude Include="include\BattleCityEnums.h">
-      <Filter>Headers</Filter>
+    <ClInclude Include="include\App\Object\Explosion.h">
+      <Filter>Headers\App\Object</Filter>
     </ClInclude>
-    <ClInclude Include="include\Utility\Rectangle.h">
-      <Filter>Headers\Utility</Filter>
+    <ClInclude Include="include\App\Object\Object.h">
+      <Filter>Headers\App\Object</Filter>
     </ClInclude>
-    <ClInclude Include="include\Utility\List.h">
-      <Filter>Headers\Utility</Filter>
+    <ClInclude Include="include\App\Object\ObjectList.h">
+      <Filter>Headers\App\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="include\App\Object\PhoenixAndFlag.h">
+      <Filter>Headers\App\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="include\App\Object\PowerUp.h">
+      <Filter>Headers\App\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="include\App\Object\Tank.h">
+      <Filter>Headers\App\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="include\App\Object\TankNPC.h">
+      <Filter>Headers\App\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="include\App\Object\TankPlayer.h">
+      <Filter>Headers\App\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="include\App\Object\Wall.h">
+      <Filter>Headers\App\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="include\App\BattleCityEnums.h">
+      <Filter>Headers\App</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Toolkit\Hashes.h">
+      <Filter>Headers\Toolkit</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Toolkit\magic_enum.hpp">
+      <Filter>Headers\Toolkit</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Toolkit\Rectangle.h">
+      <Filter>Headers\Toolkit</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Toolkit\TimerHandle.h">
+      <Filter>Headers\Toolkit</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Toolkit\Vector2Int.h">
+      <Filter>Headers\Toolkit</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -177,25 +168,31 @@
     <Filter Include="Headers\Framework">
       <UniqueIdentifier>{4e80204e-52f5-4951-9ae0-a5c80e5802a4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Headers\Manager">
-      <UniqueIdentifier>{6f45e7dd-52d6-4d87-8ac6-2c8bad9fbf52}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Headers\Object">
-      <UniqueIdentifier>{85d26384-d2e2-43ee-83aa-927e9b87fe07}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Headers\Utility">
-      <UniqueIdentifier>{c462b0d0-44c5-485c-8cdd-4be1fd9dac56}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source\Framework">
       <UniqueIdentifier>{340da608-4e03-44a9-b2c5-c5e953d7f08a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Manager">
+    <Filter Include="Headers\Toolkit">
+      <UniqueIdentifier>{da7034ae-ef68-41d7-af5e-db9aae45f66a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\App">
+      <UniqueIdentifier>{be222bd4-15d1-4985-8486-c7d0e6ea0187}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\App\Object">
+      <UniqueIdentifier>{85d26384-d2e2-43ee-83aa-927e9b87fe07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\App\Manager">
+      <UniqueIdentifier>{6f45e7dd-52d6-4d87-8ac6-2c8bad9fbf52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\App">
+      <UniqueIdentifier>{eafcfc95-769e-4ff1-a06d-7370b4e7ce63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Toolkit">
+      <UniqueIdentifier>{afacf658-b7c8-4254-badb-db2d37e1bc68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\App\Manager">
       <UniqueIdentifier>{cb029feb-0984-4641-b87b-152f0b69cfc1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Utility">
-      <UniqueIdentifier>{25c6241a-728e-4793-9516-9ba413f8f8e5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Object">
+    <Filter Include="Source\App\Object">
       <UniqueIdentifier>{07204f34-c876-4173-abb0-8f7961da8f89}</UniqueIdentifier>
     </Filter>
   </ItemGroup>

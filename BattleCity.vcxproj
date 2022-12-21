@@ -20,65 +20,62 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="src\App\Manager\GameManager.cpp" />
+    <ClCompile Include="src\App\Manager\Manager.cpp" />
+    <ClCompile Include="src\App\Manager\MapManager.cpp" />
+    <ClCompile Include="src\App\Manager\SpriteManager.cpp" />
+    <ClCompile Include="src\App\Manager\SpritePathManager.cpp" />
+    <ClCompile Include="src\App\Manager\TimerManager.cpp" />
+    <ClCompile Include="src\App\Manager\WorldManager.cpp" />
+    <ClCompile Include="src\App\Object\Bullet.cpp" />
+    <ClCompile Include="src\App\Object\Explosion.cpp" />
+    <ClCompile Include="src\App\Object\Object.cpp" />
+    <ClCompile Include="src\App\Object\ObjectList.cpp" />
+    <ClCompile Include="src\App\Object\PhoenixAndFlag.cpp" />
+    <ClCompile Include="src\App\Object\PowerUp.cpp" />
+    <ClCompile Include="src\App\Object\Tank.cpp" />
+    <ClCompile Include="src\App\Object\TankNPC.cpp" />
+    <ClCompile Include="src\App\Object\TankPlayer.cpp" />
+    <ClCompile Include="src\App\Object\Wall.cpp" />
     <ClCompile Include="src\Framework\FrameworkWrapper.cpp" />
     <ClCompile Include="src\Framework\Screen.cpp" />
-    <ClCompile Include="src\Manager\GameManager.cpp" />
-    <ClCompile Include="src\Manager\Manager.cpp" />
-    <ClCompile Include="src\Manager\MapManager.cpp" />
-    <ClCompile Include="src\Manager\SpritePathManager.cpp" />
-    <ClCompile Include="src\Manager\TimerManager.cpp" />
-    <ClCompile Include="src\Manager\WorldManager.cpp" />
-    <ClCompile Include="src\Manager\SpriteManager.cpp" />
-    <ClCompile Include="src\Object\Bullet.cpp" />
-    <ClCompile Include="src\Object\Explosion.cpp" />
-    <ClCompile Include="src\Object\Object.cpp" />
-    <ClCompile Include="src\Object\ObjectList.cpp" />
-    <ClCompile Include="src\Object\PhoenixAndFlag.cpp" />
-    <ClCompile Include="src\Object\PowerUp.cpp" />
-    <ClCompile Include="src\Object\Tank.cpp" />
-    <ClCompile Include="src\Object\TankNPC.cpp" />
-    <ClCompile Include="src\Object\TankPlayer.cpp" />
-    <ClCompile Include="src\Object\Wall.cpp" />
     <ClCompile Include="src\PCHeader.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">PCHeader.h</PrecompiledHeaderFile>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="src\Utility\List.cpp" />
-    <ClCompile Include="src\Utility\Rectangle.cpp" />
-    <ClCompile Include="src\Utility\TimerHandle.cpp" />
-    <ClCompile Include="src\Utility\Vector2Int.cpp" />
+    <ClCompile Include="src\Toolkit\Rectangle.cpp" />
+    <ClCompile Include="src\Toolkit\TimerHandle.cpp" />
+    <ClCompile Include="src\Toolkit\Vector2Int.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\BattleCityEnums.h" />
+    <ClInclude Include="include\App\BattleCityEnums.h" />
+    <ClInclude Include="include\App\Manager\GameManager.h" />
+    <ClInclude Include="include\App\Manager\Manager.h" />
+    <ClInclude Include="include\App\Manager\MapManager.h" />
+    <ClInclude Include="include\App\Manager\SpriteManager.h" />
+    <ClInclude Include="include\App\Manager\SpritePathManager.h" />
+    <ClInclude Include="include\App\Manager\TimerManager.h" />
+    <ClInclude Include="include\App\Manager\WorldManager.h" />
+    <ClInclude Include="include\App\Object\Bullet.h" />
+    <ClInclude Include="include\App\Object\Explosion.h" />
+    <ClInclude Include="include\App\Object\Object.h" />
+    <ClInclude Include="include\App\Object\ObjectList.h" />
+    <ClInclude Include="include\App\Object\PhoenixAndFlag.h" />
+    <ClInclude Include="include\App\Object\PowerUp.h" />
+    <ClInclude Include="include\App\Object\Tank.h" />
+    <ClInclude Include="include\App\Object\TankNPC.h" />
+    <ClInclude Include="include\App\Object\TankPlayer.h" />
+    <ClInclude Include="include\App\Object\Wall.h" />
     <ClInclude Include="include\Framework\Framework.h" />
     <ClInclude Include="include\Framework\FrameworkWrapper.h" />
     <ClInclude Include="include\Framework\Screen.h" />
-    <ClInclude Include="include\Manager\GameManager.h" />
-    <ClInclude Include="include\Manager\Manager.h" />
-    <ClInclude Include="include\Manager\MapManager.h" />
-    <ClInclude Include="include\Manager\SpritePathManager.h" />
-    <ClInclude Include="include\Manager\SpriteManager.h" />
-    <ClInclude Include="include\Manager\TimerManager.h" />
-    <ClInclude Include="include\Manager\WorldManager.h" />
-    <ClInclude Include="include\Object\Bullet.h" />
-    <ClInclude Include="include\Object\Explosion.h" />
-    <ClInclude Include="include\Object\Object.h" />
-    <ClInclude Include="include\Object\ObjectList.h" />
-    <ClInclude Include="include\Object\PhoenixAndFlag.h" />
-    <ClInclude Include="include\Object\PowerUp.h" />
-    <ClInclude Include="include\Object\Tank.h" />
-    <ClInclude Include="include\Object\TankNPC.h" />
-    <ClInclude Include="include\Object\TankPlayer.h" />
-    <ClInclude Include="include\Object\Wall.h" />
     <ClInclude Include="include\PCHeader.h" />
-    <ClInclude Include="include\Utility\Hashes.h" />
-    <ClInclude Include="include\Utility\List.h" />
-    <ClInclude Include="include\Utility\magic_enum.hpp" />
-    <ClInclude Include="include\Utility\Rectangle.h" />
-    <ClInclude Include="include\Utility\TFunction.h" />
-    <ClInclude Include="include\Utility\TimerHandle.h" />
-    <ClInclude Include="include\Utility\Vector2Int.h" />
+    <ClInclude Include="include\Toolkit\Hashes.h" />
+    <ClInclude Include="include\Toolkit\magic_enum.hpp" />
+    <ClInclude Include="include\Toolkit\Rectangle.h" />
+    <ClInclude Include="include\Toolkit\TimerHandle.h" />
+    <ClInclude Include="include\Toolkit\Vector2Int.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
@@ -180,7 +177,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>PCHeader.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)include\;$(ProjectDir)include\Framework\;$(ProjectDir)include\Manager\;$(ProjectDir)include\Object\;$(ProjectDir)include\Utility\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include\;$(ProjectDir)include\Framework\;$(ProjectDir)include\App\;$(ProjectDir)include\App\Manager\;$(ProjectDir)include\App\Object\;$(ProjectDir)include\Toolkit\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -203,7 +200,7 @@ if %errorlevel% LEQ 3 exit 0</Command>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)include\;$(ProjectDir)include\Framework\;$(ProjectDir)include\Manager\;$(ProjectDir)include\Object\;$(ProjectDir)include\Utility\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include\;$(ProjectDir)include\Framework\;$(ProjectDir)include\App\;$(ProjectDir)include\App\Manager\;$(ProjectDir)include\App\Object\;$(ProjectDir)include\Toolkit\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>PCHeader.h</PrecompiledHeaderFile>
     </ClCompile>
