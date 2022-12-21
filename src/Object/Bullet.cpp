@@ -5,7 +5,7 @@
 namespace BattleCity::Object
 {
 	Bullet::Bullet(Type ownerType)
-		: Object(0, 0, Type::Bullet, Manager::SpriteType::Bullet, Behaviour::Up), mOwnerType(ownerType)
+		: Object(0, 0, Type::Bullet, { Manager::SpriteType::Bullet, Behaviour::Up }), mOwnerType(ownerType)
 	{
 	}
 

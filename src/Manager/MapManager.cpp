@@ -12,7 +12,7 @@ namespace BattleCity::Manager
 	}
 
 	MapManager::MapManager() : Manager(Type::Map)
-	, mBackground(SM().SetAndGetSprite(SpriteType::Background, Object::Behaviour::Basic))
+		, mBackground(SM().SetAndGetSprite({ SpriteType::Background, Object::Behaviour::Basic }))
 	, mBoundaries(SpriteManager::GetSpriteRectangle(mBackground, 40, 44))
 	{
 		

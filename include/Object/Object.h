@@ -10,9 +10,7 @@ namespace BattleCity::Object
 	class Object
 	{
 	public:
-		Object(int x, int y, Type type
-				, Manager::SpriteType spriteType
-				, BattleCity::Object::Behaviour behaviour);
+		Object(int x, int y, Type type, const SpriteBehaviour& spriteBehaviour);
 
 		Object(const Object&) = delete;
 		Object(Object&&) = delete;
