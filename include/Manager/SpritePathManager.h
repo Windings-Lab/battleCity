@@ -6,9 +6,12 @@ namespace BattleCity::Manager
 {
 	class SpritePathManager final : public Manager
 	{
-		using SpritePathList = std::unordered_map<SpriteBehaviour, std::string>;
 	public:
 		static SpritePathManager& GetInstance();
+
+	private:
+		SpritePathManager();
+	public:
 
 		SpritePathManager(const SpritePathManager&) = delete;
 		SpritePathManager(SpritePathManager&&) = delete;
@@ -22,12 +25,14 @@ namespace BattleCity::Manager
 		void StartUp() override;
 		void ShutDown() override;
 
-		std::optional<std::string> GetSpritePath(SpriteType spriteType, Object::Behaviour objectBehaviour) const;
+		std::optional<std::string> GetSpritePath(const SpriteBehaviour& spriteBehaviour) const;
+
 	private:
 		void SetSpritePath(const std::filesystem::path& folderPath);
 		void OutputAllPath();
+
 	private:
-		SpritePathManager();
+		using SpritePathList = std::unordered_map<SpriteBehaviour, std::string>;
 
 		const std::filesystem::path SpriteFolderPath;
 		const std::filesystem::path FileExtension;

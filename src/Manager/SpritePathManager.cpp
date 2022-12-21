@@ -69,13 +69,11 @@ namespace BattleCity::Manager
 		mSpritePathList.clear();
 	}
 
-	std::optional<std::string> SpritePathManager::GetSpritePath(SpriteType spriteType, Object::Behaviour objectBehaviour) const
+	std::optional<std::string> SpritePathManager::GetSpritePath(const SpriteBehaviour& spriteBehaviour) const
 	{
-		const SpriteBehaviour pair = { spriteType, objectBehaviour };
-
 		return
-				mSpritePathList.find(pair) != mSpritePathList.end()
-				? std::optional(mSpritePathList.at(pair))
+				mSpritePathList.find(spriteBehaviour) != mSpritePathList.end()
+				? std::optional(mSpritePathList.at(spriteBehaviour))
 				: std::optional<std::string>();
 	}
 
