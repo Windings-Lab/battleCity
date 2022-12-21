@@ -61,6 +61,11 @@ namespace BattleCity::Object
 
 	private:
 		static int IDCounter;
+
+	public:
+		const int ID;
+		const Type ObjectType;
+		
 	protected:
 		// Object
 		Sprite* mSprite;
@@ -76,8 +81,6 @@ namespace BattleCity::Object
 		// IMovable Interface
 		int mSpeed;
 		Vector2Int mDirection;
-	public:
-		const int ID;
-		const Type ObjectType;
+
 	};
 }
