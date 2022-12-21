@@ -32,7 +32,7 @@ namespace BattleCity::Manager
 			return;
 		}
 
-		SpriteTypeBehaviourPair pair = { spriteTypeCast.value(),objectBehaviourCast.value() };
+		SpriteBehaviour pair = { spriteTypeCast.value(),objectBehaviourCast.value() };
 		mSpritePathList.try_emplace(std::move(pair), folderPath.string());
 	}
 
@@ -71,7 +71,7 @@ namespace BattleCity::Manager
 
 	std::optional<std::string> SpritePathManager::GetSpritePath(SpriteType spriteType, Object::Behaviour objectBehaviour) const
 	{
-		const SpriteTypeBehaviourPair pair = { spriteType, objectBehaviour };
+		const SpriteBehaviour pair = { spriteType, objectBehaviour };
 
 		return
 				mSpritePathList.find(pair) != mSpritePathList.end()
@@ -85,7 +85,7 @@ namespace BattleCity::Manager
 		using std::cout;
 		using std::endl;
 
-		std::vector<SpriteTypeBehaviourPair> keys(mSpritePathList.size());
+		std::vector<SpriteBehaviour> keys(mSpritePathList.size());
 		transform(mSpritePathList.begin(), mSpritePathList.end(), keys.begin(), [](auto& pair) { return pair.first; });
 		std::sort(keys.begin(), keys.end());
 

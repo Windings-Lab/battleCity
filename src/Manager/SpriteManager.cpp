@@ -38,7 +38,7 @@ namespace BattleCity::Manager
 
 	Sprite* SpriteManager::SetAndGetSprite(SpriteType spriteType, Object::Behaviour objectBehaviour)
 	{
-		const SpriteTypeBehaviourPair pair = { spriteType, objectBehaviour };
+		const SpriteBehaviour pair = { spriteType, objectBehaviour };
 
 		if(mSpriteAtlas.find(pair) != mSpriteAtlas.end())
 		{
@@ -50,7 +50,7 @@ namespace BattleCity::Manager
 
 	Sprite* SpriteManager::GetSprite(SpriteType spriteType, Object::Behaviour objectBehaviour) const
 	{
-		const SpriteTypeBehaviourPair pair = { spriteType, objectBehaviour };
+		const SpriteBehaviour pair = { spriteType, objectBehaviour };
 
 		if (mSpriteAtlas.find(pair) != mSpriteAtlas.end())
 		{

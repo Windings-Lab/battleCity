@@ -38,7 +38,7 @@ namespace BattleCity::Manager
 	private:
 		struct SpriteDeleter;
 		using SpriteObject = std::unique_ptr<Sprite, SpriteDeleter>;
-		using SpriteAtlas = std::unordered_map<SpriteTypeBehaviourPair, SpriteObject>;
+		using SpriteAtlas = std::unordered_map<SpriteBehaviour, SpriteObject>;
 	private:
 		SpriteManager();
 
