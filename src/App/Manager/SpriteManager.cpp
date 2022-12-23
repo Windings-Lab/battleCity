@@ -46,16 +46,6 @@ namespace BattleCity::Manager
 		return SetSprite(spriteBehaviour);
 	}
 
-	Sprite* SpriteManager::GetSprite(const SpriteBehaviour& spriteBehaviour) const
-	{
-		if (mSpriteAtlas.find(spriteBehaviour) != mSpriteAtlas.end())
-		{
-			return mSpriteAtlas.at(spriteBehaviour).get();
-		}
-
-		return nullptr;
-	}
-
 	Sprite* SpriteManager::SetSprite(const SpriteBehaviour& spriteBehaviour)
 	{
 		const auto path = PM().GetSpritePath(spriteBehaviour);

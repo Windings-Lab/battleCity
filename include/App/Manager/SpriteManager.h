@@ -38,7 +38,6 @@ namespace BattleCity::Manager
 
 		Sprite* SetAndGetSprite(const SpriteBehaviour& spriteBehaviour);
 	private:
-		Sprite* GetSprite(const SpriteBehaviour& spriteBehaviour) const;
 		Sprite* SetSprite(const SpriteBehaviour& spriteBehaviour);
 
 	private:
