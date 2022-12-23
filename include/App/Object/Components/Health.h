@@ -14,5 +14,3 @@ namespace BattleCity::Object::Component
 		int mHealth;
 	};
 }
-
-
