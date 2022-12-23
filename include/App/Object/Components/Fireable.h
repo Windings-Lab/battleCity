@@ -2,10 +2,13 @@
 
 namespace BattleCity::Object::Component
 {
-	class Shootable
+	class Fireable
 	{
 	public:
-		Shootable();
+		Fireable();
+		virtual ~Fireable();
+
+		virtual void Fire();
 
 		void SetBulletCount(int count);
 		int GetBulletCount() const;

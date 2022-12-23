@@ -4,9 +4,9 @@
 
 namespace BattleCity::Object
 {
-    class Explosion final : public Object
+    class Explosion : public Object
     {
     public:
-	    explicit Explosion();
+	    Explosion() = default;
     };
 }

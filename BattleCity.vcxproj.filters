@@ -16,9 +16,6 @@
     <ClCompile Include="src\App\Manager\Manager.cpp">
       <Filter>Source\App\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="src\App\Manager\SpriteManager.cpp">
-      <Filter>Source\App\Manager</Filter>
-    </ClCompile>
     <ClCompile Include="src\App\Manager\SpritePathManager.cpp">
       <Filter>Source\App\Manager</Filter>
     </ClCompile>
@@ -34,12 +31,6 @@
     <ClCompile Include="src\App\Object\Object.cpp">
       <Filter>Source\App\Object</Filter>
     </ClCompile>
-    <ClCompile Include="src\App\Object\ObjectList.cpp">
-      <Filter>Source\App\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="src\App\Object\PhoenixAndFlag.cpp">
-      <Filter>Source\App\Object</Filter>
-    </ClCompile>
     <ClCompile Include="src\App\Object\PowerUp.cpp">
       <Filter>Source\App\Object</Filter>
     </ClCompile>
@@ -52,14 +43,8 @@
     <ClCompile Include="src\Toolkit\Rectangle.cpp">
       <Filter>Source\Toolkit</Filter>
     </ClCompile>
-    <ClCompile Include="src\Toolkit\TimerHandle.cpp">
-      <Filter>Source\Toolkit</Filter>
-    </ClCompile>
     <ClCompile Include="src\Toolkit\Vector2Int.cpp">
       <Filter>Source\Toolkit</Filter>
-    </ClCompile>
-    <ClCompile Include="src\App\Object\Components\Shootable.cpp">
-      <Filter>Source\App\Object\Components</Filter>
     </ClCompile>
     <ClCompile Include="src\App\Object\Components\Health.cpp">
       <Filter>Source\App\Object\Components</Filter>
@@ -76,6 +61,18 @@
     </ClCompile>
     <ClCompile Include="src\App\MapCreator.cpp">
       <Filter>Source\App</Filter>
+    </ClCompile>
+    <ClCompile Include="src\App\Object\Components\Fireable.cpp">
+      <Filter>Source\App\Object\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\App\Object\List\ObjectList.cpp">
+      <Filter>Source\App\Object\List</Filter>
+    </ClCompile>
+    <ClCompile Include="src\App\Object\Phoenix.cpp">
+      <Filter>Source\App\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="src\App\Object\Components\BCSprite.cpp">
+      <Filter>Source\App\Object\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -97,9 +94,6 @@
     <ClInclude Include="include\App\Manager\Manager.h">
       <Filter>Headers\App\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="include\App\Manager\SpriteManager.h">
-      <Filter>Headers\App\Manager</Filter>
-    </ClInclude>
     <ClInclude Include="include\App\Manager\SpritePathManager.h">
       <Filter>Headers\App\Manager</Filter>
     </ClInclude>
@@ -113,12 +107,6 @@
       <Filter>Headers\App\Object</Filter>
     </ClInclude>
     <ClInclude Include="include\App\Object\Object.h">
-      <Filter>Headers\App\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="include\App\Object\ObjectList.h">
-      <Filter>Headers\App\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="include\App\Object\PhoenixAndFlag.h">
       <Filter>Headers\App\Object</Filter>
     </ClInclude>
     <ClInclude Include="include\App\Object\PowerUp.h">
@@ -142,9 +130,6 @@
     <ClInclude Include="include\Toolkit\Rectangle.h">
       <Filter>Headers\Toolkit</Filter>
     </ClInclude>
-    <ClInclude Include="include\Toolkit\TimerHandle.h">
-      <Filter>Headers\Toolkit</Filter>
-    </ClInclude>
     <ClInclude Include="include\Toolkit\Vector2Int.h">
       <Filter>Headers\Toolkit</Filter>
     </ClInclude>
@@ -152,9 +137,6 @@
       <Filter>Headers\App\Object\Components</Filter>
     </ClInclude>
     <ClInclude Include="include\App\Object\Components\Movable.h">
-      <Filter>Headers\App\Object\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="include\App\Object\Components\Shootable.h">
       <Filter>Headers\App\Object\Components</Filter>
     </ClInclude>
     <ClInclude Include="include\App\Object\Components\Collider.h">
@@ -165,6 +147,18 @@
     </ClInclude>
     <ClInclude Include="include\App\MapCreator.h">
       <Filter>Headers\App</Filter>
+    </ClInclude>
+    <ClInclude Include="include\App\Object\Components\Fireable.h">
+      <Filter>Headers\App\Object\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\App\Object\List\ObjectList.h">
+      <Filter>Headers\App\Object\List</Filter>
+    </ClInclude>
+    <ClInclude Include="include\App\Object\Phoenix.h">
+      <Filter>Headers\App\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="include\App\Object\Components\BCSprite.h">
+      <Filter>Headers\App\Object\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -212,6 +206,12 @@
     </Filter>
     <Filter Include="Source\App\Object\Components">
       <UniqueIdentifier>{dc0f6fd2-65fa-4b3d-84fd-31e43bbd466e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\App\Object\List">
+      <UniqueIdentifier>{36eb07f6-9048-4ce9-bc57-21debfc310aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\App\Object\List">
+      <UniqueIdentifier>{61ebdf0a-f542-4d45-938e-ce7883b70317}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

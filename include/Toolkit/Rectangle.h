@@ -32,11 +32,13 @@ namespace BattleCity
 
 		bool Intersects(const Rectangle& other) const noexcept;
 
+		void SetPosition(const Vector2Int& position);
 		void SetPosition(int x, int y);
 		const Vector2Int& GetPosition() const;
 		int X() const;
 		int Y() const;
 
+		void SetSize(const Vector2Int& size);
 		void SetSize(int width, int height);
 		const Vector2Int& GetSize() const;
 		int W() const;

@@ -5,7 +5,7 @@
 #include "MapCreator.h"
 
 #include "Object.h"
-#include "PhoenixAndFlag.h"
+#include "Phoenix.h"
 #include "Tank.h"
 #include "Wall.h"
 #include "WorldBoundaries.h"
@@ -16,9 +16,6 @@ namespace BattleCity::Manager
 	{
 		static WorldManager single;
 		return single;
-	}
-	WorldManager::WorldManager() : Manager(Type::World)
-	{
 	}
 
 	void WorldManager::StartUp()
@@ -38,12 +35,17 @@ namespace BattleCity::Manager
 
 	void WorldManager::InitMap()
 	{
+		using std::make_unique;
+		using std::unique_ptr;
+
+		int posX = 40, posY = 44;
+
 		std::unique_ptr<Object::Object> worldBoundaries
-			= std::make_unique<Object::WorldBoundaries>(40, 44);
+			= std::make_unique<Object::WorldBoundaries>();
 
-		int posX = worldBoundaries->X(), posY = worldBoundaries->Y();
+		worldBoundaries->SetPosition(40, 44);
+
 		InsertObject(std::move(worldBoundaries));
-
 		for (const auto& mapRow 
 			: MapCreator::GetLevel(R"(.\data\Maps\level1.txt)"))
 		{
@@ -54,16 +56,32 @@ namespace BattleCity::Manager
 				case Object::Type::None: 
 					break;
 				case Object::Type::TankPlayer:
-					InsertObject(std::make_unique<Object::Tank>(posX, posY));
+					{
+						unique_ptr<Object::Object> tank = make_unique<Object::Tank>();
+						tank->SetPosition(posX, posY);
+						InsertObject(std::move(tank));
+					}
 					break;
 				case Object::Type::TankNPC:
-					InsertObject(std::make_unique<Object::Tank>(posX, posY));
+					{
+						unique_ptr<Object::Object> tank = make_unique<Object::Tank>();
+						tank->SetPosition(posX, posY);
+						InsertObject(std::move(tank));
+					}
 					break;
 				case Object::Type::Wall:
-					InsertObject(std::make_unique<Object::Wall>(posX, posY));
+					{
+						unique_ptr<Object::Object> tank = make_unique<Object::Wall>();
+						tank->SetPosition(posX, posY);
+						InsertObject(std::move(tank));
+					}
 					break;
-				case Object::Type::PhoenixAndFlag:
-					InsertObject(std::make_unique<Object::PhoenixAndFlag>(posX, posY));
+				case Object::Type::Phoenix:
+					{
+						unique_ptr<Object::Object> tank = make_unique<Object::Phoenix>();
+						tank->SetPosition(posX, posY);
+						InsertObject(std::move(tank));
+					}
 					break;
 				default: 
 					break;
@@ -88,10 +106,6 @@ namespace BattleCity::Manager
 	void WorldManager::InsertObject(std::unique_ptr<Object::Object>&& objPtr)
 	{
 		mObjectList.Insert(std::move(objPtr));
-	}
-	void WorldManager::RemoveObject(int objID)
-	{
-		mObjectList.Remove(objID);
 	}
 	void WorldManager::MarkForDelete(int objID)
 	{

@@ -16,6 +16,7 @@ namespace BattleCity
 
 		~Vector2Int() = default;
 
+		void SetXY(const Vector2Int& position);
 		void SetXY(int x, int y);
 
 		Vector2Int operator-(int num) const;

@@ -3,96 +3,108 @@
 
 namespace BattleCity::Manager
 {
+	namespace 
+	{
+		void OutputAllPath(const SpritePathManager::SpriteData& spritePathList)
+		{
+			using magic_enum::enum_name;
+			using std::cout;
+			using std::endl;
+
+			std::vector<Sprite::SpritePair> keys(spritePathList.size());
+			transform(spritePathList.begin(), spritePathList.end(), keys.begin(), [](auto& pair) { return pair.first; });
+			std::sort(keys.begin(), keys.end());
+
+			for (auto& pair : keys)
+			{
+				cout << enum_name(pair.first) << " - "
+					<< enum_name(pair.second)
+					<< ": " << spritePathList.at(pair) << endl;
+			}
+			cout << endl;
+		}
+
+		std::optional<Sprite::SpritePair> CreateSpritePair(const std::filesystem::path& spritePath)
+		{
+			using magic_enum::enum_cast;
+
+			const std::string spriteTypeStr = spritePath.stem().string();
+			const std::string objectBehaviourStr = spritePath.parent_path().stem().string();
+
+			auto spriteTypeCast = enum_cast<Sprite::Type>(spriteTypeStr);
+			auto objectBehaviourCast = enum_cast<Sprite::Behaviour>(objectBehaviourStr);
+
+			if (!spriteTypeCast.has_value() || !objectBehaviourCast.has_value())
+			{
+				std::cerr << spriteTypeStr << " - " << objectBehaviourStr << ": have no usage.\n";
+				return {};
+			}
+
+			return std::make_pair(spriteTypeCast.value(),objectBehaviourCast.value());
+		}
+	}
+
 	SpritePathManager& SpritePathManager::GetInstance()
 	{
 		static SpritePathManager pathManager;
 		return pathManager;
 	}
 
-	SpritePathManager::SpritePathManager() : Manager(Type::SpritePath),
-		SpriteFolderPath(".\\data"), FileExtension(".png"),
-		mSpritePathList(0)
-	{
-		
-	}
-
-	void SpritePathManager::SetSpritePath(const std::filesystem::path& folderPath)
-	{
-		using magic_enum::enum_cast;
-
-		const std::string spriteTypeStr = folderPath.stem().string();
-		const std::string objectBehaviourStr = folderPath.parent_path().stem().string();
-
-		auto spriteTypeCast = enum_cast<SpriteType>(spriteTypeStr);
-		auto objectBehaviourCast = enum_cast<Object::Behaviour>(objectBehaviourStr);
-
-		if (!spriteTypeCast.has_value() || !objectBehaviourCast.has_value())
-		{
-			std::cerr << spriteTypeStr << " - " << objectBehaviourStr << ": have no usage.\n";
-			return;
-		}
-
-		SpriteBehaviour pair = { spriteTypeCast.value(),objectBehaviourCast.value() };
-		mSpritePathList.try_emplace(std::move(pair), folderPath.string());
-	}
+	SpritePathManager::SpritePathManager() : Manager() {}
 
 	void SpritePathManager::StartUp()
 	{
 		__super::StartUp();
 
-		using namespace std::filesystem;
-
-		if(!exists(SpriteFolderPath))
-		{
-			std::cerr << "Sprite Folder Path has not been found\n";
-			std::cerr << "Make sure that .\\data in folder with BattleCity.exe file\n";
-			throw std::invalid_argument("Can't find data folder");
-		}
-
-		for (const auto& folderEntry : recursive_directory_iterator(SpriteFolderPath))
-		{
-			if (folderEntry.path().extension() != FileExtension)
-			{
-				continue;
-			}
-
-			SetSpritePath(folderEntry.path());
-		}
+		CreateSpriteDataAt(".\\data");
 
 #ifdef _DEBUG
-		OutputAllPath();
+		OutputAllPath(mSpriteData);
 #endif
 	}
 
 	void SpritePathManager::ShutDown()
 	{
-		mSpritePathList.clear();
+		mSpriteData.clear();
 	}
 
-	std::optional<std::string> SpritePathManager::GetSpritePath(const SpriteBehaviour& spriteBehaviour) const
+	const std::string& SpritePathManager::GetSpritePath(const Sprite::SpritePair& spritePair) const
 	{
-		return
-				mSpritePathList.find(spriteBehaviour) != mSpritePathList.end()
-				? std::optional(mSpritePathList.at(spriteBehaviour))
-				: std::optional<std::string>();
-	}
-
-	void SpritePathManager::OutputAllPath()
-	{
-		using magic_enum::enum_name;
-		using std::cout;
-		using std::endl;
-
-		std::vector<SpriteBehaviour> keys(mSpritePathList.size());
-		transform(mSpritePathList.begin(), mSpritePathList.end(), keys.begin(), [](auto& pair) { return pair.first; });
-		std::sort(keys.begin(), keys.end());
-
-		for (auto& pair : keys)
+		const auto& spritePathIterator = mSpriteData.find(spritePair);
+		if (spritePathIterator == mSpriteData.end())
 		{
-			cout << enum_name(pair.first) << " - "
-				 << enum_name(pair.second)
-			     << ": " << mSpritePathList.at(pair) << endl;
+			throw std::out_of_range("Sprite data has not been created");
 		}
-		cout << endl;
+
+		return spritePathIterator->second;
+	}
+
+	void SpritePathManager::CreateSpriteDataAt(const std::filesystem::path& folderPath)
+	{
+		using namespace std::filesystem;
+
+		if (!exists(folderPath))
+		{
+			std::cerr << "Sprite Folder Path has not been found\n";
+			std::cerr << "Make sure that " << folderPath << " in folder with BattleCity.exe file\n";
+			throw std::invalid_argument("Can't find data folder");
+		}
+
+		const path fileExtension = ".png";
+		for (const auto& folderEntry : recursive_directory_iterator(folderPath))
+		{
+			if (folderEntry.path().extension() != fileExtension)
+			{
+				continue;
+			}
+
+			const auto& pair = CreateSpritePair(folderEntry.path());
+			if(!pair.has_value())
+			{
+				continue;
+			}
+
+			mSpriteData.emplace(pair.value(), folderEntry.path().string());
+		}
 	}
 }

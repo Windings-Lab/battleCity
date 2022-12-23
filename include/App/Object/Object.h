@@ -1,16 +1,14 @@
 #pragma once
 
-#include "Rectangle.h"
+#include "BCSprite.h"
 #include "Vector2Int.h"
-
-class Sprite;
 
 namespace BattleCity::Object
 {
 	class Object
 	{
 	public:
-		Object(int x, int y, const SpriteBehaviour& spriteBehaviour);
+		Object();
 
 		Object(const Object&) = delete;
 		Object(Object&&) = delete;
@@ -21,18 +19,20 @@ namespace BattleCity::Object
 		virtual ~Object() = 0;
 
 		virtual void Update();
-		virtual void Draw();
 
-		void SetPosition(int x, int y);
-		const Vector2Int& GetPosition() const;
-		int X() const;
-		int Y() const;
+		int ID() const noexcept;
 
-	public:
-		mutable int ID;
-		
+		void Draw() const noexcept;
+
+		void SetPosition(const Vector2Int& pos) noexcept;
+		void SetPosition(int x, int y) noexcept;
+		const Vector2Int& GetPosition() const noexcept;
+		int X() const noexcept;
+		int Y() const noexcept;
+
 	private:
-		Sprite* mSprite;
-		Rectangle mRectangle;
+		int mID;
+		Sprite::BCSprite mSprite;
+		Vector2Int mPosition;
 	};
 }

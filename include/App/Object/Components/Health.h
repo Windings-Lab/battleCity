@@ -6,6 +6,9 @@ namespace BattleCity::Object::Component
 	{
 	public:
 		Health();
+		virtual ~Health();
+
+		virtual void Destroy();
 
 		void SetHealth(int health);
 		int GetHealth() const;

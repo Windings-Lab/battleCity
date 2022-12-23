@@ -26,6 +26,10 @@ namespace BattleCity
 			< std::min(Y() + H(), other.Y() + other.H());
 	}
 
+	void Rectangle::SetPosition(const Vector2Int& position)
+	{
+		SetPosition(position.X, position.Y);
+	}
 	void Rectangle::SetPosition(int x, int y)
 	{
 		mPosition.SetXY(x, y);
@@ -43,6 +47,10 @@ namespace BattleCity
 		return mPosition.Y;
 	}
 
+	void Rectangle::SetSize(const Vector2Int& size)
+	{
+		SetSize(size.X, size.Y);
+	}
 	void Rectangle::SetSize(int width, int height)
 	{
 		mSize.SetXY(width, height);

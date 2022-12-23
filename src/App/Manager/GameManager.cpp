@@ -2,7 +2,7 @@
 
 #include "GameManager.h"
 
-#include "SpriteManager.h"
+#include "BCSprite.h"
 #include "SpritePathManager.h"
 #include "WorldManager.h"
 
@@ -10,7 +10,7 @@
 
 namespace BattleCity::Manager
 {
-	GameManager::GameManager() : Manager(Type::Game), mGameOver(false) {}
+	GameManager::GameManager() : Manager(), mGameOver(false) {}
 
 	GameManager& GameManager::GetInstance()
 	{
@@ -21,13 +21,11 @@ namespace BattleCity::Manager
 	void GameManager::StartUp()
 	{
 		PM().StartUp();
-		SM().StartUp();
 		WM().StartUp();
 	}
 	void GameManager::ShutDown()
 	{
 		WM().ShutDown();
-		SM().ShutDown();
 		PM().ShutDown();
 	}
 

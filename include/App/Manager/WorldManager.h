@@ -12,6 +12,9 @@ namespace BattleCity::Manager
 {
 	class WorldManager final : public Manager
 	{
+	private:
+		WorldManager() = default;
+
 	public:
 		static WorldManager& GetInstance();
 
@@ -30,13 +33,10 @@ namespace BattleCity::Manager
 		Object::ObjectList& GetObjectList();
 
 		void InsertObject(std::unique_ptr<Object::Object>&& objPtr);
-		void RemoveObject(int objID);
 		void MarkForDelete(int objID);
-	private:
-		void InitMap();
 
 	private:
-		WorldManager();
+		void InitMap();
 
 		Object::ObjectList mObjectList;
 	};

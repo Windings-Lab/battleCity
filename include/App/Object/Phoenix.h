@@ -4,10 +4,10 @@
 
 namespace BattleCity::Object
 {
-	class PhoenixAndFlag final : public Object
+	class Phoenix : public Object
 	{
     public:
-        PhoenixAndFlag(int x, int y);
+        Phoenix() = default;
 	};
 }
 

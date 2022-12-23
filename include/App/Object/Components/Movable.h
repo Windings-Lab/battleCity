@@ -7,6 +7,12 @@ namespace BattleCity::Object::Component
 	class Movable
 	{
 	public:
+		Movable();
+		virtual ~Movable();
+
+		void MoveTo(const Vector2Int& position);
+		virtual void MoveTo(int x, int y);
+
 		void SetSpeed(int speed);
 		int GetSpeed() const;
 

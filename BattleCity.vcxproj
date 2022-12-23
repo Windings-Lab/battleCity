@@ -22,19 +22,19 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="src\App\Manager\GameManager.cpp" />
     <ClCompile Include="src\App\Manager\Manager.cpp" />
-    <ClCompile Include="src\App\Manager\SpriteManager.cpp" />
     <ClCompile Include="src\App\Manager\SpritePathManager.cpp" />
     <ClCompile Include="src\App\Manager\WorldManager.cpp" />
     <ClCompile Include="src\App\MapCreator.cpp" />
     <ClCompile Include="src\App\Object\Bullet.cpp" />
+    <ClCompile Include="src\App\Object\Components\BCSprite.cpp" />
     <ClCompile Include="src\App\Object\Components\Collider.cpp" />
     <ClCompile Include="src\App\Object\Components\Health.cpp" />
     <ClCompile Include="src\App\Object\Components\Movable.cpp" />
-    <ClCompile Include="src\App\Object\Components\Shootable.cpp" />
+    <ClCompile Include="src\App\Object\Components\Fireable.cpp" />
     <ClCompile Include="src\App\Object\Explosion.cpp" />
+    <ClCompile Include="src\App\Object\List\ObjectList.cpp" />
     <ClCompile Include="src\App\Object\Object.cpp" />
-    <ClCompile Include="src\App\Object\ObjectList.cpp" />
-    <ClCompile Include="src\App\Object\PhoenixAndFlag.cpp" />
+    <ClCompile Include="src\App\Object\Phoenix.cpp" />
     <ClCompile Include="src\App\Object\PowerUp.cpp" />
     <ClCompile Include="src\App\Object\Tank.cpp" />
     <ClCompile Include="src\App\Object\Wall.cpp" />
@@ -53,19 +53,19 @@
     <ClInclude Include="include\App\BattleCityEnums.h" />
     <ClInclude Include="include\App\Manager\GameManager.h" />
     <ClInclude Include="include\App\Manager\Manager.h" />
-    <ClInclude Include="include\App\Manager\SpriteManager.h" />
     <ClInclude Include="include\App\Manager\SpritePathManager.h" />
     <ClInclude Include="include\App\Manager\WorldManager.h" />
     <ClInclude Include="include\App\MapCreator.h" />
     <ClInclude Include="include\App\Object\Bullet.h" />
+    <ClInclude Include="include\App\Object\Components\BCSprite.h" />
     <ClInclude Include="include\App\Object\Components\Collider.h" />
     <ClInclude Include="include\App\Object\Components\Health.h" />
     <ClInclude Include="include\App\Object\Components\Movable.h" />
-    <ClInclude Include="include\App\Object\Components\Shootable.h" />
+    <ClInclude Include="include\App\Object\Components\Fireable.h" />
     <ClInclude Include="include\App\Object\Explosion.h" />
+    <ClInclude Include="include\App\Object\List\ObjectList.h" />
     <ClInclude Include="include\App\Object\Object.h" />
-    <ClInclude Include="include\App\Object\ObjectList.h" />
-    <ClInclude Include="include\App\Object\PhoenixAndFlag.h" />
+    <ClInclude Include="include\App\Object\Phoenix.h" />
     <ClInclude Include="include\App\Object\PowerUp.h" />
     <ClInclude Include="include\App\Object\Tank.h" />
     <ClInclude Include="include\App\Object\Wall.h" />
@@ -179,7 +179,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>PCHeader.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)include\;$(ProjectDir)include\Framework\;$(ProjectDir)include\App\;$(ProjectDir)include\App\Manager\;$(ProjectDir)include\App\Object\;$(ProjectDir)include\App\Object\Components\;$(ProjectDir)include\Toolkit\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include\;$(ProjectDir)include\Framework\;$(ProjectDir)include\App\;$(ProjectDir)include\App\Manager\;$(ProjectDir)include\App\Object\;$(ProjectDir)include\App\Object\Components\;$(ProjectDir)include\App\Object\List\;$(ProjectDir)include\Toolkit\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -202,7 +202,7 @@ if %errorlevel% LEQ 3 exit 0</Command>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)include\;$(ProjectDir)include\Framework\;$(ProjectDir)include\App\;$(ProjectDir)include\App\Manager\;$(ProjectDir)include\App\Object\;$(ProjectDir)include\Toolkit\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include\;$(ProjectDir)include\Framework\;$(ProjectDir)include\App\;$(ProjectDir)include\App\Manager\;$(ProjectDir)include\App\Object\;$(ProjectDir)include\App\Object\Components\;$(ProjectDir)include\App\Object\List\;$(ProjectDir)include\Toolkit\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>PCHeader.h</PrecompiledHeaderFile>
     </ClCompile>

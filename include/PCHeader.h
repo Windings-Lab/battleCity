@@ -39,6 +39,4 @@ using namespace std::string_literals;
 #include "BattleCityEnums.h"
 #include "magic_enum.hpp"
 
-using SpriteBehaviour = std::pair<BattleCity::Manager::SpriteType, BattleCity::Object::Behaviour>;
-
 #include "Hashes.h"

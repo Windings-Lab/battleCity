@@ -2,20 +2,9 @@
 
 namespace BattleCity
 {
-	namespace Manager
+	namespace Sprite
 	{
 		enum class Type
-		{
-			Error,
-			Game,
-			World,
-			Sprite,
-			SpritePath,
-			Timer,
-			Map
-		};
-
-		enum class SpriteType
 		{
 			Error,
 			TankPlayer,
@@ -28,17 +17,6 @@ namespace BattleCity
 			Flag,
 			Background,
 			GameOver
-		};
-	}
-
-	namespace Object
-	{
-		enum class Solidness
-		{
-			Error,
-			Hard,       /// Object causes collisions and impedes.
-			Soft,       /// Object causes collision, but doesn't impede.
-			Spectral,   /// Object doesn't cause collisions.
 		};
 
 		enum class Behaviour
@@ -56,6 +34,19 @@ namespace BattleCity
 			ExplosionLarge2,
 		};
 
+		using SpritePair = std::pair<Type, Behaviour>;
+	}
+
+	namespace Object
+	{
+		enum class Solidness
+		{
+			Error,
+			Hard,       /// Object causes collisions and impedes.
+			Soft,       /// Object causes collision, but doesn't impede.
+			Spectral,   /// Object doesn't cause collisions.
+		};
+
 		enum class Type
 		{
 			Error,
@@ -64,7 +55,7 @@ namespace BattleCity
 			TankNPC,
 			Bullet,
 			Wall,
-			PhoenixAndFlag,
+			Phoenix,
 			Explosion,
 			PowerUp
 		};

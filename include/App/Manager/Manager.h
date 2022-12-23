@@ -5,9 +5,9 @@ namespace BattleCity::Manager
 	class Manager
 	{
 	protected:
-		explicit Manager(Type);
+		Manager();
+
 	public:
-		Manager() = delete;
 		Manager(const Manager&) = delete;
 		Manager(Manager&&) = delete;
 
@@ -18,9 +18,5 @@ namespace BattleCity::Manager
 
 		virtual void StartUp() = 0;
 		virtual void ShutDown() = 0;
-
-		Type GetType() const;
-	private:
-		Type mType;
 	};
 }

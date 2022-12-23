@@ -2,46 +2,51 @@
 
 #include "Object.h"
 
-#include "SpriteManager.h"
 #include "Vector2Int.h"
 
 namespace BattleCity::Object
 {
-    Object::Object(int x, int y, const SpriteBehaviour& spriteBehaviour)
-		: mSprite(Manager::SM().SetAndGetSprite(spriteBehaviour))
-		, mRectangle(Manager::SpriteManager::GetSpriteRectangle(mSprite, x, y))
+    Object::Object()
     {
         static int idCounter = 0;
 
-        ID = idCounter++;
+        mID = idCounter++;
     }
 
     Object::~Object() = default;
 
     void Object::Update()
     {
-
     }
 
-    void Object::Draw()
+    int Object::ID() const noexcept
     {
-        Manager::SpriteManager::DrawSprite(mSprite, X(), Y());
+        return mID;
     }
 
-    void Object::SetPosition(int x, int y)
+    void Object::Draw() const noexcept
     {
-        mRectangle.SetPosition(x, y);
+        mSprite.DrawAt(mPosition);
     }
-    const Vector2Int& Object::GetPosition() const
+
+    void Object::SetPosition(const Vector2Int& pos) noexcept
     {
-        return mRectangle.GetPosition();
+        mPosition.SetXY(pos);
     }
-    int Object::X() const
+    void Object::SetPosition(int x, int y) noexcept
     {
-        return mRectangle.X();
+        mPosition.SetXY(x, y);
     }
-    int Object::Y() const
+    const Vector2Int& Object::GetPosition() const noexcept
     {
-        return mRectangle.Y();
+        return mPosition;
+    }
+    int Object::X() const noexcept
+    {
+        return mPosition.X;
+    }
+    int Object::Y() const noexcept
+    {
+        return mPosition.Y;
     }
 }

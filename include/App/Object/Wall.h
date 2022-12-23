@@ -4,10 +4,10 @@
 
 namespace BattleCity::Object
 {
-    class Wall final : public Object
+    class Wall : public Object
     {
     public:
-        Wall(int x, int y);
+        Wall() = default;
     };
 }
 
