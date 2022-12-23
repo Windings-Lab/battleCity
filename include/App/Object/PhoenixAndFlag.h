@@ -8,8 +8,6 @@ namespace BattleCity::Object
 	{
     public:
         PhoenixAndFlag(int x, int y);
-
-        void Update() override;
 	};
 }
 

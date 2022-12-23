@@ -4,9 +4,9 @@
 
 namespace BattleCity::Object
 {
-	class Tank : public Object
+	class WorldBoundaries final : public Object
 	{
 	public:
-		Tank(int x, int y);
+		WorldBoundaries(int x, int y);
 	};
 }

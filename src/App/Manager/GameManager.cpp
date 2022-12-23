@@ -2,11 +2,11 @@
 
 #include "GameManager.h"
 
-#include "MapManager.h"
 #include "SpriteManager.h"
 #include "SpritePathManager.h"
-#include "TimerManager.h"
 #include "WorldManager.h"
+
+#include "Object.h"
 
 namespace BattleCity::Manager
 {
@@ -20,19 +20,15 @@ namespace BattleCity::Manager
 
 	void GameManager::StartUp()
 	{
-		TM().StartUp();
 		PM().StartUp();
 		SM().StartUp();
-		MAP().StartUp();
 		WM().StartUp();
 	}
 	void GameManager::ShutDown()
 	{
 		WM().ShutDown();
-		MAP().ShutDown();
 		SM().ShutDown();
 		PM().ShutDown();
-		TM().ShutDown();
 	}
 
 	void GameManager::Step()
@@ -41,12 +37,29 @@ namespace BattleCity::Manager
 		using Framerate = duration<steady_clock::rep, std::ratio<1, 60>>;
 		mNextFrame = steady_clock::now() + Framerate{ 1 };
 
-		MAP().Step();
-		WM().Step();
-		TM().Step();
+		Update();
+		// Resolve Collisions
+		// Delete All
+		Draw();
 
 		std::this_thread::sleep_until(mNextFrame);
 		mNextFrame += Framerate{ 1 };
+	}
+
+	void GameManager::Update()
+	{
+		for (auto& [id, obj] : WM().GetObjectList().GetIterator())
+		{
+			obj->Update();
+		}
+	}
+
+	void GameManager::Draw()
+	{
+		for (auto& [id, obj] : WM().GetObjectList().GetIterator())
+		{
+			obj->Draw();
+		}
 	}
 
 	bool GameManager::GetGameOver() const

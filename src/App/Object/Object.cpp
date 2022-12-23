@@ -7,20 +7,13 @@
 
 namespace BattleCity::Object
 {
-    int Object::IDCounter = 1;
-
     Object::Object(int x, int y, const SpriteBehaviour& spriteBehaviour)
-		: ID(IDCounter++)
-		, mSprite(Manager::SM().SetAndGetSprite(spriteBehaviour))
+		: mSprite(Manager::SM().SetAndGetSprite(spriteBehaviour))
 		, mRectangle(Manager::SpriteManager::GetSpriteRectangle(mSprite, x, y))
     {
-        mSolidness = Solidness::Hard;
+        static int idCounter = 0;
 
-        mHealth = 1;
-
-        mBulletCount = 1;
-
-        mSpeed = 2;
+        ID = idCounter++;
     }
 
     Object::~Object() = default;
@@ -30,16 +23,9 @@ namespace BattleCity::Object
 
     }
 
-    void Object::Draw() const
+    void Object::Draw()
     {
         Manager::SpriteManager::DrawSprite(mSprite, X(), Y());
-    }
-
-	#pragma region Object
-
-    Type Object::GetType() const
-    {
-        return mObjectType;
     }
 
     void Object::SetPosition(int x, int y)
@@ -58,63 +44,4 @@ namespace BattleCity::Object
     {
         return mRectangle.Y();
     }
-
-    void Object::SetSolidness(Solidness solidness)
-    {
-        mSolidness = solidness;
-    }
-    Solidness Object::GetSolidness() const
-    {
-        return mSolidness;
-    }
-
-	#pragma endregion
-
-	#pragma region IDestroyable
-
-    void Object::SetHealth(int health)
-    {
-        mHealth = health;
-    }
-    int Object::GetHealth() const
-    {
-        return mHealth;
-    }
-
-	#pragma endregion
-
-	#pragma region IShoot
-
-    void Object::IncrementBulletCount(int count)
-    {
-        mBulletCount += count;
-    }
-    int Object::GetBulletCount() const
-    {
-        return mBulletCount;
-    }
-
-	#pragma endregion
-
-	#pragma region IMovable
-
-    void Object::SetSpeed(int speed)
-    {
-        mSpeed = speed;
-    }
-    int Object::GetSpeed() const
-    {
-        return mSpeed;
-    }
-
-    void Object::SetDirection(const Vector2Int& direction)
-    {
-        mDirection.SetXY(direction.X, direction.Y);
-    }
-    const Vector2Int& Object::GetDirection() const
-    {
-        return mDirection;
-    }
-
-	#pragma endregion
 }

@@ -8,7 +8,5 @@ namespace BattleCity::Object
     {
     public:
 	    explicit Explosion();
-
-        void Update() override;
     };
 }

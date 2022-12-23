@@ -8,9 +8,6 @@ namespace BattleCity::Object
     {
     public:
         Wall(int x, int y);
-        ~Wall() override = default;
-
-        void Update() override;
     };
 }
 

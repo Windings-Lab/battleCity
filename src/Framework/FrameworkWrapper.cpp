@@ -1,17 +1,12 @@
 #include "PCHeader.h"
 
 #include "FrameworkWrapper.h"
+
 #include "GameManager.h"
+#include "Screen.h"
 
 namespace BattleCity::Framework
 {
-	namespace Screen
-	{
-		int W();
-		int H();
-		const bool& IsFullscreen();
-	}
-
 	void FrameworkWrapper::PreInit(int& width, int& height, bool& fullscreen)
 	{
 		width = Screen::W();
@@ -21,21 +16,21 @@ namespace BattleCity::Framework
 
 	bool FrameworkWrapper::Init()
 	{
-		Manager::GM.StartUp();
+		Manager::GM().StartUp();
 		return true;
 	}
 
 	void FrameworkWrapper::Close()
 	{
-		Manager::GM.ShutDown();
+		Manager::GM().ShutDown();
 	}
 
 	bool FrameworkWrapper::Tick()
 	{
 		// return false;
 
-		Manager::GM.Step();
-		return Manager::GM.GetGameOver();
+		Manager::GM().Step();
+		return Manager::GM().GetGameOver();
 	}
 
 	const char* FrameworkWrapper::GetTitle()

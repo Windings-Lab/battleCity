@@ -23,7 +23,7 @@ namespace BattleCity::Framework
 	class FrameworkWrapper final : public Framework
 	{
 	public:
-		FrameworkWrapper() : mPlayer(nullptr) {}
+		FrameworkWrapper() {}
 
 		FrameworkWrapper(const FrameworkWrapper&) = delete;
 		FrameworkWrapper(FrameworkWrapper&&) = delete;
@@ -46,9 +46,6 @@ namespace BattleCity::Framework
 
 		void onMouseMove(int x, int y, int xrelative, int yrelative) override;
 		void onMouseButtonClick(FRMouseButton button, bool isReleased) override;
-
-	private:
-		TankPlayer* mPlayer;
 	};
 
 	FRAMEWORK_API int run(FrameworkWrapper*);

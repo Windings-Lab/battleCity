@@ -7,16 +7,5 @@ namespace BattleCity::Object
 	Bullet::Bullet(Type ownerType)
 		: Object(0, 0, { Manager::SpriteType::Bullet, Behaviour::Up })
 		, mOwnerType(ownerType)
-	{
-		mObjectType = Type::Bullet;
-	}
-
-	Bullet::~Bullet()
-	{
-	}
-
-	void Bullet::Update()
-	{
-
-	}
+	{	}
 }

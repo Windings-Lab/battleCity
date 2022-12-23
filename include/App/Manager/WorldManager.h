@@ -13,7 +13,6 @@ namespace BattleCity::Manager
 	class WorldManager final : public Manager
 	{
 	public:
-		// Singleton
 		static WorldManager& GetInstance();
 
 		WorldManager(WorldManager&&) = delete;
@@ -23,38 +22,23 @@ namespace BattleCity::Manager
 		void operator=(WorldManager&&) = delete;
 
 		~WorldManager() override = default;
-	public:
+
 		void StartUp() override;
 		void ShutDown() override;
-	public:
-		void Step();
 
-		Object::Object& GetObject(int id);
+		Object::Object& GetObject(int id) const;
+		Object::ObjectList& GetObjectList();
 
 		void InsertObject(std::unique_ptr<Object::Object>&& objPtr);
 		void RemoveObject(int objID);
 		void MarkForDelete(int objID);
-
-		const std::unordered_set<int>& GetMovableObjects() const;
-		// Expensive
-		std::unordered_set<int> GetObjectsOfType(Object::Type type) const;
 	private:
 		void InitMap();
-		void Update();
-		void Draw();
 
 	private:
-		// Singleton
 		WorldManager();
 
-		// All Objects in game world
-		Object::ObjectList mWorldList;
-		// Objects, that needed to move every loop step
-		std::unordered_set<int> mMovableObjects;
-		// List of all Objects to delete in the end of loop step.
-		std::unordered_set<int> mObjectsToDelete;
-
-		int mPlayerID;
+		Object::ObjectList mObjectList;
 	};
 
 	constexpr auto& WM = WorldManager::GetInstance;

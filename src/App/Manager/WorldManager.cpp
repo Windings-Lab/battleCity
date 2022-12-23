@@ -2,13 +2,13 @@
 
 #include "WorldManager.h"
 
-#include "MapManager.h"
+#include "MapCreator.h"
 
 #include "Object.h"
 #include "PhoenixAndFlag.h"
-#include "TankNPC.h"
-#include "TankPlayer.h"
+#include "Tank.h"
 #include "Wall.h"
+#include "WorldBoundaries.h"
 
 namespace BattleCity::Manager
 {
@@ -19,7 +19,6 @@ namespace BattleCity::Manager
 	}
 	WorldManager::WorldManager() : Manager(Type::World)
 	{
-		mPlayerID = 0;
 	}
 
 	void WorldManager::StartUp()
@@ -29,37 +28,24 @@ namespace BattleCity::Manager
 		InitMap();
 
 #ifdef _DEBUG
-		std::cout << "World Manager object count: " << mWorldList.GetSize() << "\n";
+		std::cout << "World Manager object count: " << mObjectList.GetSize() << "\n";
 #endif
 	}
 	void WorldManager::ShutDown()
 	{
-		mWorldList.Clear();
-		mMovableObjects.clear();
-		mObjectsToDelete.clear();
-	}
-
-	void WorldManager::Step()
-	{
-		Update();
-		// Resolve Collisions
-		// Delete All
-		Draw();
-	}
-
-	void WorldManager::Draw()
-	{
-		for (auto& [id, obj] : mWorldList.GetRange())
-		{
-			obj->Draw();
-		}
+		mObjectList.Clear();
 	}
 
 	void WorldManager::InitMap()
 	{
-		int posX = MAP().mBoundaries.X();
-		int posY = MAP().mBoundaries.Y();
-		for (const auto& mapRow : MAP().mMap)
+		std::unique_ptr<Object::Object> worldBoundaries
+			= std::make_unique<Object::WorldBoundaries>(40, 44);
+
+		int posX = worldBoundaries->X(), posY = worldBoundaries->Y();
+		InsertObject(std::move(worldBoundaries));
+
+		for (const auto& mapRow 
+			: MapCreator::GetLevel(R"(.\data\Maps\level1.txt)"))
 		{
 			for (const auto& objectType : mapRow)
 			{
@@ -68,10 +54,10 @@ namespace BattleCity::Manager
 				case Object::Type::None: 
 					break;
 				case Object::Type::TankPlayer:
-					InsertObject(std::make_unique<Object::TankPlayer>(posX, posY));
+					InsertObject(std::make_unique<Object::Tank>(posX, posY));
 					break;
 				case Object::Type::TankNPC:
-					InsertObject(std::make_unique<Object::TankNPC>(posX, posY));
+					InsertObject(std::make_unique<Object::Tank>(posX, posY));
 					break;
 				case Object::Type::Wall:
 					InsertObject(std::make_unique<Object::Wall>(posX, posY));
@@ -82,56 +68,33 @@ namespace BattleCity::Manager
 				default: 
 					break;
 				}
-
 				posX += 16;
 			}
-
+			posX = 40;
 			posY += 16;
-			posX = MAP().mBoundaries.X();
 		}
 	}
 
-	void WorldManager::Update()
+	Object::Object& WorldManager::GetObject(int id) const
 	{
-		for (auto& [id, obj] : mWorldList.GetRange())
-		{
-			obj->Update();
-		}
+		return mObjectList.GetObject(id);
 	}
 
-	Object::Object& WorldManager::GetObject(int id)
+	Object::ObjectList& WorldManager::GetObjectList()
 	{
-		return mWorldList.GetObject(id);
+		return mObjectList;
 	}
 
 	void WorldManager::InsertObject(std::unique_ptr<Object::Object>&& objPtr)
 	{
-		// Pseudo: Insert Movable Objects
-		mWorldList.Insert(std::move(objPtr));
+		mObjectList.Insert(std::move(objPtr));
 	}
 	void WorldManager::RemoveObject(int objID)
 	{
-		mMovableObjects.erase(objID);
-		mWorldList.Remove(objID);
+		mObjectList.Remove(objID);
 	}
 	void WorldManager::MarkForDelete(int objID)
 	{
-		mObjectsToDelete.insert(objID);
-	}
 
-	const std::unordered_set<int>& WorldManager::GetMovableObjects() const
-	{
-		return mMovableObjects;
-	}
-	std::unordered_set<int> WorldManager::GetObjectsOfType(Object::Type type) const
-	{
-		std::unordered_set<int> newList;
-		for (const auto& [ID, object] : mWorldList.GetRange())
-		{
-			if (object->GetType() == type)
-				newList.insert(object->ID);
-		}
-
-		return newList;
 	}
 }

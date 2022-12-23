@@ -6,8 +6,10 @@ namespace BattleCity::Manager
 {
 	class GameManager final : Manager
 	{
+	private:
+		GameManager();
+
 	public:
-		// Singleton
 		static GameManager& GetInstance();
 
 		GameManager(const GameManager&) = delete;
@@ -18,17 +20,17 @@ namespace BattleCity::Manager
 
 		~GameManager() override = default;
 
-	public:
 		void StartUp() override;
 		void ShutDown() override;
-	public:
+
 		void Step();
 
 		bool GetGameOver() const;
 	private:
-		// Singleton
-		GameManager();
+		void Update();
+		void Draw();
 
+	private:
 		bool mGameOver;
 
 		std::chrono::time_point <std::chrono::steady_clock,
@@ -36,5 +38,5 @@ namespace BattleCity::Manager
 			std::chrono::duration<long long, std::ratio<1, 60>>>> mNextFrame;
 	};
 
-	inline GameManager& GM = GameManager::GetInstance();
+	constexpr auto& GM = GameManager::GetInstance;
 }

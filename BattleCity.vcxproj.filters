@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Main.cpp" />
     <ClCompile Include="src\Framework\FrameworkWrapper.cpp">
       <Filter>Source\Framework</Filter>
     </ClCompile>
@@ -17,16 +16,10 @@
     <ClCompile Include="src\App\Manager\Manager.cpp">
       <Filter>Source\App\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="src\App\Manager\MapManager.cpp">
-      <Filter>Source\App\Manager</Filter>
-    </ClCompile>
     <ClCompile Include="src\App\Manager\SpriteManager.cpp">
       <Filter>Source\App\Manager</Filter>
     </ClCompile>
     <ClCompile Include="src\App\Manager\SpritePathManager.cpp">
-      <Filter>Source\App\Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="src\App\Manager\TimerManager.cpp">
       <Filter>Source\App\Manager</Filter>
     </ClCompile>
     <ClCompile Include="src\App\Manager\WorldManager.cpp">
@@ -53,12 +46,6 @@
     <ClCompile Include="src\App\Object\Tank.cpp">
       <Filter>Source\App\Object</Filter>
     </ClCompile>
-    <ClCompile Include="src\App\Object\TankNPC.cpp">
-      <Filter>Source\App\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="src\App\Object\TankPlayer.cpp">
-      <Filter>Source\App\Object</Filter>
-    </ClCompile>
     <ClCompile Include="src\App\Object\Wall.cpp">
       <Filter>Source\App\Object</Filter>
     </ClCompile>
@@ -70,6 +57,25 @@
     </ClCompile>
     <ClCompile Include="src\Toolkit\Vector2Int.cpp">
       <Filter>Source\Toolkit</Filter>
+    </ClCompile>
+    <ClCompile Include="src\App\Object\Components\Shootable.cpp">
+      <Filter>Source\App\Object\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\App\Object\Components\Health.cpp">
+      <Filter>Source\App\Object\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\App\Object\Components\Movable.cpp">
+      <Filter>Source\App\Object\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\App\Object\Components\Collider.cpp">
+      <Filter>Source\App\Object\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="src\App\Object\WorldBoundaries.cpp">
+      <Filter>Source\App\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="src\App\MapCreator.cpp">
+      <Filter>Source\App</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -91,16 +97,10 @@
     <ClInclude Include="include\App\Manager\Manager.h">
       <Filter>Headers\App\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="include\App\Manager\MapManager.h">
-      <Filter>Headers\App\Manager</Filter>
-    </ClInclude>
     <ClInclude Include="include\App\Manager\SpriteManager.h">
       <Filter>Headers\App\Manager</Filter>
     </ClInclude>
     <ClInclude Include="include\App\Manager\SpritePathManager.h">
-      <Filter>Headers\App\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="include\App\Manager\TimerManager.h">
       <Filter>Headers\App\Manager</Filter>
     </ClInclude>
     <ClInclude Include="include\App\Manager\WorldManager.h">
@@ -127,12 +127,6 @@
     <ClInclude Include="include\App\Object\Tank.h">
       <Filter>Headers\App\Object</Filter>
     </ClInclude>
-    <ClInclude Include="include\App\Object\TankNPC.h">
-      <Filter>Headers\App\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="include\App\Object\TankPlayer.h">
-      <Filter>Headers\App\Object</Filter>
-    </ClInclude>
     <ClInclude Include="include\App\Object\Wall.h">
       <Filter>Headers\App\Object</Filter>
     </ClInclude>
@@ -153,6 +147,24 @@
     </ClInclude>
     <ClInclude Include="include\Toolkit\Vector2Int.h">
       <Filter>Headers\Toolkit</Filter>
+    </ClInclude>
+    <ClInclude Include="include\App\Object\Components\Health.h">
+      <Filter>Headers\App\Object\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\App\Object\Components\Movable.h">
+      <Filter>Headers\App\Object\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\App\Object\Components\Shootable.h">
+      <Filter>Headers\App\Object\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\App\Object\Components\Collider.h">
+      <Filter>Headers\App\Object\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\App\Object\WorldBoundaries.h">
+      <Filter>Headers\App\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="include\App\MapCreator.h">
+      <Filter>Headers\App</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -194,6 +206,12 @@
     </Filter>
     <Filter Include="Source\App\Object">
       <UniqueIdentifier>{07204f34-c876-4173-abb0-8f7961da8f89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\App\Object\Components">
+      <UniqueIdentifier>{05a4fdd7-05d5-47a4-b390-bc76af311e50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\App\Object\Components">
+      <UniqueIdentifier>{dc0f6fd2-65fa-4b3d-84fd-31e43bbd466e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

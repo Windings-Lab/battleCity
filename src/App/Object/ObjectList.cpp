@@ -14,9 +14,9 @@ namespace BattleCity::Object
 		swap(*this, mve);
 	}
 
-	ObjectList::Range ObjectList::GetRange() const
+	ObjectList::Iterator ObjectList::GetIterator() const
 	{
-		return Range {mList.begin(), mList.end()};
+		return Iterator {mList.begin(), mList.end()};
 	}
 
 	Object& ObjectList::GetObject(int id) const

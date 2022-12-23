@@ -1,11 +1,7 @@
 #include "PCHeader.h"
-#include "FrameworkWrapper.h"
 
-namespace BattleCity::Framework::Screen
-{
-	void Set(int, int, bool);
-	bool IsValidSize(int w, int h);
-}
+#include "FrameworkWrapper.h"
+#include "Screen.h"
 
 namespace 
 {

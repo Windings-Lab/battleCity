@@ -6,7 +6,7 @@ namespace BattleCity::Object
 
 	class ObjectList
 	{
-		struct Range
+		struct Iterator
 		{
 			std::unordered_map<int, std::unique_ptr<Object>>::const_iterator Begin;
 			std::unordered_map<int, std::unique_ptr<Object>>::const_iterator End;
@@ -24,7 +24,7 @@ namespace BattleCity::Object
 
 		~ObjectList() = default;
 
-		Range GetRange() const;
+		Iterator GetIterator() const;
 		Object& GetObject(int id) const;
 
 		void Insert(std::unique_ptr<Object>&& objPtr);

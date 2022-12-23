@@ -8,8 +8,6 @@ namespace BattleCity::Object
 	{
     public:
         PowerUp();
-
-        void Update() override;
 	};
 }
 
