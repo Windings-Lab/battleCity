@@ -37,6 +37,7 @@ namespace BattleCity::Manager
 
 	private:
 		void InitMap();
+		void Test();
 
 		Object::ObjectList mObjectList;
 	};

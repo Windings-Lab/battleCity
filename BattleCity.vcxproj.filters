@@ -74,6 +74,15 @@
     <ClCompile Include="src\App\Object\Components\BCSprite.cpp">
       <Filter>Source\App\Object\Components</Filter>
     </ClCompile>
+    <ClCompile Include="src\App\UUID.cpp">
+      <Filter>Source\App</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Toolkit\Observer\IObserver.cpp">
+      <Filter>Source\Toolkit\Observer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Toolkit\Observer\ISubject.cpp">
+      <Filter>Source\Toolkit\Observer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Framework\Framework.h">
@@ -157,6 +166,15 @@
     <ClInclude Include="include\App\Object\Components\BCSprite.h">
       <Filter>Headers\App\Object\Components</Filter>
     </ClInclude>
+    <ClInclude Include="include\App\UUID.h">
+      <Filter>Headers\App</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Toolkit\Observer\ISubject.h">
+      <Filter>Headers\Toolkit\Observer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Toolkit\Observer\IObserver.h">
+      <Filter>Headers\Toolkit\Observer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
@@ -209,6 +227,12 @@
     </Filter>
     <Filter Include="Headers\App\Object\List">
       <UniqueIdentifier>{61ebdf0a-f542-4d45-938e-ce7883b70317}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Toolkit\Observer">
+      <UniqueIdentifier>{0eb0fc77-c2fc-476b-b277-8e440792c58a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Toolkit\Observer">
+      <UniqueIdentifier>{b932d68d-a422-4105-a616-47310540442b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
