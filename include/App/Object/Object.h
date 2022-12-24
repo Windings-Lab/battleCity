@@ -1,14 +1,16 @@
 #pragma once
 
+#include "UUID.h"
+
 #include "BCSprite.h"
 #include "Vector2Int.h"
 
 namespace BattleCity::Object
 {
-	class Object
+	class Object : public UUID
 	{
 	public:
-		Object();
+		Object() = default;
 
 		Object(const Object&) = delete;
 		Object(Object&&) = delete;
@@ -16,11 +18,9 @@ namespace BattleCity::Object
 		virtual Object& operator=(const Object&) = delete;
 		virtual Object& operator=(Object&&) = delete;
 
-		virtual ~Object() = 0;
+		~Object() override = 0;
 
 		virtual void Update();
-
-		int ID() const noexcept;
 
 		void Draw() const noexcept;
 		void SetSprite(const Sprite::SpritePair& spriteBehaviour);
@@ -32,7 +32,6 @@ namespace BattleCity::Object
 		int Y() const noexcept;
 
 	private:
-		int mID;
 		Sprite::BCSprite mSprite;
 		Vector2Int mPosition;
 	};

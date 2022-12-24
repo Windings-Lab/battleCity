@@ -26,7 +26,7 @@ namespace BattleCity::Object
 
 	void ObjectList::Insert(std::unique_ptr<Object>&& objPtr)
 	{
-		mList.try_emplace(objPtr->ID(), std::move(objPtr));
+		mList.try_emplace(objPtr->GetID(), std::move(objPtr));
 	}
 
 	void ObjectList::Remove(int objID)

@@ -23,6 +23,7 @@ namespace BattleCity::Manager
 		__super::StartUp();
 
 		InitMap();
+		Test();
 
 #ifdef _DEBUG
 		std::cout << "World Manager object count: " << mObjectList.GetSize() << "\n";
@@ -38,7 +39,7 @@ namespace BattleCity::Manager
 		using std::make_unique;
 		using std::unique_ptr;
 
-		unique_ptr<Object::Object> worldBoundaries = make_unique<Object::WorldBoundaries>();
+		auto worldBoundaries = make_unique<Object::WorldBoundaries>();
 
 		int posX = 40, posY = 44;
 		worldBoundaries->SetPosition(posX, posY);
@@ -56,7 +57,7 @@ namespace BattleCity::Manager
 					break;
 				case Object::Type::TankPlayer:
 					{
-						unique_ptr<Object::Object> tankPlayer = make_unique<Object::Tank>();
+						auto tankPlayer = make_unique<Object::Tank>();
 						tankPlayer->SetPosition(posX, posY);
 						tankPlayer->SetSprite({ Sprite::Type::TankPlayer, Sprite::Behaviour::Up });
 						InsertObject(std::move(tankPlayer));
@@ -64,7 +65,7 @@ namespace BattleCity::Manager
 					break;
 				case Object::Type::TankNPC:
 					{
-						unique_ptr<Object::Object> tank = make_unique<Object::Tank>();
+						auto tank = make_unique<Object::Tank>();
 						tank->SetPosition(posX, posY);
 						tank->SetSprite({ Sprite::Type::TankNPC, Sprite::Behaviour::Up });
 						InsertObject(std::move(tank));
@@ -72,7 +73,7 @@ namespace BattleCity::Manager
 					break;
 				case Object::Type::Wall:
 					{
-						unique_ptr<Object::Object> wall = make_unique<Object::Wall>();
+						auto wall = make_unique<Object::Wall>();
 						wall->SetPosition(posX, posY);
 						wall->SetSprite({ Sprite::Type::Wall, Sprite::Behaviour::Basic });
 						InsertObject(std::move(wall));
@@ -80,7 +81,7 @@ namespace BattleCity::Manager
 					break;
 				case Object::Type::Phoenix:
 					{
-						unique_ptr<Object::Object> phoenix = make_unique<Object::Phoenix>();
+						auto phoenix = make_unique<Object::Phoenix>();
 						phoenix->SetPosition(posX, posY);
 						phoenix->SetSprite({ Sprite::Type::Phoenix, Sprite::Behaviour::Basic });
 						InsertObject(std::move(phoenix));
@@ -94,6 +95,10 @@ namespace BattleCity::Manager
 			posX = 40;
 			posY += 16;
 		}
+	}
+
+	void WorldManager::Test()
+	{
 	}
 
 	Object::Object& WorldManager::GetObject(int id) const

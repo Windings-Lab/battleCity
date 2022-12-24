@@ -6,22 +6,10 @@
 
 namespace BattleCity::Object
 {
-    Object::Object()
-    {
-        static int idCounter = 0;
-
-        mID = idCounter++;
-    }
-
     Object::~Object() = default;
 
     void Object::Update()
     {
-    }
-
-    int Object::ID() const noexcept
-    {
-        return mID;
     }
 
     void Object::Draw() const noexcept
