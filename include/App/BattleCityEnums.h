@@ -35,6 +35,16 @@ namespace BattleCity
 		};
 
 		using SpritePair = std::pair<Type, Behaviour>;
+
+		struct SpritePairHash
+		{
+			std::size_t operator()(const SpritePair& s) const
+			{
+				size_t h1 = std::hash<Type>{}(s.first);
+				size_t h2 = std::hash<Behaviour>{}(s.second);
+				return h1 ^ (h2 << 1);
+			}
+		};
 	}
 
 	namespace Object

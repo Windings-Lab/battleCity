@@ -33,7 +33,7 @@ namespace BattleCity::Sprite
 	private:
 		struct SpriteDeleter;
 		using SpriteObject = std::unique_ptr<Sprite, SpriteDeleter>;
-		using SpriteAtlas = std::unordered_map<SpritePair, SpriteObject>;
+		using SpriteAtlas = std::unordered_map<SpritePair, SpriteObject, SpritePairHash>;
 
 		static SpriteAtlas mSpriteAtlas;
 

@@ -121,9 +121,6 @@
     <ClInclude Include="include\App\BattleCityEnums.h">
       <Filter>Headers\App</Filter>
     </ClInclude>
-    <ClInclude Include="include\Toolkit\Hashes.h">
-      <Filter>Headers\Toolkit</Filter>
-    </ClInclude>
     <ClInclude Include="include\Toolkit\magic_enum.hpp">
       <Filter>Headers\Toolkit</Filter>
     </ClInclude>

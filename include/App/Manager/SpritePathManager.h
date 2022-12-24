@@ -29,7 +29,7 @@ namespace BattleCity::Manager
 		void CreateSpriteDataAt(const std::filesystem::path& folderPath);
 
 	public:
-		using SpriteData = std::unordered_map<Sprite::SpritePair, std::string>;
+		using SpriteData = std::unordered_map<Sprite::SpritePair, std::string, Sprite::SpritePairHash>;
 
 	private:
 

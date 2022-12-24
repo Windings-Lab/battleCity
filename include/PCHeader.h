@@ -38,5 +38,3 @@ using namespace std::string_literals;
 
 #include "BattleCityEnums.h"
 #include "magic_enum.hpp"
-
-#include "Hashes.h"

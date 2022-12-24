@@ -74,7 +74,6 @@
     <ClInclude Include="include\Framework\FrameworkWrapper.h" />
     <ClInclude Include="include\Framework\Screen.h" />
     <ClInclude Include="include\PCHeader.h" />
-    <ClInclude Include="include\Toolkit\Hashes.h" />
     <ClInclude Include="include\Toolkit\magic_enum.hpp" />
     <ClInclude Include="include\Toolkit\Rectangle.h" />
     <ClInclude Include="include\Toolkit\Vector2Int.h" />
