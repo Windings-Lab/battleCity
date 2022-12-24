@@ -23,6 +23,7 @@ namespace BattleCity::Object
 		int ID() const noexcept;
 
 		void Draw() const noexcept;
+		void SetSprite(const Sprite::SpritePair& spriteBehaviour);
 
 		void SetPosition(const Vector2Int& pos) noexcept;
 		void SetPosition(int x, int y) noexcept;

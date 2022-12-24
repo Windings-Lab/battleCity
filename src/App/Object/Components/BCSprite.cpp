@@ -72,25 +72,26 @@ namespace BattleCity::Sprite
 		const auto& path = Manager::PM().GetSpritePath(spriteBehaviour);
 		const auto& spriteIterator = mSpriteAtlas.find(spriteBehaviour);
 
-		if(spriteIterator == mSpriteAtlas.end())
+		if(spriteIterator != mSpriteAtlas.end())
 		{
-			mSprite = createSprite(path.c_str());
-			mSpriteAtlas.try_emplace(spriteBehaviour, mSprite);
+			mSprite = spriteIterator->second.get();
+			InitSpriteSize();
+			return;
 		}
 
-		mSprite = spriteIterator->second.get();
-
-		int w, h;
-		getSpriteSize(mSprite, w, h);
-		mSpriteSize.SetXY(w, h);
-	}
-	Sprite* BCSprite::GetSprite() const
-	{
-		return mSprite;
+		mSprite = createSprite(path.c_str());
+		InitSpriteSize();
+		mSpriteAtlas.try_emplace(spriteBehaviour, mSprite);
 	}
 
 	const Vector2Int& BCSprite::GetSpriteSize()
 	{
 		return mSpriteSize;
+	}
+	void BCSprite::InitSpriteSize()
+	{
+		int width, height;
+		getSpriteSize(mSprite, width, height);
+		mSpriteSize.SetXY(width, height);
 	}
 }

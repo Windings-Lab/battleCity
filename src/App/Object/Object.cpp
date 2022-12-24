@@ -29,6 +29,11 @@ namespace BattleCity::Object
         mSprite.DrawAt(mPosition);
     }
 
+    void Object::SetSprite(const Sprite::SpritePair& spriteBehaviour)
+    {
+        mSprite.SetSprite(spriteBehaviour);
+    }
+
     void Object::SetPosition(const Vector2Int& pos) noexcept
     {
         mPosition.SetXY(pos);

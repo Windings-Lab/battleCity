@@ -23,11 +23,11 @@ namespace BattleCity::Sprite
 		void DrawAt(int x, int y)  const noexcept;
 
 		void SetSprite(const SpritePair& spriteBehaviour);
-		Sprite* GetSprite() const;
 
 		const Vector2Int& GetSpriteSize();
 
 	private:
+		void InitSpriteSize();
 		friend void swap(BCSprite& first, BCSprite& second) noexcept;
 
 	private:

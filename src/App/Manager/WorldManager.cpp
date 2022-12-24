@@ -38,12 +38,11 @@ namespace BattleCity::Manager
 		using std::make_unique;
 		using std::unique_ptr;
 
+		unique_ptr<Object::Object> worldBoundaries = make_unique<Object::WorldBoundaries>();
+
 		int posX = 40, posY = 44;
-
-		std::unique_ptr<Object::Object> worldBoundaries
-			= std::make_unique<Object::WorldBoundaries>();
-
-		worldBoundaries->SetPosition(40, 44);
+		worldBoundaries->SetPosition(posX, posY);
+		worldBoundaries->SetSprite({ Sprite::Type::Background, Sprite::Behaviour::Basic });
 
 		InsertObject(std::move(worldBoundaries));
 		for (const auto& mapRow 
@@ -57,30 +56,34 @@ namespace BattleCity::Manager
 					break;
 				case Object::Type::TankPlayer:
 					{
-						unique_ptr<Object::Object> tank = make_unique<Object::Tank>();
-						tank->SetPosition(posX, posY);
-						InsertObject(std::move(tank));
+						unique_ptr<Object::Object> tankPlayer = make_unique<Object::Tank>();
+						tankPlayer->SetPosition(posX, posY);
+						tankPlayer->SetSprite({ Sprite::Type::TankPlayer, Sprite::Behaviour::Up });
+						InsertObject(std::move(tankPlayer));
 					}
 					break;
 				case Object::Type::TankNPC:
 					{
 						unique_ptr<Object::Object> tank = make_unique<Object::Tank>();
 						tank->SetPosition(posX, posY);
+						tank->SetSprite({ Sprite::Type::TankNPC, Sprite::Behaviour::Up });
 						InsertObject(std::move(tank));
 					}
 					break;
 				case Object::Type::Wall:
 					{
-						unique_ptr<Object::Object> tank = make_unique<Object::Wall>();
-						tank->SetPosition(posX, posY);
-						InsertObject(std::move(tank));
+						unique_ptr<Object::Object> wall = make_unique<Object::Wall>();
+						wall->SetPosition(posX, posY);
+						wall->SetSprite({ Sprite::Type::Wall, Sprite::Behaviour::Basic });
+						InsertObject(std::move(wall));
 					}
 					break;
 				case Object::Type::Phoenix:
 					{
-						unique_ptr<Object::Object> tank = make_unique<Object::Phoenix>();
-						tank->SetPosition(posX, posY);
-						InsertObject(std::move(tank));
+						unique_ptr<Object::Object> phoenix = make_unique<Object::Phoenix>();
+						phoenix->SetPosition(posX, posY);
+						phoenix->SetSprite({ Sprite::Type::Phoenix, Sprite::Behaviour::Basic });
+						InsertObject(std::move(phoenix));
 					}
 					break;
 				default: 
