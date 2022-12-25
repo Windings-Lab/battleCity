@@ -46,7 +46,7 @@ namespace BattleCity::Manager
 
 	void GameManager::Update()
 	{
-		for (auto& [id, obj] : WM().GetObjectList().GetIterator())
+		for (auto& [id, obj] : WM().GetFrontLayerIterator())
 		{
 			obj->Update();
 		}
@@ -54,7 +54,12 @@ namespace BattleCity::Manager
 
 	void GameManager::Draw()
 	{
-		for (auto& [id, obj] : WM().GetObjectList().GetIterator())
+		for (auto& [id, obj] : WM().GetBackLayerIterator())
+		{
+			obj->Draw();
+		}
+
+		for (auto& [id, obj] : WM().GetFrontLayerIterator())
 		{
 			obj->Draw();
 		}

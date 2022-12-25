@@ -30,16 +30,19 @@ namespace BattleCity::Manager
 		void ShutDown() override;
 
 		Object::Object& GetObject(int id) const;
-		Object::ObjectList& GetObjectList();
+		Object::ObjectList::Iterator& GetFrontLayerIterator();
+		Object::ObjectList::Iterator& GetBackLayerIterator();
 
-		void InsertObject(std::unique_ptr<Object::Object>&& objPtr);
+		void InsertObject(std::unique_ptr<Object::Object>&& objPtr
+			, Sprite::Layer layer = Sprite::Layer::Front);
 		void MarkForDelete(int objID);
 
 	private:
 		void InitMap();
 		void Test();
 
-		Object::ObjectList mObjectList;
+		Object::ObjectList mBackLayer;
+		Object::ObjectList mFrontLayer;
 	};
 
 	constexpr auto& WM = WorldManager::GetInstance;

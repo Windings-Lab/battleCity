@@ -26,12 +26,12 @@ namespace BattleCity::Manager
 		Test();
 
 #ifdef _DEBUG
-		std::cout << "World Manager object count: " << mObjectList.GetSize() << "\n";
+		std::cout << "World Manager object count: " << mFrontLayer.GetSize() << "\n";
 #endif
 	}
 	void WorldManager::ShutDown()
 	{
-		mObjectList.Clear();
+		mFrontLayer.Clear();
 	}
 
 	void WorldManager::InitMap()
@@ -45,7 +45,8 @@ namespace BattleCity::Manager
 		worldBoundaries->SetPosition(posX, posY);
 		worldBoundaries->SetSprite({ Sprite::Type::Background, Sprite::Behaviour::Basic });
 
-		InsertObject(std::move(worldBoundaries));
+		InsertObject(std::move(worldBoundaries), Sprite::Layer::Back);
+
 		for (const auto& mapRow 
 			: MapCreator::GetLevel(R"(.\data\Maps\level1.txt)"))
 		{
@@ -103,17 +104,38 @@ namespace BattleCity::Manager
 
 	Object::Object& WorldManager::GetObject(int id) const
 	{
-		return mObjectList.GetObject(id);
+		return mFrontLayer.GetObject(id);
 	}
 
-	Object::ObjectList& WorldManager::GetObjectList()
+	Object::ObjectList::Iterator& WorldManager::GetFrontLayerIterator()
 	{
-		return mObjectList;
+		return mFrontLayer.GetIterator();
 	}
 
-	void WorldManager::InsertObject(std::unique_ptr<Object::Object>&& objPtr)
+	Object::ObjectList::Iterator& WorldManager::GetBackLayerIterator()
 	{
-		mObjectList.Insert(std::move(objPtr));
+		return mBackLayer.GetIterator();
+	}
+
+	void WorldManager::InsertObject(std::unique_ptr<Object::Object>&& objPtr, Sprite::Layer layer)
+	{
+		switch (layer)
+		{
+		case Sprite::Layer::Back:
+			{
+				mBackLayer.Insert(std::move(objPtr));
+				break;
+			}
+		case Sprite::Layer::Front:
+			{
+				mFrontLayer.Insert(std::move(objPtr));
+				break;
+			}
+		case Sprite::Layer::UI:
+		case Sprite::Layer::Error:
+		default: 
+			break;
+		}
 	}
 	void WorldManager::MarkForDelete(int objID)
 	{

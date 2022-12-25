@@ -6,14 +6,15 @@ namespace BattleCity::Object
 
 	class ObjectList
 	{
+	public:
 		struct Iterator
 		{
 			std::unordered_map<int, std::unique_ptr<Object>>::const_iterator Begin;
 			std::unordered_map<int, std::unique_ptr<Object>>::const_iterator End;
-			std::unordered_map<int, std::unique_ptr<Object>>::const_iterator begin() { return Begin; }
-			std::unordered_map<int, std::unique_ptr<Object>>::const_iterator end() { return End; }
+			std::unordered_map<int, std::unique_ptr<Object>>::const_iterator& begin() { return Begin; }
+			std::unordered_map<int, std::unique_ptr<Object>>::const_iterator& end() { return End; }
 		};
-	public:
+
 		ObjectList();
 
 		ObjectList(const ObjectList& cpy) = delete;
@@ -24,7 +25,7 @@ namespace BattleCity::Object
 
 		~ObjectList() = default;
 
-		Iterator GetIterator() const;
+		Iterator& GetIterator();
 		Object& GetObject(int id) const;
 
 		void Insert(std::unique_ptr<Object>&& objPtr);
@@ -35,9 +36,9 @@ namespace BattleCity::Object
 
 		void Clear();
 
-
 	private:
 		std::unordered_map<int, std::unique_ptr<Object>> mList;
+		Iterator mIt;
 
 		friend void swap(ObjectList&, ObjectList&) noexcept;
 	};

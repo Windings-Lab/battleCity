@@ -4,6 +4,14 @@ namespace BattleCity
 {
 	namespace Sprite
 	{
+		enum class Layer
+		{
+			Error,
+			Back,
+			Front,
+			UI
+		};
+
 		enum class Type
 		{
 			Error,
