@@ -25,15 +25,17 @@ namespace BattleCity::Manager
 		void ShutDown() override;
 
 		const std::string& GetSpritePath(const Sprite::SpritePair& spritePair) const;
-
 		void CreateSpriteDataAt(const std::filesystem::path& folderPath);
+
+	private:
+		std::optional<Sprite::SpritePair> CreateSpritePairFrom(const std::filesystem::path& spritePath);
 
 	public:
 		using SpriteData = std::unordered_map<Sprite::SpritePair, std::string, Sprite::SpritePairHash>;
 
 	private:
-
 		SpriteData mSpriteData;
+
 	};
 
 	constexpr auto& PM = SpritePathManager::GetInstance;

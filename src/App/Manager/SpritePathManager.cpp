@@ -23,25 +23,6 @@ namespace BattleCity::Manager
 			}
 			cout << endl;
 		}
-
-		std::optional<Sprite::SpritePair> CreateSpritePair(const std::filesystem::path& spritePath)
-		{
-			using magic_enum::enum_cast;
-
-			const std::string spriteTypeStr = spritePath.stem().string();
-			const std::string objectBehaviourStr = spritePath.parent_path().stem().string();
-
-			auto spriteTypeCast = enum_cast<Sprite::Type>(spriteTypeStr);
-			auto objectBehaviourCast = enum_cast<Sprite::Behaviour>(objectBehaviourStr);
-
-			if (!spriteTypeCast.has_value() || !objectBehaviourCast.has_value())
-			{
-				std::cerr << spriteTypeStr << " - " << objectBehaviourStr << ": have no usage.\n";
-				return {};
-			}
-
-			return std::make_pair(spriteTypeCast.value(),objectBehaviourCast.value());
-		}
 	}
 
 	SpritePathManager& SpritePathManager::GetInstance()
@@ -79,6 +60,28 @@ namespace BattleCity::Manager
 		return spritePathIterator->second;
 	}
 
+	std::optional<Sprite::SpritePair> SpritePathManager::CreateSpritePairFrom
+		(const std::filesystem::path& spritePath)
+	{
+		using magic_enum::enum_cast;
+
+		const std::string spriteTypeStr = spritePath.stem().string();
+		const std::string objectBehaviourStr = spritePath.parent_path().stem().string();
+
+		auto spriteTypeCast
+			= enum_cast<Sprite::Type>(spriteTypeStr);
+		auto objectBehaviourCast
+			= enum_cast<Sprite::Behaviour>(objectBehaviourStr);
+
+		if (!spriteTypeCast.has_value() || !objectBehaviourCast.has_value())
+		{
+			std::cerr << spriteTypeStr << " - " << objectBehaviourStr << ": have no usage.\n";
+			return {};
+		}
+
+		return std::make_pair(spriteTypeCast.value(), objectBehaviourCast.value());
+	}
+
 	void SpritePathManager::CreateSpriteDataAt(const std::filesystem::path& folderPath)
 	{
 		using namespace std::filesystem;
@@ -98,7 +101,8 @@ namespace BattleCity::Manager
 				continue;
 			}
 
-			const auto& pair = CreateSpritePair(folderEntry.path());
+			const auto& pair
+				= CreateSpritePairFrom(folderEntry.path());
 			if(!pair.has_value())
 			{
 				continue;
