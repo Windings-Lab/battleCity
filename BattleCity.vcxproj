@@ -32,7 +32,7 @@
     <ClCompile Include="src\App\Object\Components\Movable.cpp" />
     <ClCompile Include="src\App\Object\Components\Fireable.cpp" />
     <ClCompile Include="src\App\Object\Explosion.cpp" />
-    <ClCompile Include="src\App\Object\List\ObjectList.cpp" />
+    <ClCompile Include="src\App\Object\List\ObjectContainer.cpp" />
     <ClCompile Include="src\App\Object\Object.cpp" />
     <ClCompile Include="src\App\Object\Phoenix.cpp" />
     <ClCompile Include="src\App\Object\PowerUp.cpp" />
@@ -66,7 +66,7 @@
     <ClInclude Include="include\App\Object\Components\Movable.h" />
     <ClInclude Include="include\App\Object\Components\Fireable.h" />
     <ClInclude Include="include\App\Object\Explosion.h" />
-    <ClInclude Include="include\App\Object\List\ObjectList.h" />
+    <ClInclude Include="include\App\Object\List\ObjectContainer.h" />
     <ClInclude Include="include\App\Object\Object.h" />
     <ClInclude Include="include\App\Object\Phoenix.h" />
     <ClInclude Include="include\App\Object\PowerUp.h" />

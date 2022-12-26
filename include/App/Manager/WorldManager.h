@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Manager.h"
-#include "ObjectList.h"
+#include "ObjectContainer.h"
 
 namespace BattleCity::Object
 {
@@ -29,20 +29,20 @@ namespace BattleCity::Manager
 		void StartUp() override;
 		void ShutDown() override;
 
-		Object::Object& GetObject(int id) const;
-		Object::ObjectList::Iterator& GetFrontLayerIterator();
-		Object::ObjectList::Iterator& GetBackLayerIterator();
-
+		Object::Object& GetObject(int id) const noexcept;
 		void InsertObject(std::unique_ptr<Object::Object>&& objPtr
-			, Sprite::Layer layer = Sprite::Layer::Front);
+			, Sprite::Layer layer = Sprite::Layer::Front) noexcept;
 		void MarkForDelete(int objID);
+
+		const Object::ObjectContainer& GetBackLayerObjects() const noexcept;
+		const Object::ObjectContainer& GetFrontLayerObjects() const noexcept;
 
 	private:
 		void InitMap();
 		void Test();
 
-		Object::ObjectList mBackLayer;
-		Object::ObjectList mFrontLayer;
+		Object::ObjectContainer mBackLayer;
+		Object::ObjectContainer mFrontLayer;
 	};
 
 	constexpr auto& WM = WorldManager::GetInstance;

@@ -65,7 +65,7 @@
     <ClCompile Include="src\App\Object\Components\Fireable.cpp">
       <Filter>Source\App\Object\Components</Filter>
     </ClCompile>
-    <ClCompile Include="src\App\Object\List\ObjectList.cpp">
+    <ClCompile Include="src\App\Object\List\ObjectContainer.cpp">
       <Filter>Source\App\Object\List</Filter>
     </ClCompile>
     <ClCompile Include="src\App\Object\Phoenix.cpp">
@@ -157,7 +157,7 @@
     <ClInclude Include="include\App\Object\Components\Fireable.h">
       <Filter>Headers\App\Object\Components</Filter>
     </ClInclude>
-    <ClInclude Include="include\App\Object\List\ObjectList.h">
+    <ClInclude Include="include\App\Object\List\ObjectContainer.h">
       <Filter>Headers\App\Object\List</Filter>
     </ClInclude>
     <ClInclude Include="include\App\Object\Phoenix.h">

@@ -96,49 +96,53 @@ namespace BattleCity::Manager
 			posX = 40;
 			posY += 16;
 		}
+
+		for (int i = 1; mFrontLayer.begin() != mFrontLayer.end(); i++)
+		{
+			mFrontLayer.Remove(i);
+		}
 	}
 
 	void WorldManager::Test()
 	{
 	}
 
-	Object::Object& WorldManager::GetObject(int id) const
+	Object::Object& WorldManager::GetObject(int id) const noexcept
 	{
 		return mFrontLayer.GetObject(id);
 	}
 
-	Object::ObjectList::Iterator& WorldManager::GetFrontLayerIterator()
-	{
-		return mFrontLayer.GetIterator();
-	}
-
-	Object::ObjectList::Iterator& WorldManager::GetBackLayerIterator()
-	{
-		return mBackLayer.GetIterator();
-	}
-
-	void WorldManager::InsertObject(std::unique_ptr<Object::Object>&& objPtr, Sprite::Layer layer)
+	void WorldManager::InsertObject(std::unique_ptr<Object::Object>&& objPtr, Sprite::Layer layer) noexcept
 	{
 		switch (layer)
 		{
 		case Sprite::Layer::Back:
-			{
-				mBackLayer.Insert(std::move(objPtr));
-				break;
-			}
+		{
+			mBackLayer.Insert(std::move(objPtr));
+			break;
+		}
 		case Sprite::Layer::Front:
-			{
-				mFrontLayer.Insert(std::move(objPtr));
-				break;
-			}
+		{
+			mFrontLayer.Insert(std::move(objPtr));
+			break;
+		}
 		case Sprite::Layer::UI:
 		case Sprite::Layer::Error:
-		default: 
+		default:
 			break;
 		}
 	}
 	void WorldManager::MarkForDelete(int objID)
 	{
 
+	}
+
+	const Object::ObjectContainer& WorldManager::GetBackLayerObjects() const noexcept
+	{
+		return mBackLayer;
+	}
+	const Object::ObjectContainer& WorldManager::GetFrontLayerObjects() const noexcept
+	{
+		return mFrontLayer;
 	}
 }
