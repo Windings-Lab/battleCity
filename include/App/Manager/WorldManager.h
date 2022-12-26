@@ -29,9 +29,9 @@ namespace BattleCity::Manager
 		void StartUp() override;
 		void ShutDown() override;
 
-		Object::Object& GetObject(int id) const noexcept;
+		Object::Object& GetObject(int id) const;
 		void InsertObject(std::unique_ptr<Object::Object>&& objPtr
-			, Sprite::Layer layer = Sprite::Layer::Front) noexcept;
+			, Sprite::Layer layer = Sprite::Layer::Front);
 		void MarkForDelete(int objID);
 
 		const Object::ObjectContainer& GetBackLayerObjects() const noexcept;

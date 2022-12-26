@@ -96,23 +96,18 @@ namespace BattleCity::Manager
 			posX = 40;
 			posY += 16;
 		}
-
-		for (int i = 1; mFrontLayer.begin() != mFrontLayer.end(); i++)
-		{
-			mFrontLayer.Remove(i);
-		}
 	}
 
 	void WorldManager::Test()
 	{
 	}
 
-	Object::Object& WorldManager::GetObject(int id) const noexcept
+	Object::Object& WorldManager::GetObject(int id) const
 	{
 		return mFrontLayer.GetObject(id);
 	}
 
-	void WorldManager::InsertObject(std::unique_ptr<Object::Object>&& objPtr, Sprite::Layer layer) noexcept
+	void WorldManager::InsertObject(std::unique_ptr<Object::Object>&& objPtr, Sprite::Layer layer)
 	{
 		switch (layer)
 		{
