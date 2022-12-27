@@ -31,8 +31,9 @@
     <ClCompile Include="src\App\Object\Components\Health.cpp" />
     <ClCompile Include="src\App\Object\Components\Movable.cpp" />
     <ClCompile Include="src\App\Object\Components\Fireable.cpp" />
+    <ClCompile Include="src\App\Object\Container\ObjectContainer.cpp" />
     <ClCompile Include="src\App\Object\Explosion.cpp" />
-    <ClCompile Include="src\App\Object\List\ObjectContainer.cpp" />
+    <ClCompile Include="src\App\Object\Factory\BasicFactory.cpp" />
     <ClCompile Include="src\App\Object\Object.cpp" />
     <ClCompile Include="src\App\Object\Phoenix.cpp" />
     <ClCompile Include="src\App\Object\PowerUp.cpp" />
@@ -65,8 +66,9 @@
     <ClInclude Include="include\App\Object\Components\Health.h" />
     <ClInclude Include="include\App\Object\Components\Movable.h" />
     <ClInclude Include="include\App\Object\Components\Fireable.h" />
+    <ClInclude Include="include\App\Object\Container\ObjectContainer.h" />
     <ClInclude Include="include\App\Object\Explosion.h" />
-    <ClInclude Include="include\App\Object\List\ObjectContainer.h" />
+    <ClInclude Include="include\App\Object\Factory\BasicFactory.h" />
     <ClInclude Include="include\App\Object\Object.h" />
     <ClInclude Include="include\App\Object\Phoenix.h" />
     <ClInclude Include="include\App\Object\PowerUp.h" />
@@ -184,7 +186,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>PCHeader.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)include\;$(ProjectDir)include\Framework\;$(ProjectDir)include\App\;$(ProjectDir)include\App\Manager\;$(ProjectDir)include\App\Object\;$(ProjectDir)include\App\Object\Components\;$(ProjectDir)include\App\Object\List\;$(ProjectDir)include\Toolkit\;$(ProjectDir)include\Toolkit\Observer\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)include\;$(ProjectDir)include\Framework\;$(ProjectDir)include\App\;$(ProjectDir)include\App\Manager\;$(ProjectDir)include\App\Object\;$(ProjectDir)include\App\Object\Components\;$(ProjectDir)include\App\Object\Container\;$(ProjectDir)include\App\Object\Factory\;$(ProjectDir)include\Toolkit\;$(ProjectDir)include\Toolkit\Observer\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -207,7 +209,7 @@ if %errorlevel% LEQ 3 exit 0</Command>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)include\;$(ProjectDir)include\Framework\;$(ProjectDir)include\App\;$(ProjectDir)include\App\Manager\;$(ProjectDir)include\App\Object\;$(ProjectDir)include\App\Object\Components\;$(ProjectDir)include\App\Object\List\;$(ProjectDir)include\Toolkit\;$(ProjectDir)include\Toolkit\Observer\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)include\;$(ProjectDir)include\Framework\;$(ProjectDir)include\App\;$(ProjectDir)include\App\Manager\;$(ProjectDir)include\App\Object\;$(ProjectDir)include\App\Object\Components\;$(ProjectDir)include\App\Object\Container\;$(ProjectDir)include\App\Object\Factory\;$(ProjectDir)include\Toolkit\;$(ProjectDir)include\Toolkit\Observer\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>PCHeader.h</PrecompiledHeaderFile>
     </ClCompile>

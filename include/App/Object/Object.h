@@ -9,9 +9,10 @@ namespace BattleCity::Object
 {
 	class Object : public UUID
 	{
-	public:
+	protected:
 		Object() = default;
 
+	public:
 		Object(const Object&) = delete;
 		Object(Object&&) = delete;
 
@@ -31,8 +32,31 @@ namespace BattleCity::Object
 		int X() const noexcept;
 		int Y() const noexcept;
 
+	public:
+		struct Factory;
+
 	private:
 		Sprite::BCSprite mSprite;
 		Vector2Int mPosition;
+
+	};
+
+	struct Object::Factory
+	{
+		virtual ~Factory() = default;
+
+		virtual Object* const CreateWorldBoundaries() = 0;
+
+		virtual Object* const CreateTank(Type tankType) = 0;
+
+		virtual Object* const CreateBullet() = 0;
+
+		virtual Object* const CreatePowerUp() = 0;
+
+		virtual Object* const CreateWall() = 0;
+
+		virtual Object* const CreatePhoenix() = 0;
+
+		virtual Object* const CreateExplosion() = 0;
 	};
 }

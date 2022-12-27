@@ -2,13 +2,10 @@
 
 #include "WorldManager.h"
 
+#include "BasicFactory.h"
 #include "MapCreator.h"
 
 #include "Object.h"
-#include "Phoenix.h"
-#include "Tank.h"
-#include "Wall.h"
-#include "WorldBoundaries.h"
 
 namespace BattleCity::Manager
 {
@@ -36,16 +33,12 @@ namespace BattleCity::Manager
 
 	void WorldManager::InitMap()
 	{
-		using std::make_unique;
-		using std::unique_ptr;
+		auto& objectFactory = Object::BasicFactory::GetInstance();
 
-		auto worldBoundaries = make_unique<Object::WorldBoundaries>();
+		const auto worldBoundaries = objectFactory.CreateWorldBoundaries();
 
 		int posX = 40, posY = 44;
 		worldBoundaries->SetPosition(posX, posY);
-		worldBoundaries->SetSprite({ Sprite::Type::Background, Sprite::Behaviour::Basic });
-
-		InsertObject(std::move(worldBoundaries), Sprite::Layer::Back);
 
 		for (const auto& mapRow 
 			: MapCreator::GetLevel(R"(.\data\Maps\level1.txt)"))
@@ -58,34 +51,26 @@ namespace BattleCity::Manager
 					break;
 				case Object::Type::TankPlayer:
 					{
-						auto tankPlayer = make_unique<Object::Tank>();
+						const auto tankPlayer = objectFactory.CreateTank(Object::Type::TankPlayer);
 						tankPlayer->SetPosition(posX, posY);
-						tankPlayer->SetSprite({ Sprite::Type::TankPlayer, Sprite::Behaviour::Up });
-						InsertObject(std::move(tankPlayer));
 					}
 					break;
 				case Object::Type::TankNPC:
 					{
-						auto tank = make_unique<Object::Tank>();
-						tank->SetPosition(posX, posY);
-						tank->SetSprite({ Sprite::Type::TankNPC, Sprite::Behaviour::Up });
-						InsertObject(std::move(tank));
+						const auto tankNPC = objectFactory.CreateTank(Object::Type::TankNPC);
+						tankNPC->SetPosition(posX, posY);
 					}
 					break;
 				case Object::Type::Wall:
 					{
-						auto wall = make_unique<Object::Wall>();
+						const auto wall = objectFactory.CreateWall();
 						wall->SetPosition(posX, posY);
-						wall->SetSprite({ Sprite::Type::Wall, Sprite::Behaviour::Basic });
-						InsertObject(std::move(wall));
 					}
 					break;
 				case Object::Type::Phoenix:
 					{
-						auto phoenix = make_unique<Object::Phoenix>();
+						const auto phoenix = objectFactory.CreatePhoenix();
 						phoenix->SetPosition(posX, posY);
-						phoenix->SetSprite({ Sprite::Type::Phoenix, Sprite::Behaviour::Basic });
-						InsertObject(std::move(phoenix));
 					}
 					break;
 				default: 
