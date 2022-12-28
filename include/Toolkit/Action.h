@@ -2,7 +2,7 @@
 
 namespace BattleCity
 {
-	template<typename ...Args>
+	template<typename... Args>
 	class Action final
 	{
 	public:
@@ -20,11 +20,12 @@ namespace BattleCity
 			mFunctions.clear();
 		}
 
-		void operator()(Args&&... args) const noexcept
+		template<typename... OpArgs, std::enable_if_t<sizeof...(Args) == sizeof...(OpArgs), int> = 0>
+		void operator()(OpArgs&&... args) const noexcept
 		{
 			for (const auto& function : mFunctions)
 			{
-				function(std::forward<Args>(args)...);
+				function(std::forward<OpArgs>(args)...);
 			}
 		}
 
