@@ -74,12 +74,6 @@
     <ClCompile Include="src\App\UUID.cpp">
       <Filter>Source\App</Filter>
     </ClCompile>
-    <ClCompile Include="src\Toolkit\Observer\IObserver.cpp">
-      <Filter>Source\Toolkit\Observer</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Toolkit\Observer\ISubject.cpp">
-      <Filter>Source\Toolkit\Observer</Filter>
-    </ClCompile>
     <ClCompile Include="src\App\Object\Factory\BasicFactory.cpp">
       <Filter>Source\App\Object\Factory</Filter>
     </ClCompile>
@@ -169,12 +163,6 @@
     <ClInclude Include="include\App\UUID.h">
       <Filter>Headers\App</Filter>
     </ClInclude>
-    <ClInclude Include="include\Toolkit\Observer\ISubject.h">
-      <Filter>Headers\Toolkit\Observer</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Toolkit\Observer\IObserver.h">
-      <Filter>Headers\Toolkit\Observer</Filter>
-    </ClInclude>
     <ClInclude Include="include\App\Object\Factory\BasicFactory.h">
       <Filter>Headers\App\Object\Factory</Filter>
     </ClInclude>
@@ -185,6 +173,9 @@
       <Filter>Headers\Toolkit</Filter>
     </ClInclude>
     <ClInclude Include="include\Toolkit\BasicMacros.h">
+      <Filter>Headers\Toolkit</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Toolkit\ISignal.h">
       <Filter>Headers\Toolkit</Filter>
     </ClInclude>
   </ItemGroup>
@@ -233,12 +224,6 @@
     </Filter>
     <Filter Include="Source\App\Object\Components">
       <UniqueIdentifier>{dc0f6fd2-65fa-4b3d-84fd-31e43bbd466e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Headers\Toolkit\Observer">
-      <UniqueIdentifier>{0eb0fc77-c2fc-476b-b277-8e440792c58a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Toolkit\Observer">
-      <UniqueIdentifier>{b932d68d-a422-4105-a616-47310540442b}</UniqueIdentifier>
     </Filter>
     <Filter Include="Headers\App\Object\Factory">
       <UniqueIdentifier>{ecf268d0-e685-466a-bc20-8e96bd809c90}</UniqueIdentifier>

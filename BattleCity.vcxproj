@@ -48,8 +48,6 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">PCHeader.h</PrecompiledHeaderFile>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="src\Toolkit\Observer\IObserver.cpp" />
-    <ClCompile Include="src\Toolkit\Observer\ISubject.cpp" />
     <ClCompile Include="src\Toolkit\Rectangle.cpp" />
     <ClCompile Include="src\Toolkit\Vector2Int.cpp" />
   </ItemGroup>
@@ -82,9 +80,8 @@
     <ClInclude Include="include\PCHeader.h" />
     <ClInclude Include="include\Toolkit\Action.h" />
     <ClInclude Include="include\Toolkit\BasicMacros.h" />
+    <ClInclude Include="include\Toolkit\ISignal.h" />
     <ClInclude Include="include\Toolkit\magic_enum.hpp" />
-    <ClInclude Include="include\Toolkit\Observer\IObserver.h" />
-    <ClInclude Include="include\Toolkit\Observer\ISubject.h" />
     <ClInclude Include="include\Toolkit\Rectangle.h" />
     <ClInclude Include="include\Toolkit\Vector2Int.h" />
   </ItemGroup>

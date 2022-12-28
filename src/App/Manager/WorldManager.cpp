@@ -3,6 +3,7 @@
 #include "WorldManager.h"
 
 #include "BasicFactory.h"
+#include "ISignal.h"
 #include "MapCreator.h"
 
 #include "Object.h"
@@ -83,8 +84,19 @@ namespace BattleCity::Manager
 		}
 	}
 
+	void updateTest(int test)
+	{
+		std::cout << "Test func called " << test << std::endl;
+	}
+
 	void WorldManager::Test()
 	{
+		ISignal<int> testSignal;
+
+		testSignal.AddListener(updateTest);
+		testSignal.AddListener([](int num){std::cout << "Test lambda called " << num << std::endl; });
+
+		testSignal.Dispatch(1);
 	}
 
 	Object::Object& WorldManager::GetObject(int id) const
