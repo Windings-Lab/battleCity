@@ -181,6 +181,9 @@
     <ClInclude Include="include\App\Object\Container\ObjectContainer.h">
       <Filter>Headers\App\Object\Container</Filter>
     </ClInclude>
+    <ClInclude Include="include\Toolkit\Action.h">
+      <Filter>Headers\Toolkit</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
