@@ -3,13 +3,13 @@
 
 namespace BattleCity::Object
 {
-	struct BasicFactory : Object::Factory
+	struct BasicObjectFactory : Object::Factory
 	{
 	private:
-		BasicFactory() = default;
+		BasicObjectFactory() = default;
 
 	public:
-		static BasicFactory& GetInstance();
+		static BasicObjectFactory& GetInstance();
 
 		Object* const CreateWorldBoundaries() override;
 

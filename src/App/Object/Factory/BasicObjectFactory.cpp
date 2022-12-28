@@ -1,5 +1,5 @@
 #include "PCHeader.h"
-#include "BasicFactory.h"
+#include "BasicObjectFactory.h"
 
 #include "Bullet.h"
 #include "Explosion.h"
@@ -14,13 +14,13 @@
 
 namespace BattleCity::Object
 {
-	BasicFactory& BasicFactory::GetInstance()
+	BasicObjectFactory& BasicObjectFactory::GetInstance()
 	{
-		static BasicFactory objectFactory;
+		static BasicObjectFactory objectFactory;
 		return objectFactory;
 	}
 
-	Object* const BasicFactory::CreateWorldBoundaries()
+	Object* const BasicObjectFactory::CreateWorldBoundaries()
 	{
 		auto worldBoundaries = std::make_unique<WorldBoundaries>();
 		worldBoundaries->SetSprite({ Sprite::Type::Background, Sprite::Behaviour::Basic });
@@ -31,7 +31,7 @@ namespace BattleCity::Object
 		return worldBoundariesPtr;
 	}
 
-	Object* const BasicFactory::CreateTank(Type tankType)
+	Object* const BasicObjectFactory::CreateTank(Type tankType)
 	{
 		std::unique_ptr<Object> tank;
 
@@ -56,7 +56,7 @@ namespace BattleCity::Object
 		return tankPtr;
 	}
 
-	Object* const BasicFactory::CreateBullet()
+	Object* const BasicObjectFactory::CreateBullet()
 	{
 		auto bullet = std::make_unique<Bullet>();
 		bullet->SetSprite({ Sprite::Type::Bullet, Sprite::Behaviour::Up });
@@ -67,7 +67,7 @@ namespace BattleCity::Object
 		return bulletPtr;
 	}
 
-	Object* const BasicFactory::CreatePowerUp()
+	Object* const BasicObjectFactory::CreatePowerUp()
 	{
 		auto powerUp = std::make_unique<Tank>();
 		powerUp->SetSprite({ Sprite::Type::PowerUp, Sprite::Behaviour::Basic });
@@ -78,7 +78,7 @@ namespace BattleCity::Object
 		return powerUpPtr;
 	}
 
-	Object* const BasicFactory::CreateWall()
+	Object* const BasicObjectFactory::CreateWall()
 	{
 		auto wall = std::make_unique<Wall>();
 		wall->SetSprite({ Sprite::Type::Wall, Sprite::Behaviour::Basic });
@@ -88,7 +88,7 @@ namespace BattleCity::Object
 
 		return wallPtr;
 	}
-	Object* const BasicFactory::CreatePhoenix()
+	Object* const BasicObjectFactory::CreatePhoenix()
 	{
 		auto phoenix = std::make_unique<Phoenix>();
 		phoenix->SetSprite({ Sprite::Type::Phoenix, Sprite::Behaviour::Basic });
@@ -99,7 +99,7 @@ namespace BattleCity::Object
 		return phoenixPtr;
 	}
 
-	Object* const BasicFactory::CreateExplosion()
+	Object* const BasicObjectFactory::CreateExplosion()
 	{
 		auto explosion = std::make_unique<Explosion>();
 		explosion->SetSprite({ Sprite::Type::Explosion, Sprite::Behaviour::ExplosionSmall1 });

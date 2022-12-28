@@ -2,8 +2,7 @@
 
 #include "WorldManager.h"
 
-#include "BasicFactory.h"
-#include "ISignal.h"
+#include "BasicObjectFactory.h"
 #include "MapCreator.h"
 
 #include "Object.h"
@@ -34,7 +33,7 @@ namespace BattleCity::Manager
 
 	void WorldManager::InitMap()
 	{
-		auto& objectFactory = Object::BasicFactory::GetInstance();
+		auto& objectFactory = Object::BasicObjectFactory::GetInstance();
 
 		const auto worldBoundaries = objectFactory.CreateWorldBoundaries();
 

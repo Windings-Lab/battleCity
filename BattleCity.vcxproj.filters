@@ -74,7 +74,7 @@
     <ClCompile Include="src\App\UUID.cpp">
       <Filter>Source\App</Filter>
     </ClCompile>
-    <ClCompile Include="src\App\Object\Factory\BasicFactory.cpp">
+    <ClCompile Include="src\App\Object\Factory\BasicObjectFactory.cpp">
       <Filter>Source\App\Object\Factory</Filter>
     </ClCompile>
     <ClCompile Include="src\App\Object\Container\ObjectContainer.cpp">
@@ -163,7 +163,7 @@
     <ClInclude Include="include\App\UUID.h">
       <Filter>Headers\App</Filter>
     </ClInclude>
-    <ClInclude Include="include\App\Object\Factory\BasicFactory.h">
+    <ClInclude Include="include\App\Object\Factory\BasicObjectFactory.h">
       <Filter>Headers\App\Object\Factory</Filter>
     </ClInclude>
     <ClInclude Include="include\App\Object\Container\ObjectContainer.h">
