@@ -13,11 +13,7 @@ namespace BattleCity::Object
 		Object() = default;
 
 	public:
-		Object(const Object&) = delete;
-		Object(Object&&) = delete;
-
-		virtual Object& operator=(const Object&) = delete;
-		virtual Object& operator=(Object&&) = delete;
+		DISALLOW_COPY_MOVE(Object)
 
 		~Object() override = 0;
 

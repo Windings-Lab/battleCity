@@ -184,6 +184,9 @@
     <ClInclude Include="include\Toolkit\Action.h">
       <Filter>Headers\Toolkit</Filter>
     </ClInclude>
+    <ClInclude Include="include\Toolkit\BasicMacros.h">
+      <Filter>Headers\Toolkit</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />

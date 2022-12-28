@@ -11,8 +11,7 @@ namespace BattleCity::Sprite
 	public:
 		BCSprite();
 
-		BCSprite(const BCSprite&) = delete;
-		BCSprite& operator=(const BCSprite&) = delete;
+		DISALLOW_COPY(BCSprite);
 
 		BCSprite(BCSprite&& mve) noexcept;
 		BCSprite& operator=(BCSprite&& mve) noexcept;

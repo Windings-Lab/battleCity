@@ -36,5 +36,6 @@
 using namespace std::string_view_literals;
 using namespace std::string_literals;
 
+#include "BasicMacros.h"
 #include "BattleCityEnums.h"
 #include "magic_enum.hpp"

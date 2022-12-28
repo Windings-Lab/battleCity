@@ -13,11 +13,7 @@ namespace BattleCity::Manager
 		SpritePathManager();
 
 	public:
-		SpritePathManager(const SpritePathManager&) = delete;
-		SpritePathManager(SpritePathManager&&) = delete;
-
-		SpritePathManager& operator=(const SpritePathManager&) = delete;
-		SpritePathManager& operator=(SpritePathManager&&) = delete;
+		DISALLOW_COPY_MOVE(SpritePathManager)
 
 		~SpritePathManager() override = default;
 

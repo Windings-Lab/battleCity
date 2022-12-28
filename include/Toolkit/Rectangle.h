@@ -22,11 +22,7 @@ namespace BattleCity
 		Rectangle(int width, int height);
 		Rectangle(int x, int y, int width, int height);
 
-		Rectangle(const Rectangle&) = delete;
-		Rectangle& operator=(const Rectangle&) = delete;
-
-		Rectangle(Rectangle&&) = delete;
-		Rectangle& operator=(Rectangle&&) noexcept = delete;
+		DISALLOW_COPY_MOVE(Rectangle)
 
 		~Rectangle() = default;
 

@@ -11,8 +11,7 @@ namespace BattleCity::Object
 	public:
 		ObjectContainer() = default;
 
-		ObjectContainer(const ObjectContainer& cpy) = delete;
-		ObjectContainer& operator=(const ObjectContainer& rhs) = delete;
+		DISALLOW_COPY(ObjectContainer)
 
 		ObjectContainer(ObjectContainer&& mve) noexcept;
 		ObjectContainer& operator=(ObjectContainer&& rhs) noexcept;

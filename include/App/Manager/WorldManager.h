@@ -18,11 +18,7 @@ namespace BattleCity::Manager
 	public:
 		static WorldManager& GetInstance();
 
-		WorldManager(WorldManager&&) = delete;
-		WorldManager(const WorldManager&) = delete;
-
-		void operator=(const WorldManager&) = delete;
-		void operator=(WorldManager&&) = delete;
+		DISALLOW_COPY_MOVE(WorldManager)
 
 		~WorldManager() override = default;
 

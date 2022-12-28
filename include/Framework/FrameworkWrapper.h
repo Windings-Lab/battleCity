@@ -25,11 +25,7 @@ namespace BattleCity::Framework
 	public:
 		FrameworkWrapper() {}
 
-		FrameworkWrapper(const FrameworkWrapper&) = delete;
-		FrameworkWrapper(FrameworkWrapper&&) = delete;
-
-		FrameworkWrapper& operator=(const FrameworkWrapper&) = delete;
-		FrameworkWrapper& operator=(FrameworkWrapper&&) = delete;
+		DISALLOW_COPY_MOVE(FrameworkWrapper)
 
 		~FrameworkWrapper() override = default;
 

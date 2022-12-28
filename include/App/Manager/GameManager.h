@@ -12,11 +12,7 @@ namespace BattleCity::Manager
 	public:
 		static GameManager& GetInstance();
 
-		GameManager(const GameManager&) = delete;
-		GameManager(GameManager&&) = delete;
-
-		void operator=(const GameManager&) = delete;
-		void operator=(GameManager&&) = delete;
+		DISALLOW_COPY_MOVE(GameManager)
 
 		~GameManager() override = default;
 

@@ -8,11 +8,7 @@ namespace BattleCity
 		Vector2Int();
 		Vector2Int(int x, int y);
 
-		Vector2Int(const Vector2Int&) = delete;
-		Vector2Int& operator=(const Vector2Int&) = delete;
-
-		Vector2Int(Vector2Int&&) = delete;
-		Vector2Int& operator=(Vector2Int&&) noexcept = delete;
+		DISALLOW_COPY_MOVE(Vector2Int)
 
 		~Vector2Int() = default;
 

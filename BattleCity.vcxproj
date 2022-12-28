@@ -81,6 +81,7 @@
     <ClInclude Include="include\Framework\Screen.h" />
     <ClInclude Include="include\PCHeader.h" />
     <ClInclude Include="include\Toolkit\Action.h" />
+    <ClInclude Include="include\Toolkit\BasicMacros.h" />
     <ClInclude Include="include\Toolkit\magic_enum.hpp" />
     <ClInclude Include="include\Toolkit\Observer\IObserver.h" />
     <ClInclude Include="include\Toolkit\Observer\ISubject.h" />
