@@ -20,7 +20,6 @@ namespace BattleCity::Manager
 		__super::StartUp();
 
 		InitMap();
-		Test();
 
 #ifdef _DEBUG
 		std::cout << "World Manager object count: " << mFrontLayer.GetSize() << "\n";
@@ -81,21 +80,6 @@ namespace BattleCity::Manager
 			posX = 40;
 			posY += 16;
 		}
-	}
-
-	void updateTest(int test)
-	{
-		std::cout << "Test func called " << test << std::endl;
-	}
-
-	void WorldManager::Test()
-	{
-		ISignal<int> testSignal;
-
-		testSignal.AddListener(updateTest);
-		testSignal.AddListener([](int num){std::cout << "Test lambda called " << num << std::endl; });
-
-		testSignal.Dispatch(1);
 	}
 
 	Object::Object& WorldManager::GetObject(int id) const

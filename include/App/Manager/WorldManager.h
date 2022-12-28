@@ -35,7 +35,6 @@ namespace BattleCity::Manager
 
 	private:
 		void InitMap();
-		void Test();
 
 		Object::ObjectContainer mBackLayer;
 		Object::ObjectContainer mFrontLayer;
