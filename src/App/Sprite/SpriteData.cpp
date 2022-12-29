@@ -3,6 +3,8 @@
 
 namespace BattleCity::Sprite
 {
+	SpriteData::SpritePathAtlas SpriteData::mSpritePathAtlas;
+
 	SpriteData::SpriteData(SpriteData&& mve) noexcept : SpriteData()
 	{
 		swap(*this, mve);
@@ -14,14 +16,21 @@ namespace BattleCity::Sprite
 		return *this;
 	}
 
-
-	void SpriteData::Init(const std::string& folderPath)
+	void SpriteData::Init(const FolderPath& folderPath)
 	{
 		using namespace std::filesystem;
 
-		const path pathFS(folderPath);
+		if  (
+			const auto& pathContainerIt = mSpritePathAtlas.find(folderPath); 
+			pathContainerIt != mSpritePathAtlas.end()
+			)
+		{
+			mSpritePathContainer = pathContainerIt->second;
+			return;
+		}
 
-		if (!exists(pathFS))
+		const path folderPathFs(folderPath);
+		if (!exists(folderPathFs))
 		{
 			std::cerr << "Sprite Folder Path has not been found\n";
 			std::cerr << "Make sure that " << folderPath << " in folder with BattleCity.exe file\n";
@@ -29,7 +38,7 @@ namespace BattleCity::Sprite
 		}
 
 		const path fileExtension = ".png";
-		for (const auto& folderEntry : recursive_directory_iterator(pathFS))
+		for (const auto& folderEntry : recursive_directory_iterator(folderPathFs))
 		{
 			if (folderEntry.path().extension() != fileExtension)
 			{
@@ -42,12 +51,14 @@ namespace BattleCity::Sprite
 				continue;
 			}
 
-			mSpritePathContainer.emplace(type.value(), folderEntry.path().string());
+			mSpritePathContainer.try_emplace(type.value(), folderEntry.path().string());
 		}
+
+		mSpritePathAtlas.try_emplace(folderPath, mSpritePathContainer);
 	}
-	const std::string& SpriteData::Get(Type spritePair) const
+	const SpriteData::SpritePath& SpriteData::Get(Type spriteType) const
 	{
-		const auto& spritePathIterator = mSpritePathContainer.find(spritePair);
+		const auto& spritePathIterator = mSpritePathContainer.find(spriteType);
 		if (spritePathIterator == mSpritePathContainer.end())
 		{
 			throw std::out_of_range("Sprite data has not been created");
@@ -71,11 +82,11 @@ namespace BattleCity::Sprite
 		return spriteTypeCast;
 	}
 
-	std::unordered_map<Type, std::string>::const_iterator SpriteData::begin() const
+	SpriteData::SpritePathContainer::const_iterator SpriteData::begin() const
 	{
 		return mSpritePathContainer.cbegin();
 	}
-	std::unordered_map<Type, std::string>::const_iterator SpriteData::end() const
+	SpriteData::SpritePathContainer::const_iterator SpriteData::end() const
 	{
 		return mSpritePathContainer.cend();
 	}

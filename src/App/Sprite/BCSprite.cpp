@@ -73,14 +73,15 @@ namespace BattleCity::Sprite
 		for (const auto& [spriteType, spritePath] : mSpriteData)
 		{
 			Sprite* sprite = nullptr;
-			if(mSpriteAtlas.find(spritePath) == mSpriteAtlas.end())
+			if(const auto& spriteIt = mSpriteAtlas.find(spritePath);
+				spriteIt == mSpriteAtlas.end())
 			{
 				sprite = createSprite(spritePath.c_str());
 				mSpriteAtlas.try_emplace(spritePath, sprite);
 			}
 			else
 			{
-				sprite = mSpriteAtlas.at(spritePath).get();
+				sprite = spriteIt->second.get();
 			}
 
 			mSpriteContainer.try_emplace(spriteType, sprite);
