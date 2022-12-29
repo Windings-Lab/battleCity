@@ -3,6 +3,18 @@
 
 namespace BattleCity::Sprite
 {
+	SpriteData::SpriteData(SpriteData&& mve) noexcept : SpriteData()
+	{
+		swap(*this, mve);
+	}
+
+	SpriteData& SpriteData::operator=(SpriteData&& mve) noexcept
+	{
+		swap(*this, mve);
+		return *this;
+	}
+
+
 	void SpriteData::Init(const std::string& folderPath)
 	{
 		using namespace std::filesystem;
@@ -33,7 +45,6 @@ namespace BattleCity::Sprite
 			mSpritePathContainer.emplace(type.value(), folderEntry.path().string());
 		}
 	}
-
 	const std::string& SpriteData::Get(Type spritePair) const
 	{
 		const auto& spritePathIterator = mSpritePathContainer.find(spritePair);
@@ -43,16 +54,6 @@ namespace BattleCity::Sprite
 		}
 
 		return spritePathIterator->second;
-	}
-
-	std::unordered_map<Type, std::string>::const_iterator SpriteData::begin() const
-	{
-		return mSpritePathContainer.cbegin();
-	}
-
-	std::unordered_map<Type, std::string>::const_iterator SpriteData::end() const
-	{
-		return mSpritePathContainer.cend();
 	}
 
 	std::optional<Type> SpriteData::TypeFrom(const std::filesystem::path& spritePath) const
@@ -68,5 +69,19 @@ namespace BattleCity::Sprite
 		}
 
 		return spriteTypeCast;
+	}
+
+	std::unordered_map<Type, std::string>::const_iterator SpriteData::begin() const
+	{
+		return mSpritePathContainer.cbegin();
+	}
+	std::unordered_map<Type, std::string>::const_iterator SpriteData::end() const
+	{
+		return mSpritePathContainer.cend();
+	}
+
+	void swap(SpriteData& first, SpriteData& second) noexcept
+	{
+		first.mSpritePathContainer.swap(second.mSpritePathContainer);
 	}
 }

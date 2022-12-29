@@ -7,7 +7,8 @@ namespace BattleCity::Sprite
 	public:
 		SpriteData() = default;
 
-		DISALLOW_COPY_MOVE(SpriteData)
+		DISALLOW_COPY(SpriteData)
+		ALLOW_MOVE(SpriteData)
 
 		~SpriteData() = default;
 
@@ -19,6 +20,7 @@ namespace BattleCity::Sprite
 
 	private:
 		std::optional<Type> TypeFrom(const std::filesystem::path& spritePath) const;
+		friend void swap(SpriteData& first, SpriteData& second) noexcept;
 
 	private:
 		using SpritePathContainer = std::unordered_map<Type, std::string>;

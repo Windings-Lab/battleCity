@@ -13,9 +13,7 @@ namespace BattleCity::Sprite
 		BCSprite();
 
 		DISALLOW_COPY(BCSprite)
-
-		BCSprite(BCSprite&& mve) noexcept;
-		BCSprite& operator=(BCSprite&& mve) noexcept;
+		ALLOW_MOVE(BCSprite)
 
 		~BCSprite() = default;
 

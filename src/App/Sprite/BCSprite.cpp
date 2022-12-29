@@ -37,6 +37,8 @@ namespace BattleCity::Sprite
 		using std::swap;
 
 		swap(first.mSprite, second.mSprite);
+		swap(first.mType, second.mType);
+		swap(first.mSpriteData, second.mSpriteData);
 		first.mSpriteSize.SetXY(second.mSpriteSize);
 	}
 

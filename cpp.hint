@@ -3,3 +3,4 @@
 // For more information see https://go.microsoft.com/fwlink/?linkid=865984
 #define DISALLOW_COPY_MOVE(Class) Class(const Class &) = delete; Class& operator=(const Class &) = delete; Class(Class&&) noexcept = delete; Class& operator=(Class&&) noexcept = delete;
 #define DISALLOW_COPY(Class) Class(const Class &) = delete; Class& operator=(const Class &) = delete;
+#define ALLOW_MOVE(Class) Class(Class&&) noexcept; Class& operator=(Class&&) noexcept;
