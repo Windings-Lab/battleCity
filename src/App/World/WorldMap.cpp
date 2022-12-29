@@ -3,27 +3,22 @@
 #include "WorldMap.h"
 
 #include "BasicObjectFactory.h"
-#include "LevelCreator.h"
+#include "Level.h"
 
 #include "Object.h"
 
 namespace BattleCity
 {
-	void WorldMap::CreateLevel(const char* levelPath)
+	void WorldMap::SetWorldRelative(const TopLeft& worldRelative) noexcept
 	{
-		mMapCreator.CreateLevel(levelPath);
+		mWorldRelative.SetXY(worldRelative);
+	}
+	const WorldMap::TopLeft& WorldMap::GetWorldRelative() const noexcept
+	{
+		return mWorldRelative;
 	}
 
-	const Vector2Int& WorldMap::GetWorldRelative() const noexcept
-	{
-		return mMapCreator.GetTopLeftPosition();
-	}
-	void WorldMap::SetWorldRelative(const Vector2Int& worldRelative) noexcept
-	{
-		mMapCreator.SetStartPosition(worldRelative);
-	}
-
-	void WorldMap::InitLevel()
+	void WorldMap::CreateMap(const Level& level)
 	{
 		mFrontLayer.Clear();
 		mBackLayer.Clear();
@@ -32,15 +27,14 @@ namespace BattleCity
 
 		const auto worldBoundaries = objectFactory.CreateWorldBoundaries();
 
-		auto& startPos = mMapCreator.GetTopLeftPosition();
-		worldBoundaries->SetPosition(startPos);
+		worldBoundaries->SetPosition(mWorldRelative);
 
-		const auto& mapColumn = mMapCreator.GetMap();
+		const auto& mapColumn = level;
 
-		int nextPosY = startPos.Y;
+		int nextPosY = mWorldRelative.Y;
 		for (const auto& mapRow : mapColumn)
 		{
-			int nextPosX = startPos.X;
+			int nextPosX = mWorldRelative.X;
 			for (const auto& objectType : mapRow)
 			{
 				Vector2Int position(nextPosX, nextPosY);
@@ -81,6 +75,9 @@ namespace BattleCity
 
 			nextPosY += 16;
 		}
+#ifdef _DEBUG
+		std::cout << "Created map with: " << mFrontLayer.GetSize() + mBackLayer.GetSize() << " object count." << std::endl;
+#endif
 	}
 
 	Object::Object& WorldMap::GetObject(int id) const

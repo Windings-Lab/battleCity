@@ -1,6 +1,5 @@
 #pragma once
 
-#include "LevelCreator.h"
 #include "ObjectContainer.h"
 
 namespace BattleCity::Object
@@ -10,8 +9,13 @@ namespace BattleCity::Object
 
 namespace BattleCity
 {
+	class Level;
+
 	class WorldMap final
 	{
+	public:
+		using TopLeft = Vector2Int;
+
 	public:
 		WorldMap() = default;
 
@@ -19,12 +23,10 @@ namespace BattleCity
 
 		~WorldMap() = default;
 
-		void CreateLevel(const char* levelPath);
+		void SetWorldRelative(const TopLeft& worldRelative) noexcept;
+		const TopLeft& GetWorldRelative() const noexcept;
 
-		const Vector2Int& GetWorldRelative() const noexcept;
-		void SetWorldRelative(const Vector2Int& worldRelative) noexcept;
-
-		void InitLevel();
+		void CreateMap(const Level& level);
 
 		Object::Object& GetObject(int id) const;
 		void InsertObject(std::unique_ptr<Object::Object>&& objPtr
@@ -35,7 +37,7 @@ namespace BattleCity
 		const Object::ObjectContainer& GetFrontLayer() const noexcept;
 
 	private:
-		LevelCreator mMapCreator;
+		TopLeft mWorldRelative;
 
 		Object::ObjectContainer mBackLayer;
 		Object::ObjectContainer mFrontLayer;

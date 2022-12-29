@@ -4,6 +4,7 @@
 
 #include "ISignal.h"
 
+#include "Level.h"
 #include "Object.h"
 #include "Screen.h"
 
@@ -22,12 +23,9 @@ namespace BattleCity::Framework
 
 	bool FrameworkWrapper::Init()
 	{
-		mWorldMap.CreateLevel(R"(.\data\Maps\level1.txt)");
+		const Level level = Level::CreateLevel(R"(.\data\Maps\level1.txt)");
 		mWorldMap.SetWorldRelative({ 40, 44 });
-		mWorldMap.InitLevel();
-
-		mWorldMap.CreateLevel(R"(.\data\Maps\Demo.txt)");
-		mWorldMap.InitLevel();
+		mWorldMap.CreateMap(level);
 
 		return true;
 	}
