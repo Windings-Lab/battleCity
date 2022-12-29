@@ -3,6 +3,11 @@
 #include "Manager.h"
 #include "ObjectContainer.h"
 
+namespace BattleCity
+{
+	class MapCreator;
+}
+
 namespace BattleCity::Object
 {
 	class Object;
@@ -31,7 +36,7 @@ namespace BattleCity::Manager
 		const Object::ObjectContainer& GetFrontLayerObjects() const noexcept;
 
 	private:
-		void InitMap();
+		void InitMap(const MapCreator& mapCreator);
 
 		Object::ObjectContainer mBackLayer;
 		Object::ObjectContainer mFrontLayer;

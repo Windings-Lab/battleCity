@@ -13,7 +13,10 @@ namespace BattleCity::Manager
 	{
 		__super::OnInit();
 
-		InitMap();
+		MapCreator mapCreator;
+		mapCreator.CreateMap(R"(.\data\Maps\level1.txt)");
+		mapCreator.SetStartPosition({ 40, 44 });
+		InitMap(mapCreator);
 
 #ifdef _DEBUG
 		std::cout << "World Manager object count: " << mFrontLayer.GetSize() << "\n";
@@ -24,19 +27,24 @@ namespace BattleCity::Manager
 		mFrontLayer.Clear();
 	}
 
-	void WorldManager::InitMap()
+	void WorldManager::InitMap(const MapCreator& mapCreator)
 	{
 		Object::BasicObjectFactory objectFactory(*this);
 
 		const auto worldBoundaries = objectFactory.CreateWorldBoundaries();
 
-		int posX = 40, posY = 44;
-		worldBoundaries->SetPosition(posX, posY);
+		auto& startPos = mapCreator.GetStartPosition();
+		worldBoundaries->SetPosition(startPos);
 
-		for (const auto& mapRow : MapCreator::GetLevel(R"(.\data\Maps\level1.txt)"))
+		const auto& mapColumn = mapCreator.GetMap();
+
+		int nextPosY = startPos.Y;
+		for (const auto& mapRow : mapColumn)
 		{
+			int nextPosX = startPos.X;
 			for (const auto& objectType : mapRow)
 			{
+				Vector2Int position(nextPosX, nextPosY);
 				switch (objectType)
 				{
 				case Object::Type::None: 
@@ -44,34 +52,35 @@ namespace BattleCity::Manager
 				case Object::Type::TankPlayer:
 					{
 						const auto tankPlayer = objectFactory.CreateTank(Object::Type::TankPlayer);
-						tankPlayer->SetPosition(posX, posY);
+						tankPlayer->SetPosition(position);
 					}
 					break;
 				case Object::Type::TankNPC:
 					{
 						const auto tankNPC = objectFactory.CreateTank(Object::Type::TankNPC);
-						tankNPC->SetPosition(posX, posY);
+						tankNPC->SetPosition(position);
 					}
 					break;
 				case Object::Type::Wall:
 					{
 						const auto wall = objectFactory.CreateWall();
-						wall->SetPosition(posX, posY);
+						wall->SetPosition(position);
 					}
 					break;
 				case Object::Type::Phoenix:
 					{
 						const auto phoenix = objectFactory.CreatePhoenix();
-						phoenix->SetPosition(posX, posY);
+						phoenix->SetPosition(position);
 					}
 					break;
 				default: 
 					break;
 				}
-				posX += 16;
+
+				nextPosX += 16;
 			}
-			posX = 40;
-			posY += 16;
+
+			nextPosY += 16;
 		}
 	}
 
