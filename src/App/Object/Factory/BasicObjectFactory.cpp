@@ -7,6 +7,7 @@
 
 #include "Object.h"
 #include "Phoenix.h"
+#include "PowerUp.h"
 #include "Tank.h"
 #include "Wall.h"
 #include "WorldBoundaries.h"
@@ -66,7 +67,7 @@ namespace BattleCity::Object
 
 	Object* const BasicObjectFactory::CreatePowerUp()
 	{
-		auto powerUp = std::make_unique<Tank>();
+		auto powerUp = std::make_unique<PowerUp>();
 		powerUp->CreateSprite(R"(.\data\PowerUp)");
 		powerUp->SetSprite(Sprite::Type::Basic);
 
