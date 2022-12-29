@@ -65,8 +65,8 @@ namespace BattleCity::Manager
 	{
 		using magic_enum::enum_cast;
 
-		const std::string spriteTypeStr = spritePath.stem().string();
-		const std::string objectBehaviourStr = spritePath.parent_path().stem().string();
+		const std::string spriteTypeStr = spritePath.parent_path().stem().string();
+		const std::string objectBehaviourStr = spritePath.stem().string();
 
 		auto spriteTypeCast
 			= enum_cast<Sprite::Type>(spriteTypeStr);
