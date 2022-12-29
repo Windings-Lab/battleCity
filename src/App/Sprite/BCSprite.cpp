@@ -66,7 +66,7 @@ namespace BattleCity::Sprite
 		drawSprite(mSprite, x, y);
 	}
 
-	void BCSprite::CreateSprite(const std::string& folderPath)
+	void BCSprite::CreateSprite(const FolderPath& folderPath)
 	{
 		mSpriteData.Init(folderPath);
 

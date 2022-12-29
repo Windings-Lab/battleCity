@@ -9,6 +9,17 @@ namespace BattleCity::Sprite
 
 	class BCSprite final
 	{
+	private:
+		struct SpriteDeleter;
+
+		using SpriteObject = std::unique_ptr<Sprite, SpriteDeleter>;
+
+		using FolderPath = std::string;
+		using SpritePath = std::string;
+
+		using SpriteContainer = std::unordered_map<Type, Sprite*>;
+		using SpriteAtlas = std::unordered_map<SpritePath, SpriteObject>;
+
 	public:
 		BCSprite();
 
@@ -20,7 +31,7 @@ namespace BattleCity::Sprite
 		void DrawAt(const Vector2Int& position) const noexcept;
 		void DrawAt(int x, int y)  const noexcept;
 
-		void CreateSprite(const std::string& folderPath);
+		void CreateSprite(const FolderPath& folderPath);
 		void SetSpriteType(Type spriteType);
 
 		const Vector2Int& GetSpriteSize();
@@ -30,12 +41,6 @@ namespace BattleCity::Sprite
 		friend void swap(BCSprite& first, BCSprite& second) noexcept;
 
 	private:
-		struct SpriteDeleter;
-
-		using SpriteObject = std::unique_ptr<Sprite, SpriteDeleter>;
-		using SpriteContainer = std::unordered_map<Type, Sprite*>;
-		using SpriteAtlas = std::unordered_map<std::string, SpriteObject>;
-
 		SpriteContainer mSpriteContainer;
 		static SpriteAtlas mSpriteAtlas;
 
