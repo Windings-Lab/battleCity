@@ -23,8 +23,6 @@ namespace BattleCity::Object
 
 		virtual void Update();
 
-		void SetType(Type type);
-
 		void Draw() const noexcept;
 		void CreateSprite(const std::string& spritePath);
 		void SetSprite(Sprite::Type objectBehaviour);
@@ -39,8 +37,6 @@ namespace BattleCity::Object
 		struct Factory;
 
 	private:
-		Type mType;
-
 		Sprite::BCSprite mSprite;
 		Vector2Int mPosition;
 	};

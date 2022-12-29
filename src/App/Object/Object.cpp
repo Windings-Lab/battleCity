@@ -12,11 +12,6 @@ namespace BattleCity::Object
     {
     }
 
-    void Object::SetType(Type type)
-    {
-        mType = type;
-    }
-
     void Object::Draw() const noexcept
     {
         mSprite.DrawAt(mPosition);

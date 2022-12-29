@@ -16,7 +16,6 @@ namespace BattleCity::Object
 	Object* const BasicObjectFactory::CreateWorldBoundaries()
 	{
 		auto worldBoundaries = std::make_unique<WorldBoundaries>();
-		worldBoundaries->SetType(Type::WorldBoundaries);
 		worldBoundaries->CreateSprite(R"(.\data\Background)");
 		worldBoundaries->SetSprite(Sprite::Type::Basic);
 
@@ -35,12 +34,10 @@ namespace BattleCity::Object
 		case Type::TankNPC:
 			tank = std::make_unique<Tank>();
 			tank->CreateSprite(R"(.\data\Tank\TankNPC)");
-			tank->SetType(Type::TankNPC);
 			tank->SetSprite(Sprite::Type::Up);
 			break;
 		case Type::TankPlayer:
 			tank = std::make_unique<Tank>();
-			tank->SetType(Type::TankPlayer);
 			tank->CreateSprite(R"(.\data\Tank\TankPlayer)");
 			tank->SetSprite(Sprite::Type::Up);
 			break;
@@ -58,7 +55,6 @@ namespace BattleCity::Object
 	Object* const BasicObjectFactory::CreateBullet()
 	{
 		auto bullet = std::make_unique<Bullet>();
-		bullet->SetType(Type::Bullet);
 		bullet->CreateSprite(R"(.\data\Bullet)");
 		bullet->SetSprite(Sprite::Type::Up);
 
@@ -71,7 +67,6 @@ namespace BattleCity::Object
 	Object* const BasicObjectFactory::CreatePowerUp()
 	{
 		auto powerUp = std::make_unique<Tank>();
-		powerUp->SetType(Type::PowerUp);
 		powerUp->CreateSprite(R"(.\data\PowerUp)");
 		powerUp->SetSprite(Sprite::Type::Basic);
 
@@ -84,7 +79,6 @@ namespace BattleCity::Object
 	Object* const BasicObjectFactory::CreateWall()
 	{
 		auto wall = std::make_unique<Wall>();
-		wall->SetType(Type::Wall);
 		wall->CreateSprite(R"(.\data\Wall)");
 		wall->SetSprite(Sprite::Type::Basic);
 
@@ -96,7 +90,6 @@ namespace BattleCity::Object
 	Object* const BasicObjectFactory::CreatePhoenix()
 	{
 		auto phoenix = std::make_unique<Phoenix>();
-		phoenix->SetType(Type::Phoenix);
 		phoenix->CreateSprite(R"(.\data\PhoenixAndFlag)");
 		phoenix->SetSprite(Sprite::Type::Phoenix);
 
@@ -109,7 +102,6 @@ namespace BattleCity::Object
 	Object* const BasicObjectFactory::CreateExplosion()
 	{
 		auto explosion = std::make_unique<Explosion>();
-		explosion->SetType(Type::Explosion);
 		explosion->CreateSprite(R"(.\data\Explosion)");
 		explosion->SetSprite(Sprite::Type::ExplosionSmall1);
 
