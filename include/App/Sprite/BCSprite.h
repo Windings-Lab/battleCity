@@ -22,8 +22,8 @@ namespace BattleCity::Sprite
 		void DrawAt(const Vector2Int& position) const noexcept;
 		void DrawAt(int x, int y)  const noexcept;
 
-		void CreateSprite(Object::Type objectType, const std::filesystem::path& spritePath);
-		void SetSpriteType(Type spriteBehaviour);
+		void CreateSprite(const std::string& folderPath);
+		void SetSpriteType(Type spriteType);
 
 		const Vector2Int& GetSpriteSize();
 
@@ -36,7 +36,7 @@ namespace BattleCity::Sprite
 
 		using SpriteObject = std::unique_ptr<Sprite, SpriteDeleter>;
 		using SpriteContainer = std::unordered_map<Type, Sprite*>;
-		using SpriteAtlas = std::unordered_map<SpritePair, SpriteObject, SpritePairHash>;
+		using SpriteAtlas = std::unordered_map<std::string, SpriteObject>;
 
 		SpriteContainer mSpriteContainer;
 		static SpriteAtlas mSpriteAtlas;

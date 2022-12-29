@@ -61,40 +61,36 @@ namespace BattleCity::Sprite
 
 	void BCSprite::DrawAt(int x, int y) const noexcept
 	{
-		if(mSprite)
-		{
-			drawSprite(mSprite, x, y);
-		}
+		drawSprite(mSprite, x, y);
 	}
 
-	void BCSprite::CreateSprite(Object::Type objectType, const std::filesystem::path& spritePath)
+	void BCSprite::CreateSprite(const std::string& folderPath)
 	{
-		mSpriteData.Init(spritePath);
+		mSpriteData.Init(folderPath);
 
-		for (const auto& [spriteType, path] : mSpriteData)
+		for (const auto& [spriteType, spritePath] : mSpriteData)
 		{
-			SpritePair pair{ objectType, spriteType };
 			Sprite* sprite = nullptr;
-			if(mSpriteAtlas.find(pair) == mSpriteAtlas.end())
+			if(mSpriteAtlas.find(spritePath) == mSpriteAtlas.end())
 			{
-				sprite = createSprite(path.c_str());
-				mSpriteAtlas.try_emplace(pair, sprite);
+				sprite = createSprite(spritePath.c_str());
+				mSpriteAtlas.try_emplace(spritePath, sprite);
 			}
 			else
 			{
-				sprite = mSpriteAtlas.at(pair).get();
+				sprite = mSpriteAtlas.at(spritePath).get();
 			}
 
 			mSpriteContainer.try_emplace(spriteType, sprite);
 		}
 	}
 
-	void BCSprite::SetSpriteType(Type spriteBehaviour)
+	void BCSprite::SetSpriteType(Type spriteType)
 	{
-		if(mType == spriteBehaviour) return;
+		if(mType == spriteType) return;
 
-		mType = spriteBehaviour;
-		mSprite = mSpriteContainer.at(spriteBehaviour);
+		mType = spriteType;
+		mSprite = mSpriteContainer.at(spriteType);
 		InitSpriteSize();
 	}
 

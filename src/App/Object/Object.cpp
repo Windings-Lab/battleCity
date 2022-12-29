@@ -22,9 +22,9 @@ namespace BattleCity::Object
         mSprite.DrawAt(mPosition);
     }
 
-    void Object::CreateSprite(const std::filesystem::path& spritePath)
+    void Object::CreateSprite(const std::string& spritePath)
     {
-        mSprite.CreateSprite(mType, spritePath);
+        mSprite.CreateSprite(spritePath);
     }
 
     void Object::SetSprite(Sprite::Type objectBehaviour)

@@ -3,11 +3,13 @@
 
 namespace BattleCity::Sprite
 {
-	void SpriteData::Init(const std::filesystem::path& folderPath)
+	void SpriteData::Init(const std::string& folderPath)
 	{
 		using namespace std::filesystem;
 
-		if (!exists(folderPath))
+		const path pathFS(folderPath);
+
+		if (!exists(pathFS))
 		{
 			std::cerr << "Sprite Folder Path has not been found\n";
 			std::cerr << "Make sure that " << folderPath << " in folder with BattleCity.exe file\n";
@@ -15,7 +17,7 @@ namespace BattleCity::Sprite
 		}
 
 		const path fileExtension = ".png";
-		for (const auto& folderEntry : recursive_directory_iterator(folderPath))
+		for (const auto& folderEntry : recursive_directory_iterator(pathFS))
 		{
 			if (folderEntry.path().extension() != fileExtension)
 			{

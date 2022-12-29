@@ -11,7 +11,7 @@ namespace BattleCity::Sprite
 
 		~SpriteData() = default;
 
-		void Init(const std::filesystem::path& folderPath);
+		void Init(const std::string& folderPath);
 		const std::string& Get(Type spritePair) const;
 
 		std::unordered_map<Type, std::string>::const_iterator begin() const;

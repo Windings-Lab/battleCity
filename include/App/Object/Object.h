@@ -26,7 +26,7 @@ namespace BattleCity::Object
 		void SetType(Type type);
 
 		void Draw() const noexcept;
-		void CreateSprite(const std::filesystem::path& spritePath);
+		void CreateSprite(const std::string& spritePath);
 		void SetSprite(Sprite::Type objectBehaviour);
 
 		void SetPosition(const Vector2Int& pos) noexcept;

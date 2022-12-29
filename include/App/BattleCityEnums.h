@@ -66,16 +66,4 @@ namespace BattleCity
 			Idle
 		};
 	}
-
-	using SpritePair = std::pair<Object::Type, Sprite::Type>;
-
-	struct SpritePairHash
-	{
-		std::size_t operator()(const SpritePair& s) const
-		{
-			size_t h1 = std::hash<Object::Type>{}(s.first);
-			size_t h2 = std::hash<Sprite::Type>{}(s.second);
-			return h1 ^ (h2 << 1);
-		}
-	};
 }
