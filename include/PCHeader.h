@@ -39,3 +39,5 @@ using namespace std::string_literals;
 #include "BasicMacros.h"
 #include "BattleCityEnums.h"
 #include "magic_enum.hpp"
+
+#include "Vector2Int.h"

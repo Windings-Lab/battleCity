@@ -1,7 +1,5 @@
 #pragma once
 
-#include "Vector2Int.h"
-
 namespace BattleCity
 {
 	// Create Rectangle at World position

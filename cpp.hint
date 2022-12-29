@@ -5,3 +5,6 @@
 #define DISALLOW_COPY_MOVE(Class) Class(const Class &) = delete; Class& operator=(const Class &) = delete; Class(Class&&) noexcept = delete; Class& operator=(Class&&) noexcept = delete;
 #define DISALLOW_COPY(Class) Class(const Class &) = delete; Class& operator=(const Class &) = delete;
 #define ALLOW_MOVE(Class) Class(Class&&) noexcept; Class& operator=(Class&&) noexcept;
+#define ALLOW_COPY(Class) Class(const Class &); Class& operator=(const Class &);
+#define DISALLOW_MOVE(Class) Class(Class&&) noexcept = delete; Class& operator=(Class&&) noexcept = delete;
+#define ALLOW_COPY_DEFAULT(Class) Class(const Class &) = default; Class& operator=(const Class &) = default;

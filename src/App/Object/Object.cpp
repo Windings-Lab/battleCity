@@ -2,8 +2,6 @@
 
 #include "Object.h"
 
-#include "Vector2Int.h"
-
 namespace BattleCity::Object
 {
     Object::~Object() = default;

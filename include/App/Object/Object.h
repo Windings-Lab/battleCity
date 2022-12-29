@@ -3,7 +3,6 @@
 #include "UUID.h"
 
 #include "BCSprite.h"
-#include "Vector2Int.h"
 
 namespace BattleCity::Manager
 {
