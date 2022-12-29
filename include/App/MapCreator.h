@@ -19,7 +19,7 @@ namespace BattleCity
 		const Map& GetMap() const noexcept;
 
 		void SetStartPosition(const Vector2Int& startPos) noexcept;
-		const Vector2Int& GetStartPosition() const noexcept;
+		const Vector2Int& GetTopLeftPosition() const noexcept;
 
 		Map::const_iterator begin() const noexcept;
 		Map::const_iterator end() const noexcept;

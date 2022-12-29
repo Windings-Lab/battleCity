@@ -1,12 +1,8 @@
 #pragma once
 
 #include "Manager.h"
+#include "MapCreator.h"
 #include "ObjectContainer.h"
-
-namespace BattleCity
-{
-	class MapCreator;
-}
 
 namespace BattleCity::Object
 {
@@ -27,6 +23,8 @@ namespace BattleCity::Manager
 		void OnInit() override;
 		void OnClose() override;
 
+		const Vector2Int& GetWorldRelative() const noexcept;
+
 		Object::Object& GetObject(int id) const;
 		void InsertObject(std::unique_ptr<Object::Object>&& objPtr
 			, Sprite::Layer layer = Sprite::Layer::Front);
@@ -36,7 +34,10 @@ namespace BattleCity::Manager
 		const Object::ObjectContainer& GetFrontLayerObjects() const noexcept;
 
 	private:
-		void InitMap(const MapCreator& mapCreator);
+		void InitMap();
+
+	private:
+		MapCreator mMapCreator;
 
 		Object::ObjectContainer mBackLayer;
 		Object::ObjectContainer mFrontLayer;

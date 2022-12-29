@@ -42,7 +42,7 @@ namespace BattleCity
 		mStartPos.SetXY(startPos);
 	}
 
-	const Vector2Int& MapCreator::GetStartPosition() const noexcept
+	const Vector2Int& MapCreator::GetTopLeftPosition() const noexcept
 	{
 		return mStartPos;
 	}

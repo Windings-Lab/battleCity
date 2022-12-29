@@ -13,10 +13,9 @@ namespace BattleCity::Manager
 	{
 		__super::OnInit();
 
-		MapCreator mapCreator;
-		mapCreator.CreateMap(R"(.\data\Maps\level1.txt)");
-		mapCreator.SetStartPosition({ 40, 44 });
-		InitMap(mapCreator);
+		mMapCreator.CreateMap(R"(.\data\Maps\level1.txt)");
+		mMapCreator.SetStartPosition({ 40, 44 });
+		InitMap();
 
 #ifdef _DEBUG
 		std::cout << "World Manager object count: " << mFrontLayer.GetSize() << "\n";
@@ -27,16 +26,21 @@ namespace BattleCity::Manager
 		mFrontLayer.Clear();
 	}
 
-	void WorldManager::InitMap(const MapCreator& mapCreator)
+	const Vector2Int& WorldManager::GetWorldRelative() const noexcept
+	{
+		return mMapCreator.GetTopLeftPosition();
+	}
+
+	void WorldManager::InitMap()
 	{
 		Object::BasicObjectFactory objectFactory(*this);
 
 		const auto worldBoundaries = objectFactory.CreateWorldBoundaries();
 
-		auto& startPos = mapCreator.GetStartPosition();
+		auto& startPos = mMapCreator.GetTopLeftPosition();
 		worldBoundaries->SetPosition(startPos);
 
-		const auto& mapColumn = mapCreator.GetMap();
+		const auto& mapColumn = mMapCreator.GetMap();
 
 		int nextPosY = startPos.Y;
 		for (const auto& mapRow : mapColumn)
