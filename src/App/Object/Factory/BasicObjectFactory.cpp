@@ -11,22 +11,17 @@
 #include "Wall.h"
 #include "WorldBoundaries.h"
 
-
 namespace BattleCity::Object
 {
-	BasicObjectFactory& BasicObjectFactory::GetInstance()
-	{
-		static BasicObjectFactory objectFactory;
-		return objectFactory;
-	}
-
 	Object* const BasicObjectFactory::CreateWorldBoundaries()
 	{
 		auto worldBoundaries = std::make_unique<WorldBoundaries>();
-		worldBoundaries->SetSprite({ Sprite::Type::Background, Sprite::Behaviour::Basic });
+		worldBoundaries->SetType(Type::WorldBoundaries);
+		worldBoundaries->CreateSprite(R"(.\data\Background)");
+		worldBoundaries->SetSprite(Sprite::Type::Basic);
 
 		auto worldBoundariesPtr = worldBoundaries.get();
-		Manager::WM().InsertObject(std::move(worldBoundaries), Sprite::Layer::Back);
+		mInserter.InsertObject(std::move(worldBoundaries), Sprite::Layer::Back);
 
 		return worldBoundariesPtr;
 	}
@@ -39,11 +34,15 @@ namespace BattleCity::Object
 		{
 		case Type::TankNPC:
 			tank = std::make_unique<Tank>();
-			tank->SetSprite({ Sprite::Type::TankNPC, Sprite::Behaviour::Up });
+			tank->CreateSprite(R"(.\data\Tank\TankNPC)");
+			tank->SetType(Type::TankNPC);
+			tank->SetSprite(Sprite::Type::Up);
 			break;
 		case Type::TankPlayer:
 			tank = std::make_unique<Tank>();
-			tank->SetSprite({ Sprite::Type::TankPlayer, Sprite::Behaviour::Up });
+			tank->SetType(Type::TankPlayer);
+			tank->CreateSprite(R"(.\data\Tank\TankPlayer)");
+			tank->SetSprite(Sprite::Type::Up);
 			break;
 		default:
 			std::cerr << "Incorrect tank type\n";
@@ -51,7 +50,7 @@ namespace BattleCity::Object
 		}
 		
 		auto tankPtr = tank.get();
-		Manager::WM().InsertObject(std::move(tank), Sprite::Layer::Front);
+		mInserter.InsertObject(std::move(tank), Sprite::Layer::Front);
 
 		return tankPtr;
 	}
@@ -59,10 +58,12 @@ namespace BattleCity::Object
 	Object* const BasicObjectFactory::CreateBullet()
 	{
 		auto bullet = std::make_unique<Bullet>();
-		bullet->SetSprite({ Sprite::Type::Bullet, Sprite::Behaviour::Up });
+		bullet->SetType(Type::Bullet);
+		bullet->CreateSprite(R"(.\data\Bullet)");
+		bullet->SetSprite(Sprite::Type::Up);
 
 		auto bulletPtr = bullet.get();
-		Manager::WM().InsertObject(std::move(bullet), Sprite::Layer::Front);
+		mInserter.InsertObject(std::move(bullet), Sprite::Layer::Front);
 
 		return bulletPtr;
 	}
@@ -70,10 +71,12 @@ namespace BattleCity::Object
 	Object* const BasicObjectFactory::CreatePowerUp()
 	{
 		auto powerUp = std::make_unique<Tank>();
-		powerUp->SetSprite({ Sprite::Type::PowerUp, Sprite::Behaviour::Basic });
+		powerUp->SetType(Type::PowerUp);
+		powerUp->CreateSprite(R"(.\data\PowerUp)");
+		powerUp->SetSprite(Sprite::Type::Basic);
 
 		auto powerUpPtr = powerUp.get();
-		Manager::WM().InsertObject(std::move(powerUp), Sprite::Layer::Front);
+		mInserter.InsertObject(std::move(powerUp), Sprite::Layer::Front);
 
 		return powerUpPtr;
 	}
@@ -81,20 +84,24 @@ namespace BattleCity::Object
 	Object* const BasicObjectFactory::CreateWall()
 	{
 		auto wall = std::make_unique<Wall>();
-		wall->SetSprite({ Sprite::Type::Wall, Sprite::Behaviour::Basic });
+		wall->SetType(Type::Wall);
+		wall->CreateSprite(R"(.\data\Wall)");
+		wall->SetSprite(Sprite::Type::Basic);
 
 		auto wallPtr = wall.get();
-		Manager::WM().InsertObject(std::move(wall), Sprite::Layer::Front);
+		mInserter.InsertObject(std::move(wall), Sprite::Layer::Front);
 
 		return wallPtr;
 	}
 	Object* const BasicObjectFactory::CreatePhoenix()
 	{
 		auto phoenix = std::make_unique<Phoenix>();
-		phoenix->SetSprite({ Sprite::Type::Phoenix, Sprite::Behaviour::Basic });
+		phoenix->SetType(Type::Phoenix);
+		phoenix->CreateSprite(R"(.\data\PhoenixAndFlag)");
+		phoenix->SetSprite(Sprite::Type::Phoenix);
 
 		auto phoenixPtr = phoenix.get();
-		Manager::WM().InsertObject(std::move(phoenix), Sprite::Layer::Front);
+		mInserter.InsertObject(std::move(phoenix), Sprite::Layer::Front);
 
 		return phoenixPtr;
 	}
@@ -102,10 +109,12 @@ namespace BattleCity::Object
 	Object* const BasicObjectFactory::CreateExplosion()
 	{
 		auto explosion = std::make_unique<Explosion>();
-		explosion->SetSprite({ Sprite::Type::Explosion, Sprite::Behaviour::ExplosionSmall1 });
+		explosion->SetType(Type::Explosion);
+		explosion->CreateSprite(R"(.\data\Explosion)");
+		explosion->SetSprite(Sprite::Type::ExplosionSmall1);
 
 		auto explosionPtr = explosion.get();
-		Manager::WM().InsertObject(std::move(explosion), Sprite::Layer::Front);
+		mInserter.InsertObject(std::move(explosion), Sprite::Layer::Front);
 
 		return explosionPtr;
 	}

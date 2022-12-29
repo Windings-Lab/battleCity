@@ -2,17 +2,15 @@
 
 namespace BattleCity::Manager
 {
-	class Manager
+	struct Manager
 	{
-	protected:
-		Manager();
+		Manager() = default;
 
-	public:
 		DISALLOW_COPY_MOVE(Manager)
 
 		virtual ~Manager() = 0;
 
-		virtual void StartUp() = 0;
-		virtual void ShutDown() = 0;
+		virtual void OnInit() = 0;
+		virtual void OnClose() = 0;
 	};
 }

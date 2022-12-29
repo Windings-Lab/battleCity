@@ -20,13 +20,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="src\App\Manager\GameManager.cpp" />
     <ClCompile Include="src\App\Manager\Manager.cpp" />
-    <ClCompile Include="src\App\Manager\SpritePathManager.cpp" />
     <ClCompile Include="src\App\Manager\WorldManager.cpp" />
     <ClCompile Include="src\App\MapCreator.cpp" />
     <ClCompile Include="src\App\Object\Bullet.cpp" />
-    <ClCompile Include="src\App\Object\Components\BCSprite.cpp" />
     <ClCompile Include="src\App\Object\Components\Collider.cpp" />
     <ClCompile Include="src\App\Object\Components\Health.cpp" />
     <ClCompile Include="src\App\Object\Components\Movable.cpp" />
@@ -40,6 +37,8 @@
     <ClCompile Include="src\App\Object\Tank.cpp" />
     <ClCompile Include="src\App\Object\Wall.cpp" />
     <ClCompile Include="src\App\Object\WorldBoundaries.cpp" />
+    <ClCompile Include="src\App\Sprite\BCSprite.cpp" />
+    <ClCompile Include="src\App\Sprite\SpriteData.cpp" />
     <ClCompile Include="src\App\UUID.cpp" />
     <ClCompile Include="src\Framework\FrameworkWrapper.cpp" />
     <ClCompile Include="src\Framework\Screen.cpp" />
@@ -53,13 +52,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\App\BattleCityEnums.h" />
-    <ClInclude Include="include\App\Manager\GameManager.h" />
     <ClInclude Include="include\App\Manager\Manager.h" />
-    <ClInclude Include="include\App\Manager\SpritePathManager.h" />
     <ClInclude Include="include\App\Manager\WorldManager.h" />
     <ClInclude Include="include\App\MapCreator.h" />
     <ClInclude Include="include\App\Object\Bullet.h" />
-    <ClInclude Include="include\App\Object\Components\BCSprite.h" />
     <ClInclude Include="include\App\Object\Components\Collider.h" />
     <ClInclude Include="include\App\Object\Components\Health.h" />
     <ClInclude Include="include\App\Object\Components\Movable.h" />
@@ -73,6 +69,8 @@
     <ClInclude Include="include\App\Object\Tank.h" />
     <ClInclude Include="include\App\Object\Wall.h" />
     <ClInclude Include="include\App\Object\WorldBoundaries.h" />
+    <ClInclude Include="include\App\Sprite\BCSprite.h" />
+    <ClInclude Include="include\App\Sprite\SpriteData.h" />
     <ClInclude Include="include\App\UUID.h" />
     <ClInclude Include="include\Framework\Framework.h" />
     <ClInclude Include="include\Framework\FrameworkWrapper.h" />
@@ -185,7 +183,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>PCHeader.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)include\;$(ProjectDir)include\Framework\;$(ProjectDir)include\App\;$(ProjectDir)include\App\Manager\;$(ProjectDir)include\App\Object\;$(ProjectDir)include\App\Object\Components\;$(ProjectDir)include\App\Object\Container\;$(ProjectDir)include\App\Object\Factory\;$(ProjectDir)include\Toolkit\;$(ProjectDir)include\Toolkit\Observer\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)include\;$(ProjectDir)include\Framework\;$(ProjectDir)include\App\;$(ProjectDir)include\App\Manager\;$(ProjectDir)include\App\Object\;$(ProjectDir)include\App\Sprite\;$(ProjectDir)include\App\Object\Components\;$(ProjectDir)include\App\Object\Container\;$(ProjectDir)include\App\Object\Factory\;$(ProjectDir)include\Toolkit\;$(ProjectDir)include\Toolkit\Observer\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -208,7 +206,7 @@ if %errorlevel% LEQ 3 exit 0</Command>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)include\;$(ProjectDir)include\Framework\;$(ProjectDir)include\App\;$(ProjectDir)include\App\Manager\;$(ProjectDir)include\App\Object\;$(ProjectDir)include\App\Object\Components\;$(ProjectDir)include\App\Object\Container\;$(ProjectDir)include\App\Object\Factory\;$(ProjectDir)include\Toolkit\;$(ProjectDir)include\Toolkit\Observer\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)include\;$(ProjectDir)include\Framework\;$(ProjectDir)include\App\;$(ProjectDir)include\App\Manager\;$(ProjectDir)include\App\Object\;$(ProjectDir)include\App\Sprite\;$(ProjectDir)include\App\Object\Components\;$(ProjectDir)include\App\Object\Container\;$(ProjectDir)include\App\Object\Factory\;$(ProjectDir)include\Toolkit\;$(ProjectDir)include\Toolkit\Observer\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>PCHeader.h</PrecompiledHeaderFile>
     </ClCompile>

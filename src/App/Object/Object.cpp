@@ -12,14 +12,24 @@ namespace BattleCity::Object
     {
     }
 
+    void Object::SetType(Type type)
+    {
+        mType = type;
+    }
+
     void Object::Draw() const noexcept
     {
         mSprite.DrawAt(mPosition);
     }
 
-    void Object::SetSprite(const Sprite::SpritePair& spriteBehaviour)
+    void Object::CreateSprite(const std::filesystem::path& spritePath)
     {
-        mSprite.SetSprite(spriteBehaviour);
+        mSprite.CreateSprite(mType, spritePath);
+    }
+
+    void Object::SetSprite(Sprite::Type objectBehaviour)
+    {
+        mSprite.SetSpriteType(objectBehaviour);
     }
 
     void Object::SetPosition(const Vector2Int& pos) noexcept

@@ -15,21 +15,6 @@ namespace BattleCity
 		enum class Type
 		{
 			Error,
-			TankPlayer,
-			TankNPC,
-			Bullet,
-			Wall,
-			Explosion,
-			PowerUp,
-			Phoenix,
-			Flag,
-			Background,
-			GameOver
-		};
-
-		enum class Behaviour
-		{
-			Error,
 			Basic,
 			Down,
 			Left,
@@ -40,18 +25,8 @@ namespace BattleCity
 			ExplosionSmall3,
 			ExplosionLarge1,
 			ExplosionLarge2,
-		};
-
-		using SpritePair = std::pair<Type, Behaviour>;
-
-		struct SpritePairHash
-		{
-			std::size_t operator()(const SpritePair& s) const
-			{
-				size_t h1 = std::hash<Type>{}(s.first);
-				size_t h2 = std::hash<Behaviour>{}(s.second);
-				return h1 ^ (h2 << 1);
-			}
+			Phoenix,
+			Flag,
 		};
 	}
 
@@ -75,7 +50,8 @@ namespace BattleCity
 			Wall,
 			Phoenix,
 			Explosion,
-			PowerUp
+			PowerUp,
+			WorldBoundaries,
 		};
 
 		// Do not use int(4) since framework using it for another purpose
@@ -90,4 +66,16 @@ namespace BattleCity
 			Idle
 		};
 	}
+
+	using SpritePair = std::pair<Object::Type, Sprite::Type>;
+
+	struct SpritePairHash
+	{
+		std::size_t operator()(const SpritePair& s) const
+		{
+			size_t h1 = std::hash<Object::Type>{}(s.first);
+			size_t h2 = std::hash<Sprite::Type>{}(s.second);
+			return h1 ^ (h2 << 1);
+		}
+	};
 }

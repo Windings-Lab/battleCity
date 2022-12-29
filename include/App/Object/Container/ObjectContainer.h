@@ -1,9 +1,9 @@
 #pragma once
 
+#include "Object.h"
+
 namespace BattleCity::Object
 {
-	class Object;
-
 	using ObjectVector = std::vector<std::unique_ptr<Object>>;
 
 	class ObjectContainer

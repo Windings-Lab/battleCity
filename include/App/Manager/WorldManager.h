@@ -12,18 +12,15 @@ namespace BattleCity::Manager
 {
 	class WorldManager final : public Manager
 	{
-	private:
-		WorldManager() = default;
-
 	public:
-		static WorldManager& GetInstance();
+		using Manager::Manager;
 
 		DISALLOW_COPY_MOVE(WorldManager)
 
 		~WorldManager() override = default;
 
-		void StartUp() override;
-		void ShutDown() override;
+		void OnInit() override;
+		void OnClose() override;
 
 		Object::Object& GetObject(int id) const;
 		void InsertObject(std::unique_ptr<Object::Object>&& objPtr
@@ -39,6 +36,4 @@ namespace BattleCity::Manager
 		Object::ObjectContainer mBackLayer;
 		Object::ObjectContainer mFrontLayer;
 	};
-
-	constexpr auto& WM = WorldManager::GetInstance;
 }

@@ -5,11 +5,7 @@ namespace BattleCity::Object
 {
 	struct BasicObjectFactory : Object::Factory
 	{
-	private:
-		BasicObjectFactory() = default;
-
-	public:
-		static BasicObjectFactory& GetInstance();
+		using Factory::Factory;
 
 		Object* const CreateWorldBoundaries() override;
 

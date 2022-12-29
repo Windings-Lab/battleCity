@@ -9,15 +9,9 @@
 
 namespace BattleCity::Manager
 {
-	WorldManager& WorldManager::GetInstance()
+	void WorldManager::OnInit()
 	{
-		static WorldManager single;
-		return single;
-	}
-
-	void WorldManager::StartUp()
-	{
-		__super::StartUp();
+		__super::OnInit();
 
 		InitMap();
 
@@ -25,22 +19,21 @@ namespace BattleCity::Manager
 		std::cout << "World Manager object count: " << mFrontLayer.GetSize() << "\n";
 #endif
 	}
-	void WorldManager::ShutDown()
+	void WorldManager::OnClose()
 	{
 		mFrontLayer.Clear();
 	}
 
 	void WorldManager::InitMap()
 	{
-		auto& objectFactory = Object::BasicObjectFactory::GetInstance();
+		Object::BasicObjectFactory objectFactory(*this);
 
 		const auto worldBoundaries = objectFactory.CreateWorldBoundaries();
 
 		int posX = 40, posY = 44;
 		worldBoundaries->SetPosition(posX, posY);
 
-		for (const auto& mapRow 
-			: MapCreator::GetLevel(R"(.\data\Maps\level1.txt)"))
+		for (const auto& mapRow : MapCreator::GetLevel(R"(.\data\Maps\level1.txt)"))
 		{
 			for (const auto& objectType : mapRow)
 			{

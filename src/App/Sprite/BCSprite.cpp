@@ -1,7 +1,7 @@
 #include "PCHeader.h"
 
 #include "BCSprite.h"
-#include "SpritePathManager.h"
+#include "SpriteData.h"
 
 namespace BattleCity::Sprite
 {
@@ -30,6 +30,8 @@ namespace BattleCity::Sprite
 		}
 	};
 
+	BCSprite::SpriteAtlas BCSprite::mSpriteAtlas;
+
 	void swap(BCSprite& first, BCSprite& second) noexcept
 	{
 		using std::swap;
@@ -38,9 +40,7 @@ namespace BattleCity::Sprite
 		first.mSpriteSize.SetXY(second.mSpriteSize);
 	}
 
-	BCSprite::SpriteAtlas BCSprite::mSpriteAtlas;
-
-	BCSprite::BCSprite() : mSprite(nullptr)
+	BCSprite::BCSprite() : mType(Type::Error), mSprite(nullptr)
 	{ }
 
 	BCSprite::BCSprite(BCSprite&& mve) noexcept : BCSprite()
@@ -67,21 +67,35 @@ namespace BattleCity::Sprite
 		}
 	}
 
-	void BCSprite::SetSprite(const SpritePair& spriteBehaviour)
+	void BCSprite::CreateSprite(Object::Type objectType, const std::filesystem::path& spritePath)
 	{
-		const auto& path = Manager::PM().GetSpritePath(spriteBehaviour);
-		const auto& spriteIterator = mSpriteAtlas.find(spriteBehaviour);
+		mSpriteData.Init(spritePath);
 
-		if(spriteIterator != mSpriteAtlas.end())
+		for (const auto& [spriteType, path] : mSpriteData)
 		{
-			mSprite = spriteIterator->second.get();
-			InitSpriteSize();
-			return;
-		}
+			SpritePair pair{ objectType, spriteType };
+			Sprite* sprite = nullptr;
+			if(mSpriteAtlas.find(pair) == mSpriteAtlas.end())
+			{
+				sprite = createSprite(path.c_str());
+				mSpriteAtlas.try_emplace(pair, sprite);
+			}
+			else
+			{
+				sprite = mSpriteAtlas.at(pair).get();
+			}
 
-		mSprite = createSprite(path.c_str());
+			mSpriteContainer.try_emplace(spriteType, sprite);
+		}
+	}
+
+	void BCSprite::SetSpriteType(Type spriteBehaviour)
+	{
+		if(mType == spriteBehaviour) return;
+
+		mType = spriteBehaviour;
+		mSprite = mSpriteContainer.at(spriteBehaviour);
 		InitSpriteSize();
-		mSpriteAtlas.try_emplace(spriteBehaviour, mSprite);
 	}
 
 	const Vector2Int& BCSprite::GetSpriteSize()

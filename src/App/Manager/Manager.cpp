@@ -4,14 +4,12 @@
 
 namespace BattleCity::Manager
 {
-	Manager::Manager() {}
 	Manager::~Manager() = default;
 
-	void Manager::StartUp()
+	void Manager::OnInit()
 	{
 #ifdef _DEBUG
-		std::cout << "===========" << typeid(*this).name() << " start up.===========\n" << std::endl;
+		std::cout << "===========" << typeid(*this).name() << " initialized.===========\n" << std::endl;
 #endif
 	}
-
 }

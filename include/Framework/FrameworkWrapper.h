@@ -15,6 +15,7 @@
 // FRAMEWORK_API void showCursor(bool bShow);
 
 #include "Framework.h"
+#include "WorldManager.h"
 
 namespace BattleCity::Framework
 {
@@ -23,7 +24,7 @@ namespace BattleCity::Framework
 	class FrameworkWrapper final : public Framework
 	{
 	public:
-		FrameworkWrapper() {}
+		FrameworkWrapper();
 
 		DISALLOW_COPY_MOVE(FrameworkWrapper)
 
@@ -42,6 +43,20 @@ namespace BattleCity::Framework
 
 		void onMouseMove(int x, int y, int xrelative, int yrelative) override;
 		void onMouseButtonClick(FRMouseButton button, bool isReleased) override;
+
+	private:
+		void Update();
+		void Draw();
+
+		void Test();
+
+	private:
+		Manager::WorldManager mWorldManager;
+		bool mGameOver;
+
+		std::chrono::time_point <std::chrono::steady_clock,
+			std::common_type_t<std::chrono::duration<long long, std::ratio<1, 1000000000>>,
+			std::chrono::duration<long long, std::ratio<1, 60>>>> mNextFrame;
 	};
 
 	FRAMEWORK_API int run(FrameworkWrapper*);

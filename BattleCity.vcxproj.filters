@@ -10,13 +10,10 @@
     <ClCompile Include="src\Framework\Screen.cpp">
       <Filter>Source\Framework</Filter>
     </ClCompile>
-    <ClCompile Include="src\App\Manager\GameManager.cpp">
-      <Filter>Source\App\Manager</Filter>
-    </ClCompile>
     <ClCompile Include="src\App\Manager\Manager.cpp">
       <Filter>Source\App\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="src\App\Manager\SpritePathManager.cpp">
+    <ClCompile Include="src\App\Manager\SpritePathContainer.cpp">
       <Filter>Source\App\Manager</Filter>
     </ClCompile>
     <ClCompile Include="src\App\Manager\WorldManager.cpp">
@@ -94,13 +91,10 @@
     <ClInclude Include="include\PCHeader.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="include\App\Manager\GameManager.h">
-      <Filter>Headers\App\Manager</Filter>
-    </ClInclude>
     <ClInclude Include="include\App\Manager\Manager.h">
       <Filter>Headers\App\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="include\App\Manager\SpritePathManager.h">
+    <ClInclude Include="include\App\Manager\SpritePathContainer.h">
       <Filter>Headers\App\Manager</Filter>
     </ClInclude>
     <ClInclude Include="include\App\Manager\WorldManager.h">

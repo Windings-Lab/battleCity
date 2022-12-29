@@ -5,22 +5,29 @@
 #include "BCSprite.h"
 #include "Vector2Int.h"
 
+namespace BattleCity::Manager
+{
+	class WorldManager;
+}
+
 namespace BattleCity::Object
 {
 	class Object : public UUID
 	{
-	protected:
+	public:
 		Object() = default;
 
-	public:
 		DISALLOW_COPY_MOVE(Object)
 
 		~Object() override = 0;
 
 		virtual void Update();
 
+		void SetType(Type type);
+
 		void Draw() const noexcept;
-		void SetSprite(const Sprite::SpritePair& spriteBehaviour);
+		void CreateSprite(const std::filesystem::path& spritePath);
+		void SetSprite(Sprite::Type objectBehaviour);
 
 		void SetPosition(const Vector2Int& pos) noexcept;
 		void SetPosition(int x, int y) noexcept;
@@ -32,13 +39,16 @@ namespace BattleCity::Object
 		struct Factory;
 
 	private:
+		Type mType;
+
 		Sprite::BCSprite mSprite;
 		Vector2Int mPosition;
-
 	};
 
 	struct Object::Factory
 	{
+		explicit Factory(Manager::WorldManager& inserter) : mInserter(inserter) {}
+
 		virtual ~Factory() = default;
 
 		virtual Object* const CreateWorldBoundaries() = 0;
@@ -54,5 +64,9 @@ namespace BattleCity::Object
 		virtual Object* const CreatePhoenix() = 0;
 
 		virtual Object* const CreateExplosion() = 0;
+
+	protected:
+		Manager::WorldManager& mInserter;
+
 	};
 }
