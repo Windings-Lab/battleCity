@@ -1,9 +1,9 @@
 #include "PCHeader.h"
-#include "MapCreator.h"
+#include "LevelCreator.h"
 
 namespace BattleCity
 {
-	void MapCreator::CreateMap(const char* levelPath)
+	void LevelCreator::CreateLevel(const char* levelPath)
 	{
 		std::ifstream file;
 		file.open(levelPath, std::ios::in);
@@ -32,26 +32,26 @@ namespace BattleCity
 		}
 	}
 
-	const MapCreator::Map& MapCreator::GetMap() const noexcept
+	const LevelCreator::Level& LevelCreator::GetMap() const noexcept
 	{
 		return mMap;
 	}
 
-	void MapCreator::SetStartPosition(const Vector2Int& startPos) noexcept
+	void LevelCreator::SetStartPosition(const Vector2Int& startPos) noexcept
 	{
 		mStartPos.SetXY(startPos);
 	}
 
-	const Vector2Int& MapCreator::GetTopLeftPosition() const noexcept
+	const Vector2Int& LevelCreator::GetTopLeftPosition() const noexcept
 	{
 		return mStartPos;
 	}
 
-	MapCreator::Map::const_iterator MapCreator::begin() const noexcept
+	LevelCreator::Level::const_iterator LevelCreator::begin() const noexcept
 	{
 		return mMap.cbegin();
 	}
-	MapCreator::Map::const_iterator MapCreator::end() const noexcept
+	LevelCreator::Level::const_iterator LevelCreator::end() const noexcept
 	{
 		return mMap.cend();
 	}

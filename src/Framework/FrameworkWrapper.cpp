@@ -22,16 +22,18 @@ namespace BattleCity::Framework
 
 	bool FrameworkWrapper::Init()
 	{
-		mWorldManager.OnInit();
-		{
-			Test();
-		}
+		mWorldMap.CreateLevel(R"(.\data\Maps\level1.txt)");
+		mWorldMap.SetWorldRelative({ 40, 44 });
+		mWorldMap.InitLevel();
+
+		mWorldMap.CreateLevel(R"(.\data\Maps\Demo.txt)");
+		mWorldMap.InitLevel();
+
 		return true;
 	}
 
 	void FrameworkWrapper::Close()
 	{
-		mWorldManager.OnClose();
 	}
 
 	bool FrameworkWrapper::Tick()
@@ -53,7 +55,7 @@ namespace BattleCity::Framework
 
 	void FrameworkWrapper::Update()
 	{
-		for (auto& obj : mWorldManager.GetFrontLayerObjects())
+		for (auto& obj : mWorldMap.GetFrontLayer())
 		{
 			obj->Update();
 		}
@@ -61,12 +63,12 @@ namespace BattleCity::Framework
 
 	void FrameworkWrapper::Draw()
 	{
-		for (auto& obj : mWorldManager.GetBackLayerObjects())
+		for (auto& obj : mWorldMap.GetBackLayer())
 		{
 			obj->Draw();
 		}
 
-		for (auto& obj : mWorldManager.GetFrontLayerObjects())
+		for (auto& obj : mWorldMap.GetFrontLayer())
 		{
 			obj->Draw();
 		}

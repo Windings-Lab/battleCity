@@ -15,7 +15,7 @@
 // FRAMEWORK_API void showCursor(bool bShow);
 
 #include "Framework.h"
-#include "WorldManager.h"
+#include "WorldMap.h"
 
 namespace BattleCity::Framework
 {
@@ -51,7 +51,7 @@ namespace BattleCity::Framework
 		void Test();
 
 	private:
-		Manager::WorldManager mWorldManager;
+		WorldMap mWorldMap;
 		bool mGameOver;
 
 		std::chrono::time_point <std::chrono::steady_clock,

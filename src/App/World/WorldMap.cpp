@@ -1,38 +1,33 @@
 #include "PCHeader.h"
 
-#include "WorldManager.h"
+#include "WorldMap.h"
 
 #include "BasicObjectFactory.h"
-#include "MapCreator.h"
+#include "LevelCreator.h"
 
 #include "Object.h"
 
-namespace BattleCity::Manager
+namespace BattleCity
 {
-	void WorldManager::OnInit()
+	void WorldMap::CreateLevel(const char* levelPath)
 	{
-		__super::OnInit();
-
-		mMapCreator.CreateMap(R"(.\data\Maps\level1.txt)");
-		mMapCreator.SetStartPosition({ 40, 44 });
-		InitMap();
-
-#ifdef _DEBUG
-		std::cout << "World Manager object count: " << mFrontLayer.GetSize() << "\n";
-#endif
-	}
-	void WorldManager::OnClose()
-	{
-		mFrontLayer.Clear();
+		mMapCreator.CreateLevel(levelPath);
 	}
 
-	const Vector2Int& WorldManager::GetWorldRelative() const noexcept
+	const Vector2Int& WorldMap::GetWorldRelative() const noexcept
 	{
 		return mMapCreator.GetTopLeftPosition();
 	}
-
-	void WorldManager::InitMap()
+	void WorldMap::SetWorldRelative(const Vector2Int& worldRelative) noexcept
 	{
+		mMapCreator.SetStartPosition(worldRelative);
+	}
+
+	void WorldMap::InitLevel()
+	{
+		mFrontLayer.Clear();
+		mBackLayer.Clear();
+
 		Object::BasicObjectFactory objectFactory(*this);
 
 		const auto worldBoundaries = objectFactory.CreateWorldBoundaries();
@@ -88,12 +83,12 @@ namespace BattleCity::Manager
 		}
 	}
 
-	Object::Object& WorldManager::GetObject(int id) const
+	Object::Object& WorldMap::GetObject(int id) const
 	{
 		return mFrontLayer.GetObject(id);
 	}
 
-	void WorldManager::InsertObject(std::unique_ptr<Object::Object>&& objPtr, Sprite::Layer layer)
+	void WorldMap::InsertObject(std::unique_ptr<Object::Object>&& objPtr, Sprite::Layer layer)
 	{
 		switch (layer)
 		{
@@ -113,16 +108,16 @@ namespace BattleCity::Manager
 			break;
 		}
 	}
-	void WorldManager::MarkForDelete(int objID)
+	void WorldMap::MarkForDelete(int objID)
 	{
 
 	}
 
-	const Object::ObjectContainer& WorldManager::GetBackLayerObjects() const noexcept
+	const Object::ObjectContainer& WorldMap::GetBackLayer() const noexcept
 	{
 		return mBackLayer;
 	}
-	const Object::ObjectContainer& WorldManager::GetFrontLayerObjects() const noexcept
+	const Object::ObjectContainer& WorldMap::GetFrontLayer() const noexcept
 	{
 		return mFrontLayer;
 	}

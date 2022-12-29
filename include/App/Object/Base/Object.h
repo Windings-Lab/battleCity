@@ -4,9 +4,9 @@
 
 #include "BCSprite.h"
 
-namespace BattleCity::Manager
+namespace BattleCity
 {
-	class WorldManager;
+	class WorldMap;
 }
 
 namespace BattleCity::Object
@@ -42,7 +42,7 @@ namespace BattleCity::Object
 
 	struct Object::Factory
 	{
-		explicit Factory(Manager::WorldManager& inserter) : mInserter(inserter) {}
+		explicit Factory(WorldMap& inserter) : mInserter(inserter) {}
 
 		virtual ~Factory() = default;
 
@@ -61,7 +61,7 @@ namespace BattleCity::Object
 		virtual Object* const CreateExplosion() = 0;
 
 	protected:
-		Manager::WorldManager& mInserter;
+		WorldMap& mInserter;
 
 	};
 }

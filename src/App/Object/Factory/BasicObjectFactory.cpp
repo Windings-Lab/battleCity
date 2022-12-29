@@ -3,7 +3,7 @@
 
 #include "Bullet.h"
 #include "Explosion.h"
-#include "WorldManager.h"
+#include "WorldMap.h"
 
 #include "Object.h"
 #include "Phoenix.h"
