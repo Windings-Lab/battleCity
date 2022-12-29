@@ -13,9 +13,6 @@
     <ClCompile Include="src\App\Manager\Manager.cpp">
       <Filter>Source\App\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="src\App\Manager\SpritePathContainer.cpp">
-      <Filter>Source\App\Manager</Filter>
-    </ClCompile>
     <ClCompile Include="src\App\Manager\WorldManager.cpp">
       <Filter>Source\App\Manager</Filter>
     </ClCompile>
@@ -65,9 +62,6 @@
     <ClCompile Include="src\App\Object\Phoenix.cpp">
       <Filter>Source\App\Object</Filter>
     </ClCompile>
-    <ClCompile Include="src\App\Object\Components\BCSprite.cpp">
-      <Filter>Source\App\Object\Components</Filter>
-    </ClCompile>
     <ClCompile Include="src\App\UUID.cpp">
       <Filter>Source\App</Filter>
     </ClCompile>
@@ -76,6 +70,12 @@
     </ClCompile>
     <ClCompile Include="src\App\Object\Container\ObjectContainer.cpp">
       <Filter>Source\App\Object\Container</Filter>
+    </ClCompile>
+    <ClCompile Include="src\App\Sprite\BCSprite.cpp">
+      <Filter>Source\App\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="src\App\Sprite\SpriteData.cpp">
+      <Filter>Source\App\Sprite</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -92,9 +92,6 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="include\App\Manager\Manager.h">
-      <Filter>Headers\App\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="include\App\Manager\SpritePathContainer.h">
       <Filter>Headers\App\Manager</Filter>
     </ClInclude>
     <ClInclude Include="include\App\Manager\WorldManager.h">
@@ -151,9 +148,6 @@
     <ClInclude Include="include\App\Object\Phoenix.h">
       <Filter>Headers\App\Object</Filter>
     </ClInclude>
-    <ClInclude Include="include\App\Object\Components\BCSprite.h">
-      <Filter>Headers\App\Object\Components</Filter>
-    </ClInclude>
     <ClInclude Include="include\App\UUID.h">
       <Filter>Headers\App</Filter>
     </ClInclude>
@@ -171,6 +165,12 @@
     </ClInclude>
     <ClInclude Include="include\Toolkit\ISignal.h">
       <Filter>Headers\Toolkit</Filter>
+    </ClInclude>
+    <ClInclude Include="include\App\Sprite\BCSprite.h">
+      <Filter>Headers\App\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="include\App\Sprite\SpriteData.h">
+      <Filter>Headers\App\Sprite</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -230,6 +230,12 @@
     </Filter>
     <Filter Include="Source\App\Object\Container">
       <UniqueIdentifier>{36eb07f6-9048-4ce9-bc57-21debfc310aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\App\Sprite">
+      <UniqueIdentifier>{5442297e-a9a3-4fb8-89dd-01f09342171a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\App\Sprite">
+      <UniqueIdentifier>{aa10d9ef-3019-45aa-81a3-3bca5d283211}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
