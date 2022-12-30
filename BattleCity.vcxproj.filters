@@ -62,9 +62,6 @@
     <ClCompile Include="src\App\Sprite\SpriteData.cpp">
       <Filter>Source\App\Sprite</Filter>
     </ClCompile>
-    <ClCompile Include="src\App\World\LevelCreator.cpp">
-      <Filter>Source\App\World</Filter>
-    </ClCompile>
     <ClCompile Include="src\App\World\WorldMap.cpp">
       <Filter>Source\App\World</Filter>
     </ClCompile>
@@ -73,6 +70,9 @@
     </ClCompile>
     <ClCompile Include="src\App\Object\Base\UUID.cpp">
       <Filter>Source\App\Object\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="src\App\World\Level.cpp">
+      <Filter>Source\App\World</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -154,9 +154,6 @@
     <ClInclude Include="include\App\Sprite\SpriteData.h">
       <Filter>Headers\App\Sprite</Filter>
     </ClInclude>
-    <ClInclude Include="include\App\World\LevelCreator.h">
-      <Filter>Headers\App\World</Filter>
-    </ClInclude>
     <ClInclude Include="include\App\World\WorldMap.h">
       <Filter>Headers\App\World</Filter>
     </ClInclude>
@@ -165,6 +162,9 @@
     </ClInclude>
     <ClInclude Include="include\App\Object\Base\Object.h">
       <Filter>Headers\App\Object\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="include\App\World\Level.h">
+      <Filter>Headers\App\World</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
