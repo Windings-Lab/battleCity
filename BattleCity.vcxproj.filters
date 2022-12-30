@@ -4,9 +4,6 @@
     <ClCompile Include="src\Framework\FrameworkWrapper.cpp">
       <Filter>Source\Framework</Filter>
     </ClCompile>
-    <ClCompile Include="src\PCHeader.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="src\Framework\Screen.cpp">
       <Filter>Source\Framework</Filter>
     </ClCompile>
@@ -74,6 +71,9 @@
     <ClCompile Include="src\App\World\Level.cpp">
       <Filter>Source\App\World</Filter>
     </ClCompile>
+    <ClCompile Include="pcheader\PCHeader.cpp">
+      <Filter>PCHeaders</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Framework\Framework.h">
@@ -84,9 +84,6 @@
     </ClInclude>
     <ClInclude Include="include\Framework\Screen.h">
       <Filter>Headers\Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="include\PCHeader.h">
-      <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="include\App\Object\Bullet.h">
       <Filter>Headers\App\Object</Filter>
@@ -166,6 +163,9 @@
     <ClInclude Include="include\App\World\Level.h">
       <Filter>Headers\App\World</Filter>
     </ClInclude>
+    <ClInclude Include="pcheader\PCHeader.h">
+      <Filter>PCHeaders</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
@@ -236,6 +236,9 @@
     </Filter>
     <Filter Include="Source\App\World">
       <UniqueIdentifier>{0d884510-9fa3-4509-8224-58f035cf3dbf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PCHeaders">
+      <UniqueIdentifier>{e81d3e70-df37-4457-bbfe-6a2e174898fe}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

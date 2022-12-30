@@ -20,6 +20,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="pcheader\PCHeader.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="src\App\Object\Base\Object.cpp" />
     <ClCompile Include="src\App\Object\Base\UUID.cpp" />
     <ClCompile Include="src\App\Object\Bullet.cpp" />
@@ -41,11 +47,6 @@
     <ClCompile Include="src\App\World\WorldMap.cpp" />
     <ClCompile Include="src\Framework\FrameworkWrapper.cpp" />
     <ClCompile Include="src\Framework\Screen.cpp" />
-    <ClCompile Include="src\PCHeader.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">PCHeader.h</PrecompiledHeaderFile>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
-    </ClCompile>
     <ClCompile Include="src\Toolkit\Rectangle.cpp" />
     <ClCompile Include="src\Toolkit\Vector2Int.cpp" />
   </ItemGroup>
@@ -73,13 +74,13 @@
     <ClInclude Include="include\Framework\Framework.h" />
     <ClInclude Include="include\Framework\FrameworkWrapper.h" />
     <ClInclude Include="include\Framework\Screen.h" />
-    <ClInclude Include="include\PCHeader.h" />
     <ClInclude Include="include\Toolkit\Action.h" />
     <ClInclude Include="include\Toolkit\BasicMacros.h" />
     <ClInclude Include="include\Toolkit\ISignal.h" />
     <ClInclude Include="include\Toolkit\magic_enum.hpp" />
     <ClInclude Include="include\Toolkit\Rectangle.h" />
     <ClInclude Include="include\Toolkit\Vector2Int.h" />
+    <ClInclude Include="pcheader\PCHeader.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
@@ -138,11 +139,21 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IntDir>$(Platform)\$(Configuration)\obj\</IntDir>
-    <PublicIncludeDirectories>$(ProjectDir)include;$(ProjectDir)src;$(PublicIncludeDirectories)</PublicIncludeDirectories>
+    <PublicIncludeDirectories>
+    </PublicIncludeDirectories>
+    <AllProjectIncludesArePublic>true</AllProjectIncludesArePublic>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IntDir>$(Platform)\$(Configuration)\obj\</IntDir>
-    <PublicIncludeDirectories>$(ProjectDir)include;$(ProjectDir)src;$(PublicIncludeDirectories)</PublicIncludeDirectories>
+    <PublicIncludeDirectories>
+    </PublicIncludeDirectories>
+    <AllProjectIncludesArePublic>true</AllProjectIncludesArePublic>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <AllProjectIncludesArePublic>true</AllProjectIncludesArePublic>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <AllProjectIncludesArePublic>true</AllProjectIncludesArePublic>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -150,11 +161,22 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)pcheader\;$(ProjectDir)include\;$(ProjectDir)include\App\;$(ProjectDir)include\Toolkit\;$(ProjectDir)include\Framework\;$(ProjectDir)include\App\World\;$(ProjectDir)include\App\Object\;$(ProjectDir)include\App\Sprite\;$(ProjectDir)include\App\Object\Base\;$(ProjectDir)include\App\Object\Components\;$(ProjectDir)include\App\Object\Container\;$(ProjectDir)include\App\Object\Factory\;$(ProjectDir)include\Toolkit\Observer\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>PCHeader.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(ProjectDir)lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>$(ProjectDir)lib\FrameworkRelease_x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>call robocopy "$(SolutionDir)data" "$(TargetDir)data" /MIR
+call robocopy "$(SolutionDir)lib" "$(TargetDir)." /XF FrameworkRelease_x64.lib
+if %errorlevel% LEQ 3 exit 0</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -164,13 +186,24 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)pcheader\;$(ProjectDir)include\;$(ProjectDir)include\App\;$(ProjectDir)include\Toolkit\;$(ProjectDir)include\Framework\;$(ProjectDir)include\App\World\;$(ProjectDir)include\App\Object\;$(ProjectDir)include\App\Sprite\;$(ProjectDir)include\App\Object\Base\;$(ProjectDir)include\App\Object\Components\;$(ProjectDir)include\App\Object\Container\;$(ProjectDir)include\App\Object\Factory\;$(ProjectDir)include\Toolkit\Observer\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>PCHeader.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(ProjectDir)lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>$(ProjectDir)lib\FrameworkRelease_x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>call robocopy "$(SolutionDir)data" "$(TargetDir)data" /MIR
+call robocopy "$(SolutionDir)lib" "$(TargetDir)." /XF FrameworkRelease_x64.lib
+if %errorlevel% LEQ 3 exit 0</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -181,7 +214,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>PCHeader.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)include\;$(ProjectDir)include\App\;$(ProjectDir)include\Toolkit\;$(ProjectDir)include\Framework\;$(ProjectDir)include\App\World\;$(ProjectDir)include\App\Object\;$(ProjectDir)include\App\Sprite\;$(ProjectDir)include\App\Object\Base\;$(ProjectDir)include\App\Object\Components\;$(ProjectDir)include\App\Object\Container\;$(ProjectDir)include\App\Object\Factory\;$(ProjectDir)include\Toolkit\Observer\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)pcheader\;$(ProjectDir)include\;$(ProjectDir)include\App\;$(ProjectDir)include\Toolkit\;$(ProjectDir)include\Framework\;$(ProjectDir)include\App\World\;$(ProjectDir)include\App\Object\;$(ProjectDir)include\App\Sprite\;$(ProjectDir)include\App\Object\Base\;$(ProjectDir)include\App\Object\Components\;$(ProjectDir)include\App\Object\Container\;$(ProjectDir)include\App\Object\Factory\;$(ProjectDir)include\Toolkit\Observer\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -204,7 +237,7 @@ if %errorlevel% LEQ 3 exit 0</Command>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)include\;$(ProjectDir)include\App\;$(ProjectDir)include\Toolkit\;$(ProjectDir)include\Framework\;$(ProjectDir)include\App\World\;$(ProjectDir)include\App\Object\;$(ProjectDir)include\App\Sprite\;$(ProjectDir)include\App\Object\Base\;$(ProjectDir)include\App\Object\Components\;$(ProjectDir)include\App\Object\Container\;$(ProjectDir)include\App\Object\Factory\;$(ProjectDir)include\Toolkit\Observer\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)pcheader\;$(ProjectDir)include\;$(ProjectDir)include\App\;$(ProjectDir)include\Toolkit\;$(ProjectDir)include\Framework\;$(ProjectDir)include\App\World\;$(ProjectDir)include\App\Object\;$(ProjectDir)include\App\Sprite\;$(ProjectDir)include\App\Object\Base\;$(ProjectDir)include\App\Object\Components\;$(ProjectDir)include\App\Object\Container\;$(ProjectDir)include\App\Object\Factory\;$(ProjectDir)include\Toolkit\Observer\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>PCHeader.h</PrecompiledHeaderFile>
     </ClCompile>
