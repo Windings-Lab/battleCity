@@ -2,6 +2,9 @@
 
 namespace BattleCity
 {
+	using X = int;
+	using Y = int;
+
 	class Vector2Int final
 	{
 	public:
@@ -13,7 +16,7 @@ namespace BattleCity
 		~Vector2Int() = default;
 
 		void SetXY(const Vector2Int& position);
-		void SetXY(int x, int y);
+		void SetXY(X, Y);
 
 		Vector2Int operator-(int num) const;
 		Vector2Int operator-(const Vector2Int& other) const;

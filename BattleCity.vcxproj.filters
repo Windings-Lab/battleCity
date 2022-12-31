@@ -74,6 +74,9 @@
     <ClCompile Include="pcheader\PCHeader.cpp">
       <Filter>PCHeaders</Filter>
     </ClCompile>
+    <ClCompile Include="src\App\Sprite\Texture.cpp">
+      <Filter>Source\App\Sprite</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Framework\Framework.h">
@@ -165,6 +168,12 @@
     </ClInclude>
     <ClInclude Include="pcheader\PCHeader.h">
       <Filter>PCHeaders</Filter>
+    </ClInclude>
+    <ClInclude Include="include\App\Sprite\SpriteAliases.h">
+      <Filter>Headers\App\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="include\App\Sprite\Texture.h">
+      <Filter>Headers\App\Sprite</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

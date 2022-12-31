@@ -8,7 +8,7 @@ namespace BattleCity::Sprite
 		using SpritePath = std::string;
 		using FolderPath = std::string;
 
-		using SpritePathContainer = std::unordered_map<Type, SpritePath>;
+		using SpritePathContainer = std::unordered_map<TextureType, SpritePath>;
 		using SpritePathAtlas = std::unordered_map<FolderPath, SpritePathContainer>;
 
 	public:
@@ -20,13 +20,13 @@ namespace BattleCity::Sprite
 		~SpriteData() = default;
 
 		void Init(const FolderPath& folderPath);
-		const SpritePath& Get(Type spriteType) const;
+		const SpritePath& Get(TextureType spriteType) const;
 
 		SpritePathContainer::const_iterator begin() const;
 		SpritePathContainer::const_iterator end() const;
 
 	private:
-		std::optional<Type> TypeFrom(const std::filesystem::path& spritePath) const;
+		std::optional<TextureType> TypeFrom(const std::filesystem::path& spritePath) const;
 		friend void swap(SpriteData& first, SpriteData& second) noexcept;
 
 	private:

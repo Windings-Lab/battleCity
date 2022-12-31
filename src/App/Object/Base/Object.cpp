@@ -20,9 +20,9 @@ namespace BattleCity::Object
         mSprite.CreateSprite(spritePath);
     }
 
-    void Object::SetSprite(Sprite::Type objectBehaviour)
+    void Object::SetSprite(Sprite::TextureType objectBehaviour)
     {
-        mSprite.SetSpriteType(objectBehaviour);
+        mSprite.ChangeTexture(objectBehaviour);
     }
 
     void Object::SetPosition(const Vector2Int& pos) noexcept

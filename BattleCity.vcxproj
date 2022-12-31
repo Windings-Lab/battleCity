@@ -43,6 +43,7 @@
     <ClCompile Include="src\App\Object\WorldBoundaries.cpp" />
     <ClCompile Include="src\App\Sprite\BCSprite.cpp" />
     <ClCompile Include="src\App\Sprite\SpriteData.cpp" />
+    <ClCompile Include="src\App\Sprite\Texture.cpp" />
     <ClCompile Include="src\App\World\Level.cpp" />
     <ClCompile Include="src\App\World\WorldMap.cpp" />
     <ClCompile Include="src\Framework\FrameworkWrapper.cpp" />
@@ -68,7 +69,9 @@
     <ClInclude Include="include\App\Object\Wall.h" />
     <ClInclude Include="include\App\Object\WorldBoundaries.h" />
     <ClInclude Include="include\App\Sprite\BCSprite.h" />
+    <ClInclude Include="include\App\Sprite\SpriteAliases.h" />
     <ClInclude Include="include\App\Sprite\SpriteData.h" />
+    <ClInclude Include="include\App\Sprite\Texture.h" />
     <ClInclude Include="include\App\World\Level.h" />
     <ClInclude Include="include\App\World\WorldMap.h" />
     <ClInclude Include="include\Framework\Framework.h" />

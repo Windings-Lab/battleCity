@@ -18,7 +18,7 @@ namespace BattleCity::Object
 	{
 		auto worldBoundaries = std::make_unique<WorldBoundaries>();
 		worldBoundaries->CreateSprite(R"(.\data\Background)");
-		worldBoundaries->SetSprite(Sprite::Type::Basic);
+		worldBoundaries->SetSprite(Sprite::TextureType::Basic);
 
 		auto worldBoundariesPtr = worldBoundaries.get();
 		mInserter.InsertObject(std::move(worldBoundaries), Sprite::Layer::Back);
@@ -35,12 +35,12 @@ namespace BattleCity::Object
 		case Type::TankNPC:
 			tank = std::make_unique<Tank>();
 			tank->CreateSprite(R"(.\data\Tank\TankNPC)");
-			tank->SetSprite(Sprite::Type::Up);
+			tank->SetSprite(Sprite::TextureType::Up);
 			break;
 		case Type::TankPlayer:
 			tank = std::make_unique<Tank>();
 			tank->CreateSprite(R"(.\data\Tank\TankPlayer)");
-			tank->SetSprite(Sprite::Type::Up);
+			tank->SetSprite(Sprite::TextureType::Up);
 			break;
 		default:
 			std::cerr << "Incorrect tank type\n";
@@ -57,7 +57,7 @@ namespace BattleCity::Object
 	{
 		auto bullet = std::make_unique<Bullet>();
 		bullet->CreateSprite(R"(.\data\Bullet)");
-		bullet->SetSprite(Sprite::Type::Up);
+		bullet->SetSprite(Sprite::TextureType::Up);
 
 		auto bulletPtr = bullet.get();
 		mInserter.InsertObject(std::move(bullet), Sprite::Layer::Front);
@@ -69,7 +69,7 @@ namespace BattleCity::Object
 	{
 		auto powerUp = std::make_unique<PowerUp>();
 		powerUp->CreateSprite(R"(.\data\PowerUp)");
-		powerUp->SetSprite(Sprite::Type::Basic);
+		powerUp->SetSprite(Sprite::TextureType::Basic);
 
 		auto powerUpPtr = powerUp.get();
 		mInserter.InsertObject(std::move(powerUp), Sprite::Layer::Front);
@@ -81,7 +81,7 @@ namespace BattleCity::Object
 	{
 		auto wall = std::make_unique<Wall>();
 		wall->CreateSprite(R"(.\data\Wall)");
-		wall->SetSprite(Sprite::Type::Basic);
+		wall->SetSprite(Sprite::TextureType::Basic);
 
 		auto wallPtr = wall.get();
 		mInserter.InsertObject(std::move(wall), Sprite::Layer::Front);
@@ -92,7 +92,7 @@ namespace BattleCity::Object
 	{
 		auto phoenix = std::make_unique<Phoenix>();
 		phoenix->CreateSprite(R"(.\data\PhoenixAndFlag)");
-		phoenix->SetSprite(Sprite::Type::Phoenix);
+		phoenix->SetSprite(Sprite::TextureType::Phoenix);
 
 		auto phoenixPtr = phoenix.get();
 		mInserter.InsertObject(std::move(phoenix), Sprite::Layer::Front);
@@ -104,7 +104,7 @@ namespace BattleCity::Object
 	{
 		auto explosion = std::make_unique<Explosion>();
 		explosion->CreateSprite(R"(.\data\Explosion)");
-		explosion->SetSprite(Sprite::Type::ExplosionSmall1);
+		explosion->SetSprite(Sprite::TextureType::ExplosionSmall1);
 
 		auto explosionPtr = explosion.get();
 		mInserter.InsertObject(std::move(explosion), Sprite::Layer::Front);

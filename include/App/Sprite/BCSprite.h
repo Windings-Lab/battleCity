@@ -1,54 +1,39 @@
 #pragma once
 
-#include "Rectangle.h"
-#include "SpriteData.h"
-
 namespace BattleCity::Sprite
 {
-	class Sprite;
+	class Texture;
 
 	class BCSprite final
 	{
 	private:
-		struct SpriteDeleter;
+		friend void swap(BCSprite& first, BCSprite& second) noexcept;
 
-		using SpriteObject = std::unique_ptr<Sprite, SpriteDeleter>;
+	private:
+		using X = int;
+		using Y = int;
+		using TextureSize = Vector2Int;
+		using SpriteContainer = std::unordered_map<TextureType, Texture>;
 
-		using FolderPath = std::string;
-		using SpritePath = std::string;
-
-		using SpriteContainer = std::unordered_map<Type, Sprite*>;
-		using SpriteAtlas = std::unordered_map<SpritePath, SpriteObject>;
+	private:
+		BCSprite();
 
 	public:
-		BCSprite();
+		explicit BCSprite(SpriteContainer&);
 
 		DISALLOW_COPY(BCSprite)
 		ALLOW_MOVE(BCSprite)
 
 		~BCSprite() = default;
 
-		void DrawAt(const Vector2Int& position) const noexcept;
-		void DrawAt(int x, int y)  const noexcept;
+		void DrawAt(X, Y)  const noexcept;
+		const TextureSize& GetSpriteSize() const noexcept;
 
-		void CreateSprite(const FolderPath& folderPath);
-		void SetSpriteType(Type spriteType);
-
-		const Vector2Int& GetSpriteSize();
+		void ChangeTexture(TextureType);
 
 	private:
-		void InitSpriteSize();
-		friend void swap(BCSprite& first, BCSprite& second) noexcept;
+		Texture* mCurrentTexture;
 
-	private:
 		SpriteContainer mSpriteContainer;
-		static SpriteAtlas mSpriteAtlas;
-
-	private:
-		Type mType;
-		Sprite* mSprite;
-		Vector2Int mSpriteSize;
-
-		SpriteData mSpriteData;
 	};
 }

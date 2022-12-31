@@ -12,7 +12,7 @@ namespace BattleCity
 			UI
 		};
 
-		enum class Type
+		enum class TextureType
 		{
 			Error,
 			Basic,

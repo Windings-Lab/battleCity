@@ -1,110 +1,47 @@
 #include "PCHeader.h"
 
 #include "BCSprite.h"
-#include "SpriteData.h"
+
+#include "Texture.h"
 
 namespace BattleCity::Sprite
 {
-	namespace 
-	{
-		FRAMEWORK_API Sprite* createSprite(const char* path);
-		FRAMEWORK_API void drawSprite(Sprite*, int x, int y);
-		FRAMEWORK_API void getSpriteSize(Sprite* s, int& w, int& h);
-		FRAMEWORK_API void destroySprite(Sprite* s);
-	}
-
-	struct BCSprite::SpriteDeleter
-	{
-		SpriteDeleter() = default;
-		SpriteDeleter(const SpriteDeleter&) = delete;
-		SpriteDeleter(SpriteDeleter&&) noexcept = delete;
-
-		SpriteDeleter& operator=(const SpriteDeleter&) = delete;
-		SpriteDeleter& operator=(SpriteDeleter&&) noexcept = delete;
-
-		~SpriteDeleter() = default;
-
-		void operator()(Sprite* p) const
-		{
-			destroySprite(p);
-		}
-	};
-
-	BCSprite::SpriteAtlas BCSprite::mSpriteAtlas;
-
 	void swap(BCSprite& first, BCSprite& second) noexcept
 	{
 		using std::swap;
 
-		swap(first.mSprite, second.mSprite);
-		swap(first.mType, second.mType);
-		swap(first.mSpriteData, second.mSpriteData);
-		first.mSpriteSize.SetXY(second.mSpriteSize);
+		swap(first.mCurrentTexture, second.mCurrentTexture);
+		swap(first.mTextureType, second.mTextureType);
+		first.mSpriteContainer.swap(second.mSpriteContainer);
 	}
 
-	BCSprite::BCSprite() : mType(Type::Error), mSprite(nullptr)
-	{ }
-
+	BCSprite::BCSprite() : mCurrentTexture(nullptr){}
+	BCSprite::BCSprite(SpriteContainer& spriteContainer)
+		: mCurrentTexture(nullptr)
+		, mSpriteContainer(std::move(spriteContainer))
+	{
+	}
 	BCSprite::BCSprite(BCSprite&& mve) noexcept : BCSprite()
 	{
 		swap(*this, mve);
 	}
-
 	BCSprite& BCSprite::operator=(BCSprite&& mve) noexcept
 	{
 		swap(*this, mve);
 		return *this;
 	}
 
-	void BCSprite::DrawAt(const Vector2Int& position) const noexcept
+	void BCSprite::DrawAt(X x, Y y) const noexcept
 	{
-		DrawAt(position.X, position.Y);
+		mCurrentTexture->DrawAt(x, y);
+	}
+	const Vector2Int& BCSprite::GetSpriteSize() const noexcept
+	{
+		return mCurrentTexture->GetSize();
 	}
 
-	void BCSprite::DrawAt(int x, int y) const noexcept
+	void BCSprite::ChangeTexture(TextureType textureType)
 	{
-		drawSprite(mSprite, x, y);
-	}
-
-	void BCSprite::CreateSprite(const FolderPath& folderPath)
-	{
-		mSpriteData.Init(folderPath);
-
-		for (const auto& [spriteType, spritePath] : mSpriteData)
-		{
-			Sprite* sprite = nullptr;
-			if(const auto& spriteIt = mSpriteAtlas.find(spritePath);
-				spriteIt == mSpriteAtlas.end())
-			{
-				sprite = createSprite(spritePath.c_str());
-				mSpriteAtlas.try_emplace(spritePath, sprite);
-			}
-			else
-			{
-				sprite = spriteIt->second.get();
-			}
-
-			mSpriteContainer.try_emplace(spriteType, sprite);
-		}
-	}
-
-	void BCSprite::SetSpriteType(Type spriteType)
-	{
-		if(mType == spriteType) return;
-
-		mType = spriteType;
-		mSprite = mSpriteContainer.at(spriteType);
-		InitSpriteSize();
-	}
-
-	const Vector2Int& BCSprite::GetSpriteSize()
-	{
-		return mSpriteSize;
-	}
-	void BCSprite::InitSpriteSize()
-	{
-		int width, height;
-		getSpriteSize(mSprite, width, height);
-		mSpriteSize.SetXY(width, height);
+		mCurrentTexture = &mSpriteContainer.at(textureType);
 	}
 }

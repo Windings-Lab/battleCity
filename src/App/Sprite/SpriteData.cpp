@@ -56,7 +56,7 @@ namespace BattleCity::Sprite
 
 		mSpritePathAtlas.try_emplace(folderPath, mSpritePathContainer);
 	}
-	const SpriteData::SpritePath& SpriteData::Get(Type spriteType) const
+	const SpriteData::SpritePath& SpriteData::Get(TextureType spriteType) const
 	{
 		const auto& spritePathIterator = mSpritePathContainer.find(spriteType);
 		if (spritePathIterator == mSpritePathContainer.end())
@@ -67,12 +67,12 @@ namespace BattleCity::Sprite
 		return spritePathIterator->second;
 	}
 
-	std::optional<Type> SpriteData::TypeFrom(const std::filesystem::path& spritePath) const
+	std::optional<TextureType> SpriteData::TypeFrom(const std::filesystem::path& spritePath) const
 	{
 		using magic_enum::enum_cast;
 
 		const std::string spriteTypeStr = spritePath.stem().string();
-		const auto& spriteTypeCast= enum_cast<Type>(spriteTypeStr);
+		const auto& spriteTypeCast= enum_cast<TextureType>(spriteTypeStr);
 
 		if (!spriteTypeCast.has_value())
 		{
