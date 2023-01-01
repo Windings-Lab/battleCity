@@ -80,6 +80,12 @@
     <ClCompile Include="src\App\Object\AbstractFactory\ObjectAbstractFactory.cpp">
       <Filter>Source\App\Object\AbstractFactory</Filter>
     </ClCompile>
+    <ClCompile Include="src\App\Object\Factory\WorldBoundariesFactory.cpp">
+      <Filter>Source\App\Object\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="src\App\Object\Factory\ObjectFactory.cpp">
+      <Filter>Source\App\Object\Factory</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Framework\Framework.h">
@@ -181,6 +187,12 @@
     <ClInclude Include="include\App\Object\AbstractFactory\ObjectAbstractFactory.h">
       <Filter>Headers\App\Object\AbstractFactory</Filter>
     </ClInclude>
+    <ClInclude Include="include\App\Object\Factory\WorldBoundariesFactory.h">
+      <Filter>Headers\App\Object\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="include\App\Object\Factory\ObjectFactory.h">
+      <Filter>Headers\App\Object\Factory</Filter>
+    </ClInclude>
     <ClInclude Include="ObjectAliases.h">
       <Filter>Headers\App\Object</Filter>
     </ClInclude>
@@ -257,6 +269,12 @@
     </Filter>
     <Filter Include="Source\App\Object\AbstractFactory">
       <UniqueIdentifier>{f40ac654-67df-4718-bc44-5128b93501e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\App\Object\Factory">
+      <UniqueIdentifier>{a573406d-ee04-45d8-a250-6ebdb0e5b9f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\App\Object\Factory">
+      <UniqueIdentifier>{e7bc91fc-d636-4e6c-b828-d0dfcd78bd54}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
