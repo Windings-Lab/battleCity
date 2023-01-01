@@ -8,6 +8,7 @@ namespace BattleCity::Sprite
 {
 	void swap(BCSprite& first, BCSprite& second) noexcept
 	{
+		first.mCurrentTexture = second.mCurrentTexture;
 		first.mSpriteContainer.swap(second.mSpriteContainer);
 	}
 

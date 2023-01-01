@@ -44,22 +44,26 @@ namespace BattleCity
 					break;
 				case Object::Type::TankPlayer:
 					{
-						const auto tankPlayer = objectFactory.CreateTank(Object::Type::TankPlayer);
+						const auto object = objectFactory.CreateTank(Object::Type::TankPlayer);
+						object->SetPosition(position);
 					}
 					break;
 				case Object::Type::TankNPC:
 					{
-						const auto tankNPC = objectFactory.CreateTank(Object::Type::TankNPC);
+						const auto object = objectFactory.CreateTank(Object::Type::TankNPC);
+						object->SetPosition(position);
 					}
 					break;
 				case Object::Type::Wall:
 					{
-						const auto wall = objectFactory.CreateWall();
+						const auto object = objectFactory.CreateWall();
+						object->SetPosition(position);
 					}
 					break;
 				case Object::Type::Phoenix:
 					{
-						const auto phoenix = objectFactory.CreatePhoenix();
+						const auto object = objectFactory.CreatePhoenix();
+						object->SetPosition(position);
 					}
 					break;
 				default: 
@@ -81,25 +85,30 @@ namespace BattleCity
 		return mFrontLayer.GetObject(id);
 	}
 
-	void WorldMap::InsertObject(std::unique_ptr<Object::Object>&& objPtr, Sprite::Layer layer)
+	Object::Object* WorldMap::InsertObject(std::unique_ptr<Object::Object>&& object, Sprite::Layer layer)
 	{
+		auto objectPtr = object.get();
+
 		switch (layer)
 		{
 		case Sprite::Layer::Back:
 		{
-			mBackLayer.Insert(std::move(objPtr));
+			mBackLayer.Insert(std::move(object));
 			break;
 		}
 		case Sprite::Layer::Front:
 		{
-			mFrontLayer.Insert(std::move(objPtr));
+			mFrontLayer.Insert(std::move(object));
 			break;
 		}
 		case Sprite::Layer::UI:
 		case Sprite::Layer::Error:
 		default:
+			objectPtr = nullptr;
 			break;
 		}
+
+		return objectPtr;
 	}
 	void WorldMap::MarkForDelete(int objID)
 	{

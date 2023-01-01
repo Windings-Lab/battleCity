@@ -17,14 +17,16 @@ namespace BattleCity::Sprite
 
 		swap(f.mTexture, s.mTexture);
 		f.mSpriteSize.SetXY(s.mSpriteSize);
+		s.mSpriteSize.SetXY(0, 0);
 	}
 
 	Texture::Texture() : mTexture(nullptr) {}
 
-	Texture::Texture(Sprite& texture, const TextureSize& size)
-		: mTexture(&texture), mSpriteSize(size.X, size.Y)
+	Texture::Texture(const TexturePath& path)
+		: mTexture(createSprite(path.c_str()))
 	{
-
+		int w, h;
+		getSpriteSize(mTexture, w, h);
 	}
 
 	Texture::Texture(Texture&& mve) noexcept : Texture()
@@ -44,15 +46,6 @@ namespace BattleCity::Sprite
 		{
 			destroySprite(mTexture);
 		}
-	}
-
-	Texture Texture::Create(const TexturePath& path)
-	{
-		Sprite& sprite = *createSprite(path.c_str());
-		int w, h;
-		getSpriteSize(&sprite, w, h);
-
-		return { sprite, TextureSize(w, h) };
 	}
 
 	void Texture::DrawAt(X x, Y y) const noexcept

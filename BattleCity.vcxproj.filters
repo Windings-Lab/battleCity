@@ -53,7 +53,7 @@
     <ClCompile Include="src\App\Sprite\BCSprite.cpp">
       <Filter>Source\App\Sprite</Filter>
     </ClCompile>
-    <ClCompile Include="src\App\Sprite\SpriteData.cpp">
+    <ClCompile Include="src\App\Sprite\TexturePathContainer.cpp">
       <Filter>Source\App\Sprite</Filter>
     </ClCompile>
     <ClCompile Include="src\App\World\WorldMap.cpp">
@@ -74,16 +74,10 @@
     <ClCompile Include="src\App\Sprite\Texture.cpp">
       <Filter>Source\App\Sprite</Filter>
     </ClCompile>
-    <ClCompile Include="src\App\Object\Builder\ObjectBuilder.cpp">
-      <Filter>Source\App\Object\Builder</Filter>
+    <ClCompile Include="src\App\Object\Builder\SpriteBuilder.cpp">
+      <Filter>Source\App\Sprite\Builder</Filter>
     </ClCompile>
-    <ClCompile Include="src\App\Object\AbstractFactory\BasicObjectFactory.cpp">
-      <Filter>Source\App\Object\AbstractFactory</Filter>
-    </ClCompile>
-    <ClCompile Include="src\App\Object\AbstractFactory\ObjectAbstractFactory.cpp">
-      <Filter>Source\App\Object\AbstractFactory</Filter>
-    </ClCompile>
-    <ClCompile Include="src\App\Object\Factory\WorldBoundariesFactory.cpp">
+    <ClCompile Include="src\App\Object\Factory\BasicObjectFactory.cpp">
       <Filter>Source\App\Object\Factory</Filter>
     </ClCompile>
     <ClCompile Include="src\App\Object\Factory\ObjectFactory.cpp">
@@ -160,7 +154,7 @@
     <ClInclude Include="include\App\Sprite\BCSprite.h">
       <Filter>Headers\App\Sprite</Filter>
     </ClInclude>
-    <ClInclude Include="include\App\Sprite\SpriteData.h">
+    <ClInclude Include="include\App\Sprite\TexturePathContainer.h">
       <Filter>Headers\App\Sprite</Filter>
     </ClInclude>
     <ClInclude Include="include\App\World\WorldMap.h">
@@ -184,23 +178,17 @@
     <ClInclude Include="include\App\Sprite\Texture.h">
       <Filter>Headers\App\Sprite</Filter>
     </ClInclude>
-    <ClInclude Include="include\App\Object\Builder\ObjectBuilder.h">
-      <Filter>Headers\App\Object\Builder</Filter>
+    <ClInclude Include="include\App\Object\Builder\SpriteBuilder.h">
+      <Filter>Headers\App\Sprite\Builder</Filter>
     </ClInclude>
-    <ClInclude Include="include\App\Object\AbstractFactory\BasicObjectFactory.h">
-      <Filter>Headers\App\Object\AbstractFactory</Filter>
+    <ClInclude Include="ObjectAliases.h">
+      <Filter>Headers\App\Object</Filter>
     </ClInclude>
-    <ClInclude Include="include\App\Object\AbstractFactory\ObjectAbstractFactory.h">
-      <Filter>Headers\App\Object\AbstractFactory</Filter>
-    </ClInclude>
-    <ClInclude Include="include\App\Object\Factory\WorldBoundariesFactory.h">
+    <ClInclude Include="include\App\Object\Factory\BasicObjectFactory.h">
       <Filter>Headers\App\Object\Factory</Filter>
     </ClInclude>
     <ClInclude Include="include\App\Object\Factory\ObjectFactory.h">
       <Filter>Headers\App\Object\Factory</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjectAliases.h">
-      <Filter>Headers\App\Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -270,23 +258,17 @@
     <Filter Include="PCHeaders">
       <UniqueIdentifier>{e81d3e70-df37-4457-bbfe-6a2e174898fe}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Headers\App\Object\Builder">
+    <Filter Include="Headers\App\Sprite\Builder">
       <UniqueIdentifier>{65155735-7c25-42f5-bde5-8245d8f8edfb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\App\Object\Builder">
+    <Filter Include="Source\App\Sprite\Builder">
       <UniqueIdentifier>{f8bd922a-fbf4-44ec-9f24-c20cc07373ad}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Headers\App\Object\AbstractFactory">
-      <UniqueIdentifier>{ecf268d0-e685-466a-bc20-8e96bd809c90}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\App\Object\AbstractFactory">
+    <Filter Include="Source\App\Object\Factory">
       <UniqueIdentifier>{f40ac654-67df-4718-bc44-5128b93501e1}</UniqueIdentifier>
     </Filter>
     <Filter Include="Headers\App\Object\Factory">
-      <UniqueIdentifier>{a573406d-ee04-45d8-a250-6ebdb0e5b9f8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\App\Object\Factory">
-      <UniqueIdentifier>{e7bc91fc-d636-4e6c-b828-d0dfcd78bd54}</UniqueIdentifier>
+      <UniqueIdentifier>{ecf268d0-e685-466a-bc20-8e96bd809c90}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

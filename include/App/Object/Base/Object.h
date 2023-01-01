@@ -16,8 +16,7 @@ namespace BattleCity::Object
 	class Object : public UUID
 	{
 	public:
-		Object() = delete;
-		Object(Sprite::BCSprite&, const Position&);
+		Object(Sprite::BCSprite);
 
 		DISALLOW_COPY_MOVE(Object)
 

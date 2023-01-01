@@ -1,26 +1,41 @@
 #pragma once
 
-#include "ObjectAliases.h"
+#include "SpriteBuilder.h"
 
 namespace BattleCity
 {
-	namespace Sprite
-	{
-		class BCSprite;
-	}
+	class WorldMap;
 }
 
 namespace BattleCity::Object
 {
 	class Object;
 
-	class ObjectFactory
+	struct ObjectFactory
 	{
-	public:
-		ObjectFactory() = default;
+		explicit ObjectFactory(WorldMap& inserter) : mInserter(inserter) {}
+
+		DISALLOW_COPY_MOVE(ObjectFactory)
+
 		virtual ~ObjectFactory() = default;
 
-		virtual std::unique_ptr<Object> Create(Sprite::BCSprite&, const Position&) = 0;
+		virtual Object* CreateWorldBoundaries() = 0;
+
+		virtual Object* CreateTank(Type tankType) = 0;
+
+		virtual Object* CreateBullet() = 0;
+
+		virtual Object* CreatePowerUp() = 0;
+
+		virtual Object* CreateWall() = 0;
+
+		virtual Object* CreatePhoenix() = 0;
+
+		virtual Object* CreateExplosion() = 0;
+
+	protected:
+		WorldMap& mInserter;
+		Sprite::SpriteBuilder mSpriteBuilder;
 	};
 }
 

@@ -29,7 +29,7 @@ namespace BattleCity
 		void CreateMap(const Level& level);
 
 		Object::Object& GetObject(int id) const;
-		void InsertObject(std::unique_ptr<Object::Object>&& objPtr
+		Object::Object* InsertObject(std::unique_ptr<Object::Object>&& object
 			, Sprite::Layer layer = Sprite::Layer::Front);
 		void MarkForDelete(int objID);
 

@@ -29,6 +29,8 @@ namespace BattleCity::Sprite
 		void ChangeTexture(TextureType);
 
 	private:
+		friend class SpriteBuilder;
+
 		Texture* mCurrentTexture;
 		TextureContainer mSpriteContainer;
 	};

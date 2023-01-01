@@ -1,22 +1,23 @@
 #include "PCHeader.h"
-#include "SpriteData.h"
+
+#include "TexturePathContainer.h"
 
 namespace BattleCity::Sprite
 {
-	SpriteData::SpriteFolderAtlas SpriteData::mSpritePathAtlas;
+	TexturePathContainer::SpritePathAtlas TexturePathContainer::mSpritePathAtlas;
 
-	SpriteData::SpriteData(SpriteData&& mve) noexcept : SpriteData()
+	TexturePathContainer::TexturePathContainer(TexturePathContainer&& mve) noexcept : TexturePathContainer()
 	{
 		swap(*this, mve);
 	}
 
-	SpriteData& SpriteData::operator=(SpriteData&& mve) noexcept
+	TexturePathContainer& TexturePathContainer::operator=(TexturePathContainer&& mve) noexcept
 	{
 		swap(*this, mve);
 		return *this;
 	}
 
-	void SpriteData::Init(const SpritePath& spritePath)
+	void TexturePathContainer::Init(const SpritePath& spritePath)
 	{
 		using namespace std::filesystem;
 
@@ -56,7 +57,7 @@ namespace BattleCity::Sprite
 
 		mSpritePathAtlas.try_emplace(spritePath, mSpritePathContainer);
 	}
-	const TexturePath& SpriteData::Get(TextureType spriteType) const
+	const TexturePath& TexturePathContainer::Get(TextureType spriteType) const
 	{
 		const auto& spritePathIterator = mSpritePathContainer.find(spriteType);
 		if (spritePathIterator == mSpritePathContainer.end())
@@ -67,7 +68,7 @@ namespace BattleCity::Sprite
 		return spritePathIterator->second;
 	}
 
-	std::optional<TextureType> SpriteData::TypeFrom(const std::filesystem::path& spritePath) const
+	std::optional<TextureType> TexturePathContainer::TypeFrom(const std::filesystem::path& spritePath) const
 	{
 		using magic_enum::enum_cast;
 
@@ -82,16 +83,26 @@ namespace BattleCity::Sprite
 		return spriteTypeCast;
 	}
 
-	SpriteData::TexturePathContainer::const_iterator SpriteData::begin() const
+	TexturePathContainer::Container::const_iterator TexturePathContainer::begin() const
 	{
 		return mSpritePathContainer.cbegin();
 	}
-	SpriteData::TexturePathContainer::const_iterator SpriteData::end() const
+	TexturePathContainer::Container::const_iterator TexturePathContainer::end() const
 	{
 		return mSpritePathContainer.cend();
 	}
 
-	void swap(SpriteData& first, SpriteData& second) noexcept
+	bool TexturePathContainer::IsEmpty() const
+	{
+		return mSpritePathContainer.empty();
+	}
+
+	void TexturePathContainer::Clear()
+	{
+		mSpritePathContainer.clear();
+	}
+
+	void swap(TexturePathContainer& first, TexturePathContainer& second) noexcept
 	{
 		first.mSpritePathContainer.swap(second.mSpritePathContainer);
 	}

@@ -4,9 +4,8 @@
 
 namespace BattleCity::Object
 {
-    Object::Object(Sprite::BCSprite& sprite, const Position& position)
+    Object::Object(Sprite::BCSprite sprite)
 	    : mSprite(std::move(sprite))
-		, mPosition(position.X, position.Y)
     {
     }
     Object::~Object() = default;
