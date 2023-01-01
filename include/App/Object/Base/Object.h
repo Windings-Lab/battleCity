@@ -1,6 +1,9 @@
 #pragma once
 
 #include "UUID.h"
+
+#include "ObjectAliases.h"
+
 #include "BCSprite.h"
 
 namespace BattleCity
@@ -10,8 +13,6 @@ namespace BattleCity
 
 namespace BattleCity::Object
 {
-	using Position = Vector2Int;
-
 	class Object : public UUID
 	{
 	public:

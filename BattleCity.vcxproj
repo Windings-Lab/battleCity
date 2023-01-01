@@ -85,6 +85,7 @@
     <ClInclude Include="include\Toolkit\magic_enum.hpp" />
     <ClInclude Include="include\Toolkit\Rectangle.h" />
     <ClInclude Include="include\Toolkit\Vector2Int.h" />
+    <ClInclude Include="ObjectAliases.h" />
     <ClInclude Include="pcheader\PCHeader.h" />
   </ItemGroup>
   <ItemGroup>
