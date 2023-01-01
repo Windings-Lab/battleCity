@@ -74,6 +74,9 @@
     <ClCompile Include="src\App\Sprite\Texture.cpp">
       <Filter>Source\App\Sprite</Filter>
     </ClCompile>
+    <ClCompile Include="src\App\Object\Builder\ObjectBuilder.cpp">
+      <Filter>Source\App\Object\Builder</Filter>
+    </ClCompile>
     <ClCompile Include="src\App\Object\AbstractFactory\BasicObjectFactory.cpp">
       <Filter>Source\App\Object\AbstractFactory</Filter>
     </ClCompile>
@@ -181,6 +184,9 @@
     <ClInclude Include="include\App\Sprite\Texture.h">
       <Filter>Headers\App\Sprite</Filter>
     </ClInclude>
+    <ClInclude Include="include\App\Object\Builder\ObjectBuilder.h">
+      <Filter>Headers\App\Object\Builder</Filter>
+    </ClInclude>
     <ClInclude Include="include\App\Object\AbstractFactory\BasicObjectFactory.h">
       <Filter>Headers\App\Object\AbstractFactory</Filter>
     </ClInclude>
@@ -263,6 +269,12 @@
     </Filter>
     <Filter Include="PCHeaders">
       <UniqueIdentifier>{e81d3e70-df37-4457-bbfe-6a2e174898fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\App\Object\Builder">
+      <UniqueIdentifier>{65155735-7c25-42f5-bde5-8245d8f8edfb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\App\Object\Builder">
+      <UniqueIdentifier>{f8bd922a-fbf4-44ec-9f24-c20cc07373ad}</UniqueIdentifier>
     </Filter>
     <Filter Include="Headers\App\Object\AbstractFactory">
       <UniqueIdentifier>{ecf268d0-e685-466a-bc20-8e96bd809c90}</UniqueIdentifier>
