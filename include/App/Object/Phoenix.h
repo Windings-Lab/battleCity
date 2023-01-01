@@ -7,7 +7,7 @@ namespace BattleCity::Object
 	class Phoenix : public Object
 	{
     public:
-        Phoenix() = default;
+		using Object::Object;
 	};
 }
 

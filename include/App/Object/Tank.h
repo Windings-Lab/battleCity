@@ -7,6 +7,6 @@ namespace BattleCity::Object
 	class Tank : public Object
 	{
 	public:
-		Tank() = default;
+		using Object::Object;
 	};
 }

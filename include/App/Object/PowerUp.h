@@ -7,7 +7,7 @@ namespace BattleCity::Object
 	class PowerUp : public Object
 	{
     public:
-        PowerUp() = default;
+		using Object::Object;
 	};
 }
 

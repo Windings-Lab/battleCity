@@ -45,25 +45,21 @@ namespace BattleCity
 				case Object::Type::TankPlayer:
 					{
 						const auto tankPlayer = objectFactory.CreateTank(Object::Type::TankPlayer);
-						tankPlayer->SetPosition(position);
 					}
 					break;
 				case Object::Type::TankNPC:
 					{
 						const auto tankNPC = objectFactory.CreateTank(Object::Type::TankNPC);
-						tankNPC->SetPosition(position);
 					}
 					break;
 				case Object::Type::Wall:
 					{
 						const auto wall = objectFactory.CreateWall();
-						wall->SetPosition(position);
 					}
 					break;
 				case Object::Type::Phoenix:
 					{
 						const auto phoenix = objectFactory.CreatePhoenix();
-						phoenix->SetPosition(position);
 					}
 					break;
 				default: 

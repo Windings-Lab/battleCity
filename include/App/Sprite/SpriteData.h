@@ -1,15 +1,17 @@
 #pragma once
 
+#include "SpriteAliases.h"
+
 namespace BattleCity::Sprite
 {
 	class SpriteData final
 	{
 	private:
-		using SpritePath = std::string;
-		using FolderPath = std::string;
+		using TexturePathContainer = std::unordered_map<TextureType, TexturePath>;
+		using SpriteFolderAtlas = std::unordered_map<SpritePath, TexturePathContainer>;
 
-		using SpritePathContainer = std::unordered_map<TextureType, SpritePath>;
-		using SpritePathAtlas = std::unordered_map<FolderPath, SpritePathContainer>;
+	private:
+		friend void swap(SpriteData& first, SpriteData& second) noexcept;
 
 	public:
 		SpriteData() = default;
@@ -19,19 +21,19 @@ namespace BattleCity::Sprite
 
 		~SpriteData() = default;
 
-		void Init(const FolderPath& folderPath);
-		const SpritePath& Get(TextureType spriteType) const;
+		void Init(const SpritePath&);
+		const TexturePath& Get(TextureType) const;
 
-		SpritePathContainer::const_iterator begin() const;
-		SpritePathContainer::const_iterator end() const;
-
-	private:
-		std::optional<TextureType> TypeFrom(const std::filesystem::path& spritePath) const;
-		friend void swap(SpriteData& first, SpriteData& second) noexcept;
+		TexturePathContainer::const_iterator begin() const;
+		TexturePathContainer::const_iterator end() const;
 
 	private:
-		static SpritePathAtlas mSpritePathAtlas;
-		SpritePathContainer mSpritePathContainer;
+		std::optional<TextureType> TypeFrom(const std::filesystem::path&) const;
+
+
+	private:
+		static SpriteFolderAtlas mSpritePathAtlas;
+		TexturePathContainer mSpritePathContainer;
 
 	};
 }

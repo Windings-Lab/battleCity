@@ -3,7 +3,7 @@
 
 namespace BattleCity::Sprite
 {
-	SpriteData::SpritePathAtlas SpriteData::mSpritePathAtlas;
+	SpriteData::SpriteFolderAtlas SpriteData::mSpritePathAtlas;
 
 	SpriteData::SpriteData(SpriteData&& mve) noexcept : SpriteData()
 	{
@@ -16,12 +16,12 @@ namespace BattleCity::Sprite
 		return *this;
 	}
 
-	void SpriteData::Init(const FolderPath& folderPath)
+	void SpriteData::Init(const SpritePath& spritePath)
 	{
 		using namespace std::filesystem;
 
 		if  (
-			const auto& pathContainerIt = mSpritePathAtlas.find(folderPath); 
+			const auto& pathContainerIt = mSpritePathAtlas.find(spritePath); 
 			pathContainerIt != mSpritePathAtlas.end()
 			)
 		{
@@ -29,16 +29,16 @@ namespace BattleCity::Sprite
 			return;
 		}
 
-		const path folderPathFs(folderPath);
-		if (!exists(folderPathFs))
+		const path spritePathFS(spritePath);
+		if (!exists(spritePathFS))
 		{
 			std::cerr << "Sprite Folder Path has not been found\n";
-			std::cerr << "Make sure that " << folderPath << " in folder with BattleCity.exe file\n";
+			std::cerr << "Make sure that " << spritePath << " in folder with BattleCity.exe file\n";
 			throw std::invalid_argument("Can't find sprite folder");
 		}
 
 		const path fileExtension = ".png";
-		for (const auto& folderEntry : recursive_directory_iterator(folderPathFs))
+		for (const auto& folderEntry : recursive_directory_iterator(spritePathFS))
 		{
 			if (folderEntry.path().extension() != fileExtension)
 			{
@@ -54,9 +54,9 @@ namespace BattleCity::Sprite
 			mSpritePathContainer.try_emplace(type.value(), folderEntry.path().string());
 		}
 
-		mSpritePathAtlas.try_emplace(folderPath, mSpritePathContainer);
+		mSpritePathAtlas.try_emplace(spritePath, mSpritePathContainer);
 	}
-	const SpriteData::SpritePath& SpriteData::Get(TextureType spriteType) const
+	const TexturePath& SpriteData::Get(TextureType spriteType) const
 	{
 		const auto& spritePathIterator = mSpritePathContainer.find(spriteType);
 		if (spritePathIterator == mSpritePathContainer.end())
@@ -82,11 +82,11 @@ namespace BattleCity::Sprite
 		return spriteTypeCast;
 	}
 
-	SpriteData::SpritePathContainer::const_iterator SpriteData::begin() const
+	SpriteData::TexturePathContainer::const_iterator SpriteData::begin() const
 	{
 		return mSpritePathContainer.cbegin();
 	}
-	SpriteData::SpritePathContainer::const_iterator SpriteData::end() const
+	SpriteData::TexturePathContainer::const_iterator SpriteData::end() const
 	{
 		return mSpritePathContainer.cend();
 	}

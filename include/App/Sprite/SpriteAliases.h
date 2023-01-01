@@ -2,6 +2,7 @@
 
 namespace BattleCity::Sprite
 {
+	using SpritePath = std::string;
 	using TextureSize = Vector2Int;
-	using TexturePath = const char*;
+	using TexturePath = std::string;
 }

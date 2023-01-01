@@ -1,25 +1,22 @@
 #pragma once
 
+#include "Texture.h"
+#include "SpriteAliases.h"
+
 namespace BattleCity::Sprite
 {
-	class Texture;
+	using TextureContainer = std::unordered_map<TextureType, Texture>;
 
 	class BCSprite final
 	{
 	private:
-		friend void swap(BCSprite& first, BCSprite& second) noexcept;
-
-	private:
-		using X = int;
-		using Y = int;
-		using TextureSize = Vector2Int;
-		using SpriteContainer = std::unordered_map<TextureType, Texture>;
+		friend void swap(BCSprite&, BCSprite&) noexcept;
 
 	private:
 		BCSprite();
 
 	public:
-		explicit BCSprite(SpriteContainer&);
+		explicit BCSprite(TextureContainer&);
 
 		DISALLOW_COPY(BCSprite)
 		ALLOW_MOVE(BCSprite)
@@ -27,13 +24,12 @@ namespace BattleCity::Sprite
 		~BCSprite() = default;
 
 		void DrawAt(X, Y)  const noexcept;
-		const TextureSize& GetSpriteSize() const noexcept;
+		const TextureSize& GetSize() const noexcept;
 
 		void ChangeTexture(TextureType);
 
 	private:
 		Texture* mCurrentTexture;
-
-		SpriteContainer mSpriteContainer;
+		TextureContainer mSpriteContainer;
 	};
 }

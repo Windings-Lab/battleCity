@@ -7,6 +7,6 @@ namespace BattleCity::Object
 	class WorldBoundaries final : public Object
 	{
 	public:
-		WorldBoundaries() = default;
+		using Object::Object;
 	};
 }

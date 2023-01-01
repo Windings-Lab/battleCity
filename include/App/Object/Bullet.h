@@ -7,6 +7,6 @@ namespace BattleCity::Object
     class Bullet final : public Object
     {
     public:
-	    Bullet() = default;
+        using Object::Object;
     };
 }

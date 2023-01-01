@@ -4,44 +4,44 @@
 
 namespace BattleCity::Object
 {
+    Object::Object(Sprite::BCSprite& sprite, const Position& position)
+	    : mSprite(std::move(sprite))
+		, mPosition(position.X, position.Y)
+    {
+    }
     Object::~Object() = default;
 
     void Object::Update()
     {
     }
 
-    void Object::Draw() const noexcept
+    void Object::Draw() noexcept
     {
-        mSprite.DrawAt(mPosition);
+        mSprite.DrawAt(mPosition.X, mPosition.Y);
     }
 
-    void Object::CreateSprite(const std::string& spritePath)
+    void Object::ChangeTexture(Sprite::TextureType textureType)
     {
-        mSprite.CreateSprite(spritePath);
+        mSprite.ChangeTexture(textureType);
     }
 
-    void Object::SetSprite(Sprite::TextureType objectBehaviour)
-    {
-        mSprite.ChangeTexture(objectBehaviour);
-    }
-
-    void Object::SetPosition(const Vector2Int& pos) noexcept
+    void Object::SetPosition(const Position& pos) noexcept
     {
         mPosition.SetXY(pos);
     }
-    void Object::SetPosition(int x, int y) noexcept
+    void Object::SetPosition(X x, Y y) noexcept
     {
         mPosition.SetXY(x, y);
     }
-    const Vector2Int& Object::GetPosition() const noexcept
+    const Position& Object::GetPosition() const noexcept
     {
         return mPosition;
     }
-    int Object::X() const noexcept
+    int Object::GetX() const noexcept
     {
         return mPosition.X;
     }
-    int Object::Y() const noexcept
+    int Object::GetY() const noexcept
     {
         return mPosition.Y;
     }

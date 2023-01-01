@@ -7,6 +7,6 @@ namespace BattleCity::Object
     class Explosion : public Object
     {
     public:
-	    Explosion() = default;
+        using Object::Object;
     };
 }
