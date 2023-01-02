@@ -77,13 +77,10 @@
     <ClCompile Include="include\Game\Object\Derived\WorldBoundaries.cpp">
       <Filter>Source\Game\Object\Derived</Filter>
     </ClCompile>
-    <ClCompile Include="include\Game\Object\Container\Container.cpp">
-      <Filter>Source\Game\Object</Filter>
-    </ClCompile>
     <ClCompile Include="include\Game\Object\Object.cpp">
       <Filter>Source\Game\Object</Filter>
     </ClCompile>
-    <ClCompile Include="include\Game\Object\UUID.cpp">
+    <ClCompile Include="include\Game\Object\Container.cpp">
       <Filter>Source\Game\Object</Filter>
     </ClCompile>
   </ItemGroup>
@@ -184,16 +181,13 @@
     <ClInclude Include="include\Game\Object\Derived\WorldBoundaries.h">
       <Filter>Source\Game\Object\Derived</Filter>
     </ClInclude>
-    <ClInclude Include="include\Game\Object\Container\Container.h">
-      <Filter>Source\Game\Object</Filter>
-    </ClInclude>
     <ClInclude Include="include\Game\Object\Aliases.h">
       <Filter>Source\Game\Object</Filter>
     </ClInclude>
     <ClInclude Include="include\Game\Object\Object.h">
       <Filter>Source\Game\Object</Filter>
     </ClInclude>
-    <ClInclude Include="include\Game\Object\UUID.h">
+    <ClInclude Include="include\Game\Object\Container.h">
       <Filter>Source\Game\Object</Filter>
     </ClInclude>
   </ItemGroup>

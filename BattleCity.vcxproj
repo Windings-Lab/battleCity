@@ -26,12 +26,12 @@
     <ClCompile Include="include\Framework\Sprite\TexturePath\Group.cpp" />
     <ClCompile Include="include\Framework\Sprite\TexturePath\Library.cpp" />
     <ClCompile Include="include\Framework\Sprite\Texture\Texture.cpp" />
+    <ClCompile Include="include\Game\Object\Container.cpp" />
     <ClCompile Include="include\Game\Object\Object.cpp" />
     <ClCompile Include="include\Game\Object\Components\Collider.cpp" />
     <ClCompile Include="include\Game\Object\Components\Fireable.cpp" />
     <ClCompile Include="include\Game\Object\Components\Health.cpp" />
     <ClCompile Include="include\Game\Object\Components\Movable.cpp" />
-    <ClCompile Include="include\Game\Object\Container\Container.cpp" />
     <ClCompile Include="include\Game\Object\Derived\Bullet.cpp" />
     <ClCompile Include="include\Game\Object\Derived\Explosion.cpp" />
     <ClCompile Include="include\Game\Object\Derived\Phoenix.cpp" />
@@ -41,7 +41,6 @@
     <ClCompile Include="include\Game\Object\Derived\WorldBoundaries.cpp" />
     <ClCompile Include="include\Game\Object\Factory\Standart.cpp" />
     <ClCompile Include="include\Game\Object\Factory\Factory.cpp" />
-    <ClCompile Include="include\Game\Object\UUID.cpp" />
     <ClCompile Include="include\Game\World\Level.cpp" />
     <ClCompile Include="include\Game\World\Map.cpp" />
     <ClCompile Include="include\Utility\Rectangle.cpp" />
@@ -66,12 +65,12 @@
     <ClInclude Include="include\Framework\Sprite\Texture\Texture.h" />
     <ClInclude Include="include\Game\BattleCityEnums.h" />
     <ClInclude Include="include\Game\Object\Aliases.h" />
+    <ClInclude Include="include\Game\Object\Container.h" />
     <ClInclude Include="include\Game\Object\Object.h" />
     <ClInclude Include="include\Game\Object\Components\Collider.h" />
     <ClInclude Include="include\Game\Object\Components\Fireable.h" />
     <ClInclude Include="include\Game\Object\Components\Health.h" />
     <ClInclude Include="include\Game\Object\Components\Movable.h" />
-    <ClInclude Include="include\Game\Object\Container\Container.h" />
     <ClInclude Include="include\Game\Object\Derived\Bullet.h" />
     <ClInclude Include="include\Game\Object\Derived\Explosion.h" />
     <ClInclude Include="include\Game\Object\Derived\Phoenix.h" />
@@ -81,7 +80,6 @@
     <ClInclude Include="include\Game\Object\Derived\WorldBoundaries.h" />
     <ClInclude Include="include\Game\Object\Factory\Standart.h" />
     <ClInclude Include="include\Game\Object\Factory\Factory.h" />
-    <ClInclude Include="include\Game\Object\UUID.h" />
     <ClInclude Include="include\Game\World\Level.h" />
     <ClInclude Include="include\Game\World\Map.h" />
     <ClInclude Include="include\Utility\Action.h" />

@@ -7,6 +7,9 @@ namespace BattleCity::Object
     Object::Object(Sprite::BCSprite sprite)
 	    : mSprite(std::move(sprite))
     {
+        static int idCounter = 0;
+
+        mID = idCounter++;
     }
     Object::~Object() = default;
 
@@ -14,7 +17,12 @@ namespace BattleCity::Object
     {
     }
 
-    void Object::Draw() noexcept
+    int Object::GetID() const noexcept
+    {
+        return mID;
+    }
+
+    void Object::Draw()
     {
         mSprite.DrawAt(mPosition.X, mPosition.Y);
     }
