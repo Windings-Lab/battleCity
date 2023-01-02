@@ -1,7 +1,7 @@
 #include "PCHeader.h"
 
-#include "FrameworkWrapper.h"
-#include "Screen.h"
+#include "Framework/Wrapper.h"
+#include "Framework/Screen.h"
 
 namespace 
 {
@@ -78,7 +78,7 @@ int main(const int argc, const char* argv[])
 		}
 	}
 	
-	const auto framework = std::make_unique<BattleCity::Framework::FrameworkWrapper>();
+	const auto framework = std::make_unique<BattleCity::Framework::Wrapper>();
 
 	return run(framework.get());
 }
