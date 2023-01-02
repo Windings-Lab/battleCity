@@ -2,7 +2,7 @@
 
 #include "Factory.h"
 
-namespace BattleCity::Object::Factory
+namespace BattleCity::Game::Object::Factory
 {
 	struct Standart : Factory
 	{

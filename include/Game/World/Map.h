@@ -2,7 +2,7 @@
 
 #include "Game/Object/Container/Container.h"
 
-namespace BattleCity::Object::World
+namespace BattleCity::Game::Object
 {
 	class Level;
 

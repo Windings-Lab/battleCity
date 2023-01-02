@@ -4,7 +4,7 @@
 
 #include "Game/Object/Object.h"
 
-namespace BattleCity::Object
+namespace BattleCity::Game::Object
 {
 	Container::Container(Container&& mve) noexcept : Container()
 	{

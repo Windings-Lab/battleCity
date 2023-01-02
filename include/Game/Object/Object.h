@@ -3,7 +3,7 @@
 #include "Framework/Sprite/BCSprite.h"
 #include "Game/Object/Aliases.h"
 
-namespace BattleCity::Object
+namespace BattleCity::Game::Object
 {
 	class Object
 	{

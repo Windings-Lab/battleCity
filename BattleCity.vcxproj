@@ -19,13 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="include\Framework\Texture\PathLibrary.cpp" />
+    <ClCompile Include="include\Framework\Texture\Texture.cpp" />
     <ClCompile Include="include\Framework\Wrapper.cpp" />
     <ClCompile Include="include\Framework\Screen.cpp" />
-    <ClCompile Include="include\Framework\Sprite\BCSprite.cpp" />
-    <ClCompile Include="include\Framework\Sprite\Builder.cpp" />
-    <ClCompile Include="include\Framework\Sprite\TexturePath\Group.cpp" />
-    <ClCompile Include="include\Framework\Sprite\TexturePath\Library.cpp" />
-    <ClCompile Include="include\Framework\Sprite\Texture\Texture.cpp" />
     <ClCompile Include="include\Game\Object\Container.cpp" />
     <ClCompile Include="include\Game\Object\Object.cpp" />
     <ClCompile Include="include\Game\Object\Components\Collider.cpp" />
@@ -41,6 +38,7 @@
     <ClCompile Include="include\Game\Object\Derived\WorldBoundaries.cpp" />
     <ClCompile Include="include\Game\Object\Factory\Standart.cpp" />
     <ClCompile Include="include\Game\Object\Factory\Factory.cpp" />
+    <ClCompile Include="include\Game\Object\Texture\Group.cpp" />
     <ClCompile Include="include\Game\World\Level.cpp" />
     <ClCompile Include="include\Game\World\Map.cpp" />
     <ClCompile Include="include\Utility\Rectangle.cpp" />
@@ -55,14 +53,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Framework\Framework.h" />
+    <ClInclude Include="include\Framework\Texture\Aliases.h" />
+    <ClInclude Include="include\Framework\Texture\PathLibrary.h" />
+    <ClInclude Include="include\Framework\Texture\Texture.h" />
     <ClInclude Include="include\Framework\Wrapper.h" />
     <ClInclude Include="include\Framework\Screen.h" />
-    <ClInclude Include="include\Framework\Sprite\Aliases.h" />
-    <ClInclude Include="include\Framework\Sprite\BCSprite.h" />
-    <ClInclude Include="include\Framework\Sprite\Builder.h" />
-    <ClInclude Include="include\Framework\Sprite\TexturePath\Group.h" />
-    <ClInclude Include="include\Framework\Sprite\TexturePath\Library.h" />
-    <ClInclude Include="include\Framework\Sprite\Texture\Texture.h" />
     <ClInclude Include="include\Game\BattleCityEnums.h" />
     <ClInclude Include="include\Game\Object\Aliases.h" />
     <ClInclude Include="include\Game\Object\Container.h" />
@@ -80,6 +75,7 @@
     <ClInclude Include="include\Game\Object\Derived\WorldBoundaries.h" />
     <ClInclude Include="include\Game\Object\Factory\Standart.h" />
     <ClInclude Include="include\Game\Object\Factory\Factory.h" />
+    <ClInclude Include="include\Game\Object\Texture\Group.h" />
     <ClInclude Include="include\Game\World\Level.h" />
     <ClInclude Include="include\Game\World\Map.h" />
     <ClInclude Include="include\Utility\Action.h" />

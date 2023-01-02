@@ -2,7 +2,7 @@
 
 namespace BattleCity
 {
-	namespace Sprite
+	namespace Framework::Texture
 	{
 		enum class Layer
 		{
@@ -11,10 +11,7 @@ namespace BattleCity
 			Front,
 			UI
 		};
-	}
 
-	namespace Texture
-	{
 		enum class Type
 		{
 			Error,
@@ -33,7 +30,7 @@ namespace BattleCity
 		};
 	}
 
-	namespace Object
+	namespace Game::Object
 	{
 		enum class Solidness
 		{

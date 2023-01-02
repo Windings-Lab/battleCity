@@ -2,7 +2,7 @@
 
 #include "Game/Object/Object.h"
 
-namespace BattleCity::Object
+namespace BattleCity::Game::Object
 {
     class Explosion : public Object
     {

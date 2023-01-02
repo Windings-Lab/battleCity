@@ -2,7 +2,7 @@
 
 #include "Bullet.h"
 
-namespace BattleCity::Object
+namespace BattleCity::Game::Object
 {
 
 }

@@ -11,7 +11,7 @@
 #include "Game/Object/Derived/Wall.h"
 #include "Game/Object/Derived/WorldBoundaries.h"
 
-namespace BattleCity::Object::Factory
+namespace BattleCity::Game::Object::Factory
 {
 	Object* Standart::CreateWorldBoundaries()
 	{

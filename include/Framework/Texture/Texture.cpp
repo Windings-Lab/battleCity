@@ -1,7 +1,7 @@
 #include "PCHeader.h"
 #include "Texture.h"
 
-namespace BattleCity::Texture
+namespace BattleCity::Framework::Texture
 {
 	namespace
 	{

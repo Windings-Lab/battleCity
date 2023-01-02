@@ -22,8 +22,8 @@ namespace BattleCity::Framework
 	bool Wrapper::Init()
 	{
 		const Object::World::Level level = Object::World::Level::CreateLevel(R"(.\data\Maps\level1.txt)");
-		mWorldMap.SetWorldRelative({ 40, 44 });
-		mWorldMap.CreateMap(level);
+		mMap.SetWorldRelative({ 40, 44 });
+		mMap.CreateMap(level);
 
 		return true;
 	}
@@ -51,7 +51,7 @@ namespace BattleCity::Framework
 
 	void Wrapper::Update()
 	{
-		for (auto& obj : mWorldMap.GetFrontLayer())
+		for (auto& obj : mMap.GetFrontLayer())
 		{
 			obj->Update();
 		}
@@ -59,12 +59,12 @@ namespace BattleCity::Framework
 
 	void Wrapper::Draw()
 	{
-		for (auto& obj : mWorldMap.GetBackLayer())
+		for (auto& obj : mMap.GetBackLayer())
 		{
 			obj->Draw();
 		}
 
-		for (auto& obj : mWorldMap.GetFrontLayer())
+		for (auto& obj : mMap.GetFrontLayer())
 		{
 			obj->Draw();
 		}

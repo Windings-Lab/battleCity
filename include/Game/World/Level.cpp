@@ -1,7 +1,7 @@
 #include "PCHeader.h"
 #include "Level.h"
 
-namespace BattleCity::Object::World
+namespace BattleCity::Game::Object::World
 {
 	Level::Level(LevelSheet levelSheet)
 		: mLevelSheet(std::move(levelSheet))

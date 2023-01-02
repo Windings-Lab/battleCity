@@ -1,6 +1,6 @@
 #pragma once
 
-namespace BattleCity::Object::World
+namespace BattleCity::Game::Object::World
 {
 	class Level final
 	{

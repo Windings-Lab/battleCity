@@ -1,6 +1,6 @@
 #pragma once
 
-namespace BattleCity::Macros
+namespace BattleCity
 {
 	// ============== Allow Default ================
 

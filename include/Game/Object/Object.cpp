@@ -2,7 +2,7 @@
 
 #include "Object.h"
 
-namespace BattleCity::Object
+namespace BattleCity::Game::Object
 {
     Object::Object(Sprite::BCSprite sprite)
 	    : mSprite(std::move(sprite))

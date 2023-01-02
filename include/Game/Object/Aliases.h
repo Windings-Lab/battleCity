@@ -1,8 +1,8 @@
 #pragma once
 
-namespace BattleCity::Object
+namespace BattleCity::Game::Object
 {
 	using ObjectIndex = int;
 	using ObjectID = int;
-	using Position = Vector2Int;
+	using Position = Utility::Vector2Int;
 }

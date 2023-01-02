@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Framework/Sprite/Aliases.h"
+#include "Framework/Texture/Aliases.h"
 
-namespace BattleCity::Texture
+namespace BattleCity::Framework::Texture
 {
 	class Sprite;
 

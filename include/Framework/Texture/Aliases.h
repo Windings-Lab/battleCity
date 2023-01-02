@@ -1,13 +1,8 @@
 #pragma once
 
-namespace BattleCity::Sprite
+namespace BattleCity::Framework::Texture
 {
 	using FolderPath = std::string;
-
-}
-
-namespace BattleCity::Texture
-{
 	using Path = std::string;
 	using Size = Vector2Int;
 }

@@ -1,7 +1,7 @@
 #include "PCHeader.h"
 #include "WorldBoundaries.h"
 
-namespace BattleCity::Object
+namespace BattleCity::Game::Object
 {
 
 }

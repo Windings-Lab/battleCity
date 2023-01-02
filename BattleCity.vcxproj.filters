@@ -41,21 +41,6 @@
     <ClCompile Include="include\Framework\Screen.cpp">
       <Filter>Source\Framework</Filter>
     </ClCompile>
-    <ClCompile Include="include\Framework\Sprite\BCSprite.cpp">
-      <Filter>Source\Framework\Sprite</Filter>
-    </ClCompile>
-    <ClCompile Include="include\Framework\Sprite\Builder.cpp">
-      <Filter>Source\Framework\Sprite</Filter>
-    </ClCompile>
-    <ClCompile Include="include\Framework\Sprite\TexturePath\Group.cpp">
-      <Filter>Source\Framework\Sprite\TexturePath</Filter>
-    </ClCompile>
-    <ClCompile Include="include\Framework\Sprite\TexturePath\Library.cpp">
-      <Filter>Source\Framework\Sprite\TexturePath</Filter>
-    </ClCompile>
-    <ClCompile Include="include\Framework\Sprite\Texture\Texture.cpp">
-      <Filter>Source\Framework\Sprite\Texture</Filter>
-    </ClCompile>
     <ClCompile Include="include\Game\Object\Derived\Bullet.cpp">
       <Filter>Source\Game\Object\Derived</Filter>
     </ClCompile>
@@ -82,6 +67,15 @@
     </ClCompile>
     <ClCompile Include="include\Game\Object\Container.cpp">
       <Filter>Source\Game\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="include\Framework\Texture\Texture.cpp">
+      <Filter>Source\Framework\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="include\Framework\Texture\PathLibrary.cpp">
+      <Filter>Source\Framework\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="include\Game\Object\Texture\Group.cpp">
+      <Filter>Source\Game\Object\Texture</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -142,24 +136,6 @@
     <ClInclude Include="include\Framework\Screen.h">
       <Filter>Source\Framework</Filter>
     </ClInclude>
-    <ClInclude Include="include\Framework\Sprite\Aliases.h">
-      <Filter>Source\Framework\Sprite</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Framework\Sprite\BCSprite.h">
-      <Filter>Source\Framework\Sprite</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Framework\Sprite\Builder.h">
-      <Filter>Source\Framework\Sprite</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Framework\Sprite\TexturePath\Group.h">
-      <Filter>Source\Framework\Sprite\TexturePath</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Framework\Sprite\TexturePath\Library.h">
-      <Filter>Source\Framework\Sprite\TexturePath</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Framework\Sprite\Texture\Texture.h">
-      <Filter>Source\Framework\Sprite\Texture</Filter>
-    </ClInclude>
     <ClInclude Include="include\Game\Object\Derived\Bullet.h">
       <Filter>Source\Game\Object\Derived</Filter>
     </ClInclude>
@@ -189,6 +165,18 @@
     </ClInclude>
     <ClInclude Include="include\Game\Object\Container.h">
       <Filter>Source\Game\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Framework\Texture\Aliases.h">
+      <Filter>Source\Framework\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Framework\Texture\Texture.h">
+      <Filter>Source\Framework\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Framework\Texture\PathLibrary.h">
+      <Filter>Source\Framework\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Game\Object\Texture\Group.h">
+      <Filter>Source\Game\Object\Texture</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -222,20 +210,17 @@
     <Filter Include="Source\Utility">
       <UniqueIdentifier>{afacf658-b7c8-4254-badb-db2d37e1bc68}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Framework\Sprite">
-      <UniqueIdentifier>{5442297e-a9a3-4fb8-89dd-01f09342171a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Framework\Sprite\Texture">
-      <UniqueIdentifier>{9493df78-9840-4a93-badd-a0a16b9e6a07}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source\Game\Object\Builder">
       <UniqueIdentifier>{8da801f4-bbf8-4324-9aeb-5d8f314039e6}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source\Game\Object\Derived">
       <UniqueIdentifier>{77d13303-96e1-4516-befd-091e3dc0c62d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Framework\Sprite\TexturePath">
-      <UniqueIdentifier>{fd647533-478b-4cd8-ac1a-b7460886c2f0}</UniqueIdentifier>
+    <Filter Include="Source\Framework\Texture">
+      <UniqueIdentifier>{9493df78-9840-4a93-badd-a0a16b9e6a07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Game\Object\Texture">
+      <UniqueIdentifier>{390a7c39-069c-41fc-a7c3-5ec17b5bbdc8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -2,7 +2,7 @@
 
 #include "Tank.h"
 
-namespace BattleCity::Object
+namespace BattleCity::Game::Object
 {
 
 }

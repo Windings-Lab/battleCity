@@ -1,6 +1,6 @@
 #pragma once
 
-namespace BattleCity::Object::Component
+namespace BattleCity::Game::Object::Component
 {
 	class Collider
 	{

@@ -2,7 +2,7 @@
 
 #include "Framework/Sprite/Builder.h"
 
-namespace BattleCity::Object::World
+namespace BattleCity::Game::Object::World
 {
 	class Map;
 }

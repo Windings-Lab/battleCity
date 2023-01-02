@@ -6,7 +6,7 @@
 #include "Game/Object/Object.h"
 #include "Game/Object/Factory/Standart.h"
 
-namespace BattleCity::Object::World
+namespace BattleCity::Game::Object::World
 {
 	void Map::SetWorldRelative(const TopLeft& worldRelative) noexcept
 	{

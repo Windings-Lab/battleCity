@@ -2,7 +2,7 @@
 
 #include "PowerUp.h"
 
-namespace BattleCity::Object
+namespace BattleCity::Game::Object
 {
 
 }
