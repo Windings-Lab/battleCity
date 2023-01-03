@@ -1,42 +1,42 @@
 #include "PCHeader.h"
 
-#include "Wrapper.h"
-#include "Screen.h"
+#include "Game.h"
+#include "Framework/Screen.h"
 
 #include "Game/Object/Object.h"
 #include "Game/World/Level.h"
 
-namespace BattleCity::Framework
+namespace BattleCity::Game
 {
-	Wrapper::Wrapper() : mGameOver(false)
+	Game::Game() : mGameOver(false)
 	{
 	}
 
-	void Wrapper::PreInit(int& width, int& height, bool& fullscreen)
+	void Game::PreInit(int& width, int& height, bool& fullscreen)
 	{
-		width = Screen::W();
-		height = Screen::H();
-		fullscreen = Screen::IsFullscreen();
+		width = BattleCity::Framework::Screen::W();
+		height = BattleCity::Framework::Screen::H();
+		fullscreen = BattleCity::Framework::Screen::IsFullscreen();
 	}
 
-	bool Wrapper::Init()
+	bool Game::Init()
 	{
-		const Game::Object::World::Level level = Game::Object::World::Level::CreateLevel(R"(.\data\Maps\level1.txt)");
+		const Object::World::Level level = Object::World::Level::CreateLevel(R"(.\data\Maps\level1.txt)");
 		mMap.SetWorldRelative({ 40, 44 });
 		mMap.CreateMap(level);
 
 		return true;
 	}
 
-	void Wrapper::Close()
+	void Game::Close()
 	{
 	}
 
-	bool Wrapper::Tick()
+	bool Game::Tick()
 	{
+#ifdef _DEBUG
 		using namespace std::chrono;
 
-#ifdef _DEBUG
 		const auto& start = high_resolution_clock::now();
 #endif
 
@@ -49,15 +49,14 @@ namespace BattleCity::Framework
 		const auto& stop = high_resolution_clock::now();
 
 		const auto& result = duration_cast<duration<double, std::milli>>(stop - start).count();
-#endif
 
 		std::cout << "Tick complexity: " << result << std::endl;
-
+#endif
 
 		return mGameOver;
 	}
 
-	void Wrapper::Update()
+	void Game::Update()
 	{
 		for (auto& obj : mMap.GetFrontLayer())
 		{
@@ -65,7 +64,7 @@ namespace BattleCity::Framework
 		}
 	}
 
-	void Wrapper::Draw()
+	void Game::Draw()
 	{
 		for (auto& obj : mMap.GetBackLayer())
 		{
@@ -83,28 +82,28 @@ namespace BattleCity::Framework
 		std::cout << "Test func called " << test << std::endl;
 	}
 
-	void Wrapper::Test()
+	void Game::Test()
 	{
 	}
 
-	const char* Wrapper::GetTitle()
+	const char* Game::GetTitle()
 	{
 		return "Tanks";
 	}
 
-	void Wrapper::onKeyPressed(FRKey k)
+	void Game::onKeyPressed(BattleCity::Framework::FRKey k)
 	{
 	}
 
-	void Wrapper::onKeyReleased(FRKey k)
+	void Game::onKeyReleased(BattleCity::Framework::FRKey k)
 	{
 	}
 
-	void Wrapper::onMouseMove(int x, int y, int xrelative, int yrelative)
+	void Game::onMouseMove(int x, int y, int xrelative, int yrelative)
 	{
 	}
 
-	void Wrapper::onMouseButtonClick(FRMouseButton button, bool isReleased)
+	void Game::onMouseButtonClick(BattleCity::Framework::FRMouseButton button, bool isReleased)
 	{
 	}
 }

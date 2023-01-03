@@ -35,9 +35,6 @@
     <ClCompile Include="include\Utility\Vector2Int.cpp">
       <Filter>Source\Utility</Filter>
     </ClCompile>
-    <ClCompile Include="include\Framework\Wrapper.cpp">
-      <Filter>Source\Framework</Filter>
-    </ClCompile>
     <ClCompile Include="include\Framework\Screen.cpp">
       <Filter>Source\Framework</Filter>
     </ClCompile>
@@ -76,6 +73,9 @@
     </ClCompile>
     <ClCompile Include="include\Game\Object\Texture\Group.cpp">
       <Filter>Source\Game\Object\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="include\Game\Game.cpp">
+      <Filter>Source\Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -130,9 +130,6 @@
     <ClInclude Include="include\Framework\Framework.h">
       <Filter>Source\Framework</Filter>
     </ClInclude>
-    <ClInclude Include="include\Framework\Wrapper.h">
-      <Filter>Source\Framework</Filter>
-    </ClInclude>
     <ClInclude Include="include\Framework\Screen.h">
       <Filter>Source\Framework</Filter>
     </ClInclude>
@@ -177,6 +174,9 @@
     </ClInclude>
     <ClInclude Include="include\Game\Object\Texture\Group.h">
       <Filter>Source\Game\Object\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Game\Game.h">
+      <Filter>Source\Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

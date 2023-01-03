@@ -1,21 +1,21 @@
 #pragma once
 
-#include "Framework.h"
+#include "Framework/Framework.h"
 #include "Game/Object/Factory/Factory.h"
 #include "Game/World/Map.h"
 
-namespace BattleCity::Framework
+namespace BattleCity::Game
 {
 	class TankPlayer;
 
-	class Wrapper final : public Framework
+	class Game final : public Framework::Framework
 	{
 	public:
-		Wrapper();
+		Game();
 
-		DISALLOW_COPY_MOVE(Wrapper)
+		DISALLOW_COPY_MOVE(Game)
 
-		~Wrapper() override = default;
+		~Game() override = default;
 
 		void PreInit(int& width, int& height, bool& fullscreen) override;
 		bool Init() override;
@@ -25,11 +25,11 @@ namespace BattleCity::Framework
 
 		const char* GetTitle() override;
 
-		void onKeyPressed(FRKey k) override;
-		void onKeyReleased(FRKey k) override;
+		void onKeyPressed(BattleCity::Framework::FRKey k) override;
+		void onKeyReleased(BattleCity::Framework::FRKey k) override;
 
 		void onMouseMove(int x, int y, int xrelative, int yrelative) override;
-		void onMouseButtonClick(FRMouseButton button, bool isReleased) override;
+		void onMouseButtonClick(BattleCity::Framework::FRMouseButton button, bool isReleased) override;
 
 	private:
 		void Update();
@@ -38,10 +38,10 @@ namespace BattleCity::Framework
 		void Test();
 
 	private:
-		Game::Object::World::Map mMap;
+		Object::World::Map mMap;
 		bool mGameOver;
 
 	};
 
-	FRAMEWORK_API int run(Wrapper*);
+	FRAMEWORK_API int run(Game*);
 }

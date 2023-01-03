@@ -21,8 +21,8 @@
   <ItemGroup>
     <ClCompile Include="include\Framework\Texture\PathLibrary.cpp" />
     <ClCompile Include="include\Framework\Texture\Texture.cpp" />
-    <ClCompile Include="include\Framework\Wrapper.cpp" />
     <ClCompile Include="include\Framework\Screen.cpp" />
+    <ClCompile Include="include\Game\Game.cpp" />
     <ClCompile Include="include\Game\Object\Container.cpp" />
     <ClCompile Include="include\Game\Object\Object.cpp" />
     <ClCompile Include="include\Game\Object\Components\Collider.cpp" />
@@ -56,9 +56,9 @@
     <ClInclude Include="include\Framework\Texture\Aliases.h" />
     <ClInclude Include="include\Framework\Texture\PathLibrary.h" />
     <ClInclude Include="include\Framework\Texture\Texture.h" />
-    <ClInclude Include="include\Framework\Wrapper.h" />
     <ClInclude Include="include\Framework\Screen.h" />
     <ClInclude Include="include\Game\BattleCityEnums.h" />
+    <ClInclude Include="include\Game\Game.h" />
     <ClInclude Include="include\Game\Object\Aliases.h" />
     <ClInclude Include="include\Game\Object\Container.h" />
     <ClInclude Include="include\Game\Object\Object.h" />

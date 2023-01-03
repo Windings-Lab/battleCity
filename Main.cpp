@@ -78,7 +78,7 @@ int main(const int argc, const char* argv[])
 		}
 	}
 	
-	const auto framework = std::make_unique<BattleCity::Framework::Wrapper>();
+	const auto framework = std::make_unique<BattleCity::Framework::Game>();
 
 	return run(framework.get());
 }
