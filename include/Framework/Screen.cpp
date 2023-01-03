@@ -2,42 +2,34 @@
 
 #include "Screen.h"
 
-#include "Utility/Rectangle.h"
-
-namespace BattleCity::Framework::Screen
+namespace BattleCity::Framework
 {
-	namespace
+	Screen::Screen(ScreenWidth& w, ScreenHeight& h, bool& fullscreen)
+		: mWidth(w)
+		, mHeight(h)
+		, mFullScreen(fullscreen)
 	{
-		Rectangle Bounds;
-		bool FullScreen;
+		const bool isValidWidth	 = w >= 800 && w <= 1920;
+		const bool isValidHeight = h >= 600 && h <= 1080;
+		const bool isValidSize   = isValidWidth && isValidHeight;
+
+		if(!isValidSize)
+		{
+			throw std::invalid_argument("Invalid screen size");
+		}
 	}
 
-	int W()
+	int Screen::GetWidth() const
 	{
-		return Bounds.W();
+		return mWidth;
+	}
+	int Screen::GetHeight() const
+	{
+		return mHeight;
 	}
 
-	int H()
+	bool Screen::IsFullscreen() const noexcept
 	{
-		return Bounds.H();
-	}
-
-	const bool& IsFullscreen()
-	{
-		return FullScreen;
-	}
-
-	void Set(int width, int height, bool fullScreen)
-	{
-		Bounds.SetSize(width, height);
-		FullScreen = fullScreen;
-	}
-
-	bool IsValidSize(int w, int h)
-	{
-		return
-			w >= 800 && w <= 1920
-			&&
-			h >= 600 && h <= 1080;
+		return mFullScreen;
 	}
 }

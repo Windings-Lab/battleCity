@@ -2,6 +2,8 @@
 
 #include "Framework/Texture/Aliases.h"
 
+namespace BFrameworkT = BattleCity::Framework::Texture;
+
 namespace BattleCity::Framework::Texture
 {
 	class PathLibrary final

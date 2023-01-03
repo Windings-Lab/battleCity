@@ -1,10 +1,26 @@
 #pragma once
 
-namespace BattleCity::Framework::Screen
+namespace BFramework = BattleCity::Framework;
+
+namespace BattleCity::Framework
 {
-	int W();
-	int H();
-	const bool& IsFullscreen();
-	void Set(int width, int height, bool fullScreen);
-	bool IsValidSize(int w, int h);
+	using ScreenWidth = int;
+	using ScreenHeight = int;
+
+	class Screen final
+	{
+	public:
+		Screen(ScreenWidth&, ScreenHeight&, bool& fullscreen);
+
+		int GetWidth() const noexcept;
+		int GetHeight() const noexcept;
+
+		bool IsFullscreen() const noexcept;
+
+	private:
+		ScreenWidth& mWidth;
+		ScreenHeight& mHeight;
+		bool& mFullScreen;
+
+	};
 }

@@ -8,15 +8,17 @@
 
 namespace BattleCity::Game
 {
-	Game::Game() : mGameOver(false)
+	Game::Game(const BattleCity::Framework::Screen& screen)
+		: mScreen(screen)
+		, mGameOver(false)
 	{
 	}
 
 	void Game::PreInit(int& width, int& height, bool& fullscreen)
 	{
-		width = BattleCity::Framework::Screen::W();
-		height = BattleCity::Framework::Screen::H();
-		fullscreen = BattleCity::Framework::Screen::IsFullscreen();
+		width = mScreen.GetWidth();
+		height = mScreen.GetHeight();
+		fullscreen = mScreen.IsFullscreen();
 	}
 
 	bool Game::Init()

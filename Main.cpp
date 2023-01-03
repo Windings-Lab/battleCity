@@ -1,7 +1,10 @@
 #include "PCHeader.h"
 
-#include "Framework/Wrapper.h"
+#include "Framework/Framework.h"
 #include "Framework/Screen.h"
+#include "Framework/Texture/PathLibrary.h"
+
+#include "Game/Game.h"
 
 namespace 
 {
@@ -21,54 +24,42 @@ namespace
 			throw std::invalid_argument("Invalid argument count");
 		}
 	}
-
 	void IsValidWindowArg(std::string_view arg)
 	{
-		if(!(arg == "-w" || arg == "-window"))
+		const bool correctArg = arg == "-w" || arg == "-window";
+
+		if(!correctArg)
 		{
 			throw std::invalid_argument("Invalid first argument");
 		}
 	}
-
-	void IsValidSizeArg(std::string_view arg)
+	void IsValidSizeArg(std::string_view arg, int& w, int& h)
 	{
-		int width = 0, height = 0;
 		char delim;
 
 		std::istringstream argv2(arg.data());
-		argv2 >> width;
+		argv2 >> w;
 		argv2.get(delim);
-		argv2 >> height;
+		argv2 >> h;
 
 		if (!argv2 || !argv2.eof() || delim != 'x')
 		{
 			throw std::invalid_argument("Invalid third argument");
 		}
-
-		if (!BattleCity::Framework::Screen::IsValidSize(width, height))
-		{
-			throw std::invalid_argument("Incorrect window size");
-		}
-
-		BattleCity::Framework::Screen::Set(width, height, false);
 	}
 }
 
 int main(const int argc, const char* argv[])
 {
-#ifdef _DEBUG
-	BattleCity::Framework::Screen::Set(800, 600, false);
-#else
-	BattleCity::Framework::Screen::Set(800, 600, true);
-#endif
-
+	int width = 800, height = 600;
+	bool fullScreen = true;
 	if (argc != 1)
 	{
 		try
 		{
 			IsValidArgCount(argc);
 			IsValidWindowArg(argv[1]);
-			IsValidSizeArg(argv[2]); // Sets window size if everything correct
+			IsValidSizeArg(argv[2], width, height);
 		}
 		catch (const std::invalid_argument& ex)
 		{
@@ -76,9 +67,14 @@ int main(const int argc, const char* argv[])
 			ShowUsage();
 			return 0;
 		}
+
+		fullScreen = false;
 	}
-	
-	const auto framework = std::make_unique<BattleCity::Framework::Game>();
+
+	BFramework::Screen screen(width, height, fullScreen);
+	BFrameworkT::PathLibrary pathLibrary(R"(.\data)");
+
+	const auto framework = std::make_unique<BattleCity::Game::Game>(screen, pathLibrary);
 
 	return run(framework.get());
 }

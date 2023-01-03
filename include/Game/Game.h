@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Framework/Framework.h"
+#include "Framework/Screen.h"
+
 #include "Game/Object/Factory/Factory.h"
 #include "Game/World/Map.h"
 
@@ -11,7 +13,7 @@ namespace BattleCity::Game
 	class Game final : public Framework::Framework
 	{
 	public:
-		Game();
+		Game(const BattleCity::Framework::Screen&);
 
 		DISALLOW_COPY_MOVE(Game)
 
@@ -38,10 +40,10 @@ namespace BattleCity::Game
 		void Test();
 
 	private:
+		const BattleCity::Framework::Screen& mScreen;
+
 		Object::World::Map mMap;
 		bool mGameOver;
 
 	};
-
-	FRAMEWORK_API int run(Game*);
 }

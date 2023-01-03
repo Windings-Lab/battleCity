@@ -13,7 +13,7 @@
 // FRAMEWORK_API unsigned int getTickCount();
 // FRAMEWORK_API void showCursor(bool bShow);
 
-// FRAMEWORK_API int run(Framework*);
+namespace BFramework = BattleCity::Framework;
 
 namespace BattleCity::Framework
 {
@@ -63,4 +63,6 @@ namespace BattleCity::Framework
 
 		virtual ~Framework() {}
 	};
+
+	FRAMEWORK_API int run(Framework*);
 }
