@@ -1,5 +1,19 @@
 #pragma once
 
+#define FRAMEWORK_API extern "C" __declspec(dllimport)
+
+// FRAMEWORK_API Sprite* createSprite(const char* path);
+// FRAMEWORK_API void drawSprite(Sprite*, int x, int y);
+// FRAMEWORK_API void getSpriteSize(Sprite* s, int& w, int& h);
+// FRAMEWORK_API void destroySprite(Sprite* s);
+
+
+// FRAMEWORK_API void drawTestBackground();
+// FRAMEWORK_API void getScreenSize(int& w, int& h);
+
+// FRAMEWORK_API unsigned int getTickCount();
+// FRAMEWORK_API void showCursor(bool bShow);
+
 namespace BattleCity::Framework
 {
 	enum class FRKey

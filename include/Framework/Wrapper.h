@@ -1,19 +1,5 @@
 #pragma once
 
-#define FRAMEWORK_API extern "C" __declspec(dllimport)
-
-// FRAMEWORK_API Sprite* createSprite(const char* path);
-// FRAMEWORK_API void drawSprite(Sprite*, int x, int y);
-// FRAMEWORK_API void getSpriteSize(Sprite* s, int& w, int& h);
-// FRAMEWORK_API void destroySprite(Sprite* s);
-
-
-// FRAMEWORK_API void drawTestBackground();
-// FRAMEWORK_API void getScreenSize(int& w, int& h);
-
-// FRAMEWORK_API unsigned int getTickCount();
-// FRAMEWORK_API void showCursor(bool bShow);
-
 #include "Framework.h"
 #include "Game/Object/Factory/Factory.h"
 #include "Game/World/Map.h"
@@ -55,9 +41,6 @@ namespace BattleCity::Framework
 		Game::Object::World::Map mMap;
 		bool mGameOver;
 
-		std::chrono::time_point <std::chrono::steady_clock,
-			std::common_type_t<std::chrono::duration<long long, std::ratio<1, 1000000000>>,
-			std::chrono::duration<long long, std::ratio<1, 60>>>> mNextFrame;
 	};
 
 	FRAMEWORK_API int run(Wrapper*);

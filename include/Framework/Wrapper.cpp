@@ -21,7 +21,7 @@ namespace BattleCity::Framework
 
 	bool Wrapper::Init()
 	{
-		const Object::World::Level level = Object::World::Level::CreateLevel(R"(.\data\Maps\level1.txt)");
+		const Game::Object::World::Level level = Game::Object::World::Level::CreateLevel(R"(.\data\Maps\level1.txt)");
 		mMap.SetWorldRelative({ 40, 44 });
 		mMap.CreateMap(level);
 
@@ -35,16 +35,24 @@ namespace BattleCity::Framework
 	bool Wrapper::Tick()
 	{
 		using namespace std::chrono;
-		using Framerate = duration<steady_clock::rep, std::ratio<1, 60>>;
-		mNextFrame = steady_clock::now() + Framerate{ 1 };
+
+#ifdef _DEBUG
+		const auto& start = high_resolution_clock::now();
+#endif
 
 		Update();
 		// Resolve Collisions
 		// Delete All
 		Draw();
 
-		std::this_thread::sleep_until(mNextFrame);
-		mNextFrame += Framerate{ 1 };
+#ifdef _DEBUG
+		const auto& stop = high_resolution_clock::now();
+
+		const auto& result = duration_cast<duration<double, std::milli>>(stop - start).count();
+#endif
+
+		std::cout << "Tick complexity: " << result << std::endl;
+
 
 		return mGameOver;
 	}
