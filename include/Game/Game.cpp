@@ -8,8 +8,9 @@
 
 namespace BattleCity::Game
 {
-	Game::Game(const BattleCity::Framework::Screen& screen)
+	Game::Game(const BattleCity::Framework::Screen& screen, const BFrameworkT::PathLibrary& pathLibrary)
 		: mScreen(screen)
+		, mPathLibrary(pathLibrary)
 		, mGameOver(false)
 	{
 	}
