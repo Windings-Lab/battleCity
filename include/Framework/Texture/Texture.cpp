@@ -16,17 +16,20 @@ namespace BattleCity::Framework::Texture
 		using std::swap;
 
 		swap(f.mTexture, s.mTexture);
-		f.mSpriteSize.SetXY(s.mSpriteSize);
-		s.mSpriteSize.SetXY(0, 0);
+		swap(f.mWidth, s.mWidth);
+		swap(f.mHeight, s.mHeight);
 	}
 
-	Texture::Texture() : mTexture(nullptr) {}
+	Texture::Texture()
+		: mTexture(nullptr)
+		, mWidth(0)
+		, mHeight(0)
+	{}
 
 	Texture::Texture(const Path& path)
 		: mTexture(createSprite(path.c_str()))
 	{
-		int w, h;
-		getSpriteSize(mTexture, w, h);
+		getSpriteSize(mTexture, mWidth, mHeight);
 	}
 
 	Texture::Texture(Texture&& mve) noexcept : Texture()
@@ -48,13 +51,14 @@ namespace BattleCity::Framework::Texture
 		}
 	}
 
-	void Texture::DrawAt(X x, Y y) const noexcept
+	void Texture::DrawAt(int x, int y) const noexcept
 	{
 		drawSprite(mTexture, x, y);
 	}
 
-	const Size& Texture::GetSize() const noexcept
+	void Texture::GetSize(int& w, int& h) const noexcept
 	{
-		return mSpriteSize;
+		w = mWidth;
+		h = mHeight;
 	}
 }
