@@ -1,5 +1,5 @@
 #include "PCHeader.h"
-#include "Group.h"
+#include "TextureGroup.h"
 
 namespace BattleCity::Engine::Texture
 {

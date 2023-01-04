@@ -2,11 +2,12 @@
 
 #include "Game.h"
 
-#include "BattleCity/NamespaceAliases.h"
-
+#include "BattleCity/Engine/Storage.h"
+#include "BattleCity/Engine/Texture/TextureContainer.h"
+#include "BattleCity/Engine/Texture/TexturePathLibrary.h"
 #include "BattleCity/Framework/Screen.h"
 #include "BattleCity/Game/Object/Object.h"
-#include "BattleCity/Game/World/Level.h"
+#include "BattleCity/Game/World/WorldLevel.h"
 
 namespace BattleCity::Game
 {
@@ -25,9 +26,11 @@ namespace BattleCity::Game
 
 	bool Game::Init()
 	{
-		const Object::World::Level level = Object::World::Level::CreateLevel(R"(.\data\Maps\level1.txt)");
+		UnitTest();
+
+		/*const Object::World::Level level = Object::World::Level::CreateLevel(R"(.\data\Maps\level1.txt)");
 		mMap.SetWorldRelative({ 40, 44 });
-		mMap.CreateMap(level);
+		mMap.CreateMap(level);*/
 
 		return true;
 	}
@@ -38,7 +41,7 @@ namespace BattleCity::Game
 
 	bool Game::Tick()
 	{
-#ifdef _DEBUG
+/*#ifdef _DEBUG
 		using namespace std::chrono;
 
 		const auto& start = high_resolution_clock::now();
@@ -55,7 +58,7 @@ namespace BattleCity::Game
 		const auto& result = duration_cast<duration<double, std::milli>>(stop - start).count();
 
 		std::cout << "Tick complexity: " << result << std::endl;
-#endif
+#endif*/
 
 		return mGameOver;
 	}
@@ -81,13 +84,14 @@ namespace BattleCity::Game
 		}
 	}
 
-	void updateTest(int test)
+	void Game::UnitTest()
 	{
-		std::cout << "Test func called " << test << std::endl;
-	}
+		Engine::Storage storage;
 
-	void Game::Test()
-	{
+		storage.CreatePathLibrary(R"(.\data)");
+		storage.CreateTextures(storage.GetPathLibrary());
+
+		storage.GetTextures().Test();
 	}
 
 	const char* Game::GetTitle()

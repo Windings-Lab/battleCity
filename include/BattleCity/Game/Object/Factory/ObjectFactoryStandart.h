@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Factory.h"
+#include "ObjectFactory.h"
 
 namespace BattleCity::Game::Object::Factory
 {

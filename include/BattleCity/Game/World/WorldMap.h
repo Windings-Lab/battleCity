@@ -1,7 +1,6 @@
 #pragma once
 
-#include "BattleCity/NamespaceAliases.h"
-#include "BattleCity/Game/Object/Container.h"
+#include "BattleCity/Game/Object/ObjectContainer.h"
 
 namespace BattleCity::Game::Object::World
 {
@@ -25,7 +24,7 @@ namespace BattleCity::Game::Object::World
 
 		Object& GetObject(int id) const;
 		Object* InsertObject(std::unique_ptr<Object>&& object
-			, NSTexture::Layer layer = NSTexture::Layer::Front);
+			, Layer layer = Layer::Front);
 		void MarkForDelete(int objID);
 
 		const Container& GetBackLayer() const noexcept;

@@ -36,6 +36,7 @@
 using namespace std::string_view_literals;
 using namespace std::string_literals;
 
+#include "BattleCity/NamespaceAliases.h"
 #include "BattleCity/Enums.h"
 
 #include "BattleCity/Utility/BasicMacros.h"

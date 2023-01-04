@@ -1,7 +1,7 @@
 #include "PCHeader.h"
-#include "Standart.h"
+#include "ObjectFactoryStandart.h"
 
-#include "BattleCity/Game/World/Map.h"
+#include "BattleCity/Game/World/WorldMap.h"
 
 #include "BattleCity/Game/Object/Derived/Bullet.h"
 #include "BattleCity/Game/Object/Derived/Explosion.h"

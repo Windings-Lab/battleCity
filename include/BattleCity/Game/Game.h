@@ -1,12 +1,10 @@
 #pragma once
 
-#include "BattleCity/NamespaceAliases.h"
-
 #include "BattleCity/Framework/Framework.h"
 #include "BattleCity/Framework/Screen.h"
 
-#include "BattleCity/Game/Object/Factory/Factory.h"
-#include "BattleCity/Game/World/Map.h"
+#include "BattleCity/Game/Object/Factory/ObjectFactory.h"
+#include "BattleCity/Game/World/WorldMap.h"
 
 namespace BattleCity::Game
 {
@@ -39,7 +37,7 @@ namespace BattleCity::Game
 		void Update();
 		void Draw();
 
-		void Test();
+		void UnitTest();
 
 	private:
 		const NSFramework::Screen& mScreen;

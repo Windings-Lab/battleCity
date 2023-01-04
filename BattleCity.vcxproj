@@ -19,8 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="include\BattleCity\Engine\Texture\Group.cpp" />
-    <ClCompile Include="include\BattleCity\Engine\Texture\PathLibrary.cpp" />
+    <ClCompile Include="include\BattleCity\Engine\Storage.cpp" />
+    <ClCompile Include="include\BattleCity\Engine\Texture\TextureGroup.cpp" />
+    <ClCompile Include="include\BattleCity\Engine\Texture\TextureContainer.cpp" />
+    <ClCompile Include="include\BattleCity\Engine\Texture\TexturePathLibrary.cpp" />
     <ClCompile Include="include\BattleCity\Framework\Screen.cpp" />
     <ClCompile Include="include\BattleCity\Framework\Texture.cpp" />
     <ClCompile Include="include\BattleCity\Game\Game.cpp" />
@@ -28,7 +30,7 @@
     <ClCompile Include="include\BattleCity\Game\Object\Components\Fireable.cpp" />
     <ClCompile Include="include\BattleCity\Game\Object\Components\Health.cpp" />
     <ClCompile Include="include\BattleCity\Game\Object\Components\Movable.cpp" />
-    <ClCompile Include="include\BattleCity\Game\Object\Container.cpp" />
+    <ClCompile Include="include\BattleCity\Game\Object\ObjectContainer.cpp" />
     <ClCompile Include="include\BattleCity\Game\Object\Derived\Bullet.cpp" />
     <ClCompile Include="include\BattleCity\Game\Object\Derived\Explosion.cpp" />
     <ClCompile Include="include\BattleCity\Game\Object\Derived\Phoenix.cpp" />
@@ -36,11 +38,11 @@
     <ClCompile Include="include\BattleCity\Game\Object\Derived\Tank.cpp" />
     <ClCompile Include="include\BattleCity\Game\Object\Derived\Wall.cpp" />
     <ClCompile Include="include\BattleCity\Game\Object\Derived\WorldBoundaries.cpp" />
-    <ClCompile Include="include\BattleCity\Game\Object\Factory\Factory.cpp" />
-    <ClCompile Include="include\BattleCity\Game\Object\Factory\Standart.cpp" />
+    <ClCompile Include="include\BattleCity\Game\Object\Factory\ObjectFactory.cpp" />
+    <ClCompile Include="include\BattleCity\Game\Object\Factory\ObjectFactoryStandart.cpp" />
     <ClCompile Include="include\BattleCity\Game\Object\Object.cpp" />
-    <ClCompile Include="include\BattleCity\Game\World\Level.cpp" />
-    <ClCompile Include="include\BattleCity\Game\World\Map.cpp" />
+    <ClCompile Include="include\BattleCity\Game\World\WorldLevel.cpp" />
+    <ClCompile Include="include\BattleCity\Game\World\WorldMap.cpp" />
     <ClCompile Include="include\BattleCity\Utility\Rectangle.cpp" />
     <ClCompile Include="include\BattleCity\Utility\Vector2Int.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -52,20 +54,22 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\BattleCity\Engine\Texture\Aliases.h" />
-    <ClInclude Include="include\BattleCity\Engine\Texture\Group.h" />
-    <ClInclude Include="include\BattleCity\Engine\Texture\PathLibrary.h" />
+    <ClInclude Include="include\BattleCity\Engine\Storage.h" />
+    <ClInclude Include="include\BattleCity\Engine\Texture\TextureAliases.h" />
+    <ClInclude Include="include\BattleCity\Engine\Texture\TextureGroup.h" />
+    <ClInclude Include="include\BattleCity\Engine\Texture\TextureContainer.h" />
+    <ClInclude Include="include\BattleCity\Engine\Texture\TexturePathLibrary.h" />
     <ClInclude Include="include\BattleCity\Enums.h" />
     <ClInclude Include="include\BattleCity\Framework\Framework.h" />
     <ClInclude Include="include\BattleCity\Framework\Screen.h" />
     <ClInclude Include="include\BattleCity\Framework\Texture.h" />
     <ClInclude Include="include\BattleCity\Game\Game.h" />
-    <ClInclude Include="include\BattleCity\Game\Object\Aliases.h" />
+    <ClInclude Include="include\BattleCity\Game\Object\ObjectAliases.h" />
     <ClInclude Include="include\BattleCity\Game\Object\Components\Collider.h" />
     <ClInclude Include="include\BattleCity\Game\Object\Components\Fireable.h" />
     <ClInclude Include="include\BattleCity\Game\Object\Components\Health.h" />
     <ClInclude Include="include\BattleCity\Game\Object\Components\Movable.h" />
-    <ClInclude Include="include\BattleCity\Game\Object\Container.h" />
+    <ClInclude Include="include\BattleCity\Game\Object\ObjectContainer.h" />
     <ClInclude Include="include\BattleCity\Game\Object\Derived\Bullet.h" />
     <ClInclude Include="include\BattleCity\Game\Object\Derived\Explosion.h" />
     <ClInclude Include="include\BattleCity\Game\Object\Derived\Phoenix.h" />
@@ -73,11 +77,11 @@
     <ClInclude Include="include\BattleCity\Game\Object\Derived\Tank.h" />
     <ClInclude Include="include\BattleCity\Game\Object\Derived\Wall.h" />
     <ClInclude Include="include\BattleCity\Game\Object\Derived\WorldBoundaries.h" />
-    <ClInclude Include="include\BattleCity\Game\Object\Factory\Factory.h" />
-    <ClInclude Include="include\BattleCity\Game\Object\Factory\Standart.h" />
+    <ClInclude Include="include\BattleCity\Game\Object\Factory\ObjectFactory.h" />
+    <ClInclude Include="include\BattleCity\Game\Object\Factory\ObjectFactoryStandart.h" />
     <ClInclude Include="include\BattleCity\Game\Object\Object.h" />
-    <ClInclude Include="include\BattleCity\Game\World\Level.h" />
-    <ClInclude Include="include\BattleCity\Game\World\Map.h" />
+    <ClInclude Include="include\BattleCity\Game\World\WorldLevel.h" />
+    <ClInclude Include="include\BattleCity\Game\World\WorldMap.h" />
     <ClInclude Include="include\BattleCity\NamespaceAliases.h" />
     <ClInclude Include="include\BattleCity\Utility\Action.h" />
     <ClInclude Include="include\BattleCity\Utility\BasicMacros.h" />

@@ -1,11 +1,10 @@
 #include "PCHeader.h"
 
-#include "Map.h"
-#include "Level.h"
+#include "WorldMap.h"
+#include "WorldLevel.h"
 
-#include "BattleCity/NamespaceAliases.h"
 #include "BattleCity/Game/Object/Object.h"
-#include "BattleCity/Game/Object/Factory/Standart.h"
+#include "BattleCity/Game/Object/Factory/ObjectFactoryStandart.h"
 
 namespace BattleCity::Game::Object::World
 {
@@ -85,24 +84,24 @@ namespace BattleCity::Game::Object::World
 		return mFrontLayer.GetObject(id);
 	}
 
-	Object* Map::InsertObject(std::unique_ptr<Object>&& object, NSTexture::Layer layer)
+	Object* Map::InsertObject(std::unique_ptr<Object>&& object, Layer layer)
 	{
 		auto objectPtr = object.get();
 
 		switch (layer)
 		{
-		case NSTexture::Layer::Back:
+		case Layer::Back:
 		{
 			mBackLayer.Insert(std::move(object));
 			break;
 		}
-		case NSTexture::Layer::Front:
+		case Layer::Front:
 		{
 			mFrontLayer.Insert(std::move(object));
 			break;
 		}
-		case NSTexture::Layer::UI:
-		case NSTexture::Layer::Error:
+		case Layer::UI:
+		case Layer::Error:
 		default:
 			objectPtr = nullptr;
 			break;

@@ -11,22 +11,22 @@
     <ClCompile Include="include\BattleCity\Utility\Vector2Int.cpp">
       <Filter>BattleCity\Utility</Filter>
     </ClCompile>
-    <ClCompile Include="include\BattleCity\Game\World\Level.cpp">
+    <ClCompile Include="include\BattleCity\Game\World\WorldLevel.cpp">
       <Filter>BattleCity\Game\World</Filter>
     </ClCompile>
-    <ClCompile Include="include\BattleCity\Game\World\Map.cpp">
+    <ClCompile Include="include\BattleCity\Game\World\WorldMap.cpp">
       <Filter>BattleCity\Game\World</Filter>
     </ClCompile>
-    <ClCompile Include="include\BattleCity\Game\Object\Container.cpp">
+    <ClCompile Include="include\BattleCity\Game\Object\ObjectContainer.cpp">
       <Filter>BattleCity\Game\Object</Filter>
     </ClCompile>
     <ClCompile Include="include\BattleCity\Game\Object\Object.cpp">
       <Filter>BattleCity\Game\Object</Filter>
     </ClCompile>
-    <ClCompile Include="include\BattleCity\Game\Object\Factory\Factory.cpp">
+    <ClCompile Include="include\BattleCity\Game\Object\Factory\ObjectFactory.cpp">
       <Filter>BattleCity\Game\Object\Factory</Filter>
     </ClCompile>
-    <ClCompile Include="include\BattleCity\Game\Object\Factory\Standart.cpp">
+    <ClCompile Include="include\BattleCity\Game\Object\Factory\ObjectFactoryStandart.cpp">
       <Filter>BattleCity\Game\Object\Factory</Filter>
     </ClCompile>
     <ClCompile Include="include\BattleCity\Game\Object\Derived\Bullet.cpp">
@@ -62,10 +62,10 @@
     <ClCompile Include="include\BattleCity\Game\Object\Components\Movable.cpp">
       <Filter>BattleCity\Game\Object\Components</Filter>
     </ClCompile>
-    <ClCompile Include="include\BattleCity\Engine\Texture\Group.cpp">
+    <ClCompile Include="include\BattleCity\Engine\Texture\TextureGroup.cpp">
       <Filter>BattleCity\Engine\Texture</Filter>
     </ClCompile>
-    <ClCompile Include="include\BattleCity\Engine\Texture\PathLibrary.cpp">
+    <ClCompile Include="include\BattleCity\Engine\Texture\TexturePathLibrary.cpp">
       <Filter>BattleCity\Engine\Texture</Filter>
     </ClCompile>
     <ClCompile Include="include\BattleCity\Framework\Screen.cpp">
@@ -76,6 +76,12 @@
     </ClCompile>
     <ClCompile Include="include\BattleCity\Game\Game.cpp">
       <Filter>BattleCity\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="include\BattleCity\Engine\Storage.cpp">
+      <Filter>BattleCity\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="include\BattleCity\Engine\Texture\TextureContainer.cpp">
+      <Filter>BattleCity\Engine\Texture</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -100,25 +106,25 @@
     <ClInclude Include="include\BattleCity\Utility\Vector2Int.h">
       <Filter>BattleCity\Utility</Filter>
     </ClInclude>
-    <ClInclude Include="include\BattleCity\Game\World\Level.h">
+    <ClInclude Include="include\BattleCity\Game\World\WorldLevel.h">
       <Filter>BattleCity\Game\World</Filter>
     </ClInclude>
-    <ClInclude Include="include\BattleCity\Game\World\Map.h">
+    <ClInclude Include="include\BattleCity\Game\World\WorldMap.h">
       <Filter>BattleCity\Game\World</Filter>
     </ClInclude>
-    <ClInclude Include="include\BattleCity\Game\Object\Aliases.h">
+    <ClInclude Include="include\BattleCity\Game\Object\ObjectAliases.h">
       <Filter>BattleCity\Game\Object</Filter>
     </ClInclude>
-    <ClInclude Include="include\BattleCity\Game\Object\Container.h">
+    <ClInclude Include="include\BattleCity\Game\Object\ObjectContainer.h">
       <Filter>BattleCity\Game\Object</Filter>
     </ClInclude>
     <ClInclude Include="include\BattleCity\Game\Object\Object.h">
       <Filter>BattleCity\Game\Object</Filter>
     </ClInclude>
-    <ClInclude Include="include\BattleCity\Game\Object\Factory\Factory.h">
+    <ClInclude Include="include\BattleCity\Game\Object\Factory\ObjectFactory.h">
       <Filter>BattleCity\Game\Object\Factory</Filter>
     </ClInclude>
-    <ClInclude Include="include\BattleCity\Game\Object\Factory\Standart.h">
+    <ClInclude Include="include\BattleCity\Game\Object\Factory\ObjectFactoryStandart.h">
       <Filter>BattleCity\Game\Object\Factory</Filter>
     </ClInclude>
     <ClInclude Include="include\BattleCity\Game\Object\Derived\Bullet.h">
@@ -154,20 +160,14 @@
     <ClInclude Include="include\BattleCity\Game\Object\Components\Movable.h">
       <Filter>BattleCity\Game\Object\Components</Filter>
     </ClInclude>
-    <ClInclude Include="include\BattleCity\Engine\Texture\Aliases.h">
+    <ClInclude Include="include\BattleCity\Engine\Texture\TextureAliases.h">
       <Filter>BattleCity\Engine\Texture</Filter>
     </ClInclude>
-    <ClInclude Include="include\BattleCity\Engine\Texture\Group.h">
+    <ClInclude Include="include\BattleCity\Engine\Texture\TextureGroup.h">
       <Filter>BattleCity\Engine\Texture</Filter>
     </ClInclude>
-    <ClInclude Include="include\BattleCity\Engine\Texture\PathLibrary.h">
+    <ClInclude Include="include\BattleCity\Engine\Texture\TexturePathLibrary.h">
       <Filter>BattleCity\Engine\Texture</Filter>
-    </ClInclude>
-    <ClInclude Include="include\BattleCity\Enums.h">
-      <Filter>BattleCity</Filter>
-    </ClInclude>
-    <ClInclude Include="include\BattleCity\NamespaceAliases.h">
-      <Filter>BattleCity</Filter>
     </ClInclude>
     <ClInclude Include="include\BattleCity\Framework\Framework.h">
       <Filter>BattleCity\Framework</Filter>
@@ -180,6 +180,18 @@
     </ClInclude>
     <ClInclude Include="include\BattleCity\Game\Game.h">
       <Filter>BattleCity\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Engine\Storage.h">
+      <Filter>BattleCity\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Engine\Texture\TextureContainer.h">
+      <Filter>BattleCity\Engine\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Enums.h">
+      <Filter>BattleCity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\NamespaceAliases.h">
+      <Filter>BattleCity</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

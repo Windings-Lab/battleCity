@@ -1,6 +1,6 @@
 #pragma once
 
-#include "BattleCity/Game/Object/Aliases.h"
+#include "BattleCity/Game/Object/ObjectAliases.h"
 
 namespace BattleCity::Game::Object
 {
