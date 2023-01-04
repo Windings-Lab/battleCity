@@ -1,10 +1,15 @@
 #pragma once
 
 #include "BattleCity/Framework/Framework.h"
-#include "BattleCity/Framework/Screen.h"
-
-#include "BattleCity/Game/Object/Factory/ObjectFactory.h"
 #include "BattleCity/Game/World/WorldMap.h"
+
+namespace BattleCity
+{
+	namespace Framework
+	{
+		class Screen;
+	}
+}
 
 namespace BattleCity::Game
 {
@@ -42,7 +47,7 @@ namespace BattleCity::Game
 	private:
 		const NSFramework::Screen& mScreen;
 
-		Object::World::Map mMap;
 		bool mGameOver;
+		Object::World::Map mMap;
 	};
 }
