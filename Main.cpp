@@ -1,10 +1,9 @@
 #include "PCHeader.h"
 
-#include "Framework/Framework.h"
-#include "Framework/Screen.h"
-#include "Framework/Texture/PathLibrary.h"
+#include "BattleCity/Framework/Framework.h"
+#include "BattleCity/Framework/Screen.h"
 
-#include "Game/Game.h"
+#include "BattleCity/Game/Game.h"
 
 namespace 
 {
@@ -71,10 +70,9 @@ int main(const int argc, const char* argv[])
 		fullScreen = false;
 	}
 
-	BFramework::Screen screen(width, height, fullScreen);
-	BFrameworkT::PathLibrary pathLibrary(R"(.\data)");
+	NSFramework::Screen screen(width, height, fullScreen);
 
-	const auto framework = std::make_unique<BattleCity::Game::Game>(screen, pathLibrary);
+	const auto framework = std::make_unique<BattleCity::Game::Game>(screen);
 
 	return run(framework.get());
 }
