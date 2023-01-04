@@ -22,8 +22,6 @@ namespace BattleCity::Engine::Texture
 		~Container() = default;
 
 		void CreateData(const PathLibrary&);
-
-		void Test() const;
 	
 	private:
 		TextureContainer mTextures;

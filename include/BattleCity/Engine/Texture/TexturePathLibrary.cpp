@@ -3,6 +3,22 @@
 
 namespace BattleCity::Engine::Texture
 {
+#ifdef _DEBUG
+	namespace 
+	{
+		void OutputAllPaths(const TexturePathContainer& paths)
+		{
+			std::cout << "Created texture paths: " << std::endl;
+
+			for (const auto& path : paths)
+			{
+				std::cout << path.string() << "\n";
+			}
+			std::cout << std::endl;
+		}
+	}
+#endif
+
 	void PathLibrary::CreateData(const std::filesystem::path& folderPath)
 	{
 		using namespace std::filesystem;
@@ -24,6 +40,10 @@ namespace BattleCity::Engine::Texture
 
 			mPaths.emplace_back(texturePath);
 		}
+
+#ifdef _DEBUG
+		OutputAllPaths(mPaths);
+#endif
 	}
 
 	TexturePathContainer::const_iterator PathLibrary::begin() const noexcept

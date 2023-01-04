@@ -5,6 +5,25 @@
 
 namespace BattleCity::Engine::Texture
 {
+#ifdef _DEBUG
+	namespace
+	{
+		void OutputAllTextures(const TextureContainer& textures)
+		{
+			std::cout << "Created textures: " << std::endl;
+
+			for (const auto& texture : textures)
+			{
+				std::cout	<< magic_enum::enum_name<Framework::TextureName>(texture.GetName())
+							<< "\t - \t"
+							<< magic_enum::enum_name<Framework::TextureType>(texture.GetType())
+							<< "\n";
+			}
+			std::cout << std::endl;
+		}
+	}
+#endif
+
 	void swap(Container& f, Container& s) noexcept
 	{
 		f.mTextures.swap(s.mTextures);
@@ -16,18 +35,8 @@ namespace BattleCity::Engine::Texture
 		{
 			mTextures.emplace_back(path);
 		}
-	}
-
-	void Container::Test() const
-	{
-		int w, h;
-		const auto& texture = mTextures.at(0);
-		texture.GetSize(w, h);
-
-		std::cout << w << " " << h << std::endl;
-
-		auto name = texture.GetName();
-
-		int test = 4;
+#ifdef _DEBUG
+		OutputAllTextures(mTextures);
+#endif
 	}
 }

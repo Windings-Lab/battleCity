@@ -12,7 +12,8 @@ namespace BattleCity::Framework
 		GameOver,
 		Phoenix,
 		PowerUp,
-		Tank,
+		TankPlayer,
+		TankNPC,
 		Wall,
 	};
 

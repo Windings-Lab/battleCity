@@ -3,8 +3,6 @@
 #include "Game.h"
 
 #include "BattleCity/Engine/Storage.h"
-#include "BattleCity/Engine/Texture/TextureContainer.h"
-#include "BattleCity/Engine/Texture/TexturePathLibrary.h"
 #include "BattleCity/Framework/Screen.h"
 #include "BattleCity/Game/Object/Object.h"
 #include "BattleCity/Game/World/WorldLevel.h"
@@ -90,8 +88,6 @@ namespace BattleCity::Game
 
 		storage.CreatePathLibrary(R"(.\data)");
 		storage.CreateTextures(storage.GetPathLibrary());
-
-		storage.GetTextures().Test();
 	}
 
 	const char* Game::GetTitle()
