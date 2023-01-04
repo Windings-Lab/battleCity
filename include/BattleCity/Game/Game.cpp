@@ -92,7 +92,7 @@ namespace BattleCity::Game
 
 	const char* Game::GetTitle()
 	{
-		return "Tanks";
+		return "Battle City";
 	}
 
 	void Game::onKeyPressed(BattleCity::Framework::FRKey k)
