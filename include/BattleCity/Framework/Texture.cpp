@@ -25,22 +25,19 @@ namespace BattleCity::Framework
 	}
 
 	Texture::Texture()
-		: mTexture(nullptr)
-		, mName(TextureName::Error)
-		, mType(TextureType::Error)
-		, mWidth(0)
-		, mHeight(0)
-	{}
-	Texture::Texture(const std::filesystem::path& path)
-		: mTexture(createSprite(path.string().c_str()))
-		, mName(magic_enum::enum_cast<TextureName>(path.parent_path().stem().string()).value_or(TextureName::Error))
-		, mType(magic_enum::enum_cast<TextureType>(path.stem().string()).value_or(TextureType::Error))
+		: Texture(nullptr, TextureName::Error, TextureType::Error, 0, 0) {}
+	Texture::Texture(const char* path, const TextureName name, const TextureType type)
+		: Texture(createSprite(path), name, type, 0, 0)
 	{
-		if (mTexture)
-		{
-			getSpriteSize(mTexture, mWidth, mHeight);
-		}
+		getSpriteSize(mTexture, mWidth, mHeight);
 	}
+	Texture::Texture(Sprite* texture, TextureName name, TextureType type, int w, int h)
+		: mTexture(texture)
+		, mName(name)
+		, mType(type)
+		, mWidth(w)
+		, mHeight(h)
+	{}
 
 	Texture::Texture(Texture&& mve) noexcept : Texture()
 	{

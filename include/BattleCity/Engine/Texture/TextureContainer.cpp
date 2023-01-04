@@ -33,7 +33,13 @@ namespace BattleCity::Engine::Texture
 	{
 		for (const auto& path : pathLibrary)
 		{
-			mTextures.emplace_back(path);
+			auto name = magic_enum::enum_cast<Framework::TextureName>
+				(path.parent_path().stem().string()).value_or(Framework::TextureName::Error);
+
+			auto type = magic_enum::enum_cast<Framework::TextureType>
+				(path.stem().string()).value_or(Framework::TextureType::Error);
+
+			mTextures.emplace_back(path.string().c_str(), name, type);
 		}
 #ifdef _DEBUG
 		OutputAllTextures(mTextures);

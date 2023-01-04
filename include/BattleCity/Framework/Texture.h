@@ -36,23 +36,24 @@ namespace BattleCity::Framework
 
 	class Sprite;
 
-	class Texture final
+	class Texture
 	{
 	private:
 		friend void swap(Texture&, Texture&) noexcept;
 
-	private:
+	protected:
 		Texture();
+		Texture(Sprite*, TextureName, TextureType, int, int);
 
 	public:
-		Texture(const std::filesystem::path&);
+		Texture(const char*, TextureName, TextureType);
 
 		DISALLOW_COPY(Texture)
 		ALLOW_MOVE(Texture)
 
-		~Texture();
+		virtual ~Texture();
 
-		void DrawAt(int, int)  const noexcept;
+		void DrawAt(int, int) const noexcept;
 
 		TextureName GetName() const noexcept;
 		TextureType GetType() const noexcept;
