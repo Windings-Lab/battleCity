@@ -26,6 +26,17 @@ namespace BattleCity::Engine::Texture
 		f.mTextures.swap(s.mTextures);
 	}
 
+	Container::Container(Container&& mve) noexcept : Container()
+	{
+		swap(*this, mve);
+	}
+	Container& Container::operator=(Container&& mve) noexcept
+	{
+		Container temp(std::move(mve));
+		swap(*this, temp);
+		return *this;
+	}
+
 	void Container::CreateData(const PathLibrary& pathLibrary)
 	{
 		for (const auto& path : pathLibrary)
