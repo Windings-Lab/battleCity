@@ -46,7 +46,8 @@ namespace BattleCity::Framework
 	}
 	Texture& Texture::operator=(Texture&& mve) noexcept
 	{
-		swap(*this, mve);
+		Texture temp(std::move(mve));
+		swap(*this, temp);
 		return *this;
 	}
 	Texture::~Texture()

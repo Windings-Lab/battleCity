@@ -13,6 +13,11 @@ namespace BattleCity::Engine::Texture
 	{}
 
 	Texture::Texture(Texture&& mve) noexcept : Framework::Texture(std::move(mve)) {}
+	Texture& Texture::operator=(Texture&& mve) noexcept
+	{
+		Framework::Texture::operator=(std::move(mve));
+		return *this;
+	}
 
 	Texture::~Texture() = default;
 
