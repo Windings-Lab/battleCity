@@ -10,8 +10,16 @@ namespace BattleCity::Engine::Texture
 
 	class GroupLibrary
 	{
+	private:
+		friend void swap(GroupLibrary&, GroupLibrary&) noexcept;
+
 	public:
 		GroupLibrary() = default;
+
+		DISALLOW_COPY(GroupLibrary)
+		ALLOW_MOVE(GroupLibrary)
+
+		~GroupLibrary();
 
 		void CreateData(const Container&);
 		const Group& GetGroupBy(Framework::TextureName) const;

@@ -22,6 +22,25 @@ namespace BattleCity::Engine::Texture
 	}
 #endif
 
+	void swap(GroupLibrary& f, GroupLibrary& s) noexcept
+	{
+		f.mGroups.swap(s.mGroups);
+	}
+
+	GroupLibrary::GroupLibrary(GroupLibrary&& mve) noexcept : GroupLibrary()
+	{
+		swap(*this, mve);
+	}
+
+	GroupLibrary& GroupLibrary::operator=(GroupLibrary&& mve) noexcept
+	{
+		GroupLibrary temp(std::move(mve));
+		swap(*this, temp);
+		return *this;
+	}
+
+	GroupLibrary::~GroupLibrary() = default;
+
 	void GroupLibrary::CreateData(const Container& textures)
 	{
 		for (auto& texture : textures)
