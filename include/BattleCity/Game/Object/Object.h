@@ -2,12 +2,23 @@
 
 #include "BattleCity/Game/Object/ObjectAliases.h"
 
+namespace BattleCity::Framework
+{
+	enum class TextureType;
+}
+
+namespace BattleCity::Engine::Texture
+{
+	class Texture;
+	class Group;
+}
+
 namespace BattleCity::Game::Object
 {
 	class Object
 	{
 	public:
-		Object();
+		Object(const Engine::Texture::Group&);
 
 		DISALLOW_COPY_MOVE(Object)
 
@@ -15,9 +26,9 @@ namespace BattleCity::Game::Object
 
 		virtual void Update();
 
-		int GetID() const noexcept;
-
 		void Draw();
+
+		int GetID() const noexcept;
 
 		void SetPosition(const Position&) noexcept;
 		void SetPosition(X, Y) noexcept;
@@ -25,9 +36,13 @@ namespace BattleCity::Game::Object
 		int GetX() const noexcept;
 		int GetY() const noexcept;
 
+		void ChangeTextureTo(Framework::TextureType) const;
+
 	private:
 		ObjectID mID;
-
 		Position mPosition;
+
+		mutable const Engine::Texture::Group* mTextureGroup;
+		mutable const Engine::Texture::Texture* mCurrentTexture;
 	};
 }

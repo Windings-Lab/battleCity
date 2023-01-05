@@ -1,11 +1,14 @@
 #include "PCHeader.h"
-
-
 #include "Object.h"
+
+#include "BattleCity/Engine/Texture/BCTexture.h"
+#include "BattleCity/Engine/Texture/TextureGroup.h"
 
 namespace BattleCity::Game::Object
 {
-    Object::Object()
+    Object::Object(const Engine::Texture::Group& group)
+		: mTextureGroup(&group)
+		, mCurrentTexture(nullptr)
     {
         static int idCounter = 0;
 
@@ -17,14 +20,14 @@ namespace BattleCity::Game::Object
     {
     }
 
+    void Object::Draw()
+    {
+        mCurrentTexture->DrawAt(mPosition.X, mPosition.Y);
+    }
+
     int Object::GetID() const noexcept
     {
         return mID;
-    }
-
-    void Object::Draw()
-    {
-        //mSprite.DrawAt(mPosition.X, mPosition.Y);
     }
 
     void Object::SetPosition(const Position& pos) noexcept
@@ -46,5 +49,10 @@ namespace BattleCity::Game::Object
     int Object::GetY() const noexcept
     {
         return mPosition.Y;
+    }
+
+    void Object::ChangeTextureTo(Framework::TextureType type) const
+    {
+        mCurrentTexture = mTextureGroup->GetTextureBy(type);
     }
 }
