@@ -7,26 +7,35 @@ namespace BattleCity::Engine
     {
         using std::swap;
 
-        swap(f.mPathLibrary, s.mPathLibrary);
-        swap(f.mTextureContainer, s.mTextureContainer);
+        swap(f.mTexturePaths, s.mTexturePaths);
+        swap(f.mTextures, s.mTextures);
     }
 
     void Storage::CreatePathLibrary(const std::filesystem::path& path)
     {
-        mPathLibrary.CreateData(path);
+        mTexturePaths.CreateData(path);
     }
     const Texture::PathLibrary& Storage::GetPathLibrary() const noexcept
     {
-        return mPathLibrary;
+        return mTexturePaths;
     }
 
     void Storage::CreateTextures(const Texture::PathLibrary& pathLibrary)
     {
-        mTextureContainer.CreateData(pathLibrary);
+        mTextures.CreateData(pathLibrary);
     }
     const Texture::Container& Storage::GetTextures() const noexcept
     {
-        return mTextureContainer;
+        return mTextures;
+    }
+
+    void Storage::CreateGroups(const Texture::Container& textures)
+    {
+        mGroups.CreateData(textures);
+    }
+    const Texture::GroupLibrary& Storage::GetGroups() const noexcept
+    {
+        return mGroups;
     }
 
 }

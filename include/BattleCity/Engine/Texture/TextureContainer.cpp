@@ -47,4 +47,13 @@ namespace BattleCity::Engine::Texture
 		OutputAllTextures(mTextures);
 #endif
 	}
+
+	TextureContainer::const_iterator Container::begin() const noexcept
+	{
+		return mTextures.cbegin();
+	}
+	TextureContainer::const_iterator Container::end() const noexcept
+	{
+		return mTextures.cend();
+	}
 }

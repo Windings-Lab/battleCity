@@ -86,6 +86,9 @@
     <ClCompile Include="include\BattleCity\Engine\Texture\BCTexture.cpp">
       <Filter>BattleCity\Engine\Texture</Filter>
     </ClCompile>
+    <ClCompile Include="include\BattleCity\Engine\Texture\TextureGroupLibrary.cpp">
+      <Filter>BattleCity\Engine\Texture</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pcheader\PCHeader.h">
@@ -197,6 +200,9 @@
       <Filter>BattleCity</Filter>
     </ClInclude>
     <ClInclude Include="include\BattleCity\Engine\Texture\BCTexture.h">
+      <Filter>BattleCity\Engine\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Engine\Texture\TextureGroupLibrary.h">
       <Filter>BattleCity\Engine\Texture</Filter>
     </ClInclude>
   </ItemGroup>

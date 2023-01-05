@@ -22,6 +22,9 @@ namespace BattleCity::Engine::Texture
 		~Container() = default;
 
 		void CreateData(const PathLibrary&);
+
+		TextureContainer::const_iterator begin() const noexcept;
+		TextureContainer::const_iterator end() const noexcept;
 	
 	private:
 		TextureContainer mTextures;

@@ -88,6 +88,7 @@ namespace BattleCity::Game
 
 		storage.CreatePathLibrary(R"(.\data)");
 		storage.CreateTextures(storage.GetPathLibrary());
+		storage.CreateGroups(storage.GetTextures());
 	}
 
 	const char* Game::GetTitle()
