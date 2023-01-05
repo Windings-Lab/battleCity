@@ -1,8 +1,8 @@
 #pragma once
 
-#include "BattleCity/Game/Object/ObjectContainer.h"
+#include "BattleCity/Game/World/Object/ObjectContainer.h"
 
-namespace BattleCity::Game::Object::World
+namespace BattleCity::Game::World
 {
 	using TopLeft = Vector2Int;
 
@@ -22,18 +22,17 @@ namespace BattleCity::Game::Object::World
 
 		void CreateMap(const Level& level);
 
-		Object& GetObject(int id) const;
-		Object* InsertObject(std::unique_ptr<Object>&& object
-			, Layer layer = Layer::Front);
+		Object::Object& GetObject(int id) const;
+		Object::Object* InsertObject(std::unique_ptr<Object::Object>&& object, Object::Layer layer = Object::Layer::Front);
 		void MarkForDelete(int objID);
 
-		const Container& GetBackLayer() const noexcept;
-		const Container& GetFrontLayer() const noexcept;
+		const Object::Container& GetBackLayer() const noexcept;
+		const Object::Container& GetFrontLayer() const noexcept;
 
 	private:
 		TopLeft mWorldRelative;
 
-		Container mBackLayer;
-		Container mFrontLayer;
+		Object::Container mBackLayer;
+		Object::Container mFrontLayer;
 	};
 }

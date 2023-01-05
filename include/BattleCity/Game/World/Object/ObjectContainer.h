@@ -1,8 +1,8 @@
 #pragma once
 
-#include "BattleCity/Game/Object/ObjectAliases.h"
+#include "BattleCity/Game/World/Object/ObjectAliases.h"
 
-namespace BattleCity::Game::Object
+namespace BattleCity::Game::World::Object
 {
 	class Object;
 

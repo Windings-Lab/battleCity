@@ -1,9 +1,9 @@
 #include "PCHeader.h"
 #include "ObjectContainer.h"
 
-#include "BattleCity/Game/Object/Object.h"
+#include "BattleCity/Game/World/Object/Object.h"
 
-namespace BattleCity::Game::Object
+namespace BattleCity::Game::World::Object
 {
 	Container::Container(Container&& mve) noexcept : Container()
 	{

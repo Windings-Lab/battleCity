@@ -48,6 +48,6 @@ namespace BattleCity::Game
 		const NSFramework::Screen& mScreen;
 
 		bool mGameOver;
-		Object::World::Map mMap;
+		World::Map mMap;
 	};
 }

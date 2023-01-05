@@ -3,15 +3,15 @@
 
 #include "BattleCity/Game/World/WorldMap.h"
 
-#include "BattleCity/Game/Object/Derived/Bullet.h"
-#include "BattleCity/Game/Object/Derived/Explosion.h"
-#include "BattleCity/Game/Object/Derived/Phoenix.h"
-#include "BattleCity/Game/Object/Derived/PowerUp.h"
-#include "BattleCity/Game/Object/Derived/Tank.h"
-#include "BattleCity/Game/Object/Derived/Wall.h"
-#include "BattleCity/Game/Object/Derived/WorldBoundaries.h"
+#include "BattleCity/Game/World/Object/Derived/Bullet.h"
+#include "BattleCity/Game/World/Object/Derived/Explosion.h"
+#include "BattleCity/Game/World/Object/Derived/Phoenix.h"
+#include "BattleCity/Game/World/Object/Derived/PowerUp.h"
+#include "BattleCity/Game/World/Object/Derived/Tank.h"
+#include "BattleCity/Game/World/Object/Derived/Wall.h"
+#include "BattleCity/Game/World/Object/Derived/WorldBoundaries.h"
 
-namespace BattleCity::Game::Object::Factory
+namespace BattleCity::Game::World::Object::Factory
 {
 	Object* Standart::CreateWorldBoundaries()
 	{

@@ -1,16 +1,16 @@
 #pragma once
 
-namespace BattleCity::Game::Object::World
+namespace BattleCity::Game::World
 {
 	class Map;
 }
 
-namespace BattleCity::Game::Object
+namespace BattleCity::Game::World::Object
 {
 	class Object;
 }
 
-namespace BattleCity::Game::Object::Factory
+namespace BattleCity::Game::World::Object::Factory
 {
 	struct Factory
 	{

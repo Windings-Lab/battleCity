@@ -1,7 +1,7 @@
 #include "PCHeader.h"
 #include "WorldLevel.h"
 
-namespace BattleCity::Game::Object::World
+namespace BattleCity::Game::World
 {
 	Level::Level(LevelSheet levelSheet)
 		: mLevelSheet(std::move(levelSheet))
@@ -20,7 +20,7 @@ namespace BattleCity::Game::Object::World
 		}
 
 		LevelSheet levelSheet;
-		std::vector<Type> mapRow;
+		std::vector<Object::Type> mapRow;
 		std::string line;
 		while (std::getline(file, line))
 		{
@@ -28,8 +28,8 @@ namespace BattleCity::Game::Object::World
 			for (char num; lineStream >> num; )
 			{
 				auto objectType
-					= magic_enum::enum_cast<Type>(num - '0');
-				mapRow.emplace_back(objectType.value_or(Type::None));
+					= magic_enum::enum_cast<Object::Type>(num - '0');
+				mapRow.emplace_back(objectType.value_or(Object::Type::None));
 			}
 			mapRow.shrink_to_fit();
 			levelSheet.emplace_back(std::move(mapRow));

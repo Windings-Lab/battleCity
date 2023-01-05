@@ -2,7 +2,7 @@
 
 namespace BattleCity
 {
-	namespace Game::Object
+	namespace Game::World::Object
 	{
 		enum class Solidness
 		{

@@ -4,7 +4,7 @@
 #include "BattleCity/Engine/Texture/BCTexture.h"
 #include "BattleCity/Engine/Texture/TextureGroup.h"
 
-namespace BattleCity::Game::Object
+namespace BattleCity::Game::World::Object
 {
     Object::Object(const Engine::Texture::Group& group)
 		: mTextureGroup(&group)

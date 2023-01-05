@@ -3,10 +3,10 @@
 #include "WorldMap.h"
 #include "WorldLevel.h"
 
-#include "BattleCity/Game/Object/Object.h"
-#include "BattleCity/Game/Object/Factory/ObjectFactoryStandart.h"
+#include "BattleCity/Game/World/Object/Object.h"
+#include "BattleCity/Game/World/Object/Factory/ObjectFactoryStandart.h"
 
-namespace BattleCity::Game::Object::World
+namespace BattleCity::Game::World
 {
 	void Map::SetWorldRelative(const TopLeft& worldRelative) noexcept
 	{
@@ -22,7 +22,7 @@ namespace BattleCity::Game::Object::World
 		mFrontLayer.Clear();
 		mBackLayer.Clear();
 
-		Factory::Standart objectFactory(*this);
+		Object::Factory::Standart objectFactory(*this);
 
 		const auto worldBoundaries = objectFactory.CreateWorldBoundaries();
 
@@ -39,27 +39,27 @@ namespace BattleCity::Game::Object::World
 				Vector2Int position(nextPosX, nextPosY);
 				switch (objectType)
 				{
-				case Type::None: 
+				case Object::Type::None: 
 					break;
-				case Type::TankPlayer:
+				case Object::Type::TankPlayer:
 					{
-						const auto object = objectFactory.CreateTank(Type::TankPlayer);
+						const auto object = objectFactory.CreateTank(Object::Type::TankPlayer);
 						object->SetPosition(position);
 					}
 					break;
-				case Type::TankNPC:
+				case Object::Type::TankNPC:
 					{
-						const auto object = objectFactory.CreateTank(Type::TankNPC);
+						const auto object = objectFactory.CreateTank(Object::Type::TankNPC);
 						object->SetPosition(position);
 					}
 					break;
-				case Type::Wall:
+				case Object::Type::Wall:
 					{
 						const auto object = objectFactory.CreateWall();
 						object->SetPosition(position);
 					}
 					break;
-				case Type::Phoenix:
+				case Object::Type::Phoenix:
 					{
 						const auto object = objectFactory.CreatePhoenix();
 						object->SetPosition(position);
@@ -79,29 +79,29 @@ namespace BattleCity::Game::Object::World
 #endif
 	}
 
-	Object& Map::GetObject(int id) const
+	Object::Object& Map::GetObject(int id) const
 	{
 		return mFrontLayer.GetObject(id);
 	}
 
-	Object* Map::InsertObject(std::unique_ptr<Object>&& object, Layer layer)
+	Object::Object* Map::InsertObject(std::unique_ptr<Object::Object>&& object, Object::Layer layer)
 	{
 		auto objectPtr = object.get();
 
 		switch (layer)
 		{
-		case Layer::Back:
+		case Object::Layer::Back:
 		{
 			mBackLayer.Insert(std::move(object));
 			break;
 		}
-		case Layer::Front:
+		case Object::Layer::Front:
 		{
 			mFrontLayer.Insert(std::move(object));
 			break;
 		}
-		case Layer::UI:
-		case Layer::Error:
+		case Object::Layer::UI:
+		case Object::Layer::Error:
 		default:
 			objectPtr = nullptr;
 			break;
@@ -114,11 +114,11 @@ namespace BattleCity::Game::Object::World
 
 	}
 
-	const Container& Map::GetBackLayer() const noexcept
+	const Object::Container& Map::GetBackLayer() const noexcept
 	{
 		return mBackLayer;
 	}
-	const Container& Map::GetFrontLayer() const noexcept
+	const Object::Container& Map::GetFrontLayer() const noexcept
 	{
 		return mFrontLayer;
 	}

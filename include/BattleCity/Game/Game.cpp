@@ -4,8 +4,8 @@
 
 #include "BattleCity/Engine/Storage.h"
 #include "BattleCity/Framework/Screen.h"
-#include "BattleCity/Game/Object/Object.h"
 #include "BattleCity/Game/World/WorldLevel.h"
+#include "BattleCity/Game/World/Object/Object.h"
 
 namespace BattleCity::Game
 {
@@ -26,9 +26,9 @@ namespace BattleCity::Game
 	{
 		UnitTest();
 
-		/*const Object::World::Level level = Object::World::Level::CreateLevel(R"(.\data\Maps\level1.txt)");
+		const World::Level level = World::Level::CreateLevel(R"(.\data\Maps\level1.txt)");
 		mMap.SetWorldRelative({ 40, 44 });
-		mMap.CreateMap(level);*/
+		//mMap.CreateMap(level);
 
 		return true;
 	}

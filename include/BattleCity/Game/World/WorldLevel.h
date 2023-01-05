@@ -1,11 +1,11 @@
 #pragma once
 
-namespace BattleCity::Game::Object::World
+namespace BattleCity::Game::World
 {
 	class Level final
 	{
 	public:
-		using LevelSheet = std::vector<std::vector<Type>>;
+		using LevelSheet = std::vector<std::vector<Object::Type>>;
 
 	private:
 		explicit Level(LevelSheet levelSheet);

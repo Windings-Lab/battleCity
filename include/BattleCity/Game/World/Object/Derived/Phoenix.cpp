@@ -2,7 +2,7 @@
 
 #include "Phoenix.h"
 
-namespace BattleCity::Game::Object
+namespace BattleCity::Game::World::Object
 {
 
 }

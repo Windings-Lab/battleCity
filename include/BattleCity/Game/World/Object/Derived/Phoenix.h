@@ -1,8 +1,8 @@
 #pragma once
 
-#include "BattleCity/Game/Object/Object.h"
+#include "BattleCity/Game/World/Object/Object.h"
 
-namespace BattleCity::Game::Object
+namespace BattleCity::Game::World::Object
 {
 	class Phoenix : public Object
 	{

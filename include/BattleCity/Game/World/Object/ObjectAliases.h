@@ -1,6 +1,6 @@
 #pragma once
 
-namespace BattleCity::Game::Object
+namespace BattleCity::Game::World::Object
 {
 	using ObjectID = int;
 
