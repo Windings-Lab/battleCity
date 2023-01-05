@@ -12,7 +12,7 @@ namespace BattleCity::Game::World::Object
 	{
 	private:
 		using ObjectIndex = int;
-		using IDHashMap = std::unordered_map<ObjectID, ObjectIndex>;
+		using IDHashMap = std::unordered_map<ID, ObjectIndex>;
 
 	private:
 		friend void swap(Container&, Container&) noexcept;

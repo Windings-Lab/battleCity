@@ -33,7 +33,7 @@ namespace BattleCity::Game::World::Object
 	void Container::Remove(int objID)
 	{
 		const ObjectIndex index = mHashMap.at(objID);
-		const ObjectID backID = mContainer.back()->GetID();
+		const ID backID = mContainer.back()->GetID();
 		if(mContainer[index] != mContainer.back())
 		{
 			mHashMap.at(backID) = index;

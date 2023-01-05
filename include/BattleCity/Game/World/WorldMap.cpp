@@ -17,12 +17,12 @@ namespace BattleCity::Game::World
 		return mWorldRelative;
 	}
 
-	void Map::CreateMap(const Level& level)
+	void Map::CreateMap(const Level& level, const Engine::Texture::GroupLibrary& textureGroups)
 	{
 		mFrontLayer.Clear();
 		mBackLayer.Clear();
 
-		Object::Factory::Standart objectFactory(*this);
+		Object::Factory::Standart objectFactory(*this, textureGroups);
 
 		const auto worldBoundaries = objectFactory.CreateWorldBoundaries();
 
@@ -79,7 +79,7 @@ namespace BattleCity::Game::World
 #endif
 	}
 
-	Object::Object& Map::GetObject(int id) const
+	Object::Object& Map::GetObjectBy(Object::ID id) const
 	{
 		return mFrontLayer.GetObject(id);
 	}
@@ -109,7 +109,7 @@ namespace BattleCity::Game::World
 
 		return objectPtr;
 	}
-	void Map::MarkForDelete(int objID)
+	void Map::MarkForDelete(Object::ID objID)
 	{
 
 	}

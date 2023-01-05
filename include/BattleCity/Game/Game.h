@@ -1,5 +1,8 @@
 #pragma once
 
+constexpr bool C_TICK = false;
+
+#include "BattleCity/Engine/Storage.h"
 #include "BattleCity/Framework/Framework.h"
 #include "BattleCity/Game/World/WorldMap.h"
 
@@ -45,9 +48,10 @@ namespace BattleCity::Game
 		void UnitTest();
 
 	private:
-		const NSFramework::Screen& mScreen;
-
-		bool mGameOver;
 		World::Map mMap;
+		Engine::Storage mStorage;
+		bool mGameOver;
+
+		const NSFramework::Screen& mScreen;
 	};
 }

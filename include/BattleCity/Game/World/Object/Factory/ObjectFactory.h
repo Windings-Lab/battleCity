@@ -1,5 +1,10 @@
 #pragma once
 
+namespace BattleCity::Engine::Texture
+{
+	class GroupLibrary;
+}
+
 namespace BattleCity::Game::World
 {
 	class Map;
@@ -14,7 +19,10 @@ namespace BattleCity::Game::World::Object::Factory
 {
 	struct Factory
 	{
-		explicit Factory(World::Map& inserter) : mInserter(inserter) {}
+		explicit Factory(Map& inserter, const Engine::Texture::GroupLibrary& textureGroups)
+			: mInserter(inserter)
+			, mTextureGroups(textureGroups)
+		{}
 
 		DISALLOW_COPY_MOVE(Factory)
 
@@ -35,7 +43,8 @@ namespace BattleCity::Game::World::Object::Factory
 		virtual Object* CreateExplosion() = 0;
 
 	protected:
-		World::Map& mInserter;
+		Map& mInserter;
+		const Engine::Texture::GroupLibrary& mTextureGroups;
 	};
 }
 

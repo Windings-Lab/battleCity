@@ -2,6 +2,11 @@
 
 #include "BattleCity/Game/World/Object/ObjectContainer.h"
 
+namespace BattleCity::Engine::Texture
+{
+	class GroupLibrary;
+}
+
 namespace BattleCity::Game::World
 {
 	using TopLeft = Vector2Int;
@@ -17,14 +22,14 @@ namespace BattleCity::Game::World
 
 		~Map() = default;
 
-		void SetWorldRelative(const TopLeft& worldRelative) noexcept;
+		void SetWorldRelative(const TopLeft&) noexcept;
 		const TopLeft& GetWorldRelative() const noexcept;
 
-		void CreateMap(const Level& level);
+		void CreateMap(const Level&, const Engine::Texture::GroupLibrary&);
 
-		Object::Object& GetObject(int id) const;
-		Object::Object* InsertObject(std::unique_ptr<Object::Object>&& object, Object::Layer layer = Object::Layer::Front);
-		void MarkForDelete(int objID);
+		Object::Object& GetObjectBy(Object::ID) const;
+		Object::Object* InsertObject(std::unique_ptr<Object::Object>&&, Object::Layer = Object::Layer::Front);
+		void MarkForDelete(Object::ID);
 
 		const Object::Container& GetBackLayer() const noexcept;
 		const Object::Container& GetFrontLayer() const noexcept;

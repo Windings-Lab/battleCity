@@ -1,6 +1,8 @@
 #include "PCHeader.h"
 #include "ObjectFactoryStandart.h"
 
+#include "BattleCity/Engine/Texture/BCTexture.h"
+#include "BattleCity/Engine/Texture/TextureGroupLibrary.h"
 #include "BattleCity/Game/World/WorldMap.h"
 
 #include "BattleCity/Game/World/Object/Derived/Bullet.h"
@@ -15,103 +17,72 @@ namespace BattleCity::Game::World::Object::Factory
 {
 	Object* Standart::CreateWorldBoundaries()
 	{
-		/*mSpriteBuilder.BuildPathGroupAt(R"(.\data\Background)");
-		mSpriteBuilder.BuildTextures();
-		mSpriteBuilder.BuildSpriteWith(Texture::Type::Basic);
+		auto object = std::make_unique<WorldBoundaries>(mTextureGroups.GetGroupBy(Framework::TextureName::Background));
+		object->ChangeTextureTo(Framework::TextureType::Basic);
 
-		auto object = std::make_unique<WorldBoundaries>(mSpriteBuilder.GetSprite());
-
-		return mInserter.InsertObject(std::move(object), Sprite::Layer::Back);*/
-
-		return nullptr;
+		return mInserter.InsertObject(std::move(object), Layer::Back);
 	}
 
 	Object* Standart::CreateTank(Type tankType)
 	{
-		/*switch (tankType)
+		std::unique_ptr<Object> object;
+
+		switch (tankType)
 		{
 		case Type::TankNPC:
-			mSpriteBuilder.BuildPathGroupAt(R"(.\data\Tank\TankNPC)");
+			object = std::make_unique<Tank>(mTextureGroups.GetGroupBy(Framework::TextureName::TankNPC));
+			object->ChangeTextureTo(Framework::TextureType::Up);
 			break;
 		case Type::TankPlayer:
-			mSpriteBuilder.BuildPathGroupAt(R"(.\data\Tank\TankPlayer)");
+			object = std::make_unique<Tank>(mTextureGroups.GetGroupBy(Framework::TextureName::TankPlayer));
+			object->ChangeTextureTo(Framework::TextureType::Up);
 			break;
 		default:
 			std::cerr << "Incorrect tank type\n";
 			return nullptr;
 		}
-		mSpriteBuilder.BuildTextures();
-		mSpriteBuilder.BuildSpriteWith(Texture::Type::Up);
 
-		auto object = std::make_unique<Tank>(mSpriteBuilder.GetSprite());
-
-		return mInserter.InsertObject(std::move(object));*/
-
-		return nullptr;
+		return mInserter.InsertObject(std::move(object));
 	}
 
 	Object* Standart::CreateBullet()
 	{
-		/*mSpriteBuilder.BuildPathGroupAt(R"(.\data\Bullet)");
-		mSpriteBuilder.BuildTextures();
-		mSpriteBuilder.BuildSpriteWith(Texture::Type::Up);
+		auto object = std::make_unique<Bullet>(mTextureGroups.GetGroupBy(Framework::TextureName::Bullet));
+		object->ChangeTextureTo(Framework::TextureType::Up);
 
-		auto object = std::make_unique<Bullet>(mSpriteBuilder.GetSprite());
-
-		return mInserter.InsertObject(std::move(object));*/
-
-		return nullptr;
+		return mInserter.InsertObject(std::move(object));
 	}
 
 	Object* Standart::CreatePowerUp()
 	{
-		/*mSpriteBuilder.BuildPathGroupAt(R"(.\data\PowerUp)");
-		mSpriteBuilder.BuildTextures();
-		mSpriteBuilder.BuildSpriteWith(Texture::Type::Basic);
+		auto object = std::make_unique<PowerUp>(mTextureGroups.GetGroupBy(Framework::TextureName::PowerUp));
+		object->ChangeTextureTo(Framework::TextureType::Basic);
 
-		auto object = std::make_unique<PowerUp>(mSpriteBuilder.GetSprite());
-
-		return mInserter.InsertObject(std::move(object), Sprite::Layer::Front);*/
-
-		return nullptr;
+		return mInserter.InsertObject(std::move(object));
 	}
 
 	Object* Standart::CreateWall()
 	{
-		/*mSpriteBuilder.BuildPathGroupAt(R"(.\data\Wall)");
-		mSpriteBuilder.BuildTextures();
-		mSpriteBuilder.BuildSpriteWith(Texture::Type::Basic);
+		auto object = std::make_unique<Wall>(mTextureGroups.GetGroupBy(Framework::TextureName::Wall));
+		object->ChangeTextureTo(Framework::TextureType::Basic);
 
-		auto object = std::make_unique<Wall>(mSpriteBuilder.GetSprite());
-
-		return mInserter.InsertObject(std::move(object));*/
-
-		return nullptr;
+		return mInserter.InsertObject(std::move(object));
 	}
+
 	Object* Standart::CreatePhoenix()
 	{
-		/*mSpriteBuilder.BuildPathGroupAt(R"(.\data\PhoenixAndFlag)");
-		mSpriteBuilder.BuildTextures();
-		mSpriteBuilder.BuildSpriteWith(Texture::Type::Phoenix);
+		auto object = std::make_unique<Phoenix>(mTextureGroups.GetGroupBy(Framework::TextureName::Phoenix));
+		object->ChangeTextureTo(Framework::TextureType::Phoenix);
 
-		auto object = std::make_unique<Phoenix>(mSpriteBuilder.GetSprite());
-
-		return mInserter.InsertObject(std::move(object));*/
-
-		return nullptr;
+		return mInserter.InsertObject(std::move(object));
 	}
 
 	Object* Standart::CreateExplosion()
 	{
-		/*mSpriteBuilder.BuildPathGroupAt(R"(.\data\Explosion)");
-		mSpriteBuilder.BuildTextures();
-		mSpriteBuilder.BuildSpriteWith(Texture::Type::ExplosionSmall1);
+		auto object = std::make_unique<Explosion>(mTextureGroups.GetGroupBy(Framework::TextureName::Explosion));
+		object->ChangeTextureTo(Framework::TextureType::ExplosionSmall1);
 
-		auto object = std::make_unique<Explosion>(mSpriteBuilder.GetSprite());
-
-		return mInserter.InsertObject(std::move(object));*/
-
-		return nullptr;
+		return mInserter.InsertObject(std::move(object));
 	}
 }
 

@@ -2,7 +2,6 @@
 
 #include "Game.h"
 
-#include "BattleCity/Engine/Storage.h"
 #include "BattleCity/Framework/Screen.h"
 #include "BattleCity/Game/World/WorldLevel.h"
 #include "BattleCity/Game/World/Object/Object.h"
@@ -10,8 +9,8 @@
 namespace BattleCity::Game
 {
 	Game::Game(const NSFramework::Screen& screen)
-		: mScreen(screen)
-		, mGameOver(false)
+		: mGameOver(false)
+		, mScreen(screen)
 	{
 	}
 
@@ -24,11 +23,14 @@ namespace BattleCity::Game
 
 	bool Game::Init()
 	{
-		UnitTest();
+		mStorage.CreatePathLibrary(R"(.\data)");
+		mStorage.CreateTextures(mStorage.GetPathLibrary());
+		mStorage.ClearAllPaths();
+		mStorage.CreateGroups(mStorage.GetTextures());
 
 		const World::Level level = World::Level::CreateLevel(R"(.\data\Maps\level1.txt)");
 		mMap.SetWorldRelative({ 40, 44 });
-		//mMap.CreateMap(level);
+		mMap.CreateMap(level, mStorage.GetGroups());
 
 		return true;
 	}
@@ -39,7 +41,7 @@ namespace BattleCity::Game
 
 	bool Game::Tick()
 	{
-/*#ifdef _DEBUG
+#ifdef _DEBUG
 		using namespace std::chrono;
 
 		const auto& start = high_resolution_clock::now();
@@ -51,12 +53,15 @@ namespace BattleCity::Game
 		Draw();
 
 #ifdef _DEBUG
-		const auto& stop = high_resolution_clock::now();
+		if(C_TICK)
+		{
+			const auto& stop = high_resolution_clock::now();
 
-		const auto& result = duration_cast<duration<double, std::milli>>(stop - start).count();
+			const auto& result = duration_cast<duration<double, std::milli>>(stop - start).count();
 
-		std::cout << "Tick complexity: " << result << std::endl;
-#endif*/
+			std::cout << "Tick complexity: " << result << std::endl;
+		}
+#endif
 
 		return mGameOver;
 	}
@@ -84,11 +89,6 @@ namespace BattleCity::Game
 
 	void Game::UnitTest()
 	{
-		Engine::Storage storage;
-
-		storage.CreatePathLibrary(R"(.\data)");
-		storage.CreateTextures(storage.GetPathLibrary());
-		storage.CreateGroups(storage.GetTextures());
 	}
 
 	const char* Game::GetTitle()
