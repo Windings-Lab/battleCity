@@ -15,6 +15,10 @@ namespace BattleCity::Engine
     {
         mTexturePaths.CreateData(path);
     }
+    void Storage::ClearAllPaths() noexcept
+    {
+        mTexturePaths.clear();
+    }
     const Texture::PathLibrary& Storage::GetPathLibrary() const noexcept
     {
         return mTexturePaths;
@@ -24,6 +28,10 @@ namespace BattleCity::Engine
     {
         mTextures.CreateData(pathLibrary);
     }
+    void Storage::ClearAllTextures() noexcept
+    {
+        mTextures.clear();
+    }
     const Texture::Container& Storage::GetTextures() const noexcept
     {
         return mTextures;
@@ -32,6 +40,10 @@ namespace BattleCity::Engine
     void Storage::CreateGroups(const Texture::Container& textures)
     {
         mGroups.CreateData(textures);
+    }
+    void Storage::ClearAllGroups() noexcept
+    {
+        mGroups.clear();
     }
     const Texture::GroupLibrary& Storage::GetGroups() const noexcept
     {

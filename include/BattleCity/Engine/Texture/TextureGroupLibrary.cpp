@@ -57,4 +57,9 @@ namespace BattleCity::Engine::Texture
 	{
 		return mGroups.at(name);
 	}
+
+	void GroupLibrary::clear() noexcept
+	{
+		mGroups.clear();
+	}
 }

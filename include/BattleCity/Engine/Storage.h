@@ -20,12 +20,15 @@ namespace BattleCity::Engine
 		~Storage() = default;
 
 		void CreatePathLibrary(const std::filesystem::path&);
+		void ClearAllPaths() noexcept;
 		const Texture::PathLibrary& GetPathLibrary() const noexcept;
 
 		void CreateTextures(const Texture::PathLibrary&);
+		void ClearAllTextures() noexcept;
 		const Texture::Container& GetTextures() const noexcept;
 
 		void CreateGroups(const Texture::Container&);
+		void ClearAllGroups() noexcept;
 		const Texture::GroupLibrary& GetGroups() const noexcept;
 
 

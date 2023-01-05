@@ -18,6 +18,8 @@ namespace BattleCity::Engine::Texture
 		TexturePathContainer::const_iterator begin() const noexcept;
 		TexturePathContainer::const_iterator end() const noexcept;
 
+		void clear() noexcept;
+
 	private:
 		TexturePathContainer mPaths;
 

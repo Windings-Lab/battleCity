@@ -56,4 +56,8 @@ namespace BattleCity::Engine::Texture
 	{
 		return mTextures.cend();
 	}
+	void Container::clear() noexcept
+	{
+		mTextures.clear();
+	}
 }

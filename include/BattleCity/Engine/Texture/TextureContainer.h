@@ -25,6 +25,7 @@ namespace BattleCity::Engine::Texture
 
 		TextureContainer::const_iterator begin() const noexcept;
 		TextureContainer::const_iterator end() const noexcept;
+		void clear() noexcept;
 	
 	private:
 		TextureContainer mTextures;

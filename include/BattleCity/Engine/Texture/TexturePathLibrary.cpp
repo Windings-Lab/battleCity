@@ -54,4 +54,8 @@ namespace BattleCity::Engine::Texture
 	{
 		return mPaths.cend();
 	}
+	void PathLibrary::clear() noexcept
+	{
+		mPaths.clear();
+	}
 }

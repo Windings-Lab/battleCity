@@ -24,6 +24,8 @@ namespace BattleCity::Engine::Texture
 		void CreateData(const Container&);
 		const Group& GetGroupBy(Framework::TextureName) const;
 
+		void clear() noexcept;
+
 	private:
 		GroupContainer mGroups;
 	};
