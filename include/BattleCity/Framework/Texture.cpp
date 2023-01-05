@@ -24,13 +24,14 @@ namespace BattleCity::Framework
 		swap(f.mHeight, s.mHeight);
 	}
 
-	Texture::Texture()
-		: Texture(nullptr, TextureName::Error, TextureType::Error, 0, 0) {}
 	Texture::Texture(const char* path, const TextureName name, const TextureType type)
 		: Texture(createSprite(path), name, type, 0, 0)
 	{
 		getSpriteSize(mTexture, mWidth, mHeight);
 	}
+
+	Texture::Texture()
+		: Texture(nullptr, TextureName::Error, TextureType::Error, 0, 0) {}
 	Texture::Texture(Sprite* texture, TextureName name, TextureType type, int w, int h)
 		: mTexture(texture)
 		, mName(name)

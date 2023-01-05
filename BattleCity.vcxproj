@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="include\BattleCity\Engine\Storage.cpp" />
+    <ClCompile Include="include\BattleCity\Engine\Texture\BCTexture.cpp" />
     <ClCompile Include="include\BattleCity\Engine\Texture\TextureGroup.cpp" />
     <ClCompile Include="include\BattleCity\Engine\Texture\TextureContainer.cpp" />
     <ClCompile Include="include\BattleCity\Engine\Texture\TexturePathLibrary.cpp" />
@@ -55,6 +56,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\BattleCity\Engine\Storage.h" />
+    <ClInclude Include="include\BattleCity\Engine\Texture\BCTexture.h" />
     <ClInclude Include="include\BattleCity\Engine\Texture\TextureAliases.h" />
     <ClInclude Include="include\BattleCity\Engine\Texture\TextureGroup.h" />
     <ClInclude Include="include\BattleCity\Engine\Texture\TextureContainer.h" />

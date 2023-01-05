@@ -1,10 +1,10 @@
 #pragma once
 
-#include "BattleCity/Framework/Texture.h"
+#include "BattleCity/Engine/Texture/BCTexture.h"
 
 namespace BattleCity::Engine::Texture
 {
-	using TextureContainer = std::vector<NSFramework::Texture>;
+	using TextureContainer = std::vector<Texture>;
 
 	class PathLibrary;
 

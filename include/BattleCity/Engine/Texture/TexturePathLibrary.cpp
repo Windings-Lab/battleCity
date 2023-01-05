@@ -12,7 +12,7 @@ namespace BattleCity::Engine::Texture
 
 			for (const auto& path : paths)
 			{
-				std::cout << path.string() << "\n";
+				std::cout << "Path: " << path.string() << "\n";
 			}
 			std::cout << std::endl;
 		}

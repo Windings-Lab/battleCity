@@ -41,13 +41,14 @@ namespace BattleCity::Framework
 	private:
 		friend void swap(Texture&, Texture&) noexcept;
 
-	protected:
+	private:
 		Texture();
 		Texture(Sprite*, TextureName, TextureType, int, int);
 
-	public:
+	protected:
 		Texture(const char*, TextureName, TextureType);
 
+	public:
 		DISALLOW_COPY(Texture)
 		ALLOW_MOVE(Texture)
 

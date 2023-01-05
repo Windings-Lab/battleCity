@@ -83,6 +83,9 @@
     <ClCompile Include="include\BattleCity\Engine\Texture\TextureContainer.cpp">
       <Filter>BattleCity\Engine\Texture</Filter>
     </ClCompile>
+    <ClCompile Include="include\BattleCity\Engine\Texture\BCTexture.cpp">
+      <Filter>BattleCity\Engine\Texture</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pcheader\PCHeader.h">
@@ -192,6 +195,9 @@
     </ClInclude>
     <ClInclude Include="include\BattleCity\NamespaceAliases.h">
       <Filter>BattleCity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Engine\Texture\BCTexture.h">
+      <Filter>BattleCity\Engine\Texture</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
