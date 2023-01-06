@@ -2,15 +2,18 @@
 
 #include "Game.h"
 
+#include "BattleCity/Engine/Texture/TextureStorage.h"
 #include "BattleCity/Framework/Screen.h"
 #include "BattleCity/Game/World/WorldLevel.h"
 #include "BattleCity/Game/World/Object/Object.h"
 
 namespace BattleCity::Game
 {
-	Game::Game(const NSFramework::Screen& screen)
-		: mGameOver(false)
-		, mScreen(screen)
+	Game::Game(const NSFramework::Screen& screen, const Engine::Texture::PathLibrary& pathLibrary)
+		: mScreen(screen)
+		, mPathLibrary(pathLibrary)
+		, mMap(mTextureStorage.GetGroups())
+		, mGameOver(false)
 	{
 	}
 
@@ -23,14 +26,12 @@ namespace BattleCity::Game
 
 	bool Game::Init()
 	{
-		mStorage.CreatePathLibrary(R"(.\data)");
-		mStorage.CreateTextures(mStorage.GetPathLibrary());
-		mStorage.ClearAllPaths();
-		mStorage.CreateGroups(mStorage.GetTextures());
+		mTextureStorage.CreateTextures(mPathLibrary);
+		mTextureStorage.CreateGroups(mTextureStorage.GetTextures());
 
 		const World::Level level = World::Level::CreateLevel(R"(.\data\Maps\level1.txt)");
 		mMap.SetWorldRelative({ 40, 44 });
-		mMap.CreateMap(level, mStorage.GetGroups());
+		mMap.CreateMap(level);
 
 		return true;
 	}

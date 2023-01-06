@@ -2,16 +2,18 @@
 
 constexpr bool C_TICK = false;
 
-#include "BattleCity/Engine/Storage.h"
+#include "BattleCity/Engine/Texture/TextureStorage.h"
 #include "BattleCity/Framework/Framework.h"
 #include "BattleCity/Game/World/WorldMap.h"
 
-namespace BattleCity
+namespace BattleCity::Engine::Texture
 {
-	namespace Framework
-	{
-		class Screen;
-	}
+	class PathLibrary;
+}
+
+namespace BattleCity::Framework
+{
+	class Screen;
 }
 
 namespace BattleCity::Game
@@ -21,7 +23,7 @@ namespace BattleCity::Game
 	class Game final : public NSFramework::Framework
 	{
 	public:
-		Game(const NSFramework::Screen&);
+		Game(const NSFramework::Screen&, const Engine::Texture::PathLibrary&);
 
 		DISALLOW_COPY_MOVE(Game)
 
@@ -48,10 +50,12 @@ namespace BattleCity::Game
 		void UnitTest();
 
 	private:
-		World::Map mMap;
-		Engine::Storage mStorage;
-		bool mGameOver;
-
 		const NSFramework::Screen& mScreen;
+		const Engine::Texture::PathLibrary& mPathLibrary;
+
+		Engine::Texture::Storage mTextureStorage;
+		World::Map mMap;
+
+		bool mGameOver;
 	};
 }
