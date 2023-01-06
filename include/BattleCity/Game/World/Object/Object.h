@@ -30,13 +30,14 @@ namespace BattleCity::Game::World::Object
 
 		int GetID() const noexcept;
 
-		void SetPosition(const Position&) noexcept;
-		void SetPosition(X, Y) noexcept;
+		virtual void SetPosition(const Position&) noexcept;
+		virtual void SetPosition(X, Y) noexcept;
 		const Position& GetPosition() const noexcept;
 		int GetX() const noexcept;
 		int GetY() const noexcept;
 
 		void ChangeTextureTo(Framework::TextureType) const;
+		void GetTextureSize(int&, int&) const noexcept;
 
 	protected:
 		Position mPosition;

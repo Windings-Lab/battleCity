@@ -55,4 +55,9 @@ namespace BattleCity::Game::World::Object
     {
         mCurrentTexture = mTextureGroup->GetTextureBy(type);
     }
+
+    void Object::GetTextureSize(int& w, int& h) const noexcept
+    {
+        mCurrentTexture->GetSize(w, h);
+    }
 }
