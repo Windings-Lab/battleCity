@@ -4,9 +4,11 @@
 
 namespace BattleCity::Game::World::Object
 {
-    class Bullet final : public Object
+    class Bullet : public Object
     {
     public:
         using Object::Object;
+
+        void Update() override;
     };
 }

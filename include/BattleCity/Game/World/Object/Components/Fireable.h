@@ -1,19 +1,32 @@
 #pragma once
 
+#include "BattleCity/Game/World/Object/ObjectAliases.h"
+
+namespace BattleCity::Game::World::Object
+{
+	class Bullet;
+	class Object;
+}
+
 namespace BattleCity::Game::World::Object::Component
 {
 	class Fireable
 	{
 	public:
-		Fireable();
-		virtual ~Fireable();
+		Fireable(std::function<Bullet*()>);
 
-		virtual void Fire();
+		ALLOW_COPY_MOVE_DEFAULT(Fireable)
 
-		void SetBulletCount(int count);
-		int GetBulletCount() const;
+		virtual ~Fireable() = default;
+
+		virtual void Fire(const Position&);
+
+		void SetBulletCount(int count) noexcept;
+		int GetBulletCount() const noexcept;
 
 	private:
+		std::function<Bullet*()> mSpawnBullet;
+
 		int mBulletCount;
 	};
 }
