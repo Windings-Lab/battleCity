@@ -27,7 +27,7 @@ namespace BattleCity::Game::World
 		const TopLeft& GetWorldRelative() const noexcept;
 
 		// Returns object that can be controlled with user Input
-		std::shared_ptr<Object::Object> CreateMap(const Level&);
+		std::weak_ptr<Object::Tank> CreateMap(const Level&);
 
 		std::shared_ptr<Object::Object> GetObjectBy(Object::ID) const;
 		void InsertObject(std::shared_ptr<Object::Object>, Object::Layer = Object::Layer::Front);

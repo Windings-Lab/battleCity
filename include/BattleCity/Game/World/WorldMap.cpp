@@ -24,7 +24,7 @@ namespace BattleCity::Game::World
 		return mWorldRelative;
 	}
 
-	std::shared_ptr<Object::Object> Map::CreateMap(const Level& level)
+	std::weak_ptr<Object::Tank> Map::CreateMap(const Level& level)
 	{
 		mFrontLayer.Clear();
 		mBackLayer.Clear();
@@ -35,7 +35,7 @@ namespace BattleCity::Game::World
 
 		const auto& mapColumn = level;
 
-		std::shared_ptr<Object::Object> player = nullptr;
+		std::shared_ptr<Object::Tank> player = nullptr;
 
 		int nextPosY = mWorldRelative.Y;
 		for (const auto& mapRow : mapColumn)
