@@ -11,11 +11,23 @@ namespace BattleCity::Game::World::Object
 
     void Tank::Fire()
     {
-        mFireable.Fire(mPosition);
+        mFireable.Fire(GetBulletSpawnPositon());
     }
-
     void Tank::SetBulletCount(int num) noexcept
     {
         mFireable.SetBulletCount(num);
+    }
+
+    Position Tank::GetBulletSpawnPositon() const noexcept
+    {
+        int tankWidth;
+        int tankHeight;
+
+        GetTextureSize(tankWidth, tankHeight);
+
+        Position bulletPosition(mPosition.X, mPosition.Y);
+        bulletPosition.X += tankWidth / 2;
+
+        return bulletPosition;
     }
 }

@@ -10,5 +10,7 @@ namespace BattleCity::Game::World::Object
         using Object::Object;
 
         void Update() override;
+
+        void SetPosition(const Position&) noexcept override;
     };
 }

@@ -15,6 +15,9 @@ namespace BattleCity::Game::World::Object
 		void SetBulletCount(int) noexcept;
 
 	private:
+		Position GetBulletSpawnPositon() const noexcept;
+
+	private:
 		Component::Fireable mFireable;
 	};
 }
