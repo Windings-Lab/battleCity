@@ -19,12 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="include\BattleCity\Engine\Storage.cpp" />
     <ClCompile Include="include\BattleCity\Engine\Texture\BCTexture.cpp" />
     <ClCompile Include="include\BattleCity\Engine\Texture\TextureGroup.cpp" />
     <ClCompile Include="include\BattleCity\Engine\Texture\TextureContainer.cpp" />
     <ClCompile Include="include\BattleCity\Engine\Texture\TextureGroupLibrary.cpp" />
     <ClCompile Include="include\BattleCity\Engine\Texture\TexturePathLibrary.cpp" />
+    <ClCompile Include="include\BattleCity\Engine\Texture\TextureStorage.cpp" />
     <ClCompile Include="include\BattleCity\Framework\Screen.cpp" />
     <ClCompile Include="include\BattleCity\Framework\Texture.cpp" />
     <ClCompile Include="include\BattleCity\Game\Game.cpp" />
@@ -56,13 +56,13 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\BattleCity\Engine\Storage.h" />
     <ClInclude Include="include\BattleCity\Engine\Texture\BCTexture.h" />
     <ClInclude Include="include\BattleCity\Engine\Texture\TextureAliases.h" />
     <ClInclude Include="include\BattleCity\Engine\Texture\TextureGroup.h" />
     <ClInclude Include="include\BattleCity\Engine\Texture\TextureContainer.h" />
     <ClInclude Include="include\BattleCity\Engine\Texture\TextureGroupLibrary.h" />
     <ClInclude Include="include\BattleCity\Engine\Texture\TexturePathLibrary.h" />
+    <ClInclude Include="include\BattleCity\Engine\Texture\TextureStorage.h" />
     <ClInclude Include="include\BattleCity\Enums.h" />
     <ClInclude Include="include\BattleCity\Framework\Framework.h" />
     <ClInclude Include="include\BattleCity\Framework\Screen.h" />
