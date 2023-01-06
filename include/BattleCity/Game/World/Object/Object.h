@@ -38,9 +38,11 @@ namespace BattleCity::Game::World::Object
 
 		void ChangeTextureTo(Framework::TextureType) const;
 
+	protected:
+		Position mPosition;
+
 	private:
 		ID mID;
-		Position mPosition;
 
 		mutable const Engine::Texture::Group* mTextureGroup;
 		mutable const Engine::Texture::Texture* mCurrentTexture;
