@@ -19,12 +19,12 @@ namespace BattleCity::Game::World::Object
 
 	Container::~Container() = default;
 
-	Object& Container::GetObject(int id) const
+	std::shared_ptr<Object> Container::GetObject(int id) const
 	{
-		return *mContainer[id];
+		return mContainer[id];
 	}
 
-	void Container::Insert(std::unique_ptr<Object>&& objPtr)
+	void Container::Insert(std::shared_ptr<Object>&& objPtr)
 	{
 		mHashMap.try_emplace(objPtr->GetID(), GetSize());
 		mContainer.emplace_back(std::move(objPtr));

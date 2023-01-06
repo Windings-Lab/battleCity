@@ -15,17 +15,19 @@
 
 namespace BattleCity::Game::World::Object::Factory
 {
-	WorldBoundaries* Standart::CreateWorldBoundaries()
+	std::shared_ptr<WorldBoundaries> Standart::CreateWorldBoundaries()
 	{
-		auto object = std::make_unique<WorldBoundaries>(mTextureGroups.GetGroupBy(Framework::TextureName::Background));
+		auto object = std::make_shared<WorldBoundaries>(mTextureGroups.GetGroupBy(Framework::TextureName::Background));
 		object->ChangeTextureTo(Framework::TextureType::Basic);
 
-		return dynamic_cast<WorldBoundaries*>(mInserter.InsertObject(std::move(object), Layer::Back));
+		mInserter.InsertObject(object, Layer::Back);
+
+		return object;
 	}
 
-	Tank* Standart::CreateTank(Type tankType)
+	std::shared_ptr<Tank> Standart::CreateTank(Type tankType)
 	{
-		std::unique_ptr<Object> object;
+		std::shared_ptr<Tank> object;
 
 		auto spawnBullet = [&]
 		{
@@ -35,11 +37,11 @@ namespace BattleCity::Game::World::Object::Factory
 		switch (tankType)
 		{
 		case Type::TankNPC:
-			object = std::make_unique<Tank>(mTextureGroups.GetGroupBy(Framework::TextureName::TankNPC), spawnBullet);
+			object = std::make_shared<Tank>(mTextureGroups.GetGroupBy(Framework::TextureName::TankNPC), spawnBullet);
 			object->ChangeTextureTo(Framework::TextureType::Up);
 			break;
 		case Type::TankPlayer:
-			object = std::make_unique<Tank>(mTextureGroups.GetGroupBy(Framework::TextureName::TankPlayer), spawnBullet);
+			object = std::make_shared<Tank>(mTextureGroups.GetGroupBy(Framework::TextureName::TankPlayer), spawnBullet);
 			object->ChangeTextureTo(Framework::TextureType::Up);
 			break;
 		default:
@@ -47,47 +49,59 @@ namespace BattleCity::Game::World::Object::Factory
 			return nullptr;
 		}
 
-		return dynamic_cast<Tank*>(mInserter.InsertObject(std::move(object)));
+		mInserter.InsertObject(object);
+
+		return object;
 	}
 
-	Bullet* Standart::CreateBullet()
+	std::shared_ptr<Bullet> Standart::CreateBullet()
 	{
-		auto object = std::make_unique<Bullet>(mTextureGroups.GetGroupBy(Framework::TextureName::Bullet));
+		auto object = std::make_shared<Bullet>(mTextureGroups.GetGroupBy(Framework::TextureName::Bullet));
 		object->ChangeTextureTo(Framework::TextureType::Up);
 
-		return dynamic_cast<Bullet*>(mInserter.InsertObject(std::move(object)));
+		mInserter.InsertObject(object);
+
+		return object;
 	}
 
-	PowerUp* Standart::CreatePowerUp()
+	std::shared_ptr<PowerUp> Standart::CreatePowerUp()
 	{
-		auto object = std::make_unique<PowerUp>(mTextureGroups.GetGroupBy(Framework::TextureName::PowerUp));
+		auto object = std::make_shared<PowerUp>(mTextureGroups.GetGroupBy(Framework::TextureName::PowerUp));
 		object->ChangeTextureTo(Framework::TextureType::Basic);
 
-		return dynamic_cast<PowerUp*>(mInserter.InsertObject(std::move(object)));
+		mInserter.InsertObject(object);
+
+		return object;
 	}
 
-	Wall* Standart::CreateWall()
+	std::shared_ptr<Wall> Standart::CreateWall()
 	{
-		auto object = std::make_unique<Wall>(mTextureGroups.GetGroupBy(Framework::TextureName::Wall));
+		auto object = std::make_shared<Wall>(mTextureGroups.GetGroupBy(Framework::TextureName::Wall));
 		object->ChangeTextureTo(Framework::TextureType::Basic);
 
-		return dynamic_cast<Wall*>(mInserter.InsertObject(std::move(object)));
+		mInserter.InsertObject(object);
+
+		return object;
 	}
 
-	Phoenix* Standart::CreatePhoenix()
+	std::shared_ptr<Phoenix> Standart::CreatePhoenix()
 	{
-		auto object = std::make_unique<Phoenix>(mTextureGroups.GetGroupBy(Framework::TextureName::Phoenix));
+		auto object = std::make_shared<Phoenix>(mTextureGroups.GetGroupBy(Framework::TextureName::Phoenix));
 		object->ChangeTextureTo(Framework::TextureType::Phoenix);
 
-		return dynamic_cast<Phoenix*>(mInserter.InsertObject(std::move(object)));
+		mInserter.InsertObject(object);
+
+		return object;
 	}
 
-	Explosion* Standart::CreateExplosion()
+	std::shared_ptr<Explosion> Standart::CreateExplosion()
 	{
-		auto object = std::make_unique<Explosion>(mTextureGroups.GetGroupBy(Framework::TextureName::Explosion));
+		auto object = std::make_shared<Explosion>(mTextureGroups.GetGroupBy(Framework::TextureName::Explosion));
 		object->ChangeTextureTo(Framework::TextureType::ExplosionSmall1);
 
-		return dynamic_cast<Explosion*>(mInserter.InsertObject(std::move(object)));
+		mInserter.InsertObject(object);
+
+		return object;
 	}
 }
 

@@ -24,18 +24,18 @@ namespace BattleCity::Game::World
 		return mWorldRelative;
 	}
 
-	Object::Object* Map::CreateMap(const Level& level)
+	std::shared_ptr<Object::Object> Map::CreateMap(const Level& level)
 	{
 		mFrontLayer.Clear();
 		mBackLayer.Clear();
 
-		const auto worldBoundaries = mObjectFactory.CreateWorldBoundaries();
+		auto worldBoundaries = mObjectFactory.CreateWorldBoundaries();
 
 		worldBoundaries->SetPosition(mWorldRelative);
 
 		const auto& mapColumn = level;
 
-		Object::Object* player = nullptr;
+		std::shared_ptr<Object::Object> player = nullptr;
 
 		int nextPosY = mWorldRelative.Y;
 		for (const auto& mapRow : mapColumn)
@@ -56,19 +56,19 @@ namespace BattleCity::Game::World
 					break;
 				case Object::Type::TankNPC:
 					{
-						const auto object = mObjectFactory.CreateTank(Object::Type::TankNPC);
+						auto object = mObjectFactory.CreateTank(Object::Type::TankNPC);
 						object->SetPosition(position);
 					}
 					break;
 				case Object::Type::Wall:
 					{
-						const auto object = mObjectFactory.CreateWall();
+						auto object = mObjectFactory.CreateWall();
 						object->SetPosition(position);
 					}
 					break;
 				case Object::Type::Phoenix:
 					{
-						const auto object = mObjectFactory.CreatePhoenix();
+						auto object = mObjectFactory.CreatePhoenix();
 						object->SetPosition(position);
 					}
 					break;
@@ -88,15 +88,13 @@ namespace BattleCity::Game::World
 		return player;
 	}
 
-	Object::Object& Map::GetObjectBy(Object::ID id) const
+	std::shared_ptr<Object::Object> Map::GetObjectBy(Object::ID id) const
 	{
 		return mFrontLayer.GetObject(id);
 	}
 
-	Object::Object* Map::InsertObject(std::unique_ptr<Object::Object>&& object, Object::Layer layer)
+	void Map::InsertObject(std::shared_ptr<Object::Object> object, Object::Layer layer)
 	{
-		auto objectPtr = object.get();
-
 		switch (layer)
 		{
 		case Object::Layer::Back:
@@ -112,15 +110,11 @@ namespace BattleCity::Game::World
 		case Object::Layer::UI:
 		case Object::Layer::Error:
 		default:
-			objectPtr = nullptr;
 			break;
 		}
-
-		return objectPtr;
 	}
 	void Map::MarkForDelete(Object::ID objID)
 	{
-
 	}
 
 	const Object::Container& Map::GetBackLayer() const noexcept

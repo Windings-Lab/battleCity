@@ -59,6 +59,6 @@ namespace BattleCity::Game
 		Engine::Texture::Storage mTextureStorage;
 		World::Map mMap;
 
-		World::Object::Tank* mPlayer;
+		std::weak_ptr<World::Object::Tank> mPlayer;
 	};
 }

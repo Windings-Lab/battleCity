@@ -8,7 +8,7 @@ namespace BattleCity::Game::World::Object
 	class Tank : public Object
 	{
 	public:
-		Tank(const Engine::Texture::Group&, std::function<Bullet*()>);
+		Tank(const Engine::Texture::Group&, std::function<std::shared_ptr<Bullet>()>);
 
 		void Fire();
 

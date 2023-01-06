@@ -34,19 +34,19 @@ namespace BattleCity::Game::World::Object::Factory
 
 		virtual ~Factory() = default;
 
-		virtual WorldBoundaries* CreateWorldBoundaries() = 0;
+		virtual std::shared_ptr<WorldBoundaries> CreateWorldBoundaries() = 0;
 
-		virtual Tank* CreateTank(Type tankType) = 0;
+		virtual std::shared_ptr<Tank> CreateTank(Type tankType) = 0;
 
-		virtual Bullet* CreateBullet() = 0;
+		virtual std::shared_ptr<Bullet> CreateBullet() = 0;
 
-		virtual PowerUp* CreatePowerUp() = 0;
+		virtual std::shared_ptr<PowerUp> CreatePowerUp() = 0;
 
-		virtual Wall* CreateWall() = 0;
+		virtual std::shared_ptr<Wall> CreateWall() = 0;
 
-		virtual Phoenix* CreatePhoenix() = 0;
+		virtual std::shared_ptr<Phoenix> CreatePhoenix() = 0;
 
-		virtual Explosion* CreateExplosion() = 0;
+		virtual std::shared_ptr<Explosion> CreateExplosion() = 0;
 
 	protected:
 		Map& mInserter;

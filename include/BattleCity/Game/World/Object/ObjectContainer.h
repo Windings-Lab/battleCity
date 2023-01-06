@@ -6,7 +6,7 @@ namespace BattleCity::Game::World::Object
 {
 	class Object;
 
-	using ObjectContainer = std::vector<std::unique_ptr<Object>>;
+	using ObjectContainer = std::vector<std::shared_ptr<Object>>;
 
 	class Container
 	{
@@ -27,9 +27,9 @@ namespace BattleCity::Game::World::Object
 
 		~Container();
 
-		Object& GetObject(int id) const;
+		std::shared_ptr<Object> GetObject(int id) const;
 
-		void Insert(std::unique_ptr<Object>&& objPtr);
+		void Insert(std::shared_ptr<Object>&& objPtr);
 		void Remove(int objID);
 
 		int GetSize() const noexcept;

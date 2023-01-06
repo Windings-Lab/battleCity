@@ -5,7 +5,7 @@
 
 namespace BattleCity::Game::World::Object::Component
 {
-	Fireable::Fireable(std::function<Bullet*()> fire)
+	Fireable::Fireable(std::function<std::shared_ptr<Bullet>()> fire)
 		: mSpawnBullet(std::move(fire))
 		, mBulletCount(0)
 	{
@@ -14,9 +14,9 @@ namespace BattleCity::Game::World::Object::Component
 
 	void Fireable::Fire(const Position& position)
 	{
-		if(mBulletCount != 0)
+		if(mBulletCount > 0)
 		{
-			auto* bullet = mSpawnBullet();
+			auto bullet = mSpawnBullet();
 			bullet->SetPosition(position);
 		}
 	}
