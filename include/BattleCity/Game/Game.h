@@ -18,7 +18,10 @@ namespace BattleCity::Framework
 
 namespace BattleCity::Game
 {
-	class TankPlayer;
+	namespace World::Object
+	{
+		class Tank;
+	}
 
 	class Game final : public NSFramework::Framework
 	{
@@ -56,6 +59,6 @@ namespace BattleCity::Game
 		Engine::Texture::Storage mTextureStorage;
 		World::Map mMap;
 
-		bool mGameOver;
+		World::Object::Tank* mPlayer;
 	};
 }

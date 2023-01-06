@@ -1,11 +1,12 @@
 #include "PCHeader.h"
-
 #include "Game.h"
 
-#include "BattleCity/Engine/Texture/TextureStorage.h"
 #include "BattleCity/Framework/Screen.h"
+
 #include "BattleCity/Game/World/WorldLevel.h"
+
 #include "BattleCity/Game/World/Object/Object.h"
+#include "World/Object/Derived/Tank.h"
 
 namespace BattleCity::Game
 {
@@ -13,7 +14,7 @@ namespace BattleCity::Game
 		: mScreen(screen)
 		, mPathLibrary(pathLibrary)
 		, mMap(mTextureStorage.GetGroups())
-		, mGameOver(false)
+		, mPlayer(nullptr)
 	{
 	}
 
@@ -31,7 +32,7 @@ namespace BattleCity::Game
 
 		const World::Level level = World::Level::CreateLevel(R"(.\data\Maps\level1.txt)");
 		mMap.SetWorldRelative({ 40, 44 });
-		mMap.CreateMap(level);
+		mPlayer = dynamic_cast<World::Object::Tank*>(mMap.CreateMap(level));
 
 		return true;
 	}
@@ -64,7 +65,7 @@ namespace BattleCity::Game
 		}
 #endif
 
-		return mGameOver;
+		return !mPlayer;
 	}
 
 	void Game::Update()

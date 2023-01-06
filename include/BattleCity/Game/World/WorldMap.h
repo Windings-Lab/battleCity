@@ -26,7 +26,8 @@ namespace BattleCity::Game::World
 		void SetWorldRelative(const TopLeft&) noexcept;
 		const TopLeft& GetWorldRelative() const noexcept;
 
-		void CreateMap(const Level&);
+		// Returns object that can be controlled with user Input
+		Object::Object* CreateMap(const Level&);
 
 		Object::Object& GetObjectBy(Object::ID) const;
 		Object::Object* InsertObject(std::unique_ptr<Object::Object>&&, Object::Layer = Object::Layer::Front);

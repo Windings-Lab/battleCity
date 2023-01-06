@@ -24,7 +24,7 @@ namespace BattleCity::Game::World
 		return mWorldRelative;
 	}
 
-	void Map::CreateMap(const Level& level)
+	Object::Object* Map::CreateMap(const Level& level)
 	{
 		mFrontLayer.Clear();
 		mBackLayer.Clear();
@@ -34,6 +34,8 @@ namespace BattleCity::Game::World
 		worldBoundaries->SetPosition(mWorldRelative);
 
 		const auto& mapColumn = level;
+
+		Object::Object* player = nullptr;
 
 		int nextPosY = mWorldRelative.Y;
 		for (const auto& mapRow : mapColumn)
@@ -48,10 +50,8 @@ namespace BattleCity::Game::World
 					break;
 				case Object::Type::TankPlayer:
 					{
-						const auto& object = mObjectFactory.CreateTank(Object::Type::TankPlayer);
-						object->SetPosition(position);
-						object->SetBulletCount(1);
-						object->Fire();
+						player = mObjectFactory.CreateTank(Object::Type::TankPlayer);
+						player->SetPosition(position);
 					}
 					break;
 				case Object::Type::TankNPC:
@@ -84,6 +84,8 @@ namespace BattleCity::Game::World
 #ifdef _DEBUG
 		std::cout << "Created map with: " << mFrontLayer.GetSize() + mBackLayer.GetSize() << " object count." << std::endl;
 #endif
+
+		return player;
 	}
 
 	Object::Object& Map::GetObjectBy(Object::ID id) const
