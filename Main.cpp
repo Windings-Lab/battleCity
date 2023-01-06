@@ -4,6 +4,7 @@
 #include "BattleCity/Framework/Screen.h"
 
 #include "BattleCity/Game/Game.h"
+#include "BattleCity/Engine/Texture/TexturePathLibrary.h"
 
 namespace 
 {
@@ -71,8 +72,10 @@ int main(const int argc, const char* argv[])
 	}
 
 	NSFramework::Screen screen(width, height, fullScreen);
+	BattleCity::Engine::Texture::PathLibrary pathLibrary;
+	pathLibrary.CreateData(R"(.\data)");
 
-	const auto framework = std::make_unique<BattleCity::Game::Game>(screen);
+	const auto framework = std::make_unique<BattleCity::Game::Game>(screen, pathLibrary);
 
 	return run(framework.get());
 }
