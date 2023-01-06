@@ -8,18 +8,18 @@ namespace BattleCity::Game::World::Object::Factory
 	{
 		using Factory::Factory;
 
-		Object* CreateWorldBoundaries() override;
+		WorldBoundaries* CreateWorldBoundaries() override;
 
-		Object* CreateTank(Type tankType) override;
+		Tank* CreateTank(Type tankType) override;
 
-		Object* CreateBullet() override;
+		Bullet* CreateBullet() override;
 
-		Object* CreatePowerUp() override;
+		PowerUp* CreatePowerUp() override;
 
-		Object* CreateWall() override;
+		Wall* CreateWall() override;
 
-		Object* CreatePhoenix() override;
+		Phoenix* CreatePhoenix() override;
 
-		Object* CreateExplosion() override;
+		Explosion* CreateExplosion() override;
 	};
 }

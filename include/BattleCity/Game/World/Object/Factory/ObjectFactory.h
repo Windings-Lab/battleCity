@@ -12,7 +12,13 @@ namespace BattleCity::Game::World
 
 namespace BattleCity::Game::World::Object
 {
-	class Object;
+	class Explosion;
+	class Phoenix;
+	class PowerUp;
+	class Wall;
+	class Bullet;
+	class Tank;
+	class WorldBoundaries;
 }
 
 namespace BattleCity::Game::World::Object::Factory
@@ -28,19 +34,19 @@ namespace BattleCity::Game::World::Object::Factory
 
 		virtual ~Factory() = default;
 
-		virtual Object* CreateWorldBoundaries() = 0;
+		virtual WorldBoundaries* CreateWorldBoundaries() = 0;
 
-		virtual Object* CreateTank(Type tankType) = 0;
+		virtual Tank* CreateTank(Type tankType) = 0;
 
-		virtual Object* CreateBullet() = 0;
+		virtual Bullet* CreateBullet() = 0;
 
-		virtual Object* CreatePowerUp() = 0;
+		virtual PowerUp* CreatePowerUp() = 0;
 
-		virtual Object* CreateWall() = 0;
+		virtual Wall* CreateWall() = 0;
 
-		virtual Object* CreatePhoenix() = 0;
+		virtual Phoenix* CreatePhoenix() = 0;
 
-		virtual Object* CreateExplosion() = 0;
+		virtual Explosion* CreateExplosion() = 0;
 
 	protected:
 		Map& mInserter;
