@@ -1,13 +1,20 @@
 #include "PCHeader.h"
-
 #include "WorldMap.h"
+
 #include "WorldLevel.h"
 
 #include "BattleCity/Game/World/Object/Object.h"
-#include "BattleCity/Game/World/Object/Factory/ObjectFactoryStandart.h"
+
+#include "Object/Derived/Phoenix.h"
+#include "Object/Derived/Tank.h"
+#include "Object/Derived/Wall.h"
+#include "Object/Derived/WorldBoundaries.h"
 
 namespace BattleCity::Game::World
 {
+	Map::Map(const Engine::Texture::GroupLibrary& textureGroups)
+		: mObjectFactory(*this, textureGroups)
+	{}
 	void Map::SetWorldRelative(const TopLeft& worldRelative) noexcept
 	{
 		mWorldRelative.SetXY(worldRelative);
@@ -17,14 +24,12 @@ namespace BattleCity::Game::World
 		return mWorldRelative;
 	}
 
-	void Map::CreateMap(const Level& level, const Engine::Texture::GroupLibrary& textureGroups)
+	void Map::CreateMap(const Level& level)
 	{
 		mFrontLayer.Clear();
 		mBackLayer.Clear();
 
-		Object::Factory::Standart objectFactory(*this, textureGroups);
-
-		const auto worldBoundaries = objectFactory.CreateWorldBoundaries();
+		const auto worldBoundaries = mObjectFactory.CreateWorldBoundaries();
 
 		worldBoundaries->SetPosition(mWorldRelative);
 
@@ -43,25 +48,27 @@ namespace BattleCity::Game::World
 					break;
 				case Object::Type::TankPlayer:
 					{
-						const auto object = objectFactory.CreateTank(Object::Type::TankPlayer);
+						const auto& object = mObjectFactory.CreateTank(Object::Type::TankPlayer);
 						object->SetPosition(position);
+						object->SetBulletCount(1);
+						object->Fire();
 					}
 					break;
 				case Object::Type::TankNPC:
 					{
-						const auto object = objectFactory.CreateTank(Object::Type::TankNPC);
+						const auto object = mObjectFactory.CreateTank(Object::Type::TankNPC);
 						object->SetPosition(position);
 					}
 					break;
 				case Object::Type::Wall:
 					{
-						const auto object = objectFactory.CreateWall();
+						const auto object = mObjectFactory.CreateWall();
 						object->SetPosition(position);
 					}
 					break;
 				case Object::Type::Phoenix:
 					{
-						const auto object = objectFactory.CreatePhoenix();
+						const auto object = mObjectFactory.CreatePhoenix();
 						object->SetPosition(position);
 					}
 					break;

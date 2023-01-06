@@ -1,6 +1,7 @@
 #pragma once
 
 #include "BattleCity/Game/World/Object/ObjectContainer.h"
+#include "Object/Factory/ObjectFactoryStandart.h"
 
 namespace BattleCity::Engine::Texture
 {
@@ -16,7 +17,7 @@ namespace BattleCity::Game::World
 	class Map final
 	{
 	public:
-		Map() = default;
+		explicit Map(const Engine::Texture::GroupLibrary&);
 
 		DISALLOW_COPY_MOVE(Map)
 
@@ -25,7 +26,7 @@ namespace BattleCity::Game::World
 		void SetWorldRelative(const TopLeft&) noexcept;
 		const TopLeft& GetWorldRelative() const noexcept;
 
-		void CreateMap(const Level&, const Engine::Texture::GroupLibrary&);
+		void CreateMap(const Level&);
 
 		Object::Object& GetObjectBy(Object::ID) const;
 		Object::Object* InsertObject(std::unique_ptr<Object::Object>&&, Object::Layer = Object::Layer::Front);
@@ -35,6 +36,7 @@ namespace BattleCity::Game::World
 		const Object::Container& GetFrontLayer() const noexcept;
 
 	private:
+		Object::Factory::Standart mObjectFactory;
 		TopLeft mWorldRelative;
 
 		Object::Container mBackLayer;
