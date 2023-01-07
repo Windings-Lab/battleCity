@@ -5,7 +5,7 @@
 
 namespace BattleCity::Game::World::Object::Component
 {
-	Fireable::Fireable(std::function<std::shared_ptr<Bullet>()> fire)
+	Fireable::Fireable(std::function<std::shared_ptr<Object>()> fire)
 		: mSpawnBullet(std::move(fire))
 		, mBulletCount(0)
 	{

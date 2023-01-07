@@ -8,18 +8,18 @@ namespace BattleCity::Game::World::Object::Factory
 	{
 		using Factory::Factory;
 
-		std::shared_ptr<WorldBoundaries> CreateWorldBoundaries() override;
+		std::shared_ptr<Object> CreateWorldBoundaries() override;
 
-		std::shared_ptr<Tank> CreateTank(Type tankType) override;
+		std::shared_ptr<Object> CreateTank(Type tankType) override;
 
-		std::shared_ptr<Bullet> CreateBullet() override;
+		std::shared_ptr<Object> CreateBullet() override;
 
-		std::shared_ptr<PowerUp> CreatePowerUp() override;
+		std::shared_ptr<Object> CreatePowerUp() override;
 
-		std::shared_ptr<Wall> CreateWall() override;
+		std::shared_ptr<Object> CreateWall() override;
 
-		std::shared_ptr<Phoenix> CreatePhoenix() override;
+		std::shared_ptr<Object> CreatePhoenix() override;
 
-		std::shared_ptr<Explosion> CreateExplosion() override;
+		std::shared_ptr<Object> CreateExplosion() override;
 	};
 }

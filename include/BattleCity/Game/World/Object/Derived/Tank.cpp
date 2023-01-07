@@ -4,7 +4,7 @@
 
 namespace BattleCity::Game::World::Object
 {
-    Tank::Tank(const Engine::Texture::Group& textures, std::function<std::shared_ptr<Bullet>()> fireable)
+    Tank::Tank(const Engine::Texture::Group& textures, std::function<std::shared_ptr<Object>()> fireable)
 	    : Object(textures), mFireable(std::move(fireable))
     {
     }

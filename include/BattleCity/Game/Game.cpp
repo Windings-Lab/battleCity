@@ -6,6 +6,7 @@
 #include "BattleCity/Game/World/WorldLevel.h"
 
 #include "BattleCity/Game/World/Object/Object.h"
+#include "World/Object/Derived/Tank.h"
 
 namespace BattleCity::Game
 {
@@ -30,7 +31,7 @@ namespace BattleCity::Game
 
 		const World::Level level = World::Level::CreateLevel(R"(.\data\Maps\level1.txt)");
 		mMap.SetWorldRelative({ 40, 44 });
-		mPlayer = mMap.CreateMap(level);
+		mPlayer = std::dynamic_pointer_cast<World::Object::Tank>(mMap.CreateMap(level));
 
 		return true;
 	}

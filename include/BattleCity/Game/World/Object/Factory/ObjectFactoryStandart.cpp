@@ -15,7 +15,7 @@
 
 namespace BattleCity::Game::World::Object::Factory
 {
-	std::shared_ptr<WorldBoundaries> Standart::CreateWorldBoundaries()
+	std::shared_ptr<Object> Standart::CreateWorldBoundaries()
 	{
 		auto object = std::make_shared<WorldBoundaries>(mTextureGroups.GetGroupBy(Framework::TextureName::Background));
 		object->ChangeTextureTo(Framework::TextureType::Basic);
@@ -25,7 +25,7 @@ namespace BattleCity::Game::World::Object::Factory
 		return object;
 	}
 
-	std::shared_ptr<Tank> Standart::CreateTank(Type tankType)
+	std::shared_ptr<Object> Standart::CreateTank(Type tankType)
 	{
 		std::shared_ptr<Tank> object;
 
@@ -54,7 +54,7 @@ namespace BattleCity::Game::World::Object::Factory
 		return object;
 	}
 
-	std::shared_ptr<Bullet> Standart::CreateBullet()
+	std::shared_ptr<Object> Standart::CreateBullet()
 	{
 		auto object = std::make_shared<Bullet>(mTextureGroups.GetGroupBy(Framework::TextureName::Bullet));
 		object->ChangeTextureTo(Framework::TextureType::Up);
@@ -64,7 +64,7 @@ namespace BattleCity::Game::World::Object::Factory
 		return object;
 	}
 
-	std::shared_ptr<PowerUp> Standart::CreatePowerUp()
+	std::shared_ptr<Object> Standart::CreatePowerUp()
 	{
 		auto object = std::make_shared<PowerUp>(mTextureGroups.GetGroupBy(Framework::TextureName::PowerUp));
 		object->ChangeTextureTo(Framework::TextureType::Basic);
@@ -74,7 +74,7 @@ namespace BattleCity::Game::World::Object::Factory
 		return object;
 	}
 
-	std::shared_ptr<Wall> Standart::CreateWall()
+	std::shared_ptr<Object> Standart::CreateWall()
 	{
 		auto object = std::make_shared<Wall>(mTextureGroups.GetGroupBy(Framework::TextureName::Wall));
 		object->ChangeTextureTo(Framework::TextureType::Basic);
@@ -84,7 +84,7 @@ namespace BattleCity::Game::World::Object::Factory
 		return object;
 	}
 
-	std::shared_ptr<Phoenix> Standart::CreatePhoenix()
+	std::shared_ptr<Object> Standart::CreatePhoenix()
 	{
 		auto object = std::make_shared<Phoenix>(mTextureGroups.GetGroupBy(Framework::TextureName::Phoenix));
 		object->ChangeTextureTo(Framework::TextureType::Phoenix);
@@ -94,7 +94,7 @@ namespace BattleCity::Game::World::Object::Factory
 		return object;
 	}
 
-	std::shared_ptr<Explosion> Standart::CreateExplosion()
+	std::shared_ptr<Object> Standart::CreateExplosion()
 	{
 		auto object = std::make_shared<Explosion>(mTextureGroups.GetGroupBy(Framework::TextureName::Explosion));
 		object->ChangeTextureTo(Framework::TextureType::ExplosionSmall1);

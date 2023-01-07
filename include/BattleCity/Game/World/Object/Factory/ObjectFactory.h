@@ -12,13 +12,7 @@ namespace BattleCity::Game::World
 
 namespace BattleCity::Game::World::Object
 {
-	class Explosion;
-	class Phoenix;
-	class PowerUp;
-	class Wall;
-	class Bullet;
-	class Tank;
-	class WorldBoundaries;
+	class Object;
 }
 
 namespace BattleCity::Game::World::Object::Factory
@@ -34,19 +28,19 @@ namespace BattleCity::Game::World::Object::Factory
 
 		virtual ~Factory() = default;
 
-		virtual std::shared_ptr<WorldBoundaries> CreateWorldBoundaries() = 0;
+		virtual std::shared_ptr<Object> CreateWorldBoundaries() = 0;
 
-		virtual std::shared_ptr<Tank> CreateTank(Type tankType) = 0;
+		virtual std::shared_ptr<Object> CreateTank(Type tankType) = 0;
 
-		virtual std::shared_ptr<Bullet> CreateBullet() = 0;
+		virtual std::shared_ptr<Object> CreateBullet() = 0;
 
-		virtual std::shared_ptr<PowerUp> CreatePowerUp() = 0;
+		virtual std::shared_ptr<Object> CreatePowerUp() = 0;
 
-		virtual std::shared_ptr<Wall> CreateWall() = 0;
+		virtual std::shared_ptr<Object> CreateWall() = 0;
 
-		virtual std::shared_ptr<Phoenix> CreatePhoenix() = 0;
+		virtual std::shared_ptr<Object> CreatePhoenix() = 0;
 
-		virtual std::shared_ptr<Explosion> CreateExplosion() = 0;
+		virtual std::shared_ptr<Object> CreateExplosion() = 0;
 
 	protected:
 		Map& mInserter;
