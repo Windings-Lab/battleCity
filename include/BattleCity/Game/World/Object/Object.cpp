@@ -18,7 +18,6 @@ namespace BattleCity::Game::World::Object
 
     void Object::Update()
     {
-        mPrevious = mPosition;
     }
 
     void Object::Draw()
@@ -38,10 +37,6 @@ namespace BattleCity::Game::World::Object
     Position Object::GetPosition() const noexcept
     {
         return mPosition;
-    }
-    Position Object::GetPreviousPosition() const noexcept
-    {
-        return mPrevious;
     }
 
     void Object::ChangeTextureTo(Framework::TextureType type) const

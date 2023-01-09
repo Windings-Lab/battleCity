@@ -9,19 +9,9 @@ namespace BattleCity::Game::World::Object
 	class Tank : public Object
 	{
 	public:
-		Tank(const Engine::Texture::Group&, std::function<std::shared_ptr<Bullet>()>);
-
-		void SetSpeed(Speed) noexcept;
-		void SetDirection(Direction) noexcept;
-
-		void Fire();
-		void SetBulletCount(int) noexcept;
+		using Object::Object;
 
 	private:
-		Position GetBulletSpawnPositon() const noexcept;
-
-	private:
-		Component::Movable mMovable;
-		Component::Fireable mFireable;
+		Position GetBulletSpawnPosition() const noexcept;
 	};
 }

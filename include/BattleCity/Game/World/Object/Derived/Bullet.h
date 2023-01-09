@@ -13,11 +13,5 @@ namespace BattleCity::Game::World::Object
         void Update() override;
 
         void SetPosition(Position) noexcept override;
-
-        void SetSpeed(Speed) noexcept;
-        void SetDirection(Direction) noexcept;
-
-    private:
-        Component::Movable mMovable;
     };
 }

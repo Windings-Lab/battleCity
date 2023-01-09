@@ -37,11 +37,11 @@ namespace BattleCity::Game::World::Object::Factory
 		switch (tankType)
 		{
 		case Type::TankNPC:
-			object = std::make_shared<Tank>(mTextureGroups.GetGroupBy(Framework::TextureName::TankNPC), spawnBullet);
+			object = std::make_shared<Tank>(mTextureGroups.GetGroupBy(Framework::TextureName::TankNPC));
 			object->ChangeTextureTo(Framework::TextureType::Up);
 			break;
 		case Type::TankPlayer:
-			object = std::make_shared<Tank>(mTextureGroups.GetGroupBy(Framework::TextureName::TankPlayer), spawnBullet);
+			object = std::make_shared<Tank>(mTextureGroups.GetGroupBy(Framework::TextureName::TankPlayer));
 			object->ChangeTextureTo(Framework::TextureType::Up);
 			break;
 		default:
@@ -58,7 +58,6 @@ namespace BattleCity::Game::World::Object::Factory
 	{
 		auto object = std::make_shared<Bullet>(mTextureGroups.GetGroupBy(Framework::TextureName::TankPlayer));
 		object->ChangeTextureTo(Framework::TextureType::Up);
-		object->SetSpeed(1);
 
 		mInserter.InsertObject(object);
 

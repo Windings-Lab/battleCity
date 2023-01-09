@@ -17,7 +17,7 @@ namespace BattleCity::Game::World
 	{}
 	void Map::SetWorldRelative(const TopLeft& worldRelative) noexcept
 	{
-		mWorldRelative.SetXY(worldRelative);
+		mWorldRelative = worldRelative;
 	}
 	const TopLeft& Map::GetWorldRelative() const noexcept
 	{

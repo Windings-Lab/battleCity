@@ -18,7 +18,6 @@ namespace BattleCity::Game::World::Object::Component
 		{
 			auto bullet = mSpawnBullet();
 			bullet->SetPosition(position);
-			bullet->SetDirection(direction);
 		}
 	}
 	void Fireable::SetBulletCount(int count) noexcept
