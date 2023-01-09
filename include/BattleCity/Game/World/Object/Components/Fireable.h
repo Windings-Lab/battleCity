@@ -13,19 +13,19 @@ namespace BattleCity::Game::World::Object::Component
 	class Fireable
 	{
 	public:
-		Fireable(std::function<std::shared_ptr<Object>()>);
+		Fireable(std::function<std::shared_ptr<Bullet>()>);
 
 		ALLOW_COPY_MOVE_DEFAULT(Fireable)
 
 		virtual ~Fireable() = default;
 
-		virtual void Fire(const Position&);
+		virtual void Fire(const Position&, const Direction&);
 
 		void SetBulletCount(int count) noexcept;
 		int GetBulletCount() const noexcept;
 
 	private:
-		std::function<std::shared_ptr<Object>()> mSpawnBullet;
+		std::function<std::shared_ptr<Bullet>()> mSpawnBullet;
 
 		int mBulletCount;
 	};
