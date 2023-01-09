@@ -28,13 +28,11 @@ namespace BattleCity::Engine::Physics
 		bool Intersects(const Rectangle&) const noexcept;
 
 		void SetPosition(const Position&);
-		void SetPosition(X, Y);
 		const Position& GetPosition() const;
 		X GetX() const;
 		Y GetY() const;
 
 		void SetSize(const Size&);
-		void SetSize(Width, Height);
 		const Size& GetSize() const;
 		Width GetWidth() const;
 		Height GetHeight() const;

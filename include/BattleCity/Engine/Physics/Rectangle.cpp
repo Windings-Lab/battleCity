@@ -21,11 +21,7 @@ namespace BattleCity::Engine::Physics
 
 	void Rectangle::SetPosition(const Position& position)
 	{
-		SetPosition(position.X, position.Y);
-	}
-	void Rectangle::SetPosition(X x, Y y)
-	{
-		mPosition.SetXY(x, y);
+		mPosition = position;
 	}
 	const Rectangle::Position& Rectangle::GetPosition() const
 	{
@@ -42,11 +38,7 @@ namespace BattleCity::Engine::Physics
 
 	void Rectangle::SetSize(const Size& size)
 	{
-		SetSize(size.X, size.Y);
-	}
-	void Rectangle::SetSize(Width width, Height height)
-	{
-		mSize.SetXY(width, height);
+		mSize = size;
 	}
 	const Rectangle::Size& Rectangle::GetSize() const
 	{
