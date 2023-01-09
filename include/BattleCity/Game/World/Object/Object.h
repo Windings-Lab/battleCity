@@ -32,6 +32,7 @@ namespace BattleCity::Game::World::Object
 
 		virtual void SetPosition(Position) noexcept;
 		Position GetPosition() const noexcept;
+		Position GetPreviousPosition() const noexcept;
 
 		void ChangeTextureTo(Framework::TextureType) const;
 
@@ -40,6 +41,7 @@ namespace BattleCity::Game::World::Object
 
 	protected:
 		Position mPosition;
+		Position mPrevious;
 
 	private:
 		ID mID;
