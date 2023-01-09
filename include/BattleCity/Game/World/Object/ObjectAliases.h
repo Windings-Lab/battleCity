@@ -7,4 +7,7 @@ namespace BattleCity::Game::World::Object
 	using Position = Vector2Int;
 	using X = int;
 	using Y = int;
+
+	using Speed = int;
+	using Direction = Vector2Int;
 }

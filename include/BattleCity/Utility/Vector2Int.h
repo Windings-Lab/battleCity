@@ -8,8 +8,7 @@ namespace BattleCity
 		Vector2Int();
 		Vector2Int(int, int);
 
-		DISALLOW_COPY(Vector2Int)
-		ALLOW_MOVE_DEFAULT(Vector2Int)
+		ALLOW_COPY_MOVE_DEFAULT(Vector2Int)
 
 		~Vector2Int() = default;
 

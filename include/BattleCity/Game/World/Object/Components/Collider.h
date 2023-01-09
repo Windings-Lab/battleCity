@@ -1,16 +1,26 @@
 #pragma once
 
+#include "BattleCity/Game/World/Object/ObjectAliases.h"
+
+namespace BattleCity::Game::World::Object
+{
+	class Object;
+}
+
 namespace BattleCity::Game::World::Object::Component
 {
 	class Collider
 	{
 	public:
-		Collider();
+		Collider(Object&);
 
-		void SetSolidness(Solidness solidness);
-		Solidness GetSolidness() const;
+		void ResolveCollisions(const Object&);
+
+		void SetPreviousPosition(const Position&) noexcept;
 
 	private:
-		Solidness mSolidness;
+		Object& mObject;
+
+		Position mPrevious;
 	};
 }

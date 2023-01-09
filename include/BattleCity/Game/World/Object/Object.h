@@ -25,19 +25,19 @@ namespace BattleCity::Game::World::Object
 		virtual ~Object() = 0;
 
 		virtual void Update();
+		virtual void ResolveCollision(const Object&);
 
 		void Draw();
 
 		int GetID() const noexcept;
 
-		virtual void SetPosition(const Position&) noexcept;
-		virtual void SetPosition(X, Y) noexcept;
-		const Position& GetPosition() const noexcept;
-		int GetX() const noexcept;
-		int GetY() const noexcept;
+		virtual void SetPosition(Position) noexcept;
+		Position GetPosition() const noexcept;
 
 		void ChangeTextureTo(Framework::TextureType) const;
+
 		void GetTextureSize(int&, int&) const noexcept;
+		Vector2Int GetTextureSize() const noexcept;
 
 	protected:
 		Position mPosition;

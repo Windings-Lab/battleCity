@@ -25,7 +25,7 @@ namespace BattleCity::Game::World::Object
 
         GetTextureSize(tankWidth, tankHeight);
 
-        Position bulletPosition(mPosition.X, mPosition.Y);
+        Position bulletPosition = mPosition;
         bulletPosition.X += tankWidth / 2;
 
         return bulletPosition;

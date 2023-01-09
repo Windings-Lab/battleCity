@@ -20,6 +20,10 @@ namespace BattleCity::Game::World::Object
     {
     }
 
+    void Object::ResolveCollision(const Object& obj)
+    {
+    }
+
     void Object::Draw()
     {
         mCurrentTexture->DrawAt(mPosition.X, mPosition.Y);
@@ -30,25 +34,13 @@ namespace BattleCity::Game::World::Object
         return mID;
     }
 
-    void Object::SetPosition(const Position& pos) noexcept
+    void Object::SetPosition(Position pos) noexcept
     {
         mPosition.SetXY(pos);
     }
-    void Object::SetPosition(X x, Y y) noexcept
-    {
-        mPosition.SetXY(x, y);
-    }
-    const Position& Object::GetPosition() const noexcept
+    Position Object::GetPosition() const noexcept
     {
         return mPosition;
-    }
-    int Object::GetX() const noexcept
-    {
-        return mPosition.X;
-    }
-    int Object::GetY() const noexcept
-    {
-        return mPosition.Y;
     }
 
     void Object::ChangeTextureTo(Framework::TextureType type) const
@@ -59,5 +51,11 @@ namespace BattleCity::Game::World::Object
     void Object::GetTextureSize(int& w, int& h) const noexcept
     {
         mCurrentTexture->GetSize(w, h);
+    }
+    Vector2Int Object::GetTextureSize() const noexcept
+    {
+        int w, h;
+        GetTextureSize(w, h);
+        return {w, h};
     }
 }

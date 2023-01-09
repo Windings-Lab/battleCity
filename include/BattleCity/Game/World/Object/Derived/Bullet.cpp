@@ -4,21 +4,32 @@
 
 namespace BattleCity::Game::World::Object
 {
-    void Bullet::Update()
+    Bullet::Bullet(const Engine::Texture::Group& textures)
+	    : Object(textures)
+		, mCollider(*this)
     {
+	    
     }
 
-    void Bullet::SetPosition(const Position& pos) noexcept
+    void Bullet::Update()
+    {
+
+    }
+
+    void Bullet::ResolveCollision(const Object& obj)
+    {
+        //mCollider.ResolveCollisions(o)
+    }
+
+    void Bullet::SetPosition(Position pos) noexcept
     {
         int bulletWidth, bulletHeight;
 
         GetTextureSize(bulletWidth, bulletHeight);
+        
+        pos.X -= bulletWidth / 2;
+        pos.Y -= bulletHeight;
 
-        Position bulletPosition(pos.X, pos.Y);
-
-        bulletPosition.X -= bulletWidth / 2;
-        bulletPosition.Y -= bulletHeight;
-
-        Object::SetPosition(bulletPosition);
+        Object::SetPosition(pos);
     }
 }
