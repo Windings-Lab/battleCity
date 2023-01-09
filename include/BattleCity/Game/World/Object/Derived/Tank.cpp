@@ -4,14 +4,23 @@
 
 namespace BattleCity::Game::World::Object
 {
-    Tank::Tank(const Engine::Texture::Group& textures, std::function<std::shared_ptr<Object>()> fireable)
+    Tank::Tank(const Engine::Texture::Group& textures, std::function<std::shared_ptr<Bullet>()> fireable)
 	    : Object(textures), mFireable(std::move(fireable))
     {
     }
 
+    void Tank::SetSpeed(Speed s) noexcept
+    {
+        mMovable.SetSpeed(s);
+    }
+    void Tank::SetDirection(Direction d) noexcept
+    {
+        mMovable.SetDirection(d);
+    }
+
     void Tank::Fire()
     {
-        mFireable.Fire(GetBulletSpawnPositon());
+        mFireable.Fire(GetBulletSpawnPositon(), mMovable.GetDirection());
     }
     void Tank::SetBulletCount(int num) noexcept
     {
@@ -25,7 +34,7 @@ namespace BattleCity::Game::World::Object
 
         GetTextureSize(tankWidth, tankHeight);
 
-        Position bulletPosition = mPosition;
+        Position bulletPosition(mPosition);
         bulletPosition.X += tankWidth / 2;
 
         return bulletPosition;
