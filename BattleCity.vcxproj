@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="include\BattleCity\Engine\Physics\Rectangle.cpp" />
     <ClCompile Include="include\BattleCity\Engine\Texture\BCTexture.cpp" />
     <ClCompile Include="include\BattleCity\Engine\Texture\TextureGroup.cpp" />
     <ClCompile Include="include\BattleCity\Engine\Texture\TextureContainer.cpp" />
@@ -45,7 +46,6 @@
     <ClCompile Include="include\BattleCity\Game\World\Object\ObjectContainer.cpp" />
     <ClCompile Include="include\BattleCity\Game\World\WorldLevel.cpp" />
     <ClCompile Include="include\BattleCity\Game\World\WorldMap.cpp" />
-    <ClCompile Include="include\BattleCity\Utility\Rectangle.cpp" />
     <ClCompile Include="include\BattleCity\Utility\Vector2Int.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="pcheader\PCHeader.cpp">
@@ -56,6 +56,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\BattleCity\Engine\Physics\Rectangle.h" />
     <ClInclude Include="include\BattleCity\Engine\Texture\BCTexture.h" />
     <ClInclude Include="include\BattleCity\Engine\Texture\TextureAliases.h" />
     <ClInclude Include="include\BattleCity\Engine\Texture\TextureGroup.h" />
@@ -91,7 +92,6 @@
     <ClInclude Include="include\BattleCity\Utility\BasicMacros.h" />
     <ClInclude Include="include\BattleCity\Utility\ISignal.h" />
     <ClInclude Include="include\BattleCity\Utility\magic_enum.hpp" />
-    <ClInclude Include="include\BattleCity\Utility\Rectangle.h" />
     <ClInclude Include="include\BattleCity\Utility\Vector2Int.h" />
     <ClInclude Include="pcheader\PCHeader.h" />
   </ItemGroup>

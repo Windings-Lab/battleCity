@@ -5,9 +5,6 @@
     <ClCompile Include="pcheader\PCHeader.cpp">
       <Filter>PCHeaders</Filter>
     </ClCompile>
-    <ClCompile Include="include\BattleCity\Utility\Rectangle.cpp">
-      <Filter>BattleCity\Utility</Filter>
-    </ClCompile>
     <ClCompile Include="include\BattleCity\Utility\Vector2Int.cpp">
       <Filter>BattleCity\Utility</Filter>
     </ClCompile>
@@ -31,9 +28,6 @@
     </ClCompile>
     <ClCompile Include="include\BattleCity\Game\Game.cpp">
       <Filter>BattleCity\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="include\BattleCity\Engine\Storage.cpp">
-      <Filter>BattleCity\Engine</Filter>
     </ClCompile>
     <ClCompile Include="include\BattleCity\Engine\Texture\TextureContainer.cpp">
       <Filter>BattleCity\Engine\Texture</Filter>
@@ -89,6 +83,10 @@
     <ClCompile Include="include\BattleCity\Game\World\Object\Object.cpp">
       <Filter>BattleCity\Game\World\Object</Filter>
     </ClCompile>
+    <ClCompile Include="include\BattleCity\Engine\Texture\TextureStorage.cpp" />
+    <ClCompile Include="include\BattleCity\Engine\Physics\Rectangle.cpp">
+      <Filter>BattleCity\Engine\Physics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pcheader\PCHeader.h">
@@ -104,9 +102,6 @@
       <Filter>BattleCity\Utility</Filter>
     </ClInclude>
     <ClInclude Include="include\BattleCity\Utility\magic_enum.hpp">
-      <Filter>BattleCity\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="include\BattleCity\Utility\Rectangle.h">
       <Filter>BattleCity\Utility</Filter>
     </ClInclude>
     <ClInclude Include="include\BattleCity\Utility\Vector2Int.h">
@@ -138,9 +133,6 @@
     </ClInclude>
     <ClInclude Include="include\BattleCity\Game\Game.h">
       <Filter>BattleCity\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="include\BattleCity\Engine\Storage.h">
-      <Filter>BattleCity\Engine</Filter>
     </ClInclude>
     <ClInclude Include="include\BattleCity\Engine\Texture\TextureContainer.h">
       <Filter>BattleCity\Engine\Texture</Filter>
@@ -205,6 +197,10 @@
     <ClInclude Include="include\BattleCity\Game\World\Object\ObjectAliases.h">
       <Filter>BattleCity\Game\World\Object</Filter>
     </ClInclude>
+    <ClInclude Include="include\BattleCity\Engine\Texture\TextureStorage.h" />
+    <ClInclude Include="include\BattleCity\Engine\Physics\Rectangle.h">
+      <Filter>BattleCity\Engine\Physics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
@@ -248,6 +244,9 @@
     </Filter>
     <Filter Include="BattleCity\Game\World\Object\Derived">
       <UniqueIdentifier>{77d13303-96e1-4516-befd-091e3dc0c62d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BattleCity\Engine\Physics">
+      <UniqueIdentifier>{e5e9caf4-e2da-4b53-9eae-6de5f06bf6d4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
