@@ -38,11 +38,9 @@ namespace BattleCity::Game::World::Object
 		void GetTextureSize(int&, int&) const noexcept;
 		Vector2Int GetTextureSize() const noexcept;
 
-	protected:
-		Position mPosition;
-
 	private:
 		ID mID;
+		Position mPosition;
 
 		mutable const Engine::Texture::Group* mTextureGroup;
 		mutable const Engine::Texture::Texture* mCurrentTexture;
