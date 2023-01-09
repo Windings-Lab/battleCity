@@ -25,7 +25,6 @@ namespace BattleCity::Game::World::Object
 		virtual ~Object() = 0;
 
 		virtual void Update();
-		virtual void ResolveCollision(const Object&);
 
 		void Draw();
 

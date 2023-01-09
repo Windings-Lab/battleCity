@@ -4,21 +4,9 @@
 
 namespace BattleCity::Game::World::Object
 {
-    Bullet::Bullet(const Engine::Texture::Group& textures)
-	    : Object(textures)
-		, mCollider(*this)
-    {
-	    
-    }
-
     void Bullet::Update()
     {
 
-    }
-
-    void Bullet::ResolveCollision(const Object& obj)
-    {
-        //mCollider.ResolveCollisions(o)
     }
 
     void Bullet::SetPosition(Position pos) noexcept

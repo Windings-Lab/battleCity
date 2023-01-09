@@ -20,10 +20,6 @@ namespace BattleCity::Game::World::Object
     {
     }
 
-    void Object::ResolveCollision(const Object& obj)
-    {
-    }
-
     void Object::Draw()
     {
         mCurrentTexture->DrawAt(mPosition.X, mPosition.Y);
