@@ -75,10 +75,9 @@ namespace BattleCity::Game::World::Object
 		virtual void SetPosition(Position) noexcept;
 		Position GetPosition() const noexcept;
 
-		void ChangeTextureTo(Framework::TextureType) const;
+		void ChangeTextureTo(Framework::TextureType);
 
-		void GetTextureSize(int&, int&) const noexcept;
-		Vector2Int GetTextureSize() const noexcept;
+		const Size& GetSize() const noexcept;
 
 	protected:
 		virtual void OnComponentAdd();
@@ -89,6 +88,7 @@ namespace BattleCity::Game::World::Object
 
 		mutable const Engine::Texture::Group* mTextureGroup;
 		mutable const Engine::Texture::Texture* mCurrentTexture;
+		Size mSize;
 
 		ComponentContainer mComponents;
 

@@ -10,12 +10,10 @@ namespace BattleCity::Game::World::Object
 
     void Bullet::SetPosition(Position pos) noexcept
     {
-        int bulletWidth, bulletHeight;
-
-        GetTextureSize(bulletWidth, bulletHeight);
+	    const Size bulletSize = GetSize();
         
-        pos.X -= bulletWidth / 2;
-        pos.Y -= bulletHeight;
+        pos.X -= bulletSize.X / 2;
+        pos.Y -= bulletSize.Y;
 
         Object::SetPosition(pos);
     }

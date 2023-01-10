@@ -45,19 +45,14 @@ namespace BattleCity::Game::World::Object
         return mPosition;
     }
 
-    void Object::ChangeTextureTo(Framework::TextureType type) const
+    void Object::ChangeTextureTo(Framework::TextureType type)
     {
         mCurrentTexture = mTextureGroup->GetTextureBy(type);
+        mCurrentTexture->GetSize(mSize.X, mSize.Y);
     }
 
-    void Object::GetTextureSize(int& w, int& h) const noexcept
+    const Size& Object::GetSize() const noexcept
     {
-        mCurrentTexture->GetSize(w, h);
-    }
-    Vector2Int Object::GetTextureSize() const noexcept
-    {
-        int w, h;
-        GetTextureSize(w, h);
-        return {w, h};
+        return mSize;
     }
 }
