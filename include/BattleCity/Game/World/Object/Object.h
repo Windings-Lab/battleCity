@@ -72,8 +72,8 @@ namespace BattleCity::Game::World::Object
 
 		int GetID() const noexcept;
 
-		virtual void SetPosition(Position) noexcept;
-		Position GetPosition() const noexcept;
+		void SetPosition(Position) noexcept;
+		const Position& GetPosition() const noexcept;
 
 		void ChangeTextureTo(Framework::TextureType);
 

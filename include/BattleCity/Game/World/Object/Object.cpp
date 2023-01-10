@@ -40,7 +40,7 @@ namespace BattleCity::Game::World::Object
     {
         mPosition = pos;
     }
-    Position Object::GetPosition() const noexcept
+    const Position& Object::GetPosition() const noexcept
     {
         return mPosition;
     }

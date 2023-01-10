@@ -11,6 +11,5 @@ namespace BattleCity::Game::World::Object
 
         void Update() override;
 
-        void SetPosition(Position) noexcept override;
     };
 }
