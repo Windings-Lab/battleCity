@@ -32,7 +32,7 @@ namespace BattleCity::Game::World
 		auto worldBoundaries = mObjectFactory.CreateWorldBoundaries();
 		worldBoundaries->SetPosition(mWorldRelative);
 
-		std::shared_ptr<Object::Object> player = nullptr;
+		std::shared_ptr<Object::Tank> player = nullptr;
 
 		const auto& mapColumn = level;
 		int nextPosY = mWorldRelative.Y;
@@ -50,6 +50,7 @@ namespace BattleCity::Game::World
 					{
 						player = mObjectFactory.CreateTank(Object::Type::TankPlayer);
 						player->SetPosition(position);
+						player->Fire();
 					}
 					break;
 				case Object::Type::TankNPC:

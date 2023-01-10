@@ -54,8 +54,8 @@ namespace BattleCity::Game::World::Object::Factory
 			return nullptr;
 		}
 
-		object->AddComponent<Component::Fireable>(bulletSpawner);
-		object->AddComponent<Component::Movable>();
+		object->AddComponent<Component::Fireable>(bulletSpawner)->SetBulletCount(1);
+		object->AddComponent<Component::Movable>()->SetDirection({0, -1});
 		object->AddComponent<Component::Collider>();
 
 		mInserter.InsertObject(object);
@@ -68,7 +68,7 @@ namespace BattleCity::Game::World::Object::Factory
 		auto object = std::make_shared<Bullet>(mTextureGroups.GetGroupBy(Framework::TextureName::TankPlayer));
 		object->ChangeTextureTo(Framework::TextureType::Up);
 
-		object->AddComponent<Component::Movable>();
+		object->AddComponent<Component::Movable>()->SetSpeed(1);
 		object->AddComponent<Component::Collider>();
 
 		mInserter.InsertObject(object);
