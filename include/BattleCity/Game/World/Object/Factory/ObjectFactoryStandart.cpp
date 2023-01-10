@@ -54,6 +54,7 @@ namespace BattleCity::Game::World::Object::Factory
 		}
 
 		object->AddComponent<Component::Fireable>(bulletSpawner);
+		object->AddComponent<Component::Movable>();
 
 		mInserter.InsertObject(object);
 
