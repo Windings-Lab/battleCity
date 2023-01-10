@@ -1,6 +1,8 @@
 #include "PCHeader.h"
 #include "Object.h"
 
+#include "Components/Component.h"
+
 #include "BattleCity/Engine/Texture/BCTexture.h"
 #include "BattleCity/Engine/Texture/TextureGroup.h"
 

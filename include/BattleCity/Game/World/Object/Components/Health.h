@@ -1,12 +1,14 @@
 #pragma once
 
+#include "Component.h"
+
 namespace BattleCity::Game::World::Object::Component
 {
-	class Health
+	class Health : public Component
 	{
 	public:
 		Health();
-		virtual ~Health();
+		~Health() override = default;
 
 		virtual void Destroy();
 

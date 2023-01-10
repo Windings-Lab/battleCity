@@ -26,11 +26,14 @@
 // Stoi and etc
 #include <cstdlib>
 
+// Template related
+#include <typeindex>
+#include <type_traits>
+
 #include <algorithm>
 #include <cmath>
 #include <functional>
 #include <memory>
-#include <type_traits>
 #include <utility>
 
 using namespace std::string_view_literals;

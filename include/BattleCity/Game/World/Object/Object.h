@@ -15,6 +15,13 @@ namespace BattleCity::Engine::Texture
 
 namespace BattleCity::Game::World::Object
 {
+	namespace Component
+	{
+		class Component;
+	}
+
+	using ComponentContainer = std::unordered_map<std::type_index, std::unique_ptr<Component::Component>>;
+
 	class Object
 	{
 	public:
@@ -27,6 +34,37 @@ namespace BattleCity::Game::World::Object
 		virtual void Update();
 
 		void Draw();
+
+		template<typename T, typename... Args
+			, typename = std::enable_if_t<std::is_base_of_v<Component::Component, T>>>
+		void AddComponent(Args&&... args)
+		{
+			using std::type_index;
+
+			mComponents.try_emplace	(type_index(typeid(T))
+									, std::make_unique<T>(std::forward<Args>(args)...));
+		}
+
+		template<typename RetType
+				, typename = std::enable_if_t<std::is_base_of_v<Component::Component, RetType>>>
+		RetType* GetComponent()
+		{
+			using std::type_index;
+
+			const auto component = mComponents.find(type_index(typeid(RetType)));
+			return component	== mComponents.end()
+								? nullptr
+								: static_cast<RetType*>(component->second.get());
+		}
+
+		template<typename T
+			, typename = std::enable_if_t<std::is_base_of_v<Component::Component, T>>>
+		bool HasComponent()
+		{
+			using std::type_index;
+
+			return mComponents.find(type_index(typeid(T))) != mComponents.end();
+		}
 
 		int GetID() const noexcept;
 
@@ -44,5 +82,8 @@ namespace BattleCity::Game::World::Object
 
 		mutable const Engine::Texture::Group* mTextureGroup;
 		mutable const Engine::Texture::Texture* mCurrentTexture;
+
+		ComponentContainer mComponents;
+
 	};
 }

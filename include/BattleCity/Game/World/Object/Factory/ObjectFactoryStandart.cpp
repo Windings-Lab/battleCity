@@ -1,8 +1,6 @@
 #include "PCHeader.h"
 #include "ObjectFactoryStandart.h"
 
-#include "BattleCity/Engine/Texture/BCTexture.h"
-#include "BattleCity/Engine/Texture/TextureGroupLibrary.h"
 #include "BattleCity/Game/World/WorldMap.h"
 
 #include "BattleCity/Game/World/Object/Derived/Bullet.h"
@@ -12,6 +10,12 @@
 #include "BattleCity/Game/World/Object/Derived/Tank.h"
 #include "BattleCity/Game/World/Object/Derived/Wall.h"
 #include "BattleCity/Game/World/Object/Derived/WorldBoundaries.h"
+
+#include "BattleCity/Engine/Texture/BCTexture.h"
+#include "BattleCity/Engine/Texture/TextureGroupLibrary.h"
+
+#include "BattleCity/Game/World/Object/Components/Fireable.h"
+#include "BattleCity/Game/World/Object/Components/Movable.h"
 
 namespace BattleCity::Game::World::Object::Factory
 {
@@ -29,7 +33,7 @@ namespace BattleCity::Game::World::Object::Factory
 	{
 		std::shared_ptr<Tank> object;
 
-		auto spawnBullet = [&]
+		auto bulletSpawner = [&]
 		{
 			return CreateBullet();
 		};
@@ -49,6 +53,8 @@ namespace BattleCity::Game::World::Object::Factory
 			return nullptr;
 		}
 
+		object->AddComponent<Component::Fireable>(bulletSpawner);
+
 		mInserter.InsertObject(object);
 
 		return object;
@@ -58,6 +64,8 @@ namespace BattleCity::Game::World::Object::Factory
 	{
 		auto object = std::make_shared<Bullet>(mTextureGroups.GetGroupBy(Framework::TextureName::TankPlayer));
 		object->ChangeTextureTo(Framework::TextureType::Up);
+
+		object->AddComponent<Component::Movable>();
 
 		mInserter.InsertObject(object);
 

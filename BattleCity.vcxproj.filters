@@ -68,9 +68,6 @@
     <ClCompile Include="include\BattleCity\Game\World\Object\Derived\WorldBoundaries.cpp">
       <Filter>BattleCity\Game\World\Object\Derived</Filter>
     </ClCompile>
-    <ClCompile Include="include\BattleCity\Game\World\Object\Components\Collider.cpp">
-      <Filter>BattleCity\Game\World\Object\Components</Filter>
-    </ClCompile>
     <ClCompile Include="include\BattleCity\Game\World\Object\Components\Fireable.cpp">
       <Filter>BattleCity\Game\World\Object\Components</Filter>
     </ClCompile>
@@ -87,6 +84,7 @@
     <ClCompile Include="include\BattleCity\Engine\Physics\Rectangle.cpp">
       <Filter>BattleCity\Engine\Physics</Filter>
     </ClCompile>
+    <ClCompile Include="include\BattleCity\Game\World\Object\Components\Component.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pcheader\PCHeader.h">
@@ -179,9 +177,6 @@
     <ClInclude Include="include\BattleCity\Game\World\Object\Derived\WorldBoundaries.h">
       <Filter>BattleCity\Game\World\Object\Derived</Filter>
     </ClInclude>
-    <ClInclude Include="include\BattleCity\Game\World\Object\Components\Collider.h">
-      <Filter>BattleCity\Game\World\Object\Components</Filter>
-    </ClInclude>
     <ClInclude Include="include\BattleCity\Game\World\Object\Components\Fireable.h">
       <Filter>BattleCity\Game\World\Object\Components</Filter>
     </ClInclude>
@@ -201,6 +196,7 @@
     <ClInclude Include="include\BattleCity\Engine\Physics\Rectangle.h">
       <Filter>BattleCity\Engine\Physics</Filter>
     </ClInclude>
+    <ClInclude Include="include\BattleCity\Game\World\Object\Components\Component.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />

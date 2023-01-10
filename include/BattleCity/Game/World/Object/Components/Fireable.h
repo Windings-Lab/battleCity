@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Component.h"
 #include "BattleCity/Game/World/Object/ObjectAliases.h"
 
 namespace BattleCity::Game::World::Object
@@ -10,14 +11,14 @@ namespace BattleCity::Game::World::Object
 
 namespace BattleCity::Game::World::Object::Component
 {
-	class Fireable
+	class Fireable : public Component
 	{
 	public:
 		Fireable(std::function<std::shared_ptr<Bullet>()>);
 
 		ALLOW_COPY_MOVE_DEFAULT(Fireable)
 
-		virtual ~Fireable() = default;
+		~Fireable() override = default;
 
 		virtual void Fire(const Position&, const Direction&);
 
