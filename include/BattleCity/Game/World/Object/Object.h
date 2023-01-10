@@ -44,6 +44,8 @@ namespace BattleCity::Game::World::Object
 			mComponents.try_emplace(type_index(typeid(T))
 									, std::make_unique<T>(std::forward<Args>(args)...));
 
+			OnComponentAdd();
+
 			return static_cast<T*>(mComponents.at(type_index(typeid(T))).get());
 		}
 
@@ -77,6 +79,9 @@ namespace BattleCity::Game::World::Object
 
 		void GetTextureSize(int&, int&) const noexcept;
 		Vector2Int GetTextureSize() const noexcept;
+
+	protected:
+		virtual void OnComponentAdd();
 
 	private:
 		ID mID;

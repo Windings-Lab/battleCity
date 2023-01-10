@@ -27,6 +27,10 @@ namespace BattleCity::Game::World::Object
         mCurrentTexture->DrawAt(mPosition.X, mPosition.Y);
     }
 
+    void Object::OnComponentAdd()
+    {
+    }
+
     int Object::GetID() const noexcept
     {
         return mID;
