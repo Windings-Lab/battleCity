@@ -11,7 +11,8 @@
 namespace BattleCity::Game
 {
 	Game::Game(const NSFramework::Screen& screen, const Engine::Texture::PathLibrary& pathLibrary)
-		: mScreen(screen)
+		: mPreviousFrameTime(std::chrono::high_resolution_clock::now())
+		, mScreen(screen)
 		, mPathLibrary(pathLibrary)
 		, mMap(mTextureStorage.GetGroups())
 	{
@@ -42,27 +43,27 @@ namespace BattleCity::Game
 
 	bool Game::Tick()
 	{
-#ifdef _DEBUG
-		using namespace std::chrono;
+		using std::chrono::high_resolution_clock;
+		using std::chrono::nanoseconds;
+		using std::chrono::duration;
 
-		const auto& start = high_resolution_clock::now();
-#endif
+		const auto current = high_resolution_clock::now();
+		const auto elapsed = current - mPreviousFrameTime;
+		mPreviousFrameTime = current;
+		mLag += elapsed;
 
-		Update();
-		// Resolve Collisions
-		// Delete All
-		Draw();
-
-#ifdef _DEBUG
-		if(C_TICK)
+		while (mLag.time_since_epoch().count() >= MS_PER_UPDATE.count())
 		{
-			const auto& stop = high_resolution_clock::now();
-
-			const auto& result = duration_cast<duration<double, std::milli>>(stop - start).count();
-
-			std::cout << "Tick complexity: " << result << std::endl;
+			Update();
+			// Resolve Collisions
+			// Delete All
+			mLag -= MS_PER_UPDATE;
 		}
-#endif
+
+		auto lag = static_cast<double>(mLag.time_since_epoch().count());
+		auto ms = static_cast<double>(MS_PER_UPDATE.count());
+
+		Draw(lag / ms);
 
 		return mPlayer.expired();
 	}
@@ -75,16 +76,16 @@ namespace BattleCity::Game
 		}
 	}
 
-	void Game::Draw()
+	void Game::Draw(double bailed)
 	{
 		for (auto& obj : mMap.GetBackLayer())
 		{
-			obj->Draw();
+			obj->Draw(bailed);
 		}
 
 		for (auto& obj : mMap.GetFrontLayer())
 		{
-			obj->Draw();
+			obj->Draw(bailed);
 		}
 	}
 

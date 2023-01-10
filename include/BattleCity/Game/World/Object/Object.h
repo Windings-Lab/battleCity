@@ -33,7 +33,7 @@ namespace BattleCity::Game::World::Object
 
 		virtual void Update();
 
-		void Draw();
+		void Draw(double);
 
 		template<typename T, typename... Args
 			, typename = std::enable_if_t<std::is_base_of_v<Component::Component, T>>>
@@ -85,10 +85,11 @@ namespace BattleCity::Game::World::Object
 	private:
 		ID mID;
 		Position mPosition;
+		Size mSize;
 
 		mutable const Engine::Texture::Group* mTextureGroup;
 		mutable const Engine::Texture::Texture* mCurrentTexture;
-		Size mSize;
+		Position mPrevDrawPosition;
 
 		ComponentContainer mComponents;
 

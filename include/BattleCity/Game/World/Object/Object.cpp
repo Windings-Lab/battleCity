@@ -22,9 +22,13 @@ namespace BattleCity::Game::World::Object
     {
     }
 
-    void Object::Draw()
+    void Object::Draw(double bailed)
     {
-        mCurrentTexture->DrawAt(mPosition.X, mPosition.Y);
+        int currX = static_cast<int>(mPrevDrawPosition.X + (mPosition.X - mPrevDrawPosition.X) * bailed);
+        int currY = static_cast<int>(mPrevDrawPosition.Y + (mPosition.Y - mPrevDrawPosition.Y) * bailed);
+        mCurrentTexture->DrawAt(currX, currY);
+        mPrevDrawPosition.X = currX;
+        mPrevDrawPosition.Y = currY;
     }
 
     void Object::OnComponentAdd()
