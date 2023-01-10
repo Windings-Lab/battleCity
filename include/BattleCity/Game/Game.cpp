@@ -11,7 +11,9 @@
 namespace BattleCity::Game
 {
 	Game::Game(const NSFramework::Screen& screen, const Engine::Texture::PathLibrary& pathLibrary)
-		: mPreviousFrameTime(std::chrono::high_resolution_clock::now())
+		: mNextGameTick(getTickCount())
+		, mIterations(0)
+		, mInterpolation(0.f)
 		, mScreen(screen)
 		, mPathLibrary(pathLibrary)
 		, mMap(mTextureStorage.GetGroups())
@@ -43,27 +45,20 @@ namespace BattleCity::Game
 
 	bool Game::Tick()
 	{
-		using std::chrono::high_resolution_clock;
-		using std::chrono::nanoseconds;
-		using std::chrono::duration;
+		mIterations = 0;
 
-		const auto current = high_resolution_clock::now();
-		const auto elapsed = current - mPreviousFrameTime;
-		mPreviousFrameTime = current;
-		mLag += elapsed;
-
-		while (mLag.time_since_epoch().count() >= MS_PER_UPDATE.count())
+		while (getTickCount() > mNextGameTick && mIterations < MAX_FRAMESKIP)
 		{
 			Update();
-			// Resolve Collisions
-			// Delete All
-			mLag -= MS_PER_UPDATE;
+
+			mNextGameTick += SKIP_TICKS;
+			mIterations++;
 		}
 
-		auto lag = static_cast<double>(mLag.time_since_epoch().count());
-		auto ms = static_cast<double>(MS_PER_UPDATE.count());
+		mInterpolation = static_cast<float>(getTickCount() + SKIP_TICKS - mNextGameTick)
+						/ static_cast<float>(SKIP_TICKS);
 
-		Draw(lag / ms);
+		Draw(mInterpolation);
 
 		return mPlayer.expired();
 	}
@@ -76,16 +71,16 @@ namespace BattleCity::Game
 		}
 	}
 
-	void Game::Draw(double bailed)
+	void Game::Draw(float interpolation)
 	{
 		for (auto& obj : mMap.GetBackLayer())
 		{
-			obj->Draw(bailed);
+			obj->Draw(interpolation);
 		}
 
 		for (auto& obj : mMap.GetFrontLayer())
 		{
-			obj->Draw(bailed);
+			obj->Draw(interpolation);
 		}
 	}
 

@@ -1,6 +1,7 @@
 #include "PCHeader.h"
 #include "Object.h"
 
+// ReSharper disable once CppUnusedIncludeDirective
 #include "Components/Component.h"
 
 #include "BattleCity/Engine/Texture/BCTexture.h"
@@ -22,13 +23,11 @@ namespace BattleCity::Game::World::Object
     {
     }
 
-    void Object::Draw(double bailed)
+    void Object::Draw(float interpolation)
     {
-        int currX = static_cast<int>(mPrevDrawPosition.X + (mPosition.X - mPrevDrawPosition.X) * bailed);
-        int currY = static_cast<int>(mPrevDrawPosition.Y + (mPosition.Y - mPrevDrawPosition.Y) * bailed);
-        mCurrentTexture->DrawAt(currX, currY);
-        mPrevDrawPosition.X = currX;
-        mPrevDrawPosition.Y = currY;
+        mDrawPosition.X = mDrawPosition.X + static_cast<int>(static_cast<float>(mPosition.X - mDrawPosition.X) * interpolation);
+        mDrawPosition.Y = mDrawPosition.Y + static_cast<int>(static_cast<float>(mPosition.Y - mDrawPosition.Y) * interpolation);
+        mCurrentTexture->DrawAt(mDrawPosition.X, mDrawPosition.Y);
     }
 
     void Object::OnComponentAdd()

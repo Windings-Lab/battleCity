@@ -10,7 +10,7 @@
 // FRAMEWORK_API void drawTestBackground();
 // FRAMEWORK_API void getScreenSize(int& w, int& h);
 
-// FRAMEWORK_API unsigned int getTickCount();
+FRAMEWORK_API unsigned int getTickCount();
 // FRAMEWORK_API void showCursor(bool bShow);
 
 namespace BattleCity::Framework

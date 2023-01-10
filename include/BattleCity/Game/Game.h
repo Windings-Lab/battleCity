@@ -1,6 +1,8 @@
 #pragma once
 
-constexpr std::chrono::nanoseconds MS_PER_UPDATE = std::chrono::nanoseconds(static_cast<int>(1.6e+7));
+constexpr int TICKS_PER_SECOND	= 30;
+constexpr int SKIP_TICKS		= 1000 / TICKS_PER_SECOND;
+constexpr int MAX_FRAMESKIP		= 5;
 
 #include "BattleCity/Engine/Texture/TextureStorage.h"
 #include "BattleCity/Framework/Framework.h"
@@ -48,13 +50,14 @@ namespace BattleCity::Game
 
 	private:
 		void Update();
-		void Draw(double bailed);
+		void Draw(float);
 
 		void UnitTest();
 
 	private:
-		std::chrono::time_point<std::chrono::steady_clock> mPreviousFrameTime;
-		std::chrono::time_point<std::chrono::steady_clock> mLag;
+		unsigned int mNextGameTick;
+		int mIterations;
+		float mInterpolation;
 
 		const NSFramework::Screen& mScreen;
 		const Engine::Texture::PathLibrary& mPathLibrary;
