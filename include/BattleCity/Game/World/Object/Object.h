@@ -37,12 +37,14 @@ namespace BattleCity::Game::World::Object
 
 		template<typename T, typename... Args
 			, typename = std::enable_if_t<std::is_base_of_v<Component::Component, T>>>
-		void AddComponent(Args&&... args)
+		T* AddComponent(Args&&... args)
 		{
 			using std::type_index;
 
-			mComponents.try_emplace	(type_index(typeid(T))
+			mComponents.try_emplace(type_index(typeid(T))
 									, std::make_unique<T>(std::forward<Args>(args)...));
+
+			return static_cast<T*>(mComponents.at(type_index(typeid(T))).get());
 		}
 
 		template<typename RetType
