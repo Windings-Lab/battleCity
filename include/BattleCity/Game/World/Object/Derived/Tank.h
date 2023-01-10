@@ -6,6 +6,7 @@ namespace BattleCity::Game::World::Object
 {
 	namespace Component
 	{
+		class Collider;
 		class Movable;
 		class Fireable;
 	}
@@ -14,6 +15,8 @@ namespace BattleCity::Game::World::Object
 	{
 	public:
 		using Object::Object;
+
+		void Update() override;
 
 		void Fire();
 
@@ -24,6 +27,6 @@ namespace BattleCity::Game::World::Object
 	private:
 		Component::Fireable* mFireable;
 		Component::Movable* mMovable;
-
+		Component::Collider* mCollider;
 	};
 }

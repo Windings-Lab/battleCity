@@ -20,7 +20,7 @@ namespace BattleCity::Game::World::Object::Component
 
 		~Fireable() override = default;
 
-		virtual void Fire(const Position&, const Direction&);
+		virtual void Fire(Position, const Direction&);
 
 		void SetBulletCount(int count) noexcept;
 		int GetBulletCount() const noexcept;

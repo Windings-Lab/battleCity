@@ -4,6 +4,7 @@
 
 #include "BattleCity/Game/World/Object/Components/Fireable.h"
 #include "BattleCity/Game/World/Object/Components/Movable.h"
+#include "BattleCity/Game/World/Object/Components/Collider.h"
 
 namespace BattleCity::Game::World::Object
 {
@@ -11,6 +12,14 @@ namespace BattleCity::Game::World::Object
     {
         mFireable = GetComponent<Component::Fireable>();
         mMovable = GetComponent<Component::Movable>();
+        mCollider = GetComponent<Component::Collider>();
+    }
+
+    void Tank::Update()
+    {
+        mCollider->SetPreviousPosition(GetPosition());
+        SetPosition(GetPosition() + mMovable->GetSpeed());
+        mCollider->Update(GetPosition(), GetSize());
     }
 
     void Tank::Fire()

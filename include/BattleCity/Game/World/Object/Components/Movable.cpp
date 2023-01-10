@@ -7,19 +7,21 @@ namespace BattleCity::Game::World::Object::Component
 	{
 	}
 
-	Vector2Int Movable::GetSpeedDirection() const noexcept
+	Vector2Int Movable::GetSpeed() const noexcept
 	{
 		return mDirection * mSpeed;
 	}
 
-	void Movable::SetSpeed(Speed speed) noexcept
+	Movable& Movable::SetSpeed(Speed speed) noexcept
 	{
 		mSpeed = speed;
+		return *this;
 	}
 
-	void Movable::SetDirection(Direction direction) noexcept
+	Movable& Movable::SetDirection(Direction direction) noexcept
 	{
 		mDirection = direction;
+		return *this;
 	}
 	const Direction& Movable::GetDirection() const noexcept
 	{
