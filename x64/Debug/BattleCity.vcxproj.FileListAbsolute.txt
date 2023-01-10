@@ -1,2 +1,3 @@
 D:\Desktop\Battle City\Game\BattleCity\x64\Debug\BattleCity.exe
 D:\Desktop\Battle City\Game\BattleCity\x64\Debug\BattleCity.pdb
+D:\Desktop\Programming\battleCity\x64\Debug\BattleCity.exe

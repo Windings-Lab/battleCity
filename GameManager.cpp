@@ -75,7 +75,8 @@ void battleCity::GameManager::gameOverState()
 void battleCity::GameManager::run()
 {
 	_clock.delta();
-	onEvent(&EventStep());
+	auto step = EventStep();
+	onEvent(&step);
 	WM.update();
 	WM.draw();
 	_frameTime = getTickCount() / 1000;

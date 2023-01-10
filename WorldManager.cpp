@@ -346,7 +346,8 @@ int battleCity::WorldManager::moveObject(Object* ptrObject, Vector where)
 	}
 	else
 	{
-		ptrObject->eventHandler(&EventOut());
+		auto out = EventOut();
+		ptrObject->eventHandler(&out);
 	}
 
 	ptrObject = NULL;
