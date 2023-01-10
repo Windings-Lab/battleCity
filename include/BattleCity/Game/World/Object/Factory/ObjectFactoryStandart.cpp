@@ -15,6 +15,7 @@
 #include "BattleCity/Engine/Texture/TextureGroupLibrary.h"
 
 #include "BattleCity/Game/World/Object/Components/Fireable.h"
+#include "BattleCity/Game/World/Object/Components/Collider.h"
 #include "BattleCity/Game/World/Object/Components/Movable.h"
 
 namespace BattleCity::Game::World::Object::Factory
@@ -55,6 +56,7 @@ namespace BattleCity::Game::World::Object::Factory
 
 		object->AddComponent<Component::Fireable>(bulletSpawner);
 		object->AddComponent<Component::Movable>();
+		object->AddComponent<Component::Collider>();
 
 		mInserter.InsertObject(object);
 
@@ -67,6 +69,7 @@ namespace BattleCity::Game::World::Object::Factory
 		object->ChangeTextureTo(Framework::TextureType::Up);
 
 		object->AddComponent<Component::Movable>();
+		object->AddComponent<Component::Collider>();
 
 		mInserter.InsertObject(object);
 
@@ -87,6 +90,8 @@ namespace BattleCity::Game::World::Object::Factory
 	{
 		auto object = std::make_shared<Wall>(mTextureGroups.GetGroupBy(Framework::TextureName::Wall));
 		object->ChangeTextureTo(Framework::TextureType::Basic);
+
+		object->AddComponent<Component::Collider>();
 
 		mInserter.InsertObject(object);
 

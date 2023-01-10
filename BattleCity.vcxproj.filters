@@ -80,11 +80,18 @@
     <ClCompile Include="include\BattleCity\Game\World\Object\Object.cpp">
       <Filter>BattleCity\Game\World\Object</Filter>
     </ClCompile>
-    <ClCompile Include="include\BattleCity\Engine\Texture\TextureStorage.cpp" />
     <ClCompile Include="include\BattleCity\Engine\Physics\Rectangle.cpp">
       <Filter>BattleCity\Engine\Physics</Filter>
     </ClCompile>
-    <ClCompile Include="include\BattleCity\Game\World\Object\Components\Component.cpp" />
+    <ClCompile Include="include\BattleCity\Engine\Texture\TextureStorage.cpp">
+      <Filter>BattleCity\Engine\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="include\BattleCity\Game\World\Object\Components\Component.cpp">
+      <Filter>BattleCity\Game\World\Object\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="include\BattleCity\Game\World\Object\Components\Collider.cpp">
+      <Filter>BattleCity\Game\World\Object\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pcheader\PCHeader.h">
@@ -192,11 +199,18 @@
     <ClInclude Include="include\BattleCity\Game\World\Object\ObjectAliases.h">
       <Filter>BattleCity\Game\World\Object</Filter>
     </ClInclude>
-    <ClInclude Include="include\BattleCity\Engine\Texture\TextureStorage.h" />
     <ClInclude Include="include\BattleCity\Engine\Physics\Rectangle.h">
       <Filter>BattleCity\Engine\Physics</Filter>
     </ClInclude>
-    <ClInclude Include="include\BattleCity\Game\World\Object\Components\Component.h" />
+    <ClInclude Include="include\BattleCity\Engine\Texture\TextureStorage.h">
+      <Filter>BattleCity\Engine\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Game\World\Object\Components\Component.h">
+      <Filter>BattleCity\Game\World\Object\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Game\World\Object\Components\Collider.h">
+      <Filter>BattleCity\Game\World\Object\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />

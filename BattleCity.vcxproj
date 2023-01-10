@@ -29,6 +29,7 @@
     <ClCompile Include="include\BattleCity\Framework\Screen.cpp" />
     <ClCompile Include="include\BattleCity\Framework\Texture.cpp" />
     <ClCompile Include="include\BattleCity\Game\Game.cpp" />
+    <ClCompile Include="include\BattleCity\Game\World\Object\Components\Collider.cpp" />
     <ClCompile Include="include\BattleCity\Game\World\Object\Components\Component.cpp" />
     <ClCompile Include="include\BattleCity\Game\World\Object\Components\Fireable.cpp" />
     <ClCompile Include="include\BattleCity\Game\World\Object\Components\Health.cpp" />
@@ -69,6 +70,7 @@
     <ClInclude Include="include\BattleCity\Framework\Screen.h" />
     <ClInclude Include="include\BattleCity\Framework\Texture.h" />
     <ClInclude Include="include\BattleCity\Game\Game.h" />
+    <ClInclude Include="include\BattleCity\Game\World\Object\Components\Collider.h" />
     <ClInclude Include="include\BattleCity\Game\World\Object\Components\Component.h" />
     <ClInclude Include="include\BattleCity\Game\World\Object\Components\Fireable.h" />
     <ClInclude Include="include\BattleCity\Game\World\Object\Components\Health.h" />
