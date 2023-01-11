@@ -1,4 +1,4 @@
-# battleCity
+# How to Build
 Source code of my first game written on C++
 
 NewVersion is currently in development
