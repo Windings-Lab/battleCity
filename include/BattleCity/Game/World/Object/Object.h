@@ -76,6 +76,7 @@ namespace BattleCity::Game::World::Object
 		const Position& GetPosition() const noexcept;
 
 		void ChangeTextureTo(Framework::TextureType);
+		void SetDrawPosition(Position) noexcept;
 
 		const Size& GetSize() const noexcept;
 

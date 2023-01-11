@@ -48,27 +48,22 @@ namespace BattleCity::Game::World
 					break;
 				case Object::Type::TankPlayer:
 					{
-						player = mObjectFactory.CreateTank(Object::Type::TankPlayer);
-						player->SetPosition(position);
-						player->Fire();
+						player = mObjectFactory.CreateTank(Object::Type::TankPlayer, position);
 					}
 					break;
 				case Object::Type::TankNPC:
 					{
-						auto object = mObjectFactory.CreateTank(Object::Type::TankNPC);
-						object->SetPosition(position);
+						auto object = mObjectFactory.CreateTank(Object::Type::TankNPC, position);
 					}
 					break;
 				case Object::Type::Wall:
 					{
-						auto object = mObjectFactory.CreateWall();
-						object->SetPosition(position);
+						auto object = mObjectFactory.CreateWall(position);
 					}
 					break;
 				case Object::Type::Phoenix:
 					{
-						auto object = mObjectFactory.CreatePhoenix();
-						object->SetPosition(position);
+						auto object = mObjectFactory.CreatePhoenix(position);
 					}
 					break;
 				default: 

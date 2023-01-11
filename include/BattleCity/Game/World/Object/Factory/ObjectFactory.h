@@ -1,5 +1,7 @@
 #pragma once
 
+#include "BattleCity/Game/World/Object/ObjectAliases.h"
+
 namespace BattleCity::Engine::Texture
 {
 	class GroupLibrary;
@@ -35,19 +37,19 @@ namespace BattleCity::Game::World::Object::Factory
 
 		virtual ~Factory() = default;
 
-		virtual std::shared_ptr<WorldBoundaries> CreateWorldBoundaries() = 0;
+		virtual std::shared_ptr<WorldBoundaries> CreateWorldBoundaries(Position = {0, 0}) = 0;
 
-		virtual std::shared_ptr<Tank> CreateTank(Type tankType) = 0;
+		virtual std::shared_ptr<Tank> CreateTank(Type tankType, Position = { 0, 0 }) = 0;
 
-		virtual std::shared_ptr<Bullet> CreateBullet() = 0;
+		virtual std::shared_ptr<Bullet> CreateBullet(Position = { 0, 0 }) = 0;
 
-		virtual std::shared_ptr<PowerUp> CreatePowerUp() = 0;
+		virtual std::shared_ptr<PowerUp> CreatePowerUp(Position = { 0, 0 }) = 0;
 
-		virtual std::shared_ptr<Wall> CreateWall() = 0;
+		virtual std::shared_ptr<Wall> CreateWall(Position = { 0, 0 }) = 0;
 
-		virtual std::shared_ptr<Phoenix> CreatePhoenix() = 0;
+		virtual std::shared_ptr<Phoenix> CreatePhoenix(Position = { 0, 0 }) = 0;
 
-		virtual std::shared_ptr<Explosion> CreateExplosion() = 0;
+		virtual std::shared_ptr<Explosion> CreateExplosion(Position = { 0, 0 }) = 0;
 
 	protected:
 		Map& mInserter;
