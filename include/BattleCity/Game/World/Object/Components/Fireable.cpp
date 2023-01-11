@@ -1,31 +1,55 @@
 #include "PCHeader.h"
 #include "Fireable.h"
 
-#include "BattleCity/Game/World/Object/Derived/Bullet.h"
+#include "BattleCity/Framework/Texture.h"
 #include "BattleCity/Game/World/Object/Components/Movable.h"
+#include "BattleCity/Game/World/Object/Derived/Bullet.h"
 
 namespace BattleCity::Game::World::Object::Component
 {
-	Fireable::Fireable(std::function<std::shared_ptr<Bullet>()> fire)
-		: mSpawnBullet(std::move(fire))
+	Fireable::Fireable(Object& object, std::function<std::shared_ptr<Bullet>(Position)> fire)
+		: Component(object)
+		, mSpawnBullet(std::move(fire))
 		, mBulletCount(0)
 	{
 
 	}
 
-	void Fireable::Fire(Position position, const Direction& direction)
+	void Fireable::Fire()
 	{
 		if(mBulletCount > 0)
 		{
-			auto bullet = mSpawnBullet();
+			auto bullet = mSpawnBullet(mObject.GetPosition());
+			bullet->GetComponent<Movable>()->SetDirection(mObject.GetTextureType());
 
 			const Size bulletSize = bullet->GetSize();
+			const Size objectSize = mObject.GetSize();
+			Position position = bullet->GetPosition();
 
-			position.X -= bulletSize.X / 2;
-			position.Y -= bulletSize.Y;
+			switch (mObject.GetTextureType())
+			{
+			case Framework::TextureType::Left:
+				position.X -= bulletSize.X;
+				position.Y += (objectSize.Y - bulletSize.Y) * 0.5;
+				break;
+			case Framework::TextureType::Right:
+				position.X += objectSize.X;
+				position.Y += (objectSize.Y - bulletSize.Y) * 0.5;
+				break;
+			case Framework::TextureType::Up:
+				position.Y -= bulletSize.Y;
+				position.X += (objectSize.X - bulletSize.X) * 0.5;
+				break;
+			case Framework::TextureType::Down:
+				position.Y += objectSize.Y;
+				position.X += (objectSize.X - bulletSize.X) * 0.5;
+				break;
+			case Framework::TextureType::Error: break;
+			default:;
+			}
 
 			bullet->SetPosition(position);
-			bullet->GetComponent<Movable>()->SetDirection(direction);
+			bullet->SetDrawPosition(position);
 		}
 	}
 	void Fireable::SetBulletCount(int count) noexcept
