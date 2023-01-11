@@ -42,7 +42,7 @@ namespace BattleCity::Game::World::Object
 			using std::type_index;
 
 			mComponents.try_emplace(type_index(typeid(T))
-									, std::make_unique<T>(std::forward<Args>(args)...));
+									, std::make_unique<T>(*this, std::forward<Args>(args)...));
 
 			OnComponentAdd();
 

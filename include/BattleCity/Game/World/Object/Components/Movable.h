@@ -8,7 +8,7 @@ namespace BattleCity::Game::World::Object::Component
 	class Movable : public Component
 	{
 	public:
-		Movable();
+		using Component::Component;
 		~Movable() override = default;
 
 		Movable& SetSpeed(Speed) noexcept;

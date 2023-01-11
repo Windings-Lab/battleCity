@@ -7,7 +7,7 @@ namespace BattleCity::Game::World::Object::Component
 	class Health : public Component
 	{
 	public:
-		Health();
+		using Component::Component;
 		~Health() override = default;
 
 		virtual void Destroy();

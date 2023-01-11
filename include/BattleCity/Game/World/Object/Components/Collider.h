@@ -9,7 +9,7 @@ namespace BattleCity::Game::World::Object::Component
 	class Collider : public Component
 	{
 	public:
-		Collider() = default;
+		using Component::Component;
 
 		void Update(const Position&, const Size&) noexcept;
 

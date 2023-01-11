@@ -22,7 +22,7 @@ namespace BattleCity::Game::World::Object
 
 	private:
 		void OnComponentAdd() override;
-		Position GetBulletSpawnPosition() const noexcept;
+
 
 	private:
 		Component::Fireable* mFireable;

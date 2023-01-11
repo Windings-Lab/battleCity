@@ -2,9 +2,9 @@
 
 #include "Tank.h"
 
+#include "BattleCity/Game/World/Object/Components/Collider.h"
 #include "BattleCity/Game/World/Object/Components/Fireable.h"
 #include "BattleCity/Game/World/Object/Components/Movable.h"
-#include "BattleCity/Game/World/Object/Components/Collider.h"
 
 namespace BattleCity::Game::World::Object
 {
@@ -24,16 +24,6 @@ namespace BattleCity::Game::World::Object
 
     void Tank::Fire()
     {
-        mFireable->Fire(GetBulletSpawnPosition(), mMovable->GetDirection());
-    }
-
-    Position Tank::GetBulletSpawnPosition() const noexcept
-    {
-	    const Size tankSize = GetSize();
-
-        Position bulletPosition(GetPosition());
-        bulletPosition.X += tankSize.X / 2;
-
-        return bulletPosition;
+        mFireable->Fire();
     }
 }
