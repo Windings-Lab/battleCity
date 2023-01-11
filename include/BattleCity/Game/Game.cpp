@@ -8,6 +8,9 @@
 #include "BattleCity/Game/World/Object/Object.h"
 #include "World/Object/Derived/Tank.h"
 
+#include "World/Object/Components/Movable.h"
+#include "World/Object/Components/Fireable.h"
+
 namespace BattleCity::Game
 {
 	Game::Game(const NSFramework::Screen& screen, const Engine::Texture::PathLibrary& pathLibrary)
@@ -95,10 +98,35 @@ namespace BattleCity::Game
 
 	void Game::onKeyPressed(BattleCity::Framework::FRKey k)
 	{
+		static auto player = mPlayer.lock();
+		static auto movable = player->GetComponent<World::Object::Component::Movable>();
+
+		switch (k)
+		{
+		case BattleCity::Framework::FRKey::RIGHT:
+			movable->SetDirection(BattleCity::Framework::TextureType::Right);
+			break;
+		case BattleCity::Framework::FRKey::LEFT:
+			movable->SetDirection(BattleCity::Framework::TextureType::Left);
+			break;
+		case BattleCity::Framework::FRKey::DOWN:
+			movable->SetDirection(BattleCity::Framework::TextureType::Down);
+			break;
+		case BattleCity::Framework::FRKey::UP: 
+			movable->SetDirection(BattleCity::Framework::TextureType::Up);
+			break;
+		case BattleCity::Framework::FRKey::COUNT: 
+		default:
+			break;
+		}
 	}
 
 	void Game::onKeyReleased(BattleCity::Framework::FRKey k)
 	{
+		static auto player = mPlayer.lock();
+		static auto movable = player->GetComponent<World::Object::Component::Movable>();
+
+		movable->ResetDirection();
 	}
 
 	void Game::onMouseMove(int x, int y, int xrelative, int yrelative)
@@ -107,5 +135,20 @@ namespace BattleCity::Game
 
 	void Game::onMouseButtonClick(BattleCity::Framework::FRMouseButton button, bool isReleased)
 	{
+		static auto player = mPlayer.lock();
+
+		switch(button)
+		{
+		case BattleCity::Framework::FRMouseButton::LEFT:
+			if(!isReleased)
+			{
+				player->Fire();
+			}
+			break;
+		case BattleCity::Framework::FRMouseButton::MIDDLE: break;
+		case BattleCity::Framework::FRMouseButton::RIGHT: break;
+		case BattleCity::Framework::FRMouseButton::COUNT: break;
+		default: ;
+		}
 	}
 }

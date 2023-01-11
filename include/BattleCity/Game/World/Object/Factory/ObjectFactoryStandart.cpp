@@ -58,7 +58,7 @@ namespace BattleCity::Game::World::Object::Factory
 		}
 
 		object->AddComponent<Component::Fireable>(bulletSpawner)->SetBulletCount(1);
-		object->AddComponent<Component::Movable>()->SetDirection(Framework::TextureType::Up).SetSpeed(10);
+		object->AddComponent<Component::Movable>()->SetDirection(Framework::TextureType::Up).ResetDirection().SetSpeed(10);
 		object->AddComponent<Component::Collider>();
 
 		object->SetPosition(position);
@@ -73,7 +73,7 @@ namespace BattleCity::Game::World::Object::Factory
 	{
 		auto object = std::make_shared<Bullet>(mTextureGroups.GetGroupBy(Framework::TextureName::Bullet));
 
-		object->AddComponent<Component::Movable>()->SetSpeed(0);
+		object->AddComponent<Component::Movable>()->SetSpeed(20);
 		object->AddComponent<Component::Collider>();
 
 		object->SetPosition(position);
