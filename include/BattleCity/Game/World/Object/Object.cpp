@@ -54,6 +54,10 @@ namespace BattleCity::Game::World::Object
         mCurrentTexture->GetSize(mSize.X, mSize.Y);
     }
 
+    Framework::TextureType Object::GetTextureType() const noexcept
+    {
+        return mCurrentTexture->GetType();
+    }
 
     void Object::SetDrawPosition(Position pos) noexcept
     {
