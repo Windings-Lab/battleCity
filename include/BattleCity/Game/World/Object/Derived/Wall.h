@@ -4,10 +4,21 @@
 
 namespace BattleCity::Game::World::Object
 {
-    class Wall : public Object
+	namespace Component
+	{
+		class Collider;
+	}
+
+	class Wall : public Object
     {
     public:
         using Object::Object;
+
+        void OnComponentInitialization() override;
+        void Update() override;
+
+    private:
+        Component::Collider* mCollider;
     };
 }
 

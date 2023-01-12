@@ -15,10 +15,9 @@ namespace BattleCity::Game::World::Object
     public:
         using Object::Object;
 
-        void Update() override;
+        void OnComponentInitialization() override;
 
-	private:
-        void OnComponentAdd() override;
+        void Update() override;
 
     private:
         Component::Movable* mMovable;

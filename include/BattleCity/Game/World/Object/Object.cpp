@@ -30,7 +30,7 @@ namespace BattleCity::Game::World::Object
         mCurrentTexture->DrawAt(mDrawPosition.X, mDrawPosition.Y);
     }
 
-    void Object::OnComponentAdd()
+    void Object::OnComponentInitialization()
     {
     }
 

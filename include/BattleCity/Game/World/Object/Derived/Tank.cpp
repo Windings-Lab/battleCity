@@ -8,7 +8,7 @@
 
 namespace BattleCity::Game::World::Object
 {
-    void Tank::OnComponentAdd()
+    void Tank::OnComponentInitialization()
     {
         mFireable = GetComponent<Component::Fireable>();
         mMovable = GetComponent<Component::Movable>();

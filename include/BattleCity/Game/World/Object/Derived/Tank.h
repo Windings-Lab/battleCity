@@ -16,13 +16,11 @@ namespace BattleCity::Game::World::Object
 	public:
 		using Object::Object;
 
+		void OnComponentInitialization() override;
+
 		void Update() override;
 
 		void Fire();
-
-	private:
-		void OnComponentAdd() override;
-
 
 	private:
 		Component::Fireable* mFireable;

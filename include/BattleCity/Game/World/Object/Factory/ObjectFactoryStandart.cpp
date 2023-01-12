@@ -61,6 +61,8 @@ namespace BattleCity::Game::World::Object::Factory
 		object->AddComponent<Component::Movable>()->SetDirection(Framework::TextureType::Up).ResetDirection().SetSpeed(10);
 		object->AddComponent<Component::Collider>();
 
+		object->OnComponentInitialization();
+
 		object->SetPosition(position);
 		object->SetDrawPosition(position);
 
@@ -75,6 +77,7 @@ namespace BattleCity::Game::World::Object::Factory
 
 		object->AddComponent<Component::Movable>()->SetSpeed(20);
 		object->AddComponent<Component::Collider>();
+		object->OnComponentInitialization();
 
 		object->SetPosition(position);
 		object->SetDrawPosition(position);
@@ -103,6 +106,7 @@ namespace BattleCity::Game::World::Object::Factory
 		object->ChangeTextureTo(Framework::TextureType::Basic);
 
 		object->AddComponent<Component::Collider>();
+		object->OnComponentInitialization();
 
 		object->SetPosition(position);
 		object->SetDrawPosition(position);
@@ -116,6 +120,9 @@ namespace BattleCity::Game::World::Object::Factory
 	{
 		auto object = std::make_shared<Phoenix>(mTextureGroups.GetGroupBy(Framework::TextureName::Phoenix));
 		object->ChangeTextureTo(Framework::TextureType::Phoenix);
+
+		object->AddComponent<Component::Collider>();
+		object->OnComponentInitialization();
 
 		object->SetPosition(position);
 		object->SetDrawPosition(position);

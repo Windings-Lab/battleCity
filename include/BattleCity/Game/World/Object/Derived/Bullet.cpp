@@ -6,7 +6,7 @@
 
 namespace BattleCity::Game::World::Object
 {
-    void Bullet::OnComponentAdd()
+    void Bullet::OnComponentInitialization()
     {
         mMovable = GetComponent<Component::Movable>();
         mCollider = GetComponent<Component::Collider>();

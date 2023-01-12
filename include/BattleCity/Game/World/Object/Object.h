@@ -35,6 +35,8 @@ namespace BattleCity::Game::World::Object
 
 		void Draw(float);
 
+		virtual void OnComponentInitialization();
+
 		template<typename T, typename... Args
 			, typename = std::enable_if_t<std::is_base_of_v<Component::Component, T>>>
 		T* AddComponent(Args&&... args)
@@ -43,8 +45,6 @@ namespace BattleCity::Game::World::Object
 
 			mComponents.try_emplace(type_index(typeid(T))
 									, std::make_unique<T>(*this, std::forward<Args>(args)...));
-
-			OnComponentAdd();
 
 			return static_cast<T*>(mComponents.at(type_index(typeid(T))).get());
 		}
@@ -55,10 +55,15 @@ namespace BattleCity::Game::World::Object
 		{
 			using std::type_index;
 
-			const auto component = mComponents.find(type_index(typeid(RetType)));
-			return component	== mComponents.end()
-								? nullptr
-								: static_cast<RetType*>(component->second.get());
+			const auto componentIt = mComponents.find(type_index(typeid(RetType)));
+
+			if (componentIt == mComponents.end())
+			{
+				std::cerr << typeid(*this).name() << " have no component called: " << typeid(RetType).name() << "\n";
+				return nullptr;
+			}
+
+			return static_cast<RetType*>(componentIt->second.get());
 		}
 
 		template<typename T
@@ -80,9 +85,6 @@ namespace BattleCity::Game::World::Object
 		void SetDrawPosition(Position) noexcept;
 
 		const Size& GetSize() const noexcept;
-
-	protected:
-		virtual void OnComponentAdd();
 
 	private:
 		ID mID;
