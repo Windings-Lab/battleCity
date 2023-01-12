@@ -1,9 +1,5 @@
 #pragma once
 
-constexpr int TICKS_PER_SECOND	= 30;
-constexpr int SKIP_TICKS		= 1000 / TICKS_PER_SECOND;
-constexpr int MAX_FRAMESKIP		= 5;
-
 #include "BattleCity/Engine/Texture/TextureStorage.h"
 #include "BattleCity/Framework/Framework.h"
 #include "BattleCity/Game/World/WorldMap.h"
@@ -20,6 +16,10 @@ namespace BattleCity::Framework
 
 namespace BattleCity::Game
 {
+	constexpr int TICKS_PER_SECOND = 30;
+	constexpr int SKIP_TICKS = 1000 / TICKS_PER_SECOND;
+	constexpr int MAX_FRAMESKIP = 5;
+
 	namespace World::Object
 	{
 		class Tank;
