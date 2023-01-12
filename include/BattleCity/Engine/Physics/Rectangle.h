@@ -20,22 +20,31 @@ namespace BattleCity::Engine::Physics
 	public:
 		Rectangle() = default;
 		explicit Rectangle(const TopLeft&, const BottomRight&);
+		explicit Rectangle(X, Y, Width, Height);
 
-		DISALLOW_COPY_MOVE(Rectangle)
+		ALLOW_COPY_MOVE_DEFAULT(Rectangle)
 
 		~Rectangle() = default;
 
 		bool Intersects(const Rectangle&) const noexcept;
 
-		void SetPosition(const Position&);
-		const Position& GetPosition() const;
-		X GetX() const;
-		Y GetY() const;
+		void SetPosition(const Position&) noexcept;
+		const Position& GetPosition() const noexcept;
+		X GetX() const noexcept;
+		Y GetY() const noexcept;
 
-		void SetSize(const Size&);
-		const Size& GetSize() const;
-		Width GetWidth() const;
-		Height GetHeight() const;
+		void SetSize(const Size&) noexcept;
+		const Size& GetSize() const noexcept;
+		Width GetWidth() const noexcept;
+		Height GetHeight() const noexcept;
+
+		int GetVerticalMidpoint() const noexcept;
+		int GetHorizontalMidpoint() const noexcept;
+
+		Rectangle TopLeftQuadrant() const noexcept;
+		Rectangle TopRightQuadrant() const noexcept;
+		Rectangle BottomLeftQuadrant() const noexcept;
+		Rectangle BottomRightQuadrant() const noexcept;
 
 	private:
 		Position mPosition;
