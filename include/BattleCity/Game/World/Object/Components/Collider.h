@@ -14,6 +14,7 @@ namespace BattleCity::Game::World::Object::Component
 		void Update(const Position&, const Size&) noexcept;
 
 		bool IsIntersects(const Collider&) const noexcept;
+		const Engine::Physics::Rectangle& GetRectangle() const noexcept;
 
 		void SetPreviousPosition(const Position&) noexcept;
 		const Position& GetPreviousPosition() const noexcept;

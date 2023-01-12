@@ -15,6 +15,11 @@ namespace BattleCity::Game::World::Object::Component
 		return mRectangle.Intersects(other.mRectangle);
 	}
 
+	const Engine::Physics::Rectangle& Collider::GetRectangle() const noexcept
+	{
+		return mRectangle;
+	}
+
 	void Collider::SetPreviousPosition(const Position& prev) noexcept
 	{
 		mPrevious.X = prev.X;
