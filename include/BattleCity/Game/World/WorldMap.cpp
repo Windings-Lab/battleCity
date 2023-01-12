@@ -102,6 +102,10 @@ namespace BattleCity::Game::World
 			break;
 		}
 		case Object::Layer::UI:
+		{
+			mUILayer.Insert(std::move(object));
+			break;
+		}
 		case Object::Layer::Error:
 		default:
 			break;
@@ -111,12 +115,20 @@ namespace BattleCity::Game::World
 	{
 	}
 
-	const Object::Container& Map::GetBackLayer() const noexcept
+	const Object::Container& Map::GetLayer(Object::Layer layer) const noexcept
 	{
-		return mBackLayer;
-	}
-	const Object::Container& Map::GetFrontLayer() const noexcept
-	{
-		return mFrontLayer;
+		switch (layer)
+		{
+		case Object::Layer::Error:
+			throw std::runtime_error("Error when trying to get object layer list");
+		case Object::Layer::Back:
+			return mBackLayer;
+		case Object::Layer::Front:
+			return mFrontLayer;
+		case Object::Layer::UI:
+			return mUILayer;
+		default:
+			return mFrontLayer;
+		}
 	}
 }
