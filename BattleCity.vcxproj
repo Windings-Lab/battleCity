@@ -37,6 +37,7 @@
     <ClCompile Include="include\BattleCity\Game\World\Object\Derived\Bullet.cpp" />
     <ClCompile Include="include\BattleCity\Game\World\Object\Derived\Explosion.cpp" />
     <ClCompile Include="include\BattleCity\Game\World\Object\Derived\Phoenix.cpp" />
+    <ClCompile Include="include\BattleCity\Game\World\Object\Derived\Pixel.cpp" />
     <ClCompile Include="include\BattleCity\Game\World\Object\Derived\PowerUp.cpp" />
     <ClCompile Include="include\BattleCity\Game\World\Object\Derived\Tank.cpp" />
     <ClCompile Include="include\BattleCity\Game\World\Object\Derived\Wall.cpp" />
@@ -78,6 +79,7 @@
     <ClInclude Include="include\BattleCity\Game\World\Object\Derived\Bullet.h" />
     <ClInclude Include="include\BattleCity\Game\World\Object\Derived\Explosion.h" />
     <ClInclude Include="include\BattleCity\Game\World\Object\Derived\Phoenix.h" />
+    <ClInclude Include="include\BattleCity\Game\World\Object\Derived\Pixel.h" />
     <ClInclude Include="include\BattleCity\Game\World\Object\Derived\PowerUp.h" />
     <ClInclude Include="include\BattleCity\Game\World\Object\Derived\Tank.h" />
     <ClInclude Include="include\BattleCity\Game\World\Object\Derived\Wall.h" />

@@ -15,6 +15,7 @@ namespace BattleCity::Framework
 		TankPlayer,
 		TankNPC,
 		Wall,
+		Pixel,
 	};
 
 	enum class TextureType
