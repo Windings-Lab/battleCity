@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="include\BattleCity\Engine\Debug.cpp" />
     <ClCompile Include="include\BattleCity\Engine\Physics\Rectangle.cpp" />
     <ClCompile Include="include\BattleCity\Engine\Texture\BCTexture.cpp" />
     <ClCompile Include="include\BattleCity\Engine\Texture\TextureGroup.cpp" />
@@ -58,6 +59,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\BattleCity\Engine\Debug.h" />
     <ClInclude Include="include\BattleCity\Engine\Physics\Rectangle.h" />
     <ClInclude Include="include\BattleCity\Engine\Texture\BCTexture.h" />
     <ClInclude Include="include\BattleCity\Engine\Texture\TextureAliases.h" />
