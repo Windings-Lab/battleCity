@@ -2,11 +2,6 @@
 
 namespace BattleCity
 {
-	namespace Game::World::Object
-	{
-		class Object;
-	}
-
 	class Subject;
 
 	class Observer : std::enable_shared_from_this<Observer>
@@ -17,7 +12,7 @@ namespace BattleCity
 		virtual ~Observer();
 
 		virtual void PreUnregister() = 0;
-		virtual void OnUpdate(Game::World::Object::Object&) = 0;
+		virtual void OnNotify() = 0;
 
 	private:
 		std::weak_ptr<Subject> mSubject;
