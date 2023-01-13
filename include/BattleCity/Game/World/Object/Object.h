@@ -1,6 +1,7 @@
 #pragma once
 
 #include "BattleCity/Game/World/Object/ObjectAliases.h"
+#include "BattleCity/Utility/Subject.h"
 
 namespace BattleCity::Framework
 {
@@ -22,7 +23,7 @@ namespace BattleCity::Game::World::Object
 
 	using ComponentContainer = std::unordered_map<std::type_index, std::unique_ptr<Component::Component>>;
 
-	class Object
+	class Object : public Subject
 	{
 	public:
 		Object(const Engine::Texture::Group&);
@@ -30,10 +31,6 @@ namespace BattleCity::Game::World::Object
 		DISALLOW_COPY_MOVE(Object)
 
 		virtual ~Object() = 0;
-
-		virtual void Update();
-
-		void Draw(float);
 
 		virtual void OnComponentInitialization();
 
@@ -74,6 +71,10 @@ namespace BattleCity::Game::World::Object
 
 			return mComponents.find(type_index(typeid(T))) != mComponents.end();
 		}
+
+		virtual void Update();
+
+		void Draw(float);
 
 		int GetID() const noexcept;
 
