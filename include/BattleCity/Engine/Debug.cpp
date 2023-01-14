@@ -1,11 +1,14 @@
 #include "PCHeader.h"
 #include "Debug.h"
 
+#include "BattleCity/Engine/Texture/TextureGroupLibrary.h"
 #include "BattleCity/Framework/Texture.h"
 #include "BattleCity/Game/World/WorldMap.h"
 #include "BattleCity/Game/World/Object/Derived/Pixel.h"
+
+#include "BattleCity/Game/World/Object/Components/Collider.h"
 #include "Physics/Rectangle.h"
-#include "Texture/TextureGroupLibrary.h"
+
 
 
 namespace BattleCity::Engine
@@ -34,5 +37,14 @@ namespace BattleCity::Engine
         }
 	}
 
+    void Debug::OutputMousePosition(int x, int y)
+    {
+        if(mMouseX != x || mMouseY != y)
+        {
+            mMouseX = x;
+            mMouseY = y;
+            std::cout << mMouseX << " " << mMouseY << std::endl;
+        }
+    }
 }
 
