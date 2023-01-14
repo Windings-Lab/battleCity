@@ -47,6 +47,8 @@
     <ClCompile Include="include\BattleCity\Game\World\Object\Factory\ObjectFactoryStandart.cpp" />
     <ClCompile Include="include\BattleCity\Game\World\Object\Object.cpp" />
     <ClCompile Include="include\BattleCity\Game\World\Object\ObjectContainer.cpp" />
+    <ClCompile Include="include\BattleCity\Game\World\Object\Observer\ObjectObserver.cpp" />
+    <ClCompile Include="include\BattleCity\Game\World\Object\Observer\ObjectSubject.cpp" />
     <ClCompile Include="include\BattleCity\Game\World\WorldLevel.cpp" />
     <ClCompile Include="include\BattleCity\Game\World\WorldMap.cpp" />
     <ClCompile Include="include\BattleCity\Utility\Vector2Int.cpp" />
@@ -91,6 +93,8 @@
     <ClInclude Include="include\BattleCity\Game\World\Object\Object.h" />
     <ClInclude Include="include\BattleCity\Game\World\Object\ObjectAliases.h" />
     <ClInclude Include="include\BattleCity\Game\World\Object\ObjectContainer.h" />
+    <ClInclude Include="include\BattleCity\Game\World\Object\Observer\ObjectObserver.h" />
+    <ClInclude Include="include\BattleCity\Game\World\Object\Observer\ObjectSubject.h" />
     <ClInclude Include="include\BattleCity\Game\World\WorldLevel.h" />
     <ClInclude Include="include\BattleCity\Game\World\WorldMap.h" />
     <ClInclude Include="include\BattleCity\NamespaceAliases.h" />

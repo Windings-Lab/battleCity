@@ -10,7 +10,8 @@
 namespace BattleCity::Game::World::Object
 {
     Object::Object(const Engine::Texture::Group& group)
-		: mTextureGroup(&group)
+	    : Subject(this)
+		, mTextureGroup(&group)
 		, mCurrentTexture(nullptr)
     {
         static int idCounter = 0;

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "BattleCity/Game/World/Object/ObjectAliases.h"
-#include "BattleCity/Utility/Subject.h"
+#include "Observer/ObjectSubject.h"
 
 namespace BattleCity::Framework
 {
@@ -30,7 +30,7 @@ namespace BattleCity::Game::World::Object
 
 		DISALLOW_COPY_MOVE(Object)
 
-		virtual ~Object() = 0;
+		~Object() override = 0;
 
 		virtual void OnComponentInitialization();
 
@@ -48,7 +48,7 @@ namespace BattleCity::Game::World::Object
 
 		template<typename RetType
 				, typename = std::enable_if_t<std::is_base_of_v<Component::Component, RetType>>>
-		RetType* GetComponent()
+		RetType* GetComponent() const
 		{
 			using std::type_index;
 
@@ -65,7 +65,7 @@ namespace BattleCity::Game::World::Object
 
 		template<typename T
 			, typename = std::enable_if_t<std::is_base_of_v<Component::Component, T>>>
-		bool HasComponent()
+		bool HasComponent() const
 		{
 			using std::type_index;
 
