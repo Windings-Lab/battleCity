@@ -33,7 +33,7 @@ namespace BattleCity::Game::World
 		void InsertObject(std::shared_ptr<Object::Object>, Object::Layer = Object::Layer::Front);
 		void MarkForDelete(Object::ID);
 
-		const Object::Container& GetLayer(Object::Layer) const noexcept;
+		const Object::Container& GetLayer(Object::Layer) const;
 
 	private:
 		Object::Factory::Standart mObjectFactory;

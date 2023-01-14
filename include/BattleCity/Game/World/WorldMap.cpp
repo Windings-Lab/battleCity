@@ -115,7 +115,7 @@ namespace BattleCity::Game::World
 	{
 	}
 
-	const Object::Container& Map::GetLayer(Object::Layer layer) const noexcept
+	const Object::Container& Map::GetLayer(Object::Layer layer) const
 	{
 		switch (layer)
 		{
