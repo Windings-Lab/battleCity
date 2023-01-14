@@ -1,6 +1,7 @@
 #include "PCHeader.h"
 #include "Game.h"
 
+#include "BattleCity/Engine/Debug.h"
 #include "BattleCity/Framework/Screen.h"
 
 #include "BattleCity/Game/World/WorldLevel.h"
@@ -19,7 +20,8 @@ namespace BattleCity::Game
 		, mInterpolation(0.f)
 		, mScreen(screen)
 		, mPathLibrary(pathLibrary)
-		, mMap(mTextureStorage.GetGroups())
+		, mMap(World::Relative(32, 32), mTextureStorage.GetGroups())
+		, mDebug(mMap, mTextureStorage.GetGroups())
 	{
 	}
 
