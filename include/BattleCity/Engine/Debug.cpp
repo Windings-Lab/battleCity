@@ -39,7 +39,7 @@ namespace BattleCity::Engine
 
     void Debug::OutputMousePosition(int x, int y)
     {
-        if(mMouseX != x || mMouseY != y)
+        if (mMouseX != x || mMouseY != y)
         {
             mMouseX = x;
             mMouseY = y;

@@ -25,7 +25,6 @@ namespace BattleCity::Engine
 
 
 		void OutputMousePosition(int x, int y);
-		void OutputQuadTree(const Game::World::Object::QuadTree&) const;
 
 	private:
 		Game::World::Map& mMap;
