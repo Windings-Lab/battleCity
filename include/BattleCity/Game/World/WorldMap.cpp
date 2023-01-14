@@ -12,14 +12,15 @@
 
 namespace BattleCity::Game::World
 {
-	Map::Map(const Engine::Texture::GroupLibrary& textureGroups)
+	Map::Map(Relative pos, const Engine::Texture::GroupLibrary& textureGroups)
 		: mObjectFactory(*this, textureGroups)
+		, mWorldRelative(pos)
 	{}
-	void Map::SetWorldRelative(const TopLeft& worldRelative) noexcept
+	void Map::SetWorldRelative(const Relative& worldRelative) noexcept
 	{
 		mWorldRelative = worldRelative;
 	}
-	const TopLeft& Map::GetWorldRelative() const noexcept
+	const Relative& Map::GetWorldRelative() const noexcept
 	{
 		return mWorldRelative;
 	}
