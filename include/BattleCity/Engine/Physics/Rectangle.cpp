@@ -59,15 +59,6 @@ namespace BattleCity::Engine::Physics
 		return mSize.Y;
 	}
 
-	int Rectangle::GetVerticalMidpoint() const noexcept
-	{
-		return mPosition.X + (mSize.X >> 1);
-	}
-	int Rectangle::GetHorizontalMidpoint() const noexcept
-	{
-		return mPosition.Y + (mSize.Y >> 1);
-	}
-
 	Rectangle Rectangle::TopLeftQuadrant() const noexcept
 	{
 		return Rectangle(mPosition.X, mPosition.Y, mSize.X >> 1, mSize.Y >> 1);

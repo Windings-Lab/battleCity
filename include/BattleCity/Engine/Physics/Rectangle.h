@@ -2,6 +2,14 @@
 
 namespace BattleCity::Engine::Physics
 {
+	enum class Quadrant
+	{
+		TopLeft,
+		TopRight,
+		BottomLeft,
+		BottomRight
+	};
+
 	// Create Rectangle at World position
 	class Rectangle final
 	{
@@ -37,9 +45,6 @@ namespace BattleCity::Engine::Physics
 		const Size& GetSize() const noexcept;
 		Width GetWidth() const noexcept;
 		Height GetHeight() const noexcept;
-
-		int GetVerticalMidpoint() const noexcept;
-		int GetHorizontalMidpoint() const noexcept;
 
 		Rectangle TopLeftQuadrant() const noexcept;
 		Rectangle TopRightQuadrant() const noexcept;
