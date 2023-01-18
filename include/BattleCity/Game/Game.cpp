@@ -1,16 +1,12 @@
 #include "PCHeader.h"
 #include "Game.h"
 
-#include "BattleCity/Engine/Debug.h"
+#include "BattleCity/Engine/DebugDrawer.h"
 #include "BattleCity/Framework/Screen.h"
 
 #include "BattleCity/Game/World/WorldLevel.h"
 
-#include "BattleCity/Game/World/Object/Object.h"
 #include "World/Object/Derived/Tank.h"
-
-#include "World/Object/Components/Movable.h"
-#include "World/Object/Components/Fireable.h"
 
 namespace BattleCity::Game
 {
@@ -20,8 +16,8 @@ namespace BattleCity::Game
 		, mInterpolation(0.f)
 		, mScreen(screen)
 		, mPathLibrary(pathLibrary)
-		, mMap(World::Relative(32, 32), mTextureStorage.GetGroups())
-		, mDebug(mMap, mTextureStorage.GetGroups())
+		, mDebug(mMap, mTextureStorage.GetGroups(), mQuadTree)
+		, mMap(mTextureStorage.GetGroups())
 	{
 	}
 
@@ -38,7 +34,6 @@ namespace BattleCity::Game
 		mTextureStorage.CreateGroups(mTextureStorage.GetTextures());
 
 		const World::Level level = World::Level::CreateLevel(R"(.\data\Maps\level1.txt)");
-		mMap.SetWorldRelative({ 40, 44 });
 		mPlayer = std::dynamic_pointer_cast<World::Object::Tank>(mMap.CreateMap(level));
 
 		return true;
@@ -101,38 +96,18 @@ namespace BattleCity::Game
 	void Game::onKeyPressed(BattleCity::Framework::FRKey k)
 	{
 		static auto player = mPlayer.lock();
-		static auto movable = player->GetComponent<World::Object::Component::Movable>();
-
-		switch (k)
-		{
-		case BattleCity::Framework::FRKey::RIGHT:
-			movable->SetDirection(BattleCity::Framework::TextureType::Right);
-			break;
-		case BattleCity::Framework::FRKey::LEFT:
-			movable->SetDirection(BattleCity::Framework::TextureType::Left);
-			break;
-		case BattleCity::Framework::FRKey::DOWN:
-			movable->SetDirection(BattleCity::Framework::TextureType::Down);
-			break;
-		case BattleCity::Framework::FRKey::UP: 
-			movable->SetDirection(BattleCity::Framework::TextureType::Up);
-			break;
-		case BattleCity::Framework::FRKey::COUNT: 
-		default:
-			break;
-		}
+		player->SetDirection(static_cast<World::Object::MovementDirection>(k));
 	}
 
 	void Game::onKeyReleased(BattleCity::Framework::FRKey k)
 	{
 		static auto player = mPlayer.lock();
-		static auto movable = player->GetComponent<World::Object::Component::Movable>();
-
-		movable->ResetDirection();
+		player->StopMovement();
 	}
 
 	void Game::onMouseMove(int x, int y, int xrelative, int yrelative)
 	{
+		//mDebug.OutputMousePosition(x, y);
 	}
 
 	void Game::onMouseButtonClick(BattleCity::Framework::FRMouseButton button, bool isReleased)

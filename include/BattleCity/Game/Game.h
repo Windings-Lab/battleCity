@@ -1,5 +1,6 @@
 #pragma once
 
+#include "BattleCity/Engine/DebugDrawer.h"
 #include "BattleCity/Engine/Texture/TextureStorage.h"
 #include "BattleCity/Framework/Framework.h"
 #include "BattleCity/Game/World/WorldMap.h"
@@ -61,11 +62,11 @@ namespace BattleCity::Game
 
 		const NSFramework::Screen& mScreen;
 		const Engine::Texture::PathLibrary& mPathLibrary;
-
 		Engine::Texture::Storage mTextureStorage;
-		World::Map mMap;
-		Engine::Debug mDebug;
 
+		Engine::DebugDrawer mDebug;
+
+		World::Map mMap;
 
 		std::weak_ptr<World::Object::Tank> mPlayer;
 	};
