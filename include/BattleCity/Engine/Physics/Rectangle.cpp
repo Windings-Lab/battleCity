@@ -18,11 +18,10 @@ namespace BattleCity::Engine::Physics
 
 	bool Rectangle::Intersects(const Rectangle& other) const noexcept
 	{
-		return
-			std::max(GetX(), other.GetX())
-			< std::min(GetX() + GetWidth(), other.GetX() + other.GetWidth())
-			& std::max(GetY(), other.GetY())
-			< std::min(GetY() + GetHeight(), other.GetY() + other.GetHeight());
+		return (GetX() <= other.GetX() + other.GetWidth() &&
+			GetX() + GetWidth() >= other.GetX() &&
+			GetY() <= other.GetY() + other.GetHeight() &&
+			GetY() + GetHeight() >= other.GetY());
 	}
 
 	void Rectangle::SetPosition(const Position& position) noexcept
@@ -57,6 +56,23 @@ namespace BattleCity::Engine::Physics
 	Rectangle::Height Rectangle::GetHeight() const noexcept
 	{
 		return mSize.Y;
+	}
+
+	Rectangle Rectangle::Get(Quadrant quad) const noexcept
+	{
+		switch (quad)
+		{
+			case Quadrant::TL: return TopLeftQuadrant();
+			case Quadrant::TR: return TopRightQuadrant();
+			case Quadrant::BL: return BottomLeftQuadrant();
+			case Quadrant::BR: return BottomRightQuadrant();
+			default: return TopLeftQuadrant();
+		}
+	}
+
+	Rectangle::Position Rectangle::GetCenter() const noexcept
+	{
+		return { mPosition.X + (mSize.X >> 1), mPosition.Y + (mSize.Y >> 1) };
 	}
 
 	Rectangle Rectangle::TopLeftQuadrant() const noexcept

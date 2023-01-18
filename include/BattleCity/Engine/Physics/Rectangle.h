@@ -4,10 +4,11 @@ namespace BattleCity::Engine::Physics
 {
 	enum class Quadrant
 	{
-		TopLeft,
-		TopRight,
-		BottomLeft,
-		BottomRight
+		Error = -1,
+		TL,
+		TR,
+		BL,
+		BR
 	};
 
 	// Create Rectangle at World position
@@ -46,6 +47,10 @@ namespace BattleCity::Engine::Physics
 		Width GetWidth() const noexcept;
 		Height GetHeight() const noexcept;
 
+		Rectangle Get(Quadrant) const noexcept;
+		Position GetCenter() const noexcept;
+
+	private:
 		Rectangle TopLeftQuadrant() const noexcept;
 		Rectangle TopRightQuadrant() const noexcept;
 		Rectangle BottomLeftQuadrant() const noexcept;
