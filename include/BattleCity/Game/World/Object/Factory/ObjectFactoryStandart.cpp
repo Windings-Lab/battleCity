@@ -13,6 +13,7 @@
 
 #include "BattleCity/Engine/Texture/BCTexture.h"
 #include "BattleCity/Engine/Texture/TextureGroupLibrary.h"
+#include "BattleCity/Game/World/Object/Containers/QuadTree.h"
 
 namespace BattleCity::Game::World::Object::Factory
 {
@@ -66,6 +67,9 @@ namespace BattleCity::Game::World::Object::Factory
 
 		mInserter.InsertObject(object);
 
+		object->RegisterObserver(&mQuadTree);
+		mQuadTree.Insert(object.get());
+
 		return object;
 	}
 
@@ -80,6 +84,9 @@ namespace BattleCity::Game::World::Object::Factory
 		object->UpdateCollider();
 
 		mInserter.InsertObject(object);
+
+		object->RegisterObserver(&mQuadTree);
+		mQuadTree.Insert(object.get());
 
 		return object;
 	}
@@ -97,6 +104,9 @@ namespace BattleCity::Game::World::Object::Factory
 
 		mInserter.InsertObject(object);
 
+		object->RegisterObserver(&mQuadTree);
+		mQuadTree.Insert(object.get());
+
 		return object;
 	}
 
@@ -113,6 +123,9 @@ namespace BattleCity::Game::World::Object::Factory
 
 		mInserter.InsertObject(object);
 
+		object->RegisterObserver(&mQuadTree);
+		mQuadTree.Insert(object.get());
+
 		return object;
 	}
 
@@ -128,6 +141,9 @@ namespace BattleCity::Game::World::Object::Factory
 		object->UpdateCollider();
 
 		mInserter.InsertObject(object);
+
+		object->RegisterObserver(&mQuadTree);
+		mQuadTree.Insert(object.get());
 
 		return object;
 	}

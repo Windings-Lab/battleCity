@@ -17,7 +17,8 @@ namespace BattleCity::Game
 		, mScreen(screen)
 		, mPathLibrary(pathLibrary)
 		, mDebug(mMap, mTextureStorage.GetGroups(), mQuadTree)
-		, mMap(mTextureStorage.GetGroups())
+		, mQuadTree(Engine::Physics::Rectangle(32, 32, 720, 520))
+		, mMap(mTextureStorage.GetGroups(), mQuadTree)
 	{
 	}
 
@@ -85,7 +86,7 @@ namespace BattleCity::Game
 
 		for (auto& obj : mMap.GetLayer(World::Object::Layer::UI))
 		{
-			obj->Draw(1);
+			obj->Draw(interpolation);
 		}
 	}
 

@@ -14,6 +14,8 @@ namespace BattleCity::Game::World
 
 namespace BattleCity::Game::World::Object
 {
+	class QuadTree;
+
 	class Explosion;
 	class Phoenix;
 	class Wall;
@@ -28,10 +30,7 @@ namespace BattleCity::Game::World::Object::Factory
 {
 	struct Factory
 	{
-		explicit Factory(Map& inserter, const Engine::Texture::GroupLibrary& textureGroups)
-			: mInserter(inserter)
-			, mTextureGroups(textureGroups)
-		{}
+		explicit Factory(Map&, const Engine::Texture::GroupLibrary&, QuadTree&);
 
 		DISALLOW_COPY_MOVE(Factory)
 
@@ -54,6 +53,8 @@ namespace BattleCity::Game::World::Object::Factory
 	protected:
 		Map& mInserter;
 		const Engine::Texture::GroupLibrary& mTextureGroups;
+
+		QuadTree& mQuadTree;
 	};
 }
 

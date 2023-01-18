@@ -16,6 +16,11 @@ namespace BattleCity::Engine::Texture
 
 namespace BattleCity::Game::World
 {
+	namespace Object
+	{
+		class QuadTree;
+	}
+
 	using Relative = Vector2Int;
 	using Bounds = Engine::Physics::Rectangle;
 
@@ -24,7 +29,7 @@ namespace BattleCity::Game::World
 	class Map final
 	{
 	public:
-		explicit Map(Relative, const Engine::Texture::GroupLibrary&);
+		explicit Map(const Engine::Texture::GroupLibrary&, Object::QuadTree&);
 
 		DISALLOW_COPY_MOVE(Map)
 

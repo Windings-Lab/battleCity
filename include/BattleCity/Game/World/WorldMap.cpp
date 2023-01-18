@@ -4,16 +4,15 @@
 #include "WorldLevel.h"
 
 #include "BattleCity/Game/World/Object/Object.h"
+#include "Object/Containers/QuadTree.h"
 
-#include "Object/Derived/Phoenix.h"
 #include "Object/Derived/Tank.h"
-#include "Object/Derived/Wall.h"
-#include "Object/Derived/WorldBoundaries.h"
 
 namespace BattleCity::Game::World
 {
-	Map::Map(const Engine::Texture::GroupLibrary& textureGroups)
-		: mObjectFactory(*this, textureGroups)
+	Map::Map(const Engine::Texture::GroupLibrary& textureGroups, Object::QuadTree& quadTree)
+		: mObjectFactory(*this, textureGroups, quadTree)
+		, mBounds(quadTree.GetBorder())
 	{
 	}
 

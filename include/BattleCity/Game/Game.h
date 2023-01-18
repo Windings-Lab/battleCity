@@ -4,6 +4,7 @@
 #include "BattleCity/Engine/Texture/TextureStorage.h"
 #include "BattleCity/Framework/Framework.h"
 #include "BattleCity/Game/World/WorldMap.h"
+#include "World/Object/Containers/QuadTree.h"
 
 namespace BattleCity::Engine::Texture
 {
@@ -65,6 +66,7 @@ namespace BattleCity::Game
 		Engine::Texture::Storage mTextureStorage;
 
 		Engine::DebugDrawer mDebug;
+		World::Object::QuadTree mQuadTree;
 
 		World::Map mMap;
 

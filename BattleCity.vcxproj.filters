@@ -105,6 +105,9 @@
     <ClCompile Include="include\BattleCity\Game\World\Object\Containers\ObjectContainer.cpp">
       <Filter>BattleCity\Game\World\Object\Containers</Filter>
     </ClCompile>
+    <ClCompile Include="include\BattleCity\Game\World\Object\Containers\QuadTree.cpp">
+      <Filter>BattleCity\Game\World\Object\Containers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pcheader\PCHeader.h">
@@ -237,6 +240,9 @@
     <ClInclude Include="include\BattleCity\Game\World\Object\Containers\ObjectContainer.h">
       <Filter>BattleCity\Game\World\Object\Containers</Filter>
     </ClInclude>
+    <ClInclude Include="include\BattleCity\Game\World\Object\Containers\QuadTree.h">
+      <Filter>BattleCity\Game\World\Object\Containers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
@@ -274,9 +280,6 @@
     </Filter>
     <Filter Include="BattleCity\Game\World\Object\Factory">
       <UniqueIdentifier>{f40ac654-67df-4718-bc44-5128b93501e1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="BattleCity\Game\World\Object\Builder">
-      <UniqueIdentifier>{8da801f4-bbf8-4324-9aeb-5d8f314039e6}</UniqueIdentifier>
     </Filter>
     <Filter Include="BattleCity\Game\World\Object\Derived">
       <UniqueIdentifier>{77d13303-96e1-4516-befd-091e3dc0c62d}</UniqueIdentifier>

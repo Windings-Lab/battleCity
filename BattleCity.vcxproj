@@ -37,6 +37,7 @@
     <ClCompile Include="include\BattleCity\Game\World\Object\Components\Health.cpp" />
     <ClCompile Include="include\BattleCity\Game\World\Object\Components\Movable.cpp" />
     <ClCompile Include="include\BattleCity\Game\World\Object\Containers\ObjectContainer.cpp" />
+    <ClCompile Include="include\BattleCity\Game\World\Object\Containers\QuadTree.cpp" />
     <ClCompile Include="include\BattleCity\Game\World\Object\Derived\Bullet.cpp" />
     <ClCompile Include="include\BattleCity\Game\World\Object\Derived\Explosion.cpp" />
     <ClCompile Include="include\BattleCity\Game\World\Object\Derived\Phoenix.cpp" />
@@ -83,6 +84,7 @@
     <ClInclude Include="include\BattleCity\Game\World\Object\Components\Health.h" />
     <ClInclude Include="include\BattleCity\Game\World\Object\Components\Movable.h" />
     <ClInclude Include="include\BattleCity\Game\World\Object\Containers\ObjectContainer.h" />
+    <ClInclude Include="include\BattleCity\Game\World\Object\Containers\QuadTree.h" />
     <ClInclude Include="include\BattleCity\Game\World\Object\Derived\Bullet.h" />
     <ClInclude Include="include\BattleCity\Game\World\Object\Derived\Explosion.h" />
     <ClInclude Include="include\BattleCity\Game\World\Object\Derived\Phoenix.h" />
