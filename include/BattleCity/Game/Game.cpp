@@ -7,6 +7,7 @@
 #include "BattleCity/Game/World/WorldLevel.h"
 
 #include "World/Object/Derived/Tank.h"
+#include "BattleCity/Game/World/Object/Components/Movable.h"
 
 namespace BattleCity::Game
 {
@@ -51,6 +52,7 @@ namespace BattleCity::Game
 		while (getTickCount() > mNextGameTick && mIterations < MAX_FRAMESKIP)
 		{
 			Update();
+			ResolveCollisions();
 
 			mNextGameTick += SKIP_TICKS;
 			mIterations++;
@@ -70,6 +72,36 @@ namespace BattleCity::Game
 		{
 			obj->Update();
 		}
+	}
+	void Game::ResolveCollisions()
+	{
+		BroadPhase();
+		NarrowPhase();
+	}
+
+	void Game::BroadPhase()
+	{
+		for (auto& obj : mMap.GetLayer(World::Object::Layer::Front))
+		{
+			if(obj->HasComponent<World::Object::Component::Movable>())
+			{
+				mColliders.push_back(obj.get());
+			}
+		}
+	}
+
+	void Game::NarrowPhase()
+	{
+		for (auto obj : mColliders)
+		{
+			auto collisions = mQuadTree.GetPossibleCollisions(obj);
+			for (auto other : collisions)
+			{
+				obj->ResolveCollisions(other);
+			}
+		}
+
+		mColliders.clear();
 	}
 
 	void Game::Draw(float interpolation)
@@ -129,7 +161,13 @@ namespace BattleCity::Game
 			}
 			break;
 		case BattleCity::Framework::FRMouseButton::MIDDLE: break;
-		case BattleCity::Framework::FRMouseButton::RIGHT: break;
+		case BattleCity::Framework::FRMouseButton::RIGHT:
+			if (!isReleased)
+			{
+				const_cast<World::Object::Container&>(mMap.GetLayer(World::Object::Layer::UI)).Clear();
+				mDebug.DrawWholeNode(mQuadTree);
+			}
+			break;
 		case BattleCity::Framework::FRMouseButton::COUNT: break;
 		default: ;
 		}

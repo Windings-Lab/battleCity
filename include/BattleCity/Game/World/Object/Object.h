@@ -38,6 +38,7 @@ namespace BattleCity::Game::World::Object
 		~Object() override = 0;
 
 		virtual void Update() = 0;
+		virtual void ResolveCollisions(const Object*);
 
 		void Draw(float);
 

@@ -23,12 +23,14 @@ namespace BattleCity::Game::World::Object
 
     void Object::Update()
     {
-        if(GetPosition() != GetPreviousPosition())
-        {
-            SetPreviousPosition(GetPosition());
+    }
 
-            NotifyObjectUpdated(*this); 
-        }
+    void Object::ResolveCollisions(const Object*)
+    {
+        SetPosition(GetPreviousPosition());
+        SetPreviousPosition(GetPosition());
+
+        NotifyObjectUpdated(*this);
     }
 
     void Object::Draw(float interpolation)

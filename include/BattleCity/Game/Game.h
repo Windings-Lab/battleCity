@@ -52,6 +52,10 @@ namespace BattleCity::Game
 
 	private:
 		void Update();
+		void ResolveCollisions();
+		void BroadPhase();
+		void NarrowPhase();
+
 		void Draw(float);
 
 		void UnitTest();
@@ -67,6 +71,7 @@ namespace BattleCity::Game
 
 		Engine::DebugDrawer mDebug;
 		World::Object::QuadTree mQuadTree;
+		std::vector<World::Object::Object*> mColliders;
 
 		World::Map mMap;
 

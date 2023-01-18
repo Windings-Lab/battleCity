@@ -74,7 +74,7 @@ namespace BattleCity::Game::World::Object
 	private:
 		void CollectObjectsFromLeaf(std::unordered_set<ID>& duplicateCheck, Container& objects) const;
 	public:
-		std::vector<const Object*> GetPossibleCollisions(const Object& object) const;
+		std::vector<const Object*> GetPossibleCollisions(const Object* object) const;
 		int GetSize() const noexcept;
 
 	private:

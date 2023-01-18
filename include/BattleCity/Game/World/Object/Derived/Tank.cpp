@@ -18,9 +18,15 @@ namespace BattleCity::Game::World::Object
 
     void Tank::Update()
     {
-        Object::Update();
-
+        SetPreviousPosition(GetPosition());
         SetPosition(GetPosition() + mMovable->GetSpeed());
+        NotifyObjectUpdated(*this);
+    }
+
+    void Tank::ResolveCollisions(const Object* object)
+    {
+	    Object::ResolveCollisions(object);
+        StopMovement();
     }
 
     void Tank::Fire()

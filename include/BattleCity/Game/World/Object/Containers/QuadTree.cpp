@@ -249,7 +249,7 @@ namespace BattleCity::Game::World::Object
     {
         return mSize;
     }
-	std::vector<const Object*> QuadTree::GetPossibleCollisions(const Object& object) const
+	std::vector<const Object*> QuadTree::GetPossibleCollisions(const Object* object) const
     {
         std::unordered_set<ID> duplicateCheck;
         std::vector<const Object*> collisions;
@@ -267,7 +267,7 @@ namespace BattleCity::Game::World::Object
             {
                 for (auto& child : node->mNodes)
                 {
-                    if (!child.mBorder.Intersects(object.GetBounds())) continue;
+                    if (!child.mBorder.Intersects(object->GetBounds())) continue;
 
                     nodeStack.push_back(&child);
                 }
@@ -276,8 +276,8 @@ namespace BattleCity::Game::World::Object
 
             for (const auto& other : node->mObjects)
             {
-                if (&object == other) continue;
-                if (!object.GetBounds().Intersects(other->GetBounds())) continue;
+                if (object == other) continue;
+                if (!object->GetBounds().Intersects(other->GetBounds())) continue;
                 if (!duplicateCheck.emplace(other->GetID()).second) continue;
 
                 collisions.push_back(other);
