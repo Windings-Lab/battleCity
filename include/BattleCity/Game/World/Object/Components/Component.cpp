@@ -3,5 +3,9 @@
 
 namespace BattleCity::Game::World::Object::Component
 {
-	Component::~Component() = default;
+    Component::Component(Object& object)
+	    : mObject(object)
+    {
+    }
+    Component::~Component() = default;
 }

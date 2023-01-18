@@ -10,7 +10,7 @@ namespace BattleCity::Game::World::Object::Component
 	class Component
 	{
 	public:
-		Component(Object& object) : mObject(object){}
+		explicit Component(Object& object);
 		virtual ~Component() = 0;
 
 	protected:

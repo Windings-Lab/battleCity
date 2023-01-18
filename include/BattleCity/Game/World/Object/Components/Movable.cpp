@@ -1,7 +1,6 @@
 #include "PCHeader.h"
 #include "Movable.h"
 
-#include "BattleCity/Framework/Texture.h"
 #include "BattleCity/Game/World/Object/Object.h"
 
 namespace BattleCity::Game::World::Object::Component
@@ -17,36 +16,35 @@ namespace BattleCity::Game::World::Object::Component
 		return *this;
 	}
 
-	Movable& Movable::SetDirection(Framework::TextureType direction) noexcept
+	Movable& Movable::SetDirection(MovementDirection direction) noexcept
 	{
 		switch (direction)
 		{
-			case Framework::TextureType::Left:
+			case MovementDirection::Left:
 				mDirection = { -1, 0 };
 				break;
-			case Framework::TextureType::Right:
+			case MovementDirection::Right:
 				mDirection = { 1, 0 };
 				break;
-			case Framework::TextureType::Up:
+			case MovementDirection::Up:
 				mDirection = { 0, -1 };
 				break;
-			case Framework::TextureType::Down:
+			case MovementDirection::Down:
 				mDirection = { 0, 1 };
 				break;
-			default: ;
+			case MovementDirection::Count:
+			default: break;
 		}
 
-		mObject.ChangeTextureTo(direction);
-
-		return *this;
-	}
-	Movable& Movable::ResetDirection() noexcept
-	{
-		mDirection = { 0, 0 };
 		return *this;
 	}
 	const Direction& Movable::GetDirection() const noexcept
 	{
 		return mDirection;
+	}
+
+	void Movable::StopMovement() noexcept
+	{
+		mDirection = { 0, 0 };
 	}
 }

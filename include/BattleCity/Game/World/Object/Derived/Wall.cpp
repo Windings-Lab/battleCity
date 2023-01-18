@@ -2,17 +2,15 @@
 
 #include "Wall.h"
 
-#include "BattleCity/Game/World/Object/Components/Collider.h"
-
 namespace BattleCity::Game::World::Object
 {
-	void Wall::OnComponentInitialization()
+	void Wall::InitializeComponents()
 	{
-		mCollider = GetComponent<Component::Collider>();
+		Object::InitializeComponents();
 	}
 
 	void Wall::Update()
 	{
-		mCollider->Update(GetPosition(), GetSize());
+		
 	}
 }

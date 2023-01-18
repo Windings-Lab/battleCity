@@ -2,20 +2,25 @@
 #include "Bullet.h"
 
 #include "BattleCity/Game/World/Object/Components/Movable.h"
-#include "BattleCity/Game/World/Object/Components/Collider.h"
 
 namespace BattleCity::Game::World::Object
 {
-    void Bullet::OnComponentInitialization()
+    void Bullet::InitializeComponents()
     {
-        mMovable = GetComponent<Component::Movable>();
-        mCollider = GetComponent<Component::Collider>();
+        Object::InitializeComponents();
+
+        mMovable = AddComponent<Component::Movable>(*this);
     }
 
     void Bullet::Update()
     {
-        mCollider->SetPreviousPosition(GetPosition());
+        Object::Update();
+
         SetPosition(GetPosition() + mMovable->GetSpeed());
-        mCollider->Update(GetPosition(), GetSize());
+    }
+
+    void Bullet::SetDirection(MovementDirection direction) noexcept
+    {
+        mMovable->SetDirection(direction);
     }
 }

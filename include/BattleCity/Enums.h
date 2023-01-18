@@ -34,16 +34,13 @@ namespace BattleCity
 			WorldBoundaries,
 		};
 
-		// Do not use int(4) since framework using it for another purpose
-		// Look at FRKey
 		enum class MovementDirection
 		{
-			Error,
 			Right,
 			Left,
 			Down,
-			Up = 5,
-			Idle
+			Up,
+			Count
 		};
 	}
 }

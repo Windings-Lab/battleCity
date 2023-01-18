@@ -1,16 +1,17 @@
 #include "PCHeader.h"
 #include "Object.h"
 
-// ReSharper disable once CppUnusedIncludeDirective
-#include "Components/Component.h"
-
 #include "BattleCity/Engine/Texture/BCTexture.h"
 #include "BattleCity/Engine/Texture/TextureGroup.h"
+
+#include "BattleCity/Game/World/Object/Components/Collider.h"
 
 namespace BattleCity::Game::World::Object
 {
     Object::Object(const Engine::Texture::Group& group)
-	    : Subject(this)
+	    : Subject()
+		, ComponentFactory()
+		, mCollider(nullptr)
 		, mTextureGroup(&group)
 		, mCurrentTexture(nullptr)
     {
@@ -22,17 +23,17 @@ namespace BattleCity::Game::World::Object
 
     void Object::Update()
     {
+        if(GetPosition() != GetPreviousPosition())
+        {
+            SetPreviousPosition(GetPosition());
+
+            NotifyObjectUpdated(*this); 
+        }
     }
 
     void Object::Draw(float interpolation)
     {
-        mDrawPosition.X = mDrawPosition.X + static_cast<int>(static_cast<float>(mPosition.X - mDrawPosition.X) * interpolation);
-        mDrawPosition.Y = mDrawPosition.Y + static_cast<int>(static_cast<float>(mPosition.Y - mDrawPosition.Y) * interpolation);
-        mCurrentTexture->DrawAt(mDrawPosition.X, mDrawPosition.Y);
-    }
-
-    void Object::OnComponentInitialization()
-    {
+        mCurrentTexture->DrawAt(GetPosition().X, GetPosition().Y, interpolation);
     }
 
     int Object::GetID() const noexcept
@@ -48,26 +49,44 @@ namespace BattleCity::Game::World::Object
     {
         return mPosition;
     }
+    const Size& Object::GetSize() const noexcept
+    {
+        return mSize;
+    }
 
     void Object::ChangeTextureTo(Framework::TextureType type)
     {
         mCurrentTexture = mTextureGroup->GetTextureBy(type);
-        mCurrentTexture->GetSize(mSize.X, mSize.Y);
-    }
 
+        mCurrentTexture->GetSize(mSize.X, mSize.Y);
+        mCurrentTexture->SetDrawPosition(GetPosition().X, GetPosition().Y);
+    }
     Framework::TextureType Object::GetTextureType() const noexcept
     {
         return mCurrentTexture->GetType();
     }
 
-    void Object::SetDrawPosition(Position pos) noexcept
+    const Engine::Physics::Rectangle& Object::GetBounds() const noexcept
     {
-        mDrawPosition.X = pos.X;
-        mDrawPosition.Y = pos.Y;
+        return mCollider->GetRectangle();
+    }
+    void Object::UpdateCollider() noexcept
+    {
+        mCollider->SetPosition(GetPosition());
+        mCollider->SetSize(GetSize());
     }
 
-    const Size& Object::GetSize() const noexcept
+    void Object::InitializeComponents()
     {
-        return mSize;
+        mCollider = AddComponent<Component::Collider>(*this);
+    }
+
+    void Object::SetPreviousPosition(const Position& pos) noexcept
+    {
+        mCollider->SetPreviousPosition(pos);
+    }
+    const Position& Object::GetPreviousPosition() const noexcept
+    {
+        return mCollider->GetPreviousPosition();
     }
 }

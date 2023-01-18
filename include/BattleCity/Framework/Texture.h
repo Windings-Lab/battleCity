@@ -2,6 +2,13 @@
 
 namespace BattleCity::Framework
 {
+	using Interpolation = float;
+	using X = int;
+	using Y = int;
+
+	using Width = int;
+	using Height = int;
+
 	enum class TextureName
 	{
 		Error,
@@ -44,7 +51,7 @@ namespace BattleCity::Framework
 
 	private:
 		Texture();
-		Texture(Sprite*, TextureName, TextureType, int, int);
+		Texture(Sprite*, TextureName, TextureType, X, Y, Width, Height);
 
 	protected:
 		Texture(const char*, TextureName, TextureType);
@@ -55,12 +62,13 @@ namespace BattleCity::Framework
 
 		virtual ~Texture();
 
-		void DrawAt(int, int) const noexcept;
+		void DrawAt(X, Y, Interpolation) const noexcept;
+		void SetDrawPosition(X, Y) const noexcept;
 
 		TextureName GetName() const noexcept;
 		TextureType GetType() const noexcept;
 
-		void GetSize(int&, int&) const noexcept;
+		void GetSize(Width&, Height&) const noexcept;
 
 	private:
 		Sprite* mTexture;
@@ -68,6 +76,8 @@ namespace BattleCity::Framework
 		TextureName mName;
 		TextureType mType;
 
+		mutable X mX;
+		mutable Y mY;
 		int mWidth;
 		int mHeight;
 	};

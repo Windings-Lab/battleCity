@@ -1,7 +1,14 @@
 #pragma once
 
 #include "BattleCity/Game/World/Object/ObjectAliases.h"
+
+#include "Components/ComponentFactory.h"
 #include "Observer/ObjectSubject.h"
+
+namespace BattleCity::Engine::Physics
+{
+	class Rectangle;
+}
 
 namespace BattleCity::Framework
 {
@@ -18,61 +25,19 @@ namespace BattleCity::Game::World::Object
 {
 	namespace Component
 	{
-		class Component;
+		class Collider;
 	}
 
-	using ComponentContainer = std::unordered_map<std::type_index, std::unique_ptr<Component::Component>>;
-
-	class Object : public Subject
+	class Object : public Subject, public ComponentFactory
 	{
 	public:
-		Object(const Engine::Texture::Group&);
+		explicit Object(const Engine::Texture::Group&);
 
 		DISALLOW_COPY_MOVE(Object)
 
 		~Object() override = 0;
 
-		virtual void OnComponentInitialization();
-
-		template<typename T, typename... Args
-			, typename = std::enable_if_t<std::is_base_of_v<Component::Component, T>>>
-		T* AddComponent(Args&&... args)
-		{
-			using std::type_index;
-
-			mComponents.try_emplace(type_index(typeid(T))
-									, std::make_unique<T>(*this, std::forward<Args>(args)...));
-
-			return static_cast<T*>(mComponents.at(type_index(typeid(T))).get());
-		}
-
-		template<typename RetType
-				, typename = std::enable_if_t<std::is_base_of_v<Component::Component, RetType>>>
-		RetType* GetComponent() const
-		{
-			using std::type_index;
-
-			const auto componentIt = mComponents.find(type_index(typeid(RetType)));
-
-			if (componentIt == mComponents.end())
-			{
-				std::cerr << typeid(*this).name() << " have no component called: " << typeid(RetType).name() << "\n";
-				return nullptr;
-			}
-
-			return static_cast<RetType*>(componentIt->second.get());
-		}
-
-		template<typename T
-			, typename = std::enable_if_t<std::is_base_of_v<Component::Component, T>>>
-		bool HasComponent() const
-		{
-			using std::type_index;
-
-			return mComponents.find(type_index(typeid(T))) != mComponents.end();
-		}
-
-		virtual void Update();
+		virtual void Update() = 0;
 
 		void Draw(float);
 
@@ -81,22 +46,27 @@ namespace BattleCity::Game::World::Object
 		void SetPosition(Position) noexcept;
 		const Position& GetPosition() const noexcept;
 
+		const Size& GetSize() const noexcept;
+
 		void ChangeTextureTo(Framework::TextureType);
 		Framework::TextureType GetTextureType() const noexcept;
-		void SetDrawPosition(Position) noexcept;
 
-		const Size& GetSize() const noexcept;
+		const Engine::Physics::Rectangle& GetBounds() const noexcept;
+		void UpdateCollider() noexcept;
+
+	protected:
+		void InitializeComponents() override = 0;
+		void SetPreviousPosition(const Position&) noexcept;
+		const Position& GetPreviousPosition() const noexcept;
 
 	private:
 		ID mID;
 		Position mPosition;
 		Size mSize;
 
+		Component::Collider* mCollider;
+
 		mutable const Engine::Texture::Group* mTextureGroup;
 		mutable const Engine::Texture::Texture* mCurrentTexture;
-		Position mDrawPosition;
-
-		ComponentContainer mComponents;
-
 	};
 }

@@ -8,5 +8,11 @@ namespace BattleCity::Game::World::Object
     {
     public:
         using Object::Object;
+
+        void Update() override;
+
+    private:
+        void InitializeComponents() override;
+
     };
 }

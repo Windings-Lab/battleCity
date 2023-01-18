@@ -2,28 +2,62 @@
 
 #include "Tank.h"
 
-#include "BattleCity/Game/World/Object/Components/Collider.h"
+#include "BattleCity/Framework/Texture.h"
 #include "BattleCity/Game/World/Object/Components/Fireable.h"
 #include "BattleCity/Game/World/Object/Components/Movable.h"
 
 namespace BattleCity::Game::World::Object
 {
-    void Tank::OnComponentInitialization()
+    void Tank::InitializeComponents()
     {
-        mFireable = GetComponent<Component::Fireable>();
-        mMovable = GetComponent<Component::Movable>();
-        mCollider = GetComponent<Component::Collider>();
+        Object::InitializeComponents();
+
+        mFireable = AddComponent<Component::Fireable>(*this);
+        mMovable = AddComponent<Component::Movable>(*this);
     }
 
     void Tank::Update()
     {
-        mCollider->SetPreviousPosition(GetPosition());
+        Object::Update();
+
         SetPosition(GetPosition() + mMovable->GetSpeed());
-        mCollider->Update(GetPosition(), GetSize());
     }
 
     void Tank::Fire()
     {
         mFireable->Fire();
+    }
+    void Tank::SetBullet(const std::function<std::shared_ptr<Bullet>(Position)>& bullet)
+    {
+        mFireable->SetBullet(bullet);
+    }
+
+    void Tank::SetSpeed(Speed num) noexcept
+    {
+        mMovable->SetSpeed(num);
+    }
+    void Tank::SetDirection(MovementDirection direction) noexcept
+    {
+        mMovable->SetDirection(direction);
+        switch (direction)
+        {
+        case MovementDirection::Right:
+            ChangeTextureTo(Framework::TextureType::Right);
+            break;
+        case MovementDirection::Left: 
+            ChangeTextureTo(Framework::TextureType::Left);
+            break;
+        case MovementDirection::Down: 
+            ChangeTextureTo(Framework::TextureType::Down);
+            break;
+        case MovementDirection::Up: 
+            ChangeTextureTo(Framework::TextureType::Up);
+            break;
+        default: ;
+        }
+    }
+    void Tank::StopMovement() noexcept
+    {
+        mMovable->StopMovement();
     }
 }

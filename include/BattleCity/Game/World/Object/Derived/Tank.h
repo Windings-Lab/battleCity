@@ -4,9 +4,10 @@
 
 namespace BattleCity::Game::World::Object
 {
+	class Bullet;
+
 	namespace Component
 	{
-		class Collider;
 		class Movable;
 		class Fireable;
 	}
@@ -16,15 +17,20 @@ namespace BattleCity::Game::World::Object
 	public:
 		using Object::Object;
 
-		void OnComponentInitialization() override;
+		void InitializeComponents() override;
 
 		void Update() override;
 
 		void Fire();
 
+		void SetBullet(const std::function<std::shared_ptr<Bullet>(Position)>&);
+
+		void SetSpeed(Speed) noexcept;
+		void SetDirection(MovementDirection) noexcept;
+		void StopMovement() noexcept;
+
 	private:
 		Component::Fireable* mFireable;
 		Component::Movable* mMovable;
-		Component::Collider* mCollider;
 	};
 }

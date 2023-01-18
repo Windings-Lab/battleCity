@@ -25,17 +25,19 @@ namespace BattleCity::Framework
 	}
 
 	Texture::Texture(const char* path, const TextureName name, const TextureType type)
-		: Texture(createSprite(path), name, type, 0, 0)
+		: Texture(createSprite(path), name, type, 0, 0, 0, 0)
 	{
 		getSpriteSize(mTexture, mWidth, mHeight);
 	}
 
 	Texture::Texture()
-		: Texture(nullptr, TextureName::Error, TextureType::Error, 0, 0) {}
-	Texture::Texture(Sprite* texture, TextureName name, TextureType type, int w, int h)
+		: Texture(nullptr, TextureName::Error, TextureType::Error, 0, 0, 0, 0) {}
+	Texture::Texture(Sprite* texture, TextureName name, TextureType type, X x , Y y, Width w, Height h)
 		: mTexture(texture)
 		, mName(name)
 		, mType(type)
+		, mX(x)
+		, mY(y)
 		, mWidth(w)
 		, mHeight(h)
 	{}
@@ -58,9 +60,17 @@ namespace BattleCity::Framework
 		}
 	}
 
-	void Texture::DrawAt(int x, int y) const noexcept
+	void Texture::DrawAt(X x, Y y, Interpolation interpolation) const noexcept
 	{
+		mX = mX + static_cast<X>(static_cast<Interpolation>(x - mX) * interpolation);
+		mY = mY + static_cast<Y>(static_cast<Interpolation>(y - mY) * interpolation);
+
 		drawSprite(mTexture, x, y);
+	}
+	void Texture::SetDrawPosition(X x, Y y) const noexcept
+	{
+		mX = x;
+		mY = y;
 	}
 
 	TextureName Texture::GetName() const noexcept
@@ -73,7 +83,7 @@ namespace BattleCity::Framework
 		return mType;
 	}
 
-	void Texture::GetSize(int& w, int& h) const noexcept
+	void Texture::GetSize(Width& w, Height& h) const noexcept
 	{
 		w = mWidth;
 		h = mHeight;

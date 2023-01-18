@@ -6,7 +6,6 @@ namespace BattleCity::Game::World::Object
 {
 	namespace Component
 	{
-		class Collider;
 		class Movable;
 	}
 
@@ -15,12 +14,14 @@ namespace BattleCity::Game::World::Object
     public:
         using Object::Object;
 
-        void OnComponentInitialization() override;
-
         void Update() override;
+
+        void SetDirection(MovementDirection) noexcept;
+
+	private:
+        void InitializeComponents() override;
 
     private:
         Component::Movable* mMovable;
-        Component::Collider* mCollider;
     };
 }

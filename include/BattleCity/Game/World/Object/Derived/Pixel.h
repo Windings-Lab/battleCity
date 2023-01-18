@@ -7,6 +7,10 @@ namespace BattleCity::Game::World::Object
 	{
 	public:
 		using Object::Object;
+
+		void InitializeComponents() override;
+
+		void Update() override;
 	};
 }
 

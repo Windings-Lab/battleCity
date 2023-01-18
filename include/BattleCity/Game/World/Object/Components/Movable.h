@@ -19,9 +19,10 @@ namespace BattleCity::Game::World::Object::Component
 		Movable& SetSpeed(Speed) noexcept;
 		Vector2Int GetSpeed() const noexcept;
 
-		Movable& SetDirection(Framework::TextureType) noexcept;
-		Movable& ResetDirection() noexcept;
+		Movable& SetDirection(MovementDirection) noexcept;
 		const Direction& GetDirection() const noexcept;
+
+		void StopMovement() noexcept;
 
 	private:
 		Speed mSpeed = 0;
