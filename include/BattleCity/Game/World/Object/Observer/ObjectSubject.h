@@ -7,21 +7,22 @@ namespace BattleCity::Game::World::Object
 
 	class Subject
 	{
-    public:
-		explicit Subject(const Object*);
+    protected:
+		Subject();
 
 		DISALLOW_COPY_MOVE(Subject)
 
 		virtual ~Subject();
 
+	public:
 		void RegisterObserver(Observer* observer);
-
         void UnregisterObserver(Observer* observer);
 
-        void NotifyOnObjectUpdate() const;
+	public:
+        void NotifyObjectUpdated(const Object&) const;
+		void NotifyObjectDeleted(const Object&) const;
 
     private:
-        std::list<Observer*> mObservers;
-		const Object* mObjectRef;
+        std::vector<Observer*> mObservers;
 	};
 }

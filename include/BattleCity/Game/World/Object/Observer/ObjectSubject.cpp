@@ -2,18 +2,12 @@
 #include "ObjectSubject.h"
 
 #include "ObjectObserver.h"
+#include "BattleCity/Game/World/Object/Object.h"
 
 namespace BattleCity::Game::World::Object
 {
-	Subject::Subject(const Object* obj) : mObjectRef(obj) {}
-
-	Subject::~Subject()
-	{
-		for (const auto& observer : mObservers)
-		{
-			observer->OnObjectDelete(mObjectRef);
-		}
-	}
+	Subject::Subject() = default;
+	Subject::~Subject() = default;
 
 	void Subject::RegisterObserver(Observer* observer)
 	{
@@ -21,14 +15,21 @@ namespace BattleCity::Game::World::Object
 	}
 	void Subject::UnregisterObserver(Observer* observer)
 	{
-		mObservers.remove(observer);
+		mObservers.erase(std::remove(mObservers.begin(), mObservers.end(), observer), mObservers.end());
 	}
 
-	void Subject::NotifyOnObjectUpdate() const
+	void Subject::NotifyObjectUpdated(const Object& obj) const
 	{
 		for (const auto& observer : mObservers)
 		{
-			observer->OnObjectUpdate(mObjectRef);
+			observer->OnObjectUpdate(obj, { [&obj] { const_cast<Object&>(obj).UpdateCollider(); }});
+		}
+	}
+	void Subject::NotifyObjectDeleted(const Object& obj) const
+	{
+		for (const auto& observer : mObservers)
+		{
+			observer->OnObjectDelete(obj);
 		}
 	}
 }
