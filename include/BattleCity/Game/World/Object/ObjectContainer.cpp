@@ -21,7 +21,8 @@ namespace BattleCity::Game::World::Object
 
 	std::shared_ptr<Object> Container::GetObject(int id) const
 	{
-		return mContainer[id];
+		int index = mHashMap.at(id);
+		return mContainer[index];
 	}
 
 	void Container::Insert(std::shared_ptr<Object>&& objPtr)
