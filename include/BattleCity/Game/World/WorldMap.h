@@ -1,7 +1,13 @@
 #pragma once
 
+#include "BattleCity/Engine/Physics/Rectangle.h"
 #include "BattleCity/Game/World/Object/Containers/ObjectContainer.h"
 #include "Object/Factory/ObjectFactoryStandart.h"
+
+namespace BattleCity::Engine::Physics
+{
+	class Rectangle;
+}
 
 namespace BattleCity::Engine::Texture
 {
@@ -11,6 +17,7 @@ namespace BattleCity::Engine::Texture
 namespace BattleCity::Game::World
 {
 	using Relative = Vector2Int;
+	using Bounds = Engine::Physics::Rectangle;
 
 	class Level;
 
@@ -23,11 +30,9 @@ namespace BattleCity::Game::World
 
 		~Map() = default;
 
-		void SetWorldRelative(const World::Relative&) noexcept;
-		const World::Relative& GetWorldRelative() const noexcept;
-
 		// Returns object that can be controlled with user Input
 		std::shared_ptr<Object::Object> CreateMap(const Level&);
+		const Engine::Physics::Rectangle& GetBounds() const noexcept;
 
 		std::shared_ptr<Object::Object> GetObjectBy(Object::ID) const;
 		void InsertObject(std::shared_ptr<Object::Object>, Object::Layer = Object::Layer::Front);
@@ -37,10 +42,11 @@ namespace BattleCity::Game::World
 
 	private:
 		Object::Factory::Standart mObjectFactory;
-		World::Relative mWorldRelative;
 
 		Object::Container mBackLayer;
 		Object::Container mFrontLayer;
 		Object::Container mUILayer;
+
+		Bounds mBounds;
 	};
 }

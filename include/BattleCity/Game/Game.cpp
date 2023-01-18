@@ -65,7 +65,7 @@ namespace BattleCity::Game
 
 	void Game::Update()
 	{
-		for (auto& obj : mMap.GetFrontLayer())
+		for (auto& obj : mMap.GetLayer(World::Object::Layer::Front))
 		{
 			obj->Update();
 		}
@@ -73,14 +73,19 @@ namespace BattleCity::Game
 
 	void Game::Draw(float interpolation)
 	{
-		for (auto& obj : mMap.GetBackLayer())
+		for (auto& obj : mMap.GetLayer(World::Object::Layer::Back))
 		{
 			obj->Draw(interpolation);
 		}
 
-		for (auto& obj : mMap.GetFrontLayer())
+		for (auto& obj : mMap.GetLayer(World::Object::Layer::Front))
 		{
 			obj->Draw(interpolation);
+		}
+
+		for (auto& obj : mMap.GetLayer(World::Object::Layer::UI))
+		{
+			obj->Draw(1);
 		}
 	}
 

@@ -12,17 +12,9 @@
 
 namespace BattleCity::Game::World
 {
-	Map::Map(Relative pos, const Engine::Texture::GroupLibrary& textureGroups)
+	Map::Map(const Engine::Texture::GroupLibrary& textureGroups)
 		: mObjectFactory(*this, textureGroups)
-		, mWorldRelative(pos)
-	{}
-	void Map::SetWorldRelative(const Relative& worldRelative) noexcept
 	{
-		mWorldRelative = worldRelative;
-	}
-	const Relative& Map::GetWorldRelative() const noexcept
-	{
-		return mWorldRelative;
 	}
 
 	std::shared_ptr<Object::Object> Map::CreateMap(const Level& level)
@@ -30,19 +22,18 @@ namespace BattleCity::Game::World
 		mFrontLayer.Clear();
 		mBackLayer.Clear();
 
-		auto worldBoundaries = mObjectFactory.CreateWorldBoundaries();
-		worldBoundaries->SetPosition(mWorldRelative);
+		mObjectFactory.CreateWorldBoundaries(mBounds.GetPosition());
 
 		std::shared_ptr<Object::Tank> player = nullptr;
 
 		const auto& mapColumn = level;
-		int nextPosY = mWorldRelative.Y;
+		int nextPosY = mBounds.GetPosition().Y;
 		for (const auto& mapRow : mapColumn)
 		{
-			int nextPosX = mWorldRelative.X;
+			int nextPosX = mBounds.GetPosition().X;
 			for (const auto& objectType : mapRow)
 			{
-				Vector2Int position(nextPosX, nextPosY);
+				const Vector2Int position(nextPosX, nextPosY);
 				switch (objectType)
 				{
 				case Object::Type::None: 
@@ -77,10 +68,15 @@ namespace BattleCity::Game::World
 			nextPosY += 16;
 		}
 #ifdef _DEBUG
-		std::cout << "Created map with: " << mFrontLayer.GetSize() + mBackLayer.GetSize() << " object count." << std::endl;
+		std::cout << "Created map with: " << mFrontLayer.GetSize() << " object count." << std::endl;
 #endif
 
 		return player;
+	}
+
+	const Engine::Physics::Rectangle& Map::GetBounds() const noexcept
+	{
+		return mBounds;
 	}
 
 	std::shared_ptr<Object::Object> Map::GetObjectBy(Object::ID id) const
