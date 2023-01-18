@@ -1,6 +1,6 @@
 #pragma once
 
-#include "BattleCity/Game/World/Object/ObjectContainer.h"
+#include "BattleCity/Game/World/Object/Containers/ObjectContainer.h"
 #include "Object/Factory/ObjectFactoryStandart.h"
 
 namespace BattleCity::Engine::Texture
