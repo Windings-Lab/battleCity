@@ -38,9 +38,6 @@
     <ClCompile Include="include\BattleCity\Engine\Texture\TextureGroupLibrary.cpp">
       <Filter>BattleCity\Engine\Texture</Filter>
     </ClCompile>
-    <ClCompile Include="include\BattleCity\Game\World\Object\ObjectContainer.cpp">
-      <Filter>BattleCity\Game\World\Object</Filter>
-    </ClCompile>
     <ClCompile Include="include\BattleCity\Game\World\Object\Factory\ObjectFactory.cpp">
       <Filter>BattleCity\Game\World\Object\Factory</Filter>
     </ClCompile>
@@ -92,11 +89,10 @@
     <ClCompile Include="include\BattleCity\Game\World\Object\Components\Collider.cpp">
       <Filter>BattleCity\Game\World\Object\Components</Filter>
     </ClCompile>
-    </ClCompile>
     <ClCompile Include="include\BattleCity\Game\World\Object\Derived\Pixel.cpp">
       <Filter>BattleCity\Game\World\Object\Derived</Filter>
     </ClCompile>
-    <ClCompile Include="include\BattleCity\Engine\Debug.cpp">
+    <ClCompile Include="include\BattleCity\Engine\DebugDrawer.cpp">
       <Filter>BattleCity\Engine</Filter>
     </ClCompile>
     <ClCompile Include="include\BattleCity\Game\World\Object\Observer\ObjectObserver.cpp">
@@ -104,6 +100,10 @@
     </ClCompile>
     <ClCompile Include="include\BattleCity\Game\World\Object\Observer\ObjectSubject.cpp">
       <Filter>BattleCity\Game\World\Object\Observer</Filter>
+    </ClCompile>
+    <ClCompile Include="include\BattleCity\Game\World\Object\Components\ComponentFactory.cpp" />
+    <ClCompile Include="include\BattleCity\Game\World\Object\Containers\ObjectContainer.cpp">
+      <Filter>BattleCity\Game\World\Object\Containers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -167,9 +167,6 @@
     <ClInclude Include="include\BattleCity\Engine\Texture\TextureGroupLibrary.h">
       <Filter>BattleCity\Engine\Texture</Filter>
     </ClInclude>
-    <ClInclude Include="include\BattleCity\Game\World\Object\ObjectContainer.h">
-      <Filter>BattleCity\Game\World\Object</Filter>
-    </ClInclude>
     <ClInclude Include="include\BattleCity\Game\World\Object\Factory\ObjectFactoryStandart.h">
       <Filter>BattleCity\Game\World\Object\Factory</Filter>
     </ClInclude>
@@ -227,7 +224,7 @@
     <ClInclude Include="include\BattleCity\Game\World\Object\Derived\Pixel.h">
       <Filter>BattleCity\Game\World\Object\Derived</Filter>
     </ClInclude>
-    <ClInclude Include="include\BattleCity\Engine\Debug.h">
+    <ClInclude Include="include\BattleCity\Engine\DebugDrawer.h">
       <Filter>BattleCity\Engine</Filter>
     </ClInclude>
     <ClInclude Include="include\BattleCity\Game\World\Object\Observer\ObjectObserver.h">
@@ -235,6 +232,10 @@
     </ClInclude>
     <ClInclude Include="include\BattleCity\Game\World\Object\Observer\ObjectSubject.h">
       <Filter>BattleCity\Game\World\Object\Observer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Game\World\Object\Components\ComponentFactory.h" />
+    <ClInclude Include="include\BattleCity\Game\World\Object\Containers\ObjectContainer.h">
+      <Filter>BattleCity\Game\World\Object\Containers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -285,6 +286,9 @@
     </Filter>
     <Filter Include="BattleCity\Game\World\Object\Observer">
       <UniqueIdentifier>{60da8032-42f9-4af1-a2f2-cd8fe85cd1d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BattleCity\Game\World\Object\Containers">
+      <UniqueIdentifier>{273583bb-5419-4762-8ada-318a9858f6b1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

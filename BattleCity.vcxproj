@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="include\BattleCity\Engine\Debug.cpp" />
+    <ClCompile Include="include\BattleCity\Engine\DebugDrawer.cpp" />
     <ClCompile Include="include\BattleCity\Engine\Physics\Rectangle.cpp" />
     <ClCompile Include="include\BattleCity\Engine\Texture\BCTexture.cpp" />
     <ClCompile Include="include\BattleCity\Engine\Texture\TextureGroup.cpp" />
@@ -32,9 +32,11 @@
     <ClCompile Include="include\BattleCity\Game\Game.cpp" />
     <ClCompile Include="include\BattleCity\Game\World\Object\Components\Collider.cpp" />
     <ClCompile Include="include\BattleCity\Game\World\Object\Components\Component.cpp" />
+    <ClCompile Include="include\BattleCity\Game\World\Object\Components\ComponentFactory.cpp" />
     <ClCompile Include="include\BattleCity\Game\World\Object\Components\Fireable.cpp" />
     <ClCompile Include="include\BattleCity\Game\World\Object\Components\Health.cpp" />
     <ClCompile Include="include\BattleCity\Game\World\Object\Components\Movable.cpp" />
+    <ClCompile Include="include\BattleCity\Game\World\Object\Containers\ObjectContainer.cpp" />
     <ClCompile Include="include\BattleCity\Game\World\Object\Derived\Bullet.cpp" />
     <ClCompile Include="include\BattleCity\Game\World\Object\Derived\Explosion.cpp" />
     <ClCompile Include="include\BattleCity\Game\World\Object\Derived\Phoenix.cpp" />
@@ -46,7 +48,6 @@
     <ClCompile Include="include\BattleCity\Game\World\Object\Factory\ObjectFactory.cpp" />
     <ClCompile Include="include\BattleCity\Game\World\Object\Factory\ObjectFactoryStandart.cpp" />
     <ClCompile Include="include\BattleCity\Game\World\Object\Object.cpp" />
-    <ClCompile Include="include\BattleCity\Game\World\Object\ObjectContainer.cpp" />
     <ClCompile Include="include\BattleCity\Game\World\Object\Observer\ObjectObserver.cpp" />
     <ClCompile Include="include\BattleCity\Game\World\Object\Observer\ObjectSubject.cpp" />
     <ClCompile Include="include\BattleCity\Game\World\WorldLevel.cpp" />
@@ -61,7 +62,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\BattleCity\Engine\Debug.h" />
+    <ClInclude Include="include\BattleCity\Engine\DebugDrawer.h" />
     <ClInclude Include="include\BattleCity\Engine\Physics\Rectangle.h" />
     <ClInclude Include="include\BattleCity\Engine\Texture\BCTexture.h" />
     <ClInclude Include="include\BattleCity\Engine\Texture\TextureAliases.h" />
@@ -77,9 +78,11 @@
     <ClInclude Include="include\BattleCity\Game\Game.h" />
     <ClInclude Include="include\BattleCity\Game\World\Object\Components\Collider.h" />
     <ClInclude Include="include\BattleCity\Game\World\Object\Components\Component.h" />
+    <ClInclude Include="include\BattleCity\Game\World\Object\Components\ComponentFactory.h" />
     <ClInclude Include="include\BattleCity\Game\World\Object\Components\Fireable.h" />
     <ClInclude Include="include\BattleCity\Game\World\Object\Components\Health.h" />
     <ClInclude Include="include\BattleCity\Game\World\Object\Components\Movable.h" />
+    <ClInclude Include="include\BattleCity\Game\World\Object\Containers\ObjectContainer.h" />
     <ClInclude Include="include\BattleCity\Game\World\Object\Derived\Bullet.h" />
     <ClInclude Include="include\BattleCity\Game\World\Object\Derived\Explosion.h" />
     <ClInclude Include="include\BattleCity\Game\World\Object\Derived\Phoenix.h" />
@@ -92,7 +95,6 @@
     <ClInclude Include="include\BattleCity\Game\World\Object\Factory\ObjectFactoryStandart.h" />
     <ClInclude Include="include\BattleCity\Game\World\Object\Object.h" />
     <ClInclude Include="include\BattleCity\Game\World\Object\ObjectAliases.h" />
-    <ClInclude Include="include\BattleCity\Game\World\Object\ObjectContainer.h" />
     <ClInclude Include="include\BattleCity\Game\World\Object\Observer\ObjectObserver.h" />
     <ClInclude Include="include\BattleCity\Game\World\Object\Observer\ObjectSubject.h" />
     <ClInclude Include="include\BattleCity\Game\World\WorldLevel.h" />
