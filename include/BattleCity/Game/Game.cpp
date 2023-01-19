@@ -97,7 +97,8 @@ namespace BattleCity::Game
 			auto collisions = mQuadTree.GetPossibleCollisions(obj);
 			for (auto other : collisions)
 			{
-				obj->ResolveCollisions(other);
+				auto penetration = obj->GetBounds().GetPenetration(other->GetBounds());
+				obj->ResolveCollisions(other, penetration);
 			}
 		}
 

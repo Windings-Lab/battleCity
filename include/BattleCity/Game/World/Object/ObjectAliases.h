@@ -11,6 +11,5 @@ namespace BattleCity::Game::World::Object
 	using Y = int;
 
 	using Speed = int;
-	using Velocity = int;
-	using Direction = Vector2Int;
+	using Velocity = Vector2Int;
 }
