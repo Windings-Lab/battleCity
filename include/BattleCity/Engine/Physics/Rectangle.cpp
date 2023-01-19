@@ -23,6 +23,17 @@ namespace BattleCity::Engine::Physics
 			GetY() <= other.GetY() + other.GetHeight() &&
 			GetY() + GetHeight() >= other.GetY());
 	}
+	Vector2Int Rectangle::GetPenetration(const Rectangle& other) const noexcept
+	{
+		int left   = std::max(GetX(), other.GetX());
+		int right  = std::min(GetX() + GetWidth(), other.GetX() + other.GetWidth());
+
+		int top    = std::max(GetY(), other.GetY());
+		int bottom = std::min(GetY() + GetHeight(), other.GetY() + other.GetHeight());
+
+		return { std::max(left, right) - std::min(left, right) + 1
+			     , std::max(top, bottom) - std::min(top, bottom) + 1 };
+	}
 
 	void Rectangle::SetPosition(const Position& position) noexcept
 	{

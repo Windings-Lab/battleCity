@@ -23,9 +23,23 @@ namespace BattleCity::Game::World::Object
         NotifyObjectUpdated(*this);
     }
 
-    void Tank::ResolveCollisions(const Object* object)
+    void Tank::ResolveCollisions(const Object* object, const Vector2Int& penetration)
     {
-	    Object::ResolveCollisions(object);
+        switch (mMovable->GetDirection())
+        {
+        case MovementDirection::Right:
+            SetX(GetPosition().X - penetration.X);
+            break;
+        case MovementDirection::Left:
+            SetX(GetPosition().X + penetration.X);
+            break;
+        case MovementDirection::Down:
+            SetY(GetPosition().Y - penetration.Y);
+            break;
+        case MovementDirection::Up:
+            SetY(GetPosition().Y + penetration.Y);
+            break;
+        }
         StopMovement();
     }
 

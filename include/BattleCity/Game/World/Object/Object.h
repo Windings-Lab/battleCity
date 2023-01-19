@@ -38,13 +38,15 @@ namespace BattleCity::Game::World::Object
 		~Object() override = 0;
 
 		virtual void Update() = 0;
-		virtual void ResolveCollisions(const Object*);
+		virtual void ResolveCollisions(const Object*, const Vector2Int&);
 
 		void Draw(float);
 
 		int GetID() const noexcept;
 
 		void SetPosition(Position) noexcept;
+		void SetX(X) noexcept;
+		void SetY(Y) noexcept;
 		const Position& GetPosition() const noexcept;
 
 		const Size& GetSize() const noexcept;

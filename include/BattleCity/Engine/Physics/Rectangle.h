@@ -36,6 +36,7 @@ namespace BattleCity::Engine::Physics
 		~Rectangle() = default;
 
 		bool Intersects(const Rectangle&) const noexcept;
+		Vector2Int GetPenetration(const Rectangle&) const noexcept;
 
 		void SetPosition(const Position&) noexcept;
 		const Position& GetPosition() const noexcept;

@@ -7,7 +7,7 @@ namespace BattleCity::Game::World::Object::Component
 {
 	Vector2Int Movable::GetSpeed() const noexcept
 	{
-		return mDirection * mSpeed;
+		return mVelocity * mSpeed;
 	}
 
 	Movable& Movable::SetSpeed(Speed speed) noexcept
@@ -21,30 +21,36 @@ namespace BattleCity::Game::World::Object::Component
 		switch (direction)
 		{
 			case MovementDirection::Left:
-				mDirection = { -1, 0 };
+				mVelocity = { -1, 0 };
 				break;
 			case MovementDirection::Right:
-				mDirection = { 1, 0 };
+				mVelocity = { 1, 0 };
 				break;
 			case MovementDirection::Up:
-				mDirection = { 0, -1 };
+				mVelocity = { 0, -1 };
 				break;
 			case MovementDirection::Down:
-				mDirection = { 0, 1 };
+				mVelocity = { 0, 1 };
 				break;
 			case MovementDirection::Count:
-			default: break;
+			default:
+				{
+					assert(false && "Movable: Invalid SetDirection");
+				}
+				break;
 		}
+
+		mDirection = direction;
 
 		return *this;
 	}
-	const Direction& Movable::GetDirection() const noexcept
+	MovementDirection Movable::GetDirection() const noexcept
 	{
 		return mDirection;
 	}
 
 	void Movable::StopMovement() noexcept
 	{
-		mDirection = { 0, 0 };
+		mVelocity = { 0, 0 };
 	}
 }

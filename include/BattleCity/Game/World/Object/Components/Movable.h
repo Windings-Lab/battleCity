@@ -20,12 +20,14 @@ namespace BattleCity::Game::World::Object::Component
 		Vector2Int GetSpeed() const noexcept;
 
 		Movable& SetDirection(MovementDirection) noexcept;
-		const Direction& GetDirection() const noexcept;
+		MovementDirection GetDirection() const noexcept;
 
 		void StopMovement() noexcept;
 
 	private:
 		Speed mSpeed = 0;
-		Direction mDirection;
+		Velocity mVelocity;
+
+		MovementDirection mDirection;
 	};
 }

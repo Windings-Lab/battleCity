@@ -25,12 +25,8 @@ namespace BattleCity::Game::World::Object
     {
     }
 
-    void Object::ResolveCollisions(const Object*)
+    void Object::ResolveCollisions(const Object*, const Vector2Int&)
     {
-        SetPosition(GetPreviousPosition());
-        SetPreviousPosition(GetPosition());
-
-        NotifyObjectUpdated(*this);
     }
 
     void Object::Draw(float interpolation)
@@ -47,6 +43,15 @@ namespace BattleCity::Game::World::Object
     {
         mPosition = pos;
     }
+    void Object::SetX(X x) noexcept
+    {
+        mPosition.X = x;
+    }
+    void Object::SetY(Y y) noexcept
+    {
+        mPosition.Y = y;
+    }
+
     const Position& Object::GetPosition() const noexcept
     {
         return mPosition;
