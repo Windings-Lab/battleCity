@@ -21,16 +21,6 @@ namespace BattleCity::Game::World::Object::Component
 		return mRectangle.GetPosition();
 	}
 
-	void Collider::SetPreviousPosition(const Position& prev) noexcept
-	{
-		mPrevious.X = prev.X;
-		mPrevious.Y = prev.Y;
-	}
-	const Position& Collider::GetPreviousPosition() const noexcept
-	{
-		return mPrevious;
-	}
-
 	void Collider::SetSize(const Size& size) noexcept
 	{
 		mRectangle.SetSize(size);
