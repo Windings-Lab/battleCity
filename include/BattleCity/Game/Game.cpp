@@ -97,8 +97,7 @@ namespace BattleCity::Game
 			auto collisions = mQuadTree.GetPossibleCollisions(obj);
 			for (auto other : collisions)
 			{
-				auto penetration = obj->GetBounds().GetPenetration(other->GetBounds());
-				obj->ResolveCollisions(other, penetration);
+				obj->ResolveCollisions(other);
 			}
 		}
 
@@ -161,7 +160,13 @@ namespace BattleCity::Game
 				player->Fire();
 			}
 			break;
-		case BattleCity::Framework::FRMouseButton::MIDDLE: break;
+		case BattleCity::Framework::FRMouseButton::MIDDLE:
+			if (!isReleased)
+			{
+				const_cast<World::Object::Container&>(mMap.GetLayer(World::Object::Layer::UI)).Clear();
+				mDebug.DrawRectangle(player->GetBounds());
+			}
+			break;
 		case BattleCity::Framework::FRMouseButton::RIGHT:
 			if (!isReleased)
 			{

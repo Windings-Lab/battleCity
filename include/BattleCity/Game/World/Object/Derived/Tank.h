@@ -20,7 +20,7 @@ namespace BattleCity::Game::World::Object
 		void InitializeComponents() override;
 
 		void Update() override;
-		void ResolveCollisions(const Object*, const Vector2Int&) override;
+		void ResolveCollisions(const Object*) override;
 
 		void Fire();
 

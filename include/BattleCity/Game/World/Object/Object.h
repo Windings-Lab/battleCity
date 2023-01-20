@@ -38,7 +38,7 @@ namespace BattleCity::Game::World::Object
 		~Object() override = 0;
 
 		virtual void Update() = 0;
-		virtual void ResolveCollisions(const Object*, const Vector2Int&);
+		virtual void ResolveCollisions(const Object*);
 
 		void Draw(float);
 
@@ -59,8 +59,6 @@ namespace BattleCity::Game::World::Object
 
 	protected:
 		void InitializeComponents() override = 0;
-		void SetPreviousPosition(const Position&) noexcept;
-		const Position& GetPreviousPosition() const noexcept;
 
 	private:
 		ID mID;

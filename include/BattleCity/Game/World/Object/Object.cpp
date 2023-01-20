@@ -23,10 +23,12 @@ namespace BattleCity::Game::World::Object
 
     void Object::Update()
     {
+        NotifyObjectUpdated(*this);
     }
 
-    void Object::ResolveCollisions(const Object*, const Vector2Int&)
+    void Object::ResolveCollisions(const Object*)
     {
+        NotifyObjectUpdated(*this);
     }
 
     void Object::Draw(float interpolation)
@@ -86,14 +88,5 @@ namespace BattleCity::Game::World::Object
     void Object::InitializeComponents()
     {
         mCollider = AddComponent<Component::Collider>(*this);
-    }
-
-    void Object::SetPreviousPosition(const Position& pos) noexcept
-    {
-        mCollider->SetPreviousPosition(pos);
-    }
-    const Position& Object::GetPreviousPosition() const noexcept
-    {
-        return mCollider->GetPreviousPosition();
     }
 }

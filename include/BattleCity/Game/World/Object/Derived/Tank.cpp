@@ -2,6 +2,7 @@
 
 #include "Tank.h"
 
+#include "BattleCity/Engine/Physics/Rectangle.h"
 #include "BattleCity/Framework/Texture.h"
 #include "BattleCity/Game/World/Object/Components/Fireable.h"
 #include "BattleCity/Game/World/Object/Components/Movable.h"
@@ -18,29 +19,33 @@ namespace BattleCity::Game::World::Object
 
     void Tank::Update()
     {
-        SetPreviousPosition(GetPosition());
         SetPosition(GetPosition() + mMovable->GetSpeed());
-        NotifyObjectUpdated(*this);
+
+        Object::Update();
     }
 
-    void Tank::ResolveCollisions(const Object* object, const Vector2Int& penetration)
+    void Tank::ResolveCollisions(const Object* other)
     {
+        auto penetration = GetBounds().GetPenetration(other->GetBounds());
+
         switch (mMovable->GetDirection())
         {
         case MovementDirection::Right:
-            SetX(GetPosition().X - penetration.X);
+            SetX(GetBounds().GetPosition().X + penetration.X);
             break;
         case MovementDirection::Left:
-            SetX(GetPosition().X + penetration.X);
+            SetX(GetBounds().GetPosition().X + penetration.X);
             break;
         case MovementDirection::Down:
-            SetY(GetPosition().Y - penetration.Y);
+            SetY(GetBounds().GetPosition().Y + penetration.Y);
             break;
         case MovementDirection::Up:
-            SetY(GetPosition().Y + penetration.Y);
+            SetY(GetBounds().GetPosition().Y + penetration.Y);
             break;
         }
         StopMovement();
+
+        Object::ResolveCollisions(other);
     }
 
     void Tank::Fire()
