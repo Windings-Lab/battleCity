@@ -86,6 +86,15 @@ namespace BattleCity::Engine::Physics
 		return { mPosition.X + (mSize.X >> 1), mPosition.Y + (mSize.Y >> 1) };
 	}
 
+	bool Rectangle::operator==(const Rectangle& other) const noexcept
+	{
+		return mPosition == other.mPosition && mSize == other.mSize;
+	}
+	bool Rectangle::operator!=(const Rectangle& other) const noexcept
+	{
+		return !(*this == other);
+	}
+
 	Rectangle Rectangle::TopLeftQuadrant() const noexcept
 	{
 		return Rectangle(mPosition.X, mPosition.Y, mSize.X >> 1, mSize.Y >> 1);

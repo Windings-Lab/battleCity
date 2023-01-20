@@ -51,6 +51,9 @@ namespace BattleCity::Engine::Physics
 		Rectangle Get(Quadrant) const noexcept;
 		Position GetCenter() const noexcept;
 
+		bool operator==(const Rectangle&) const noexcept;
+		bool operator!=(const Rectangle&) const noexcept;
+
 	private:
 		Rectangle TopLeftQuadrant() const noexcept;
 		Rectangle TopRightQuadrant() const noexcept;
