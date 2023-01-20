@@ -97,18 +97,37 @@ namespace BattleCity::Engine::Physics
 
 	Rectangle Rectangle::TopLeftQuadrant() const noexcept
 	{
-		return Rectangle(mPosition.X, mPosition.Y, mSize.X >> 1, mSize.Y >> 1);
+		return Rectangle(mPosition.X
+						, mPosition.Y
+						, mSize.X >> 1
+						, mSize.Y >> 1);
 	}
 	Rectangle Rectangle::TopRightQuadrant() const noexcept
 	{
-		return Rectangle(mPosition.X + (mSize.X >> 1), mPosition.Y, mSize.X >> 1, mSize.Y >> 1);
+		std::div_t halfWidth = std::div(mSize.X, 2);
+
+		return Rectangle(mPosition.X + halfWidth.quot
+						 , mPosition.Y
+						 , mSize.X - halfWidth.quot + halfWidth.rem
+						 , mSize.Y >> 1);
 	}
 	Rectangle Rectangle::BottomLeftQuadrant() const noexcept
 	{
-		return Rectangle(mPosition.X, mPosition.Y + (mSize.Y >> 1), mSize.X >> 1, mSize.Y >> 1);
+		std::div_t halfHeight = std::div(mSize.Y, 2);
+
+		return Rectangle(mPosition.X
+					 , mPosition.Y + halfHeight.quot
+					 , mSize.X >> 1
+					 , mSize.Y - halfHeight.quot + halfHeight.rem);
 	}
 	Rectangle Rectangle::BottomRightQuadrant() const noexcept
 	{
-		return Rectangle(mPosition.X + (mSize.X >> 1), mPosition.Y + (mSize.Y >> 1), mSize.X >> 1, mSize.Y >> 1);
+		std::div_t halfWidth = std::div(mSize.X, 2);
+		std::div_t halfHeight = std::div(mSize.Y, 2);
+
+		return Rectangle(mPosition.X + halfWidth.quot
+						,mPosition.Y + halfHeight.quot
+						,mSize.X - halfWidth.quot + halfWidth.rem
+						,mSize.Y - halfHeight.quot + halfHeight.rem);
 	}
 }
