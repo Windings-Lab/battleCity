@@ -11,7 +11,7 @@ namespace BattleCity::Game::World::Object
         using std::swap;
 
         swap(f.mBorder, s.mBorder);
-        swap(f.mQuadrant, s.mQuadrant);
+        f.mQuadrants.swap(s.mQuadrants);
         swap(f.mParent, s.mParent);
 
         f.mNodes.swap(s.mNodes);
@@ -33,10 +33,12 @@ namespace BattleCity::Game::World::Object
     }
 
     QuadTree::QuadTree() : QuadTree(Border()) {}
-    QuadTree::QuadTree(Engine::Physics::Rectangle rect) : QuadTree(rect, Engine::Physics::Quadrant::Error, nullptr, 0) {}
-    QuadTree::QuadTree(Border rect, Engine::Physics::Quadrant quad, Parent* parent, Level lvl)
+    QuadTree::QuadTree(Engine::Physics::Rectangle rect) : QuadTree(rect, nullptr, 0)
+    {
+        SetQuadrant(Engine::Physics::Quadrant::Base);
+    }
+    QuadTree::QuadTree(Border rect, Parent* parent, Level lvl)
         : mBorder(rect)
-        , mQuadrant(quad)
         , mParent(parent)
         , mLevel(lvl)
         , mSize(0)
@@ -65,10 +67,16 @@ namespace BattleCity::Game::World::Object
     {
         return mLevel;
     }
-    Engine::Physics::Quadrant QuadTree::GetQuadrantType() const noexcept
+
+    void QuadTree::SetQuadrant(Engine::Physics::Quadrant quadrant) noexcept
     {
-        return mQuadrant;
+        mQuadrants << "[ " << mLevel << ", " << magic_enum::enum_name<Engine::Physics::Quadrant>(quadrant) << " ] ";
     }
+   std::string QuadTree::GetQuadrants() const noexcept
+    {
+        return mQuadrants.str();
+    }
+
     bool QuadTree::IsLeaf() const noexcept
     {
         return mNodes.empty();
@@ -103,10 +111,21 @@ namespace BattleCity::Game::World::Object
 
         if (!mNodes.empty()) return;
 
-        mNodes.emplace_back(Node(mBorder.Get(Quadrant::TL), Quadrant::TL, this, mLevel + 1));
-        mNodes.emplace_back(Node(mBorder.Get(Quadrant::TR), Quadrant::TR, this, mLevel + 1));
-        mNodes.emplace_back(Node(mBorder.Get(Quadrant::BL), Quadrant::BL, this, mLevel + 1));
-        mNodes.emplace_back(Node(mBorder.Get(Quadrant::BR), Quadrant::BR, this, mLevel + 1));
+        mNodes.emplace_back(Node(mBorder.Get(Quadrant::TL), this, mLevel + 1));
+        mNodes[0].mQuadrants << GetQuadrants();
+        mNodes[0].SetQuadrant(Quadrant::TL);
+
+        mNodes.emplace_back(Node(mBorder.Get(Quadrant::TR), this, mLevel + 1));
+        mNodes[1].mQuadrants << GetQuadrants();
+        mNodes[1].SetQuadrant(Quadrant::TR);
+
+        mNodes.emplace_back(Node(mBorder.Get(Quadrant::BL), this, mLevel + 1));
+        mNodes[2].mQuadrants << GetQuadrants();
+        mNodes[2].SetQuadrant(Quadrant::BL);
+
+        mNodes.emplace_back(Node(mBorder.Get(Quadrant::BR), this, mLevel + 1));
+        mNodes[3].mQuadrants << GetQuadrants();
+        mNodes[3].SetQuadrant(Quadrant::BR);
     }
     void QuadTree::MoveObjectsToChildNodes()
     {
@@ -165,14 +184,8 @@ namespace BattleCity::Game::World::Object
         mNodes.clear();
     }
 
-    void Test()
-    {
-        std::cout << "Test" << std::endl;
-    }
     void QuadTree::RemoveObject(const Object* object)
     {
-        //OutputAllParentQuads(": Removed" + std::to_string(object->GetID()));
-
         auto it = std::find(mObjects.begin(), mObjects.end(), object);
         assert(it != mObjects.end() && "Trying to remove a value that is not present in the node");
         *it = mObjects.back();
