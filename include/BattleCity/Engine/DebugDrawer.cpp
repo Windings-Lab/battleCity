@@ -108,18 +108,7 @@ namespace BattleCity::Engine
         std::cout << "[ " << rect.GetX()
     			  << ", " << rect.GetY()
     			  << ", " << rect.GetWidth()
-    			  << ", " << rect.GetHeight() << " ] "
-				  << "Quad: " << magic_enum::enum_name<Physics::Quadrant>(node.GetQuadrantType())
-				  << " Size: " << node.GetSize();
-
-        if(node.IsLeaf())
-        {
-            std::cout << " ObjectSize: " << node.GetObjects().size() << std::endl;
-        }
-        else
-        {
-            std::cout << std::endl;
-        }
+    			  << ", " << rect.GetHeight() << " ] " << std::endl;
 
         for (auto& childNode : node.GetNodes())
         {
