@@ -27,9 +27,13 @@ namespace BattleCity::Game::World::Object
     }
     void QuadTree::OnObjectUpdate(const Object& obj, Action<> updateCollider)
     {
-        Remove(&obj);
-        updateCollider();
-        Insert(&obj);
+        auto& objectBounds = obj.GetBounds();
+        if(obj.GetPosition() != objectBounds.GetPosition() || obj.GetSize() != objectBounds.GetSize())
+        {
+            Remove(&obj);
+            updateCollider();
+            Insert(&obj);
+        }
     }
 
     QuadTree::QuadTree() : QuadTree(Border()) {}
