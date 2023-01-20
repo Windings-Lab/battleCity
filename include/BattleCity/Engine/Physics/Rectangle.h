@@ -5,6 +5,7 @@ namespace BattleCity::Engine::Physics
 	enum class Quadrant
 	{
 		Error = -1,
+		Base,
 		TL,
 		TR,
 		BL,
