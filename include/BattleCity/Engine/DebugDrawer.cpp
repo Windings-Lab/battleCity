@@ -4,6 +4,8 @@
 #include "BattleCity/Engine/Texture/TextureGroupLibrary.h"
 #include "BattleCity/Framework/Texture.h"
 #include "BattleCity/Game/World/WorldMap.h"
+#include "BattleCity/Game/World/Object/Components/Collider.h"
+#include "BattleCity/Game/World/Object/Components/TextureComponent.h"
 #include "BattleCity/Game/World/Object/Derived/Pixel.h"
 
 #include "BattleCity/Game/World/Object/Containers/QuadTree.h"
@@ -26,10 +28,11 @@ namespace BattleCity::Engine
                     || x == rectangle.GetX()
                     || x == rectangle.GetX() + rectangle.GetSize().X - 1)
                 {
-                    auto pixel = std::make_shared<Game::World::Object::Pixel>(mTextures.GetGroupBy(Framework::TextureName::Pixel));
-                    pixel->InitializeComponents();
+                    auto pixel = std::make_shared<Game::World::Object::Pixel>();
+                    auto textureComponent = pixel->GetComponent<Game::World::Object::Component::Texture>();
                     pixel->SetPosition({ x, y });
-                    pixel->ChangeTextureTo(Framework::TextureType::Basic);
+                    textureComponent->SetTextureGroup(&mTextures.GetGroupBy(Framework::TextureName::Pixel));
+                    textureComponent->ChangeTextureTo(Framework::TextureType::Basic);
                     mMap.InsertObject(std::move(pixel), Game::World::Object::Layer::UI);
                 }
             }
@@ -49,14 +52,14 @@ namespace BattleCity::Engine
         if (mObject.expired()) return;
 
         std::vector<const Game::World::Object::QuadTree*> childNodes;
-        auto& objectBounds = mObject.lock()->GetBounds();
+        auto& rect = mObject.lock()->GetComponent<Game::World::Object::Component::Collider>()->GetRectangle();
         for (auto childNode : mChildNodes)
         {
             DrawRectangle(childNode->GetBorder());
 
             for (const auto& childChild : childNode->GetNodes())
             {
-                if (!childChild.GetBorder().Intersects(objectBounds)) continue;
+                if (!childChild.GetBorder().Intersects(rect)) continue;
 
                 childNodes.push_back(&childChild);
             }
@@ -92,7 +95,8 @@ namespace BattleCity::Engine
     {
         for (auto obj : node.GetChildObjects())
         {
-            DrawRectangle(obj->GetBounds());
+            auto& rect = obj->GetComponent<Game::World::Object::Component::Collider>()->GetRectangle();
+            DrawRectangle(rect);
         }
     }
 
