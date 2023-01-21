@@ -7,12 +7,9 @@ namespace BattleCity::Game::World::Object
     class Explosion : public Object
     {
     public:
-        using Object::Object;
+        Explosion();
 
         void Update() override;
-
-    private:
-        void InitializeComponents() override;
-
+        void ResolveCollisions(const Object&) override;
     };
 }

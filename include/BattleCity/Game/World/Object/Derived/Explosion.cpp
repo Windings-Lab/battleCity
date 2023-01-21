@@ -2,14 +2,21 @@
 
 #include "Explosion.h"
 
+#include "BattleCity/Game/World/Object/Components/TextureComponent.h"
+
 namespace BattleCity::Game::World::Object
 {
-    void Explosion::InitializeComponents()
-    {
-        Object::InitializeComponents();
-    }
+	Explosion::Explosion() : Object()
+	{
+        AddComponent<Component::Texture>(*this);
+	}
 
     void Explosion::Update()
     {
+        // Update animation
+    }
+    void Explosion::ResolveCollisions(const Object&)
+    {
+        // Empty
     }
 }
