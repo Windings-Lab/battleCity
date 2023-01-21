@@ -8,6 +8,9 @@
 
 #include "World/Object/Derived/Tank.h"
 #include "BattleCity/Game/World/Object/Components/Movable.h"
+#include "World/Object/Components/Collider.h"
+#include "World/Object/Components/Fireable.h"
+#include "World/Object/Components/TextureComponent.h"
 
 namespace BattleCity::Game
 {
@@ -108,17 +111,17 @@ namespace BattleCity::Game
 	{
 		for (auto& obj : mMap.GetLayer(World::Object::Layer::Back))
 		{
-			obj->Draw(interpolation);
+			obj->GetComponent<World::Object::Component::Texture>()->Draw(interpolation);
 		}
 
 		for (auto& obj : mMap.GetLayer(World::Object::Layer::Front))
 		{
-			obj->Draw(interpolation);
+			obj->GetComponent<World::Object::Component::Texture>()->Draw(interpolation);
 		}
 
 		for (auto& obj : mMap.GetLayer(World::Object::Layer::UI))
 		{
-			obj->Draw(interpolation);
+			obj->GetComponent<World::Object::Component::Texture>()->Draw(interpolation);
 		}
 	}
 
@@ -134,13 +137,15 @@ namespace BattleCity::Game
 	void Game::onKeyPressed(BattleCity::Framework::FRKey k)
 	{
 		static auto player = mPlayer.lock();
-		player->SetDirection(static_cast<World::Object::MovementDirection>(k));
+		auto movable = player->GetComponent<World::Object::Component::Movable>();
+		movable->SetDirection(static_cast<World::Object::Direction>(k));
 	}
 
 	void Game::onKeyReleased(BattleCity::Framework::FRKey k)
 	{
 		static auto player = mPlayer.lock();
-		player->StopMovement();
+		auto movable = player->GetComponent<World::Object::Component::Movable>();
+		movable->StopMovement();
 	}
 
 	void Game::onMouseMove(int x, int y, int xrelative, int yrelative)
@@ -157,14 +162,16 @@ namespace BattleCity::Game
 		case BattleCity::Framework::FRMouseButton::LEFT:
 			if(!isReleased)
 			{
-				player->Fire();
+				auto fireable = player->GetComponent<World::Object::Component::Fireable>();
+				fireable->Fire();
 			}
 			break;
 		case BattleCity::Framework::FRMouseButton::MIDDLE:
 			if (!isReleased)
 			{
 				const_cast<World::Object::Container&>(mMap.GetLayer(World::Object::Layer::UI)).Clear();
-				mDebug.DrawRectangle(player->GetBounds());
+				auto& rect = player->GetComponent<World::Object::Component::Collider>()->GetRectangle();
+				mDebug.DrawRectangle(rect);
 			}
 			break;
 		case BattleCity::Framework::FRMouseButton::RIGHT:
