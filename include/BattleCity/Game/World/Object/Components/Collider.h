@@ -13,7 +13,9 @@ namespace BattleCity::Game::World::Object::Component
 
 		const Engine::Physics::Rectangle& GetRectangle() const noexcept;
 		bool IsIntersects(const Collider&) const noexcept;
-		
+
+		void UpdateCollider() noexcept;
+
 		void SetPosition(const Position&) noexcept;
 		const Position& GetPosition() const noexcept;
 

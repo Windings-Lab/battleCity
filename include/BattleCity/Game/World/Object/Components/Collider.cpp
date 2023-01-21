@@ -1,12 +1,24 @@
 #include "PCHeader.h"
 #include "Collider.h"
 
+#include "TextureComponent.h"
+#include "BattleCity/Game/World/Object/Object.h"
+
 namespace BattleCity::Game::World::Object::Component
 {
 	bool Collider::IsIntersects(const Collider& other) const noexcept
 	{
 		return mRectangle.Intersects(other.mRectangle);
 	}
+
+	void Collider::UpdateCollider() noexcept
+	{
+		auto& textureSize = mObject.GetComponent<Texture>()->GetSize();
+
+		mRectangle.SetPosition(mObject.GetPosition());
+		mRectangle.SetSize(textureSize);
+	}
+
 	const Engine::Physics::Rectangle& Collider::GetRectangle() const noexcept
 	{
 		return mRectangle;
