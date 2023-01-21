@@ -28,28 +28,27 @@ namespace BattleCity::Game::World::Object
         // Destroy this
     }
 
-    void Bullet::AdjustToCenterPosition()
+    void Bullet::AdjustPositionToDirection()
     {
-		auto bulletTexture = GetComponent<Component::Texture>();
-		Size bulletTextureHalfSize = bulletTexture->GetSize() / 2;
-		auto direction = GetComponent<Component::Movable>()->GetDirection();
+	    const auto bulletTexture = GetComponent<Component::Texture>();
+		const Size& bulletTextureSize = bulletTexture->GetSize();
+		const Size bulletTextureHalfSize = bulletTextureSize / 2;
 
-		switch (direction)
+		switch (GetComponent<Component::Movable>()->GetDirection())
 		{
 		case Direction::Right:
 			SetY(GetPosition().Y - bulletTextureHalfSize.Y);
 			break;
 		case Direction::Left:
-			bulletTextureHalfSize = bulletTexture->GetSize() / 2;
 			SetY(GetPosition().Y - bulletTextureHalfSize.Y);
+			SetX(GetPosition().X - bulletTextureSize.X);
 			break;
 		case Direction::Down:
-			bulletTextureHalfSize = bulletTexture->GetSize() / 2;
 			SetX(GetPosition().X - bulletTextureHalfSize.X);
 			break;
 		case Direction::Up:
-			bulletTextureHalfSize = bulletTexture->GetSize() / 2;
 			SetX(GetPosition().X - bulletTextureHalfSize.X);
+			SetY(GetPosition().Y - bulletTextureSize.Y);
 			break;
 		}
     }

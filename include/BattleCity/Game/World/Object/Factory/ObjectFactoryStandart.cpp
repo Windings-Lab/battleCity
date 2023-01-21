@@ -86,11 +86,11 @@ namespace BattleCity::Game::World::Object::Factory
 		textureComponent->SetTextureGroup(&mTextureGroups.GetGroupBy(Framework::TextureName::Bullet));
 
 		auto movable = object->GetComponent<Component::Movable>();
-		movable->SetSpeed(1);
+		movable->SetSpeed(0);
 		movable->SetDirection(direction);
 
 		object->SetPosition(position);
-		object->AdjustToCenterPosition();
+		object->AdjustPositionToDirection();
 
 		mInserter.InsertObject(object);
 
