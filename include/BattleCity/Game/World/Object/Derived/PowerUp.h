@@ -4,15 +4,11 @@
 
 namespace BattleCity::Game::World::Object
 {
+	// Abstract
 	class PowerUp : public Object
 	{
     public:
-		using Object::Object;
-
-		void Update() override;
-
-	private:
-		void InitializeComponents() override;
+		PowerUp();
 	};
 }
 
