@@ -3,6 +3,8 @@
 
 #include "BattleCity/Engine/Physics/Rectangle.h"
 #include "BattleCity/Game/World/Object/Object.h"
+#include "BattleCity/Game/World/Object/Components/Collider.h"
+#include "BattleCity/Game/World/Object/Components/TextureComponent.h"
 
 namespace BattleCity::Game::World::Object
 {
@@ -21,18 +23,20 @@ namespace BattleCity::Game::World::Object
         f.mObjects.swap(s.mObjects);
         swap(f.mSize, s.mSize);
     }
-    void QuadTree::OnObjectDelete(const Object& obj)
+    void QuadTree::OnObjectDelete(const Object& object)
     {
-        Remove(&obj);
+        Remove(&object);
     }
-    void QuadTree::OnObjectUpdate(const Object& obj, Action<> updateCollider)
+    void QuadTree::OnObjectUpdate(Object& object)
     {
-        auto& objectBounds = obj.GetBounds();
-        if(obj.GetPosition() != objectBounds.GetPosition() || obj.GetSize() != objectBounds.GetSize())
+	    const auto objectCollider = object.GetComponent<Component::Collider>();
+        auto& objectTextureSize = object.GetComponent<Component::Texture>()->GetSize();
+
+        if(object.GetPosition() != objectCollider->GetPosition() || objectTextureSize != objectCollider->GetSize())
         {
-            Remove(&obj);
-            updateCollider();
-            Insert(&obj);
+            Remove(&object);
+            objectCollider->UpdateCollider();
+            Insert(&object);
         }
     }
 
@@ -88,7 +92,7 @@ namespace BattleCity::Game::World::Object
 
     void QuadTree::Insert(const Object* object)
     {
-        auto& rect = object->GetBounds();
+        const auto& rect = object->GetComponent<Component::Collider>()->GetRectangle();
         assert(mBorder.Intersects(rect) && "Trying to insert object that out of quad tree bounds");
 
         std::vector<Node*> nodeStack;
@@ -137,7 +141,8 @@ namespace BattleCity::Game::World::Object
         {
             for (auto& child : mNodes)
             {
-                if (!child.mBorder.Intersects(object->GetBounds())) continue;
+                const auto& rect = object->GetComponent<Component::Collider>()->GetRectangle();
+                if (!child.mBorder.Intersects(rect)) continue;
 
                 child.Insert(object);
             }
@@ -284,7 +289,8 @@ namespace BattleCity::Game::World::Object
             {
                 for (auto& child : node->mNodes)
                 {
-                    if (!child.mBorder.Intersects(object->GetBounds())) continue;
+                    const auto& rect = object->GetComponent<Component::Collider>()->GetRectangle();
+                    if (!child.mBorder.Intersects(rect)) continue;
 
                     nodeStack.push_back(&child);
                 }
@@ -294,7 +300,11 @@ namespace BattleCity::Game::World::Object
             for (const auto& other : node->mObjects)
             {
                 if (object == other) continue;
-                if (!object->GetBounds().Intersects(other->GetBounds())) continue;
+
+                const auto& rect = object->GetComponent<Component::Collider>()->GetRectangle();
+                const auto& otherRect = other->GetComponent<Component::Collider>()->GetRectangle();
+
+                if (!rect.Intersects(otherRect)) continue;
                 if (!duplicateCheck.emplace(other->GetID()).second) continue;
 
                 collisions.push_back(other);
@@ -303,12 +313,55 @@ namespace BattleCity::Game::World::Object
 
         return collisions;
     }
+	std::vector<Object*> QuadTree::GetPossibleCollisions(Object* object)
+	{
+        std::unordered_set<ID> duplicateCheck;
+        std::vector<Object*> collisions;
 
-    void QuadTree::PushChildNodesToStack(std::vector<Node*>& nodeStack, const Object* object)
+        std::vector<const Node*> nodeStack;
+        nodeStack.push_back(this);
+        while (!nodeStack.empty())
+        {
+            auto* node = nodeStack.back();
+            nodeStack.pop_back();
+
+            if (node->mSize == 0) continue;
+
+            if (!node->IsLeaf())
+            {
+                for (auto& child : node->mNodes)
+                {
+                    const auto& rect = object->GetComponent<Component::Collider>()->GetRectangle();
+                    if (!child.mBorder.Intersects(rect)) continue;
+
+                    nodeStack.push_back(&child);
+                }
+                continue;
+            }
+
+            for (auto other : node->mObjects)
+            {
+                if (object == other) continue;
+
+                const auto& rect = object->GetComponent<Component::Collider>()->GetRectangle();
+                const auto& otherRect = other->GetComponent<Component::Collider>()->GetRectangle();
+
+                if (!rect.Intersects(otherRect)) continue;
+                if (!duplicateCheck.emplace(other->GetID()).second) continue;
+
+                collisions.push_back(const_cast<Object*>(other));
+            }
+        }
+
+        return collisions;
+	}
+
+	void QuadTree::PushChildNodesToStack(std::vector<Node*>& nodeStack, const Object* object)
     {
         for (auto& child : mNodes)
         {
-            if (!child.mBorder.Intersects(object->GetBounds())) continue;
+            const auto& rect = object->GetComponent<Component::Collider>()->GetRectangle();
+            if (!child.mBorder.Intersects(rect)) continue;
 
             nodeStack.push_back(&child);
         }
@@ -317,7 +370,8 @@ namespace BattleCity::Game::World::Object
     {
         for (auto& child : mNodes)
         {
-            if (!child.mBorder.Intersects(object->GetBounds())) continue;
+            const auto& rect = object->GetComponent<Component::Collider>()->GetRectangle();
+            if (!child.mBorder.Intersects(rect)) continue;
 
             nodeStack.push_back(&child);
         }

@@ -46,7 +46,7 @@ namespace BattleCity::Game::World::Object
 		~QuadTree() override;
 
 		void OnObjectDelete(const Object&) override;
-		void OnObjectUpdate(const Object&, Action<>) override;
+		void OnObjectUpdate(Object&) override;
 
 		const Border& GetBorder() const noexcept;
 
@@ -80,6 +80,7 @@ namespace BattleCity::Game::World::Object
 		void CollectObjectsFromLeaf(std::unordered_set<ID>& duplicateCheck, Container& objects) const;
 	public:
 		std::vector<const Object*> GetPossibleCollisions(const Object* object) const;
+		std::vector<Object*> GetPossibleCollisions(Object* object);
 		int GetSize() const noexcept;
 
 	private:
