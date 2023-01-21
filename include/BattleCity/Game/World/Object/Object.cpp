@@ -18,7 +18,7 @@ namespace BattleCity::Game::World::Object
         NotifyObjectUpdated(*this);
     }
 
-    void Object::ResolveCollisions(const Object&)
+    void Object::ResolveCollisions(Object&)
     {
         NotifyObjectUpdated(*this);
     }

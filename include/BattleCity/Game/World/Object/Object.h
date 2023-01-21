@@ -45,7 +45,7 @@ namespace BattleCity::Game::World::Object
 
 	public:
 		virtual void Update() = 0;
-		virtual void ResolveCollisions(const Object&) = 0;
+		virtual void ResolveCollisions(Object&) = 0;
 
 		int GetID() const noexcept;
 
