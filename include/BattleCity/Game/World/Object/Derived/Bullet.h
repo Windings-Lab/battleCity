@@ -4,24 +4,14 @@
 
 namespace BattleCity::Game::World::Object
 {
-	namespace Component
-	{
-		class Movable;
-	}
-
 	class Bullet : public Object
     {
     public:
-        using Object::Object;
+        Bullet();
 
         void Update() override;
+        void ResolveCollisions(Object&) override;
 
-        void SetDirection(MovementDirection) noexcept;
-
-	private:
-        void InitializeComponents() override;
-
-    private:
-        Component::Movable* mMovable;
+        void AdjustToCenterPosition();
     };
 }
