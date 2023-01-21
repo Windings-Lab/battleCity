@@ -4,15 +4,12 @@
 
 namespace BattleCity::Game::World::Object
 {
-	class WorldBoundaries final : public Object
+	class Background final : public Object
 	{
 	public:
-		using Object::Object;
+		Background();
 
 		void Update() override;
-
-	private:
-		void InitializeComponents() override;
-
+		void ResolveCollisions(const Object&) override;
 	};
 }
