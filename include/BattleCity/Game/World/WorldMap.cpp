@@ -11,8 +11,8 @@
 namespace BattleCity::Game::World
 {
 	Map::Map(const Engine::Texture::GroupLibrary& textureGroups, Object::QuadTree& quadTree)
-		: mObjectFactory(*this, textureGroups, quadTree)
-		, mBounds(quadTree.GetBorder())
+		: mBounds(quadTree.GetBorder())
+		, mObjectFactory(*this, quadTree, textureGroups)
 	{
 	}
 
@@ -107,8 +107,23 @@ namespace BattleCity::Game::World
 			break;
 		}
 	}
+
 	void Map::MarkForDelete(Object::ID objID)
 	{
+		if(mDeleterDuplicateCheck.emplace(objID).second)
+		{
+			mDeleters.push_back(objID);
+		}
+	}
+	void Map::DestroyObjects()
+	{
+		for (auto objectID : mDeleters)
+		{
+			mFrontLayer.RemoveBy(objectID);
+		}
+
+		mDeleters.clear();
+		mDeleterDuplicateCheck.clear();
 	}
 
 	const Object::Container& Map::GetLayer(Object::Layer layer) const

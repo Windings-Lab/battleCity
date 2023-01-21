@@ -41,17 +41,21 @@ namespace BattleCity::Game::World
 
 		std::shared_ptr<Object::Object> GetObjectBy(Object::ID) const;
 		void InsertObject(std::shared_ptr<Object::Object>, Object::Layer = Object::Layer::Front);
+
 		void MarkForDelete(Object::ID);
+		void DestroyObjects();
 
 		const Object::Container& GetLayer(Object::Layer) const;
 
 	private:
+		Bounds mBounds;
 		Object::Factory::Standart mObjectFactory;
 
 		Object::Container mBackLayer;
 		Object::Container mFrontLayer;
 		Object::Container mUILayer;
 
-		Bounds mBounds;
+		std::unordered_set<Object::ID> mDeleterDuplicateCheck;
+		std::vector<Object::ID> mDeleters;
 	};
 }
