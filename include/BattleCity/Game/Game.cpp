@@ -56,6 +56,7 @@ namespace BattleCity::Game
 		{
 			Update();
 			ResolveCollisions();
+			mMap.DestroyObjects();
 
 			mNextGameTick += SKIP_TICKS;
 			mIterations++;
