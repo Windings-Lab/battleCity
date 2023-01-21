@@ -1,23 +1,23 @@
 #include "PCHeader.h"
 #include "ObjectFactoryStandart.h"
 
+#include "BattleCity/Engine/Texture/BCTexture.h"
+#include "BattleCity/Engine/Texture/TextureGroupLibrary.h"
 #include "BattleCity/Game/World/WorldMap.h"
+#include "BattleCity/Game/World/Object/Containers/QuadTree.h"
 
+#include "BattleCity/Game/World/Object/Derived/Background.h"
 #include "BattleCity/Game/World/Object/Derived/Bullet.h"
 #include "BattleCity/Game/World/Object/Derived/Explosion.h"
 #include "BattleCity/Game/World/Object/Derived/Phoenix.h"
 #include "BattleCity/Game/World/Object/Derived/PowerUp.h"
 #include "BattleCity/Game/World/Object/Derived/Tank.h"
 #include "BattleCity/Game/World/Object/Derived/Wall.h"
-#include "BattleCity/Game/World/Object/Derived/Background.h"
 
-#include "BattleCity/Engine/Texture/BCTexture.h"
-#include "BattleCity/Engine/Texture/TextureGroupLibrary.h"
 #include "BattleCity/Game/World/Object/Components/Collider.h"
 #include "BattleCity/Game/World/Object/Components/Fireable.h"
 #include "BattleCity/Game/World/Object/Components/Movable.h"
 #include "BattleCity/Game/World/Object/Components/TextureComponent.h"
-#include "BattleCity/Game/World/Object/Containers/QuadTree.h"
 
 namespace BattleCity::Game::World::Object::Factory
 {
