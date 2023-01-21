@@ -1,6 +1,8 @@
 #include "PCHeader.h"
 #include "Movable.h"
 
+#include "TextureComponent.h"
+#include "BattleCity/Framework/Texture.h"
 #include "BattleCity/Game/World/Object/Object.h"
 
 namespace BattleCity::Game::World::Object::Component
@@ -10,29 +12,34 @@ namespace BattleCity::Game::World::Object::Component
 		return mVelocity * mSpeed;
 	}
 
-	Movable& Movable::SetSpeed(Speed speed) noexcept
+	void Movable::SetSpeed(Speed speed) noexcept
 	{
 		mSpeed = speed;
-		return *this;
 	}
 
-	Movable& Movable::SetDirection(MovementDirection direction) noexcept
+	void Movable::SetDirection(Direction direction) noexcept
 	{
+		auto textureComponent = mObject.GetComponent<Texture>();
+
 		switch (direction)
 		{
-			case MovementDirection::Left:
+			case Direction::Left:
 				mVelocity = { -1, 0 };
+				textureComponent->ChangeTextureTo(Framework::TextureType::Left);
 				break;
-			case MovementDirection::Right:
+			case Direction::Right:
 				mVelocity = { 1, 0 };
+				textureComponent->ChangeTextureTo(Framework::TextureType::Right);
 				break;
-			case MovementDirection::Up:
+			case Direction::Up:
 				mVelocity = { 0, -1 };
+				textureComponent->ChangeTextureTo(Framework::TextureType::Up);
 				break;
-			case MovementDirection::Down:
+			case Direction::Down:
 				mVelocity = { 0, 1 };
+				textureComponent->ChangeTextureTo(Framework::TextureType::Down);
 				break;
-			case MovementDirection::Count:
+			case Direction::Count:
 			default:
 				{
 					assert(false && "Movable: Invalid SetDirection");
@@ -41,10 +48,8 @@ namespace BattleCity::Game::World::Object::Component
 		}
 
 		mDirection = direction;
-
-		return *this;
 	}
-	MovementDirection Movable::GetDirection() const noexcept
+	Direction Movable::GetDirection() const noexcept
 	{
 		return mDirection;
 	}
