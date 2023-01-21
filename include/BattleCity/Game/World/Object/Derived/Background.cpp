@@ -14,7 +14,7 @@ namespace BattleCity::Game::World::Object
     {
         // Empty
     }
-    void Background::ResolveCollisions(const Object&)
+    void Background::ResolveCollisions(Object&)
     {
         // Empty
     }

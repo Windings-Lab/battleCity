@@ -20,7 +20,7 @@ namespace BattleCity::Game::World::Object
         // If Health <= 0, Set texture to Flag and set gameOver
     }
 
-    void Phoenix::ResolveCollisions(const Object&)
+    void Phoenix::ResolveCollisions(Object&)
     {
         // Empty
     }

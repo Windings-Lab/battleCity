@@ -15,7 +15,7 @@ namespace BattleCity::Game::World::Object
     {
         // Update animation
     }
-    void Explosion::ResolveCollisions(const Object&)
+    void Explosion::ResolveCollisions(Object&)
     {
         // Empty
     }

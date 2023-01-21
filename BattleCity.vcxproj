@@ -36,6 +36,7 @@
     <ClCompile Include="include\BattleCity\Game\World\Object\Components\Fireable.cpp" />
     <ClCompile Include="include\BattleCity\Game\World\Object\Components\Health.cpp" />
     <ClCompile Include="include\BattleCity\Game\World\Object\Components\Movable.cpp" />
+    <ClCompile Include="include\BattleCity\Game\World\Object\Components\TextureComponent.cpp" />
     <ClCompile Include="include\BattleCity\Game\World\Object\Containers\ObjectContainer.cpp" />
     <ClCompile Include="include\BattleCity\Game\World\Object\Containers\QuadTree.cpp" />
     <ClCompile Include="include\BattleCity\Game\World\Object\Derived\Bullet.cpp" />
@@ -45,7 +46,7 @@
     <ClCompile Include="include\BattleCity\Game\World\Object\Derived\PowerUp.cpp" />
     <ClCompile Include="include\BattleCity\Game\World\Object\Derived\Tank.cpp" />
     <ClCompile Include="include\BattleCity\Game\World\Object\Derived\Wall.cpp" />
-    <ClCompile Include="include\BattleCity\Game\World\Object\Derived\WorldBoundaries.cpp" />
+    <ClCompile Include="include\BattleCity\Game\World\Object\Derived\Background.cpp" />
     <ClCompile Include="include\BattleCity\Game\World\Object\Factory\ObjectFactory.cpp" />
     <ClCompile Include="include\BattleCity\Game\World\Object\Factory\ObjectFactoryStandart.cpp" />
     <ClCompile Include="include\BattleCity\Game\World\Object\Object.cpp" />
@@ -83,6 +84,7 @@
     <ClInclude Include="include\BattleCity\Game\World\Object\Components\Fireable.h" />
     <ClInclude Include="include\BattleCity\Game\World\Object\Components\Health.h" />
     <ClInclude Include="include\BattleCity\Game\World\Object\Components\Movable.h" />
+    <ClInclude Include="include\BattleCity\Game\World\Object\Components\TextureComponent.h" />
     <ClInclude Include="include\BattleCity\Game\World\Object\Containers\ObjectContainer.h" />
     <ClInclude Include="include\BattleCity\Game\World\Object\Containers\QuadTree.h" />
     <ClInclude Include="include\BattleCity\Game\World\Object\Derived\Bullet.h" />
@@ -92,7 +94,7 @@
     <ClInclude Include="include\BattleCity\Game\World\Object\Derived\PowerUp.h" />
     <ClInclude Include="include\BattleCity\Game\World\Object\Derived\Tank.h" />
     <ClInclude Include="include\BattleCity\Game\World\Object\Derived\Wall.h" />
-    <ClInclude Include="include\BattleCity\Game\World\Object\Derived\WorldBoundaries.h" />
+    <ClInclude Include="include\BattleCity\Game\World\Object\Derived\Background.h" />
     <ClInclude Include="include\BattleCity\Game\World\Object\Factory\ObjectFactory.h" />
     <ClInclude Include="include\BattleCity\Game\World\Object\Factory\ObjectFactoryStandart.h" />
     <ClInclude Include="include\BattleCity\Game\World\Object\Object.h" />

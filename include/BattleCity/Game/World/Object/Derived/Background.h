@@ -10,6 +10,6 @@ namespace BattleCity::Game::World::Object
 		Background();
 
 		void Update() override;
-		void ResolveCollisions(const Object&) override;
+		void ResolveCollisions(Object&) override;
 	};
 }

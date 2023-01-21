@@ -10,7 +10,7 @@ namespace BattleCity::Game::World::Object
 		Phoenix();
 
 		void Update() override;
-		void ResolveCollisions(const Object&) override;
+		void ResolveCollisions(Object&) override;
 	};
 }
 
