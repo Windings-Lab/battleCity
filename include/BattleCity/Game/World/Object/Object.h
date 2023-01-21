@@ -47,6 +47,9 @@ namespace BattleCity::Game::World::Object
 		virtual void Update() = 0;
 		virtual void ResolveCollisions(Object&) = 0;
 
+		void SetDestroyer(std::function<void(ID)>);
+		void Destroy();
+
 		int GetID() const noexcept;
 
 		void SetPosition(Position) noexcept;
@@ -60,5 +63,6 @@ namespace BattleCity::Game::World::Object
 		Size mSize;
 
 		ComponentFactory mComponentFactory;
+		std::function<void(ID)> mDestroyer;
 	};
 }

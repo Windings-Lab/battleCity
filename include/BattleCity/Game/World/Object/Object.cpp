@@ -23,6 +23,15 @@ namespace BattleCity::Game::World::Object
         NotifyObjectUpdated(*this);
     }
 
+    void Object::SetDestroyer(std::function<void(ID)> destoyer)
+    {
+        mDestroyer = destoyer;
+    }
+    void Object::Destroy()
+    {
+        mDestroyer(mID);
+    }
+
     int Object::GetID() const noexcept
     {
         return mID;
