@@ -1,54 +1,20 @@
 #include "PCHeader.h"
 #include "Fireable.h"
 
-#include "BattleCity/Engine/Physics/Rectangle.h"
-#include "BattleCity/Framework/Texture.h"
-#include "BattleCity/Game/World/Object/Components/Movable.h"
+#include "Movable.h"
+#include "TextureComponent.h"
 #include "BattleCity/Game/World/Object/Derived/Bullet.h"
 
 namespace BattleCity::Game::World::Object::Component
 {
 	void Fireable::Fire()
 	{
-		if(mBulletCount > 0)
-		{
-			auto bullet = mSpawnBullet(mObject.GetPosition());
+		if(mBulletCount <= 0) return;
 
-			const Size bulletSize = bullet->GetSize();
-			const Size objectSize = mObject.GetSize();
-			Position position = bullet->GetPosition();
-
-			switch (mObject.GetTextureType())
-			{
-			case Framework::TextureType::Left:
-				position.X -= bulletSize.X;
-				position.Y += (objectSize.Y - bulletSize.Y) * 0.5;
-				bullet->SetDirection(MovementDirection::Left);
-				break;
-			case Framework::TextureType::Right:
-				position.X += objectSize.X;
-				position.Y += (objectSize.Y - bulletSize.Y) * 0.5;
-				bullet->SetDirection(MovementDirection::Right);
-				break;
-			case Framework::TextureType::Up:
-				position.Y -= bulletSize.Y;
-				position.X += (objectSize.X - bulletSize.X) * 0.5;
-				bullet->SetDirection(MovementDirection::Up);
-				break;
-			case Framework::TextureType::Down:
-				position.Y += objectSize.Y;
-				position.X += (objectSize.X - bulletSize.X) * 0.5;
-				bullet->SetDirection(MovementDirection::Down);
-				break;
-			case Framework::TextureType::Error: break;
-			default:;
-			}
-
-			bullet->SetPosition(position);
-			bullet->ChangeTextureTo(mObject.GetTextureType());
-		}
+		auto shootDirection = mObject.GetComponent<Movable>()->GetDirection();
+		auto bullet = mSpawnBullet(GetShootPosition(shootDirection), shootDirection);
 	}
-	void Fireable::SetBullet(const std::function<std::shared_ptr<Bullet>(Position)>& bullet)
+	void Fireable::SetBullet(const std::function<std::shared_ptr<Bullet>(Position, Direction)>& bullet)
 	{
 		mSpawnBullet = bullet;
 	}
@@ -59,5 +25,34 @@ namespace BattleCity::Game::World::Object::Component
 	int Fireable::GetBulletCount() const noexcept
 	{
 		return mBulletCount;
+	}
+
+	Position Fireable::GetShootPosition(Direction direction)
+	{
+		auto& objectSize = mObject.GetComponent<Texture>()->GetSize();
+		const auto objectHalfSize = objectSize / 2;
+		auto shootPosition = mObject.GetPosition();
+
+		switch (direction)
+		{
+		case Direction::Right:
+			shootPosition.X += objectSize.X;
+		case Direction::Left:
+			shootPosition.Y += objectHalfSize.Y;
+			break;
+
+		case Direction::Down:
+			shootPosition.Y += objectSize.Y;
+		case Direction::Up:
+			shootPosition.X += objectHalfSize.X;
+			break;
+
+		case Direction::Count:
+		default:
+			assert(false && "Invalid Tank direction");
+			return {};
+		}
+
+		return shootPosition;
 	}
 }

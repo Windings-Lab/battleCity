@@ -27,13 +27,15 @@ namespace BattleCity::Game::World::Object::Component
 
 		virtual void Fire();
 
-		void SetBullet(const std::function<std::shared_ptr<Bullet>(Position)>&);
+		void SetBullet(const std::function<std::shared_ptr<Bullet>(Position, Direction)>&);
 
 		void SetBulletCount(int count) noexcept;
 		int GetBulletCount() const noexcept;
 
+		Position GetShootPosition(Direction);
+
 	private:
-		std::function<std::shared_ptr<Bullet>(Position)> mSpawnBullet;
+		std::function<std::shared_ptr<Bullet>(Position, Direction)> mSpawnBullet;
 
 		int mBulletCount = 0;
 	};
