@@ -14,6 +14,7 @@ namespace BattleCity::Game::World
 
 namespace BattleCity::Game::World::Object
 {
+	class Observer;
 	class QuadTree;
 
 	class Explosion;
@@ -30,7 +31,7 @@ namespace BattleCity::Game::World::Object::Factory
 {
 	struct Factory
 	{
-		explicit Factory(Map&, const Engine::Texture::GroupLibrary&, QuadTree&);
+		explicit Factory(Map&, QuadTree&, const Engine::Texture::GroupLibrary&);
 
 		DISALLOW_COPY_MOVE(Factory)
 
@@ -51,10 +52,12 @@ namespace BattleCity::Game::World::Object::Factory
 		virtual std::shared_ptr<Explosion> CreateExplosion(Position = { 0, 0 }) = 0;
 
 	protected:
-		Map& mInserter;
-		const Engine::Texture::GroupLibrary& mTextureGroups;
+		std::function<void(std::shared_ptr<Object>, Layer)> mInsertToMap;
 
-		QuadTree& mQuadTree;
+		std::function<void(const Object*)> mInsertToQuadTree;
+		Observer& mQuadTreeObserver;
+
+		const Engine::Texture::GroupLibrary& mTextureGroups;
 	};
 }
 

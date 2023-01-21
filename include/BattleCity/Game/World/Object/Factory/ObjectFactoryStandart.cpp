@@ -31,7 +31,7 @@ namespace BattleCity::Game::World::Object::Factory
 
 		object->SetPosition(position);
 
-		mInserter.InsertObject(object, Layer::Back);
+		mInsertToMap(object, Layer::Back);
 
 		return object;
 	}
@@ -40,11 +40,6 @@ namespace BattleCity::Game::World::Object::Factory
 	{
 		auto object = std::make_shared<Tank>();
 		auto textureComponent = object->GetComponent<Component::Texture>();
-
-		auto bulletSpawner = [&](Position pos, Direction direction)
-		{
-			return CreateBullet(pos, direction);
-		};
 
 		switch (tankType)
 		{
@@ -67,14 +62,14 @@ namespace BattleCity::Game::World::Object::Factory
 		object->SetPosition(position);
 
 		auto fireable = object->GetComponent<Component::Fireable>();
-		fireable->SetBullet(bulletSpawner);
+		fireable->SetBullet(*this);
 		fireable->SetBulletCount(1);
 
-		mInserter.InsertObject(object);
+		mInsertToMap(object, Layer::Front);
 
 		object->GetComponent<Component::Collider>()->UpdateCollider();
-		object->RegisterObserver(&mQuadTree);
-		mQuadTree.Insert(object.get());
+		object->RegisterObserver(&mQuadTreeObserver);
+		mInsertToQuadTree(object.get());
 
 		return object;
 	}
@@ -92,11 +87,11 @@ namespace BattleCity::Game::World::Object::Factory
 		object->SetPosition(position);
 		object->AdjustPositionToDirection();
 
-		mInserter.InsertObject(object);
+		mInsertToMap(object, Layer::Front);
 
 		object->GetComponent<Component::Collider>()->UpdateCollider();
-		object->RegisterObserver(&mQuadTree);
-		mQuadTree.Insert(object.get());
+		object->RegisterObserver(&mQuadTreeObserver);
+		mInsertToQuadTree(object.get());
 
 		return object;
 	}
@@ -127,11 +122,11 @@ namespace BattleCity::Game::World::Object::Factory
 		object->SetPosition(position);
 		textureComponent->ChangeTextureTo(Framework::TextureType::Basic);
 
-		mInserter.InsertObject(object);
+		mInsertToMap(object, Layer::Front);
 
 		object->GetComponent<Component::Collider>()->UpdateCollider();
-		object->RegisterObserver(&mQuadTree);
-		mQuadTree.Insert(object.get());
+		object->RegisterObserver(&mQuadTreeObserver);
+		mInsertToQuadTree(object.get());
 
 		return object;
 	}
@@ -145,11 +140,11 @@ namespace BattleCity::Game::World::Object::Factory
 		object->SetPosition(position);
 		textureComponent->ChangeTextureTo(Framework::TextureType::Phoenix);
 
-		mInserter.InsertObject(object);
+		mInsertToMap(object, Layer::Front);
 
 		object->GetComponent<Component::Collider>()->UpdateCollider();
-		object->RegisterObserver(&mQuadTree);
-		mQuadTree.Insert(object.get());
+		object->RegisterObserver(&mQuadTreeObserver);
+		mInsertToQuadTree(object.get());
 
 		return object;
 	}
@@ -163,7 +158,7 @@ namespace BattleCity::Game::World::Object::Factory
 		object->SetPosition(position);
 		textureComponent->ChangeTextureTo(Framework::TextureType::ExplosionSmall1);
 
-		mInserter.InsertObject(object);
+		mInsertToMap(object, Layer::Front);
 
 		return object;
 	}
