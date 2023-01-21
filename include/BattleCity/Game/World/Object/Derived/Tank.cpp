@@ -2,87 +2,55 @@
 
 #include "Tank.h"
 
-#include "BattleCity/Engine/Physics/Rectangle.h"
-#include "BattleCity/Framework/Texture.h"
+#include "BattleCity/Game/World/Object/Components/Collider.h"
 #include "BattleCity/Game/World/Object/Components/Fireable.h"
 #include "BattleCity/Game/World/Object/Components/Movable.h"
+#include "BattleCity/Game/World/Object/Components/TextureComponent.h"
 
 namespace BattleCity::Game::World::Object
 {
-    void Tank::InitializeComponents()
-    {
-        Object::InitializeComponents();
-
-        mFireable = AddComponent<Component::Fireable>(*this);
-        mMovable = AddComponent<Component::Movable>(*this);
-    }
+	Tank::Tank()
+	{
+        AddComponent<Component::Texture>(*this);
+        AddComponent<Component::Collider>(*this);
+        AddComponent<Component::Movable>(*this);
+        AddComponent<Component::Fireable>(*this);
+	}
 
     void Tank::Update()
     {
-        SetPosition(GetPosition() + mMovable->GetSpeed());
+        auto speed = GetComponent<Component::Movable>()->GetSpeed();
+
+        SetPosition(GetPosition() + speed);
 
         Object::Update();
     }
 
-    void Tank::ResolveCollisions(const Object* other)
+    void Tank::ResolveCollisions(Object& other)
     {
-        auto penetration = GetBounds().GetPenetration(other->GetBounds());
+        auto& rectangle = GetComponent<Component::Collider>()->GetRectangle();
+        auto& otherRectangle = other.GetComponent<Component::Collider>()->GetRectangle();
+        auto penetration = rectangle.GetPenetration(otherRectangle);
 
-        switch (mMovable->GetDirection())
+        auto movable = GetComponent<Component::Movable>();
+
+        switch (movable->GetDirection())
         {
-        case MovementDirection::Right:
-            SetX(GetBounds().GetPosition().X + penetration.X);
+        case Direction::Right:
+            SetX(rectangle.GetPosition().X + penetration.X);
             break;
-        case MovementDirection::Left:
-            SetX(GetBounds().GetPosition().X + penetration.X);
+        case Direction::Left:
+            SetX(rectangle.GetPosition().X + penetration.X);
             break;
-        case MovementDirection::Down:
-            SetY(GetBounds().GetPosition().Y + penetration.Y);
+        case Direction::Down:
+            SetY(rectangle.GetPosition().Y + penetration.Y);
             break;
-        case MovementDirection::Up:
-            SetY(GetBounds().GetPosition().Y + penetration.Y);
+        case Direction::Up:
+            SetY(rectangle.GetPosition().Y + penetration.Y);
             break;
         }
-        StopMovement();
+        movable->StopMovement();
 
         Object::ResolveCollisions(other);
-    }
-
-    void Tank::Fire()
-    {
-        mFireable->Fire();
-    }
-    void Tank::SetBullet(const std::function<std::shared_ptr<Bullet>(Position)>& bullet)
-    {
-        mFireable->SetBullet(bullet);
-    }
-
-    void Tank::SetSpeed(Speed num) noexcept
-    {
-        mMovable->SetSpeed(num);
-    }
-    void Tank::SetDirection(MovementDirection direction) noexcept
-    {
-        mMovable->SetDirection(direction);
-        switch (direction)
-        {
-        case MovementDirection::Right:
-            ChangeTextureTo(Framework::TextureType::Right);
-            break;
-        case MovementDirection::Left: 
-            ChangeTextureTo(Framework::TextureType::Left);
-            break;
-        case MovementDirection::Down: 
-            ChangeTextureTo(Framework::TextureType::Down);
-            break;
-        case MovementDirection::Up: 
-            ChangeTextureTo(Framework::TextureType::Up);
-            break;
-        default: ;
-        }
-    }
-    void Tank::StopMovement() noexcept
-    {
-        mMovable->StopMovement();
     }
 }
