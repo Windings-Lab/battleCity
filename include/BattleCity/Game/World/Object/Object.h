@@ -63,6 +63,6 @@ namespace BattleCity::Game::World::Object
 		Size mSize;
 
 		ComponentFactory mComponentFactory;
-		std::function<void(ID)> mDestroyer;
+		std::function<void(ID)> mDestroy;
 	};
 }

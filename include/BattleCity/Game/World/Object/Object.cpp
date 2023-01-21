@@ -25,11 +25,11 @@ namespace BattleCity::Game::World::Object
 
     void Object::SetDestroyer(std::function<void(ID)> destoyer)
     {
-        mDestroyer = destoyer;
+        mDestroy = std::move(destoyer);
     }
     void Object::Destroy()
     {
-        mDestroyer(mID);
+        mDestroy(mID);
     }
 
     int Object::GetID() const noexcept
