@@ -18,11 +18,11 @@ namespace BattleCity::Game::World::Object
 		mObservers.erase(std::remove(mObservers.begin(), mObservers.end(), observer), mObservers.end());
 	}
 
-	void Subject::NotifyObjectUpdated(const Object& obj) const
+	void Subject::NotifyObjectUpdated(Object& obj) const
 	{
 		for (const auto& observer : mObservers)
 		{
-			observer->OnObjectUpdate(obj, { [&obj] { const_cast<Object&>(obj).UpdateCollider(); }});
+			observer->OnObjectUpdate(obj);
 		}
 	}
 	void Subject::NotifyObjectDeleted(const Object& obj) const
