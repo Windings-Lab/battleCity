@@ -10,6 +10,11 @@ namespace BattleCity::Framework
 
 namespace BattleCity::Game::World::Object
 {
+	namespace Factory
+	{
+		struct Standart;
+	}
+
 	class Bullet;
 	class Object;
 }
@@ -27,7 +32,7 @@ namespace BattleCity::Game::World::Object::Component
 
 		virtual void Fire();
 
-		void SetBullet(const std::function<std::shared_ptr<Bullet>(Position, Direction)>&);
+		void SetBullet(Factory::Standart&);
 
 		void SetBulletCount(int count) noexcept;
 		int GetBulletCount() const noexcept;

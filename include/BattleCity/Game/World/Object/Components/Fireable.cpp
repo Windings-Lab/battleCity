@@ -4,6 +4,7 @@
 #include "Movable.h"
 #include "TextureComponent.h"
 #include "BattleCity/Game/World/Object/Derived/Bullet.h"
+#include "BattleCity/Game/World/Object/Factory/ObjectFactoryStandart.h"
 
 namespace BattleCity::Game::World::Object::Component
 {
@@ -14,9 +15,9 @@ namespace BattleCity::Game::World::Object::Component
 		auto shootDirection = mObject.GetComponent<Movable>()->GetDirection();
 		auto bullet = mSpawnBullet(GetShootPosition(shootDirection), shootDirection);
 	}
-	void Fireable::SetBullet(const std::function<std::shared_ptr<Bullet>(Position, Direction)>& bullet)
+	void Fireable::SetBullet(Factory::Standart& objectFactory)
 	{
-		mSpawnBullet = bullet;
+		mSpawnBullet = [&objectFactory](Position position, Direction direction) { return objectFactory.CreateBullet(position, direction); };
 	}
 	void Fireable::SetBulletCount(int count) noexcept
 	{
