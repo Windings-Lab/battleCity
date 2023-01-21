@@ -100,7 +100,7 @@ namespace BattleCity::Game
 			auto collisions = mQuadTree.GetPossibleCollisions(obj);
 			for (auto other : collisions)
 			{
-				obj->ResolveCollisions(other);
+				obj->ResolveCollisions(*other);
 			}
 		}
 
