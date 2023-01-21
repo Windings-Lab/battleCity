@@ -31,7 +31,7 @@ namespace BattleCity::Game::World::Object
 		mContainer.emplace_back(std::move(objPtr));
 	}
 
-	void Container::Remove(int objID)
+	void Container::RemoveBy(int objID)
 	{
 		const ObjectIndex index = mHashMap.at(objID);
 		const ID backID = mContainer.back()->GetID();
