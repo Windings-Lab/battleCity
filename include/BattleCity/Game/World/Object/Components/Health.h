@@ -10,10 +10,8 @@ namespace BattleCity::Game::World::Object::Component
 		using Component::Component;
 		~Health() override = default;
 
-		virtual void Destroy();
-
-		void SetHealth(int health);
-		int GetHealth() const;
+		void SetHealth(int health) noexcept;
+		int GetHealth() const noexcept;
 
 	private:
 		int mHealth;
