@@ -7,13 +7,10 @@ namespace BattleCity::Game::World::Object
 	class Wall : public Object
     {
     public:
-        using Object::Object;
+        Wall();
 
         void Update() override;
-
-	private:
-        void InitializeComponents() override;
-
+        void ResolveCollisions(Object&) override;
     };
 }
 
