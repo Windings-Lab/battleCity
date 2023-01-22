@@ -12,7 +12,7 @@ namespace BattleCity::Game::World::Object::Component
 	{
 		if(mBulletCount <= 0) return;
 
-		auto shootDirection = mObject.GetComponent<Movable>()->GetDirection();
+		auto shootDirection = mObject.GetComponent<Movable>()->GetMovementDirection();
 		auto bullet = mSpawnBullet(GetShootPosition(shootDirection), shootDirection);
 	}
 	void Fireable::SetBullet(Factory::Standart& objectFactory)

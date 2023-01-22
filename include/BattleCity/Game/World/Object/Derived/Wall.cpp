@@ -34,7 +34,7 @@ namespace BattleCity::Game::World::Object
 		auto& otherRectangle = other.GetComponent<Component::Collider>()->GetRectangle();
 		auto penetration = otherRectangle.GetPenetration(rectangle);
 
-		switch (movable->GetDirection())
+		switch (movable->GetMovementDirection())
 		{
 		case Direction::Right:
 		case Direction::Left:

@@ -19,9 +19,9 @@ namespace BattleCity::Game::World::Object
 
     void Tank::Update()
     {
-        auto speed = GetComponent<Component::Movable>()->GetSpeed();
+        mCollider->UpdateOldCollider();
 
-        SetPosition(GetPosition() + speed);
+        SetPosition(GetPosition() + mMovable->GetVelocity());
 
         Object::Update();
     }
@@ -35,7 +35,7 @@ namespace BattleCity::Game::World::Object
     {
         auto& rectangle = mCollider->GetRectangle();
 
-        switch (mMovable->GetDirection())
+        switch (mMovable->GetMovementDirection())
         {
         case Direction::Right:
         case Direction::Left:

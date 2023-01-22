@@ -148,7 +148,7 @@ namespace BattleCity::Game
 	{
 		static auto player = mPlayer.lock();
 		auto movable = player->GetComponent<World::Object::Component::Movable>();
-		movable->SetDirection(static_cast<World::Object::Direction>(k));
+		movable->SetMovementDirection(static_cast<World::Object::Direction>(k));
 	}
 
 	void Game::onKeyReleased(BattleCity::Framework::FRKey k)

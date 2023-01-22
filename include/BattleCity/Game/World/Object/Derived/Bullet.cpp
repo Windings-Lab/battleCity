@@ -17,9 +17,7 @@ namespace BattleCity::Game::World::Object
 
     void Bullet::Update()
     {
-        auto speed = mMovable->GetSpeed();
-
-        SetPosition(GetPosition() + speed);
+		SetPosition(GetPosition() + mMovable->GetVelocity());
 
         Object::Update();
     }
@@ -44,7 +42,7 @@ namespace BattleCity::Game::World::Object
 		const Size& textureSize = mTexture->GetSize();
 		const Size textureHalfSize = textureSize / 2;
 
-		switch (mMovable->GetDirection())
+		switch (mMovable->GetMovementDirection())
 		{
 		case Direction::Right:
 			SetY(GetPosition().Y - textureHalfSize.Y);

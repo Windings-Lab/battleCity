@@ -7,9 +7,9 @@
 
 namespace BattleCity::Game::World::Object::Component
 {
-	Vector2Int Movable::GetSpeed() const noexcept
+	const Velocity& Movable::GetVelocity() const noexcept
 	{
-		return mVelocity * mSpeed;
+		return mVelocity;
 	}
 
 	void Movable::SetSpeed(Speed speed) noexcept
@@ -17,45 +17,56 @@ namespace BattleCity::Game::World::Object::Component
 		mSpeed = speed;
 	}
 
-	void Movable::SetDirection(Direction direction) noexcept
+	void Movable::SetMovementDirection(Direction direction) noexcept
 	{
 		auto textureComponent = mObject.GetComponent<Texture>();
 
 		switch (direction)
 		{
 			case Direction::Left:
-				mVelocity = { -1, 0 };
+				mVelocity.X = -mSpeed;
+				mVelocity.Y = 0;
 				textureComponent->ChangeTextureTo(Framework::TextureType::Left);
 				break;
 			case Direction::Right:
-				mVelocity = { 1, 0 };
+				mVelocity.X = mSpeed;
+				mVelocity.Y = 0;
 				textureComponent->ChangeTextureTo(Framework::TextureType::Right);
 				break;
 			case Direction::Up:
-				mVelocity = { 0, -1 };
+				mVelocity.X = 0;
+				mVelocity.Y = -mSpeed;
 				textureComponent->ChangeTextureTo(Framework::TextureType::Up);
 				break;
 			case Direction::Down:
-				mVelocity = { 0, 1 };
+				mVelocity.X = 0;
+				mVelocity.Y = mSpeed;
 				textureComponent->ChangeTextureTo(Framework::TextureType::Down);
 				break;
 			case Direction::Count:
 			default:
 				{
-					assert(false && "Movable: Invalid SetDirection");
+					assert(false && "Movable: Invalid SetMovementDirection");
 				}
 				break;
 		}
 
-		mDirection = direction;
+		mMoving = true;
+		mMovementDirection = direction;
 	}
-	Direction Movable::GetDirection() const noexcept
+	Direction Movable::GetMovementDirection() const noexcept
 	{
-		return mDirection;
+		return mMovementDirection;
 	}
 
 	void Movable::StopMovement() noexcept
 	{
-		mVelocity = { 0, 0 };
+		mVelocity.X = 0;
+		mVelocity.Y = 0;
+		mMoving = false;
+	}
+	bool Movable::IsMoving() const noexcept
+	{
+		return mMoving;
 	}
 }
