@@ -3,8 +3,6 @@
 
 #include "BattleCity/Engine/Texture/BCTexture.h"
 #include "BattleCity/Engine/Texture/TextureGroupLibrary.h"
-#include "BattleCity/Game/World/WorldMap.h"
-#include "BattleCity/Game/World/Object/Containers/QuadTree.h"
 
 #include "BattleCity/Game/World/Object/Derived/Background.h"
 #include "BattleCity/Game/World/Object/Derived/Bullet.h"
@@ -16,6 +14,7 @@
 
 #include "BattleCity/Game/World/Object/Components/Collider.h"
 #include "BattleCity/Game/World/Object/Components/Fireable.h"
+#include "BattleCity/Game/World/Object/Components/Health.h"
 #include "BattleCity/Game/World/Object/Components/Movable.h"
 #include "BattleCity/Game/World/Object/Components/TextureComponent.h"
 
@@ -86,7 +85,7 @@ namespace BattleCity::Game::World::Object::Factory
 		textureComponent->SetTextureGroup(&mTextureGroups.GetGroupBy(Framework::TextureName::Bullet));
 
 		auto movable = object->GetComponent<Component::Movable>();
-		movable->SetSpeed(0);
+		movable->SetSpeed(1);
 		movable->SetDirection(direction);
 
 		object->SetPosition(position);
@@ -128,6 +127,8 @@ namespace BattleCity::Game::World::Object::Factory
 
 		object->SetPosition(position);
 		textureComponent->ChangeTextureTo(Framework::TextureType::Basic);
+
+		object->GetComponent<Component::Health>()->SetHealth(1);
 
 		mInsertToMap(object, Layer::Front);
 
