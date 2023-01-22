@@ -13,10 +13,18 @@ namespace BattleCity::Game::World::Object::Component
 		mRectangle.SetPosition(mObject.GetPosition());
 		mRectangle.SetSize(textureSize);
 	}
+	void Collider::UpdateOldCollider() noexcept
+	{
+		mOldRectangle = mRectangle;
+	}
 
 	const Engine::Physics::Rectangle& Collider::GetRectangle() const noexcept
 	{
 		return mRectangle;
+	}
+	const Engine::Physics::Rectangle& Collider::GetOldRectangle() const noexcept
+	{
+		return mOldRectangle;
 	}
 
 	void Collider::SetPosition(const Position& pos) noexcept

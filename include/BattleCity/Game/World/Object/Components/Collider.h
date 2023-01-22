@@ -12,8 +12,10 @@ namespace BattleCity::Game::World::Object::Component
 		using Component::Component;
 
 		const Engine::Physics::Rectangle& GetRectangle() const noexcept;
+		const Engine::Physics::Rectangle& GetOldRectangle() const noexcept;
 
 		void UpdateCollider() noexcept;
+		void UpdateOldCollider() noexcept;
 
 		void SetPosition(const Position&) noexcept;
 		const Position& GetPosition() const noexcept;
@@ -26,6 +28,8 @@ namespace BattleCity::Game::World::Object::Component
 
 	private:
 		Engine::Physics::Rectangle mRectangle;
+		Engine::Physics::Rectangle mOldRectangle;
+
 		bool mSolid;
 	};
 }
