@@ -31,7 +31,7 @@ namespace BattleCity::Game::World::Object
 			healthComponent->SetHealth(healthComponent->GetHealth() - 1);
 		}
 
-		Destroy();
+		MarkForDestroy();
     }
 
     void Bullet::AdjustPositionToDirection()

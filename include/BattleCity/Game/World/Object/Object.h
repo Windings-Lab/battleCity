@@ -49,6 +49,7 @@ namespace BattleCity::Game::World::Object
 
 		void SetDestroyer(std::function<void(ID)>);
 		void Destroy();
+		void MarkForDestroy();
 
 		int GetID() const noexcept;
 

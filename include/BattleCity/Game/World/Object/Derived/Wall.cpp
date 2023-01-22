@@ -20,7 +20,7 @@ namespace BattleCity::Game::World::Object
 	{
 		if(mHealth->GetHealth() <= 0)
 		{
-			Destroy();
+			MarkForDestroy();
 		}
 	}
 	void Wall::ResolveCollisions(Object& other)
