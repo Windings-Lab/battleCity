@@ -47,9 +47,9 @@ namespace BattleCity::Game::World::Object
 		virtual void Update() = 0;
 		virtual void ResolveCollisions(Object&) = 0;
 
-		void SetDestroyer(std::function<void(ID)>);
-		void Destroy();
+		void SetDestroyMarker(std::function<void(ID)>);
 		void MarkForDestroy();
+		virtual void OnDestroy();
 
 		int GetID() const noexcept;
 
@@ -63,6 +63,6 @@ namespace BattleCity::Game::World::Object
 		Position mPosition;
 
 		ComponentFactory mComponentFactory;
-		std::function<void(ID)> mDestroy;
+		std::function<void(ID)> mMarkForDestroy;
 	};
 }

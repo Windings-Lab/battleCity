@@ -23,13 +23,17 @@ namespace BattleCity::Game::World::Object
         NotifyObjectUpdated(*this);
     }
 
-    void Object::SetDestroyer(std::function<void(ID)> destoyer)
+    void Object::SetDestroyMarker(std::function<void(ID)> destoyer)
     {
-        mDestroy = std::move(destoyer);
+        mMarkForDestroy = std::move(destoyer);
     }
-    void Object::Destroy()
+    void Object::MarkForDestroy()
     {
-        mDestroy(mID);
+        mMarkForDestroy(mID);
+    }
+    void Object::OnDestroy()
+    {
+        NotifyObjectDeleted(*this);
     }
 
     int Object::GetID() const noexcept

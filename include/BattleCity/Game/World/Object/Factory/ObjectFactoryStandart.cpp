@@ -23,7 +23,7 @@ namespace BattleCity::Game::World::Object::Factory
 	std::shared_ptr<Background> Standart::CreateWorldBoundaries(Position position)
 	{
 		auto object = std::make_shared<Background>();
-		object->SetDestroyer(mObjectDestroyer);
+		object->SetDestroyMarker(mObjectDestroyer);
 
 		auto textureComponent = object->GetComponent<Component::Texture>();
 		textureComponent->SetTextureGroup(&mTextureGroups.GetGroupBy(Framework::TextureName::Background));
@@ -39,7 +39,7 @@ namespace BattleCity::Game::World::Object::Factory
 	std::shared_ptr<Tank> Standart::CreateTank(Type tankType, Position position)
 	{
 		auto object = std::make_shared<Tank>();
-		object->SetDestroyer(mObjectDestroyer);
+		object->SetDestroyMarker(mObjectDestroyer);
 
 		auto textureComponent = object->GetComponent<Component::Texture>();
 
@@ -79,7 +79,7 @@ namespace BattleCity::Game::World::Object::Factory
 	std::shared_ptr<Bullet> Standart::CreateBullet(Position position, Direction direction)
 	{
 		auto object = std::make_shared<Bullet>();
-		object->SetDestroyer(mObjectDestroyer);
+		object->SetDestroyMarker(mObjectDestroyer);
 
 		auto textureComponent = object->GetComponent<Component::Texture>();
 		textureComponent->SetTextureGroup(&mTextureGroups.GetGroupBy(Framework::TextureName::Bullet));
@@ -120,7 +120,7 @@ namespace BattleCity::Game::World::Object::Factory
 	std::shared_ptr<Wall> Standart::CreateWall(Position position)
 	{
 		auto object = std::make_shared<Wall>();
-		object->SetDestroyer(mObjectDestroyer);
+		object->SetDestroyMarker(mObjectDestroyer);
 
 		auto textureComponent = object->GetComponent<Component::Texture>();
 		textureComponent->SetTextureGroup(&mTextureGroups.GetGroupBy(Framework::TextureName::Wall));
@@ -142,7 +142,7 @@ namespace BattleCity::Game::World::Object::Factory
 	std::shared_ptr<Phoenix> Standart::CreatePhoenix(Position position)
 	{
 		auto object = std::make_shared<Phoenix>();
-		object->SetDestroyer(mObjectDestroyer);
+		object->SetDestroyMarker(mObjectDestroyer);
 
 		auto textureComponent = object->GetComponent<Component::Texture>();
 		textureComponent->SetTextureGroup(&mTextureGroups.GetGroupBy(Framework::TextureName::Phoenix));
@@ -162,7 +162,7 @@ namespace BattleCity::Game::World::Object::Factory
 	std::shared_ptr<Explosion> Standart::CreateExplosion(Position position)
 	{
 		auto object = std::make_shared<Explosion>();
-		object->SetDestroyer(mObjectDestroyer);
+		object->SetDestroyMarker(mObjectDestroyer);
 
 		auto textureComponent = object->GetComponent<Component::Texture>();
 		textureComponent->SetTextureGroup(&mTextureGroups.GetGroupBy(Framework::TextureName::Explosion));

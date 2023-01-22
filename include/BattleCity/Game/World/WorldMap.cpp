@@ -120,7 +120,7 @@ namespace BattleCity::Game::World
 		for (auto objectID : mDeleters)
 		{
 			auto object = mFrontLayer.GetObject(objectID);
-			object->NotifyObjectDeleted(*object);
+			object->OnDestroy();
 			mFrontLayer.RemoveBy(objectID);
 		}
 
