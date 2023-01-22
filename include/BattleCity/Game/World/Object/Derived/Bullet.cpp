@@ -8,16 +8,16 @@
 
 namespace BattleCity::Game::World::Object
 {
-	Bullet::Bullet() : Object()
-	{
-        AddComponent<Component::Texture>(*this);
-        AddComponent<Component::Collider>(*this);
-        AddComponent<Component::Movable>(*this);
-	}
+	Bullet::Bullet()
+		: Object()
+		, mTexture(AddComponent<Component::Texture>(*this))
+		, mMovable(AddComponent<Component::Movable>(*this))
+		, mCollider(AddComponent<Component::Collider>(*this))
+	{}
 
     void Bullet::Update()
     {
-        auto speed = GetComponent<Component::Movable>()->GetSpeed();
+        auto speed = mMovable->GetSpeed();
 
         SetPosition(GetPosition() + speed);
 
@@ -41,25 +41,24 @@ namespace BattleCity::Game::World::Object
 
     void Bullet::AdjustPositionToDirection()
     {
-	    const auto bulletTexture = GetComponent<Component::Texture>();
-		const Size& bulletTextureSize = bulletTexture->GetSize();
-		const Size bulletTextureHalfSize = bulletTextureSize / 2;
+		const Size& textureSize = mTexture->GetSize();
+		const Size textureHalfSize = textureSize / 2;
 
-		switch (GetComponent<Component::Movable>()->GetDirection())
+		switch (mMovable->GetDirection())
 		{
 		case Direction::Right:
-			SetY(GetPosition().Y - bulletTextureHalfSize.Y);
+			SetY(GetPosition().Y - textureHalfSize.Y);
 			break;
 		case Direction::Left:
-			SetY(GetPosition().Y - bulletTextureHalfSize.Y);
-			SetX(GetPosition().X - bulletTextureSize.X);
+			SetY(GetPosition().Y - textureHalfSize.Y);
+			SetX(GetPosition().X - textureSize.X);
 			break;
 		case Direction::Down:
-			SetX(GetPosition().X - bulletTextureHalfSize.X);
+			SetX(GetPosition().X - textureHalfSize.X);
 			break;
 		case Direction::Up:
-			SetX(GetPosition().X - bulletTextureHalfSize.X);
-			SetY(GetPosition().Y - bulletTextureSize.Y);
+			SetX(GetPosition().X - textureHalfSize.X);
+			SetY(GetPosition().Y - textureSize.Y);
 			break;
 		}
     }

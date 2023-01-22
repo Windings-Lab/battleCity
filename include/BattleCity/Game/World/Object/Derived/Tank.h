@@ -4,6 +4,14 @@
 
 namespace BattleCity::Game::World::Object
 {
+	namespace Component
+	{
+		class Fireable;
+		class Movable;
+		class Collider;
+		class Texture;
+	}
+
 	class Tank : public Object
 	{
 	public:
@@ -12,5 +20,11 @@ namespace BattleCity::Game::World::Object
 		void Update() override;
 		void ResolveCollisions(Object&) override;
 		void OnOutOfBounds(const Vector2Int&) override;
+
+	private:
+		Component::Texture* mTexture;
+		Component::Collider* mCollider;
+		Component::Movable* mMovable;
+		Component::Fireable* mFireable;
 	};
 }

@@ -4,6 +4,13 @@
 
 namespace BattleCity::Game::World::Object
 {
+	namespace Component
+	{
+		class Collider;
+		class Movable;
+		class Texture;
+	}
+
 	class Bullet : public Object
     {
     public:
@@ -14,5 +21,10 @@ namespace BattleCity::Game::World::Object
         void OnOutOfBounds(const Vector2Int&) override;
 
         void AdjustPositionToDirection();
+
+	private:
+        Component::Texture* mTexture;
+        Component::Movable* mMovable;
+        Component::Collider* mCollider;
     };
 }

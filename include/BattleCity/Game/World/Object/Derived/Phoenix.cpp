@@ -8,7 +8,7 @@
 
 namespace BattleCity::Game::World::Object
 {
-	Phoenix::Phoenix()
+	Phoenix::Phoenix() : Object()
 	{
         AddComponent<Component::Texture>(*this);
         AddComponent<Component::Collider>(*this);

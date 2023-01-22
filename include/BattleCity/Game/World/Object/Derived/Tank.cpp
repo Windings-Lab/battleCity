@@ -10,12 +10,12 @@
 namespace BattleCity::Game::World::Object
 {
 	Tank::Tank()
-	{
-        AddComponent<Component::Texture>(*this);
-        AddComponent<Component::Collider>(*this);
-        AddComponent<Component::Movable>(*this);
-        AddComponent<Component::Fireable>(*this);
-	}
+		: Object()
+		, mTexture(AddComponent<Component::Texture>(*this))
+		, mCollider(AddComponent<Component::Collider>(*this))
+		, mMovable(AddComponent<Component::Movable>(*this))
+		, mFireable(AddComponent<Component::Fireable>(*this))
+	{}
 
     void Tank::Update()
     {
@@ -31,13 +31,11 @@ namespace BattleCity::Game::World::Object
         auto otherCollider = other.GetComponent<Component::Collider>();
         if(!otherCollider->IsSolid()) return;
 
-        auto& rectangle = GetComponent<Component::Collider>()->GetRectangle();
+        auto& rectangle = mCollider->GetRectangle();
         auto& otherRectangle = other.GetComponent<Component::Collider>()->GetRectangle();
         auto penetration = rectangle.GetPenetration(otherRectangle);
 
-        auto movable = GetComponent<Component::Movable>();
-
-        switch (movable->GetDirection())
+        switch (mMovable->GetDirection())
         {
         case Direction::Right:
             SetX(rectangle.GetPosition().X + penetration.X);
@@ -52,17 +50,16 @@ namespace BattleCity::Game::World::Object
             SetY(rectangle.GetPosition().Y + penetration.Y);
             break;
         }
-        movable->StopMovement();
+        mMovable->StopMovement();
 
         Object::ResolveCollisions(other);
     }
 
     void Tank::OnOutOfBounds(const Vector2Int& penetration)
     {
-        auto& rectangle = GetComponent<Component::Collider>()->GetRectangle();
-        auto movable = GetComponent<Component::Movable>();
+        auto& rectangle = mCollider->GetRectangle();
 
-        switch (movable->GetDirection())
+        switch (mMovable->GetDirection())
         {
         case Direction::Right:
             SetX(rectangle.GetPosition().X + penetration.X);
@@ -77,7 +74,7 @@ namespace BattleCity::Game::World::Object
             SetY(rectangle.GetPosition().Y + penetration.Y);
             break;
         }
-        movable->StopMovement();
+        mMovable->StopMovement();
 
         Object::OnOutOfBounds(penetration);
     }
