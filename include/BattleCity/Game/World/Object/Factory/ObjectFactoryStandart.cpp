@@ -69,7 +69,9 @@ namespace BattleCity::Game::World::Object::Factory
 
 		mInsertToMap(object, Layer::Front);
 
-		object->GetComponent<Component::Collider>()->UpdateCollider();
+		auto collider = object->GetComponent<Component::Collider>();
+		collider->UpdateCollider();
+		collider->SetSolid(true);
 		object->RegisterObserver(&mQuadTreeObserver);
 		mInsertToQuadTree(object.get());
 
@@ -93,7 +95,9 @@ namespace BattleCity::Game::World::Object::Factory
 
 		mInsertToMap(object, Layer::Front);
 
-		object->GetComponent<Component::Collider>()->UpdateCollider();
+		auto collider = object->GetComponent<Component::Collider>();
+		collider->UpdateCollider();
+		collider->SetSolid(false);
 		object->RegisterObserver(&mQuadTreeObserver);
 		mInsertToQuadTree(object.get());
 
@@ -132,7 +136,9 @@ namespace BattleCity::Game::World::Object::Factory
 
 		mInsertToMap(object, Layer::Front);
 
-		object->GetComponent<Component::Collider>()->UpdateCollider();
+		auto collider = object->GetComponent<Component::Collider>();
+		collider->UpdateCollider();
+		collider->SetSolid(true);
 		object->RegisterObserver(&mQuadTreeObserver);
 		mInsertToQuadTree(object.get());
 
@@ -152,7 +158,9 @@ namespace BattleCity::Game::World::Object::Factory
 
 		mInsertToMap(object, Layer::Front);
 
-		object->GetComponent<Component::Collider>()->UpdateCollider();
+		auto collider = object->GetComponent<Component::Collider>();
+		collider->UpdateCollider();
+		collider->SetSolid(true);
 		object->RegisterObserver(&mQuadTreeObserver);
 		mInsertToQuadTree(object.get());
 

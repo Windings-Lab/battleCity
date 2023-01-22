@@ -12,7 +12,6 @@ namespace BattleCity::Game::World::Object::Component
 		using Component::Component;
 
 		const Engine::Physics::Rectangle& GetRectangle() const noexcept;
-		bool IsIntersects(const Collider&) const noexcept;
 
 		void UpdateCollider() noexcept;
 
@@ -22,7 +21,11 @@ namespace BattleCity::Game::World::Object::Component
 		void SetSize(const Size&) noexcept;
 		const Size& GetSize() const noexcept;
 
+		bool IsSolid() const noexcept;
+		void SetSolid(bool) noexcept;
+
 	private:
 		Engine::Physics::Rectangle mRectangle;
+		bool mSolid;
 	};
 }

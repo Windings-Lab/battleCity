@@ -28,6 +28,9 @@ namespace BattleCity::Game::World::Object
 
     void Tank::ResolveCollisions(Object& other)
     {
+        auto otherCollider = other.GetComponent<Component::Collider>();
+        if(!otherCollider->IsSolid()) return;
+
         auto& rectangle = GetComponent<Component::Collider>()->GetRectangle();
         auto& otherRectangle = other.GetComponent<Component::Collider>()->GetRectangle();
         auto penetration = rectangle.GetPenetration(otherRectangle);

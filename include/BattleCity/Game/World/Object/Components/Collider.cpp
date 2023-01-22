@@ -6,11 +6,6 @@
 
 namespace BattleCity::Game::World::Object::Component
 {
-	bool Collider::IsIntersects(const Collider& other) const noexcept
-	{
-		return mRectangle.Intersects(other.mRectangle);
-	}
-
 	void Collider::UpdateCollider() noexcept
 	{
 		auto& textureSize = mObject.GetComponent<Texture>()->GetSize();
@@ -40,6 +35,16 @@ namespace BattleCity::Game::World::Object::Component
 	const Size& Collider::GetSize() const noexcept
 	{
 		return mRectangle.GetSize();
+	}
+
+	bool Collider::IsSolid() const noexcept
+	{
+		return mSolid;
+	}
+
+	void Collider::SetSolid(bool solid) noexcept
+	{
+		mSolid = solid;
 	}
 }
 
