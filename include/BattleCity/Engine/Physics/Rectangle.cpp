@@ -16,22 +16,58 @@ namespace BattleCity::Engine::Physics
 	{
 	}
 
+	bool Rectangle::OutOfInner(const Rectangle& bounds, Vector2Int& penetration) const noexcept
+	{
+		int left	= GetX();
+		int right	= GetX() + GetWidth();
+		int top		= GetY();
+		int bottom	= GetY() + GetHeight();
+
+		int boundsLeft		= bounds.GetX();
+		int boundsRight		= bounds.GetX() + bounds.GetWidth();
+		int boundTop		= bounds.GetY();
+		int boundsBottom	= bounds.GetY() + bounds.GetHeight();
+
+		if(left < boundsLeft)
+		{
+			penetration.X = boundsLeft - left;
+			return true;
+		}
+		if(right > boundsRight)
+		{
+			penetration.X = -(right - boundsRight);
+			return true;
+		}
+
+		if(top < boundTop)
+		{
+			penetration.Y = boundTop - top;
+			return true;
+		}
+		if(bottom > boundsBottom)
+		{
+			penetration.Y = -(bottom - boundsBottom);
+			return true;
+		}
+
+		return false;
+	}
 	bool Rectangle::Intersects(const Rectangle& other) const noexcept
 	{
-		return (GetX() < other.GetX() + other.GetWidth() &&
-			GetX() + GetWidth() > other.GetX() &&
-			GetY() < other.GetY() + other.GetHeight() &&
-			GetY() + GetHeight() > other.GetY());
+		return GetX()				< other.GetX() + other.GetWidth()
+			&& GetX() + GetWidth()	> other.GetX()
+			&& GetY()				< other.GetY() + other.GetHeight()
+			&& GetY() + GetHeight() > other.GetY();
 	}
 	Vector2Int Rectangle::GetPenetration(const Rectangle& other) const noexcept
 	{
-		int left = GetX() + GetWidth();
+		int right = GetX() + GetWidth();
 		int otherRight = other.GetX() + other.GetWidth();
-		int top = GetY() + GetHeight();
+		int bottom = GetY() + GetHeight();
 		int otherBottom = other.GetY() + other.GetHeight();
 
-		int x_overlap = std::max(0, std::min(left, otherRight) - std::max(GetX(), other.GetX()));
-		int y_overlap = std::max(0, std::min(top, otherBottom) - std::max(GetY(), other.GetY()));
+		int x_overlap = std::max(0, std::min(right, otherRight) - std::max(GetX(), other.GetX()));
+		int y_overlap = std::max(0, std::min(bottom, otherBottom) - std::max(GetY(), other.GetY()));
 
 		return { x_overlap * (GetX() > other.GetX() ? 1 : -1),
 					y_overlap * (GetY() > other.GetY() ? 1 : -1) };

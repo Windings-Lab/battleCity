@@ -36,6 +36,7 @@ namespace BattleCity::Engine::Physics
 
 		~Rectangle() = default;
 
+		bool OutOfInner(const Rectangle&, Vector2Int&) const noexcept;
 		bool Intersects(const Rectangle&) const noexcept;
 		Vector2Int GetPenetration(const Rectangle&) const noexcept;
 
