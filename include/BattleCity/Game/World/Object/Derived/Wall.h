@@ -4,6 +4,11 @@
 
 namespace BattleCity::Game::World::Object
 {
+	namespace Component
+	{
+		class Health;
+	}
+
 	class Wall : public Object
     {
     public:
@@ -11,6 +16,9 @@ namespace BattleCity::Game::World::Object
 
         void Update() override;
         void ResolveCollisions(Object&) override;
+
+	private:
+        Component::Health* mHealth;
     };
 }
 
