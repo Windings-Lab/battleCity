@@ -102,6 +102,7 @@ namespace BattleCity::Game
 			for (auto other : collisions)
 			{
 				obj->ResolveCollisions(*other);
+				other->ResolveCollisions(*obj);
 			}
 		}
 
