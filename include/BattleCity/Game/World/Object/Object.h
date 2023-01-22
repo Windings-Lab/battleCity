@@ -5,6 +5,11 @@
 #include "Components/ComponentFactory.h"
 #include "Observer/ObjectSubject.h"
 
+namespace BattleCity::Engine::Physics
+{
+	class Rectangle;
+}
+
 namespace BattleCity::Game::World::Object
 {
 	class Object : public Subject
@@ -46,6 +51,7 @@ namespace BattleCity::Game::World::Object
 	public:
 		virtual void Update() = 0;
 		virtual void ResolveCollisions(Object&) = 0;
+		virtual void OnOutOfBounds(const Vector2Int&);
 
 		void SetDestroyMarker(std::function<void(ID)>);
 		void MarkForDestroy();

@@ -24,4 +24,9 @@ namespace BattleCity::Game::World::Object
     {
         // Empty
     }
+
+    void Phoenix::OnOutOfBounds(const Vector2Int&)
+    {
+        // Empty
+    }
 }

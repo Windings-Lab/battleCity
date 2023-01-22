@@ -19,4 +19,8 @@ namespace BattleCity::Game::World::Object
     {
         // Empty
     }
+    void Explosion::OnOutOfBounds(const Vector2Int&)
+    {
+        // Empty
+    }
 }

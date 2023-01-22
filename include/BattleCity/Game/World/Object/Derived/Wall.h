@@ -16,6 +16,7 @@ namespace BattleCity::Game::World::Object
 
         void Update() override;
         void ResolveCollisions(Object&) override;
+        void OnOutOfBounds(const Vector2Int&) override;
 
 	private:
         Component::Health* mHealth;

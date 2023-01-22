@@ -18,4 +18,9 @@ namespace BattleCity::Game::World::Object
 	{
 		// Empty
 	}
+
+	void Pixel::OnOutOfBounds(const Vector2Int&)
+	{
+		// Empty
+	}
 }

@@ -87,10 +87,18 @@ namespace BattleCity::Game
 	{
 		for (auto& obj : mMap.GetLayer(World::Object::Layer::Front))
 		{
-			if(obj->HasComponent<World::Object::Component::Movable>())
+			if(!obj->HasComponent<World::Object::Component::Movable>()) continue;
+			auto collider = obj->GetComponent<World::Object::Component::Collider>();
+			if(!collider) continue;
+
+			Vector2Int penetration;
+			if(collider->GetRectangle().OutOfInner(mMap.GetBounds(), penetration))
 			{
-				mColliders.push_back(obj.get());
+				obj->OnOutOfBounds(penetration);
+				continue;
 			}
+
+			mColliders.push_back(obj.get());
 		}
 	}
 

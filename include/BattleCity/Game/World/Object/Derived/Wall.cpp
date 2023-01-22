@@ -27,4 +27,8 @@ namespace BattleCity::Game::World::Object
 	{
 		// Empty
 	}
+	void Wall::OnOutOfBounds(const Vector2Int&)
+	{
+		// Empty
+	}
 }

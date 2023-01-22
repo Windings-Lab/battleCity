@@ -34,6 +34,11 @@ namespace BattleCity::Game::World::Object
 		MarkForDestroy();
     }
 
+    void Bullet::OnOutOfBounds(const Vector2Int&)
+    {
+		MarkForDestroy();
+    }
+
     void Bullet::AdjustPositionToDirection()
     {
 	    const auto bulletTexture = GetComponent<Component::Texture>();
