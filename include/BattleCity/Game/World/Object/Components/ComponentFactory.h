@@ -37,7 +37,7 @@ namespace BattleCity::Game::World::Object
 
 			using std::type_index;
 			const auto componentIt = mComponents.find(type_index(typeid(RetType)));
-			return static_cast<RetType*>(componentIt->second.get());
+			return componentIt != mComponents.end() ? static_cast<RetType*>(componentIt->second.get()) : nullptr;
 		}
 
 		template<typename RetType>
