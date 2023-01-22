@@ -45,6 +45,7 @@ namespace BattleCity::Game::World::Object
         switch (movementDirection)
         {
         case Direction::Right:
+            // If Collision on Right
             if (oldRectangle.GetX() + oldRectangle.GetWidth() <= oldOtherRectangle.GetX())
             {
                 SetX(rectangle.GetPosition().X + penetration.X);
@@ -52,6 +53,7 @@ namespace BattleCity::Game::World::Object
             }
             break;
         case Direction::Left:
+            // If Collision on Left
             if(oldRectangle.GetX() >= oldOtherRectangle.GetX() + oldOtherRectangle.GetWidth())
             {
                 SetX(rectangle.GetPosition().X + penetration.X);
@@ -59,6 +61,7 @@ namespace BattleCity::Game::World::Object
             }
             break;
         case Direction::Down:
+            // If Collision on Down
             if (oldRectangle.GetY() + oldRectangle.GetHeight() <= oldOtherRectangle.GetY())
             {
                 SetY(rectangle.GetPosition().Y + penetration.Y);
@@ -66,6 +69,7 @@ namespace BattleCity::Game::World::Object
             }
             break;
         case Direction::Up:
+            // If Collision on Up
             if (oldRectangle.GetY() >= oldOtherRectangle.GetY() + oldOtherRectangle.GetHeight())
             {
                 SetY(rectangle.GetPosition().Y + penetration.Y);
