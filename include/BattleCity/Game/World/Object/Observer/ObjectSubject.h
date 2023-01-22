@@ -20,6 +20,8 @@ namespace BattleCity::Game::World::Object
 
 	protected:
         void NotifyObjectUpdated(Object&) const;
+
+	public:
 		void NotifyObjectDeleted(const Object&) const;
 
     private:
