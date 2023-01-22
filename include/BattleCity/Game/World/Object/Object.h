@@ -60,7 +60,6 @@ namespace BattleCity::Game::World::Object
 	private:
 		ID mID;
 		Position mPosition;
-		Size mSize;
 
 		ComponentFactory mComponentFactory;
 		std::function<void(ID)> mDestroy;
