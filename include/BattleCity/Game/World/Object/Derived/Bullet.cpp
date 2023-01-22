@@ -2,6 +2,7 @@
 #include "Bullet.h"
 
 #include "BattleCity/Game/World/Object/Components/Collider.h"
+#include "BattleCity/Game/World/Object/Components/Health.h"
 #include "BattleCity/Game/World/Object/Components/Movable.h"
 #include "BattleCity/Game/World/Object/Components/TextureComponent.h"
 
@@ -22,10 +23,15 @@ namespace BattleCity::Game::World::Object
 
         Object::Update();
     }
-    void Bullet::ResolveCollisions(Object&)
+    void Bullet::ResolveCollisions(Object& object)
     {
-        // Decrease health of the object
-        // Destroy this
+		auto healthComponent = object.GetComponent<Component::Health>();
+		if(healthComponent)
+		{
+			healthComponent->SetHealth(healthComponent->GetHealth() - 1);
+		}
+
+		Destroy();
     }
 
     void Bullet::AdjustPositionToDirection()
