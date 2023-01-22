@@ -43,23 +43,26 @@ namespace BattleCity::Game::World::Object::Factory
 
 		auto textureComponent = object->GetComponent<Component::Texture>();
 
+		auto movable = object->GetComponent<Component::Movable>();
+
 		switch (tankType)
 		{
 		case Type::TankNPC:
 			textureComponent->SetTextureGroup(&mTextureGroups.GetGroupBy(Framework::TextureName::TankNPC));
+			movable->SetSpeed(1);
+			movable->SetDirection(Direction::Down);
+			movable->StopMovement();
 			break;
 		case Type::TankPlayer:
 			textureComponent->SetTextureGroup(&mTextureGroups.GetGroupBy(Framework::TextureName::TankPlayer));
+			movable->SetSpeed(5);
+			movable->SetDirection(Direction::Up);
+			movable->StopMovement();
 			break;
 		default:
 			std::cerr << "Incorrect tank type\n";
 			return nullptr;
 		}
-
-		auto movable = object->GetComponent<Component::Movable>();
-		movable->SetSpeed(5);
-		movable->SetDirection(Direction::Up);
-		movable->StopMovement();
 
 		object->SetPosition(position);
 
