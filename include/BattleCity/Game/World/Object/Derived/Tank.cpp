@@ -28,31 +28,7 @@ namespace BattleCity::Game::World::Object
 
     void Tank::ResolveCollisions(Object& other)
     {
-        auto otherCollider = other.GetComponent<Component::Collider>();
-        if(!otherCollider->IsSolid()) return;
 
-        auto& rectangle = mCollider->GetRectangle();
-        auto& otherRectangle = other.GetComponent<Component::Collider>()->GetRectangle();
-        auto penetration = rectangle.GetPenetration(otherRectangle);
-
-        switch (mMovable->GetDirection())
-        {
-        case Direction::Right:
-            SetX(rectangle.GetPosition().X + penetration.X);
-            break;
-        case Direction::Left:
-            SetX(rectangle.GetPosition().X + penetration.X);
-            break;
-        case Direction::Down:
-            SetY(rectangle.GetPosition().Y + penetration.Y);
-            break;
-        case Direction::Up:
-            SetY(rectangle.GetPosition().Y + penetration.Y);
-            break;
-        }
-        mMovable->StopMovement();
-
-        Object::ResolveCollisions(other);
     }
 
     void Tank::OnOutOfBounds(const Vector2Int& penetration)
@@ -62,14 +38,10 @@ namespace BattleCity::Game::World::Object
         switch (mMovable->GetDirection())
         {
         case Direction::Right:
-            SetX(rectangle.GetPosition().X + penetration.X);
-            break;
         case Direction::Left:
             SetX(rectangle.GetPosition().X + penetration.X);
             break;
         case Direction::Down:
-            SetY(rectangle.GetPosition().Y + penetration.Y);
-            break;
         case Direction::Up:
             SetY(rectangle.GetPosition().Y + penetration.Y);
             break;

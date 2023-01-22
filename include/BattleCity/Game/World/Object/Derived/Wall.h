@@ -6,6 +6,7 @@ namespace BattleCity::Game::World::Object
 {
 	namespace Component
 	{
+		class Collider;
 		class Health;
 	}
 
@@ -20,6 +21,7 @@ namespace BattleCity::Game::World::Object
 
 	private:
         Component::Health* mHealth;
+        Component::Collider* mCollider;
     };
 }
 
