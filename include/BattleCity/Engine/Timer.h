@@ -11,6 +11,8 @@ namespace BattleCity::Engine
 		Timer() = default;
 
 		void Start(Seconds, std::function<void()>);
+
+		void Repeat();
 		void Update();
 
 	private:

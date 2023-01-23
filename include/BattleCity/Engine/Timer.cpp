@@ -11,6 +11,17 @@ namespace BattleCity::Engine
 		mEnded = false;
 	}
 
+	void Timer::Repeat()
+	{
+		auto endTime = std::chrono::high_resolution_clock::now();
+
+		if (endTime - mStartingTime >= mDuration)
+		{
+			mOnTimerEnd();
+			mStartingTime = std::chrono::high_resolution_clock::now();
+		}
+	}
+
 	void Timer::Update()
 	{
 		if(mEnded) return;
