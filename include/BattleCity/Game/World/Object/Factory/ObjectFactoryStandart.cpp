@@ -14,6 +14,7 @@
 #include "BattleCity/Game/World/Object/Derived/Wall.h"
 
 #include "BattleCity/Game/World/Object/Components/Collider.h"
+#include "BattleCity/Game/World/Object/Components/Explodable.h"
 #include "BattleCity/Game/World/Object/Components/Fireable.h"
 #include "BattleCity/Game/World/Object/Components/Health.h"
 #include "BattleCity/Game/World/Object/Components/Movable.h"
@@ -110,6 +111,9 @@ namespace BattleCity::Game::World::Object::Factory
 			return nullptr;
 		}
 
+		auto explodable = object->GetComponent<Component::Explodable>();
+		explodable->SetExplosionSpawner(*this);
+
 		mInsertToMap(object, Layer::Middle);
 
 		object->RegisterObserver(&mQuadTreeObserver);
@@ -181,7 +185,7 @@ namespace BattleCity::Game::World::Object::Factory
 		return object;
 	}
 
-	std::shared_ptr<Explosion> Standart::CreateExplosion(Position position)
+	std::shared_ptr<Explosion> Standart::CreateExplosion(ExplosionType type, Position position)
 	{
 		auto object = std::make_shared<Explosion>();
 		object->SetDestroyMarker(mObjectDestroyer);
@@ -189,8 +193,24 @@ namespace BattleCity::Game::World::Object::Factory
 		auto textureComponent = object->GetComponent<Component::Texture>();
 		textureComponent->SetTextureGroup(&mTextureGroups.GetGroupBy(Framework::TextureName::Explosion));
 
-		object->SetPosition(position);
-		textureComponent->ChangeTextureTo(Framework::TextureType::ExplosionSmall1);
+		switch (type)
+		{
+		case ExplosionType::Large:
+			textureComponent->ChangeTextureTo(Framework::TextureType::ExplosionLarge1);
+			break;
+		case ExplosionType::Small:
+			textureComponent->ChangeTextureTo(Framework::TextureType::ExplosionSmall1);
+			break;
+		case ExplosionType::Error:
+		default:
+			{
+			assert(false && "CreateExplosion: Invalid explosion type");
+			return nullptr;
+			}
+		}
+
+		auto textureHalfSize = textureComponent->GetSize() / 2;
+		object->SetPosition(position - textureHalfSize);
 
 		mInsertToMap(object, Layer::Front);
 

@@ -54,7 +54,7 @@ namespace BattleCity::Game::World::Object::Factory
 
 		virtual std::shared_ptr<Phoenix> CreatePhoenix(Position = { 0, 0 }) = 0;
 
-		virtual std::shared_ptr<Explosion> CreateExplosion(Position = { 0, 0 }) = 0;
+		virtual std::shared_ptr<Explosion> CreateExplosion(ExplosionType, Position = { 0, 0 }) = 0;
 
 	protected:
 		std::function<void(std::shared_ptr<Object>, Layer)> mInsertToMap;

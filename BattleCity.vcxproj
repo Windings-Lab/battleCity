@@ -28,6 +28,7 @@
     <ClCompile Include="include\BattleCity\Engine\Texture\TexturePathLibrary.cpp" />
     <ClCompile Include="include\BattleCity\Engine\Texture\TextureStorage.cpp" />
     <ClCompile Include="include\BattleCity\Engine\Timer.cpp" />
+    <ClCompile Include="include\BattleCity\Engine\TimerMilliseconds.cpp" />
     <ClCompile Include="include\BattleCity\Framework\Screen.cpp" />
     <ClCompile Include="include\BattleCity\Framework\Texture.cpp" />
     <ClCompile Include="include\BattleCity\Game\Game.cpp" />
@@ -35,6 +36,7 @@
     <ClCompile Include="include\BattleCity\Game\World\Object\Components\Collider.cpp" />
     <ClCompile Include="include\BattleCity\Game\World\Object\Components\Component.cpp" />
     <ClCompile Include="include\BattleCity\Game\World\Object\Components\ComponentFactory.cpp" />
+    <ClCompile Include="include\BattleCity\Game\World\Object\Components\Explodable.cpp" />
     <ClCompile Include="include\BattleCity\Game\World\Object\Components\Fireable.cpp" />
     <ClCompile Include="include\BattleCity\Game\World\Object\Components\Health.cpp" />
     <ClCompile Include="include\BattleCity\Game\World\Object\Components\Movable.cpp" />
@@ -77,6 +79,7 @@
     <ClInclude Include="include\BattleCity\Engine\Texture\TexturePathLibrary.h" />
     <ClInclude Include="include\BattleCity\Engine\Texture\TextureStorage.h" />
     <ClInclude Include="include\BattleCity\Engine\Timer.h" />
+    <ClInclude Include="include\BattleCity\Engine\TimerMilliseconds.h" />
     <ClInclude Include="include\BattleCity\Enums.h" />
     <ClInclude Include="include\BattleCity\Framework\Framework.h" />
     <ClInclude Include="include\BattleCity\Framework\Screen.h" />
@@ -86,6 +89,7 @@
     <ClInclude Include="include\BattleCity\Game\World\Object\Components\Collider.h" />
     <ClInclude Include="include\BattleCity\Game\World\Object\Components\Component.h" />
     <ClInclude Include="include\BattleCity\Game\World\Object\Components\ComponentFactory.h" />
+    <ClInclude Include="include\BattleCity\Game\World\Object\Components\Explodable.h" />
     <ClInclude Include="include\BattleCity\Game\World\Object\Components\Fireable.h" />
     <ClInclude Include="include\BattleCity\Game\World\Object\Components\Health.h" />
     <ClInclude Include="include\BattleCity\Game\World\Object\Components\Movable.h" />

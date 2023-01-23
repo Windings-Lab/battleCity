@@ -122,6 +122,12 @@
     <ClCompile Include="include\BattleCity\Game\World\Object\Components\AI.cpp">
       <Filter>BattleCity\Game\World\Object\Components</Filter>
     </ClCompile>
+    <ClCompile Include="include\BattleCity\Engine\TimerMilliseconds.cpp">
+      <Filter>BattleCity\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="include\BattleCity\Game\World\Object\Components\Explodable.cpp">
+      <Filter>BattleCity\Game\World\Object\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pcheader\PCHeader.h">
@@ -269,6 +275,12 @@
       <Filter>BattleCity\Engine</Filter>
     </ClInclude>
     <ClInclude Include="include\BattleCity\Game\World\Object\Components\AI.h">
+      <Filter>BattleCity\Game\World\Object\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Engine\TimerMilliseconds.h">
+      <Filter>BattleCity\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Game\World\Object\Components\Explodable.h">
       <Filter>BattleCity\Game\World\Object\Components</Filter>
     </ClInclude>
   </ItemGroup>

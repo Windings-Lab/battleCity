@@ -2,6 +2,7 @@
 #include "Bullet.h"
 
 #include "BattleCity/Game/World/Object/Components/Collider.h"
+#include "BattleCity/Game/World/Object/Components/Explodable.h"
 #include "BattleCity/Game/World/Object/Components/Health.h"
 #include "BattleCity/Game/World/Object/Components/Movable.h"
 #include "BattleCity/Game/World/Object/Components/TextureComponent.h"
@@ -13,6 +14,7 @@ namespace BattleCity::Game::World::Object
 		, mTexture(AddComponent<Component::Texture>(*this))
 		, mMovable(AddComponent<Component::Movable>(*this))
 		, mCollider(AddComponent<Component::Collider>(*this))
+		, mExplodable(AddComponent<Component::Explodable>(*this))
 	{}
 
     void Bullet::Update()
@@ -35,6 +37,12 @@ namespace BattleCity::Game::World::Object
     void Bullet::OnOutOfBounds(const Vector2Int&)
     {
 		MarkForDestroy();
+    }
+
+    void Bullet::OnDestroy()
+    {
+		mExplodable->Explode(ExplosionType::Small);
+	    Object::OnDestroy();
     }
 
     void Bullet::AdjustPositionToDirection()

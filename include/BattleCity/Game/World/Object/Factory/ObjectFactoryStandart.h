@@ -20,6 +20,6 @@ namespace BattleCity::Game::World::Object::Factory
 
 		std::shared_ptr<Phoenix> CreatePhoenix(Position = { 0, 0 }) override;
 
-		std::shared_ptr<Explosion> CreateExplosion(Position = { 0, 0 }) override;
+		std::shared_ptr<Explosion> CreateExplosion(ExplosionType, Position = { 0, 0 }) override;
 	};
 }
