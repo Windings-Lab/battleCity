@@ -39,6 +39,7 @@ namespace BattleCity::Game::World::Object
 
 		ObjectContainer::const_iterator begin() const noexcept;
 		ObjectContainer::const_iterator end() const noexcept;
+		const std::shared_ptr<Object>& operator[](int) const;
 
 	private:
 		ObjectContainer mContainer;

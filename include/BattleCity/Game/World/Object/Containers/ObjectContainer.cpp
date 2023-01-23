@@ -71,6 +71,11 @@ namespace BattleCity::Game::World::Object
 		return mContainer.cend();
 	}
 
+	const std::shared_ptr<Object>& Container::operator[](int index) const
+	{
+		return mContainer[index];
+	}
+
 	void swap(Container& first, Container& second) noexcept
 	{
 		first.mContainer.swap(second.mContainer);
