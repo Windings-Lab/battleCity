@@ -2,6 +2,11 @@
 
 #include "BattleCity/Game/World/Object/ObjectAliases.h"
 
+namespace BattleCity::Engine::Physics
+{
+	class Rectangle;
+}
+
 namespace BattleCity::Engine::Texture
 {
 	class GroupLibrary;
@@ -54,6 +59,7 @@ namespace BattleCity::Game::World::Object::Factory
 	protected:
 		std::function<void(std::shared_ptr<Object>, Layer)> mInsertToMap;
 		std::function<void(ID)> mObjectDestroyer;
+		const Engine::Physics::Rectangle& mBounds;
 
 		std::function<void(const Object*)> mInsertToQuadTree;
 		Observer& mQuadTreeObserver;
