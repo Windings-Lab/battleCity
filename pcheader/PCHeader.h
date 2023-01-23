@@ -20,9 +20,9 @@
 #include <exception>
 #include <stdexcept>
 
-// Sleep_until GameLoop
+// Timers, GameLoop, Random
 #include <chrono>
-#include <thread>
+#include <random>
 
 // Stoi and etc
 #include <cstdlib>
