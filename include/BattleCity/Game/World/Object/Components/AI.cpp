@@ -14,7 +14,7 @@ namespace BattleCity::Game::World::Object::Component
 		, mRandomGenerator(std::random_device{}())
 		, mRandomDirection(0,3)
 	{
-		mTimeToChangeDirection.StartRandom(3, 10, [this]
+		mTimeToChangeDirection.StartRandom(3, 5, [this]
 			{
 				RandomChangeDirection();
 			});
@@ -27,13 +27,22 @@ namespace BattleCity::Game::World::Object::Component
 
 	void AI::Update()
 	{
-		mTimeToChangeDirection.RepeatRandom(3, 10);
+		mTimeToChangeDirection.RepeatRandom(3, 5);
 		mTimeToShoot.RepeatRandom(0, 3);
+		mOnWallCollision.Update();
 	}
 
 	void AI::RandomChangeDirection()
 	{
 		mMovable->SetMovementDirection(static_cast<Direction>(mRandomDirection(mRandomGenerator)));
+	}
+
+	void AI::OnWallCollision()
+	{
+		mOnWallCollision.StartOnceRandom(0, 2, [this]
+		{
+			RandomChangeDirection();
+		});
 	}
 }
 

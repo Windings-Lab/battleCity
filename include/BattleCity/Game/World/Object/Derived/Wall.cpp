@@ -51,7 +51,7 @@ namespace BattleCity::Game::World::Object
 		auto ai = other.GetComponent<Component::AI>();
 		if(ai)
 		{
-			ai->RandomChangeDirection();
+			ai->WallCollision();
 		}
 
 		NotifyObjectUpdated(other);

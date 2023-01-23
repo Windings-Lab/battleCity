@@ -15,6 +15,7 @@ namespace BattleCity::Game::World::Object::Component
 		void Update();
 
 		void RandomChangeDirection();
+		void WallCollision();
 
 	private:
 		Movable* mMovable;
@@ -22,6 +23,7 @@ namespace BattleCity::Game::World::Object::Component
 
 		Engine::Timer mTimeToChangeDirection;
 		Engine::Timer mTimeToShoot;
+		Engine::Timer mOnWallCollision;
 
 		std::mt19937 mRandomGenerator;
 		std::uniform_int_distribution<int> mRandomDirection;
