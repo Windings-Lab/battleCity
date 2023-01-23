@@ -11,6 +11,7 @@
 #include "World/Object/Components/Collider.h"
 #include "World/Object/Components/Fireable.h"
 #include "World/Object/Components/TextureComponent.h"
+#include "World/Object/Derived/Phoenix.h"
 
 namespace BattleCity::Game
 {
@@ -41,7 +42,9 @@ namespace BattleCity::Game
 		mTextureStorage.CreateGroups(mTextureStorage.GetTextures());
 
 		const World::Level level = World::Level::CreateLevel(R"(.\data\Maps\level1.txt)");
-		mPlayer = std::dynamic_pointer_cast<World::Object::Tank>(mMap.CreateMap(level));
+		mMap.CreateMap(level);
+		mPlayer = mMap.GetPlayer();
+		mPhoenix = mMap.GetPhoenix();
 
 		return true;
 	}
@@ -87,8 +90,11 @@ namespace BattleCity::Game
 			object->Update();
 		}
 
-		if (mPlayer.expired() && !mGameOver)
+		if (!mGameOver && (mPlayer->IsDestroyed() || mPhoenix->IsDestroyed()))
 		{
+			mPlayer.reset();
+			mPhoenix.reset();
+
 			mGameOver = true;
 			mTimeToClose.StartOnce(6, [this]
 				{
@@ -179,8 +185,7 @@ namespace BattleCity::Game
 	{
 		if(mGameOver) return;
 
-		auto player = mPlayer.lock();
-		auto movable = player->GetComponent<World::Object::Component::Movable>();
+		auto movable = mPlayer->GetComponent<World::Object::Component::Movable>();
 		movable->SetMovementDirection(static_cast<World::Object::Direction>(k));
 	}
 
@@ -188,8 +193,7 @@ namespace BattleCity::Game
 	{
 		if (mGameOver) return;
 
-		auto player = mPlayer.lock();
-		auto movable = player->GetComponent<World::Object::Component::Movable>();
+		auto movable = mPlayer->GetComponent<World::Object::Component::Movable>();
 		movable->StopMovement();
 	}
 
@@ -202,14 +206,12 @@ namespace BattleCity::Game
 	{
 		if (mGameOver) return;
 
-		auto player = mPlayer.lock();
-
 		switch(button)
 		{
 		case BattleCity::Framework::FRMouseButton::LEFT:
 			if(!isReleased)
 			{
-				auto fireable = player->GetComponent<World::Object::Component::Fireable>();
+				auto fireable = mPlayer->GetComponent<World::Object::Component::Fireable>();
 				fireable->Fire();
 			}
 			break;
@@ -217,7 +219,7 @@ namespace BattleCity::Game
 			if (!isReleased)
 			{
 				mMap.GetDebugLayer().Clear();
-				auto& rect = player->GetComponent<World::Object::Component::Collider>()->GetRectangle();
+				auto& rect = mPlayer->GetComponent<World::Object::Component::Collider>()->GetRectangle();
 				mDebug.DrawRectangle(rect);
 			}
 			break;

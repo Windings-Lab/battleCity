@@ -80,6 +80,7 @@ namespace BattleCity::Game
 
 		World::Map mMap;
 
-		std::weak_ptr<World::Object::Tank> mPlayer;
+		std::shared_ptr<World::Object::Object> mPlayer;
+		std::shared_ptr<World::Object::Object> mPhoenix;
 	};
 }
