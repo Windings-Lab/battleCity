@@ -72,9 +72,12 @@ namespace BattleCity::Game
 
 	void Game::Update()
 	{
-		for (auto& obj : mMap.GetLayer(World::Object::Layer::Front))
+		auto& frontLayerObjects = mMap.GetLayer(World::Object::Layer::Front);
+		int size = frontLayerObjects.GetSize();
+
+		for (int i = 0; i < size; i++)
 		{
-			obj->Update();
+			frontLayerObjects[i]->Update();
 		}
 	}
 	void Game::ResolveCollisions()
