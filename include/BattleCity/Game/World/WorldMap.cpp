@@ -7,6 +7,7 @@
 #include "Object/Containers/QuadTree.h"
 
 #include "Object/Derived/Tank.h"
+#include "Object/Derived/Phoenix.h"
 
 namespace BattleCity::Game::World
 {
@@ -18,7 +19,16 @@ namespace BattleCity::Game::World
 	{
 	}
 
-	std::shared_ptr<Object::Object> Map::CreateMap(const Level& level)
+	std::shared_ptr<Object::Object> Map::GetPlayer() noexcept
+	{
+		return mPlayer.lock();
+	}
+	std::shared_ptr<Object::Object> Map::GetPhoenix() noexcept
+	{
+		return mPhoenix.lock();
+	}
+
+	void Map::CreateMap(const Level& level)
 	{
 		for (auto& container : mContainers)
 		{
@@ -31,8 +41,6 @@ namespace BattleCity::Game::World
 		}
 
 		mObjectFactory.CreateWorldBoundaries(mBounds.GetPosition());
-
-		std::shared_ptr<Object::Tank> player = nullptr;
 
 		const auto& mapColumn = level;
 		int nextPosY = mBounds.GetPosition().Y;
@@ -48,7 +56,7 @@ namespace BattleCity::Game::World
 					break;
 				case Object::Type::TankPlayer:
 					{
-						player = mObjectFactory.CreateTank(Object::Type::TankPlayer, position);
+						mPlayer = mObjectFactory.CreateTank(Object::Type::TankPlayer, position);
 					}
 					break;
 				case Object::Type::TankNPC:
@@ -63,7 +71,7 @@ namespace BattleCity::Game::World
 					break;
 				case Object::Type::Phoenix:
 					{
-						auto object = mObjectFactory.CreatePhoenix(position);
+						mPhoenix = mObjectFactory.CreatePhoenix(position);
 					}
 					break;
 				default: 
@@ -75,11 +83,10 @@ namespace BattleCity::Game::World
 
 			nextPosY += 16;
 		}
+
 #ifdef _DEBUG
 		std::cout << "Created map with: " << mContainers[static_cast<int>(Object::Layer::Middle)].GetSize() << " object count." << std::endl;
 #endif
-
-		return player;
 	}
 
 	const Engine::Physics::Rectangle& Map::GetBounds() const noexcept

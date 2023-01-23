@@ -35,8 +35,11 @@ namespace BattleCity::Game::World
 
 		~Map() = default;
 
+		std::shared_ptr<Object::Object> GetPlayer() noexcept;
+		std::shared_ptr<Object::Object> GetPhoenix() noexcept;
+
 		// Returns object that can be controlled with user Input
-		std::shared_ptr<Object::Object> CreateMap(const Level&);
+		void CreateMap(const Level&);
 		const Engine::Physics::Rectangle& GetBounds() const noexcept;
 
 		std::shared_ptr<Object::Object> GetObjectBy(Object::ID, Object::Layer) const;
@@ -50,6 +53,9 @@ namespace BattleCity::Game::World
 
 	private:
 		Bounds mBounds;
+		std::weak_ptr<Object::Object> mPlayer;
+		std::weak_ptr<Object::Object> mPhoenix;
+
 		Object::Factory::Standart mObjectFactory;
 
 		std::vector<Object::Container> mContainers;
