@@ -10,6 +10,7 @@
 #include "BattleCity/Game/World/Object/Derived/Phoenix.h"
 #include "BattleCity/Game/World/Object/Derived/PowerUp.h"
 #include "BattleCity/Game/World/Object/Derived/Tank.h"
+#include "BattleCity/Game/World/Object/Derived/Tank/TankNPC.h"
 #include "BattleCity/Game/World/Object/Derived/Wall.h"
 
 #include "BattleCity/Game/World/Object/Components/Collider.h"
@@ -17,7 +18,6 @@
 #include "BattleCity/Game/World/Object/Components/Health.h"
 #include "BattleCity/Game/World/Object/Components/Movable.h"
 #include "BattleCity/Game/World/Object/Components/TextureComponent.h"
-#include "BattleCity/Game/World/Object/Derived/Tank/TankNPC.h"
 
 namespace BattleCity::Game::World::Object::Factory
 {
@@ -75,7 +75,7 @@ namespace BattleCity::Game::World::Object::Factory
 		fireable->SetBullet(*this);
 		fireable->SetBulletCount(1);
 
-		mInsertToMap(object, Layer::Front);
+		mInsertToMap(object, Layer::Middle);
 
 		auto collider = object->GetComponent<Component::Collider>();
 		collider->UpdateCollider();
@@ -110,7 +110,7 @@ namespace BattleCity::Game::World::Object::Factory
 			return nullptr;
 		}
 
-		mInsertToMap(object, Layer::Front);
+		mInsertToMap(object, Layer::Middle);
 
 		object->RegisterObserver(&mQuadTreeObserver);
 		mInsertToQuadTree(object.get());
@@ -148,7 +148,7 @@ namespace BattleCity::Game::World::Object::Factory
 
 		object->GetComponent<Component::Health>()->SetHealth(1);
 
-		mInsertToMap(object, Layer::Front);
+		mInsertToMap(object, Layer::Middle);
 
 		auto collider = object->GetComponent<Component::Collider>();
 		collider->UpdateCollider();
@@ -170,7 +170,7 @@ namespace BattleCity::Game::World::Object::Factory
 		object->SetPosition(position);
 		textureComponent->ChangeTextureTo(Framework::TextureType::Phoenix);
 
-		mInsertToMap(object, Layer::Front);
+		mInsertToMap(object, Layer::Middle);
 
 		auto collider = object->GetComponent<Component::Collider>();
 		collider->UpdateCollider();
