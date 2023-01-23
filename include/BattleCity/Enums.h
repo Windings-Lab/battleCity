@@ -6,7 +6,7 @@ namespace BattleCity
 	{
 		enum class Solidness
 		{
-			Error,
+			Error = -1,
 			Hard,       /// Object causes collisions and impedes.
 			Soft,       /// Object causes collision, but doesn't impede.
 			Spectral,   /// Object doesn't cause collisions.
@@ -14,11 +14,20 @@ namespace BattleCity
 
 		enum class Layer
 		{
-			Error,
+			Error = -1,
 			Back,
+			Middle,
 			Front,
 			UI,
-			Debug
+			Debug,
+			Count
+		};
+
+		enum class ExplosionType
+		{
+			Error = -1,
+			Large,
+			Small
 		};
 
 		enum class Type
@@ -37,6 +46,7 @@ namespace BattleCity
 
 		enum class Direction
 		{
+			Error = -1,
 			Right,
 			Left,
 			Down,
