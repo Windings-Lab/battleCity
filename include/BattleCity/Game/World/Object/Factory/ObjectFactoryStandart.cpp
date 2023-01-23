@@ -9,9 +9,10 @@
 #include "BattleCity/Game/World/Object/Derived/Explosion.h"
 #include "BattleCity/Game/World/Object/Derived/Phoenix.h"
 #include "BattleCity/Game/World/Object/Derived/PowerUp.h"
-#include "BattleCity/Game/World/Object/Derived/Tank.h"
+#include "BattleCity/Game/World/Object/Derived/Tank/Tank.h"
 #include "BattleCity/Game/World/Object/Derived/Tank/TankNPC.h"
 #include "BattleCity/Game/World/Object/Derived/Wall.h"
+#include "BattleCity/Game/World/Object/Derived/GameOver.h"
 
 #include "BattleCity/Game/World/Object/Components/Collider.h"
 #include "BattleCity/Game/World/Object/Components/Explodable.h"
@@ -22,7 +23,7 @@
 
 namespace BattleCity::Game::World::Object::Factory
 {
-	std::shared_ptr<Background> Standart::CreateWorldBoundaries(Position position)
+	std::shared_ptr<Background> Standart::CreateBackgrounds(Position position)
 	{
 		auto object = std::make_shared<Background>();
 		object->SetDestroyMarkerFunc(mObjectDestroyer);
@@ -34,6 +35,29 @@ namespace BattleCity::Game::World::Object::Factory
 		object->SetPosition(position);
 
 		mInsertToMap(object, Layer::Back);
+
+		return object;
+	}
+
+	std::shared_ptr<GameOver> Standart::CreateGameOver(Position)
+	{
+		auto object = std::make_shared<GameOver>();
+
+		auto textureComponent = object->GetComponent<Component::Texture>();
+		textureComponent->SetTextureGroup(&mTextureGroups.GetGroupBy(Framework::TextureName::GameOver));
+		textureComponent->ChangeTextureTo(Framework::TextureType::Basic);
+
+		auto screenCenter = mScreenBounds.GetCenter();
+		object->SetPosition({ screenCenter.X - textureComponent->GetSize().X / 2
+								, mScreenBounds.GetHeight() });
+
+		object->SetEndAnimationPosition(screenCenter);
+
+		auto collider = object->GetComponent<Component::Collider>();
+		collider->UpdateCollider();
+		collider->SetSolid(false);
+
+		mInsertToMap(object, Layer::UI);
 
 		return object;
 	}
@@ -111,7 +135,7 @@ namespace BattleCity::Game::World::Object::Factory
 		auto collider = object->GetComponent<Component::Collider>();
 		collider->UpdateCollider();
 		collider->SetSolid(false);
-		if (collider->GetRectangle().OutOfInner(mBounds))
+		if (collider->GetRectangle().OutOfInner(mWorldBounds))
 		{
 			object.reset();
 			return nullptr;

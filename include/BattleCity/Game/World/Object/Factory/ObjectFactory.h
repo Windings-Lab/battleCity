@@ -19,6 +19,7 @@ namespace BattleCity::Game::World
 
 namespace BattleCity::Game::World::Object
 {
+	class GameOver;
 	class Observer;
 	class QuadTree;
 
@@ -42,7 +43,9 @@ namespace BattleCity::Game::World::Object::Factory
 
 		virtual ~Factory() = default;
 
-		virtual std::shared_ptr<Background> CreateWorldBoundaries(Position = {0, 0}) = 0;
+		virtual std::shared_ptr<Background> CreateBackgrounds(Position = {0, 0}) = 0;
+
+		virtual std::shared_ptr<GameOver> CreateGameOver(Position = { 0, 0 }) = 0;
 
 		virtual std::shared_ptr<Tank> CreateTank(Type tankType, Position = { 0, 0 }) = 0;
 
@@ -59,7 +62,9 @@ namespace BattleCity::Game::World::Object::Factory
 	protected:
 		std::function<void(std::shared_ptr<Object>, Layer)> mInsertToMap;
 		std::function<void(ID, Layer)> mObjectDestroyer;
-		const Engine::Physics::Rectangle& mBounds;
+
+		const Engine::Physics::Rectangle& mScreenBounds;
+		const Engine::Physics::Rectangle& mWorldBounds;
 
 		std::function<void(const Object*)> mInsertToQuadTree;
 		Observer& mQuadTreeObserver;

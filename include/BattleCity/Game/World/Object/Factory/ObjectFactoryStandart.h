@@ -8,7 +8,9 @@ namespace BattleCity::Game::World::Object::Factory
 	{
 		using Factory::Factory;
 
-		std::shared_ptr<Background> CreateWorldBoundaries(Position = { 0, 0 }) override;
+		std::shared_ptr<Background> CreateBackgrounds(Position = { 0, 0 }) override;
+
+		std::shared_ptr<GameOver> CreateGameOver(Position = { 0, 0 }) override;
 
 		std::shared_ptr<Tank> CreateTank(Type tankType, Position = { 0, 0 }) override;
 
