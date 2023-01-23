@@ -13,13 +13,22 @@ namespace BattleCity::Game::World
 	Map::Map(const Engine::Texture::GroupLibrary& textureGroups, Object::QuadTree& quadTree)
 		: mBounds(quadTree.GetBorder())
 		, mObjectFactory(*this, quadTree, textureGroups)
+		, mContainers(static_cast<int>(Object::Layer::Count))
+		, mDeleters(static_cast<int>(Object::Layer::Count))
 	{
 	}
 
 	std::shared_ptr<Object::Object> Map::CreateMap(const Level& level)
 	{
-		mFrontLayer.Clear();
-		mBackLayer.Clear();
+		for (auto& container : mContainers)
+		{
+			container.Clear();
+		}
+		for (auto& deleter : mDeleters)
+		{
+			deleter.clear();
+			mDeleterDuplicateCheck.clear();
+		}
 
 		mObjectFactory.CreateWorldBoundaries(mBounds.GetPosition());
 
@@ -67,7 +76,7 @@ namespace BattleCity::Game::World
 			nextPosY += 16;
 		}
 #ifdef _DEBUG
-		std::cout << "Created map with: " << mFrontLayer.GetSize() << " object count." << std::endl;
+		std::cout << "Created map with: " << mContainers[static_cast<int>(Object::Layer::Middle)].GetSize() << " object count." << std::endl;
 #endif
 
 		return player;
@@ -78,80 +87,48 @@ namespace BattleCity::Game::World
 		return mBounds;
 	}
 
-	std::shared_ptr<Object::Object> Map::GetObjectBy(Object::ID id) const
+	std::shared_ptr<Object::Object> Map::GetObjectBy(Object::ID id, Object::Layer layer) const
 	{
-		return mFrontLayer.GetObject(id);
+		return mContainers[static_cast<int>(layer)].GetObject(id);
 	}
 
 	void Map::InsertObject(std::shared_ptr<Object::Object> object, Object::Layer layer)
 	{
-		switch (layer)
-		{
-		case Object::Layer::Back:
-		{
-			mBackLayer.Insert(std::move(object));
-			break;
-		}
-		case Object::Layer::Front:
-		{
-			mFrontLayer.Insert(std::move(object));
-			break;
-		}
-		case Object::Layer::UI:
-		{
-			mUILayer.Insert(std::move(object));
-			break;
-		}
-		case Object::Layer::Debug:
-		{
-			mDebugLayer.Insert(std::move(object));
-			break;
-		}
-		case Object::Layer::Error:
-		default:
-			break;
-		}
+		object->SetLayer(layer);
+
+		mContainers[static_cast<int>(layer)].Insert(std::move(object));
 	}
 
-	void Map::MarkForDelete(Object::ID objID)
+	void Map::MarkForDelete(Object::ID objID, Object::Layer layer)
 	{
-		if(mDeleterDuplicateCheck.emplace(objID).second)
-		{
-			mDeleters.push_back(objID);
-		}
+		if(!mDeleterDuplicateCheck.emplace(objID).second) return;
+
+		mDeleters[static_cast<int>(layer)].push_back(objID);
 	}
 	void Map::DestroyObjects()
 	{
-		for (auto objectID : mDeleters)
+		for (int layer = 0; layer < mDeleters.size(); layer++)
 		{
-			auto object = mFrontLayer.GetObject(objectID);
-			object->OnDestroy();
-			mFrontLayer.RemoveBy(objectID);
+			for (auto objectID : mDeleters[layer])
+			{
+				auto& container = mContainers.at(layer);
+				auto object = container.GetObject(objectID);
+				object->OnDestroy();
+				container.RemoveBy(objectID);
+			}
+
+			mDeleters[layer].clear();
 		}
 
-		mDeleters.clear();
 		mDeleterDuplicateCheck.clear();
 	}
 
 	const Object::Container& Map::GetLayer(Object::Layer layer) const
 	{
-		switch (layer)
-		{
-		case Object::Layer::Error:
-			throw std::runtime_error("Error when trying to get object layer list");
-		case Object::Layer::Back:
-			return mBackLayer;
-		case Object::Layer::Front:
-			return mFrontLayer;
-		case Object::Layer::UI:
-			return mUILayer;
-		default:
-			return mFrontLayer;
-		}
+		return mContainers[static_cast<int>(layer)];
 	}
-
 	Object::Container& Map::GetDebugLayer()
 	{
-		return mDebugLayer;
+		return mContainers[static_cast<int>(Object::Layer::Debug)];
 	}
 }

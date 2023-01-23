@@ -39,10 +39,10 @@ namespace BattleCity::Game::World
 		std::shared_ptr<Object::Object> CreateMap(const Level&);
 		const Engine::Physics::Rectangle& GetBounds() const noexcept;
 
-		std::shared_ptr<Object::Object> GetObjectBy(Object::ID) const;
-		void InsertObject(std::shared_ptr<Object::Object>, Object::Layer = Object::Layer::Front);
+		std::shared_ptr<Object::Object> GetObjectBy(Object::ID, Object::Layer) const;
+		void InsertObject(std::shared_ptr<Object::Object>, Object::Layer = Object::Layer::Middle);
 
-		void MarkForDelete(Object::ID);
+		void MarkForDelete(Object::ID, Object::Layer);
 		void DestroyObjects();
 
 		const Object::Container& GetLayer(Object::Layer) const;
@@ -52,12 +52,9 @@ namespace BattleCity::Game::World
 		Bounds mBounds;
 		Object::Factory::Standart mObjectFactory;
 
-		Object::Container mBackLayer;
-		Object::Container mFrontLayer;
-		Object::Container mUILayer;
-		Object::Container mDebugLayer;
+		std::vector<Object::Container> mContainers;
 
 		std::unordered_set<Object::ID> mDeleterDuplicateCheck;
-		std::vector<Object::ID> mDeleters;
+		std::vector<std::vector<Object::ID>> mDeleters;
 	};
 }
