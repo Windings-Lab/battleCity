@@ -27,6 +27,7 @@
     <ClCompile Include="include\BattleCity\Engine\Texture\TextureGroupLibrary.cpp" />
     <ClCompile Include="include\BattleCity\Engine\Texture\TexturePathLibrary.cpp" />
     <ClCompile Include="include\BattleCity\Engine\Texture\TextureStorage.cpp" />
+    <ClCompile Include="include\BattleCity\Engine\Timer.cpp" />
     <ClCompile Include="include\BattleCity\Framework\Screen.cpp" />
     <ClCompile Include="include\BattleCity\Framework\Texture.cpp" />
     <ClCompile Include="include\BattleCity\Game\Game.cpp" />
@@ -73,6 +74,7 @@
     <ClInclude Include="include\BattleCity\Engine\Texture\TextureGroupLibrary.h" />
     <ClInclude Include="include\BattleCity\Engine\Texture\TexturePathLibrary.h" />
     <ClInclude Include="include\BattleCity\Engine\Texture\TextureStorage.h" />
+    <ClInclude Include="include\BattleCity\Engine\Timer.h" />
     <ClInclude Include="include\BattleCity\Enums.h" />
     <ClInclude Include="include\BattleCity\Framework\Framework.h" />
     <ClInclude Include="include\BattleCity\Framework\Screen.h" />
