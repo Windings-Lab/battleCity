@@ -19,8 +19,8 @@ namespace BattleCity::Game::World::Object
 		if(mCollider->GetRectangle().GetCenter().Y > mEndAnimationPosition.Y)
 		{
 			SetY(GetPosition().Y - 5);
+			mCollider->UpdateCollider();
 		}
-		mCollider->UpdateCollider();
 	}
 
 	void GameOver::ResolveCollisions(Object&)
