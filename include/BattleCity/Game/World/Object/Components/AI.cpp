@@ -4,6 +4,7 @@
 #include "BattleCity/Game/World/Object/Object.h"
 #include "Movable.h"
 #include "Fireable.h"
+#include "Health.h"
 
 namespace BattleCity::Game::World::Object::Component
 {
@@ -11,6 +12,7 @@ namespace BattleCity::Game::World::Object::Component
 		: Component(obj)
 		, mMovable(mObject.GetComponent<Movable>())
 		, mFireable(mObject.GetComponent<Fireable>())
+		, mHealth(mObject.GetComponent<Health>())
 		, mRandomGenerator(std::random_device{}())
 		, mRandomDirection(0,3)
 	{
@@ -27,6 +29,8 @@ namespace BattleCity::Game::World::Object::Component
 
 	void AI::Update()
 	{
+		if(mHealth && mHealth->GetHealth() <= 0) return;
+
 		mTimeToChangeDirection.RepeatRandom(3, 5);
 		mTimeToShoot.RepeatRandom(0, 3);
 		mOnWallCollision.Update();

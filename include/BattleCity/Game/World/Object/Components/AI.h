@@ -4,6 +4,7 @@
 
 namespace BattleCity::Game::World::Object::Component
 {
+	class Health;
 	class Fireable;
 	class Movable;
 
@@ -15,11 +16,12 @@ namespace BattleCity::Game::World::Object::Component
 		void Update();
 
 		void RandomChangeDirection();
-		void WallCollision();
+		void OnWallCollision();
 
 	private:
 		Movable* mMovable;
 		Fireable* mFireable;
+		const Health* mHealth;
 
 		Engine::Timer mTimeToChangeDirection;
 		Engine::Timer mTimeToShoot;
