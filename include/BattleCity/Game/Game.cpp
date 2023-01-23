@@ -164,14 +164,14 @@ namespace BattleCity::Game
 
 	void Game::onKeyPressed(BattleCity::Framework::FRKey k)
 	{
-		static auto player = mPlayer.lock();
+		auto player = mPlayer.lock();
 		auto movable = player->GetComponent<World::Object::Component::Movable>();
 		movable->SetMovementDirection(static_cast<World::Object::Direction>(k));
 	}
 
 	void Game::onKeyReleased(BattleCity::Framework::FRKey k)
 	{
-		static auto player = mPlayer.lock();
+		auto player = mPlayer.lock();
 		auto movable = player->GetComponent<World::Object::Component::Movable>();
 		movable->StopMovement();
 	}
@@ -183,7 +183,7 @@ namespace BattleCity::Game
 
 	void Game::onMouseButtonClick(BattleCity::Framework::FRMouseButton button, bool isReleased)
 	{
-		static auto player = mPlayer.lock();
+		auto player = mPlayer.lock();
 
 		switch(button)
 		{
