@@ -3,29 +3,31 @@
 namespace BattleCity::Engine
 {
 	using Seconds = int;
-	using Duration = std::chrono::seconds;
+	using SecondsDuration = std::chrono::seconds;
 
 	class Timer
 	{
 	public:
 		Timer();
+		virtual ~Timer() = default;
 
 		void Start(Seconds, std::function<void()>);
 		void StartRandom(Seconds, Seconds, std::function<void()>);
 
-		void Repeat();
+		virtual void Repeat();
 		void RepeatRandom(Seconds, Seconds);
 
-		void Update();
+		virtual void Update();
 
-	private:
+	protected:
 		bool mEnded = true;
 		std::function<void()> mOnTimerEnd;
-		
-		Duration mDuration;
-		std::chrono::high_resolution_clock::time_point mStartingTime;
 
+		std::chrono::high_resolution_clock::time_point mStartingTime;
 		std::mt19937 mRandomGenerator;
+
+	private:
+		SecondsDuration mDuration;
 	};
 }
 

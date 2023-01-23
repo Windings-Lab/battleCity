@@ -4,8 +4,8 @@
 namespace BattleCity::Engine
 {
 	Timer::Timer()
-		: mDuration(std::chrono::seconds(0))
-		, mRandomGenerator(std::random_device{}())
+		: mRandomGenerator(std::random_device{}())
+		, mDuration(std::chrono::seconds(0))
 	{
 	}
 
