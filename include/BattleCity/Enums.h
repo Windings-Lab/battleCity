@@ -42,6 +42,7 @@ namespace BattleCity
 			Explosion,
 			PowerUp,
 			WorldBoundaries,
+			GameOver
 		};
 
 		enum class Direction
