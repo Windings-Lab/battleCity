@@ -52,6 +52,38 @@ namespace BattleCity::Engine::Physics
 
 		return false;
 	}
+	bool Rectangle::OutOfInner(const Rectangle& bounds) const noexcept
+	{
+		int left = GetX();
+		int right = GetX() + GetWidth();
+		int top = GetY();
+		int bottom = GetY() + GetHeight();
+
+		int boundsLeft = bounds.GetX();
+		int boundsRight = bounds.GetX() + bounds.GetWidth();
+		int boundTop = bounds.GetY();
+		int boundsBottom = bounds.GetY() + bounds.GetHeight();
+
+		if (left < boundsLeft)
+		{
+			return true;
+		}
+		if (right > boundsRight)
+		{
+			return true;
+		}
+
+		if (top < boundTop)
+		{
+			return true;
+		}
+		if (bottom > boundsBottom)
+		{
+			return true;
+		}
+
+		return false;
+	}
 	bool Rectangle::Intersects(const Rectangle& other) const noexcept
 	{
 		return GetX()				< other.GetX() + other.GetWidth()

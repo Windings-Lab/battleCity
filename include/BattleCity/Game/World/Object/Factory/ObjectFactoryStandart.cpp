@@ -101,11 +101,17 @@ namespace BattleCity::Game::World::Object::Factory
 		object->SetPosition(position);
 		object->AdjustPositionToDirection();
 
-		mInsertToMap(object, Layer::Front);
-
 		auto collider = object->GetComponent<Component::Collider>();
 		collider->UpdateCollider();
 		collider->SetSolid(false);
+		if (collider->GetRectangle().OutOfInner(mBounds))
+		{
+			object.reset();
+			return nullptr;
+		}
+
+		mInsertToMap(object, Layer::Front);
+
 		object->RegisterObserver(&mQuadTreeObserver);
 		mInsertToQuadTree(object.get());
 
