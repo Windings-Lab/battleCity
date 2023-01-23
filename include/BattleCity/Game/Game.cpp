@@ -25,7 +25,7 @@ namespace BattleCity::Game
 		, mPathLibrary(pathLibrary)
 		, mDebug(mMap, mTextureStorage.GetGroups(), mQuadTree)
 		, mQuadTree(Engine::Physics::Rectangle(32, 32, 720, 520))
-		, mMap(mTextureStorage.GetGroups(), mQuadTree)
+		, mMap(mScreen, mTextureStorage.GetGroups(), mQuadTree)
 	{
 	}
 
@@ -90,6 +90,11 @@ namespace BattleCity::Game
 			object->Update();
 		}
 
+		for (auto& object : mMap.GetLayer(World::Object::Layer::UI))
+		{
+			object->Update();
+		}
+
 		if (!mGameOver && (mPlayer->IsDestroyed() || mPhoenix->IsDestroyed()))
 		{
 			mPlayer.reset();
@@ -119,7 +124,7 @@ namespace BattleCity::Game
 			if(!collider) continue;
 
 			Vector2Int penetration;
-			if(collider->GetRectangle().OutOfInner(mMap.GetBounds(), penetration))
+			if(collider->GetRectangle().OutOfInner(mMap.GetWorldBounds(), penetration))
 			{
 				obj->OnOutOfBounds(penetration);
 				continue;
