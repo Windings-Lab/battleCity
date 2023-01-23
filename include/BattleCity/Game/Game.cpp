@@ -15,7 +15,9 @@
 namespace BattleCity::Game
 {
 	Game::Game(const NSFramework::Screen& screen, const Engine::Texture::PathLibrary& pathLibrary)
-		: mNextGameTick(getTickCount())
+		: mGameOver(false)
+		, mClose(false)
+		, mNextGameTick(getTickCount())
 		, mIterations(0)
 		, mInterpolation(0.f)
 		, mScreen(screen)
@@ -67,7 +69,7 @@ namespace BattleCity::Game
 
 		Draw(mInterpolation);
 
-		return mPlayer.expired();
+		return mClose;
 	}
 
 	void Game::Update()
@@ -84,6 +86,17 @@ namespace BattleCity::Game
 		{
 			object->Update();
 		}
+
+		if (mPlayer.expired() && !mGameOver)
+		{
+			mGameOver = true;
+			mTimeToClose.StartOnce(6, [this]
+				{
+					this->mClose = true;
+				});
+		}
+
+		mTimeToClose.Update();
 	}
 	void Game::ResolveCollisions()
 	{
@@ -164,6 +177,8 @@ namespace BattleCity::Game
 
 	void Game::onKeyPressed(BattleCity::Framework::FRKey k)
 	{
+		if(mGameOver) return;
+
 		auto player = mPlayer.lock();
 		auto movable = player->GetComponent<World::Object::Component::Movable>();
 		movable->SetMovementDirection(static_cast<World::Object::Direction>(k));
@@ -171,6 +186,8 @@ namespace BattleCity::Game
 
 	void Game::onKeyReleased(BattleCity::Framework::FRKey k)
 	{
+		if (mGameOver) return;
+
 		auto player = mPlayer.lock();
 		auto movable = player->GetComponent<World::Object::Component::Movable>();
 		movable->StopMovement();
@@ -183,6 +200,8 @@ namespace BattleCity::Game
 
 	void Game::onMouseButtonClick(BattleCity::Framework::FRMouseButton button, bool isReleased)
 	{
+		if (mGameOver) return;
+
 		auto player = mPlayer.lock();
 
 		switch(button)

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "BattleCity/Engine/DebugDrawer.h"
+#include "BattleCity/Engine/Timer.h"
 #include "BattleCity/Engine/Texture/TextureStorage.h"
 #include "BattleCity/Framework/Framework.h"
 #include "BattleCity/Game/World/WorldMap.h"
@@ -61,6 +62,10 @@ namespace BattleCity::Game
 		void UnitTest();
 
 	private:
+		bool mGameOver;
+		bool mClose;
+		Engine::Timer mTimeToClose;
+
 		unsigned int mNextGameTick;
 		int mIterations;
 		float mInterpolation;
