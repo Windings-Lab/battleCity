@@ -10,22 +10,20 @@ namespace BattleCity::Game::World::Object::Component
 {
 	void Fireable::Fire()
 	{
-		if(mBulletCount <= 0) return;
+		EraseDestroyedBullets();
+		if(mBullets.size() >= mMaxBulletCount) return;
 
 		auto shootDirection = mObject.GetComponent<Movable>()->GetMovementDirection();
-		auto bullet = mSpawnBullet(GetShootPosition(shootDirection), shootDirection);
+		mBullets.emplace_back(mSpawnBullet(GetShootPosition(shootDirection), shootDirection));
 	}
 	void Fireable::SetBullet(Factory::Standart& objectFactory)
 	{
 		mSpawnBullet = [&objectFactory](Position position, Direction direction) { return objectFactory.CreateBullet(position, direction); };
 	}
+
 	void Fireable::SetBulletCount(int count) noexcept
 	{
-		mBulletCount = count;
-	}
-	int Fireable::GetBulletCount() const noexcept
-	{
-		return mBulletCount;
+		mMaxBulletCount = count;
 	}
 
 	Position Fireable::GetShootPosition(Direction direction)
@@ -55,5 +53,24 @@ namespace BattleCity::Game::World::Object::Component
 		}
 
 		return shootPosition;
+	}
+	void Fireable::EraseDestroyedBullets()
+	{
+		if(mBullets.empty()) return;
+
+		std::vector<int> indexes;
+		for(int i = 0; i < mBullets.size(); i++)
+		{
+			if(mBullets[i].expired())
+			{
+				indexes.push_back(i);
+			}
+		}
+
+		for (auto index : indexes)
+		{
+			mBullets[index] = std::move(mBullets.back());
+			mBullets.pop_back();
+		}
 	}
 }
