@@ -6,6 +6,8 @@
 #include "BattleCity/Game/World/Object/Components/Fireable.h"
 #include "BattleCity/Game/World/Object/Components/Movable.h"
 #include "BattleCity/Game/World/Object/Components/TextureComponent.h"
+#include "BattleCity/Game/World/Object/Components/Explodable.h"
+#include "BattleCity/Game/World/Object/Components/Health.h"
 
 namespace BattleCity::Game::World::Object
 {
@@ -15,10 +17,18 @@ namespace BattleCity::Game::World::Object
 		, mCollider(AddComponent<Component::Collider>(*this))
 		, mMovable(AddComponent<Component::Movable>(*this))
 		, mFireable(AddComponent<Component::Fireable>(*this))
+		, mExplodable(AddComponent<Component::Explodable>(*this))
+		, mHealth(AddComponent<Component::Health>(*this))
 	{}
 
     void Tank::Update()
     {
+        if (mHealth->GetHealth() <= 0)
+        {
+            MarkForDestroy();
+            return;
+        }
+
         mCollider->UpdateOldCollider();
 
         SetPosition(GetPosition() + mMovable->GetVelocity());
@@ -99,5 +109,11 @@ namespace BattleCity::Game::World::Object
         mMovable->StopMovement();
 
         Object::OnOutOfBounds(penetration);
+    }
+
+    void Tank::OnDestroy()
+    {
+        mExplodable->Explode(ExplosionType::Large);
+	    Object::OnDestroy();
     }
 }
