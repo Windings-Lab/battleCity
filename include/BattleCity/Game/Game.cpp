@@ -72,12 +72,17 @@ namespace BattleCity::Game
 
 	void Game::Update()
 	{
-		auto& frontLayerObjects = mMap.GetLayer(World::Object::Layer::Front);
-		int size = frontLayerObjects.GetSize();
+		auto& middleLayerObjects = mMap.GetLayer(World::Object::Layer::Middle);
+		int size = middleLayerObjects.GetSize();
 
 		for (int i = 0; i < size; i++)
 		{
-			frontLayerObjects[i]->Update();
+			middleLayerObjects[i]->Update();
+		}
+
+		for (auto& object : mMap.GetLayer(World::Object::Layer::Front))
+		{
+			object->Update();
 		}
 	}
 	void Game::ResolveCollisions()
@@ -88,7 +93,7 @@ namespace BattleCity::Game
 
 	void Game::BroadPhase()
 	{
-		for (auto& obj : mMap.GetLayer(World::Object::Layer::Front))
+		for (auto& obj : mMap.GetLayer(World::Object::Layer::Middle))
 		{
 			if(!obj->HasComponent<World::Object::Component::Movable>()) continue;
 			auto collider = obj->GetComponent<World::Object::Component::Collider>();
@@ -123,6 +128,11 @@ namespace BattleCity::Game
 	void Game::Draw(float interpolation)
 	{
 		for (auto& obj : mMap.GetLayer(World::Object::Layer::Back))
+		{
+			obj->GetComponent<World::Object::Component::Texture>()->Draw(interpolation);
+		}
+
+		for (auto& obj : mMap.GetLayer(World::Object::Layer::Middle))
 		{
 			obj->GetComponent<World::Object::Component::Texture>()->Draw(interpolation);
 		}
