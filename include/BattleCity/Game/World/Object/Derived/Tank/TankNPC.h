@@ -1,6 +1,6 @@
 #pragma once
 
-#include "BattleCity/Game/World/Object/Derived/Tank.h"
+#include "BattleCity/Game/World/Object/Derived/Tank/Tank.h"
 
 namespace BattleCity::Game::World::Object
 {

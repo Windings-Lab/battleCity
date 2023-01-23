@@ -6,7 +6,9 @@
 #include "BattleCity/Game/World/Object/Object.h"
 #include "Object/Containers/QuadTree.h"
 
-#include "Object/Derived/Tank.h"
+// ReSharper disable once CppUnusedIncludeDirective
+#include "Object/Derived/Tank/Tank.h"
+// ReSharper disable once CppUnusedIncludeDirective
 #include "Object/Derived/Phoenix.h"
 
 namespace BattleCity::Game::World

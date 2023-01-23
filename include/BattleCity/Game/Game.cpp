@@ -6,7 +6,7 @@
 
 #include "BattleCity/Game/World/WorldLevel.h"
 
-#include "World/Object/Derived/Tank.h"
+#include "World/Object/Derived/Tank/Tank.h"
 #include "BattleCity/Game/World/Object/Components/Movable.h"
 #include "World/Object/Components/Collider.h"
 #include "World/Object/Components/Fireable.h"

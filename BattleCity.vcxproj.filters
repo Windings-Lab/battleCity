@@ -125,7 +125,7 @@
     <ClCompile Include="include\BattleCity\Game\World\Object\Components\Explodable.cpp">
       <Filter>BattleCity\Game\World\Object\Components</Filter>
     </ClCompile>
-    <ClCompile Include="include\BattleCity\Game\World\Object\Derived\Tank.cpp">
+    <ClCompile Include="include\BattleCity\Game\World\Object\Derived\Tank\Tank.cpp">
       <Filter>BattleCity\Game\World\Object\Derived\Tank</Filter>
     </ClCompile>
   </ItemGroup>
@@ -280,7 +280,7 @@
     <ClInclude Include="include\BattleCity\Game\World\Object\Components\Explodable.h">
       <Filter>BattleCity\Game\World\Object\Components</Filter>
     </ClInclude>
-    <ClInclude Include="include\BattleCity\Game\World\Object\Derived\Tank.h">
+    <ClInclude Include="include\BattleCity\Game\World\Object\Derived\Tank\Tank.h">
       <Filter>BattleCity\Game\World\Object\Derived\Tank</Filter>
     </ClInclude>
   </ItemGroup>
