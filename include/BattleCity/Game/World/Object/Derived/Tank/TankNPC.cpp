@@ -1,11 +1,24 @@
 #include "PCHeader.h"
 #include "TankNPC.h"
 
+#include "BattleCity/Game/World/Object/Components/AI.h"
 #include "BattleCity/Game/World/Object/Components/Collider.h"
 #include "BattleCity/Game/World/Object/Components/Movable.h"
 
 namespace BattleCity::Game::World::Object
 {
+	TankNPC::TankNPC()
+		: Tank()
+		, mAi(AddComponent<Component::AI>(*this))
+	{
+	}
+
+	void TankNPC::Update()
+	{
+		Tank::Update();
+        mAi->Update();
+	}
+
 	void TankNPC::ResolveCollisions(Object& other)
 	{
         if (!mMovable->IsMoving()) return;
@@ -55,6 +68,12 @@ namespace BattleCity::Game::World::Object
         }
 
         Object::ResolveCollisions(other);
+	}
+
+	void TankNPC::OnOutOfBounds(const Vector2Int& vector2Int)
+	{
+		Tank::OnOutOfBounds(vector2Int);
+        mAi->RandomChangeDirection();
 	}
 }
 

@@ -2,6 +2,7 @@
 
 #include "Wall.h"
 
+#include "BattleCity/Game/World/Object/Components/AI.h"
 #include "BattleCity/Game/World/Object/Components/Collider.h"
 #include "BattleCity/Game/World/Object/Components/Health.h"
 #include "BattleCity/Game/World/Object/Components/Movable.h"
@@ -46,6 +47,12 @@ namespace BattleCity::Game::World::Object
 			break;
 		}
 		movable->StopMovement();
+
+		auto ai = other.GetComponent<Component::AI>();
+		if(ai)
+		{
+			ai->RandomChangeDirection();
+		}
 
 		NotifyObjectUpdated(other);
 	}

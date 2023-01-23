@@ -113,6 +113,15 @@
     <ClCompile Include="include\BattleCity\Game\World\Object\Components\ComponentFactory.cpp">
       <Filter>BattleCity\Game\World\Object\Components</Filter>
     </ClCompile>
+    <ClCompile Include="include\BattleCity\Game\World\Object\Derived\Tank\TankNPC.cpp">
+      <Filter>BattleCity\Game\World\Object\Derived\Tank</Filter>
+    </ClCompile>
+    <ClCompile Include="include\BattleCity\Engine\Timer.cpp">
+      <Filter>BattleCity\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="include\BattleCity\Game\World\Object\Components\AI.cpp">
+      <Filter>BattleCity\Game\World\Object\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pcheader\PCHeader.h">
@@ -253,6 +262,15 @@
     <ClInclude Include="include\BattleCity\Game\World\Object\Components\ComponentFactory.h">
       <Filter>BattleCity\Game\World\Object\Components</Filter>
     </ClInclude>
+    <ClInclude Include="include\BattleCity\Game\World\Object\Derived\Tank\TankNPC.h">
+      <Filter>BattleCity\Game\World\Object\Derived\Tank</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Engine\Timer.h">
+      <Filter>BattleCity\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Game\World\Object\Components\AI.h">
+      <Filter>BattleCity\Game\World\Object\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
@@ -302,6 +320,9 @@
     </Filter>
     <Filter Include="BattleCity\Game\World\Object\Containers">
       <UniqueIdentifier>{273583bb-5419-4762-8ada-318a9858f6b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BattleCity\Game\World\Object\Derived\Tank">
+      <UniqueIdentifier>{223347bf-55ea-42a5-9c3f-6ce9d749ebfb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
