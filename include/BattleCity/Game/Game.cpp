@@ -26,6 +26,7 @@ namespace BattleCity::Game
 		, mDebug(mMap, mTextureStorage.GetGroups(), mQuadTree)
 		, mQuadTree(Engine::Physics::Rectangle(32, 32, 720, 520))
 		, mMap(mScreen, mTextureStorage.GetGroups(), mQuadTree)
+		, mKeyPressedCount(0)
 	{
 	}
 
@@ -193,14 +194,19 @@ namespace BattleCity::Game
 
 		auto movable = mPlayer->GetComponent<World::Object::Component::Movable>();
 		movable->SetMovementDirection(static_cast<World::Object::Direction>(k));
+		mKeyPressedCount++;
 	}
 
 	void Game::onKeyReleased(BattleCity::Framework::FRKey k)
 	{
 		if (mGameOver) return;
 
-		auto movable = mPlayer->GetComponent<World::Object::Component::Movable>();
-		movable->StopMovement();
+		mKeyPressedCount--;
+		if(mKeyPressedCount == 0)
+		{
+			auto movable = mPlayer->GetComponent<World::Object::Component::Movable>();
+			movable->StopMovement();
+		}
 	}
 
 	void Game::onMouseMove(int x, int y, int xrelative, int yrelative)

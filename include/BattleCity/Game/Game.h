@@ -81,6 +81,8 @@ namespace BattleCity::Game
 		World::Map mMap;
 
 		std::shared_ptr<World::Object::Object> mPlayer;
+		int mKeyPressedCount;
+
 		std::shared_ptr<World::Object::Object> mPhoenix;
 	};
 }
