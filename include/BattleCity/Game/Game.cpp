@@ -136,6 +136,11 @@ namespace BattleCity::Game
 		{
 			obj->GetComponent<World::Object::Component::Texture>()->Draw(interpolation);
 		}
+
+		for (auto& obj : mMap.GetDebugLayer())
+		{
+			obj->GetComponent<World::Object::Component::Texture>()->Draw(interpolation);
+		}
 	}
 
 	void Game::UnitTest()
@@ -182,7 +187,7 @@ namespace BattleCity::Game
 		case BattleCity::Framework::FRMouseButton::MIDDLE:
 			if (!isReleased)
 			{
-				const_cast<World::Object::Container&>(mMap.GetLayer(World::Object::Layer::UI)).Clear();
+				mMap.GetDebugLayer().Clear();
 				auto& rect = player->GetComponent<World::Object::Component::Collider>()->GetRectangle();
 				mDebug.DrawRectangle(rect);
 			}
@@ -190,7 +195,7 @@ namespace BattleCity::Game
 		case BattleCity::Framework::FRMouseButton::RIGHT:
 			if (!isReleased)
 			{
-				const_cast<World::Object::Container&>(mMap.GetLayer(World::Object::Layer::UI)).Clear();
+				mMap.GetDebugLayer().Clear();
 				mDebug.DrawWholeNode(mQuadTree);
 			}
 			break;

@@ -33,7 +33,7 @@ namespace BattleCity::Engine
                     pixel->SetPosition({ x, y });
                     textureComponent->SetTextureGroup(&mTextures.GetGroupBy(Framework::TextureName::Pixel));
                     textureComponent->ChangeTextureTo(Framework::TextureType::Basic);
-                    mMap.InsertObject(std::move(pixel), Game::World::Object::Layer::UI);
+                    mMap.InsertObject(std::move(pixel), Game::World::Object::Layer::Debug);
                 }
             }
         }

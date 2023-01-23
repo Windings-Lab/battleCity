@@ -102,6 +102,11 @@ namespace BattleCity::Game::World
 			mUILayer.Insert(std::move(object));
 			break;
 		}
+		case Object::Layer::Debug:
+		{
+			mDebugLayer.Insert(std::move(object));
+			break;
+		}
 		case Object::Layer::Error:
 		default:
 			break;
@@ -143,5 +148,10 @@ namespace BattleCity::Game::World
 		default:
 			return mFrontLayer;
 		}
+	}
+
+	Object::Container& Map::GetDebugLayer()
+	{
+		return mDebugLayer;
 	}
 }

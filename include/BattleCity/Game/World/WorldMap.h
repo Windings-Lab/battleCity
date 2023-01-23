@@ -46,6 +46,7 @@ namespace BattleCity::Game::World
 		void DestroyObjects();
 
 		const Object::Container& GetLayer(Object::Layer) const;
+		Object::Container& GetDebugLayer();
 
 	private:
 		Bounds mBounds;
@@ -54,6 +55,7 @@ namespace BattleCity::Game::World
 		Object::Container mBackLayer;
 		Object::Container mFrontLayer;
 		Object::Container mUILayer;
+		Object::Container mDebugLayer;
 
 		std::unordered_set<Object::ID> mDeleterDuplicateCheck;
 		std::vector<Object::ID> mDeleters;

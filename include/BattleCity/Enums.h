@@ -17,7 +17,8 @@ namespace BattleCity
 			Error,
 			Back,
 			Front,
-			UI
+			UI,
+			Debug
 		};
 
 		enum class Type
