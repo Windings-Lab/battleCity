@@ -62,7 +62,7 @@
     <ClCompile Include="include\BattleCity\Game\World\Object\Derived\Wall.cpp">
       <Filter>BattleCity\Game\World\Object\Derived</Filter>
     </ClCompile>
-    <ClCompile Include="include\BattleCity\Game\World\Object\Derived\WorldBoundaries.cpp">
+    <ClCompile Include="include\BattleCity\Game\World\Object\Derived\Background.cpp">
       <Filter>BattleCity\Game\World\Object\Derived</Filter>
     </ClCompile>
     <ClCompile Include="include\BattleCity\Game\World\Object\Components\Fireable.cpp">
@@ -101,12 +101,17 @@
     <ClCompile Include="include\BattleCity\Game\World\Object\Observer\ObjectSubject.cpp">
       <Filter>BattleCity\Game\World\Object\Observer</Filter>
     </ClCompile>
-    <ClCompile Include="include\BattleCity\Game\World\Object\Components\ComponentFactory.cpp" />
     <ClCompile Include="include\BattleCity\Game\World\Object\Containers\ObjectContainer.cpp">
       <Filter>BattleCity\Game\World\Object\Containers</Filter>
     </ClCompile>
     <ClCompile Include="include\BattleCity\Game\World\Object\Containers\QuadTree.cpp">
       <Filter>BattleCity\Game\World\Object\Containers</Filter>
+    </ClCompile>
+    <ClCompile Include="include\BattleCity\Game\World\Object\Components\TextureComponent.cpp">
+      <Filter>BattleCity\Game\World\Object\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="include\BattleCity\Game\World\Object\Components\ComponentFactory.cpp">
+      <Filter>BattleCity\Game\World\Object\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -194,7 +199,7 @@
     <ClInclude Include="include\BattleCity\Game\World\Object\Derived\Wall.h">
       <Filter>BattleCity\Game\World\Object\Derived</Filter>
     </ClInclude>
-    <ClInclude Include="include\BattleCity\Game\World\Object\Derived\WorldBoundaries.h">
+    <ClInclude Include="include\BattleCity\Game\World\Object\Derived\Background.h">
       <Filter>BattleCity\Game\World\Object\Derived</Filter>
     </ClInclude>
     <ClInclude Include="include\BattleCity\Game\World\Object\Components\Fireable.h">
@@ -236,12 +241,17 @@
     <ClInclude Include="include\BattleCity\Game\World\Object\Observer\ObjectSubject.h">
       <Filter>BattleCity\Game\World\Object\Observer</Filter>
     </ClInclude>
-    <ClInclude Include="include\BattleCity\Game\World\Object\Components\ComponentFactory.h" />
     <ClInclude Include="include\BattleCity\Game\World\Object\Containers\ObjectContainer.h">
       <Filter>BattleCity\Game\World\Object\Containers</Filter>
     </ClInclude>
     <ClInclude Include="include\BattleCity\Game\World\Object\Containers\QuadTree.h">
       <Filter>BattleCity\Game\World\Object\Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Game\World\Object\Components\TextureComponent.h">
+      <Filter>BattleCity\Game\World\Object\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Game\World\Object\Components\ComponentFactory.h">
+      <Filter>BattleCity\Game\World\Object\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

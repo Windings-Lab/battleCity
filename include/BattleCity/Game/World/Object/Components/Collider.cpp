@@ -1,15 +1,30 @@
 #include "PCHeader.h"
 #include "Collider.h"
 
+#include "TextureComponent.h"
+#include "BattleCity/Game/World/Object/Object.h"
+
 namespace BattleCity::Game::World::Object::Component
 {
-	bool Collider::IsIntersects(const Collider& other) const noexcept
+	void Collider::UpdateCollider() noexcept
 	{
-		return mRectangle.Intersects(other.mRectangle);
+		auto& textureSize = mObject.GetComponent<Texture>()->GetSize();
+
+		mRectangle.SetPosition(mObject.GetPosition());
+		mRectangle.SetSize(textureSize);
 	}
+	void Collider::UpdateOldCollider() noexcept
+	{
+		mOldRectangle = mRectangle;
+	}
+
 	const Engine::Physics::Rectangle& Collider::GetRectangle() const noexcept
 	{
 		return mRectangle;
+	}
+	const Engine::Physics::Rectangle& Collider::GetOldRectangle() const noexcept
+	{
+		return mOldRectangle;
 	}
 
 	void Collider::SetPosition(const Position& pos) noexcept
@@ -21,16 +36,6 @@ namespace BattleCity::Game::World::Object::Component
 		return mRectangle.GetPosition();
 	}
 
-	void Collider::SetPreviousPosition(const Position& prev) noexcept
-	{
-		mPrevious.X = prev.X;
-		mPrevious.Y = prev.Y;
-	}
-	const Position& Collider::GetPreviousPosition() const noexcept
-	{
-		return mPrevious;
-	}
-
 	void Collider::SetSize(const Size& size) noexcept
 	{
 		mRectangle.SetSize(size);
@@ -38,6 +43,16 @@ namespace BattleCity::Game::World::Object::Component
 	const Size& Collider::GetSize() const noexcept
 	{
 		return mRectangle.GetSize();
+	}
+
+	bool Collider::IsSolid() const noexcept
+	{
+		return mSolid;
+	}
+
+	void Collider::SetSolid(bool solid) noexcept
+	{
+		mSolid = solid;
 	}
 }
 

@@ -7,13 +7,11 @@ namespace BattleCity::Game::World::Object
 	class Phoenix : public Object
 	{
     public:
-		using Object::Object;
+		Phoenix();
 
 		void Update() override;
-
-	private:
-		void InitializeComponents() override;
-
+		void ResolveCollisions(Object&) override;
+		void OnOutOfBounds(const Vector2Int&) override;
 	};
 }
 

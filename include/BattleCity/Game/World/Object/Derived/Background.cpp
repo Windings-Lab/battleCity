@@ -1,26 +1,26 @@
 #include "PCHeader.h"
-
-#include "Explosion.h"
+#include "Background.h"
 
 #include "BattleCity/Game/World/Object/Components/TextureComponent.h"
 
 namespace BattleCity::Game::World::Object
 {
-	Explosion::Explosion() : Object()
+	Background::Background() : Object()
 	{
         AddComponent<Component::Texture>(*this);
 	}
 
-    void Explosion::Update()
-    {
-        // Update animation
-    }
-    void Explosion::ResolveCollisions(Object&)
+    void Background::Update()
     {
         // Empty
     }
-    void Explosion::OnOutOfBounds(const Vector2Int&)
+    void Background::ResolveCollisions(Object&)
+    {
+        // Empty
+    }
+    void Background::OnOutOfBounds(const Vector2Int&)
     {
         // Empty
     }
 }
+

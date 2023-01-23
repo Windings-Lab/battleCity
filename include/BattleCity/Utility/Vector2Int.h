@@ -8,10 +8,12 @@ namespace BattleCity
 		Vector2Int(int, int);
 
 		Vector2Int operator-(int) const noexcept;
-		Vector2Int operator-(const Vector2Int& other) const noexcept;
+		Vector2Int operator-(const Vector2Int&) const noexcept;
+
+		void operator-=(const Vector2Int&) noexcept;
 
 		Vector2Int operator+(int) const noexcept;
-		Vector2Int operator+(const Vector2Int& other) const noexcept;
+		Vector2Int operator+(const Vector2Int&) const noexcept;
 
 		Vector2Int operator*(int) const noexcept;
 		Vector2Int operator/(int) const noexcept;

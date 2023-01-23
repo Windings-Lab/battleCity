@@ -16,18 +16,20 @@ namespace BattleCity::Game::World::Object::Component
 		using Component::Component;
 		~Movable() override = default;
 
-		Movable& SetSpeed(Speed) noexcept;
-		Vector2Int GetSpeed() const noexcept;
+		void SetSpeed(Speed) noexcept;
+		const Velocity& GetVelocity() const noexcept;
 
-		Movable& SetDirection(MovementDirection) noexcept;
-		MovementDirection GetDirection() const noexcept;
+		void SetMovementDirection(Direction) noexcept;
+		Direction GetMovementDirection() const noexcept;
 
 		void StopMovement() noexcept;
+		bool IsMoving() const noexcept;
 
 	private:
 		Speed mSpeed = 0;
 		Velocity mVelocity;
+		bool mMoving;
 
-		MovementDirection mDirection;
+		Direction mMovementDirection;
 	};
 }

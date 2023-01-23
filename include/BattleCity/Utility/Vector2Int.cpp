@@ -16,6 +16,12 @@ namespace BattleCity
         return { X - other.X, Y - other.Y };
     }
 
+    void Vector2Int::operator-=(const Vector2Int& other) noexcept
+    {
+        X -= other.X;
+        Y -= other.Y;
+    }
+
     Vector2Int Vector2Int::operator+(int num) const noexcept
     {
         return { X + num, Y + num };

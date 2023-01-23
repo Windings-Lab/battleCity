@@ -4,16 +4,24 @@
 
 namespace BattleCity::Game::World::Object
 {
+	namespace Component
+	{
+		class Collider;
+		class Health;
+	}
+
 	class Wall : public Object
     {
     public:
-        using Object::Object;
+        Wall();
 
         void Update() override;
+        void ResolveCollisions(Object&) override;
+        void OnOutOfBounds(const Vector2Int&) override;
 
 	private:
-        void InitializeComponents() override;
-
+        Component::Health* mHealth;
+        Component::Collider* mCollider;
     };
 }
 

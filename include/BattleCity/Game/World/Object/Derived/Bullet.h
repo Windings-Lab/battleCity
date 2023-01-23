@@ -6,22 +6,25 @@ namespace BattleCity::Game::World::Object
 {
 	namespace Component
 	{
+		class Collider;
 		class Movable;
+		class Texture;
 	}
 
 	class Bullet : public Object
     {
     public:
-        using Object::Object;
+        Bullet();
 
         void Update() override;
+        void ResolveCollisions(Object&) override;
+        void OnOutOfBounds(const Vector2Int&) override;
 
-        void SetDirection(MovementDirection) noexcept;
+        void AdjustPositionToDirection();
 
 	private:
-        void InitializeComponents() override;
-
-    private:
+        Component::Texture* mTexture;
         Component::Movable* mMovable;
+        Component::Collider* mCollider;
     };
 }

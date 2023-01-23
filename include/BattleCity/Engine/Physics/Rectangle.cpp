@@ -16,23 +16,61 @@ namespace BattleCity::Engine::Physics
 	{
 	}
 
+	bool Rectangle::OutOfInner(const Rectangle& bounds, Vector2Int& penetration) const noexcept
+	{
+		int left	= GetX();
+		int right	= GetX() + GetWidth();
+		int top		= GetY();
+		int bottom	= GetY() + GetHeight();
+
+		int boundsLeft		= bounds.GetX();
+		int boundsRight		= bounds.GetX() + bounds.GetWidth();
+		int boundTop		= bounds.GetY();
+		int boundsBottom	= bounds.GetY() + bounds.GetHeight();
+
+		if(left < boundsLeft)
+		{
+			penetration.X = boundsLeft - left;
+			return true;
+		}
+		if(right > boundsRight)
+		{
+			penetration.X = -(right - boundsRight);
+			return true;
+		}
+
+		if(top < boundTop)
+		{
+			penetration.Y = boundTop - top;
+			return true;
+		}
+		if(bottom > boundsBottom)
+		{
+			penetration.Y = -(bottom - boundsBottom);
+			return true;
+		}
+
+		return false;
+	}
 	bool Rectangle::Intersects(const Rectangle& other) const noexcept
 	{
-		return (GetX() <= other.GetX() + other.GetWidth() &&
-			GetX() + GetWidth() >= other.GetX() &&
-			GetY() <= other.GetY() + other.GetHeight() &&
-			GetY() + GetHeight() >= other.GetY());
+		return GetX()				< other.GetX() + other.GetWidth()
+			&& GetX() + GetWidth()	> other.GetX()
+			&& GetY()				< other.GetY() + other.GetHeight()
+			&& GetY() + GetHeight() > other.GetY();
 	}
 	Vector2Int Rectangle::GetPenetration(const Rectangle& other) const noexcept
 	{
-		int left   = std::max(GetX(), other.GetX());
-		int right  = std::min(GetX() + GetWidth(), other.GetX() + other.GetWidth());
+		int right = GetX() + GetWidth();
+		int otherRight = other.GetX() + other.GetWidth();
+		int bottom = GetY() + GetHeight();
+		int otherBottom = other.GetY() + other.GetHeight();
 
-		int top    = std::max(GetY(), other.GetY());
-		int bottom = std::min(GetY() + GetHeight(), other.GetY() + other.GetHeight());
+		int x_overlap = std::max(0, std::min(right, otherRight) - std::max(GetX(), other.GetX()));
+		int y_overlap = std::max(0, std::min(bottom, otherBottom) - std::max(GetY(), other.GetY()));
 
-		return { std::max(left, right) - std::min(left, right) + 1
-			     , std::max(top, bottom) - std::min(top, bottom) + 1 };
+		return { x_overlap * (GetX() > other.GetX() ? 1 : -1),
+					y_overlap * (GetY() > other.GetY() ? 1 : -1) };
 	}
 
 	void Rectangle::SetPosition(const Position& position) noexcept
@@ -86,20 +124,48 @@ namespace BattleCity::Engine::Physics
 		return { mPosition.X + (mSize.X >> 1), mPosition.Y + (mSize.Y >> 1) };
 	}
 
+	bool Rectangle::operator==(const Rectangle& other) const noexcept
+	{
+		return mPosition == other.mPosition && mSize == other.mSize;
+	}
+	bool Rectangle::operator!=(const Rectangle& other) const noexcept
+	{
+		return !(*this == other);
+	}
+
 	Rectangle Rectangle::TopLeftQuadrant() const noexcept
 	{
-		return Rectangle(mPosition.X, mPosition.Y, mSize.X >> 1, mSize.Y >> 1);
+		return Rectangle(mPosition.X
+						, mPosition.Y
+						, mSize.X >> 1
+						, mSize.Y >> 1);
 	}
 	Rectangle Rectangle::TopRightQuadrant() const noexcept
 	{
-		return Rectangle(mPosition.X + (mSize.X >> 1), mPosition.Y, mSize.X >> 1, mSize.Y >> 1);
+		std::div_t halfWidth = std::div(mSize.X, 2);
+
+		return Rectangle(mPosition.X + halfWidth.quot
+						 , mPosition.Y
+						 , mSize.X - halfWidth.quot + halfWidth.rem
+						 , mSize.Y >> 1);
 	}
 	Rectangle Rectangle::BottomLeftQuadrant() const noexcept
 	{
-		return Rectangle(mPosition.X, mPosition.Y + (mSize.Y >> 1), mSize.X >> 1, mSize.Y >> 1);
+		std::div_t halfHeight = std::div(mSize.Y, 2);
+
+		return Rectangle(mPosition.X
+					 , mPosition.Y + halfHeight.quot
+					 , mSize.X >> 1
+					 , mSize.Y - halfHeight.quot + halfHeight.rem);
 	}
 	Rectangle Rectangle::BottomRightQuadrant() const noexcept
 	{
-		return Rectangle(mPosition.X + (mSize.X >> 1), mPosition.Y + (mSize.Y >> 1), mSize.X >> 1, mSize.Y >> 1);
+		std::div_t halfWidth = std::div(mSize.X, 2);
+		std::div_t halfHeight = std::div(mSize.Y, 2);
+
+		return Rectangle(mPosition.X + halfWidth.quot
+						,mPosition.Y + halfHeight.quot
+						,mSize.X - halfWidth.quot + halfWidth.rem
+						,mSize.Y - halfHeight.quot + halfHeight.rem);
 	}
 }

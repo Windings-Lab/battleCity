@@ -1,34 +1,38 @@
 #include "PCHeader.h"
 #include "ObjectFactoryStandart.h"
 
-#include "BattleCity/Game/World/WorldMap.h"
+#include "BattleCity/Engine/Texture/BCTexture.h"
+#include "BattleCity/Engine/Texture/TextureGroupLibrary.h"
 
+#include "BattleCity/Game/World/Object/Derived/Background.h"
 #include "BattleCity/Game/World/Object/Derived/Bullet.h"
 #include "BattleCity/Game/World/Object/Derived/Explosion.h"
 #include "BattleCity/Game/World/Object/Derived/Phoenix.h"
 #include "BattleCity/Game/World/Object/Derived/PowerUp.h"
 #include "BattleCity/Game/World/Object/Derived/Tank.h"
 #include "BattleCity/Game/World/Object/Derived/Wall.h"
-#include "BattleCity/Game/World/Object/Derived/WorldBoundaries.h"
 
-#include "BattleCity/Engine/Texture/BCTexture.h"
-#include "BattleCity/Engine/Texture/TextureGroupLibrary.h"
-#include "BattleCity/Game/World/Object/Containers/QuadTree.h"
+#include "BattleCity/Game/World/Object/Components/Collider.h"
+#include "BattleCity/Game/World/Object/Components/Fireable.h"
+#include "BattleCity/Game/World/Object/Components/Health.h"
+#include "BattleCity/Game/World/Object/Components/Movable.h"
+#include "BattleCity/Game/World/Object/Components/TextureComponent.h"
+#include "BattleCity/Game/World/Object/Derived/Tank/TankNPC.h"
 
 namespace BattleCity::Game::World::Object::Factory
 {
-	std::shared_ptr<WorldBoundaries> Standart::CreateWorldBoundaries(Position position)
+	std::shared_ptr<Background> Standart::CreateWorldBoundaries(Position position)
 	{
-		auto object = std::make_shared<WorldBoundaries>(mTextureGroups.GetGroupBy(Framework::TextureName::Background));
+		auto object = std::make_shared<Background>();
+		object->SetDestroyMarker(mObjectDestroyer);
 
-		auto& componentFactory = dynamic_cast<ComponentFactory&>(*object);
-		componentFactory.InitializeComponents();
+		auto textureComponent = object->GetComponent<Component::Texture>();
+		textureComponent->SetTextureGroup(&mTextureGroups.GetGroupBy(Framework::TextureName::Background));
+		textureComponent->ChangeTextureTo(Framework::TextureType::Basic);
 
 		object->SetPosition(position);
-		object->ChangeTextureTo(Framework::TextureType::Basic);
-		object->UpdateCollider();
 
-		mInserter.InsertObject(object, Layer::Back);
+		mInsertToMap(object, Layer::Back);
 
 		return object;
 	}
@@ -37,128 +41,152 @@ namespace BattleCity::Game::World::Object::Factory
 	{
 		std::shared_ptr<Tank> object;
 
-		auto bulletSpawner = [&](Position pos)
-		{
-			return CreateBullet(pos);
-		};
+		Component::Texture* textureComponent;
+		Component::Movable* movable;
 
 		switch (tankType)
 		{
 		case Type::TankNPC:
-			object = std::make_shared<Tank>(mTextureGroups.GetGroupBy(Framework::TextureName::TankNPC));
+			object = std::make_shared<TankNPC>();
+			movable = object->GetComponent<Component::Movable>();
+			textureComponent = object->GetComponent<Component::Texture>();
+			textureComponent->SetTextureGroup(&mTextureGroups.GetGroupBy(Framework::TextureName::TankNPC));
+			movable->SetSpeed(3);
+			movable->SetMovementDirection(Direction::Down);
 			break;
 		case Type::TankPlayer:
-			object = std::make_shared<Tank>(mTextureGroups.GetGroupBy(Framework::TextureName::TankPlayer));
+			object = std::make_shared<Tank>();
+			movable = object->GetComponent<Component::Movable>();
+			textureComponent = object->GetComponent<Component::Texture>();
+			textureComponent->SetTextureGroup(&mTextureGroups.GetGroupBy(Framework::TextureName::TankPlayer));
+			movable->SetSpeed(3);
+			movable->SetMovementDirection(Direction::Up);
+			movable->StopMovement();
 			break;
 		default:
 			std::cerr << "Incorrect tank type\n";
 			return nullptr;
 		}
-
-		auto& componentFactory = dynamic_cast<ComponentFactory&>(*object);
-		componentFactory.InitializeComponents();
+		object->SetDestroyMarker(mObjectDestroyer);
 
 		object->SetPosition(position);
-		object->ChangeTextureTo(Framework::TextureType::Up);
-		object->UpdateCollider();
 
-		object->SetBullet(bulletSpawner);
-		object->SetSpeed(5);
+		auto fireable = object->GetComponent<Component::Fireable>();
+		fireable->SetBullet(*this);
+		fireable->SetBulletCount(1);
 
-		mInserter.InsertObject(object);
+		mInsertToMap(object, Layer::Front);
 
-		object->RegisterObserver(&mQuadTree);
-		mQuadTree.Insert(object.get());
+		auto collider = object->GetComponent<Component::Collider>();
+		collider->UpdateCollider();
+		collider->SetSolid(true);
+		object->RegisterObserver(&mQuadTreeObserver);
+		mInsertToQuadTree(object.get());
 
 		return object;
 	}
 
-	std::shared_ptr<Bullet> Standart::CreateBullet(Position position)
+	std::shared_ptr<Bullet> Standart::CreateBullet(Position position, Direction direction)
 	{
-		auto object = std::make_shared<Bullet>(mTextureGroups.GetGroupBy(Framework::TextureName::Bullet));
+		auto object = std::make_shared<Bullet>();
+		object->SetDestroyMarker(mObjectDestroyer);
 
-		auto& componentFactory = dynamic_cast<ComponentFactory&>(*object);
-		componentFactory.InitializeComponents();
+		auto textureComponent = object->GetComponent<Component::Texture>();
+		textureComponent->SetTextureGroup(&mTextureGroups.GetGroupBy(Framework::TextureName::Bullet));
+
+		auto movable = object->GetComponent<Component::Movable>();
+		movable->SetSpeed(5);
+		movable->SetMovementDirection(direction);
 
 		object->SetPosition(position);
-		object->UpdateCollider();
+		object->AdjustPositionToDirection();
 
-		mInserter.InsertObject(object);
+		mInsertToMap(object, Layer::Front);
 
-		object->RegisterObserver(&mQuadTree);
-		mQuadTree.Insert(object.get());
+		auto collider = object->GetComponent<Component::Collider>();
+		collider->UpdateCollider();
+		collider->SetSolid(false);
+		object->RegisterObserver(&mQuadTreeObserver);
+		mInsertToQuadTree(object.get());
 
 		return object;
 	}
 
 	std::shared_ptr<PowerUp> Standart::CreatePowerUp(Position position)
 	{
-		auto object = std::make_shared<PowerUp>(mTextureGroups.GetGroupBy(Framework::TextureName::PowerUp));
-
-		auto& componentFactory = dynamic_cast<ComponentFactory&>(*object);
-		componentFactory.InitializeComponents();
+		/*auto object = std::make_shared<PowerUp>();
+		auto textureComponent = object->GetComponent<Component::Texture>();
+		textureComponent->SetTextureGroup(&mTextureGroups.GetGroupBy(Framework::TextureName::PowerUp));
 
 		object->SetPosition(position);
-		object->ChangeTextureTo(Framework::TextureType::Basic);
-		object->UpdateCollider();
+		textureComponent->ChangeTextureTo(Framework::TextureType::Basic);
 
 		mInserter.InsertObject(object);
 
 		object->RegisterObserver(&mQuadTree);
-		mQuadTree.Insert(object.get());
+		mQuadTree.Insert(object.get());*/
 
-		return object;
+		return nullptr;
 	}
 
 	std::shared_ptr<Wall> Standart::CreateWall(Position position)
 	{
-		auto object = std::make_shared<Wall>(mTextureGroups.GetGroupBy(Framework::TextureName::Wall));
+		auto object = std::make_shared<Wall>();
+		object->SetDestroyMarker(mObjectDestroyer);
 
-		auto& componentFactory = dynamic_cast<ComponentFactory&>(*object);
-		componentFactory.InitializeComponents();
+		auto textureComponent = object->GetComponent<Component::Texture>();
+		textureComponent->SetTextureGroup(&mTextureGroups.GetGroupBy(Framework::TextureName::Wall));
 
 		object->SetPosition(position);
-		object->ChangeTextureTo(Framework::TextureType::Basic);
-		object->UpdateCollider();
+		textureComponent->ChangeTextureTo(Framework::TextureType::Basic);
 
-		mInserter.InsertObject(object);
+		object->GetComponent<Component::Health>()->SetHealth(1);
 
-		object->RegisterObserver(&mQuadTree);
-		mQuadTree.Insert(object.get());
+		mInsertToMap(object, Layer::Front);
+
+		auto collider = object->GetComponent<Component::Collider>();
+		collider->UpdateCollider();
+		collider->SetSolid(true);
+		object->RegisterObserver(&mQuadTreeObserver);
+		mInsertToQuadTree(object.get());
 
 		return object;
 	}
 
 	std::shared_ptr<Phoenix> Standart::CreatePhoenix(Position position)
 	{
-		auto object = std::make_shared<Phoenix>(mTextureGroups.GetGroupBy(Framework::TextureName::Phoenix));
+		auto object = std::make_shared<Phoenix>();
+		object->SetDestroyMarker(mObjectDestroyer);
 
-		auto& componentFactory = dynamic_cast<ComponentFactory&>(*object);
-		componentFactory.InitializeComponents();
+		auto textureComponent = object->GetComponent<Component::Texture>();
+		textureComponent->SetTextureGroup(&mTextureGroups.GetGroupBy(Framework::TextureName::Phoenix));
 
 		object->SetPosition(position);
-		object->ChangeTextureTo(Framework::TextureType::Phoenix);
-		object->UpdateCollider();
+		textureComponent->ChangeTextureTo(Framework::TextureType::Phoenix);
 
-		mInserter.InsertObject(object);
+		mInsertToMap(object, Layer::Front);
 
-		object->RegisterObserver(&mQuadTree);
-		mQuadTree.Insert(object.get());
+		auto collider = object->GetComponent<Component::Collider>();
+		collider->UpdateCollider();
+		collider->SetSolid(true);
+		object->RegisterObserver(&mQuadTreeObserver);
+		mInsertToQuadTree(object.get());
 
 		return object;
 	}
 
 	std::shared_ptr<Explosion> Standart::CreateExplosion(Position position)
 	{
-		auto object = std::make_shared<Explosion>(mTextureGroups.GetGroupBy(Framework::TextureName::Explosion));
+		auto object = std::make_shared<Explosion>();
+		object->SetDestroyMarker(mObjectDestroyer);
 
-		auto& componentFactory = dynamic_cast<ComponentFactory&>(*object);
-		componentFactory.InitializeComponents();
+		auto textureComponent = object->GetComponent<Component::Texture>();
+		textureComponent->SetTextureGroup(&mTextureGroups.GetGroupBy(Framework::TextureName::Explosion));
 
 		object->SetPosition(position);
-		object->ChangeTextureTo(Framework::TextureType::ExplosionSmall1);
+		textureComponent->ChangeTextureTo(Framework::TextureType::ExplosionSmall1);
 
-		mInserter.InsertObject(object);
+		mInsertToMap(object, Layer::Front);
 
 		return object;
 	}

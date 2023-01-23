@@ -8,11 +8,11 @@ namespace BattleCity::Game::World::Object::Factory
 	{
 		using Factory::Factory;
 
-		std::shared_ptr<WorldBoundaries> CreateWorldBoundaries(Position = { 0, 0 }) override;
+		std::shared_ptr<Background> CreateWorldBoundaries(Position = { 0, 0 }) override;
 
 		std::shared_ptr<Tank> CreateTank(Type tankType, Position = { 0, 0 }) override;
 
-		std::shared_ptr<Bullet> CreateBullet(Position = { 0, 0 }) override;
+		std::shared_ptr<Bullet> CreateBullet(Position, Direction) override;
 
 		std::shared_ptr<PowerUp> CreatePowerUp(Position = { 0, 0 }) override;
 

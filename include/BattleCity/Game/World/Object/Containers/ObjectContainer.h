@@ -30,7 +30,7 @@ namespace BattleCity::Game::World::Object
 		std::shared_ptr<Object> GetObject(int id) const;
 
 		void Insert(std::shared_ptr<Object>&& objPtr);
-		void Remove(int objID);
+		void RemoveBy(int objID);
 
 		int GetSize() const noexcept;
 		bool IsEmpty() const noexcept;

@@ -4,12 +4,6 @@ namespace BattleCity::Game::World::Object
 {
 	class Object;
 
-	namespace Factory
-	{
-		struct Standart;
-		struct Factory;
-	}
-
 	namespace Component
 	{
 		class Component;
@@ -19,18 +13,13 @@ namespace BattleCity::Game::World::Object
 
 	class ComponentFactory
 	{
-	private:
-		friend struct Factory::Factory;
-		friend struct Factory::Standart;
-
-	protected:
+	public:
 		ComponentFactory();
 
 		DISALLOW_COPY_MOVE(ComponentFactory)
 
 		virtual ~ComponentFactory();
 
-	public:
 		template<typename T>
 		bool HasComponent() const
 		{
@@ -41,31 +30,29 @@ namespace BattleCity::Game::World::Object
 			return mComponents.find(type_index(typeid(T))) != mComponents.end();
 		}
 
-	protected:
-		virtual void InitializeComponents() = 0;
-
-		/*template<typename RetType>
-		RetType* GetComponent() const
+		template<typename RetType>
+		RetType* GetComponent()
 		{
-			static_assert(std::is_base_of_v<Component::Component, RetType>, "RetType must be base of type Component");
-		
+			static_assert(std::is_base_of_v<Component::Component, RetType>, "Given RetType must be base of type Component");
+
 			using std::type_index;
-
 			const auto componentIt = mComponents.find(type_index(typeid(RetType)));
+			return componentIt != mComponents.end() ? static_cast<RetType*>(componentIt->second.get()) : nullptr;
+		}
 
-			if (componentIt == mComponents.end())
-			{
-				std::cerr << typeid(*this).name() << " have no component called: " << typeid(RetType).name() << "\n";
-				return nullptr;
-			}
+		template<typename RetType>
+		const RetType* GetComponent() const
+		{
+			static_assert(std::is_base_of_v<Component::Component, RetType>, "Given RetType must be base of type Component");
 
+			using std::type_index;
+			const auto componentIt = mComponents.find(type_index(typeid(RetType)));
 			return static_cast<RetType*>(componentIt->second.get());
-		}*/
+		}
 
-		template<
-			  typename T
-			, typename U
-			, typename... Args>
+		template< typename T
+				, typename U
+				, typename... Args>
 		T* AddComponent(U& obj, Args&&... args)
 		{
 			static_assert(std::is_base_of_v<Component::Component, T>, "T must be base of type Component");
@@ -73,10 +60,12 @@ namespace BattleCity::Game::World::Object
 
 			using std::type_index;
 
-			mComponents.try_emplace(type_index(typeid(T))
-				, std::make_unique<T>(obj, std::forward<Args>(args)...));
+			auto component = std::make_unique<T>(obj, std::forward<Args>(args)...);
+			auto* componentPointer = component.get();
 
-			return static_cast<T*>(mComponents.at(type_index(typeid(T))).get());
+			mComponents.try_emplace(type_index(typeid(T)), std::move(component));
+
+			return static_cast<T*>(componentPointer);
 		}
 
 	private:

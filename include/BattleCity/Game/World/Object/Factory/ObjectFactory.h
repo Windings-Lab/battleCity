@@ -14,6 +14,7 @@ namespace BattleCity::Game::World
 
 namespace BattleCity::Game::World::Object
 {
+	class Observer;
 	class QuadTree;
 
 	class Explosion;
@@ -22,7 +23,7 @@ namespace BattleCity::Game::World::Object
 	class PowerUp;
 	class Bullet;
 	class Tank;
-	class WorldBoundaries;
+	class Background;
 	class Object;
 }
 
@@ -30,17 +31,17 @@ namespace BattleCity::Game::World::Object::Factory
 {
 	struct Factory
 	{
-		explicit Factory(Map&, const Engine::Texture::GroupLibrary&, QuadTree&);
+		explicit Factory(Map&, QuadTree&, const Engine::Texture::GroupLibrary&);
 
 		DISALLOW_COPY_MOVE(Factory)
 
 		virtual ~Factory() = default;
 
-		virtual std::shared_ptr<WorldBoundaries> CreateWorldBoundaries(Position = {0, 0}) = 0;
+		virtual std::shared_ptr<Background> CreateWorldBoundaries(Position = {0, 0}) = 0;
 
 		virtual std::shared_ptr<Tank> CreateTank(Type tankType, Position = { 0, 0 }) = 0;
 
-		virtual std::shared_ptr<Bullet> CreateBullet(Position = { 0, 0 }) = 0;
+		virtual std::shared_ptr<Bullet> CreateBullet(Position, Direction) = 0;
 
 		virtual std::shared_ptr<PowerUp> CreatePowerUp(Position = { 0, 0 }) = 0;
 
@@ -51,10 +52,13 @@ namespace BattleCity::Game::World::Object::Factory
 		virtual std::shared_ptr<Explosion> CreateExplosion(Position = { 0, 0 }) = 0;
 
 	protected:
-		Map& mInserter;
-		const Engine::Texture::GroupLibrary& mTextureGroups;
+		std::function<void(std::shared_ptr<Object>, Layer)> mInsertToMap;
+		std::function<void(ID)> mObjectDestroyer;
 
-		QuadTree& mQuadTree;
+		std::function<void(const Object*)> mInsertToQuadTree;
+		Observer& mQuadTreeObserver;
+
+		const Engine::Texture::GroupLibrary& mTextureGroups;
 	};
 }
 

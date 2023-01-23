@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Component.h"
+#include "BattleCity/Engine/Timer.h"
 #include "BattleCity/Game/World/Object/ObjectAliases.h"
 
 namespace BattleCity::Framework
@@ -10,6 +11,11 @@ namespace BattleCity::Framework
 
 namespace BattleCity::Game::World::Object
 {
+	namespace Factory
+	{
+		struct Standart;
+	}
+
 	class Bullet;
 	class Object;
 }
@@ -27,15 +33,17 @@ namespace BattleCity::Game::World::Object::Component
 
 		virtual void Fire();
 
-		void SetBullet(const std::function<std::shared_ptr<Bullet>(Position)>&);
-
-		void SetBulletCount(int count) noexcept;
-		int GetBulletCount() const noexcept;
+		void SetBullet(Factory::Standart&);
+		void SetBulletCount(int) noexcept;
 
 	private:
-		std::function<std::shared_ptr<Bullet>(Position)> mSpawnBullet;
+		Position GetShootPosition(Direction);
 
-		int mBulletCount = 0;
+	private:
+		std::function<std::shared_ptr<Bullet>(Position, Direction)> mSpawnBullet;
+		std::vector<std::weak_ptr<Bullet>> mBullets;
+
+		int mMaxBulletCount;
 	};
 }
 

@@ -12,19 +12,24 @@ namespace BattleCity::Game::World::Object::Component
 		using Component::Component;
 
 		const Engine::Physics::Rectangle& GetRectangle() const noexcept;
-		bool IsIntersects(const Collider&) const noexcept;
-		
+		const Engine::Physics::Rectangle& GetOldRectangle() const noexcept;
+
+		void UpdateCollider() noexcept;
+		void UpdateOldCollider() noexcept;
+
 		void SetPosition(const Position&) noexcept;
 		const Position& GetPosition() const noexcept;
-
-		void SetPreviousPosition(const Position&) noexcept;
-		const Position& GetPreviousPosition() const noexcept;
 
 		void SetSize(const Size&) noexcept;
 		const Size& GetSize() const noexcept;
 
+		bool IsSolid() const noexcept;
+		void SetSolid(bool) noexcept;
+
 	private:
 		Engine::Physics::Rectangle mRectangle;
-		Position mPrevious;
+		Engine::Physics::Rectangle mOldRectangle;
+
+		bool mSolid;
 	};
 }

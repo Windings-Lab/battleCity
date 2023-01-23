@@ -18,8 +18,8 @@ namespace BattleCity::Game::World::Object
 		void RegisterObserver(Observer* observer);
         void UnregisterObserver(Observer* observer);
 
-	public:
-        void NotifyObjectUpdated(const Object&) const;
+	protected:
+        void NotifyObjectUpdated(Object&) const;
 		void NotifyObjectDeleted(const Object&) const;
 
     private:

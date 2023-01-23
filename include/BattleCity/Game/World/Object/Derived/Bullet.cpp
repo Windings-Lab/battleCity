@@ -1,26 +1,63 @@
 #include "PCHeader.h"
 #include "Bullet.h"
 
+#include "BattleCity/Game/World/Object/Components/Collider.h"
+#include "BattleCity/Game/World/Object/Components/Health.h"
 #include "BattleCity/Game/World/Object/Components/Movable.h"
+#include "BattleCity/Game/World/Object/Components/TextureComponent.h"
 
 namespace BattleCity::Game::World::Object
 {
-    void Bullet::InitializeComponents()
-    {
-        Object::InitializeComponents();
-
-        mMovable = AddComponent<Component::Movable>(*this);
-    }
+	Bullet::Bullet()
+		: Object()
+		, mTexture(AddComponent<Component::Texture>(*this))
+		, mMovable(AddComponent<Component::Movable>(*this))
+		, mCollider(AddComponent<Component::Collider>(*this))
+	{}
 
     void Bullet::Update()
     {
-        Object::Update();
+		SetPosition(GetPosition() + mMovable->GetVelocity());
 
-        SetPosition(GetPosition() + mMovable->GetSpeed());
+        Object::Update();
+    }
+    void Bullet::ResolveCollisions(Object& object)
+    {
+		auto healthComponent = object.GetComponent<Component::Health>();
+		if(healthComponent)
+		{
+			healthComponent->SetHealth(healthComponent->GetHealth() - 1);
+		}
+
+		MarkForDestroy();
     }
 
-    void Bullet::SetDirection(MovementDirection direction) noexcept
+    void Bullet::OnOutOfBounds(const Vector2Int&)
     {
-        mMovable->SetDirection(direction);
+		MarkForDestroy();
+    }
+
+    void Bullet::AdjustPositionToDirection()
+    {
+		const Size& textureSize = mTexture->GetSize();
+		const Size textureHalfSize = textureSize / 2;
+
+		switch (mMovable->GetMovementDirection())
+		{
+		case Direction::Right:
+			SetY(GetPosition().Y - textureHalfSize.Y);
+			break;
+		case Direction::Left:
+			SetY(GetPosition().Y - textureHalfSize.Y);
+			SetX(GetPosition().X - textureSize.X);
+			break;
+		case Direction::Down:
+			SetX(GetPosition().X - textureHalfSize.X);
+			break;
+		case Direction::Up:
+			SetX(GetPosition().X - textureHalfSize.X);
+			SetY(GetPosition().Y - textureSize.Y);
+			break;
+		}
     }
 }

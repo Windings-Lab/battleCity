@@ -35,7 +35,7 @@ namespace BattleCity::Game::World::Object
 
 	private:
 		QuadTree();
-		explicit QuadTree(Border, Engine::Physics::Quadrant, Parent*, Level);
+		explicit QuadTree(Border, Parent*, Level);
 
 	public:
 		explicit QuadTree(Border);
@@ -46,11 +46,16 @@ namespace BattleCity::Game::World::Object
 		~QuadTree() override;
 
 		void OnObjectDelete(const Object&) override;
-		void OnObjectUpdate(const Object&, Action<>) override;
+		void OnObjectUpdate(Object&) override;
 
 		const Border& GetBorder() const noexcept;
+
+	private:
+		void SetQuadrant(Engine::Physics::Quadrant) noexcept;
+	public:
+		std::string GetQuadrants() const noexcept;
+
 		int GetLevel() const noexcept;
-		Engine::Physics::Quadrant GetQuadrantType() const noexcept;
 		bool IsLeaf() const noexcept;
 
 		void Insert(const Object*);
@@ -75,6 +80,7 @@ namespace BattleCity::Game::World::Object
 		void CollectObjectsFromLeaf(std::unordered_set<ID>& duplicateCheck, Container& objects) const;
 	public:
 		std::vector<const Object*> GetPossibleCollisions(const Object* object) const;
+		std::vector<Object*> GetPossibleCollisions(Object* object);
 		int GetSize() const noexcept;
 
 	private:
@@ -84,7 +90,7 @@ namespace BattleCity::Game::World::Object
 
 	private:
 		Border mBorder;
-		Engine::Physics::Quadrant mQuadrant;
+		std::ostringstream mQuadrants;
 
 		NodeContainer mNodes;
 		Parent* mParent;

@@ -5,6 +5,7 @@ namespace BattleCity::Engine::Physics
 	enum class Quadrant
 	{
 		Error = -1,
+		Base,
 		TL,
 		TR,
 		BL,
@@ -35,6 +36,7 @@ namespace BattleCity::Engine::Physics
 
 		~Rectangle() = default;
 
+		bool OutOfInner(const Rectangle&, Vector2Int&) const noexcept;
 		bool Intersects(const Rectangle&) const noexcept;
 		Vector2Int GetPenetration(const Rectangle&) const noexcept;
 
@@ -50,6 +52,9 @@ namespace BattleCity::Engine::Physics
 
 		Rectangle Get(Quadrant) const noexcept;
 		Position GetCenter() const noexcept;
+
+		bool operator==(const Rectangle&) const noexcept;
+		bool operator!=(const Rectangle&) const noexcept;
 
 	private:
 		Rectangle TopLeftQuadrant() const noexcept;

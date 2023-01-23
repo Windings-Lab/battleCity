@@ -1,56 +1,72 @@
 #include "PCHeader.h"
 #include "Movable.h"
 
+#include "TextureComponent.h"
+#include "BattleCity/Framework/Texture.h"
 #include "BattleCity/Game/World/Object/Object.h"
 
 namespace BattleCity::Game::World::Object::Component
 {
-	Vector2Int Movable::GetSpeed() const noexcept
+	const Velocity& Movable::GetVelocity() const noexcept
 	{
-		return mVelocity * mSpeed;
+		return mVelocity;
 	}
 
-	Movable& Movable::SetSpeed(Speed speed) noexcept
+	void Movable::SetSpeed(Speed speed) noexcept
 	{
 		mSpeed = speed;
-		return *this;
 	}
 
-	Movable& Movable::SetDirection(MovementDirection direction) noexcept
+	void Movable::SetMovementDirection(Direction direction) noexcept
 	{
+		auto textureComponent = mObject.GetComponent<Texture>();
+
 		switch (direction)
 		{
-			case MovementDirection::Left:
-				mVelocity = { -1, 0 };
+			case Direction::Left:
+				mVelocity.X = -mSpeed;
+				mVelocity.Y = 0;
+				textureComponent->ChangeTextureTo(Framework::TextureType::Left);
 				break;
-			case MovementDirection::Right:
-				mVelocity = { 1, 0 };
+			case Direction::Right:
+				mVelocity.X = mSpeed;
+				mVelocity.Y = 0;
+				textureComponent->ChangeTextureTo(Framework::TextureType::Right);
 				break;
-			case MovementDirection::Up:
-				mVelocity = { 0, -1 };
+			case Direction::Up:
+				mVelocity.X = 0;
+				mVelocity.Y = -mSpeed;
+				textureComponent->ChangeTextureTo(Framework::TextureType::Up);
 				break;
-			case MovementDirection::Down:
-				mVelocity = { 0, 1 };
+			case Direction::Down:
+				mVelocity.X = 0;
+				mVelocity.Y = mSpeed;
+				textureComponent->ChangeTextureTo(Framework::TextureType::Down);
 				break;
-			case MovementDirection::Count:
+			case Direction::Count:
 			default:
 				{
-					assert(false && "Movable: Invalid SetDirection");
+					assert(false && "Movable: Invalid SetMovementDirection");
 				}
 				break;
 		}
 
-		mDirection = direction;
-
-		return *this;
+		mMoving = true;
+		mMovementDirection = direction;
 	}
-	MovementDirection Movable::GetDirection() const noexcept
+	Direction Movable::GetMovementDirection() const noexcept
 	{
-		return mDirection;
+		return mMovementDirection;
 	}
 
 	void Movable::StopMovement() noexcept
 	{
-		mVelocity = { 0, 0 };
+		mVelocity.X = 0;
+		mVelocity.Y = 0;
+		mMoving = false;
+	}
+	bool Movable::IsMoving() const noexcept
+	{
+		return mMoving;
 	}
 }

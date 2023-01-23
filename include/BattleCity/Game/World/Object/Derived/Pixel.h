@@ -6,11 +6,11 @@ namespace BattleCity::Game::World::Object
 	class Pixel : public Object
 	{
 	public:
-		using Object::Object;
-
-		void InitializeComponents() override;
+		Pixel();
 
 		void Update() override;
+		void ResolveCollisions(Object&) override;
+		void OnOutOfBounds(const Vector2Int&) override;
 	};
 }
 

@@ -34,7 +34,7 @@ namespace BattleCity
 			WorldBoundaries,
 		};
 
-		enum class MovementDirection
+		enum class Direction
 		{
 			Right,
 			Left,

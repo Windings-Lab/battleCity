@@ -3,6 +3,8 @@
 
 #include "BattleCity/Engine/Physics/Rectangle.h"
 #include "BattleCity/Game/World/Object/Object.h"
+#include "BattleCity/Game/World/Object/Components/Collider.h"
+#include "BattleCity/Game/World/Object/Components/TextureComponent.h"
 
 namespace BattleCity::Game::World::Object
 {
@@ -11,7 +13,7 @@ namespace BattleCity::Game::World::Object
         using std::swap;
 
         swap(f.mBorder, s.mBorder);
-        swap(f.mQuadrant, s.mQuadrant);
+        f.mQuadrants.swap(s.mQuadrants);
         swap(f.mParent, s.mParent);
 
         f.mNodes.swap(s.mNodes);
@@ -21,22 +23,30 @@ namespace BattleCity::Game::World::Object
         f.mObjects.swap(s.mObjects);
         swap(f.mSize, s.mSize);
     }
-    void QuadTree::OnObjectDelete(const Object& obj)
+    void QuadTree::OnObjectDelete(const Object& object)
     {
-        Remove(&obj);
+        Remove(&object);
     }
-    void QuadTree::OnObjectUpdate(const Object& obj, Action<> updateCollider)
+    void QuadTree::OnObjectUpdate(Object& object)
     {
-        Remove(&obj);
-        updateCollider();
-        Insert(&obj);
+	    const auto objectCollider = object.GetComponent<Component::Collider>();
+        auto& objectTextureSize = object.GetComponent<Component::Texture>()->GetSize();
+
+        if(object.GetPosition() != objectCollider->GetPosition() || objectTextureSize != objectCollider->GetSize())
+        {
+            Remove(&object);
+            objectCollider->UpdateCollider();
+            Insert(&object);
+        }
     }
 
     QuadTree::QuadTree() : QuadTree(Border()) {}
-    QuadTree::QuadTree(Engine::Physics::Rectangle rect) : QuadTree(rect, Engine::Physics::Quadrant::Error, nullptr, 0) {}
-    QuadTree::QuadTree(Border rect, Engine::Physics::Quadrant quad, Parent* parent, Level lvl)
+    QuadTree::QuadTree(Engine::Physics::Rectangle rect) : QuadTree(rect, nullptr, 0)
+    {
+        SetQuadrant(Engine::Physics::Quadrant::Base);
+    }
+    QuadTree::QuadTree(Border rect, Parent* parent, Level lvl)
         : mBorder(rect)
-        , mQuadrant(quad)
         , mParent(parent)
         , mLevel(lvl)
         , mSize(0)
@@ -65,10 +75,16 @@ namespace BattleCity::Game::World::Object
     {
         return mLevel;
     }
-    Engine::Physics::Quadrant QuadTree::GetQuadrantType() const noexcept
+
+    void QuadTree::SetQuadrant(Engine::Physics::Quadrant quadrant) noexcept
     {
-        return mQuadrant;
+        mQuadrants << "[ " << mLevel << ", " << magic_enum::enum_name<Engine::Physics::Quadrant>(quadrant) << " ] ";
     }
+   std::string QuadTree::GetQuadrants() const noexcept
+    {
+        return mQuadrants.str();
+    }
+
     bool QuadTree::IsLeaf() const noexcept
     {
         return mNodes.empty();
@@ -76,7 +92,7 @@ namespace BattleCity::Game::World::Object
 
     void QuadTree::Insert(const Object* object)
     {
-        auto& rect = object->GetBounds();
+        const auto& rect = object->GetComponent<Component::Collider>()->GetRectangle();
         assert(mBorder.Intersects(rect) && "Trying to insert object that out of quad tree bounds");
 
         std::vector<Node*> nodeStack;
@@ -103,10 +119,21 @@ namespace BattleCity::Game::World::Object
 
         if (!mNodes.empty()) return;
 
-        mNodes.emplace_back(Node(mBorder.Get(Quadrant::TL), Quadrant::TL, this, mLevel + 1));
-        mNodes.emplace_back(Node(mBorder.Get(Quadrant::TR), Quadrant::TR, this, mLevel + 1));
-        mNodes.emplace_back(Node(mBorder.Get(Quadrant::BL), Quadrant::BL, this, mLevel + 1));
-        mNodes.emplace_back(Node(mBorder.Get(Quadrant::BR), Quadrant::BR, this, mLevel + 1));
+        mNodes.emplace_back(Node(mBorder.Get(Quadrant::TL), this, mLevel + 1));
+        mNodes[0].mQuadrants << GetQuadrants();
+        mNodes[0].SetQuadrant(Quadrant::TL);
+
+        mNodes.emplace_back(Node(mBorder.Get(Quadrant::TR), this, mLevel + 1));
+        mNodes[1].mQuadrants << GetQuadrants();
+        mNodes[1].SetQuadrant(Quadrant::TR);
+
+        mNodes.emplace_back(Node(mBorder.Get(Quadrant::BL), this, mLevel + 1));
+        mNodes[2].mQuadrants << GetQuadrants();
+        mNodes[2].SetQuadrant(Quadrant::BL);
+
+        mNodes.emplace_back(Node(mBorder.Get(Quadrant::BR), this, mLevel + 1));
+        mNodes[3].mQuadrants << GetQuadrants();
+        mNodes[3].SetQuadrant(Quadrant::BR);
     }
     void QuadTree::MoveObjectsToChildNodes()
     {
@@ -114,7 +141,8 @@ namespace BattleCity::Game::World::Object
         {
             for (auto& child : mNodes)
             {
-                if (!child.mBorder.Intersects(object->GetBounds())) continue;
+                const auto& rect = object->GetComponent<Component::Collider>()->GetRectangle();
+                if (!child.mBorder.Intersects(rect)) continue;
 
                 child.Insert(object);
             }
@@ -165,14 +193,8 @@ namespace BattleCity::Game::World::Object
         mNodes.clear();
     }
 
-    void Test()
-    {
-        std::cout << "Test" << std::endl;
-    }
     void QuadTree::RemoveObject(const Object* object)
     {
-        //OutputAllParentQuads(": Removed" + std::to_string(object->GetID()));
-
         auto it = std::find(mObjects.begin(), mObjects.end(), object);
         assert(it != mObjects.end() && "Trying to remove a value that is not present in the node");
         *it = mObjects.back();
@@ -267,7 +289,8 @@ namespace BattleCity::Game::World::Object
             {
                 for (auto& child : node->mNodes)
                 {
-                    if (!child.mBorder.Intersects(object->GetBounds())) continue;
+                    const auto& rect = object->GetComponent<Component::Collider>()->GetRectangle();
+                    if (!child.mBorder.Intersects(rect)) continue;
 
                     nodeStack.push_back(&child);
                 }
@@ -277,7 +300,11 @@ namespace BattleCity::Game::World::Object
             for (const auto& other : node->mObjects)
             {
                 if (object == other) continue;
-                if (!object->GetBounds().Intersects(other->GetBounds())) continue;
+
+                const auto& rect = object->GetComponent<Component::Collider>()->GetRectangle();
+                const auto& otherRect = other->GetComponent<Component::Collider>()->GetRectangle();
+
+                if (!rect.Intersects(otherRect)) continue;
                 if (!duplicateCheck.emplace(other->GetID()).second) continue;
 
                 collisions.push_back(other);
@@ -286,12 +313,55 @@ namespace BattleCity::Game::World::Object
 
         return collisions;
     }
+	std::vector<Object*> QuadTree::GetPossibleCollisions(Object* object)
+	{
+        std::unordered_set<ID> duplicateCheck;
+        std::vector<Object*> collisions;
 
-    void QuadTree::PushChildNodesToStack(std::vector<Node*>& nodeStack, const Object* object)
+        std::vector<const Node*> nodeStack;
+        nodeStack.push_back(this);
+        while (!nodeStack.empty())
+        {
+            auto* node = nodeStack.back();
+            nodeStack.pop_back();
+
+            if (node->mSize == 0) continue;
+
+            if (!node->IsLeaf())
+            {
+                for (auto& child : node->mNodes)
+                {
+                    const auto& rect = object->GetComponent<Component::Collider>()->GetRectangle();
+                    if (!child.mBorder.Intersects(rect)) continue;
+
+                    nodeStack.push_back(&child);
+                }
+                continue;
+            }
+
+            for (auto other : node->mObjects)
+            {
+                if (object == other) continue;
+
+                const auto& rect = object->GetComponent<Component::Collider>()->GetRectangle();
+                const auto& otherRect = other->GetComponent<Component::Collider>()->GetRectangle();
+
+                if (!rect.Intersects(otherRect)) continue;
+                if (!duplicateCheck.emplace(other->GetID()).second) continue;
+
+                collisions.push_back(const_cast<Object*>(other));
+            }
+        }
+
+        return collisions;
+	}
+
+	void QuadTree::PushChildNodesToStack(std::vector<Node*>& nodeStack, const Object* object)
     {
         for (auto& child : mNodes)
         {
-            if (!child.mBorder.Intersects(object->GetBounds())) continue;
+            const auto& rect = object->GetComponent<Component::Collider>()->GetRectangle();
+            if (!child.mBorder.Intersects(rect)) continue;
 
             nodeStack.push_back(&child);
         }
@@ -300,7 +370,8 @@ namespace BattleCity::Game::World::Object
     {
         for (auto& child : mNodes)
         {
-            if (!child.mBorder.Intersects(object->GetBounds())) continue;
+            const auto& rect = object->GetComponent<Component::Collider>()->GetRectangle();
+            if (!child.mBorder.Intersects(rect)) continue;
 
             nodeStack.push_back(&child);
         }

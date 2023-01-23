@@ -8,6 +8,9 @@
 
 #include "World/Object/Derived/Tank.h"
 #include "BattleCity/Game/World/Object/Components/Movable.h"
+#include "World/Object/Components/Collider.h"
+#include "World/Object/Components/Fireable.h"
+#include "World/Object/Components/TextureComponent.h"
 
 namespace BattleCity::Game
 {
@@ -53,6 +56,7 @@ namespace BattleCity::Game
 		{
 			Update();
 			ResolveCollisions();
+			mMap.DestroyObjects();
 
 			mNextGameTick += SKIP_TICKS;
 			mIterations++;
@@ -83,10 +87,18 @@ namespace BattleCity::Game
 	{
 		for (auto& obj : mMap.GetLayer(World::Object::Layer::Front))
 		{
-			if(obj->HasComponent<World::Object::Component::Movable>())
+			if(!obj->HasComponent<World::Object::Component::Movable>()) continue;
+			auto collider = obj->GetComponent<World::Object::Component::Collider>();
+			if(!collider) continue;
+
+			Vector2Int penetration;
+			if(collider->GetRectangle().OutOfInner(mMap.GetBounds(), penetration))
 			{
-				mColliders.push_back(obj.get());
+				obj->OnOutOfBounds(penetration);
+				continue;
 			}
+
+			mColliders.push_back(obj.get());
 		}
 	}
 
@@ -97,8 +109,8 @@ namespace BattleCity::Game
 			auto collisions = mQuadTree.GetPossibleCollisions(obj);
 			for (auto other : collisions)
 			{
-				auto penetration = obj->GetBounds().GetPenetration(other->GetBounds());
-				obj->ResolveCollisions(other, penetration);
+				obj->ResolveCollisions(*other);
+				other->ResolveCollisions(*obj);
 			}
 		}
 
@@ -109,17 +121,17 @@ namespace BattleCity::Game
 	{
 		for (auto& obj : mMap.GetLayer(World::Object::Layer::Back))
 		{
-			obj->Draw(interpolation);
+			obj->GetComponent<World::Object::Component::Texture>()->Draw(interpolation);
 		}
 
 		for (auto& obj : mMap.GetLayer(World::Object::Layer::Front))
 		{
-			obj->Draw(interpolation);
+			obj->GetComponent<World::Object::Component::Texture>()->Draw(interpolation);
 		}
 
 		for (auto& obj : mMap.GetLayer(World::Object::Layer::UI))
 		{
-			obj->Draw(interpolation);
+			obj->GetComponent<World::Object::Component::Texture>()->Draw(interpolation);
 		}
 	}
 
@@ -135,13 +147,15 @@ namespace BattleCity::Game
 	void Game::onKeyPressed(BattleCity::Framework::FRKey k)
 	{
 		static auto player = mPlayer.lock();
-		player->SetDirection(static_cast<World::Object::MovementDirection>(k));
+		auto movable = player->GetComponent<World::Object::Component::Movable>();
+		movable->SetMovementDirection(static_cast<World::Object::Direction>(k));
 	}
 
 	void Game::onKeyReleased(BattleCity::Framework::FRKey k)
 	{
 		static auto player = mPlayer.lock();
-		player->StopMovement();
+		auto movable = player->GetComponent<World::Object::Component::Movable>();
+		movable->StopMovement();
 	}
 
 	void Game::onMouseMove(int x, int y, int xrelative, int yrelative)
@@ -158,10 +172,18 @@ namespace BattleCity::Game
 		case BattleCity::Framework::FRMouseButton::LEFT:
 			if(!isReleased)
 			{
-				player->Fire();
+				auto fireable = player->GetComponent<World::Object::Component::Fireable>();
+				fireable->Fire();
 			}
 			break;
-		case BattleCity::Framework::FRMouseButton::MIDDLE: break;
+		case BattleCity::Framework::FRMouseButton::MIDDLE:
+			if (!isReleased)
+			{
+				const_cast<World::Object::Container&>(mMap.GetLayer(World::Object::Layer::UI)).Clear();
+				auto& rect = player->GetComponent<World::Object::Component::Collider>()->GetRectangle();
+				mDebug.DrawRectangle(rect);
+			}
+			break;
 		case BattleCity::Framework::FRMouseButton::RIGHT:
 			if (!isReleased)
 			{

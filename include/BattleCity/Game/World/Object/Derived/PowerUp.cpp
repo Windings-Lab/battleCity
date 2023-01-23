@@ -2,14 +2,14 @@
 
 #include "PowerUp.h"
 
+#include "BattleCity/Game/World/Object/Components/Collider.h"
+#include "BattleCity/Game/World/Object/Components/TextureComponent.h"
+
 namespace BattleCity::Game::World::Object
 {
-    void PowerUp::Update()
-    {
-    }
-
-    void PowerUp::InitializeComponents()
-    {
-        Object::InitializeComponents();
-    }
+	PowerUp::PowerUp() : Object()
+	{
+		AddComponent<Component::Texture>(*this);
+		AddComponent<Component::Collider>(*this);
+	}
 }

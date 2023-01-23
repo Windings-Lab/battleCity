@@ -4,34 +4,27 @@
 
 namespace BattleCity::Game::World::Object
 {
-	class Bullet;
-
 	namespace Component
 	{
-		class Movable;
 		class Fireable;
+		class Movable;
+		class Collider;
+		class Texture;
 	}
 
 	class Tank : public Object
 	{
 	public:
-		using Object::Object;
-
-		void InitializeComponents() override;
+		Tank();
 
 		void Update() override;
-		void ResolveCollisions(const Object*, const Vector2Int&) override;
+		void ResolveCollisions(Object&) override;
+		void OnOutOfBounds(const Vector2Int&) override;
 
-		void Fire();
-
-		void SetBullet(const std::function<std::shared_ptr<Bullet>(Position)>&);
-
-		void SetSpeed(Speed) noexcept;
-		void SetDirection(MovementDirection) noexcept;
-		void StopMovement() noexcept;
-
-	private:
-		Component::Fireable* mFireable;
+	protected:
+		Component::Texture* mTexture;
+		Component::Collider* mCollider;
 		Component::Movable* mMovable;
+		Component::Fireable* mFireable;
 	};
 }

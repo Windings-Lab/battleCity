@@ -27,6 +27,7 @@
     <ClCompile Include="include\BattleCity\Engine\Texture\TextureGroupLibrary.cpp" />
     <ClCompile Include="include\BattleCity\Engine\Texture\TexturePathLibrary.cpp" />
     <ClCompile Include="include\BattleCity\Engine\Texture\TextureStorage.cpp" />
+    <ClCompile Include="include\BattleCity\Engine\Timer.cpp" />
     <ClCompile Include="include\BattleCity\Framework\Screen.cpp" />
     <ClCompile Include="include\BattleCity\Framework\Texture.cpp" />
     <ClCompile Include="include\BattleCity\Game\Game.cpp" />
@@ -36,6 +37,7 @@
     <ClCompile Include="include\BattleCity\Game\World\Object\Components\Fireable.cpp" />
     <ClCompile Include="include\BattleCity\Game\World\Object\Components\Health.cpp" />
     <ClCompile Include="include\BattleCity\Game\World\Object\Components\Movable.cpp" />
+    <ClCompile Include="include\BattleCity\Game\World\Object\Components\TextureComponent.cpp" />
     <ClCompile Include="include\BattleCity\Game\World\Object\Containers\ObjectContainer.cpp" />
     <ClCompile Include="include\BattleCity\Game\World\Object\Containers\QuadTree.cpp" />
     <ClCompile Include="include\BattleCity\Game\World\Object\Derived\Bullet.cpp" />
@@ -44,8 +46,9 @@
     <ClCompile Include="include\BattleCity\Game\World\Object\Derived\Pixel.cpp" />
     <ClCompile Include="include\BattleCity\Game\World\Object\Derived\PowerUp.cpp" />
     <ClCompile Include="include\BattleCity\Game\World\Object\Derived\Tank.cpp" />
+    <ClCompile Include="include\BattleCity\Game\World\Object\Derived\Tank\TankNPC.cpp" />
     <ClCompile Include="include\BattleCity\Game\World\Object\Derived\Wall.cpp" />
-    <ClCompile Include="include\BattleCity\Game\World\Object\Derived\WorldBoundaries.cpp" />
+    <ClCompile Include="include\BattleCity\Game\World\Object\Derived\Background.cpp" />
     <ClCompile Include="include\BattleCity\Game\World\Object\Factory\ObjectFactory.cpp" />
     <ClCompile Include="include\BattleCity\Game\World\Object\Factory\ObjectFactoryStandart.cpp" />
     <ClCompile Include="include\BattleCity\Game\World\Object\Object.cpp" />
@@ -72,6 +75,7 @@
     <ClInclude Include="include\BattleCity\Engine\Texture\TextureGroupLibrary.h" />
     <ClInclude Include="include\BattleCity\Engine\Texture\TexturePathLibrary.h" />
     <ClInclude Include="include\BattleCity\Engine\Texture\TextureStorage.h" />
+    <ClInclude Include="include\BattleCity\Engine\Timer.h" />
     <ClInclude Include="include\BattleCity\Enums.h" />
     <ClInclude Include="include\BattleCity\Framework\Framework.h" />
     <ClInclude Include="include\BattleCity\Framework\Screen.h" />
@@ -83,6 +87,7 @@
     <ClInclude Include="include\BattleCity\Game\World\Object\Components\Fireable.h" />
     <ClInclude Include="include\BattleCity\Game\World\Object\Components\Health.h" />
     <ClInclude Include="include\BattleCity\Game\World\Object\Components\Movable.h" />
+    <ClInclude Include="include\BattleCity\Game\World\Object\Components\TextureComponent.h" />
     <ClInclude Include="include\BattleCity\Game\World\Object\Containers\ObjectContainer.h" />
     <ClInclude Include="include\BattleCity\Game\World\Object\Containers\QuadTree.h" />
     <ClInclude Include="include\BattleCity\Game\World\Object\Derived\Bullet.h" />
@@ -91,8 +96,9 @@
     <ClInclude Include="include\BattleCity\Game\World\Object\Derived\Pixel.h" />
     <ClInclude Include="include\BattleCity\Game\World\Object\Derived\PowerUp.h" />
     <ClInclude Include="include\BattleCity\Game\World\Object\Derived\Tank.h" />
+    <ClInclude Include="include\BattleCity\Game\World\Object\Derived\Tank\TankNPC.h" />
     <ClInclude Include="include\BattleCity\Game\World\Object\Derived\Wall.h" />
-    <ClInclude Include="include\BattleCity\Game\World\Object\Derived\WorldBoundaries.h" />
+    <ClInclude Include="include\BattleCity\Game\World\Object\Derived\Background.h" />
     <ClInclude Include="include\BattleCity\Game\World\Object\Factory\ObjectFactory.h" />
     <ClInclude Include="include\BattleCity\Game\World\Object\Factory\ObjectFactoryStandart.h" />
     <ClInclude Include="include\BattleCity\Game\World\Object\Object.h" />
