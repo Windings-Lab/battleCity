@@ -4,6 +4,11 @@
 #include "BattleCity/Game/World/Object/Containers/ObjectContainer.h"
 #include "Object/Factory/ObjectFactoryStandart.h"
 
+namespace BattleCity::Framework
+{
+	class Screen;
+}
+
 namespace BattleCity::Engine::Physics
 {
 	class Rectangle;
@@ -29,7 +34,7 @@ namespace BattleCity::Game::World
 	class Map final
 	{
 	public:
-		explicit Map(const Engine::Texture::GroupLibrary&, Object::QuadTree&);
+		explicit Map(const NSFramework::Screen&, const Engine::Texture::GroupLibrary&, Object::QuadTree&);
 
 		DISALLOW_COPY_MOVE(Map)
 
@@ -40,7 +45,10 @@ namespace BattleCity::Game::World
 
 		// Returns object that can be controlled with user Input
 		void CreateMap(const Level&);
-		const Engine::Physics::Rectangle& GetBounds() const noexcept;
+		const Engine::Physics::Rectangle& GetWorldBounds() const noexcept;
+		const Engine::Physics::Rectangle& GetScreenBounds() const noexcept;
+
+		std::shared_ptr<Object::Object> CreateObjectBy(Object::Type);
 
 		std::shared_ptr<Object::Object> GetObjectBy(Object::ID, Object::Layer) const;
 		void InsertObject(std::shared_ptr<Object::Object>, Object::Layer = Object::Layer::Middle);
@@ -52,7 +60,8 @@ namespace BattleCity::Game::World
 		Object::Container& GetDebugLayer();
 
 	private:
-		Bounds mBounds;
+		Bounds mScreenBounds;
+		Bounds mWorldBounds;
 		std::weak_ptr<Object::Object> mPlayer;
 		std::weak_ptr<Object::Object> mPhoenix;
 

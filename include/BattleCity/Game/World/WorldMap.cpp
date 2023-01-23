@@ -3,6 +3,8 @@
 
 #include "WorldLevel.h"
 
+#include "BattleCity/Framework/Screen.h"
+
 #include "BattleCity/Game/World/Object/Object.h"
 #include "Object/Containers/QuadTree.h"
 
@@ -10,11 +12,14 @@
 #include "Object/Derived/Tank/Tank.h"
 // ReSharper disable once CppUnusedIncludeDirective
 #include "Object/Derived/Phoenix.h"
+// ReSharper disable once CppUnusedIncludeDirective
+#include "Object/Derived/GameOver.h"
 
 namespace BattleCity::Game::World
 {
-	Map::Map(const Engine::Texture::GroupLibrary& textureGroups, Object::QuadTree& quadTree)
-		: mBounds(quadTree.GetBorder())
+	Map::Map(const NSFramework::Screen& screen, const Engine::Texture::GroupLibrary& textureGroups, Object::QuadTree& quadTree)
+		: mScreenBounds(0, 0, screen.GetWidth(), screen.GetHeight())
+		, mWorldBounds(quadTree.GetBorder())
 		, mObjectFactory(*this, quadTree, textureGroups)
 		, mContainers(static_cast<int>(Object::Layer::Count))
 		, mDeleters(static_cast<int>(Object::Layer::Count))
@@ -42,13 +47,13 @@ namespace BattleCity::Game::World
 			mDeleterDuplicateCheck.clear();
 		}
 
-		mObjectFactory.CreateWorldBoundaries(mBounds.GetPosition());
+		mObjectFactory.CreateBackgrounds(mWorldBounds.GetPosition());
 
 		const auto& mapColumn = level;
-		int nextPosY = mBounds.GetPosition().Y;
+		int nextPosY = mWorldBounds.GetPosition().Y;
 		for (const auto& mapRow : mapColumn)
 		{
-			int nextPosX = mBounds.GetPosition().X;
+			int nextPosX = mWorldBounds.GetPosition().X;
 			for (const auto& objectType : mapRow)
 			{
 				const Vector2Int position(nextPosX, nextPosY);
@@ -91,9 +96,35 @@ namespace BattleCity::Game::World
 #endif
 	}
 
-	const Engine::Physics::Rectangle& Map::GetBounds() const noexcept
+	const Engine::Physics::Rectangle& Map::GetWorldBounds() const noexcept
 	{
-		return mBounds;
+		return mWorldBounds;
+	}
+
+	const Engine::Physics::Rectangle& Map::GetScreenBounds() const noexcept
+	{
+		return mScreenBounds;
+	}
+
+	std::shared_ptr<Object::Object> Map::CreateObjectBy(Object::Type type)
+	{
+		switch (type)
+		{
+		case Object::Type::None:
+		case Object::Type::TankPlayer:
+		case Object::Type::TankNPC:
+		case Object::Type::Bullet:
+		case Object::Type::Wall:
+		case Object::Type::Phoenix:
+		case Object::Type::Explosion:
+		case Object::Type::PowerUp:
+		case Object::Type::WorldBoundaries:
+			return nullptr;
+		case Object::Type::GameOver:
+			return mObjectFactory.CreateGameOver();
+		case Object::Type::Error:
+		default: return nullptr;
+		}
 	}
 
 	std::shared_ptr<Object::Object> Map::GetObjectBy(Object::ID id, Object::Layer layer) const
