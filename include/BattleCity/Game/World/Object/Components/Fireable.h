@@ -38,7 +38,6 @@ namespace BattleCity::Game::World::Object::Component
 
 	private:
 		Position GetShootPosition(Direction);
-		void EraseDestroyedBullets();
 
 	private:
 		std::function<std::shared_ptr<Bullet>(Position, Direction)> mSpawnBullet;

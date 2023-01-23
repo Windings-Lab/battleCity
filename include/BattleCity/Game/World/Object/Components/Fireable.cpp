@@ -10,7 +10,11 @@ namespace BattleCity::Game::World::Object::Component
 {
 	void Fireable::Fire()
 	{
-		EraseDestroyedBullets();
+		mBullets.erase(std::remove_if(mBullets.begin(), mBullets.end(),
+			[](const auto& weak)
+			{
+				return weak.expired();
+			}), mBullets.end());
 		if(mBullets.size() >= mMaxBulletCount) return;
 
 		auto shootDirection = mObject.GetComponent<Movable>()->GetMovementDirection();
@@ -53,24 +57,5 @@ namespace BattleCity::Game::World::Object::Component
 		}
 
 		return shootPosition;
-	}
-	void Fireable::EraseDestroyedBullets()
-	{
-		if(mBullets.empty()) return;
-
-		std::vector<int> indexes;
-		for(int i = 0; i < mBullets.size(); i++)
-		{
-			if(mBullets[i].expired())
-			{
-				indexes.push_back(i);
-			}
-		}
-
-		for (auto index : indexes)
-		{
-			mBullets[index] = std::move(mBullets.back());
-			mBullets.pop_back();
-		}
 	}
 }
