@@ -101,6 +101,7 @@ namespace BattleCity::Game
 			mPhoenix.reset();
 
 			mGameOver = true;
+			mMap.CreateObjectBy(World::Object::Type::GameOver);
 			mTimeToClose.StartOnce(6, [this]
 				{
 					this->mClose = true;
