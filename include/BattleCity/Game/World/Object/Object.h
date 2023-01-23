@@ -53,7 +53,9 @@ namespace BattleCity::Game::World::Object
 		virtual void ResolveCollisions(Object&) = 0;
 		virtual void OnOutOfBounds(const Vector2Int&);
 
-		void SetDestroyMarker(std::function<void(ID, Layer)>);
+		void SetDestroyMarkerFunc(std::function<void(ID, Layer)>);
+
+		bool IsDestroyed() const noexcept;
 		void MarkForDestroy();
 		virtual void OnDestroy();
 
@@ -66,12 +68,16 @@ namespace BattleCity::Game::World::Object
 		void SetY(Y) noexcept;
 		const Position& GetPosition() const noexcept;
 
+	protected:
+		bool mDestroyed;
+
 	private:
 		ID mID;
 		Layer mLayer;
 		Position mPosition;
 
 		ComponentFactory mComponentFactory;
+
 		std::function<void(ID, Layer)> mMarkForDestroy;
 	};
 }

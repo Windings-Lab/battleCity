@@ -7,6 +7,7 @@ namespace BattleCity::Game::World::Object
 {
     Object::Object()
 		: Subject()
+		, mDestroyed(false)
 		, mLayer(Layer::Middle)
     {
         static int idCounter = 0;
@@ -28,10 +29,16 @@ namespace BattleCity::Game::World::Object
         NotifyObjectUpdated(*this);
     }
 
-    void Object::SetDestroyMarker(std::function<void(ID, Layer)> destoyer)
+    void Object::SetDestroyMarkerFunc(std::function<void(ID, Layer)> destoyer)
     {
         mMarkForDestroy = std::move(destoyer);
     }
+
+    bool Object::IsDestroyed() const noexcept
+    {
+        return mDestroyed;
+    }
+
     void Object::MarkForDestroy()
     {
         mMarkForDestroy(mID, mLayer);
