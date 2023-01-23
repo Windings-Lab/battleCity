@@ -17,7 +17,7 @@ namespace BattleCity::Engine
 		bool mEnded = true;
 		std::function<void()> mOnTimerEnd;
 		
-		Duration mDuration;
+		Duration mDuration = std::chrono::seconds(0);
 		std::chrono::high_resolution_clock::time_point mStartingTime;
 	};
 }
