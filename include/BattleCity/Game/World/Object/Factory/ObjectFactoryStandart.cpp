@@ -81,6 +81,12 @@ namespace BattleCity::Game::World::Object::Factory
 		auto collider = object->GetComponent<Component::Collider>();
 		collider->UpdateCollider();
 		collider->SetSolid(true);
+
+		auto explodable = object->GetComponent<Component::Explodable>();
+		explodable->SetExplosionSpawner(*this);
+
+		object->GetComponent<Component::Health>()->SetHealth(1);
+
 		object->RegisterObserver(&mQuadTreeObserver);
 		mInsertToQuadTree(object.get());
 
