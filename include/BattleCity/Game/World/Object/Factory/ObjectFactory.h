@@ -58,7 +58,7 @@ namespace BattleCity::Game::World::Object::Factory
 
 	protected:
 		std::function<void(std::shared_ptr<Object>, Layer)> mInsertToMap;
-		std::function<void(ID)> mObjectDestroyer;
+		std::function<void(ID, Layer)> mObjectDestroyer;
 		const Engine::Physics::Rectangle& mBounds;
 
 		std::function<void(const Object*)> mInsertToQuadTree;
