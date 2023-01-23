@@ -56,9 +56,6 @@
     <ClCompile Include="include\BattleCity\Game\World\Object\Derived\PowerUp.cpp">
       <Filter>BattleCity\Game\World\Object\Derived</Filter>
     </ClCompile>
-    <ClCompile Include="include\BattleCity\Game\World\Object\Derived\Tank.cpp">
-      <Filter>BattleCity\Game\World\Object\Derived</Filter>
-    </ClCompile>
     <ClCompile Include="include\BattleCity\Game\World\Object\Derived\Wall.cpp">
       <Filter>BattleCity\Game\World\Object\Derived</Filter>
     </ClCompile>
@@ -127,6 +124,9 @@
     </ClCompile>
     <ClCompile Include="include\BattleCity\Game\World\Object\Components\Explodable.cpp">
       <Filter>BattleCity\Game\World\Object\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="include\BattleCity\Game\World\Object\Derived\Tank.cpp">
+      <Filter>BattleCity\Game\World\Object\Derived\Tank</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -208,9 +208,6 @@
     <ClInclude Include="include\BattleCity\Game\World\Object\Derived\PowerUp.h">
       <Filter>BattleCity\Game\World\Object\Derived</Filter>
     </ClInclude>
-    <ClInclude Include="include\BattleCity\Game\World\Object\Derived\Tank.h">
-      <Filter>BattleCity\Game\World\Object\Derived</Filter>
-    </ClInclude>
     <ClInclude Include="include\BattleCity\Game\World\Object\Derived\Wall.h">
       <Filter>BattleCity\Game\World\Object\Derived</Filter>
     </ClInclude>
@@ -282,6 +279,9 @@
     </ClInclude>
     <ClInclude Include="include\BattleCity\Game\World\Object\Components\Explodable.h">
       <Filter>BattleCity\Game\World\Object\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Game\World\Object\Derived\Tank.h">
+      <Filter>BattleCity\Game\World\Object\Derived\Tank</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
