@@ -46,6 +46,7 @@ namespace BattleCity::Game::World::Object
     void Object::OnDestroy()
     {
         NotifyObjectDeleted(*this);
+        mDestroyed = true;
     }
 
     void Object::SetLayer(Layer layer)
