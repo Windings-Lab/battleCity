@@ -4,6 +4,14 @@
 
 namespace BattleCity::Game::World::Object
 {
+	namespace Component
+	{
+		class Collider;
+		class Explodable;
+		class Texture;
+		class Health;
+	}
+
 	class Phoenix : public Object
 	{
     public:
@@ -12,6 +20,12 @@ namespace BattleCity::Game::World::Object
 		void Update() override;
 		void ResolveCollisions(Object&) override;
 		void OnOutOfBounds(const Vector2Int&) override;
+
+	private:
+		Component::Collider* mCollider;
+		Component::Health* mHealth;
+		Component::Texture* mTexture;
+		Component::Explodable* mExplodable;
 	};
 }
 
