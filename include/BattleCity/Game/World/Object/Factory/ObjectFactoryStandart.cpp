@@ -49,12 +49,12 @@ namespace BattleCity::Game::World::Object::Factory
 		{
 		case Type::TankNPC:
 			textureComponent->SetTextureGroup(&mTextureGroups.GetGroupBy(Framework::TextureName::TankNPC));
-			movable->SetSpeed(5);
+			movable->SetSpeed(3);
 			movable->SetMovementDirection(Direction::Down);
 			break;
 		case Type::TankPlayer:
 			textureComponent->SetTextureGroup(&mTextureGroups.GetGroupBy(Framework::TextureName::TankPlayer));
-			movable->SetSpeed(5);
+			movable->SetSpeed(3);
 			movable->SetMovementDirection(Direction::Up);
 			movable->StopMovement();
 			break;
@@ -89,7 +89,7 @@ namespace BattleCity::Game::World::Object::Factory
 		textureComponent->SetTextureGroup(&mTextureGroups.GetGroupBy(Framework::TextureName::Bullet));
 
 		auto movable = object->GetComponent<Component::Movable>();
-		movable->SetSpeed(1);
+		movable->SetSpeed(5);
 		movable->SetMovementDirection(direction);
 
 		object->SetPosition(position);
