@@ -221,13 +221,13 @@ namespace BattleCity::Game
 				mMap.GetDebugLayer().Clear();
 				auto& rect = mPlayer->GetComponent<World::Object::Component::Collider>()->GetRectangle();
 				mDebug.DrawRectangle(rect);
+				mDebug.DrawWholeNode(mQuadTree);
 			}
 			break;
 		case BattleCity::Framework::FRMouseButton::RIGHT:
 			if (!isReleased)
 			{
 				mMap.GetDebugLayer().Clear();
-				mDebug.DrawWholeNode(mQuadTree);
 			}
 			break;
 		case BattleCity::Framework::FRMouseButton::COUNT: break;
