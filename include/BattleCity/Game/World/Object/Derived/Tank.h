@@ -21,7 +21,7 @@ namespace BattleCity::Game::World::Object
 		void ResolveCollisions(Object&) override;
 		void OnOutOfBounds(const Vector2Int&) override;
 
-	private:
+	protected:
 		Component::Texture* mTexture;
 		Component::Collider* mCollider;
 		Component::Movable* mMovable;

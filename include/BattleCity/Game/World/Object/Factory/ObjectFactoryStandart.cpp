@@ -17,6 +17,7 @@
 #include "BattleCity/Game/World/Object/Components/Health.h"
 #include "BattleCity/Game/World/Object/Components/Movable.h"
 #include "BattleCity/Game/World/Object/Components/TextureComponent.h"
+#include "BattleCity/Game/World/Object/Derived/Tank/TankNPC.h"
 
 namespace BattleCity::Game::World::Object::Factory
 {
@@ -38,21 +39,25 @@ namespace BattleCity::Game::World::Object::Factory
 
 	std::shared_ptr<Tank> Standart::CreateTank(Type tankType, Position position)
 	{
-		auto object = std::make_shared<Tank>();
-		object->SetDestroyMarker(mObjectDestroyer);
+		std::shared_ptr<Tank> object;
 
-		auto textureComponent = object->GetComponent<Component::Texture>();
-
-		auto movable = object->GetComponent<Component::Movable>();
+		Component::Texture* textureComponent;
+		Component::Movable* movable;
 
 		switch (tankType)
 		{
 		case Type::TankNPC:
+			object = std::make_shared<TankNPC>();
+			movable = object->GetComponent<Component::Movable>();
+			textureComponent = object->GetComponent<Component::Texture>();
 			textureComponent->SetTextureGroup(&mTextureGroups.GetGroupBy(Framework::TextureName::TankNPC));
 			movable->SetSpeed(3);
 			movable->SetMovementDirection(Direction::Down);
 			break;
 		case Type::TankPlayer:
+			object = std::make_shared<Tank>();
+			movable = object->GetComponent<Component::Movable>();
+			textureComponent = object->GetComponent<Component::Texture>();
 			textureComponent->SetTextureGroup(&mTextureGroups.GetGroupBy(Framework::TextureName::TankPlayer));
 			movable->SetSpeed(3);
 			movable->SetMovementDirection(Direction::Up);
@@ -62,6 +67,7 @@ namespace BattleCity::Game::World::Object::Factory
 			std::cerr << "Incorrect tank type\n";
 			return nullptr;
 		}
+		object->SetDestroyMarker(mObjectDestroyer);
 
 		object->SetPosition(position);
 
