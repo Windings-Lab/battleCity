@@ -9,6 +9,16 @@ namespace BattleCity::Engine
 	{
 	}
 
+	void Timer::StartOnce(Seconds seconds, std::function<void()> onTimerEnd)
+	{
+		if(mStarted) return;
+
+		mDuration = std::chrono::seconds(seconds);
+		mOnTimerEnd = std::move(onTimerEnd);
+		mStartingTime = std::chrono::high_resolution_clock::now();
+		mEnded = false;
+		mStarted = true;
+	}
 	void Timer::Start(Seconds seconds, std::function<void()> onTimerEnd)
 	{
 		mDuration = std::chrono::seconds(seconds);
@@ -64,6 +74,7 @@ namespace BattleCity::Engine
 		{
 			mOnTimerEnd();
 			mEnded = true;
+			mStarted = false;
 		}
 	}
 }

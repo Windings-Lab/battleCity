@@ -11,7 +11,8 @@ namespace BattleCity::Engine
 		Timer();
 		virtual ~Timer() = default;
 
-		void Start(Seconds, std::function<void()>);
+		virtual void StartOnce(Seconds, std::function<void()>);
+		virtual void Start(Seconds, std::function<void()>);
 		void StartRandom(Seconds, Seconds, std::function<void()>);
 
 		virtual void Repeat();
@@ -20,6 +21,7 @@ namespace BattleCity::Engine
 		virtual void Update();
 
 	protected:
+		bool mStarted = false;
 		bool mEnded = true;
 		std::function<void()> mOnTimerEnd;
 

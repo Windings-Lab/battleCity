@@ -12,7 +12,8 @@ namespace BattleCity::Engine
 	public:
 		TimerMilliseconds();
 
-		void Start(Milliseconds, std::function<void()>);
+		void StartOnce(Seconds, std::function<void()>) override;
+		void Start(Milliseconds, std::function<void()>) override;
 		void Update() override;
 		void Repeat() override;
 
