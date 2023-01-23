@@ -12,6 +12,8 @@ namespace BattleCity::Engine
 		virtual ~Timer() = default;
 
 		virtual void StartOnce(Seconds, std::function<void()>);
+		virtual void StartOnceRandom(Seconds, Seconds, std::function<void()>);
+
 		virtual void Start(Seconds, std::function<void()>);
 		void StartRandom(Seconds, Seconds, std::function<void()>);
 

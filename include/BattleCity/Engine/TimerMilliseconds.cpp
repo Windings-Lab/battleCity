@@ -9,6 +9,20 @@ namespace BattleCity::Engine
 	{
 	}
 
+	void TimerMilliseconds::StartOnceRandom(Milliseconds min, Milliseconds max, std::function<void()> onTimerEnd)
+	{
+		if (mStarted) return;
+
+		std::uniform_int_distribution dist(min, max);
+		int randomSeconds = dist(mRandomGenerator);
+
+		mDuration = std::chrono::milliseconds(randomSeconds);
+		mOnTimerEnd = std::move(onTimerEnd);
+		mStartingTime = std::chrono::high_resolution_clock::now();
+		mEnded = false;
+		mStarted = true;
+	}
+
 	void TimerMilliseconds::StartOnce(Milliseconds mili, std::function<void()> onTimerEnd)
 	{
 		if (mStarted) return;
