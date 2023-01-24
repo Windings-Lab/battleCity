@@ -81,6 +81,11 @@ namespace BattleCity::Game::World
 						mPhoenix = mObjectFactory.CreatePhoenix(position);
 					}
 					break;
+				case Object::Type::TankSpawnPointer:
+					{
+						auto object = mObjectFactory.CreateTankSpawnPointer(position);
+					}
+					break;
 				default: 
 					break;
 				}

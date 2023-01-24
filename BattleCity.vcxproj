@@ -51,6 +51,7 @@
     <ClCompile Include="include\BattleCity\Game\World\Object\Derived\PowerUp.cpp" />
     <ClCompile Include="include\BattleCity\Game\World\Object\Derived\Tank\Tank.cpp" />
     <ClCompile Include="include\BattleCity\Game\World\Object\Derived\Tank\TankNPC.cpp" />
+    <ClCompile Include="include\BattleCity\Game\World\Object\Derived\Tank\TankSpawnerPoint.cpp" />
     <ClCompile Include="include\BattleCity\Game\World\Object\Derived\Wall.cpp" />
     <ClCompile Include="include\BattleCity\Game\World\Object\Derived\Background.cpp" />
     <ClCompile Include="include\BattleCity\Game\World\Object\Factory\ObjectFactory.cpp" />
@@ -105,6 +106,7 @@
     <ClInclude Include="include\BattleCity\Game\World\Object\Derived\PowerUp.h" />
     <ClInclude Include="include\BattleCity\Game\World\Object\Derived\Tank\Tank.h" />
     <ClInclude Include="include\BattleCity\Game\World\Object\Derived\Tank\TankNPC.h" />
+    <ClInclude Include="include\BattleCity\Game\World\Object\Derived\Tank\TankSpawnerPoint.h" />
     <ClInclude Include="include\BattleCity\Game\World\Object\Derived\Wall.h" />
     <ClInclude Include="include\BattleCity\Game\World\Object\Derived\Background.h" />
     <ClInclude Include="include\BattleCity\Game\World\Object\Factory\ObjectFactory.h" />

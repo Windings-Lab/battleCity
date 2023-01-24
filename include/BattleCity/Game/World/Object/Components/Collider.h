@@ -15,6 +15,7 @@ namespace BattleCity::Game::World::Object::Component
 		const Engine::Physics::Rectangle& GetOldRectangle() const noexcept;
 
 		void UpdateCollider() noexcept;
+		void UpdateColliderNonTexture(const Size&) noexcept;
 		void UpdateOldCollider() noexcept;
 
 		void SetPosition(const Position&) noexcept;
@@ -26,10 +27,14 @@ namespace BattleCity::Game::World::Object::Component
 		bool IsSolid() const noexcept;
 		void SetSolid(bool) noexcept;
 
+		void SetColliderType(Type) noexcept;
+		Type GetColliderType() const noexcept;
+
 	private:
 		Engine::Physics::Rectangle mRectangle;
 		Engine::Physics::Rectangle mOldRectangle;
 
 		bool mSolid;
+		Type mColliderType;
 	};
 }

@@ -28,6 +28,11 @@ namespace BattleCity::Game::World::Object
 		// Empty
 	}
 
+	void GameOver::OnOutOfBounds(const Vector2Int&)
+	{
+		// Empty
+	}
+
 	void GameOver::SetEndAnimationPosition(Position position) noexcept
 	{
 		mEndAnimationPosition = position;

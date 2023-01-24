@@ -25,6 +25,9 @@ namespace BattleCity::Game::World::Object
     }
     void Bullet::ResolveCollisions(Object& object)
     {
+		auto otherCollider = object.GetComponent<Component::Collider>();
+		if(!otherCollider->IsSolid() || otherCollider->GetColliderType() == mIgnoreColliderType) return;
+
 		auto healthComponent = object.GetComponent<Component::Health>();
 		if(healthComponent)
 		{
@@ -43,6 +46,11 @@ namespace BattleCity::Game::World::Object
     {
 		mExplodable->Explode(ExplosionType::Small);
 	    Object::OnDestroy();
+    }
+
+    void Bullet::SetIgnoreColliderType(Type type) noexcept
+    {
+		mIgnoreColliderType = type;
     }
 
     void Bullet::AdjustPositionToDirection()

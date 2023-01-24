@@ -121,12 +121,28 @@ namespace BattleCity::Game
 	{
 		for (auto& obj : mMap.GetLayer(World::Object::Layer::Middle))
 		{
-			if(!obj->HasComponent<World::Object::Component::Movable>()) continue;
+			if (!obj->HasComponent<World::Object::Component::Movable>()) continue;
+
 			auto collider = obj->GetComponent<World::Object::Component::Collider>();
-			if(!collider) continue;
+			if (!collider) continue;
 
 			Vector2Int penetration;
-			if(collider->GetRectangle().OutOfInner(mMap.GetWorldBounds(), penetration))
+			if (collider->GetRectangle().OutOfInner(mMap.GetWorldBounds(), penetration))
+			{
+				obj->OnOutOfBounds(penetration);
+				continue;
+			}
+
+			mColliders.push_back(obj.get());
+		}
+
+		for (auto& obj : mMap.GetLayer(World::Object::Layer::Front))
+		{
+			auto collider = obj->GetComponent<World::Object::Component::Collider>();
+			if (!collider) continue;
+
+			Vector2Int penetration;
+			if (collider->GetRectangle().OutOfInner(mMap.GetWorldBounds(), penetration))
 			{
 				obj->OnOutOfBounds(penetration);
 				continue;
@@ -145,6 +161,10 @@ namespace BattleCity::Game
 			{
 				obj->ResolveCollisions(*other);
 				other->ResolveCollisions(*obj);
+			}
+			if(collisions.empty())
+			{
+				obj->NoCollision();
 			}
 		}
 
@@ -165,7 +185,11 @@ namespace BattleCity::Game
 
 		for (auto& obj : mMap.GetLayer(World::Object::Layer::Front))
 		{
-			obj->GetComponent<World::Object::Component::Texture>()->Draw(interpolation);
+			auto textureComponent = obj->GetComponent<World::Object::Component::Texture>();
+			if (textureComponent)
+			{
+				textureComponent->Draw(interpolation);
+			}
 		}
 
 		for (auto& obj : mMap.GetLayer(World::Object::Layer::UI))

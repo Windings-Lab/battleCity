@@ -24,6 +24,11 @@ namespace BattleCity::Game::World::Object
     {
         NotifyObjectUpdated(*this);
     }
+
+    void Object::NoCollision()
+    {
+    }
+
     void Object::OnOutOfBounds(const Vector2Int&)
     {
         NotifyObjectUpdated(*this);

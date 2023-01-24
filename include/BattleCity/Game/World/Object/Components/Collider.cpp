@@ -13,6 +13,13 @@ namespace BattleCity::Game::World::Object::Component
 		mRectangle.SetPosition(mObject.GetPosition());
 		mRectangle.SetSize(textureSize);
 	}
+
+	void Collider::UpdateColliderNonTexture(const Size& size) noexcept
+	{
+		mRectangle.SetPosition(mObject.GetPosition());
+		mRectangle.SetSize(size);
+	}
+
 	void Collider::UpdateOldCollider() noexcept
 	{
 		mOldRectangle = mRectangle;
@@ -53,6 +60,16 @@ namespace BattleCity::Game::World::Object::Component
 	void Collider::SetSolid(bool solid) noexcept
 	{
 		mSolid = solid;
+	}
+
+	void Collider::SetColliderType(Type type) noexcept
+	{
+		mColliderType = type;
+	}
+
+	Type Collider::GetColliderType() const noexcept
+	{
+		return mColliderType;
 	}
 }
 

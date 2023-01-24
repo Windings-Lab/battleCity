@@ -24,7 +24,9 @@ namespace BattleCity::Game::World::Object
         if (!mMovable->IsMoving()) return;
         auto otherCollider = other.GetComponent<Component::Collider>();
         auto otherMovable = other.GetComponent<Component::Movable>();
-        if (!otherCollider->IsSolid() || !otherMovable) return;
+        if (!otherCollider->IsSolid() 
+        || !otherMovable 
+        || otherCollider->GetColliderType() == mCollider->GetColliderType()) return;
 
         auto& rectangle = mCollider->GetRectangle();
         auto& otherRectangle = otherCollider->GetRectangle();

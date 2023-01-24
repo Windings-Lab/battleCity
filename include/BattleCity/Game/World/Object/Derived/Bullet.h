@@ -22,6 +22,8 @@ namespace BattleCity::Game::World::Object
         void OnOutOfBounds(const Vector2Int&) override;
         void OnDestroy() override;
 
+        void SetIgnoreColliderType(Type) noexcept;
+
         void AdjustPositionToDirection();
 
 	private:
@@ -29,5 +31,7 @@ namespace BattleCity::Game::World::Object
         Component::Movable* mMovable;
         Component::Collider* mCollider;
         Component::Explodable* mExplodable;
+
+        Type mIgnoreColliderType;
     };
 }

@@ -11,6 +11,7 @@
 #include "BattleCity/Game/World/Object/Derived/PowerUp.h"
 #include "BattleCity/Game/World/Object/Derived/Tank/Tank.h"
 #include "BattleCity/Game/World/Object/Derived/Tank/TankNPC.h"
+#include "BattleCity/Game/World/Object/Derived/Tank/TankSpawnerPoint.h"
 #include "BattleCity/Game/World/Object/Derived/Wall.h"
 #include "BattleCity/Game/World/Object/Derived/GameOver.h"
 
@@ -56,6 +57,7 @@ namespace BattleCity::Game::World::Object::Factory
 		auto collider = object->GetComponent<Component::Collider>();
 		collider->UpdateCollider();
 		collider->SetSolid(false);
+		collider->SetColliderType(Type::GameOver);
 
 		mInsertToMap(object, Layer::UI);
 
@@ -68,12 +70,16 @@ namespace BattleCity::Game::World::Object::Factory
 
 		Component::Texture* textureComponent;
 		Component::Movable* movable;
+		Component::Collider* collider;
 
 		switch (tankType)
 		{
 		case Type::TankNPC:
 			object = std::make_shared<TankNPC>();
 			movable = object->GetComponent<Component::Movable>();
+			collider = object->GetComponent<Component::Collider>();
+			collider->SetColliderType(Type::TankNPC);
+
 			textureComponent = object->GetComponent<Component::Texture>();
 			textureComponent->SetTextureGroup(&mTextureGroups.GetGroupBy(Framework::TextureName::TankNPC));
 			movable->SetSpeed(3);
@@ -82,6 +88,9 @@ namespace BattleCity::Game::World::Object::Factory
 		case Type::TankPlayer:
 			object = std::make_shared<Tank>();
 			movable = object->GetComponent<Component::Movable>();
+			collider = object->GetComponent<Component::Collider>();
+			collider->SetColliderType(Type::TankPlayer);
+
 			textureComponent = object->GetComponent<Component::Texture>();
 			textureComponent->SetTextureGroup(&mTextureGroups.GetGroupBy(Framework::TextureName::TankPlayer));
 			movable->SetSpeed(3);
@@ -102,7 +111,6 @@ namespace BattleCity::Game::World::Object::Factory
 
 		mInsertToMap(object, Layer::Middle);
 
-		auto collider = object->GetComponent<Component::Collider>();
 		collider->UpdateCollider();
 		collider->SetSolid(true);
 
@@ -117,9 +125,10 @@ namespace BattleCity::Game::World::Object::Factory
 		return object;
 	}
 
-	std::shared_ptr<Bullet> Standart::CreateBullet(Position position, Direction direction)
+	std::shared_ptr<Bullet> Standart::CreateBullet(Position position, Direction direction, Type ignoreColliderType)
 	{
 		auto object = std::make_shared<Bullet>();
+		object->SetIgnoreColliderType(ignoreColliderType);
 		object->SetDestroyMarkerFunc(mObjectDestroyer);
 
 		auto textureComponent = object->GetComponent<Component::Texture>();
@@ -135,6 +144,7 @@ namespace BattleCity::Game::World::Object::Factory
 		auto collider = object->GetComponent<Component::Collider>();
 		collider->UpdateCollider();
 		collider->SetSolid(false);
+		collider->SetColliderType(Type::Bullet);
 		if (collider->GetRectangle().OutOfInner(mWorldBounds))
 		{
 			object.reset();
@@ -187,6 +197,8 @@ namespace BattleCity::Game::World::Object::Factory
 		auto collider = object->GetComponent<Component::Collider>();
 		collider->UpdateCollider();
 		collider->SetSolid(true);
+		collider->SetColliderType(Type::Wall);
+
 		object->RegisterObserver(&mQuadTreeObserver);
 		mInsertToQuadTree(object.get());
 
@@ -214,6 +226,8 @@ namespace BattleCity::Game::World::Object::Factory
 		auto collider = object->GetComponent<Component::Collider>();
 		collider->UpdateCollider();
 		collider->SetSolid(true);
+		collider->SetColliderType(Type::Phoenix);
+
 		object->RegisterObserver(&mQuadTreeObserver);
 		mInsertToQuadTree(object.get());
 
@@ -248,6 +262,34 @@ namespace BattleCity::Game::World::Object::Factory
 		object->SetPosition(position - textureHalfSize);
 
 		mInsertToMap(object, Layer::Front);
+
+		return object;
+	}
+
+	std::shared_ptr<TankSpawnerPoint> Standart::CreateTankSpawnPointer(Position position)
+	{
+		auto object = std::make_shared<TankSpawnerPoint>();
+
+		object->SetTankCreator(*this);
+
+		object->SetPosition(position);
+
+		auto collider = object->GetComponent<Component::Collider>();
+
+		auto& tankGroup = mTextureGroups.GetGroupBy(Framework::TextureName::TankNPC);
+		auto tankTexture = tankGroup.GetTextureBy(Framework::TextureType::Up);
+
+		Size tankTextureSize;
+		tankTexture->GetSize(tankTextureSize.X, tankTextureSize.Y);
+
+		collider->UpdateColliderNonTexture(tankTextureSize);
+		collider->SetSolid(false);
+		collider->SetColliderType(Type::TankSpawnPointer);
+
+		mInsertToMap(object, Layer::Front);
+
+		object->RegisterObserver(&mQuadTreeObserver);
+		mInsertToQuadTree(object.get());
 
 		return object;
 	}

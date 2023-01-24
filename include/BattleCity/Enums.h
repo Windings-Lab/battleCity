@@ -41,8 +41,9 @@ namespace BattleCity
 			Phoenix,
 			Explosion,
 			PowerUp,
+			TankSpawnPointer,
 			WorldBoundaries,
-			GameOver
+			GameOver,
 		};
 
 		enum class Direction

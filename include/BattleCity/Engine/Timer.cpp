@@ -11,17 +11,16 @@ namespace BattleCity::Engine
 
 	void Timer::StartOnce(Seconds seconds, std::function<void()> onTimerEnd)
 	{
-		if(mStarted) return;
+		if(!mEnded) return;
 
 		mDuration = std::chrono::seconds(seconds);
 		mOnTimerEnd = std::move(onTimerEnd);
 		mStartingTime = std::chrono::high_resolution_clock::now();
 		mEnded = false;
-		mStarted = true;
 	}
 	void Timer::StartOnceRandom(Seconds min, Seconds max, std::function<void()> onTimerEnd)
 	{
-		if (mStarted) return;
+		if (!mEnded) return;
 
 		std::uniform_int_distribution dist(min, max);
 		int randomSeconds = dist(mRandomGenerator);
@@ -30,7 +29,6 @@ namespace BattleCity::Engine
 		mOnTimerEnd = std::move(onTimerEnd);
 		mStartingTime = std::chrono::high_resolution_clock::now();
 		mEnded = false;
-		mStarted = true;
 	}
 
 	void Timer::Start(Seconds seconds, std::function<void()> onTimerEnd)
@@ -88,7 +86,6 @@ namespace BattleCity::Engine
 		{
 			mOnTimerEnd();
 			mEnded = true;
-			mStarted = false;
 		}
 	}
 }

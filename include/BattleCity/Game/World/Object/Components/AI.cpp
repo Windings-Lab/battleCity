@@ -43,7 +43,7 @@ namespace BattleCity::Game::World::Object::Component
 
 	void AI::OnWallCollision()
 	{
-		mOnWallCollision.StartOnceRandom(0, 2, [this]
+		mOnWallCollision.StartOnceRandom(0, 1, [this]
 		{
 			RandomChangeDirection();
 		});

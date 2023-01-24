@@ -19,9 +19,10 @@ namespace BattleCity::Game::World
 
 namespace BattleCity::Game::World::Object
 {
-	class GameOver;
 	class Observer;
 	class QuadTree;
+
+	class Object;
 
 	class Explosion;
 	class Phoenix;
@@ -30,7 +31,8 @@ namespace BattleCity::Game::World::Object
 	class Bullet;
 	class Tank;
 	class Background;
-	class Object;
+	class TankSpawnerPoint;
+	class GameOver;
 }
 
 namespace BattleCity::Game::World::Object::Factory
@@ -49,7 +51,7 @@ namespace BattleCity::Game::World::Object::Factory
 
 		virtual std::shared_ptr<Tank> CreateTank(Type tankType, Position = { 0, 0 }) = 0;
 
-		virtual std::shared_ptr<Bullet> CreateBullet(Position, Direction) = 0;
+		virtual std::shared_ptr<Bullet> CreateBullet(Position, Direction, Type) = 0;
 
 		virtual std::shared_ptr<PowerUp> CreatePowerUp(Position = { 0, 0 }) = 0;
 
@@ -58,6 +60,8 @@ namespace BattleCity::Game::World::Object::Factory
 		virtual std::shared_ptr<Phoenix> CreatePhoenix(Position = { 0, 0 }) = 0;
 
 		virtual std::shared_ptr<Explosion> CreateExplosion(ExplosionType, Position = { 0, 0 }) = 0;
+
+		virtual std::shared_ptr<TankSpawnerPoint> CreateTankSpawnPointer(Position = { 0, 0 }) = 0;
 
 	protected:
 		std::function<void(std::shared_ptr<Object>, Layer)> mInsertToMap;

@@ -131,6 +131,9 @@
     <ClCompile Include="include\BattleCity\Game\World\Object\Derived\GameOver.cpp">
       <Filter>BattleCity\Game\World\Object\Derived</Filter>
     </ClCompile>
+    <ClCompile Include="include\BattleCity\Game\World\Object\Derived\Tank\TankSpawnerPoint.cpp">
+      <Filter>BattleCity\Game\World\Object\Derived\Tank</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pcheader\PCHeader.h">
@@ -288,6 +291,9 @@
     </ClInclude>
     <ClInclude Include="include\BattleCity\Game\World\Object\Derived\GameOver.h">
       <Filter>BattleCity\Game\World\Object\Derived</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Game\World\Object\Derived\Tank\TankSpawnerPoint.h">
+      <Filter>BattleCity\Game\World\Object\Derived\Tank</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -23,7 +23,6 @@ namespace BattleCity::Engine
 		virtual void Update();
 
 	protected:
-		bool mStarted = false;
 		bool mEnded = true;
 		std::function<void()> mOnTimerEnd;
 

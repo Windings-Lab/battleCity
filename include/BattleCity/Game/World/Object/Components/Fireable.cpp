@@ -1,6 +1,7 @@
 #include "PCHeader.h"
 #include "Fireable.h"
 
+#include "Collider.h"
 #include "Movable.h"
 #include "TextureComponent.h"
 #include "BattleCity/Game/World/Object/Derived/Bullet.h"
@@ -8,6 +9,12 @@
 
 namespace BattleCity::Game::World::Object::Component
 {
+	Fireable::Fireable(Object& obj)
+		: Component(obj)
+		, mCollider(mObject.GetComponent<Collider>())
+	{
+	}
+
 	void Fireable::Fire()
 	{
 		mBullets.erase(std::remove_if(mBullets.begin(), mBullets.end(),
@@ -18,11 +25,11 @@ namespace BattleCity::Game::World::Object::Component
 		if(mBullets.size() >= mMaxBulletCount) return;
 
 		auto shootDirection = mObject.GetComponent<Movable>()->GetMovementDirection();
-		mBullets.emplace_back(mSpawnBullet(GetShootPosition(shootDirection), shootDirection));
+		mBullets.emplace_back(mSpawnBullet(GetShootPosition(shootDirection), shootDirection, mCollider->GetColliderType()));
 	}
 	void Fireable::SetBullet(Factory::Standart& objectFactory)
 	{
-		mSpawnBullet = [&objectFactory](Position position, Direction direction) { return objectFactory.CreateBullet(position, direction); };
+		mSpawnBullet = [&objectFactory](Position position, Direction direction, Type type) { return objectFactory.CreateBullet(position, direction, type); };
 	}
 
 	void Fireable::SetBulletCount(int count) noexcept

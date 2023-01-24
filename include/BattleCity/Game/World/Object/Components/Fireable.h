@@ -22,10 +22,12 @@ namespace BattleCity::Game::World::Object
 
 namespace BattleCity::Game::World::Object::Component
 {
+	class Collider;
+
 	class Fireable : public Component
 	{
 	public:
-		using Component::Component;
+		explicit Fireable(Object&);
 
 		ALLOW_COPY_MOVE_DEFAULT(Fireable)
 
@@ -40,7 +42,9 @@ namespace BattleCity::Game::World::Object::Component
 		Position GetShootPosition(Direction);
 
 	private:
-		std::function<std::shared_ptr<Bullet>(Position, Direction)> mSpawnBullet;
+		Collider* mCollider;
+
+		std::function<std::shared_ptr<Bullet>(Position, Direction, Type)> mSpawnBullet;
 		std::vector<std::weak_ptr<Bullet>> mBullets;
 
 		int mMaxBulletCount;

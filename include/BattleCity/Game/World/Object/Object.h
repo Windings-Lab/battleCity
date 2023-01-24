@@ -51,7 +51,8 @@ namespace BattleCity::Game::World::Object
 	public:
 		virtual void Update() = 0;
 		virtual void ResolveCollisions(Object&) = 0;
-		virtual void OnOutOfBounds(const Vector2Int&);
+		virtual void NoCollision();
+		virtual void OnOutOfBounds(const Vector2Int&) = 0;
 
 		void SetDestroyMarkerFunc(std::function<void(ID, Layer)>);
 
