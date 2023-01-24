@@ -15,6 +15,7 @@ namespace BattleCity::Game::World::Object
 		, mMovable(AddComponent<Component::Movable>(*this))
 		, mCollider(AddComponent<Component::Collider>(*this))
 		, mExplodable(AddComponent<Component::Explodable>(*this))
+		, mIgnoreColliderType(Type::Error)
 	{}
 
     void Bullet::Update()
@@ -26,7 +27,9 @@ namespace BattleCity::Game::World::Object
     void Bullet::ResolveCollisions(Object& object)
     {
 		auto otherCollider = object.GetComponent<Component::Collider>();
-		if(!otherCollider->IsSolid() || otherCollider->GetColliderType() == mIgnoreColliderType) return;
+		if((!otherCollider->IsSolid() 
+		|| otherCollider->GetColliderType() == mIgnoreColliderType)
+		&& otherCollider->GetColliderType() != mCollider->GetColliderType()) return;
 
 		auto healthComponent = object.GetComponent<Component::Health>();
 		if(healthComponent)
