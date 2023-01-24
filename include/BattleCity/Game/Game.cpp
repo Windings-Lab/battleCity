@@ -42,7 +42,7 @@ namespace BattleCity::Game
 		mTextureStorage.CreateTextures(mPathLibrary);
 		mTextureStorage.CreateGroups(mTextureStorage.GetTextures());
 
-		const World::Level level = World::Level::CreateLevel(R"(.\data\Maps\level1.txt)");
+		const World::Level level = World::Level::CreateLevel(R"(.\data\Maps\Map.txt)");
 		mMap.CreateMap(level);
 		mPlayer = mMap.GetPlayer();
 		mPhoenix = mMap.GetPhoenix();

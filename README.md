@@ -1,17 +1,20 @@
 # How to Build
 Source code of my first game written on C++
 
-NewVersion is currently in development
-
 How to create map
 
 ```
+45x32 Dimension in txt file
+
 1 = Void
 2 = Player
 5 = Wall
 6 = Phoenix
-7 = PowerUps spawn positions
+9 = Tank Spawn Point
+
+Look at the example in data/Maps/Map.txt
 ```
+Name created txt file as Map.txt and move it in data/Maps/ folder
 
 How to build:
 
@@ -26,4 +29,12 @@ Post-Build Event:
 call robocopy "$(SolutionDir)data" "$(TargetDir)data" /MIR
 call robocopy "$(SolutionDir)lib" "$(TargetDir)." /XF FrameworkRelease_x64.lib
 if %errorlevel% LEQ 3 exit 0
+```
+
+You can run game using command lines:
+
+```
+Usage: BattleCity.exe
+Options:
+	-w, -window 800x600	Specify window size
 ```
