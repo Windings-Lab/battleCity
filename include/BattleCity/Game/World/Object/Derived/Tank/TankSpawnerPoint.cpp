@@ -61,7 +61,9 @@ namespace BattleCity::Game::World::Object
 
 		if (mSpawnBlocked)
 		{
+#ifdef _DEBUG
 			std::cout << "Spawner blocked" << std::endl;
+#endif
 			return;
 		}
 
