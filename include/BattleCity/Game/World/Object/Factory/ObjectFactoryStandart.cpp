@@ -142,6 +142,7 @@ namespace BattleCity::Game::World::Object::Factory
 		object->AdjustPositionToDirection();
 
 		auto collider = object->GetComponent<Component::Collider>();
+		collider->MultiplyColliderSizeBy(3);
 		collider->UpdateCollider();
 		collider->SetSolid(false);
 		collider->SetColliderType(Type::Bullet);

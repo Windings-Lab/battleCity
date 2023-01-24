@@ -30,11 +30,15 @@ namespace BattleCity::Game::World::Object::Component
 		void SetColliderType(Type) noexcept;
 		Type GetColliderType() const noexcept;
 
+		void MultiplyColliderSizeBy(int) noexcept;
+
 	private:
 		Engine::Physics::Rectangle mRectangle;
 		Engine::Physics::Rectangle mOldRectangle;
 
 		bool mSolid;
 		Type mColliderType;
+
+		int mIncreasedSize = 1;
 	};
 }

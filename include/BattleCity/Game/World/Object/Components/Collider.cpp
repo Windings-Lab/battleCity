@@ -8,7 +8,8 @@ namespace BattleCity::Game::World::Object::Component
 {
 	void Collider::UpdateCollider() noexcept
 	{
-		auto& textureSize = mObject.GetComponent<Texture>()->GetSize();
+		auto textureSize
+			= mObject.GetComponent<Texture>()->GetSize() * mIncreasedSize;
 
 		mRectangle.SetPosition(mObject.GetPosition());
 		mRectangle.SetSize(textureSize);
@@ -70,6 +71,10 @@ namespace BattleCity::Game::World::Object::Component
 	Type Collider::GetColliderType() const noexcept
 	{
 		return mColliderType;
+	}
+	void Collider::MultiplyColliderSizeBy(int num) noexcept
+	{
+		mIncreasedSize = num;
 	}
 }
 
