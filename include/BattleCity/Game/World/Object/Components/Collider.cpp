@@ -8,22 +8,19 @@ namespace BattleCity::Game::World::Object::Component
 {
 	void Collider::UpdateCollider() noexcept
 	{
-		auto textureSize
-			= mObject.GetComponent<Texture>()->GetSize() * mIncreasedSize;
+		UpdateOldCollider();
 
-		mRectangle.SetPosition(mObject.GetPosition());
-		mRectangle.SetSize(textureSize);
+		mRectangle.SetPosition(mObject.GetPosition() - mOffset);
+		mRectangle.SetSize(mSize);
 	}
-
-	void Collider::UpdateColliderNonTexture(const Size& size) noexcept
-	{
-		mRectangle.SetPosition(mObject.GetPosition());
-		mRectangle.SetSize(size);
-	}
-
 	void Collider::UpdateOldCollider() noexcept
 	{
 		mOldRectangle = mRectangle;
+	}
+
+	void Collider::SetOffset(const Position& pos) noexcept
+	{
+		mOffset = pos;
 	}
 
 	const Engine::Physics::Rectangle& Collider::GetRectangle() const noexcept
@@ -35,6 +32,15 @@ namespace BattleCity::Game::World::Object::Component
 		return mOldRectangle;
 	}
 
+	void Collider::SetSize(const Size& size) noexcept
+	{
+		mSize = size;
+	}
+	const Size& Collider::GetSize() const noexcept
+	{
+		return mRectangle.GetSize();
+	}
+
 	void Collider::SetPosition(const Position& pos) noexcept
 	{
 		mRectangle.SetPosition(pos);
@@ -42,15 +48,6 @@ namespace BattleCity::Game::World::Object::Component
 	const Position& Collider::GetPosition() const noexcept
 	{
 		return mRectangle.GetPosition();
-	}
-
-	void Collider::SetSize(const Size& size) noexcept
-	{
-		mRectangle.SetSize(size);
-	}
-	const Size& Collider::GetSize() const noexcept
-	{
-		return mRectangle.GetSize();
 	}
 
 	bool Collider::IsSolid() const noexcept
@@ -71,10 +68,6 @@ namespace BattleCity::Game::World::Object::Component
 	Type Collider::GetColliderType() const noexcept
 	{
 		return mColliderType;
-	}
-	void Collider::MultiplyColliderSizeBy(int num) noexcept
-	{
-		mIncreasedSize = num;
 	}
 }
 
