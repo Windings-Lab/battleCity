@@ -39,7 +39,7 @@ namespace BattleCity::Game::World::Object::Component
 
 	Position Fireable::GetShootPosition(Direction direction)
 	{
-		auto& objectSize = mObject.GetComponent<Texture>()->GetSize();
+		auto& objectSize = mCollider->GetSize();
 		const auto objectHalfSize = objectSize / 2;
 		auto shootPosition = mObject.GetPosition();
 

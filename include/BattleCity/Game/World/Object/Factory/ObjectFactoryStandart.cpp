@@ -49,12 +49,14 @@ namespace BattleCity::Game::World::Object::Factory
 		textureComponent->ChangeTextureTo(Framework::TextureType::Basic);
 
 		auto screenCenter = mScreenBounds.GetCenter();
-		object->SetPosition({ screenCenter.X - textureComponent->GetSize().X / 2
-								, mScreenBounds.GetHeight() });
+
 
 		object->SetEndAnimationPosition(screenCenter);
 
 		auto collider = object->GetComponent<Component::Collider>();
+		collider->SetSize(textureComponent->GetSize());
+		object->SetPosition({ screenCenter.X - textureComponent->GetSize().X / 2
+						, mScreenBounds.GetHeight() });
 		collider->UpdateCollider();
 		collider->SetSolid(false);
 		collider->SetColliderType(Type::GameOver);
@@ -103,14 +105,14 @@ namespace BattleCity::Game::World::Object::Factory
 		}
 		object->SetDestroyMarkerFunc(mObjectDestroyer);
 
-		object->SetPosition(position);
-
 		auto fireable = object->GetComponent<Component::Fireable>();
 		fireable->SetBullet(*this);
 		fireable->SetBulletCount(1);
 
 		mInsertToMap(object, Layer::Middle);
 
+		object->SetPosition(position);
+		collider->SetSize(textureComponent->GetSize());
 		collider->UpdateCollider();
 		collider->SetSolid(true);
 
@@ -138,13 +140,27 @@ namespace BattleCity::Game::World::Object::Factory
 		movable->SetSpeed(5);
 		movable->SetMovementDirection(direction);
 
+		auto collider = object->GetComponent<Component::Collider>();
 		object->SetPosition(position);
 
-		auto collider = object->GetComponent<Component::Collider>();
+		auto size = textureComponent->GetSize();
+
+		switch (direction)
+		{
+		case Direction::Right:
+		case Direction::Left:
+			size.Y *= 5;
+			break;
+		case Direction::Down:
+		case Direction::Up:
+			size.X *= 5;
+			break;
+		}
+
+		collider->SetSize(size);
 
 		collider->UpdateCollider();
 		object->AdjustPositionToDirection();
-
 		collider->SetSolid(false);
 		collider->SetColliderType(Type::Bullet);
 		if (collider->GetRectangle().OutOfInner(mWorldBounds))
@@ -189,7 +205,6 @@ namespace BattleCity::Game::World::Object::Factory
 		auto textureComponent = object->GetComponent<Component::Texture>();
 		textureComponent->SetTextureGroup(&mTextureGroups.GetGroupBy(Framework::TextureName::Wall));
 
-		object->SetPosition(position);
 		textureComponent->ChangeTextureTo(Framework::TextureType::Basic);
 
 		object->GetComponent<Component::Health>()->SetHealth(1);
@@ -197,6 +212,8 @@ namespace BattleCity::Game::World::Object::Factory
 		mInsertToMap(object, Layer::Middle);
 
 		auto collider = object->GetComponent<Component::Collider>();
+		collider->SetSize(textureComponent->GetSize());
+		object->SetPosition(position);
 		collider->UpdateCollider();
 		collider->SetSolid(true);
 		collider->SetColliderType(Type::Wall);
@@ -215,7 +232,6 @@ namespace BattleCity::Game::World::Object::Factory
 		auto textureComponent = object->GetComponent<Component::Texture>();
 		textureComponent->SetTextureGroup(&mTextureGroups.GetGroupBy(Framework::TextureName::Phoenix));
 
-		object->SetPosition(position);
 		textureComponent->ChangeTextureTo(Framework::TextureType::Phoenix);
 
 		auto explodable = object->GetComponent<Component::Explodable>();
@@ -226,6 +242,8 @@ namespace BattleCity::Game::World::Object::Factory
 		mInsertToMap(object, Layer::Middle);
 
 		auto collider = object->GetComponent<Component::Collider>();
+		collider->SetSize(textureComponent->GetSize());
+		object->SetPosition(position);
 		collider->UpdateCollider();
 		collider->SetSolid(true);
 		collider->SetColliderType(Type::Phoenix);
@@ -274,17 +292,16 @@ namespace BattleCity::Game::World::Object::Factory
 
 		object->SetTankCreator(*this);
 
-		object->SetPosition(position);
-
-		auto collider = object->GetComponent<Component::Collider>();
-
 		auto& tankGroup = mTextureGroups.GetGroupBy(Framework::TextureName::TankNPC);
 		auto tankTexture = tankGroup.GetTextureBy(Framework::TextureType::Up);
 
 		Size tankTextureSize;
 		tankTexture->GetSize(tankTextureSize.X, tankTextureSize.Y);
 
-		collider->UpdateColliderNonTexture(tankTextureSize);
+		auto collider = object->GetComponent<Component::Collider>();
+		collider->SetSize(tankTextureSize);
+		object->SetPosition(position);
+		collider->UpdateCollider();
 		collider->SetSolid(false);
 		collider->SetColliderType(Type::TankSpawnPointer);
 

@@ -84,9 +84,9 @@ namespace BattleCity::Game::World::Object
 		int GetSize() const noexcept;
 
 	private:
-		void PushChildNodesToStack(std::vector<Node*>& nodeStack, const Object* object);
-		void PushChildNodesToStack(std::vector<const Node*>& nodeStack, const Object* object) const;
-		void PushChildNodesToStack(std::vector<const Node*>& nodeStack) const;
+		void PushChildNodesToStack(std::vector<Node*>&, const Engine::Physics::Rectangle&);
+		void PushChildNodesToStack(std::vector<const Node*>&, const Engine::Physics::Rectangle&) const;
+		void PushChildNodesToStack(std::vector<const Node*>&) const;
 
 	private:
 		Border mBorder;

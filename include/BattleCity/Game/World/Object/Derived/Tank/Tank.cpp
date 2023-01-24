@@ -29,8 +29,6 @@ namespace BattleCity::Game::World::Object
             return;
         }
 
-        mCollider->UpdateOldCollider();
-
         SetPosition(GetPosition() + mMovable->GetVelocity());
 
         Object::Update();

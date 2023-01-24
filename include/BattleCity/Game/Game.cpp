@@ -255,9 +255,8 @@ namespace BattleCity::Game
 			if (!isReleased)
 			{
 				mMap.GetDebugLayer().Clear();
-				auto& rect = mPlayer->GetComponent<World::Object::Component::Collider>()->GetRectangle();
-				mDebug.DrawRectangle(rect);
-				mDebug.DrawWholeNode(mQuadTree);
+				mDebug.DrawNodeObjects(mQuadTree);
+				//mDebug.DrawWholeNode(mQuadTree);
 			}
 			break;
 		case BattleCity::Framework::FRMouseButton::RIGHT:

@@ -10,10 +10,13 @@ namespace BattleCity::Framework
 
 namespace BattleCity::Game::World::Object::Component
 {
+	class Collider;
+	class Texture;
+
 	class Movable : public Component
 	{
 	public:
-		using Component::Component;
+		explicit Movable(Object&);
 		~Movable() override = default;
 
 		void SetSpeed(Speed) noexcept;
@@ -26,6 +29,9 @@ namespace BattleCity::Game::World::Object::Component
 		bool IsMoving() const noexcept;
 
 	private:
+		Collider* mCollider;
+		Texture* mTexture;
+
 		Speed mSpeed = 0;
 		Velocity mVelocity;
 		bool mMoving;
