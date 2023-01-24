@@ -25,8 +25,7 @@ namespace BattleCity::Game::World::Object
         auto otherCollider = other.GetComponent<Component::Collider>();
         auto otherMovable = other.GetComponent<Component::Movable>();
         if (!otherCollider->IsSolid() 
-        || !otherMovable 
-        || otherCollider->GetColliderType() == mCollider->GetColliderType()) return;
+        || !otherMovable) return;
 
         auto& rectangle = mCollider->GetRectangle();
         auto& otherRectangle = otherCollider->GetRectangle();
@@ -44,6 +43,7 @@ namespace BattleCity::Game::World::Object
             if (oldRectangle.GetX() + oldRectangle.GetWidth() <= oldOtherRectangle.GetX())
             {
                 SetX(rectangle.GetPosition().X + penetration.X);
+                mAi->RandomChangeDirection();
             }
             break;
         case Direction::Left:
@@ -51,6 +51,7 @@ namespace BattleCity::Game::World::Object
             if (oldRectangle.GetX() >= oldOtherRectangle.GetX() + oldOtherRectangle.GetWidth())
             {
                 SetX(rectangle.GetPosition().X + penetration.X);
+                mAi->RandomChangeDirection();
             }
             break;
         case Direction::Down:
@@ -58,6 +59,7 @@ namespace BattleCity::Game::World::Object
             if (oldRectangle.GetY() + oldRectangle.GetHeight() <= oldOtherRectangle.GetY())
             {
                 SetY(rectangle.GetPosition().Y + penetration.Y);
+                mAi->RandomChangeDirection();
             }
             break;
         case Direction::Up:
@@ -65,6 +67,7 @@ namespace BattleCity::Game::World::Object
             if (oldRectangle.GetY() >= oldOtherRectangle.GetY() + oldOtherRectangle.GetHeight())
             {
                 SetY(rectangle.GetPosition().Y + penetration.Y);
+                mAi->RandomChangeDirection();
             }
             break;
         }
