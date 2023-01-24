@@ -23,7 +23,7 @@ namespace BattleCity::Game::World::Object
         f.mObjects.swap(s.mObjects);
         swap(f.mSize, s.mSize);
     }
-    void QuadTree::OnObjectDelete(const Object& object)
+    void QuadTree::OnObjectDelete(Object& object)
     {
         Remove(&object);
     }

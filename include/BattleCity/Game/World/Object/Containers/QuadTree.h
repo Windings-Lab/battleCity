@@ -45,7 +45,7 @@ namespace BattleCity::Game::World::Object
 
 		~QuadTree() override;
 
-		void OnObjectDelete(const Object&) override;
+		void OnObjectDelete(Object&) override;
 		void OnObjectUpdate(Object&) override;
 
 		const Border& GetBorder() const noexcept;

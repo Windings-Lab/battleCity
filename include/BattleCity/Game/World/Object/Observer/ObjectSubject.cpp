@@ -25,7 +25,7 @@ namespace BattleCity::Game::World::Object
 			observer->OnObjectUpdate(obj);
 		}
 	}
-	void Subject::NotifyObjectDeleted(const Object& obj) const
+	void Subject::NotifyObjectDeleted(Object& obj) const
 	{
 		for (const auto& observer : mObservers)
 		{

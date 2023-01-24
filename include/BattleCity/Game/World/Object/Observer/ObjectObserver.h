@@ -12,6 +12,6 @@ namespace BattleCity::Game::World::Object
 		virtual ~Observer() = 0;
 
 		virtual void OnObjectUpdate(Object&) = 0;
-		virtual void OnObjectDelete(const Object&) = 0;
+		virtual void OnObjectDelete(Object&) = 0;
 	};
 }

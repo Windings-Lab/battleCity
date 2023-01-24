@@ -20,7 +20,7 @@ namespace BattleCity::Game::World::Object
 
 	protected:
         void NotifyObjectUpdated(Object&) const;
-		void NotifyObjectDeleted(const Object&) const;
+		void NotifyObjectDeleted(Object&) const;
 
     private:
         std::vector<Observer*> mObservers;
