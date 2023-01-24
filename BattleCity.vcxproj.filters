@@ -1,207 +1,352 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="Header Files\Utility">
-      <UniqueIdentifier>{48467620-58fe-41c1-ab49-a8e81af7904b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Object">
-      <UniqueIdentifier>{a4281b0f-e02a-4208-b211-0697391218cc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Utility">
-      <UniqueIdentifier>{c55b46c8-52c3-4f9e-b883-7f217537b230}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Object">
-      <UniqueIdentifier>{0b910c8d-afe1-4cbe-945b-c605b9e18afe}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Manager">
-      <UniqueIdentifier>{7b33a953-a4e9-4e86-b278-436ab7e8793d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Event">
-      <UniqueIdentifier>{9bba60d2-3add-4d81-8391-c22cb2b13176}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Manager">
-      <UniqueIdentifier>{4a118dbb-d1f6-4da8-ad64-2154685a55ed}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Event">
-      <UniqueIdentifier>{8578686e-55f6-4f03-ab9e-fdaeb99cda45}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\BattleCity Objects">
-      <UniqueIdentifier>{30df22b6-d6fe-41a8-86d3-c3d2625a34ea}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\BattleCity Objects">
-      <UniqueIdentifier>{add61852-e9fd-4215-b961-49865336e084}</UniqueIdentifier>
-    </Filter>
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="pcheader\PCHeader.cpp">
+      <Filter>PCHeaders</Filter>
+    </ClCompile>
+    <ClCompile Include="include\BattleCity\Utility\Vector2Int.cpp">
+      <Filter>BattleCity\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="include\BattleCity\Game\World\WorldLevel.cpp">
+      <Filter>BattleCity\Game\World</Filter>
+    </ClCompile>
+    <ClCompile Include="include\BattleCity\Game\World\WorldMap.cpp">
+      <Filter>BattleCity\Game\World</Filter>
+    </ClCompile>
+    <ClCompile Include="include\BattleCity\Engine\Texture\TextureGroup.cpp">
+      <Filter>BattleCity\Engine\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="include\BattleCity\Engine\Texture\TexturePathLibrary.cpp">
+      <Filter>BattleCity\Engine\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="include\BattleCity\Framework\Screen.cpp">
+      <Filter>BattleCity\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="include\BattleCity\Framework\Texture.cpp">
+      <Filter>BattleCity\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="include\BattleCity\Game\Game.cpp">
+      <Filter>BattleCity\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="include\BattleCity\Engine\Texture\TextureContainer.cpp">
+      <Filter>BattleCity\Engine\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="include\BattleCity\Engine\Texture\BCTexture.cpp">
+      <Filter>BattleCity\Engine\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="include\BattleCity\Engine\Texture\TextureGroupLibrary.cpp">
+      <Filter>BattleCity\Engine\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="include\BattleCity\Game\World\Object\Factory\ObjectFactory.cpp">
+      <Filter>BattleCity\Game\World\Object\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="include\BattleCity\Game\World\Object\Factory\ObjectFactoryStandart.cpp">
+      <Filter>BattleCity\Game\World\Object\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="include\BattleCity\Game\World\Object\Derived\Bullet.cpp">
+      <Filter>BattleCity\Game\World\Object\Derived</Filter>
+    </ClCompile>
+    <ClCompile Include="include\BattleCity\Game\World\Object\Derived\Explosion.cpp">
+      <Filter>BattleCity\Game\World\Object\Derived</Filter>
+    </ClCompile>
+    <ClCompile Include="include\BattleCity\Game\World\Object\Derived\Phoenix.cpp">
+      <Filter>BattleCity\Game\World\Object\Derived</Filter>
+    </ClCompile>
+    <ClCompile Include="include\BattleCity\Game\World\Object\Derived\PowerUp.cpp">
+      <Filter>BattleCity\Game\World\Object\Derived</Filter>
+    </ClCompile>
+    <ClCompile Include="include\BattleCity\Game\World\Object\Derived\Wall.cpp">
+      <Filter>BattleCity\Game\World\Object\Derived</Filter>
+    </ClCompile>
+    <ClCompile Include="include\BattleCity\Game\World\Object\Derived\Background.cpp">
+      <Filter>BattleCity\Game\World\Object\Derived</Filter>
+    </ClCompile>
+    <ClCompile Include="include\BattleCity\Game\World\Object\Components\Fireable.cpp">
+      <Filter>BattleCity\Game\World\Object\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="include\BattleCity\Game\World\Object\Components\Health.cpp">
+      <Filter>BattleCity\Game\World\Object\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="include\BattleCity\Game\World\Object\Components\Movable.cpp">
+      <Filter>BattleCity\Game\World\Object\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="include\BattleCity\Game\World\Object\Object.cpp">
+      <Filter>BattleCity\Game\World\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="include\BattleCity\Engine\Physics\Rectangle.cpp">
+      <Filter>BattleCity\Engine\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="include\BattleCity\Engine\Texture\TextureStorage.cpp">
+      <Filter>BattleCity\Engine\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="include\BattleCity\Game\World\Object\Components\Component.cpp">
+      <Filter>BattleCity\Game\World\Object\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="include\BattleCity\Game\World\Object\Components\Collider.cpp">
+      <Filter>BattleCity\Game\World\Object\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="include\BattleCity\Game\World\Object\Derived\Pixel.cpp">
+      <Filter>BattleCity\Game\World\Object\Derived</Filter>
+    </ClCompile>
+    <ClCompile Include="include\BattleCity\Engine\DebugDrawer.cpp">
+      <Filter>BattleCity\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="include\BattleCity\Game\World\Object\Observer\ObjectObserver.cpp">
+      <Filter>BattleCity\Game\World\Object\Observer</Filter>
+    </ClCompile>
+    <ClCompile Include="include\BattleCity\Game\World\Object\Observer\ObjectSubject.cpp">
+      <Filter>BattleCity\Game\World\Object\Observer</Filter>
+    </ClCompile>
+    <ClCompile Include="include\BattleCity\Game\World\Object\Containers\ObjectContainer.cpp">
+      <Filter>BattleCity\Game\World\Object\Containers</Filter>
+    </ClCompile>
+    <ClCompile Include="include\BattleCity\Game\World\Object\Containers\QuadTree.cpp">
+      <Filter>BattleCity\Game\World\Object\Containers</Filter>
+    </ClCompile>
+    <ClCompile Include="include\BattleCity\Game\World\Object\Components\TextureComponent.cpp">
+      <Filter>BattleCity\Game\World\Object\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="include\BattleCity\Game\World\Object\Components\ComponentFactory.cpp">
+      <Filter>BattleCity\Game\World\Object\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="include\BattleCity\Game\World\Object\Derived\Tank\TankNPC.cpp">
+      <Filter>BattleCity\Game\World\Object\Derived\Tank</Filter>
+    </ClCompile>
+    <ClCompile Include="include\BattleCity\Engine\Timer.cpp">
+      <Filter>BattleCity\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="include\BattleCity\Game\World\Object\Components\AI.cpp">
+      <Filter>BattleCity\Game\World\Object\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="include\BattleCity\Engine\TimerMilliseconds.cpp">
+      <Filter>BattleCity\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="include\BattleCity\Game\World\Object\Components\Explodable.cpp">
+      <Filter>BattleCity\Game\World\Object\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="include\BattleCity\Game\World\Object\Derived\Tank\Tank.cpp">
+      <Filter>BattleCity\Game\World\Object\Derived\Tank</Filter>
+    </ClCompile>
+    <ClCompile Include="include\BattleCity\Game\World\Object\Derived\GameOver.cpp">
+      <Filter>BattleCity\Game\World\Object\Derived</Filter>
+    </ClCompile>
+    <ClCompile Include="include\BattleCity\Game\World\Object\Derived\Tank\TankSpawnerPoint.cpp">
+      <Filter>BattleCity\Game\World\Object\Derived\Tank</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="game.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Clock.cpp">
-      <Filter>Source Files\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="Vector.cpp">
-      <Filter>Source Files\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="Object.cpp">
-      <Filter>Source Files\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjectList.cpp">
-      <Filter>Source Files\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Manager.cpp">
-      <Filter>Source Files\Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="Event.cpp">
-      <Filter>Source Files\Event</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjectListIterator.cpp">
-      <Filter>Source Files\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="GameManager.cpp">
-      <Filter>Source Files\Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="EventStep.cpp">
-      <Filter>Source Files\Event</Filter>
-    </ClCompile>
-    <ClCompile Include="WorldManager.cpp">
-      <Filter>Source Files\Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="EventKeyboard.cpp">
-      <Filter>Source Files\Event</Filter>
-    </ClCompile>
-    <ClCompile Include="EventCollision.cpp">
-      <Filter>Source Files\Event</Filter>
-    </ClCompile>
-    <ClCompile Include="Box.cpp">
-      <Filter>Source Files\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="Utility.cpp">
-      <Filter>Source Files\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="EventOut.cpp">
-      <Filter>Source Files\Event</Filter>
-    </ClCompile>
-    <ClCompile Include="Sprites.cpp">
-      <Filter>Source Files\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="EventMouse.cpp">
-      <Filter>Source Files\Event</Filter>
-    </ClCompile>
-    <ClCompile Include="Bullet.cpp">
-      <Filter>Source Files\BattleCity Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="Tank.cpp">
-      <Filter>Source Files\BattleCity Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="TankPlayer.cpp">
-      <Filter>Source Files\BattleCity Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="Wall.cpp">
-      <Filter>Source Files\BattleCity Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="Screen.cpp">
-      <Filter>Source Files\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="PhoenixAndFlag.cpp">
-      <Filter>Source Files\BattleCity Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="Explosion.cpp">
-      <Filter>Source Files\BattleCity Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="PowerUp.cpp">
-      <Filter>Source Files\BattleCity Objects</Filter>
-    </ClCompile>
+    <ClInclude Include="pcheader\PCHeader.h">
+      <Filter>PCHeaders</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Utility\Action.h">
+      <Filter>BattleCity\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Utility\BasicMacros.h">
+      <Filter>BattleCity\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Utility\ISignal.h">
+      <Filter>BattleCity\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Utility\magic_enum.hpp">
+      <Filter>BattleCity\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Utility\Vector2Int.h">
+      <Filter>BattleCity\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Game\World\WorldLevel.h">
+      <Filter>BattleCity\Game\World</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Game\World\WorldMap.h">
+      <Filter>BattleCity\Game\World</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Engine\Texture\TextureAliases.h">
+      <Filter>BattleCity\Engine\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Engine\Texture\TextureGroup.h">
+      <Filter>BattleCity\Engine\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Engine\Texture\TexturePathLibrary.h">
+      <Filter>BattleCity\Engine\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Framework\Framework.h">
+      <Filter>BattleCity\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Framework\Screen.h">
+      <Filter>BattleCity\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Framework\Texture.h">
+      <Filter>BattleCity\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Game\Game.h">
+      <Filter>BattleCity\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Engine\Texture\TextureContainer.h">
+      <Filter>BattleCity\Engine\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Enums.h">
+      <Filter>BattleCity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\NamespaceAliases.h">
+      <Filter>BattleCity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Engine\Texture\BCTexture.h">
+      <Filter>BattleCity\Engine\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Engine\Texture\TextureGroupLibrary.h">
+      <Filter>BattleCity\Engine\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Game\World\Object\Factory\ObjectFactoryStandart.h">
+      <Filter>BattleCity\Game\World\Object\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Game\World\Object\Factory\ObjectFactory.h">
+      <Filter>BattleCity\Game\World\Object\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Game\World\Object\Derived\Bullet.h">
+      <Filter>BattleCity\Game\World\Object\Derived</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Game\World\Object\Derived\Explosion.h">
+      <Filter>BattleCity\Game\World\Object\Derived</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Game\World\Object\Derived\Phoenix.h">
+      <Filter>BattleCity\Game\World\Object\Derived</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Game\World\Object\Derived\PowerUp.h">
+      <Filter>BattleCity\Game\World\Object\Derived</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Game\World\Object\Derived\Wall.h">
+      <Filter>BattleCity\Game\World\Object\Derived</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Game\World\Object\Derived\Background.h">
+      <Filter>BattleCity\Game\World\Object\Derived</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Game\World\Object\Components\Fireable.h">
+      <Filter>BattleCity\Game\World\Object\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Game\World\Object\Components\Health.h">
+      <Filter>BattleCity\Game\World\Object\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Game\World\Object\Components\Movable.h">
+      <Filter>BattleCity\Game\World\Object\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Game\World\Object\Object.h">
+      <Filter>BattleCity\Game\World\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Game\World\Object\ObjectAliases.h">
+      <Filter>BattleCity\Game\World\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Engine\Physics\Rectangle.h">
+      <Filter>BattleCity\Engine\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Engine\Texture\TextureStorage.h">
+      <Filter>BattleCity\Engine\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Game\World\Object\Components\Component.h">
+      <Filter>BattleCity\Game\World\Object\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Game\World\Object\Components\Collider.h">
+      <Filter>BattleCity\Game\World\Object\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Game\World\Object\Derived\Pixel.h">
+      <Filter>BattleCity\Game\World\Object\Derived</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Engine\DebugDrawer.h">
+      <Filter>BattleCity\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Game\World\Object\Observer\ObjectObserver.h">
+      <Filter>BattleCity\Game\World\Object\Observer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Game\World\Object\Observer\ObjectSubject.h">
+      <Filter>BattleCity\Game\World\Object\Observer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Game\World\Object\Containers\ObjectContainer.h">
+      <Filter>BattleCity\Game\World\Object\Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Game\World\Object\Containers\QuadTree.h">
+      <Filter>BattleCity\Game\World\Object\Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Game\World\Object\Components\TextureComponent.h">
+      <Filter>BattleCity\Game\World\Object\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Game\World\Object\Components\ComponentFactory.h">
+      <Filter>BattleCity\Game\World\Object\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Game\World\Object\Derived\Tank\TankNPC.h">
+      <Filter>BattleCity\Game\World\Object\Derived\Tank</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Engine\Timer.h">
+      <Filter>BattleCity\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Game\World\Object\Components\AI.h">
+      <Filter>BattleCity\Game\World\Object\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Engine\TimerMilliseconds.h">
+      <Filter>BattleCity\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Game\World\Object\Components\Explodable.h">
+      <Filter>BattleCity\Game\World\Object\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Game\World\Object\Derived\Tank\Tank.h">
+      <Filter>BattleCity\Game\World\Object\Derived\Tank</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Game\World\Object\Derived\GameOver.h">
+      <Filter>BattleCity\Game\World\Object\Derived</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleCity\Game\World\Object\Derived\Tank\TankSpawnerPoint.h">
+      <Filter>BattleCity\Game\World\Object\Derived\Tank</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Vector.h">
-      <Filter>Header Files\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="Clock.h">
-      <Filter>Header Files\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="Object.h">
-      <Filter>Header Files\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjectList.h">
-      <Filter>Header Files\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Framework.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Manager.h">
-      <Filter>Header Files\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="GameManager.h">
-      <Filter>Header Files\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjectListIterator.h">
-      <Filter>Header Files\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Event.h">
-      <Filter>Header Files\Event</Filter>
-    </ClInclude>
-    <ClInclude Include="EventStep.h">
-      <Filter>Header Files\Event</Filter>
-    </ClInclude>
-    <ClInclude Include="WorldManager.h">
-      <Filter>Header Files\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="EventKeyboard.h">
-      <Filter>Header Files\Event</Filter>
-    </ClInclude>
-    <ClInclude Include="Utility.h">
-      <Filter>Header Files\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="EventCollision.h">
-      <Filter>Header Files\Event</Filter>
-    </ClInclude>
-    <ClInclude Include="EventOut.h">
-      <Filter>Header Files\Event</Filter>
-    </ClInclude>
-    <ClInclude Include="Box.h">
-      <Filter>Header Files\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="TankPlayer.h">
-      <Filter>Header Files\BattleCity Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="Tank.h">
-      <Filter>Header Files\BattleCity Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="Bullet.h">
-      <Filter>Header Files\BattleCity Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="Sprites.h">
-      <Filter>Header Files\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="EventMouse.h">
-      <Filter>Header Files\Event</Filter>
-    </ClInclude>
-    <ClInclude Include="Wall.h">
-      <Filter>Header Files\BattleCity Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="Screen.h">
-      <Filter>Header Files\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="PhoenixAndFlag.h">
-      <Filter>Header Files\BattleCity Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="Explosion.h">
-      <Filter>Header Files\BattleCity Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="PowerUp.h">
-      <Filter>Header Files\BattleCity Objects</Filter>
-    </ClInclude>
+    <None Include="cpp.hint" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="PCHeaders">
+      <UniqueIdentifier>{e81d3e70-df37-4457-bbfe-6a2e174898fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BattleCity">
+      <UniqueIdentifier>{53a6e30b-413c-4983-aafe-23ac415c2480}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BattleCity\Framework">
+      <UniqueIdentifier>{340da608-4e03-44a9-b2c5-c5e953d7f08a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BattleCity\Game">
+      <UniqueIdentifier>{eafcfc95-769e-4ff1-a06d-7370b4e7ce63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BattleCity\Game\World">
+      <UniqueIdentifier>{0d884510-9fa3-4509-8224-58f035cf3dbf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BattleCity\Utility">
+      <UniqueIdentifier>{afacf658-b7c8-4254-badb-db2d37e1bc68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BattleCity\Engine">
+      <UniqueIdentifier>{7b5d93bf-f74f-4a25-9a4a-40f103b07889}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BattleCity\Engine\Texture">
+      <UniqueIdentifier>{d98ee2cb-b620-4576-a40f-60e0c6755336}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BattleCity\Game\World\Object">
+      <UniqueIdentifier>{07204f34-c876-4173-abb0-8f7961da8f89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BattleCity\Game\World\Object\Components">
+      <UniqueIdentifier>{dc0f6fd2-65fa-4b3d-84fd-31e43bbd466e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BattleCity\Game\World\Object\Factory">
+      <UniqueIdentifier>{f40ac654-67df-4718-bc44-5128b93501e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BattleCity\Game\World\Object\Derived">
+      <UniqueIdentifier>{77d13303-96e1-4516-befd-091e3dc0c62d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BattleCity\Engine\Physics">
+      <UniqueIdentifier>{e5e9caf4-e2da-4b53-9eae-6de5f06bf6d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BattleCity\Game\World\Object\Observer">
+      <UniqueIdentifier>{60da8032-42f9-4af1-a2f2-cd8fe85cd1d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BattleCity\Game\World\Object\Containers">
+      <UniqueIdentifier>{273583bb-5419-4762-8ada-318a9858f6b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BattleCity\Game\World\Object\Derived\Tank">
+      <UniqueIdentifier>{223347bf-55ea-42a5-9c3f-6ce9d749ebfb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

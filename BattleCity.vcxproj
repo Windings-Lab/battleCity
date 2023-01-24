@@ -19,65 +19,119 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Box.cpp" />
-    <ClCompile Include="Bullet.cpp" />
-    <ClCompile Include="Clock.cpp" />
-    <ClCompile Include="Event.cpp" />
-    <ClCompile Include="EventCollision.cpp" />
-    <ClCompile Include="EventKeyboard.cpp" />
-    <ClCompile Include="EventMouse.cpp" />
-    <ClCompile Include="EventOut.cpp" />
-    <ClCompile Include="EventStep.cpp" />
-    <ClCompile Include="Explosion.cpp" />
-    <ClCompile Include="game.cpp" />
-    <ClCompile Include="GameManager.cpp" />
-    <ClCompile Include="Manager.cpp" />
-    <ClCompile Include="Object.cpp" />
-    <ClCompile Include="ObjectList.cpp" />
-    <ClCompile Include="ObjectListIterator.cpp" />
-    <ClCompile Include="PhoenixAndFlag.cpp" />
-    <ClCompile Include="PowerUp.cpp" />
-    <ClCompile Include="Screen.cpp" />
-    <ClCompile Include="Sprites.cpp" />
-    <ClCompile Include="Tank.cpp" />
-    <ClCompile Include="TankPlayer.cpp" />
-    <ClCompile Include="Utility.cpp" />
-    <ClCompile Include="Vector.cpp" />
-    <ClCompile Include="Wall.cpp" />
-    <ClCompile Include="WorldManager.cpp" />
+    <ClCompile Include="include\BattleCity\Engine\DebugDrawer.cpp" />
+    <ClCompile Include="include\BattleCity\Engine\Physics\Rectangle.cpp" />
+    <ClCompile Include="include\BattleCity\Engine\Texture\BCTexture.cpp" />
+    <ClCompile Include="include\BattleCity\Engine\Texture\TextureGroup.cpp" />
+    <ClCompile Include="include\BattleCity\Engine\Texture\TextureContainer.cpp" />
+    <ClCompile Include="include\BattleCity\Engine\Texture\TextureGroupLibrary.cpp" />
+    <ClCompile Include="include\BattleCity\Engine\Texture\TexturePathLibrary.cpp" />
+    <ClCompile Include="include\BattleCity\Engine\Texture\TextureStorage.cpp" />
+    <ClCompile Include="include\BattleCity\Engine\Timer.cpp" />
+    <ClCompile Include="include\BattleCity\Engine\TimerMilliseconds.cpp" />
+    <ClCompile Include="include\BattleCity\Framework\Screen.cpp" />
+    <ClCompile Include="include\BattleCity\Framework\Texture.cpp" />
+    <ClCompile Include="include\BattleCity\Game\Game.cpp" />
+    <ClCompile Include="include\BattleCity\Game\World\Object\Components\AI.cpp" />
+    <ClCompile Include="include\BattleCity\Game\World\Object\Components\Collider.cpp" />
+    <ClCompile Include="include\BattleCity\Game\World\Object\Components\Component.cpp" />
+    <ClCompile Include="include\BattleCity\Game\World\Object\Components\ComponentFactory.cpp" />
+    <ClCompile Include="include\BattleCity\Game\World\Object\Components\Explodable.cpp" />
+    <ClCompile Include="include\BattleCity\Game\World\Object\Components\Fireable.cpp" />
+    <ClCompile Include="include\BattleCity\Game\World\Object\Components\Health.cpp" />
+    <ClCompile Include="include\BattleCity\Game\World\Object\Components\Movable.cpp" />
+    <ClCompile Include="include\BattleCity\Game\World\Object\Components\TextureComponent.cpp" />
+    <ClCompile Include="include\BattleCity\Game\World\Object\Containers\ObjectContainer.cpp" />
+    <ClCompile Include="include\BattleCity\Game\World\Object\Containers\QuadTree.cpp" />
+    <ClCompile Include="include\BattleCity\Game\World\Object\Derived\Bullet.cpp" />
+    <ClCompile Include="include\BattleCity\Game\World\Object\Derived\Explosion.cpp" />
+    <ClCompile Include="include\BattleCity\Game\World\Object\Derived\GameOver.cpp" />
+    <ClCompile Include="include\BattleCity\Game\World\Object\Derived\Phoenix.cpp" />
+    <ClCompile Include="include\BattleCity\Game\World\Object\Derived\Pixel.cpp" />
+    <ClCompile Include="include\BattleCity\Game\World\Object\Derived\PowerUp.cpp" />
+    <ClCompile Include="include\BattleCity\Game\World\Object\Derived\Tank\Tank.cpp" />
+    <ClCompile Include="include\BattleCity\Game\World\Object\Derived\Tank\TankNPC.cpp" />
+    <ClCompile Include="include\BattleCity\Game\World\Object\Derived\Tank\TankSpawnerPoint.cpp" />
+    <ClCompile Include="include\BattleCity\Game\World\Object\Derived\Wall.cpp" />
+    <ClCompile Include="include\BattleCity\Game\World\Object\Derived\Background.cpp" />
+    <ClCompile Include="include\BattleCity\Game\World\Object\Factory\ObjectFactory.cpp" />
+    <ClCompile Include="include\BattleCity\Game\World\Object\Factory\ObjectFactoryStandart.cpp" />
+    <ClCompile Include="include\BattleCity\Game\World\Object\Object.cpp" />
+    <ClCompile Include="include\BattleCity\Game\World\Object\Observer\ObjectObserver.cpp" />
+    <ClCompile Include="include\BattleCity\Game\World\Object\Observer\ObjectSubject.cpp" />
+    <ClCompile Include="include\BattleCity\Game\World\WorldLevel.cpp" />
+    <ClCompile Include="include\BattleCity\Game\World\WorldMap.cpp" />
+    <ClCompile Include="include\BattleCity\Utility\Vector2Int.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="pcheader\PCHeader.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Box.h" />
-    <ClInclude Include="Bullet.h" />
-    <ClInclude Include="Clock.h" />
-    <ClInclude Include="Event.h" />
-    <ClInclude Include="EventCollision.h" />
-    <ClInclude Include="EventKeyboard.h" />
-    <ClInclude Include="EventMouse.h" />
-    <ClInclude Include="EventOut.h" />
-    <ClInclude Include="EventStep.h" />
-    <ClInclude Include="Explosion.h" />
-    <ClInclude Include="Framework.h" />
-    <ClInclude Include="GameManager.h" />
-    <ClInclude Include="Manager.h" />
-    <ClInclude Include="Object.h" />
-    <ClInclude Include="ObjectList.h" />
-    <ClInclude Include="ObjectListIterator.h" />
-    <ClInclude Include="PhoenixAndFlag.h" />
-    <ClInclude Include="PowerUp.h" />
-    <ClInclude Include="Screen.h" />
-    <ClInclude Include="Sprites.h" />
-    <ClInclude Include="Tank.h" />
-    <ClInclude Include="TankPlayer.h" />
-    <ClInclude Include="Utility.h" />
-    <ClInclude Include="Vector.h" />
-    <ClInclude Include="Wall.h" />
-    <ClInclude Include="WorldManager.h" />
+    <ClInclude Include="include\BattleCity\Engine\DebugDrawer.h" />
+    <ClInclude Include="include\BattleCity\Engine\Physics\Rectangle.h" />
+    <ClInclude Include="include\BattleCity\Engine\Texture\BCTexture.h" />
+    <ClInclude Include="include\BattleCity\Engine\Texture\TextureAliases.h" />
+    <ClInclude Include="include\BattleCity\Engine\Texture\TextureGroup.h" />
+    <ClInclude Include="include\BattleCity\Engine\Texture\TextureContainer.h" />
+    <ClInclude Include="include\BattleCity\Engine\Texture\TextureGroupLibrary.h" />
+    <ClInclude Include="include\BattleCity\Engine\Texture\TexturePathLibrary.h" />
+    <ClInclude Include="include\BattleCity\Engine\Texture\TextureStorage.h" />
+    <ClInclude Include="include\BattleCity\Engine\Timer.h" />
+    <ClInclude Include="include\BattleCity\Engine\TimerMilliseconds.h" />
+    <ClInclude Include="include\BattleCity\Enums.h" />
+    <ClInclude Include="include\BattleCity\Framework\Framework.h" />
+    <ClInclude Include="include\BattleCity\Framework\Screen.h" />
+    <ClInclude Include="include\BattleCity\Framework\Texture.h" />
+    <ClInclude Include="include\BattleCity\Game\Game.h" />
+    <ClInclude Include="include\BattleCity\Game\World\Object\Components\AI.h" />
+    <ClInclude Include="include\BattleCity\Game\World\Object\Components\Collider.h" />
+    <ClInclude Include="include\BattleCity\Game\World\Object\Components\Component.h" />
+    <ClInclude Include="include\BattleCity\Game\World\Object\Components\ComponentFactory.h" />
+    <ClInclude Include="include\BattleCity\Game\World\Object\Components\Explodable.h" />
+    <ClInclude Include="include\BattleCity\Game\World\Object\Components\Fireable.h" />
+    <ClInclude Include="include\BattleCity\Game\World\Object\Components\Health.h" />
+    <ClInclude Include="include\BattleCity\Game\World\Object\Components\Movable.h" />
+    <ClInclude Include="include\BattleCity\Game\World\Object\Components\TextureComponent.h" />
+    <ClInclude Include="include\BattleCity\Game\World\Object\Containers\ObjectContainer.h" />
+    <ClInclude Include="include\BattleCity\Game\World\Object\Containers\QuadTree.h" />
+    <ClInclude Include="include\BattleCity\Game\World\Object\Derived\Bullet.h" />
+    <ClInclude Include="include\BattleCity\Game\World\Object\Derived\Explosion.h" />
+    <ClInclude Include="include\BattleCity\Game\World\Object\Derived\GameOver.h" />
+    <ClInclude Include="include\BattleCity\Game\World\Object\Derived\Phoenix.h" />
+    <ClInclude Include="include\BattleCity\Game\World\Object\Derived\Pixel.h" />
+    <ClInclude Include="include\BattleCity\Game\World\Object\Derived\PowerUp.h" />
+    <ClInclude Include="include\BattleCity\Game\World\Object\Derived\Tank\Tank.h" />
+    <ClInclude Include="include\BattleCity\Game\World\Object\Derived\Tank\TankNPC.h" />
+    <ClInclude Include="include\BattleCity\Game\World\Object\Derived\Tank\TankSpawnerPoint.h" />
+    <ClInclude Include="include\BattleCity\Game\World\Object\Derived\Wall.h" />
+    <ClInclude Include="include\BattleCity\Game\World\Object\Derived\Background.h" />
+    <ClInclude Include="include\BattleCity\Game\World\Object\Factory\ObjectFactory.h" />
+    <ClInclude Include="include\BattleCity\Game\World\Object\Factory\ObjectFactoryStandart.h" />
+    <ClInclude Include="include\BattleCity\Game\World\Object\Object.h" />
+    <ClInclude Include="include\BattleCity\Game\World\Object\ObjectAliases.h" />
+    <ClInclude Include="include\BattleCity\Game\World\Object\Observer\ObjectObserver.h" />
+    <ClInclude Include="include\BattleCity\Game\World\Object\Observer\ObjectSubject.h" />
+    <ClInclude Include="include\BattleCity\Game\World\WorldLevel.h" />
+    <ClInclude Include="include\BattleCity\Game\World\WorldMap.h" />
+    <ClInclude Include="include\BattleCity\NamespaceAliases.h" />
+    <ClInclude Include="include\BattleCity\Utility\Action.h" />
+    <ClInclude Include="include\BattleCity\Utility\BasicMacros.h" />
+    <ClInclude Include="include\BattleCity\Utility\ISignal.h" />
+    <ClInclude Include="include\BattleCity\Utility\magic_enum.hpp" />
+    <ClInclude Include="include\BattleCity\Utility\Vector2Int.h" />
+    <ClInclude Include="pcheader\PCHeader.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{402171ff-0a37-4da9-895d-0b9e3b931b62}</ProjectGuid>
+    <ProjectGuid>{f862006a-3c5e-4f54-8c98-7a9ad1472040}</ProjectGuid>
     <RootNamespace>BattleCity</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -126,19 +180,23 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir)lib;$(IncludePath)</IncludePath>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(ProjectDir)lib;$(IncludePath)</IncludePath>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LinkIncremental>true</LinkIncremental>
+    <IntDir>$(Platform)\$(Configuration)\obj\</IntDir>
+    <PublicIncludeDirectories>
+    </PublicIncludeDirectories>
+    <AllProjectIncludesArePublic>true</AllProjectIncludesArePublic>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LinkIncremental>false</LinkIncremental>
+    <IntDir>$(Platform)\$(Configuration)\obj\</IntDir>
+    <PublicIncludeDirectories>
+    </PublicIncludeDirectories>
+    <AllProjectIncludesArePublic>true</AllProjectIncludesArePublic>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <AllProjectIncludesArePublic>true</AllProjectIncludesArePublic>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <AllProjectIncludesArePublic>true</AllProjectIncludesArePublic>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -146,12 +204,22 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)pcheader\;$(ProjectDir)include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>PCHeader.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(ProjectDir)lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>$(ProjectDir)lib\FrameworkRelease_x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>call robocopy "$(SolutionDir)data" "$(TargetDir)data" /MIR
+call robocopy "$(SolutionDir)lib" "$(TargetDir)." /XF FrameworkRelease_x64.lib
+if %errorlevel% LEQ 3 exit 0</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -161,14 +229,24 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)pcheader\;$(ProjectDir)include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>PCHeader.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(ProjectDir)lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>$(ProjectDir)lib\FrameworkRelease_x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>call robocopy "$(SolutionDir)data" "$(TargetDir)data" /MIR
+call robocopy "$(SolutionDir)lib" "$(TargetDir)." /XF FrameworkRelease_x64.lib
+if %errorlevel% LEQ 3 exit 0</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -176,8 +254,10 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <LanguageStandard>Default</LanguageStandard>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>PCHeader.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>$(ProjectDir)pcheader\;$(ProjectDir)include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -185,9 +265,11 @@
       <AdditionalLibraryDirectories>$(ProjectDir)lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>$(ProjectDir)lib\FrameworkRelease_x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-    <ProjectReference>
-      <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
-    </ProjectReference>
+    <PostBuildEvent>
+      <Command>call robocopy "$(SolutionDir)data" "$(TargetDir)data" /MIR
+call robocopy "$(SolutionDir)lib" "$(TargetDir)." /XF FrameworkRelease_x64.lib
+if %errorlevel% LEQ 3 exit 0</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -197,8 +279,10 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <LanguageStandard>Default</LanguageStandard>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>$(ProjectDir)pcheader\;$(ProjectDir)include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>PCHeader.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -208,10 +292,14 @@
       <AdditionalLibraryDirectories>$(ProjectDir)lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>$(ProjectDir)lib\FrameworkRelease_x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-    <ProjectReference>
-      <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
-    </ProjectReference>
+    <PostBuildEvent>
+      <Command>call robocopy "$(SolutionDir)data" "$(TargetDir)data" /MIR
+call robocopy "$(SolutionDir)lib" "$(TargetDir)." /XF FrameworkRelease_x64.lib
+if %errorlevel% LEQ 3 exit 0</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
+  <ItemGroup>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
