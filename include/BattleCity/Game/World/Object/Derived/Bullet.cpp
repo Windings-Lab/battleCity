@@ -34,6 +34,9 @@ namespace BattleCity::Game::World::Object
 		auto healthComponent = object.GetComponent<Component::Health>();
 		if(healthComponent)
 		{
+			if(mIgnoreColliderType == Type::TankPlayer 
+			&& otherCollider->GetColliderType() == Type::Phoenix) return;
+
 			healthComponent->SetHealth(healthComponent->GetHealth() - 1);
 		}
 
