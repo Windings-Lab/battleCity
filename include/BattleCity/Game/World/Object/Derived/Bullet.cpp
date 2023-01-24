@@ -61,25 +61,27 @@ namespace BattleCity::Game::World::Object
 
     void Bullet::AdjustPositionToDirection()
     {
-		const Size& textureSize = mTexture->GetSize();
-		const Size textureHalfSize = textureSize / 2;
+		const Size& colliderSize = mCollider->GetSize();
+		const Size colliderHalfSize = colliderSize / 2;
 
 		switch (mMovable->GetMovementDirection())
 		{
 		case Direction::Right:
-			SetY(GetPosition().Y - textureHalfSize.Y);
+			SetY(GetPosition().Y - colliderHalfSize.Y);
 			break;
 		case Direction::Left:
-			SetY(GetPosition().Y - textureHalfSize.Y);
-			SetX(GetPosition().X - textureSize.X);
+			SetY(GetPosition().Y - colliderHalfSize.Y);
+			SetX(GetPosition().X - colliderSize.X);
 			break;
 		case Direction::Down:
-			SetX(GetPosition().X - textureHalfSize.X);
+			SetX(GetPosition().X - colliderHalfSize.X);
 			break;
 		case Direction::Up:
-			SetX(GetPosition().X - textureHalfSize.X);
-			SetY(GetPosition().Y - textureSize.Y);
+			SetX(GetPosition().X - colliderHalfSize.X);
+			SetY(GetPosition().Y - colliderSize.Y);
 			break;
 		}
+
+		mCollider->UpdateCollider();
     }
 }

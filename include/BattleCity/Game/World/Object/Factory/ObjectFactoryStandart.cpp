@@ -139,11 +139,12 @@ namespace BattleCity::Game::World::Object::Factory
 		movable->SetMovementDirection(direction);
 
 		object->SetPosition(position);
-		object->AdjustPositionToDirection();
 
 		auto collider = object->GetComponent<Component::Collider>();
-		collider->MultiplyColliderSizeBy(3);
+
 		collider->UpdateCollider();
+		object->AdjustPositionToDirection();
+
 		collider->SetSolid(false);
 		collider->SetColliderType(Type::Bullet);
 		if (collider->GetRectangle().OutOfInner(mWorldBounds))
