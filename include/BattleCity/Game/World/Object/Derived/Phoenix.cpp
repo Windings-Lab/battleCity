@@ -7,6 +7,7 @@
 #include "BattleCity/Game/World/Object/Components/Health.h"
 #include "BattleCity/Game/World/Object/Components/TextureComponent.h"
 #include "BattleCity/Game/World/Object/Components/Explodable.h"
+#include "BattleCity/Game/World/Object/Components/Movable.h"
 
 namespace BattleCity::Game::World::Object
 {
@@ -29,9 +30,30 @@ namespace BattleCity::Game::World::Object
         }
     }
 
-    void Phoenix::ResolveCollisions(Object&)
+    void Phoenix::ResolveCollisions(Object& other)
     {
-        // Empty
+		auto otherCollider = other.GetComponent<Component::Collider>();
+		auto movable = other.GetComponent<Component::Movable>();
+		if (!otherCollider->IsSolid() || !movable) return;
+
+		auto& rectangle = mCollider->GetRectangle();
+		auto& otherRectangle = other.GetComponent<Component::Collider>()->GetRectangle();
+		auto penetration = otherRectangle.GetPenetration(rectangle);
+
+		switch (movable->GetMovementDirection())
+		{
+		case Direction::Right:
+		case Direction::Left:
+			other.SetX(otherRectangle.GetPosition().X + penetration.X);
+			break;
+		case Direction::Down:
+		case Direction::Up:
+			other.SetY(otherRectangle.GetPosition().Y + penetration.Y);
+			break;
+		}
+		movable->StopMovement();
+
+		NotifyObjectUpdated(other);
     }
 
     void Phoenix::OnOutOfBounds(const Vector2Int&)
