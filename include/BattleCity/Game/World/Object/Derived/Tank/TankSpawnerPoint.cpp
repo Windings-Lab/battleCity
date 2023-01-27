@@ -10,10 +10,11 @@ namespace BattleCity::Game::World::Object
 {
 	int TankSpawnerPoint::mTankCount = 0;
 
-	TankSpawnerPoint::TankSpawnerPoint(const Position& pos, const std::function<void(ID, Layer)>& d)
+	TankSpawnerPoint::TankSpawnerPoint(Factory::Standart& factory, const Position& pos, const std::function<void(ID, Layer)>& d)
 		: Object(pos, d)
 		, mCollider(AddComponent<Component::Collider>())
 		, mSpawnBlocked(false)
+		, mTankCreator([&factory](Type type, Position pos) { return factory.CreateTank(type, pos); })
 		, mRandomGenerator(std::random_device{}())
 		, mRandomDirection(0, 3)
 	{
@@ -21,11 +22,6 @@ namespace BattleCity::Game::World::Object
 			{
 				CreateTank();
 			});
-	}
-
-	void TankSpawnerPoint::SetTankCreator(Factory::Standart& factory)
-	{
-		mTankCreator = [&](Type type, Position pos) { return factory.CreateTank(type, pos); };
 	}
 
 	void TankSpawnerPoint::Update()

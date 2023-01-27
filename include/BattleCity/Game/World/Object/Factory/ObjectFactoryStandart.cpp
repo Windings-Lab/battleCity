@@ -281,9 +281,7 @@ namespace BattleCity::Game::World::Object::Factory
 
 	std::shared_ptr<TankSpawnerPoint> Standart::CreateTankSpawnPointer(Position position)
 	{
-		auto object = std::make_shared<TankSpawnerPoint>(position, mObjectDestroyer);
-
-		object->SetTankCreator(*this);
+		auto object = std::make_shared<TankSpawnerPoint>(*this, position, mObjectDestroyer);
 
 		auto& tankGroup = mTextureGroups.GetGroupBy(Framework::TextureName::TankNPC);
 		auto tankTexture = tankGroup.GetTextureBy(Framework::TextureType::Up);
