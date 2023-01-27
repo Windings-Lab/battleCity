@@ -9,7 +9,7 @@ namespace BattleCity::Game::World::Object
 {
 	TankNPC::TankNPC()
 		: Tank()
-		, mAi(AddComponent<Component::AI>(*this))
+		, mAi(AddComponent<Component::AI>())
 	{
 	}
 

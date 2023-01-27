@@ -9,7 +9,7 @@ namespace BattleCity::Game::World::Object
 {
 	PowerUp::PowerUp() : Object()
 	{
-		AddComponent<Component::Texture>(*this);
-		AddComponent<Component::Collider>(*this);
+		AddComponent<Component::Texture>();
+		AddComponent<Component::Collider>();
 	}
 }

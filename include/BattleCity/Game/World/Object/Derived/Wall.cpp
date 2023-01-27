@@ -12,10 +12,10 @@ namespace BattleCity::Game::World::Object
 {
 	Wall::Wall()
 		: Object()
-		, mHealth(AddComponent<Component::Health>(*this))
-		, mCollider(AddComponent<Component::Collider>(*this))
+		, mHealth(AddComponent<Component::Health>())
+		, mCollider(AddComponent<Component::Collider>())
 	{
-        AddComponent<Component::Texture>(*this);
+        AddComponent<Component::Texture>();
 	}
 
 	void Wall::Update()

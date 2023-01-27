@@ -7,7 +7,7 @@ namespace BattleCity::Game::World::Object
 {
 	Pixel::Pixel() : Object()
 	{
-		AddComponent<Component::Texture>(*this);
+		AddComponent<Component::Texture>();
 	}
 
 	void Pixel::Update()

@@ -8,8 +8,8 @@ namespace BattleCity::Game::World::Object
 {
 	GameOver::GameOver()
 		: Object()
-		, mTexture(AddComponent<Component::Texture>(*this))
-		, mCollider(AddComponent<Component::Collider>(*this))
+		, mTexture(AddComponent<Component::Texture>())
+		, mCollider(AddComponent<Component::Collider>())
 	{
 	}
 

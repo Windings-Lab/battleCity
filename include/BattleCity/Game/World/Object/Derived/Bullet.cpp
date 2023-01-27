@@ -11,10 +11,10 @@ namespace BattleCity::Game::World::Object
 {
 	Bullet::Bullet()
 		: Object()
-		, mTexture(AddComponent<Component::Texture>(*this))
-		, mMovable(AddComponent<Component::Movable>(*this))
-		, mCollider(AddComponent<Component::Collider>(*this))
-		, mExplodable(AddComponent<Component::Explodable>(*this))
+		, mTexture(AddComponent<Component::Texture>())
+		, mMovable(AddComponent<Component::Movable>())
+		, mCollider(AddComponent<Component::Collider>())
+		, mExplodable(AddComponent<Component::Explodable>())
 		, mIgnoreColliderType(Type::Error)
 	{}
 

@@ -13,10 +13,10 @@ namespace BattleCity::Game::World::Object
 {
 	Phoenix::Phoenix()
 		: Object()
-		, mCollider(AddComponent<Component::Collider>(*this))
-		, mHealth(AddComponent<Component::Health>(*this))
-		, mTexture(AddComponent<Component::Texture>(*this))
-		, mExplodable(AddComponent<Component::Explodable>(*this))
+		, mCollider(AddComponent<Component::Collider>())
+		, mHealth(AddComponent<Component::Health>())
+		, mTexture(AddComponent<Component::Texture>())
+		, mExplodable(AddComponent<Component::Explodable>())
 	{
 	}
 

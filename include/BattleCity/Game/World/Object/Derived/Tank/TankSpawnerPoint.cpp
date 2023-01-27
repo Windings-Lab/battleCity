@@ -12,7 +12,7 @@ namespace BattleCity::Game::World::Object
 
 	TankSpawnerPoint::TankSpawnerPoint()
 		: Object()
-		, mCollider(AddComponent<Component::Collider>(*this))
+		, mCollider(AddComponent<Component::Collider>())
 		, mSpawnBlocked(false)
 		, mRandomGenerator(std::random_device{}())
 		, mRandomDirection(0, 3)

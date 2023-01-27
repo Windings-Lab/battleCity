@@ -13,12 +13,12 @@ namespace BattleCity::Game::World::Object
 {
 	Tank::Tank()
 		: Object()
-		, mTexture(AddComponent<Component::Texture>(*this))
-		, mCollider(AddComponent<Component::Collider>(*this))
-		, mMovable(AddComponent<Component::Movable>(*this))
-		, mFireable(AddComponent<Component::Fireable>(*this))
-		, mExplodable(AddComponent<Component::Explodable>(*this))
-		, mHealth(AddComponent<Component::Health>(*this))
+		, mTexture(AddComponent<Component::Texture>())
+		, mCollider(AddComponent<Component::Collider>())
+		, mMovable(AddComponent<Component::Movable>())
+		, mFireable(AddComponent<Component::Fireable>())
+		, mExplodable(AddComponent<Component::Explodable>())
+		, mHealth(AddComponent<Component::Health>())
 	{}
 
     void Tank::Update()

@@ -41,11 +41,10 @@ namespace BattleCity::Game::World::Object
 
 	protected:
 		template< typename T
-				, typename U
 				, typename... Args>
-		T* AddComponent(U& obj, Args&&... args)
+		T* AddComponent(Args&&... args)
 		{
-			return mComponentFactory.AddComponent<T, U, Args...>(obj, std::forward<Args>(args)...);
+			return mComponentFactory.AddComponent<T, Object, Args...>(*this, std::forward<Args>(args)...);
 		}
 
 	public:

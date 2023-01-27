@@ -9,7 +9,7 @@ namespace BattleCity::Game::World::Object
 {
 	Explosion::Explosion()
 		: Object()
-		, mTexture(AddComponent<Component::Texture>(*this))
+		, mTexture(AddComponent<Component::Texture>())
 	{
         mFrameTimeAnimation.Start(80, [this]
             {

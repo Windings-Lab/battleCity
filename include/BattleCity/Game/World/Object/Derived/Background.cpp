@@ -7,7 +7,7 @@ namespace BattleCity::Game::World::Object
 {
 	Background::Background() : Object()
 	{
-        AddComponent<Component::Texture>(*this);
+        AddComponent<Component::Texture>();
 	}
 
     void Background::Update()
