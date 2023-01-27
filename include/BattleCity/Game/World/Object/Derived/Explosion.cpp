@@ -7,8 +7,8 @@
 
 namespace BattleCity::Game::World::Object
 {
-	Explosion::Explosion(const std::function<void(ID, Layer)>& d)
-		: Object(d)
+	Explosion::Explosion(const Position& pos, const std::function<void(ID, Layer)>& d)
+		: Object(pos, d)
 		, mTexture(AddComponent<Component::Texture>())
 	{
         mFrameTimeAnimation.Start(80, [this]

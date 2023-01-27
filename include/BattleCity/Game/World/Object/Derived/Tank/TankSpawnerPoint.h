@@ -19,7 +19,7 @@ namespace BattleCity::Game::World::Object
 	class TankSpawnerPoint : public Object
 	{
 	public:
-		explicit TankSpawnerPoint(const std::function<void(ID, Layer)>&);
+		explicit TankSpawnerPoint(const Position&, const std::function<void(ID, Layer)>&);
 
 		void SetTankCreator(Factory::Standart&);
 

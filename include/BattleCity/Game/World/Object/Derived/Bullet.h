@@ -15,7 +15,7 @@ namespace BattleCity::Game::World::Object
 	class Bullet : public Object
     {
     public:
-	    explicit Bullet(Type, const std::function<void(ID, Layer)>&);
+	    explicit Bullet(Type, const Position&, const std::function<void(ID, Layer)>&);
 
         void Update() override;
         void ResolveCollisions(Object&) override;

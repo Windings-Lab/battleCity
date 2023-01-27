@@ -15,7 +15,7 @@ namespace BattleCity::Game::World::Object
 	class Phoenix : public Object
 	{
     public:
-		explicit Phoenix(const std::function<void(ID, Layer)>&);
+		explicit Phoenix(const Position&, const std::function<void(ID, Layer)>&);
 
 		void Update() override;
 		void ResolveCollisions(Object&) override;

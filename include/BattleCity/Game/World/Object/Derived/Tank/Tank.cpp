@@ -11,8 +11,8 @@
 
 namespace BattleCity::Game::World::Object
 {
-	Tank::Tank(const std::function<void(ID, Layer)>& d)
-		: Object(d)
+	Tank::Tank(const Position& pos, const std::function<void(ID, Layer)>& d)
+		: Object(pos, d)
 		, mTexture(AddComponent<Component::Texture>())
 		, mCollider(AddComponent<Component::Collider>())
 		, mMovable(AddComponent<Component::Movable>())

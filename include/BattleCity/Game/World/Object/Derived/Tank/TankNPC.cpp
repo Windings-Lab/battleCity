@@ -7,8 +7,8 @@
 
 namespace BattleCity::Game::World::Object
 {
-	TankNPC::TankNPC(const std::function<void(ID, Layer)>& d)
-		: Tank(d)
+	TankNPC::TankNPC(const Position& pos, const std::function<void(ID, Layer)>& d)
+		: Tank(pos, d)
 		, mAi(AddComponent<Component::AI>())
 	{
 	}

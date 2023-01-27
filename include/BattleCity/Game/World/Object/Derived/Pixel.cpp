@@ -5,7 +5,7 @@
 
 namespace BattleCity::Game::World::Object
 {
-	Pixel::Pixel(const std::function<void(ID, Layer)>& d) : Object(d)
+	Pixel::Pixel(const Position& pos, const std::function<void(ID, Layer)>& d) : Object(pos, d)
 	{
 		AddComponent<Component::Texture>();
 	}

@@ -10,8 +10,8 @@
 
 namespace BattleCity::Game::World::Object
 {
-	Wall::Wall(const std::function<void(ID, Layer)>& d)
-		: Object(d)
+	Wall::Wall(const Position& pos, const std::function<void(ID, Layer)>& d)
+		: Object(pos, d)
 		, mHealth(AddComponent<Component::Health>())
 		, mCollider(AddComponent<Component::Collider>())
 	{

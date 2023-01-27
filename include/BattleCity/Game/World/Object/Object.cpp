@@ -5,9 +5,10 @@
 
 namespace BattleCity::Game::World::Object
 {
-    Object::Object(const std::function<void(ID, Layer)>& destroyer)
+    Object::Object(const Position& pos, const std::function<void(ID, Layer)>& destroyer)
 		: Subject()
 		, mLayer(Layer::Middle)
+		, mPosition(pos)
 		, mMarkForDestroy(destroyer)
 		, mDestroyed(false)
     {

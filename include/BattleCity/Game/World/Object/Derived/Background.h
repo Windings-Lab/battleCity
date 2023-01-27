@@ -7,7 +7,7 @@ namespace BattleCity::Game::World::Object
 	class Background final : public Object
 	{
 	public:
-		explicit Background(const std::function<void(ID, Layer)>&);
+		explicit Background(const Position&, const std::function<void(ID, Layer)>&);
 
 		void Update() override;
 		void ResolveCollisions(Object&) override;

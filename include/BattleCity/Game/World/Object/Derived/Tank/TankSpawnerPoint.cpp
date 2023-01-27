@@ -10,8 +10,8 @@ namespace BattleCity::Game::World::Object
 {
 	int TankSpawnerPoint::mTankCount = 0;
 
-	TankSpawnerPoint::TankSpawnerPoint(const std::function<void(ID, Layer)>& d)
-		: Object(d)
+	TankSpawnerPoint::TankSpawnerPoint(const Position& pos, const std::function<void(ID, Layer)>& d)
+		: Object(pos, d)
 		, mCollider(AddComponent<Component::Collider>())
 		, mSpawnBlocked(false)
 		, mRandomGenerator(std::random_device{}())

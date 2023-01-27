@@ -26,13 +26,11 @@ namespace BattleCity::Game::World::Object::Factory
 {
 	std::shared_ptr<Background> Standart::CreateBackgrounds(Position position)
 	{
-		auto object = std::make_shared<Background>(mObjectDestroyer);
+		auto object = std::make_shared<Background>(position, mObjectDestroyer);
 
 		auto textureComponent = object->GetComponent<Component::Texture>();
 		textureComponent->SetTextureGroup(&mTextureGroups.GetGroupBy(Framework::TextureName::Background));
 		textureComponent->ChangeTextureTo(Framework::TextureType::Basic);
-
-		object->SetPosition(position);
 
 		mInsertToMap(object, Layer::Back);
 
@@ -41,21 +39,25 @@ namespace BattleCity::Game::World::Object::Factory
 
 	std::shared_ptr<GameOver> Standart::CreateGameOver(Position)
 	{
-		auto object = std::make_shared<GameOver>(mObjectDestroyer);
+		auto screenCenter = mScreenBounds.GetCenter();
+
+		Vector2Int textureSize;
+		mTextureGroups.GetGroupBy(Framework::TextureName::GameOver)
+			.GetTextureBy(Framework::TextureType::Basic)
+			->GetSize(textureSize.X, textureSize.Y);
+
+		Vector2Int pos = { screenCenter.X - (textureSize.X >> 1), mScreenBounds.GetHeight() };
+
+		auto object = std::make_shared<GameOver>(pos, mObjectDestroyer);
 
 		auto textureComponent = object->GetComponent<Component::Texture>();
 		textureComponent->SetTextureGroup(&mTextureGroups.GetGroupBy(Framework::TextureName::GameOver));
 		textureComponent->ChangeTextureTo(Framework::TextureType::Basic);
 
-		auto screenCenter = mScreenBounds.GetCenter();
-
-
 		object->SetEndAnimationPosition(screenCenter);
 
 		auto collider = object->GetComponent<Component::Collider>();
 		collider->SetSize(textureComponent->GetSize());
-		object->SetPosition({ screenCenter.X - textureComponent->GetSize().X / 2
-						, mScreenBounds.GetHeight() });
 		collider->UpdateCollider();
 		collider->SetSolid(false);
 		collider->SetColliderType(Type::GameOver);
@@ -76,7 +78,7 @@ namespace BattleCity::Game::World::Object::Factory
 		switch (tankType)
 		{
 		case Type::TankNPC:
-			object = std::make_shared<TankNPC>(mObjectDestroyer);
+			object = std::make_shared<TankNPC>(position, mObjectDestroyer);
 			movable = object->GetComponent<Component::Movable>();
 			collider = object->GetComponent<Component::Collider>();
 			collider->SetColliderType(Type::TankNPC);
@@ -87,7 +89,7 @@ namespace BattleCity::Game::World::Object::Factory
 			movable->SetMovementDirection(Direction::Down);
 			break;
 		case Type::TankPlayer:
-			object = std::make_shared<Tank>(mObjectDestroyer);
+			object = std::make_shared<Tank>(position, mObjectDestroyer);
 			movable = object->GetComponent<Component::Movable>();
 			collider = object->GetComponent<Component::Collider>();
 			collider->SetColliderType(Type::TankPlayer);
@@ -109,7 +111,6 @@ namespace BattleCity::Game::World::Object::Factory
 
 		mInsertToMap(object, Layer::Middle);
 
-		object->SetPosition(position);
 		collider->SetSize(textureComponent->GetSize());
 		collider->UpdateCollider();
 		collider->SetSolid(true);
@@ -127,7 +128,7 @@ namespace BattleCity::Game::World::Object::Factory
 
 	std::shared_ptr<Bullet> Standart::CreateBullet(Position position, Direction direction, Type ignoreColliderType)
 	{
-		auto object = std::make_shared<Bullet>(ignoreColliderType, mObjectDestroyer);
+		auto object = std::make_shared<Bullet>(ignoreColliderType, position, mObjectDestroyer);
 
 		auto textureComponent = object->GetComponent<Component::Texture>();
 		textureComponent->SetTextureGroup(&mTextureGroups.GetGroupBy(Framework::TextureName::Bullet));
@@ -137,24 +138,22 @@ namespace BattleCity::Game::World::Object::Factory
 		movable->SetMovementDirection(direction);
 
 		auto collider = object->GetComponent<Component::Collider>();
-		object->SetPosition(position);
 
-		auto size = textureComponent->GetSize();
+		auto colliderSize = textureComponent->GetSize();
 
 		switch (direction)
 		{
 		case Direction::Right:
 		case Direction::Left:
-			size.Y *= 5;
+			colliderSize.Y *= 5;
 			break;
 		case Direction::Down:
 		case Direction::Up:
-			size.X *= 5;
+			colliderSize.X *= 5;
 			break;
 		}
 
-		collider->SetSize(size);
-
+		collider->SetSize(colliderSize);
 		collider->UpdateCollider();
 		object->AdjustPositionToDirection();
 		collider->SetSolid(false);
@@ -195,7 +194,7 @@ namespace BattleCity::Game::World::Object::Factory
 
 	std::shared_ptr<Wall> Standart::CreateWall(Position position)
 	{
-		auto object = std::make_shared<Wall>(mObjectDestroyer);
+		auto object = std::make_shared<Wall>(position, mObjectDestroyer);
 
 		auto textureComponent = object->GetComponent<Component::Texture>();
 		textureComponent->SetTextureGroup(&mTextureGroups.GetGroupBy(Framework::TextureName::Wall));
@@ -208,7 +207,6 @@ namespace BattleCity::Game::World::Object::Factory
 
 		auto collider = object->GetComponent<Component::Collider>();
 		collider->SetSize(textureComponent->GetSize());
-		object->SetPosition(position);
 		collider->UpdateCollider();
 		collider->SetSolid(true);
 		collider->SetColliderType(Type::Wall);
@@ -221,7 +219,7 @@ namespace BattleCity::Game::World::Object::Factory
 
 	std::shared_ptr<Phoenix> Standart::CreatePhoenix(Position position)
 	{
-		auto object = std::make_shared<Phoenix>(mObjectDestroyer);
+		auto object = std::make_shared<Phoenix>(position, mObjectDestroyer);
 
 		auto textureComponent = object->GetComponent<Component::Texture>();
 		textureComponent->SetTextureGroup(&mTextureGroups.GetGroupBy(Framework::TextureName::Phoenix));
@@ -237,7 +235,6 @@ namespace BattleCity::Game::World::Object::Factory
 
 		auto collider = object->GetComponent<Component::Collider>();
 		collider->SetSize(textureComponent->GetSize());
-		object->SetPosition(position);
 		collider->UpdateCollider();
 		collider->SetSolid(true);
 		collider->SetColliderType(Type::Phoenix);
@@ -250,29 +247,34 @@ namespace BattleCity::Game::World::Object::Factory
 
 	std::shared_ptr<Explosion> Standart::CreateExplosion(ExplosionType type, Position position)
 	{
-		auto object = std::make_shared<Explosion>(mObjectDestroyer);
+		Vector2Int textureSize;
 
-		auto textureComponent = object->GetComponent<Component::Texture>();
-		textureComponent->SetTextureGroup(&mTextureGroups.GetGroupBy(Framework::TextureName::Explosion));
+		Framework::TextureType textureType;
 
 		switch (type)
 		{
 		case ExplosionType::Large:
-			textureComponent->ChangeTextureTo(Framework::TextureType::ExplosionLarge1);
+			textureType = Framework::TextureType::ExplosionLarge1;
 			break;
 		case ExplosionType::Small:
-			textureComponent->ChangeTextureTo(Framework::TextureType::ExplosionSmall1);
+			textureType = Framework::TextureType::ExplosionSmall1;
 			break;
 		case ExplosionType::Error:
 		default:
-			{
 			assert(false && "CreateExplosion: Invalid explosion type");
 			return nullptr;
-			}
 		}
 
-		auto textureHalfSize = textureComponent->GetSize() / 2;
-		object->SetPosition(position - textureHalfSize);
+		mTextureGroups.GetGroupBy(Framework::TextureName::Explosion)
+			.GetTextureBy(textureType)
+			->GetSize(textureSize.X, textureSize.Y);
+
+		auto textureHalfSize = textureSize / 2;
+		auto object = std::make_shared<Explosion>(position - textureHalfSize, mObjectDestroyer);
+
+		auto textureComponent = object->GetComponent<Component::Texture>();
+		textureComponent->SetTextureGroup(&mTextureGroups.GetGroupBy(Framework::TextureName::Explosion));
+		textureComponent->ChangeTextureTo(textureType);
 
 		mInsertToMap(object, Layer::Front);
 
@@ -281,7 +283,7 @@ namespace BattleCity::Game::World::Object::Factory
 
 	std::shared_ptr<TankSpawnerPoint> Standart::CreateTankSpawnPointer(Position position)
 	{
-		auto object = std::make_shared<TankSpawnerPoint>(mObjectDestroyer);
+		auto object = std::make_shared<TankSpawnerPoint>(position, mObjectDestroyer);
 
 		object->SetTankCreator(*this);
 
@@ -293,7 +295,6 @@ namespace BattleCity::Game::World::Object::Factory
 
 		auto collider = object->GetComponent<Component::Collider>();
 		collider->SetSize(tankTextureSize);
-		object->SetPosition(position);
 		collider->UpdateCollider();
 		collider->SetSolid(false);
 		collider->SetColliderType(Type::TankSpawnPointer);

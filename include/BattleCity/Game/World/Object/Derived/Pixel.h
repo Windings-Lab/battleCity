@@ -6,7 +6,7 @@ namespace BattleCity::Game::World::Object
 	class Pixel : public Object
 	{
 	public:
-		explicit Pixel(const std::function<void(ID, Layer)>&);
+		explicit Pixel(const Position&, const std::function<void(ID, Layer)>&);
 
 		void Update() override;
 		void ResolveCollisions(Object&) override;

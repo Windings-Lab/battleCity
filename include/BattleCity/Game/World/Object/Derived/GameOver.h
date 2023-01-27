@@ -13,7 +13,7 @@ namespace BattleCity::Game::World::Object
 	class GameOver : public Object
 	{
 	public:
-		explicit GameOver(const std::function<void(ID, Layer)>&);
+		explicit GameOver(const Position&, const std::function<void(ID, Layer)>&);
 
 		void Update() override;
 		void ResolveCollisions(Object&) override;

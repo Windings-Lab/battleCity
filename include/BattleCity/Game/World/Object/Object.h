@@ -15,7 +15,7 @@ namespace BattleCity::Game::World::Object
 	class Object : public Subject
 	{
 	public:
-		Object(const std::function<void(ID, Layer)>&);
+		Object(const Position&, const std::function<void(ID, Layer)>&);
 
 		DISALLOW_COPY_MOVE(Object)
 
