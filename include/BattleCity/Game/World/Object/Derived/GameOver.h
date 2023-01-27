@@ -13,13 +13,11 @@ namespace BattleCity::Game::World::Object
 	class GameOver : public Object
 	{
 	public:
-		explicit GameOver(const Position&, const std::function<void(ID, Layer)>&);
+		explicit GameOver(const Position&, const Position&, const std::function<void(ID, Layer)>&);
 
 		void Update() override;
 		void ResolveCollisions(Object&) override;
 		void OnOutOfBounds(const Vector2Int&) override;
-
-		void SetEndAnimationPosition(Position) noexcept;
 
 	private:
 		Component::Texture* mTexture;

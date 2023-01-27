@@ -48,13 +48,11 @@ namespace BattleCity::Game::World::Object::Factory
 
 		Vector2Int pos = { screenCenter.X - (textureSize.X >> 1), mScreenBounds.GetHeight() };
 
-		auto object = std::make_shared<GameOver>(pos, mObjectDestroyer);
+		auto object = std::make_shared<GameOver>(screenCenter, pos, mObjectDestroyer);
 
 		auto textureComponent = object->GetComponent<Component::Texture>();
 		textureComponent->SetTextureGroup(&mTextureGroups.GetGroupBy(Framework::TextureName::GameOver));
 		textureComponent->ChangeTextureTo(Framework::TextureType::Basic);
-
-		object->SetEndAnimationPosition(screenCenter);
 
 		auto collider = object->GetComponent<Component::Collider>();
 		collider->SetSize(textureComponent->GetSize());

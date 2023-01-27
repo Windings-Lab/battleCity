@@ -6,10 +6,11 @@
 
 namespace BattleCity::Game::World::Object
 {
-	GameOver::GameOver(const Position& pos, const std::function<void(ID, Layer)>& d)
+	GameOver::GameOver(const Position& endAnimationPos, const Position& pos, const std::function<void(ID, Layer)>& d)
 		: Object(pos, d)
 		, mTexture(AddComponent<Component::Texture>())
 		, mCollider(AddComponent<Component::Collider>())
+		, mEndAnimationPosition(endAnimationPos)
 	{
 	}
 
@@ -31,10 +32,5 @@ namespace BattleCity::Game::World::Object
 	void GameOver::OnOutOfBounds(const Vector2Int&)
 	{
 		// Empty
-	}
-
-	void GameOver::SetEndAnimationPosition(Position position) noexcept
-	{
-		mEndAnimationPosition = position;
 	}
 }
