@@ -107,8 +107,6 @@ namespace BattleCity::Game::World::Object::Factory
 		fireable->SetBullet(*this);
 		fireable->SetBulletCount(1);
 
-		mInsertToMap(object, Layer::Middle);
-
 		collider->SetSize(textureComponent->GetSize());
 		collider->UpdateCollider();
 		collider->SetSolid(true);
@@ -118,6 +116,7 @@ namespace BattleCity::Game::World::Object::Factory
 
 		object->GetComponent<Component::Health>()->SetHealth(1);
 
+		mInsertToMap(object, Layer::Middle);
 		object->RegisterObserver(&mQuadTreeObserver);
 		mInsertToQuadTree(object.get());
 
@@ -166,7 +165,6 @@ namespace BattleCity::Game::World::Object::Factory
 		explodable->SetExplosionSpawner(*this);
 
 		mInsertToMap(object, Layer::Middle);
-
 		object->RegisterObserver(&mQuadTreeObserver);
 		mInsertToQuadTree(object.get());
 
@@ -201,14 +199,13 @@ namespace BattleCity::Game::World::Object::Factory
 
 		object->GetComponent<Component::Health>()->SetHealth(1);
 
-		mInsertToMap(object, Layer::Middle);
-
 		auto collider = object->GetComponent<Component::Collider>();
 		collider->SetSize(textureComponent->GetSize());
 		collider->UpdateCollider();
 		collider->SetSolid(true);
 		collider->SetColliderType(Type::Wall);
 
+		mInsertToMap(object, Layer::Middle);
 		object->RegisterObserver(&mQuadTreeObserver);
 		mInsertToQuadTree(object.get());
 
@@ -229,14 +226,13 @@ namespace BattleCity::Game::World::Object::Factory
 
 		object->GetComponent<Component::Health>()->SetHealth(1);
 
-		mInsertToMap(object, Layer::Middle);
-
 		auto collider = object->GetComponent<Component::Collider>();
 		collider->SetSize(textureComponent->GetSize());
 		collider->UpdateCollider();
 		collider->SetSolid(true);
 		collider->SetColliderType(Type::Phoenix);
 
+		mInsertToMap(object, Layer::Middle);
 		object->RegisterObserver(&mQuadTreeObserver);
 		mInsertToQuadTree(object.get());
 
@@ -296,7 +292,6 @@ namespace BattleCity::Game::World::Object::Factory
 		collider->SetColliderType(Type::TankSpawnPointer);
 
 		mInsertToMap(object, Layer::Front);
-
 		object->RegisterObserver(&mQuadTreeObserver);
 		mInsertToQuadTree(object.get());
 
