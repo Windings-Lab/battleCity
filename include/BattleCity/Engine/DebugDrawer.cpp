@@ -28,7 +28,10 @@ namespace BattleCity::Engine
                     || x == rectangle.GetX()
                     || x == rectangle.GetX() + rectangle.GetSize().X - 1)
                 {
-                    auto pixel = std::make_shared<Game::World::Object::Pixel>();
+                    auto pixel = std::make_shared<Game::World::Object::Pixel>([this](int objID, Game::World::Object::Layer layer)
+                    {
+                    	mMap.MarkForDelete(objID, layer);
+                    });
                     auto textureComponent = pixel->GetComponent<Game::World::Object::Component::Texture>();
                     pixel->SetPosition({ x, y });
                     textureComponent->SetTextureGroup(&mTextures.GetGroupBy(Framework::TextureName::Pixel));

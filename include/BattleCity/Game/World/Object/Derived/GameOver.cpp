@@ -6,8 +6,8 @@
 
 namespace BattleCity::Game::World::Object
 {
-	GameOver::GameOver()
-		: Object()
+	GameOver::GameOver(const std::function<void(ID, Layer)>& d)
+		: Object(d)
 		, mTexture(AddComponent<Component::Texture>())
 		, mCollider(AddComponent<Component::Collider>())
 	{

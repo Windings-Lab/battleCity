@@ -9,8 +9,8 @@
 
 namespace BattleCity::Game::World::Object
 {
-	Bullet::Bullet(Type ignoreColliderType)
-		: Object()
+	Bullet::Bullet(Type ignoreColliderType, const std::function<void(ID, Layer)>& d)
+		: Object(d)
 		, mTexture(AddComponent<Component::Texture>())
 		, mMovable(AddComponent<Component::Movable>())
 		, mCollider(AddComponent<Component::Collider>())

@@ -5,7 +5,7 @@
 
 namespace BattleCity::Game::World::Object
 {
-	Background::Background() : Object()
+	Background::Background(const std::function<void(ID, Layer)>& d) : Object(d)
 	{
         AddComponent<Component::Texture>();
 	}

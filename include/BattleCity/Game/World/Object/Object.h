@@ -15,7 +15,7 @@ namespace BattleCity::Game::World::Object
 	class Object : public Subject
 	{
 	public:
-		Object();
+		Object(const std::function<void(ID, Layer)>&);
 
 		DISALLOW_COPY_MOVE(Object)
 
@@ -53,8 +53,6 @@ namespace BattleCity::Game::World::Object
 		virtual void NoCollision();
 		virtual void OnOutOfBounds(const Vector2Int&) = 0;
 
-		void SetDestroyMarkerFunc(std::function<void(ID, Layer)>);
-
 		bool IsDestroyed() const noexcept;
 		void MarkForDestroy();
 		virtual void OnDestroy();
@@ -68,9 +66,6 @@ namespace BattleCity::Game::World::Object
 		void SetY(Y) noexcept;
 		const Position& GetPosition() const noexcept;
 
-	protected:
-		bool mDestroyed;
-
 	private:
 		ID mID;
 		Layer mLayer;
@@ -78,6 +73,8 @@ namespace BattleCity::Game::World::Object
 
 		ComponentFactory mComponentFactory;
 
-		std::function<void(ID, Layer)> mMarkForDestroy;
+		const std::function<void(ID, Layer)>& mMarkForDestroy;
+	protected:
+		bool mDestroyed;
 	};
 }

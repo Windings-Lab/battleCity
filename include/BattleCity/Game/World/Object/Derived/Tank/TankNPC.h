@@ -12,7 +12,7 @@ namespace BattleCity::Game::World::Object
 	class TankNPC : public Tank
 	{
 	public:
-		TankNPC();
+		explicit TankNPC(const std::function<void(ID, Layer)>&);
 
 		void Update() override;
 		void ResolveCollisions(Object&) override;

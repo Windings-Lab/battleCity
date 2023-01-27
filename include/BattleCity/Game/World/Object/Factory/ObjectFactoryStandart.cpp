@@ -26,8 +26,7 @@ namespace BattleCity::Game::World::Object::Factory
 {
 	std::shared_ptr<Background> Standart::CreateBackgrounds(Position position)
 	{
-		auto object = std::make_shared<Background>();
-		object->SetDestroyMarkerFunc(mObjectDestroyer);
+		auto object = std::make_shared<Background>(mObjectDestroyer);
 
 		auto textureComponent = object->GetComponent<Component::Texture>();
 		textureComponent->SetTextureGroup(&mTextureGroups.GetGroupBy(Framework::TextureName::Background));
@@ -42,7 +41,7 @@ namespace BattleCity::Game::World::Object::Factory
 
 	std::shared_ptr<GameOver> Standart::CreateGameOver(Position)
 	{
-		auto object = std::make_shared<GameOver>();
+		auto object = std::make_shared<GameOver>(mObjectDestroyer);
 
 		auto textureComponent = object->GetComponent<Component::Texture>();
 		textureComponent->SetTextureGroup(&mTextureGroups.GetGroupBy(Framework::TextureName::GameOver));
@@ -77,7 +76,7 @@ namespace BattleCity::Game::World::Object::Factory
 		switch (tankType)
 		{
 		case Type::TankNPC:
-			object = std::make_shared<TankNPC>();
+			object = std::make_shared<TankNPC>(mObjectDestroyer);
 			movable = object->GetComponent<Component::Movable>();
 			collider = object->GetComponent<Component::Collider>();
 			collider->SetColliderType(Type::TankNPC);
@@ -88,7 +87,7 @@ namespace BattleCity::Game::World::Object::Factory
 			movable->SetMovementDirection(Direction::Down);
 			break;
 		case Type::TankPlayer:
-			object = std::make_shared<Tank>();
+			object = std::make_shared<Tank>(mObjectDestroyer);
 			movable = object->GetComponent<Component::Movable>();
 			collider = object->GetComponent<Component::Collider>();
 			collider->SetColliderType(Type::TankPlayer);
@@ -103,7 +102,6 @@ namespace BattleCity::Game::World::Object::Factory
 			std::cerr << "Incorrect tank type\n";
 			return nullptr;
 		}
-		object->SetDestroyMarkerFunc(mObjectDestroyer);
 
 		auto fireable = object->GetComponent<Component::Fireable>();
 		fireable->SetBullet(*this);
@@ -129,8 +127,7 @@ namespace BattleCity::Game::World::Object::Factory
 
 	std::shared_ptr<Bullet> Standart::CreateBullet(Position position, Direction direction, Type ignoreColliderType)
 	{
-		auto object = std::make_shared<Bullet>(ignoreColliderType);
-		object->SetDestroyMarkerFunc(mObjectDestroyer);
+		auto object = std::make_shared<Bullet>(ignoreColliderType, mObjectDestroyer);
 
 		auto textureComponent = object->GetComponent<Component::Texture>();
 		textureComponent->SetTextureGroup(&mTextureGroups.GetGroupBy(Framework::TextureName::Bullet));
@@ -198,8 +195,7 @@ namespace BattleCity::Game::World::Object::Factory
 
 	std::shared_ptr<Wall> Standart::CreateWall(Position position)
 	{
-		auto object = std::make_shared<Wall>();
-		object->SetDestroyMarkerFunc(mObjectDestroyer);
+		auto object = std::make_shared<Wall>(mObjectDestroyer);
 
 		auto textureComponent = object->GetComponent<Component::Texture>();
 		textureComponent->SetTextureGroup(&mTextureGroups.GetGroupBy(Framework::TextureName::Wall));
@@ -225,8 +221,7 @@ namespace BattleCity::Game::World::Object::Factory
 
 	std::shared_ptr<Phoenix> Standart::CreatePhoenix(Position position)
 	{
-		auto object = std::make_shared<Phoenix>();
-		object->SetDestroyMarkerFunc(mObjectDestroyer);
+		auto object = std::make_shared<Phoenix>(mObjectDestroyer);
 
 		auto textureComponent = object->GetComponent<Component::Texture>();
 		textureComponent->SetTextureGroup(&mTextureGroups.GetGroupBy(Framework::TextureName::Phoenix));
@@ -255,8 +250,7 @@ namespace BattleCity::Game::World::Object::Factory
 
 	std::shared_ptr<Explosion> Standart::CreateExplosion(ExplosionType type, Position position)
 	{
-		auto object = std::make_shared<Explosion>();
-		object->SetDestroyMarkerFunc(mObjectDestroyer);
+		auto object = std::make_shared<Explosion>(mObjectDestroyer);
 
 		auto textureComponent = object->GetComponent<Component::Texture>();
 		textureComponent->SetTextureGroup(&mTextureGroups.GetGroupBy(Framework::TextureName::Explosion));
@@ -287,7 +281,7 @@ namespace BattleCity::Game::World::Object::Factory
 
 	std::shared_ptr<TankSpawnerPoint> Standart::CreateTankSpawnPointer(Position position)
 	{
-		auto object = std::make_shared<TankSpawnerPoint>();
+		auto object = std::make_shared<TankSpawnerPoint>(mObjectDestroyer);
 
 		object->SetTankCreator(*this);
 

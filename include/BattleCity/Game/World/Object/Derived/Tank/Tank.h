@@ -17,7 +17,7 @@ namespace BattleCity::Game::World::Object
 	class Tank : public Object
 	{
 	public:
-		Tank();
+		explicit Tank(const std::function<void(ID, Layer)>&);
 
 		void Update() override;
 		void ResolveCollisions(Object&) override;

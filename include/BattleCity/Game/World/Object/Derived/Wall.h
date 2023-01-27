@@ -13,7 +13,7 @@ namespace BattleCity::Game::World::Object
 	class Wall : public Object
     {
     public:
-        Wall();
+	    explicit Wall(const std::function<void(ID, Layer)>&);
 
         void Update() override;
         void ResolveCollisions(Object&) override;

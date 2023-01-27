@@ -14,7 +14,7 @@ namespace BattleCity::Game::World::Object
 	class Explosion : public Object
     {
     public:
-        Explosion();
+	    explicit Explosion(const std::function<void(ID, Layer)>&);
 
         void Update() override;
         void ResolveCollisions(Object&) override;

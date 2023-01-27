@@ -8,7 +8,7 @@ namespace BattleCity::Game::World::Object
 	class PowerUp : public Object
 	{
     public:
-		PowerUp();
+		explicit PowerUp(const std::function<void(ID, Layer)>&);
 	};
 }
 

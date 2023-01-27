@@ -7,7 +7,7 @@
 
 namespace BattleCity::Game::World::Object
 {
-	PowerUp::PowerUp() : Object()
+	PowerUp::PowerUp(const std::function<void(ID, Layer)>& d) : Object(d)
 	{
 		AddComponent<Component::Texture>();
 		AddComponent<Component::Collider>();

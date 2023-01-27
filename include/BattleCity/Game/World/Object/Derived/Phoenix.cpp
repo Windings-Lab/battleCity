@@ -11,8 +11,8 @@
 
 namespace BattleCity::Game::World::Object
 {
-	Phoenix::Phoenix()
-		: Object()
+	Phoenix::Phoenix(const std::function<void(ID, Layer)>& d)
+		: Object(d)
 		, mCollider(AddComponent<Component::Collider>())
 		, mHealth(AddComponent<Component::Health>())
 		, mTexture(AddComponent<Component::Texture>())

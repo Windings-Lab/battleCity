@@ -5,10 +5,11 @@
 
 namespace BattleCity::Game::World::Object
 {
-    Object::Object()
+    Object::Object(const std::function<void(ID, Layer)>& destroyer)
 		: Subject()
-		, mDestroyed(false)
 		, mLayer(Layer::Middle)
+		, mMarkForDestroy(destroyer)
+		, mDestroyed(false)
     {
         static int idCounter = 0;
 
@@ -32,11 +33,6 @@ namespace BattleCity::Game::World::Object
     void Object::OnOutOfBounds(const Vector2Int&)
     {
         NotifyObjectUpdated(*this);
-    }
-
-    void Object::SetDestroyMarkerFunc(std::function<void(ID, Layer)> destoyer)
-    {
-        mMarkForDestroy = std::move(destoyer);
     }
 
     bool Object::IsDestroyed() const noexcept
