@@ -129,8 +129,7 @@ namespace BattleCity::Game::World::Object::Factory
 
 	std::shared_ptr<Bullet> Standart::CreateBullet(Position position, Direction direction, Type ignoreColliderType)
 	{
-		auto object = std::make_shared<Bullet>();
-		object->SetIgnoreColliderType(ignoreColliderType);
+		auto object = std::make_shared<Bullet>(ignoreColliderType);
 		object->SetDestroyMarkerFunc(mObjectDestroyer);
 
 		auto textureComponent = object->GetComponent<Component::Texture>();

@@ -9,13 +9,13 @@
 
 namespace BattleCity::Game::World::Object
 {
-	Bullet::Bullet()
+	Bullet::Bullet(Type ignoreColliderType)
 		: Object()
 		, mTexture(AddComponent<Component::Texture>())
 		, mMovable(AddComponent<Component::Movable>())
 		, mCollider(AddComponent<Component::Collider>())
 		, mExplodable(AddComponent<Component::Explodable>())
-		, mIgnoreColliderType(Type::Error)
+		, mIgnoreColliderType(ignoreColliderType)
 	{}
 
     void Bullet::Update()
@@ -52,11 +52,6 @@ namespace BattleCity::Game::World::Object
     {
 		mExplodable->Explode(ExplosionType::Small);
 	    Object::OnDestroy();
-    }
-
-    void Bullet::SetIgnoreColliderType(Type type) noexcept
-    {
-		mIgnoreColliderType = type;
     }
 
     void Bullet::AdjustPositionToDirection()
